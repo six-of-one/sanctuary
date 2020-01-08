@@ -6,7 +6,7 @@ Gauntlet = function() {
   // CONFIGURATION CONSTANTS and ENUM's
   //===========================================================================
 
-  var VERSION  = "1.0.0",
+  var VERSION  = "1.0.1",
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
 /// end debug iter
