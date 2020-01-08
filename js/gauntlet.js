@@ -366,6 +366,10 @@ Gauntlet = function() {
     },
 
     onstart: function(event, previous, current, type, nlevel) {
+/// debug code - remove pre-release
+			if (DEBUGON)
+					nevel = 8;
+/// debug iter
       this.player.join(type);
       this.load(to.number(nlevel, this.loadLevel()));
     },
