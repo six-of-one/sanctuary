@@ -2,8 +2,19 @@ mod list:
 
 (nominal fixes)
 
-wiz fires pretty fast prior to extra shot speed
+wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
+wiz potion fire does not kill gens
 
+gens offscreen are active, as are monsters (test original to see if monsters can move off screen)
+
+\\\
+do demons fire too fast?
+
+(perhaps persistent issues)
+
+movement is quirky compared to original
+- not as precise, hard to hit an exact shot line - real joystick might fix this
+- possibly try a controller sensitivity option
 
 elements I did not see:
 
