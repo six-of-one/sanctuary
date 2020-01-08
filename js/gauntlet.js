@@ -38,8 +38,11 @@ Gauntlet = function() {
         POTION:  { sx: 6, sy: 9, frames: 1, fpf: FPS/10, score:  50, potion: true,  sound: 'potion' },
         GOLD:    { sx: 7, sy: 9, frames: 3, fpf: FPS/10, score: 100,                sound: 'gold'   }
       },
+// after {n} health tics with no player move / fire, all walls are exits
+		WALLSTALL = 200,
 // after {n} health tics with no player move / fire, all doors open
 		DOORSTALL = 30,
+		stalling,
       DOOR = {
         HORIZONTAL: { sx: 10, sy: 9, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
         VERTICAL:   { sx: 11, sy: 9, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
@@ -466,6 +469,7 @@ Gauntlet = function() {
 
     onPlayerFire: function(player) {
       this.map.addWeapon(player.x, player.y, player.type.weapon, player.dir, player);
+		 stalling = 0; // reset on player fire
     },
 
     onMonsterFire: function(monster) {
@@ -1354,6 +1358,9 @@ Gauntlet = function() {
         this.dir = this.moving.dir = DIR.RIGHT;
       else
         this.moving.dir = null; // no moving.dir, but still facing this.dir
+
+		 if (this.moving.dir != null)
+			stalling = 0; // reset on player move
     },
 
     addscore: function(n) { this.score = this.score + (n||0); },
@@ -1378,8 +1385,24 @@ Gauntlet = function() {
     },
 
     autohurt: function(frame) {
-      if (!DEBUG.NOAUTOHURT && (frame % (FPS/2)) === 0) // players automatically lose 1 health every 1/2 second
+      if (!DEBUG.NOAUTOHURT && (frame % (FPS/2)) === 0) {// players automatically lose 1 health every 1/2 second
         this.hurt(1, this, true);
+
+			stalling = stalling + 1;		// count health tics
+			if (stalling > DOORSTALL) {
+//			--- new fn() fire all doors
+      var n, max, entity;
+				for(n = 0, max = this.entities.length ; n < max ; n++) {
+				  entity = this.entities[n];
+				  if (entity.door)
+						entity.open();
+				}
+			}
+
+			if (stalling > WALLSTALL) 
+//			--- new fn() fire all walls to exits -- how ?
+				stalling = 0;
+		}
     },
 
     weak: function() {
