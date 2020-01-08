@@ -7,7 +7,7 @@ Gauntlet = function() {
   //===========================================================================
 
   var VERSION  = "1.0.0",
-/// allow debug mode testing - code should be removed pre-publish
+/// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
 /// end debug iter
       FPS      = 60,
@@ -1231,6 +1231,10 @@ Gauntlet = function() {
       this.healing   = 0;
       this.keys      = DEBUG.KEYS    || 0;
       this.potions   = DEBUG.POTIONS || 0;
+/// debug code - remove pre-release
+			if (DEBUGON)
+					this.potions = 7;
+/// debug iter
       this.score     = 0;
       this.dir       = Game.Math.randomInt(0, 7);
       this.health    = type.health;
@@ -1376,7 +1380,7 @@ Gauntlet = function() {
     nuke: function() {
       if (this.potions) {
         this.potions--;
-/// debug code - remove pre-publish
+/// debug code - remove pre-release
 			if (DEBUGON)
 					this.potions = 7;
 /// debug iter
