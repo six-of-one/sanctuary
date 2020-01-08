@@ -731,7 +731,7 @@ Gauntlet = function() {
     //-------------------------------------------------------------------------
 
     nuke: function(viewport, player) {
-      var n, max, entity, distance, limit = TILE*player.type.magic;
+      var rp, n, max, entity, distance, limit = TILE*player.type.magic;
       for(n = 0, max = this.entities.length ; n < max ; n++) {
         entity = this.entities[n];
         if (entity.monster && entity.active) {
@@ -739,6 +739,17 @@ Gauntlet = function() {
           if (distance < limit)
             entity.hurt(player.type.magic * (1 - distance/limit), player, true);
         }
+// cataboligne - add damage to generators
+// rp - re plot dmg, only wiz could kill gens with potion, elf with extra magic power
+        if (entity.generator && entity.active) {
+          distance = Math.max(Math.abs(player.x - entity.x), Math.abs(player.y - entity.y)); // rough, but fast, approximation for slower, sqrt(x*x + y*y)
+// hacky calc for now
+			  rp = player.type.magic;
+			  if (player.type.magic < 32) rp = player.type.magic / 2;
+          if (distance < limit)
+            entity.hurt(rp * (1 - distance/limit), player, true);
+        }
+// end mod
       }
     },
 
