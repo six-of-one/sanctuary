@@ -38,6 +38,8 @@ Gauntlet = function() {
         POTION:  { sx: 6, sy: 9, frames: 1, fpf: FPS/10, score:  50, potion: true,  sound: 'potion' },
         GOLD:    { sx: 7, sy: 9, frames: 3, fpf: FPS/10, score: 100,                sound: 'gold'   }
       },
+// after {n} health tics with no player move / fire, all doors open
+		DOORSTALL = 30,
       DOOR = {
         HORIZONTAL: { sx: 10, sy: 9, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
         VERTICAL:   { sx: 11, sy: 9, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
@@ -148,6 +150,7 @@ Gauntlet = function() {
 
   var cfg = {
 
+// cataboligne - note: set stats to false to turn off fps and timing update stats lower right
     runner: {
       fps:   FPS,
       stats: true
@@ -366,10 +369,6 @@ Gauntlet = function() {
     },
 
     onstart: function(event, previous, current, type, nlevel) {
-/// debug code - remove pre-release
-			if (DEBUGON)
-					nevel = 8;
-/// debug iter
       this.player.join(type);
       this.load(to.number(nlevel, this.loadLevel()));
     },
