@@ -13,10 +13,10 @@ Gauntlet = function() {
       VIEWPORT = { TW: 24, TH: 24 },
       DIR      = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7 },
       PLAYER = {
-        WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, health: 500, speed: 200/FPS, damage: 50/FPS, armor: 3, magic: 16, weapon: { speed: 600/FPS, reload: 0.40*FPS, damage: 4, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior"  }, // Thor
-        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, health: 500, speed: 220/FPS, damage: 40/FPS, armor: 2, magic: 16, weapon: { speed: 620/FPS, reload: 0.35*FPS, damage: 4, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie" }, // Thyra
-        WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, health: 500, speed: 240/FPS, damage: 30/FPS, armor: 1, magic: 32, weapon: { speed: 640/FPS, reload: 0.30*FPS, damage: 6, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard"   }, // Merlin
-        ELF:      { sx: 0, sy: 3, frames: 3, fpf: FPS/10, health: 500, speed: 260/FPS, damage: 20/FPS, armor: 1, magic: 24, weapon: { speed: 660/FPS, reload: 0.25*FPS, damage: 6, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf"      }  // Questor
+        WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, health: 2000, speed: 200/FPS, damage: 50/FPS, armor: 3, magic: 16, weapon: { speed: 600/FPS, reload: 0.40*FPS, damage: 4, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior"  }, // Thor
+        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, health: 2000, speed: 220/FPS, damage: 40/FPS, armor: 2, magic: 16, weapon: { speed: 620/FPS, reload: 0.35*FPS, damage: 4, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie" }, // Thyra
+        WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, health: 2000, speed: 240/FPS, damage: 30/FPS, armor: 1, magic: 32, weapon: { speed: 640/FPS, reload: 0.30*FPS, damage: 6, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard"   }, // Merlin
+        ELF:      { sx: 0, sy: 3, frames: 3, fpf: FPS/10, health: 2000, speed: 260/FPS, damage: 20/FPS, armor: 1, magic: 24, weapon: { speed: 660/FPS, reload: 0.25*FPS, damage: 6, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf"      }  // Questor
       },
       MONSTER = {
         GHOST:  { sx: 0, sy: 4, frames: 3, fpf: FPS/10, score:  10, health:  4, speed: 140/FPS, damage: 100/FPS, selfharm: 30/FPS, canbeshot: true,  canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health:  8, speed: 2.5*FPS, max: 40, score: 100, sx: 32, sy: 4 }, name: "ghost",  weapon: null                                                                                     },
@@ -26,11 +26,11 @@ Gauntlet = function() {
         DEATH:  { sx: 0, sy: 8, frames: 3, fpf: FPS/10, score: 500, health: 12, speed: 180/FPS, damage: 120/FPS, selfharm: 6/FPS,  canbeshot: false, canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 16, speed: 5.0*FPS, max: 10, score: 500, sx: 32, sy: 9 }, name: "death",  weapon: null                                                                                     }
       },
       TREASURE = {
-        HEALTH:  { sx: 0, sy: 9, frames: 1, fpf: FPS/10, score:  10, health:  50,   sound: 'potion' },
+        HEALTH:  { sx: 0, sy: 9, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'potion' },
         POISON:  { sx: 1, sy: 9, frames: 1, fpf: FPS/10, score:   0, damage:  50,   sound: 'potion' },
-        FOOD1:   { sx: 2, sy: 9, frames: 1, fpf: FPS/10, score:  10, health:  20,   sound: 'food'   },
-        FOOD2:   { sx: 3, sy: 9, frames: 1, fpf: FPS/10, score:  10, health:  30,   sound: 'food'   },
-        FOOD3:   { sx: 4, sy: 9, frames: 1, fpf: FPS/10, score:  10, health:  40,   sound: 'food'   },
+        FOOD1:   { sx: 2, sy: 9, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
+        FOOD2:   { sx: 3, sy: 9, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
+        FOOD3:   { sx: 4, sy: 9, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
         KEY:     { sx: 5, sy: 9, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'key'    },
         POTION:  { sx: 6, sy: 9, frames: 1, fpf: FPS/10, score:  50, potion: true,  sound: 'potion' },
         GOLD:    { sx: 7, sy: 9, frames: 3, fpf: FPS/10, score: 100,                sound: 'gold'   }
