@@ -7,6 +7,9 @@ Gauntlet = function() {
   //===========================================================================
 
   var VERSION  = "1.0.0",
+/// allow debug mode testing - code should be removed pre-publish
+											DEBUGON = 1,
+/// end debug iter
       FPS      = 60,
       TILE     = 32,
       STILE    = 32,
@@ -1373,6 +1376,10 @@ Gauntlet = function() {
     nuke: function() {
       if (this.potions) {
         this.potions--;
+/// debug code - remove pre-publish
+			if (DEBUGON)
+					this.potions = 7;
+/// debug iter
         publish(EVENT.PLAYER_NUKE, this);
       }
     },
