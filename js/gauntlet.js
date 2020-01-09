@@ -1388,7 +1388,8 @@ Gauntlet = function() {
       if (!DEBUG.NOAUTOHURT && (frame % (FPS/2)) === 0) {// players automatically lose 1 health every 1/2 second
         this.hurt(1, this, true);
 
-			stalling = stalling + 1;		// count health tics
+/// FIX: for some reason this locks up when opening all doors
+//			stalling = stalling + 1;		// count health tics
 			if (stalling > DOORSTALL) {
 //			--- new fn() fire all doors
       var n, max, entity;
