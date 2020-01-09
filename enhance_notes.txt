@@ -2,8 +2,14 @@ mod list:
 
 (nominal fixes)
 
+title screen scroll
+-- can this be a .gif anim ?
+intro screen sequence
+-- rotate thru image set
+
 wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
-wiz potion fire does not kill gens
+- demon shots need checked as well
+
 
 gens offscreen are active, as are monsters (test original to see if monsters can move off screen)
 
@@ -94,3 +100,9 @@ basilisk
 
 buy stuff guy, with new stuffs, keys, food, potions. temps
 
+
+
+done:
+
+x-- wiz potion fire does not kill gens
+- killing gens is now distance (radius) derived - even warrior does some damage close up
