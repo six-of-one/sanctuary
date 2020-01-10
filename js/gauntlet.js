@@ -199,7 +199,7 @@ Gauntlet = function() {
     ],
 
     sounds: [
-      { id: 'gtitle',      name: 'sounds/title',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             },
+      { id: 'gtitle',      name: 'sounds/music.title',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             },
       { id: 'lostcorridors',   name: 'sounds/music.lostcorridors',   formats: ['mp3', 'ogg'], volume: 1.0, loop: true             }, // http://luckylionstudios.com/
       { id: 'bloodyhalo',      name: 'sounds/music.bloodyhalo',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, // (ditto)
       { id: 'citrinitas',      name: 'sounds/music.citrinitas',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, //

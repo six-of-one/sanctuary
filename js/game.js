@@ -740,6 +740,12 @@ Game.Math = {
   //===========================================================================
   // GAME TITLE ROTATOR
   //===========================================================================
+  var cfg = {
+
+    sounds: [
+      { id: 'gtitle',      name: 'sounds/music.title',      formats: ['mp3', 'ogg'], volume: 0.5,  }
+		]
+}
 
   var spl_rot = 6000;
   var spl_cyc = 2;
@@ -757,10 +763,10 @@ Game.Math = {
 	  {
 			document.splashrot.src = "images/splash2.gif"
 			rot = 19900;
-			this.playMenuMusic();
+			play('gtitle');
 	  }
 	  else
 			document.splashrot.src = "images/splash" + spl_loop.substring(spl_cyc,spl_cyc+1) + ".jpg"
 
-	  setTimeout('splashrot()',r);
+	  setTimeout('splashrot()',rot);
   }
