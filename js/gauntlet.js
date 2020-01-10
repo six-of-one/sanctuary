@@ -369,6 +369,7 @@ Gauntlet = function() {
 
     onmenu: function(event, previous, current) {
       this.sounds.playMenuMusic();
+			setTimeout('splashrot()',spl_rot);
     },
 
     onstart: function(event, previous, current, type, nlevel) {
