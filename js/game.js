@@ -757,8 +757,10 @@ Game.Math = {
 	  {
 			document.splashrot.src = "images/splash2.gif"
 			rot = 19900;
+			this.playMenuMusic();
 	  }
 	  else
 			document.splashrot.src = "images/splash" + spl_loop.substring(spl_cyc,spl_cyc+1) + ".jpg"
-	  setTimeout('splashrot()',spl_rot);
+
+	  setTimeout('splashrot()',r);
   }

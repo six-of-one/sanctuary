@@ -199,6 +199,7 @@ Gauntlet = function() {
     ],
 
     sounds: [
+      { id: 'gtitle',      name: 'sounds/title',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             },
       { id: 'lostcorridors',   name: 'sounds/music.lostcorridors',   formats: ['mp3', 'ogg'], volume: 1.0, loop: true             }, // http://luckylionstudios.com/
       { id: 'bloodyhalo',      name: 'sounds/music.bloodyhalo',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, // (ditto)
       { id: 'citrinitas',      name: 'sounds/music.citrinitas',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, //
@@ -368,7 +369,8 @@ Gauntlet = function() {
     },
 
     onmenu: function(event, previous, current) {
-      this.sounds.playMenuMusic();
+// used to play lostcorridors - now plays title music in splashrot
+//      this.sounds.playMenuMusic();
 			setTimeout('splashrot()',spl_rot);
     },
 
@@ -1768,7 +1770,8 @@ Gauntlet = function() {
 
     initialize: function(sounds) {
       this.sounds      = sounds;
-      this.sounds.menu = this.sounds.lostcorridors;
+//      this.sounds.menu = this.sounds.lostcorridors;
+      this.sounds.menu = this.sounds.gtitle;
       this.sounds.game = this.sounds.thebeginning;
       this.sounds.fire = this.sounds.firewizard;     // re-use wizard firing sound for monster (demon) fire
       this.sounds.nuke = this.sounds.generatordeath; // TODO: find a big bang explosion
