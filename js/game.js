@@ -741,16 +741,23 @@ Game.Math = {
   // GAME TITLE ROTATOR
   //===========================================================================
 
-  var spl_rot = 5000;
+  var spl_rot = 6000;
   var spl_cyc = 2;
   var spl_loop = "0123456789ABCDEF";
 
   function splashrot () {
 
+	  var rot;
+	  rot = spl_rot;
+
 	  if (spl_cyc < 2 || spl_cyc > 10) spl_cyc = 1;
 	  spl_cyc++;
 
-	  if (spl_cyc == 2) document.splashrot.src = "images/splash2.gif"
+	  if (spl_cyc == 2)
+	  {
+			document.splashrot.src = "images/splash2.gif"
+			rot = 19900;
+	  }
 	  else
 			document.splashrot.src = "images/splash" + spl_loop.substring(spl_cyc,spl_cyc+1) + ".jpg"
 	  setTimeout('splashrot()',spl_rot);
