@@ -199,7 +199,7 @@ Gauntlet = function() {
     ],
 
     sounds: [
-      { id: 'gtitle',      name: 'sounds/music.title',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             },
+      { id: 'gtitle',      name: 'sounds/music.title',      formats: ['mp3', 'ogg'], volume: 0.5, loop: false             },
       { id: 'lostcorridors',   name: 'sounds/music.lostcorridors',   formats: ['mp3', 'ogg'], volume: 1.0, loop: true             }, // http://luckylionstudios.com/
       { id: 'bloodyhalo',      name: 'sounds/music.bloodyhalo',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, // (ditto)
       { id: 'citrinitas',      name: 'sounds/music.citrinitas',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, //
@@ -369,9 +369,9 @@ Gauntlet = function() {
     },
 
     onmenu: function(event, previous, current) {
-// used to play lostcorridors - now plays title music in splashrot
-//      this.sounds.playMenuMusic();
-			setTimeout('splashrot()',spl_rot);
+// used to play lostcorridors - now plays title music once at init - no loop
+      this.sounds.playMenuMusic();
+			setTimeout('splashrot()',19500);
     },
 
     onstart: function(event, previous, current, type, nlevel) {
