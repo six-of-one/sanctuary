@@ -386,6 +386,10 @@ Gauntlet = function() {
     },
 
     onload: function(event, previous, current, nlevel) {
+/// debug code - remove pre-release
+			if (DEBUGON)
+					nlevel = 9;
+/// debug tier
       var level    = cfg.levels[nlevel],
           self     = this,
           onloaded = function() { $('booting').hide(); self.play(new Map(nlevel)); };
