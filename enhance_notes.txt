@@ -12,6 +12,8 @@ wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
 
 gens offscreen are active, as are monsters (test original to see if monsters can move off screen)
 
+food values are not g1 accurate
+
 \\\
 do demons fire too fast?
 
