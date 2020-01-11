@@ -2,14 +2,13 @@ mod list:
 
 (nominal fixes)
 
-title screen scroll
--- can this be a .gif anim ?
-intro screen sequence
--- rotate thru image set
+g1 audio elements swap in
+g1 gfx tiles
+- spirtes
+- walls & floors
 
 wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
 - demon shots need checked as well
-
 
 gens offscreen are active, as are monsters (test original to see if monsters can move off screen)
 
@@ -77,7 +76,11 @@ x--- "IT" - not sure want this
 
 expansion:
 
-4th - 6th level monters & generators
+4th level+ monters & generators
+- ghosts will get to shoot
+- grunts will throw clubs infreq
+- demons will have "fire"
+
 score mult applies to potion death pts, but perhaps 50% of mult
 yellow teleports that can select further away
 blue or purple teleports that are unit linked - not to nearest visible
@@ -106,3 +109,14 @@ done:
 
 x-- wiz potion fire does not kill gens
 - killing gens is now distance (radius) derived - even warrior does some damage close up
+
+x-- title screen scroll
+-- can this be a .gif anim ?
+x-- intro screen sequence
+-- rotate thru image set
+> with exception of demo play and posting saved scores
+> and monster level > 3 boost stats display -- if we want to give those
+
+
+
+
