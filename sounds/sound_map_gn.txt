@@ -15,8 +15,8 @@ g038: potion (shot?)
 g039: grunt hit
 g043: ghost hit
 g047: death touch
-g055 - g058: 4 variant of "bong"
-g059: "psht" sound (shot or something?)
+g055 - g058: 4 variant of "bong" - all coin drop sounds
+g059: "psht" sound - collect potion
 g063: traps open sound
 g064: teleport
 g065: thief start
@@ -24,7 +24,7 @@ g066: full title music
 g068 - g071: treasure room music - 4 variants
 g073: 4 sec title music
 g074: "buzz" sound
-g075: short "buzz" sound
+g075: short "buzz" sound -- one of these is the 'no potion' pushing button buzz
 g076 - g079: player shots
 g080: lobber shot
 
@@ -62,6 +62,7 @@ g119: "han-han" - thief
 g120: "ha-ha" - thief
 g121: "han-ha han-ha" - thief
 
+some food sounds
 g122: "mmm-hum" - wiz
 g123: "aahhh" - wiz
 g124: "aahhh" - wiz, 2
