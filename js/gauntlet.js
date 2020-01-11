@@ -10,6 +10,10 @@ Gauntlet = function() {
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
 /// end debug tier
+// music control - needs user interf
+// this turns off the ver 1.0.0 background music when true
+		NOBKGMUSIC = 1,
+
       FPS      = 60,
       TILE     = 32,
       STILE    = 32,
@@ -1795,7 +1799,7 @@ Gauntlet = function() {
       subscribe(EVENT.PLAYER_DEATH,       this.onPlayerDeath.bind(this));
     },
 
-    onStartLevel:        function(map)               { this.playGameMusic(this.sounds[DEBUG.MUSIC || map.level.music]); this.nlevel = map.nlevel;             },
+    onStartLevel:        function(map)               { if (!NOBKGMUSIC) this.playGameMusic(this.sounds[DEBUG.MUSIC || map.level.music]); this.nlevel = map.nlevel;             },
     onPlayerFire:        function(player)            { this.play(this.sounds["fire" + player.type.name]);                                                     },
     onMonsterFire:       function(monster)           { this.play(this.sounds.fire);                                                                           },
     onDoorOpen:          function(door)              { this.play(this.sounds.opendoor);                                                                       },
