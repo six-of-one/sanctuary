@@ -29,7 +29,7 @@ Gauntlet = function() {
         DEATH:  { sx: 0, sy: 8, frames: 3, fpf: FPS/10, score: 2000, health: 12, speed: 180/FPS, damage: 120/FPS, selfharm: 6/FPS,  canbeshot: false, canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 16, speed: 5.0*FPS, max: 10, score: 1000, sx: 32, sy: 9 }, name: "death",  weapon: null                                                                                     }
       },
       TREASURE = {
-        HEALTH:  { sx: 0, sy: 9, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'potion' },
+        HEALTH:  { sx: 0, sy: 9, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food' },
         POISON:  { sx: 1, sy: 9, frames: 1, fpf: FPS/10, score:   0, damage:  50,   sound: 'potion' },
         FOOD1:   { sx: 2, sy: 9, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
         FOOD2:   { sx: 3, sy: 9, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
@@ -201,15 +201,15 @@ Gauntlet = function() {
     sounds: [
       { id: 'gtitle',      name: 'sounds/music.title',      formats: ['mp3', 'ogg'], volume: 1.0, loop: false             },
       { id: 'g4sec',      name: 'sounds/music.4sec',      formats: ['mp3', 'ogg'], volume: 1.0, loop: false             },
-      { id: 'lostcorridors',   name: 'sounds/music.lostcorridors',   formats: ['mp3', 'ogg'], volume: 1.0, loop: true             }, // http://luckylionstudios.com/
-      { id: 'bloodyhalo',      name: 'sounds/music.bloodyhalo',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, // (ditto)
-      { id: 'citrinitas',      name: 'sounds/music.citrinitas',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, //
-      { id: 'fleshandsteel',   name: 'sounds/music.fleshandsteel',   formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, //
-      { id: 'mountingassault', name: 'sounds/music.mountingassault', formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, //
-      { id: 'phantomdrone',    name: 'sounds/music.phantomdrone',    formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, //
-      { id: 'thebeginning',    name: 'sounds/music.thebeginning',    formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, //
-      { id: 'warbringer',      name: 'sounds/music.warbringer',      formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, //
-      { id: 'gameover',        name: 'sounds/gameover',              formats: ['mp3', 'ogg'], volume: 0.5                         }, //
+      { id: 'lostcorridors',   name: 'sounds/music.lostcorridors',   formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, // http://luckylionstudios.com/
+      { id: 'bloodyhalo',      name: 'sounds/music.bloodyhalo',      formats: ['mp3', 'ogg'], volume: 0.25, loop: true             }, // (ditto)
+      { id: 'citrinitas',      name: 'sounds/music.citrinitas',      formats: ['mp3', 'ogg'], volume: 0.25, loop: true             }, //
+      { id: 'fleshandsteel',   name: 'sounds/music.fleshandsteel',   formats: ['mp3', 'ogg'], volume: 0.25, loop: true             }, //
+      { id: 'mountingassault', name: 'sounds/music.mountingassault', formats: ['mp3', 'ogg'], volume: 0.25, loop: true             }, //
+      { id: 'phantomdrone',    name: 'sounds/music.phantomdrone',    formats: ['mp3', 'ogg'], volume: 0.25, loop: true             }, //
+      { id: 'thebeginning',    name: 'sounds/music.thebeginning',    formats: ['mp3', 'ogg'], volume: 0.25, loop: true             }, //
+      { id: 'warbringer',      name: 'sounds/music.warbringer',      formats: ['mp3', 'ogg'], volume: 0.25, loop: true             }, //
+      { id: 'gameover',        name: 'sounds/gameover',              formats: ['mp3', 'ogg'], volume: 0.3                         }, //
       { id: 'victory',         name: 'sounds/victory',               formats: ['mp3', 'ogg'], volume: 1.0                         }, //
       { id: 'femalepain1',     name: 'sounds/femalepain1',           formats: ['mp3', 'ogg'], volume: 0.3                         }, // http://www.premiumbeat.com/sfx/
       { id: 'femalepain2',     name: 'sounds/femalepain2',           formats: ['mp3', 'ogg'], volume: 0.3                         }, // (ditto)
@@ -225,6 +225,7 @@ Gauntlet = function() {
       { id: 'collectpotion',   name: 'sounds/g1_potionpick',         formats: ['mp3', 'ogg'], volume: 0.5, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'collectkey',      name: 'sounds/g1_key',            formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'collectfood',     name: 'sounds/g1_foodsnrf',           formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 }, //
+      { id: 'potionbang',  name: 'sounds/g1_potionboom',        formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'generatordeath',  name: 'sounds/generatordeath',        formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'monsterdeath1',   name: 'sounds/monsterdeath1',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'monsterdeath2',   name: 'sounds/monsterdeath2',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 }, //
@@ -756,7 +757,7 @@ Gauntlet = function() {
           distance = Math.max(Math.abs(player.x - entity.x), Math.abs(player.y - entity.y)); // rough, but fast, approximation for slower, sqrt(x*x + y*y)
 // hacky calc for now
 			  rp = player.type.magic;
-			  if (player.type.magic < 32) rp = player.type.magic / 2;
+			  if (player.type.magic < 32) rp = player.type.magic / 3;
           if (distance < limit)
             entity.hurt(rp * (1 - distance/limit), player, true);
         }
@@ -1775,7 +1776,7 @@ Gauntlet = function() {
       this.sounds.menu = this.sounds.gtitle;
       this.sounds.game = this.sounds.thebeginning;
       this.sounds.fire = this.sounds.firewizard;     // re-use wizard firing sound for monster (demon) fire
-      this.sounds.nuke = this.sounds.generatordeath; // TODO: find a big bang explosion
+      this.sounds.nuke = this.sounds.potionbang; // TODO: find a big bang explosion
       this.toggleMute(this.isMute());
 
       $('sound').on('click', this.onClickMute.bind(this)).show();
