@@ -9,7 +9,7 @@ Gauntlet = function() {
   var VERSION  = "1.0.1",
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
-/// end debug iter
+/// end debug tier
       FPS      = 60,
       TILE     = 32,
       STILE    = 32,
@@ -1255,7 +1255,7 @@ Gauntlet = function() {
 /// debug code - remove pre-release
 			if (DEBUGON)
 					this.potions = 7;
-/// debug iter
+/// debug tier
       this.score     = 0;
       this.dir       = Game.Math.randomInt(0, 7);
       this.health    = type.health;
@@ -1424,7 +1424,7 @@ Gauntlet = function() {
 /// debug code - remove pre-release
 			if (DEBUGON)
 					this.potions = 7;
-/// debug iter
+/// debug tier
         publish(EVENT.PLAYER_NUKE, this);
       }
     },
