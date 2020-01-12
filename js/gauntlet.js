@@ -255,7 +255,8 @@ Gauntlet = function() {
       { name: 'Dungeon Seven',  url: "levels/level7.png",    floor: FLOOR.PURPLE_LAMINATE,  wall: WALL.PURPLE_COBBLE,    music: 'thebeginning',    score:  7000, help: null },
       { name: 'Dungeon Eight',  url: "levels/level8.png",    floor: FLOOR.WOOD,             wall: WALL.BLUE_BRICK,       music: 'mountingassault', score:  8000, help: null },
       { name: 'Dungeon Nine',   url: "levels/level9.png",    floor: FLOOR.PURPLE_LAMINATE,  wall: WALL.CONCRETE,         music: 'fleshandsteel',   score:  9000, help: null },
-      { name: 'Dungeon Ten',    url: "levels/level10.png",   floor: FLOOR.WOOD,             wall: WALL.BLUE_BRICK,       music: 'warbringer',      score: 10000, help: "Final Level<br><br>Good Luck!" }
+      { name: 'Dungeon Ten',    url: "levels/level10.png",   floor: FLOOR.WOOD,             wall: WALL.BLUE_BRICK,       music: 'warbringer',      score: 10000, help: null }
+      { name: 'Dungeon Eleven',    url: "levels/level11.png",   floor: FLOOR.LIGHT_STONE,             wall: WALL.CONCRETE,       music: 'warbringer',      score: 10000, help: "Final Level<br><br>Good Luck!" }
     ],
 
     keys: [
@@ -387,8 +388,8 @@ Gauntlet = function() {
 
     onload: function(event, previous, current, nlevel) {
 /// debug code - remove pre-release
-			if (DEBUGON)
-					nlevel = 9;
+//			if (DEBUGON)
+//					nlevel = 17;
 /// debug tier
       var level    = cfg.levels[nlevel],
           self     = this,
