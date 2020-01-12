@@ -1834,13 +1834,22 @@ Gauntlet = function() {
 
     onPlayerExiting: function(player, exit) {
       this.play(this.sounds.exitlevel);
-      if (this.nlevel === (cfg.levels.length-1)) {
-        this.sounds.game.stop();
-        this.play(this.sounds.victory);
+		 if (RUNORG)
+		 {
+				if (this.nlevel === (cfg.levels.length-1)) {
+				  this.sounds.game.stop();
+				  this.play(this.sounds.victory);
+				}
+				else if (cfg.levels[this.nlevel].music != cfg.levels[this.nlevel+1].music) {
+				  this.sounds.game.fade(3000);
+				}
       }
-      else if (cfg.levels[this.nlevel].music != cfg.levels[this.nlevel+1].music) {
-        this.sounds.game.fade(3000);
-      }
+		else
+		{
+			if (cfg.levels[this.nlevel].music != cfg.levels[this.nlevel+1].music) {
+				  this.sounds.game.fade(3000);
+				}
+		}
     },
 
     onPlayerHurt: function(player, damage) {
