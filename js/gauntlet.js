@@ -9,6 +9,8 @@ Gauntlet = function() {
   var VERSION  = "1.0.1",
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
+// debug - provide a one time start level
+											initlevel = 1,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -394,7 +396,12 @@ Gauntlet = function() {
 
     onload: function(event, previous, current, nlevel) {
 /// debug code - remove pre-release
-//			if (DEBUGON)
+			if (DEBUGON)
+			if (initlevel > 0)
+		 {
+			 		nlevel = initlevel;
+					initlevel = 0;
+		 }
 //					nlevel = 17;
 /// debug tier
       var level    = cfg.levels[nlevel],
