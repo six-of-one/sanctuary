@@ -592,7 +592,7 @@ Gauntlet = function() {
 
     saveLevel: function(nlevel) { this.storage[STORAGE.NLEVEL] = nlevel;             },
     loadLevel: function()       { return to.number(this.storage[STORAGE.NLEVEL], 1); },
-    nextLevel: function()       { var n = this.map.nlevel + 1; if (rnd_level) n = Game.Math.randomInt(loop_level, cfg.levels.length-1); this.load(n >= cfg.levels.length ? 1                     : n); },
+    nextLevel: function()       { var n = this.map.nlevel + 1; if (rnd_level) nlevel = n = Game.Math.randomInt(loop_level, cfg.levels.length-1); this.load(n >= cfg.levels.length ? 1                     : n); },
     prevLevel: function()       { var n = this.map.nlevel - 1; this.load(n <= 0                 ? cfg.levels.length - 1 : n); },
 
     loadHighScore: function() { return to.number(this.storage[STORAGE.SCORE], 10000); },
@@ -1846,9 +1846,7 @@ Gauntlet = function() {
       }
 		else
 		{
-			if (cfg.levels[this.nlevel].music != cfg.levels[this.nlevel+1].music) {
-				  this.sounds.game.fade(3000);
-				}
+			this.sounds.game.fade(3000);
 		}
     },
 
