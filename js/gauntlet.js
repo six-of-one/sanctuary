@@ -13,6 +13,12 @@ Gauntlet = function() {
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
 		NOBKGMUSIC = 1,
+// set to 1 to run original code
+		RUNORG = 0,
+// when hitting last seq level, pick a random # between loop start and last level
+// set rnd_level true to indicate running rnd levels from here on out
+		loop_level = 8,
+		rnd_level = 0,
 
       FPS      = 60,
       TILE     = 32,
@@ -491,14 +497,25 @@ Gauntlet = function() {
     },
 
     onPlayerExiting: function(player, exit) {
-      player.addscore(this.map.level.score);
-      if (this.map.last)
-        this.win();
+		 if (RUNORG)		// only do if running original code - that will end game on last seq level
+		 {
+				player.addscore(this.map.level.score);
+				if (this.map.last)
+				  this.win();
+		 }
     },
 
     onPlayerExit: function(player) {
-      if (!this.map.last)
-        this.nextLevel();
+		 if (RUNORG)
+		 {
+			if (!this.map.last)
+				this.nextLevel();
+		 }
+		else
+		{
+			if (this.map.last) rnd_level = 1;
+			this.nextLevel();
+		}
     },
 
     onDoorOpening: function(door, speed) {
@@ -575,7 +592,7 @@ Gauntlet = function() {
 
     saveLevel: function(nlevel) { this.storage[STORAGE.NLEVEL] = nlevel;             },
     loadLevel: function()       { return to.number(this.storage[STORAGE.NLEVEL], 1); },
-    nextLevel: function()       { var n = this.map.nlevel + 1; this.load(n >= cfg.levels.length ? 1                     : n); },
+    nextLevel: function()       { var n = this.map.nlevel + 1; if (rnd_level) n = randomInt(loop_level, cfg.levels.length-1); this.load(n >= cfg.levels.length ? 1                     : n); },
     prevLevel: function()       { var n = this.map.nlevel - 1; this.load(n <= 0                 ? cfg.levels.length - 1 : n); },
 
     loadHighScore: function() { return to.number(this.storage[STORAGE.SCORE], 10000); },
