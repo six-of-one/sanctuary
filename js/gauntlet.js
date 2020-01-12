@@ -89,7 +89,7 @@ Gauntlet = function() {
         }
       },
       FLOOR = { BROWN_BOARDS: 1, LIGHBROWN_BOARDS: 2, GREEN_BOARDS: 3, GREY_BOARDS: 4, WOOD: 5, LIGHT_STONE: 6, DARK_STONE: 7, BROWN_LAMINATE: 8, PURPLE_LAMINATE: 9, MIN: 1, MAX: 9 },
-      WALL  = { BLUE: 1, BLUE_BRICK: 2, PURPLE_TILE: 3, BLUE_COBBLE: 4, PURPLE_COBBLE: 5, CONCRETE: 6, MIN: 1, MAX: 6 },
+      WALL  = { BLUE: 1, BLUE_BRICK: 2, PURPLE_TILE: 3, BLUE_COBBLE: 4, PURPLE_COBBLE: 5, CONCRETE: 6, PINKSLD: 7, INVIS: 8, MIN: 1, MAX: 8 },
       EVENT = {
         START_LEVEL:         0,
         PLAYER_JOIN:         1,
@@ -262,7 +262,7 @@ Gauntlet = function() {
       { name: 'Dungeon Eight',  url: "levels/level8.png",    floor: FLOOR.WOOD,             wall: WALL.BLUE_BRICK,       music: 'mountingassault', score:  8000, help: null },
       { name: 'Dungeon Nine',   url: "levels/level9.png",    floor: FLOOR.PURPLE_LAMINATE,  wall: WALL.CONCRETE,         music: 'fleshandsteel',   score:  9000, help: null },
       { name: 'Dungeon Ten',    url: "levels/level10.png",   floor: FLOOR.WOOD,             wall: WALL.BLUE_BRICK,       music: 'warbringer',      score: 10000, help: null },
-      { name: 'Dungeon Eleven',    url: "levels/level11.png",   floor: FLOOR.LIGHT_STONE,             wall: WALL.CONCRETE,       music: 'warbringer',      score: 11000, help: "Random levels after exit" }
+      { name: 'Dungeon Eleven',    url: "levels/level11.png",   floor: FLOOR.LIGHT_STONE,             wall: WALL.CONCRETE,       music: 'warbringer',      score: 11000, help: null }
     ],
 
     keys: [
