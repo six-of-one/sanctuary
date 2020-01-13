@@ -10,7 +10,7 @@ Gauntlet = function() {
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
 // debug - provide a one time start level
-											initlevel = 4,
+											initlevel = 8,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -211,7 +211,9 @@ Gauntlet = function() {
     ],
 
     sounds: [
-      { id: 'gtitle',      name: 'sounds/music.title',      formats: ['mp3', 'ogg'], volume: 1.0, loop: false             },
+/// RESTORE!
+//      { id: 'gtitle',      name: 'sounds/music.title',      formats: ['mp3', 'ogg'], volume: 1.0, loop: false             },
+      { id: 'gtitle',      name: 'sounds/music.4sec',      formats: ['mp3', 'ogg'], volume: 1.0, loop: false             },
       { id: 'g4sec',      name: 'sounds/music.4sec',      formats: ['mp3', 'ogg'], volume: 1.0, loop: false             },
       { id: 'lostcorridors',   name: 'sounds/music.lostcorridors',   formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, // http://luckylionstudios.com/
       { id: 'bloodyhalo',      name: 'sounds/music.bloodyhalo',      formats: ['mp3', 'ogg'], volume: 0.25, loop: true             }, // (ditto)
@@ -254,6 +256,9 @@ Gauntlet = function() {
       { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.CONCRETE,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_BRICK,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.PURPLE_TILE,      music: 'bloodyhalo',      score:  1000, help: null },
+      { name: 'Level 104',     url: "levels/glevel104.png",  floor: FLOOR.GREEN_BOARDS,      wall: WALL.BLUE,      music: 'mountingassault',      score:  1000, help: null },
+      { name: 'Level 68',     url: "levels/glevel68.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.PINKSLD,      music: 'mountingassault',      score:  1000, help: null },
+      { name: 'Level 86',     url: "levels/glevel86.png",  floor: FLOOR.DARK_STONE,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
 //      { name: 'Training',       url: "levels/trainer1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Shoot ghosts and find the exit" },
 //      { name: 'Training Two',   url: "levels/trainer2.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Watch out for demon fire" },
 //      { name: 'Training Three', url: "levels/trainer3.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Find keys to open doors" },

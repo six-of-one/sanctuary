@@ -1,3 +1,5 @@
+* leaving out player start...fails - with a black screen
+
 mod list:
 
 (nominal fixes)
