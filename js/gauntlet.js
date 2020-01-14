@@ -85,8 +85,8 @@ Gauntlet = function() {
         TREASURE:       0x008000, // MEDIUM GREEN
         EXIT:           0x004000, // DARK GREEN
         MASK: {
-          TYPE:         0xFFFF00,
-          EXHIGH:       0x0000F0,
+          TYPE:         0xFFF000,
+          EXHIGH:       0x000FF0,
           EXLOW:        0x00000F
         }
       },
