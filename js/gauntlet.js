@@ -10,7 +10,7 @@ Gauntlet = function() {
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
 // debug - provide a one time start level
-											initlevel = 1,
+											initlevel = 8,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -135,7 +135,8 @@ Gauntlet = function() {
       DEBUG = {
         RESET:      Game.qsBool("reset"),
         GRID:       Game.qsBool("grid"),
-        NOMONSTERS: Game.qsBool("nomonsters"),
+/// RESTORE !
+        NOMONSTERS: 1, //: Game.qsBool("nomonsters"),
         NODAMAGE:   Game.qsBool("nodamage"),
         NOAUTOHURT: Game.qsBool("noautohurt"),
         POTIONS:    Game.qsNumber("potions"),
@@ -267,6 +268,7 @@ Gauntlet = function() {
       { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.CONCRETE,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_BRICK,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.PURPLE_TILE,      music: 'bloodyhalo',      score:  1000, help: null },
+      { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.PURPLE_TILE,      music: 'mountingassault',      score:  1000, help: null },
       { name: 'Treasure 124',     url: "levels/glevel124t.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.PURPLE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
       { name: 'Level 52',       url: "levels/glevel52.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.PURPLE_TILE,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 111',     url: "levels/glevel111.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.PINKSLD,      music: 'mountingassault',      score:  1000, help: null },
