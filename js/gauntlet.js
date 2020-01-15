@@ -58,8 +58,9 @@ Gauntlet = function() {
         FOOD2:   { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
         FOOD3:   { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
         KEY:     { sx: 5, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'key'    },
-        POTION:  { sx: 6, sy: 10, frames: 1, fpf: FPS/10, score:  50, potion: true,  sound: 'potion' },
-        GOLD:    { sx: 7, sy: 10, frames: 3, fpf: FPS/10, score: 100,                sound: 'gold'   }
+        POTION:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true,  sound: 'potion' },
+        GOLD:    { sx: 7, sy: 10, frames: 3, fpf: FPS/10, score: 100,                sound: 'gold'   },
+        LOCKED:    { sx: 6, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   }
       },
 // after {n} health tics with no player move / fire, all walls are exits
 		WALLSTALL = 200,
@@ -70,16 +71,18 @@ Gauntlet = function() {
         HORIZONTAL: { sx: 10, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
         VERTICAL:   { sx: 11, sy: 10, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
         EXIT:       { sx: 12, sy: 10, speed: 3*FPS, fpf: FPS/30 },
+        EXIT4:       { sx: 13, sy: 10, speed: 3*FPS, fpf: FPS/30 },
+        EXIT8:       { sx: 14, sy: 10, speed: 3*FPS, fpf: FPS/30 },
       },
       FX = {
-        GENERATOR_DEATH: { sx: 13, sy: 10, frames: 6, fpf: FPS/10 },
-        MONSTER_DEATH:   { sx: 13, sy: 10, frames: 6, fpf: FPS/20 },
-        WEAPON_HIT:      { sx: 19, sy: 10, frames: 2, fpf: FPS/20 },
+        GENERATOR_DEATH: { sx: 15, sy: 10, frames: 6, fpf: FPS/10 },
+        MONSTER_DEATH:   { sx: 15, sy: 10, frames: 6, fpf: FPS/20 },
+        WEAPON_HIT:      { sx: 21, sy: 10, frames: 2, fpf: FPS/20 },
         PLAYER_GLOW:     { frames: FPS/2, border: 5 }
       },
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
       MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2 ],
-      TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD ],
+      TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, TREASURE.LOCKED ],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,   h: TILE          },
         PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2, h: TILE - TILE/4 },
