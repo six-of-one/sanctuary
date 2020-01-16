@@ -21,6 +21,8 @@ Gauntlet = function() {
 // set rnd_level true to indicate running rnd levels from here on out
 		loop_level = 8,
 		rnd_level = 0,
+// save this. to reload level
+		reloaded,
 
       FPS      = 60,
       TILE     = 32,
@@ -898,6 +900,7 @@ Gauntlet = function() {
 		  }
 		  else
 			 {
+				  reloaded = this;
 				  if (isstart(pixel))
 					 self.start = { x: x, y: y }
 
@@ -1481,7 +1484,10 @@ Gauntlet = function() {
 //				  if (entity.door)
 //						entity.open();
 //				}
+				var sv = this;
+				this = reloaded;
 				this.setupLevel(nlevel);
+				this = sv;
 			}
 
 			if (stalling > WALLSTALL) 
