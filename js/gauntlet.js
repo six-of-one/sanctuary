@@ -52,15 +52,16 @@ Gauntlet = function() {
         LOBBER2: { sx: 0, sy: 9, frames: 3, fpf: FPS/10, score:  10, health:  4, speed: 60/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 8, speed: 2.5*FPS, max: 20, score: 100, sx: 33, sy: 7 }, name: "lobber", weapon: null                                                                                     }
       },
       TREASURE = {
-        HEALTH:  { sx: 0, sy: 10, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food' },
-        POISON:  { sx: 1, sy: 10, frames: 1, fpf: FPS/10, score:   0, damage:  50,   sound: 'potion' },
-        FOOD1:   { sx: 2, sy: 10, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
-        FOOD2:   { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
-        FOOD3:   { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
+        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food' },
+        POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50,   sound: 'potion' },
+        FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
+        FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
+        FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
         KEY:     { sx: 5, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'key'    },
-        POTION:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true,  sound: 'potion' },
-        GOLD:    { sx: 7, sy: 10, frames: 3, fpf: FPS/10, score: 100,                sound: 'gold'   },
-        LOCKED:    { sx: 6, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   }
+        POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true,  sound: 'potion' },
+        GOLD:    { sx: 0, sy: 10, frames: 3, fpf: FPS/10, score: 100,                sound: 'gold'   },
+        BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   },
+        LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   }
       },
 // after {n} health tics with no player move / fire, all walls are exits
 		WALLSTALL = 200,
@@ -68,21 +69,24 @@ Gauntlet = function() {
 		DOORSTALL = 30,
 		stalling,
       DOOR = {
-        HORIZONTAL: { sx: 10, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
+        HORIZONTAL: { sx: 16, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
         VERTICAL:   { sx: 11, sy: 10, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
-        EXIT:       { sx: 12, sy: 10, speed: 3*FPS, fpf: FPS/30 },
-        EXIT4:       { sx: 13, sy: 10, speed: 3*FPS, fpf: FPS/30 },
-        EXIT8:       { sx: 14, sy: 10, speed: 3*FPS, fpf: FPS/30 },
+        EXIT:       { sx: 7, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+        EXIT4:       { sx: 8, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+        EXIT8:       { sx: 9, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+        EXIT6:       { sx: 10, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+        EXITMOVE:       { sx: 11, sy: 12, frames:4, speed: 3*FPS, fpf: FPS/30 },
+        TELEPORT:       { sx: 1, sy: 12, frames:3, speed: 3*FPS, fpf: FPS/30 }
       },
       FX = {
-        GENERATOR_DEATH: { sx: 15, sy: 10, frames: 6, fpf: FPS/10 },
-        MONSTER_DEATH:   { sx: 15, sy: 10, frames: 6, fpf: FPS/20 },
-        WEAPON_HIT:      { sx: 21, sy: 10, frames: 2, fpf: FPS/20 },
+        GENERATOR_DEATH: { sx: 15, sy: 12, frames: 6, fpf: FPS/10 },
+        MONSTER_DEATH:   { sx: 15, sy: 12, frames: 6, fpf: FPS/20 },
+        WEAPON_HIT:      { sx: 21, sy: 12, frames: 2, fpf: FPS/20 },
         PLAYER_GLOW:     { frames: FPS/2, border: 5 }
       },
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
       MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2 ],
-      TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, TREASURE.LOCKED ],
+      TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, TREASURE.LOCKED, TREASURE.BAG ],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,   h: TILE          },
         PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2, h: TILE - TILE/4 },
