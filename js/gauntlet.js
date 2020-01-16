@@ -891,26 +891,34 @@ Gauntlet = function() {
 
         self.cells[n] = cell = { occupied: [] };
 
-        if (isstart(pixel))
-          self.start = { x: x, y: y }
+		  if (stalling)
+		  {
+				  if (iswall(pixel))
+					 self.addExit(x, y, DOOR.EXIT);			  
+		  }
+		  else
+			 {
+				  if (isstart(pixel))
+					 self.start = { x: x, y: y }
 
-        if (iswall(pixel))
-          cell.wall = walltype(tx, ty, map);
-        else if (isnothing(pixel))
-          cell.nothing = true;
-        else
-          cell.shadow = shadowtype(tx, ty, map);
+				  if (iswall(pixel))
+					 cell.wall = walltype(tx, ty, map);
+				  else if (isnothing(pixel))
+					 cell.nothing = true;
+				  else
+					 cell.shadow = shadowtype(tx, ty, map);
 
-        if (isexit(pixel))
-          self.addExit(x, y, DOOR.EXIT);
-        else if (isdoor(pixel))
-          self.addDoor(x, y, doortype(tx,ty,map));
-        else if (isgenerator(pixel))
-          self.addGenerator(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
-        else if (istreasure(pixel))
-          self.addTreasure(x, y, TREASURES[type(pixel) < TREASURES.length ? type(pixel) : 0]);
-        else if (ismonster(pixel))
-          self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
+				  if (isexit(pixel))
+					 self.addExit(x, y, DOOR.EXIT);
+				  else if (isdoor(pixel))
+					 self.addDoor(x, y, doortype(tx,ty,map));
+				  else if (isgenerator(pixel))
+					 self.addGenerator(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
+				  else if (istreasure(pixel))
+					 self.addTreasure(x, y, TREASURES[type(pixel) < TREASURES.length ? type(pixel) : 0]);
+				  else if (ismonster(pixel))
+					 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
+				}
       });
 
     },
@@ -1464,15 +1472,16 @@ Gauntlet = function() {
         this.hurt(1, this, true);
 
 /// FIX: for some reason this locks up when opening all doors
-//			stalling = stalling + 1;		// count health tics
+			stalling = stalling + 1;		// count health tics
 			if (stalling > DOORSTALL) {
 //			--- new fn() fire all doors
-      var n, max, entity;
-				for(n = 0, max = this.entities.length ; n < max ; n++) {
-				  entity = this.entities[n];
-				  if (entity.door)
-						entity.open();
-				}
+//      var n, max, entity;
+//				for(n = 0, max = this.entities.length ; n < max ; n++) {
+//				  entity = this.entities[n];
+//				  if (entity.door)
+//						entity.open();
+//				}
+				this.setupLevel(nlevel);
 			}
 
 			if (stalling > WALLSTALL) 
