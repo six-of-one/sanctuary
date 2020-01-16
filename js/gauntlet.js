@@ -895,7 +895,9 @@ Gauntlet = function() {
           self.start = { x: x, y: y }
 
         if (iswall(pixel))
-          cell.wall = walltype(tx, ty, map);
+			           self.addExit(x, y, DOOR.EXIT);
+
+//          cell.wall = walltype(tx, ty, map);
         else if (isnothing(pixel))
           cell.nothing = true;
         else
@@ -1464,27 +1466,15 @@ Gauntlet = function() {
         this.hurt(1, this, true);
 
 /// FIX: for some reason this locks up when opening all doors
-			stalling = stalling + 1;		// count health tics
+//			stalling = stalling + 1;		// count health tics
 			if (stalling > DOORSTALL) {
 //			--- new fn() fire all doors
       var n, max, entity;
-//				for(n = 0, max = this.entities.length ; n < max ; n++) {
-//				  entity = this.entities[n];
-//				  if (entity.door)
-//						entity.open();
-      var cells   = this.overlappingCells(x, y, w, h),
-          cell,
-          c, nc = cells.length;
-
-      // now loop again checking for walls and other entities
-					for(c = 0 ; c < nc ; c++) {
-					  cell = cells[c];
-					  if (cell.wall !== undefined)
-							{
-										cell.addExit();
-							}
-						 }
-//				}
+				for(n = 0, max = this.entities.length ; n < max ; n++) {
+				  entity = this.entities[n];
+				  if (entity.door)
+						entity.open();
+				}
 			}
 
 			if (stalling > WALLSTALL) 
