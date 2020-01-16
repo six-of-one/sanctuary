@@ -895,9 +895,7 @@ Gauntlet = function() {
           self.start = { x: x, y: y }
 
         if (iswall(pixel))
-			           self.addExit(x, y, DOOR.EXIT);
-
-//          cell.wall = walltype(tx, ty, map);
+          cell.wall = walltype(tx, ty, map);
         else if (isnothing(pixel))
           cell.nothing = true;
         else
