@@ -857,18 +857,19 @@ Gauntlet = function() {
           tw     = source.width,
           th     = source.height,
           self   = this;
+			 if (stalling > 10) self   = reloaded;
 
-      this.nlevel   = nlevel;
-      this.level    = level;
-      this.last     = nlevel === (cfg.levels.length-1);
-      this.tw       = tw;
-      this.th       = th;
-      this.w        = tw * TILE;
-      this.h        = th * TILE;
-      this.start    = null;
-      this.cells    = [];
-      this.entities = [];
-      this.pool     = { weapons: [], monsters: [], fx: [] }
+      self.nlevel   = nlevel;
+      self.level    = level;
+      self.last     = nlevel === (cfg.levels.length-1);
+      self.tw       = tw;
+      self.th       = th;
+      self.w        = tw * TILE;
+      self.h        = th * TILE;
+      self.start    = null;
+      self.cells    = [];
+      self.entities = [];
+      self.pool     = { weapons: [], monsters: [], fx: [] }
 
       function is(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
       function type(pixel)     { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
@@ -893,14 +894,14 @@ Gauntlet = function() {
 
         self.cells[n] = cell = { occupied: [] };
 
-		  if (stalling)
+		  if (stalling > 10)
 		  {
 				  if (iswall(pixel))
 					 self.addExit(x, y, DOOR.EXIT);			  
 		  }
 		  else
 			 {
-				  reloaded = this;
+				  reloaded = self;
 				  if (isstart(pixel))
 					 self.start = { x: x, y: y }
 
@@ -1484,10 +1485,7 @@ Gauntlet = function() {
 //				  if (entity.door)
 //						entity.open();
 //				}
-				var sv = this;
-				this = reloaded;
-				this.setupLevel(nlevel);
-				this = sv;
+				reloaded.setupLevel(nlevel);
 			}
 
 			if (stalling > WALLSTALL) 
