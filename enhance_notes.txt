@@ -52,8 +52,6 @@ traps making walls vanish
 shootable walls - the "dirt" kind
 level wrap to opposite side
 temp invisible
-doors auto open on stall timer
-walls -> exits on stall timer long
 tutorial messaging system is differnt
 
 door opening needs checked to see if the "corner rule" is obeyed - code looks like the entire door just opens
@@ -139,5 +137,7 @@ x-- intro screen sequence
 
 x-- levels loop with random select
 
+x-- doors auto open on stall timer
+x-- walls -> exits on stall timer long
 
 
