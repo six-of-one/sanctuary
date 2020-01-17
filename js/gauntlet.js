@@ -926,7 +926,21 @@ Gauntlet = function() {
 			 cell.shadow = shadowtype(tx, ty, map);
 
 		  if (isexit(pixel))
-			 self.addExit(x, y, DOOR.EXIT + type(pixel));
+			 {
+				 switch(type(pixel)) {
+					case 0: self.addExit(x, y, DOOR.EXIT);
+							break;
+					case 1: self.addExit(x, y, DOOR.EXIT4);
+							break;
+					case 2: self.addExit(x, y, DOOR.EXIT8);
+							break;
+					case 3: self.addExit(x, y, DOOR.EXIT6);
+							break;
+					case 4: self.addExit(x, y, DOOR.EXITMOVE);
+							break;
+					case 5: self.addExit(x, y, DOOR.TELEPORT);
+				 }
+			 }
 		  else if (isdoor(pixel))
 			 self.addDoor(x, y, doortype(tx,ty,map));
 		  else if (isgenerator(pixel))
