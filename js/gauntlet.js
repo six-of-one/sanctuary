@@ -1514,7 +1514,6 @@ Gauntlet = function() {
 				// now loop again checking for walls and other entities
 				for(c = 0 ; c < nc ; c++) {
 					  cell = cells[c];
-					  if (cell.shadow) cell.shadow = 0;
 					  if (cell.wall !== undefined && cell.wall !== null)
 						{
 //							if (cell.y == 1 || cell.y == 2)
