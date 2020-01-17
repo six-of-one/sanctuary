@@ -54,13 +54,13 @@ Gauntlet = function() {
         LOBBER2: { sx: 0, sy: 9, frames: 3, fpf: FPS/10, score:  10, health:  4, speed: 60/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 8, speed: 2.5*FPS, max: 20, score: 100, sx: 33, sy: 7 }, name: "lobber", weapon: null                                                                                     }
       },
       TREASURE = {
-        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food' },
+        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'food' },
         POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50,   sound: 'potion' },
         FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
         FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
         FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
         KEY:     { sx: 5, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'key'    },
-        POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true,  sound: 'potion' },
+        POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'potion' },
         GOLD:    { sx: 0, sy: 10, frames: 3, fpf: FPS/10, score: 100,                sound: 'gold'   },
         BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   },
         LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   }
@@ -1093,6 +1093,11 @@ Gauntlet = function() {
     },
 
     hurt: function(damage, by, nuke) {
+// not living shootables
+		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
+			 this.remove();
+			 return;
+		 }
       if ((by.weapon && this.type.canbeshot) || (by.player && this.type.canbehit) || (by == this) || nuke) {
         this.health = Math.max(0, this.health - damage);
         if (this.health === 0)
