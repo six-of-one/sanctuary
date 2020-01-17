@@ -94,7 +94,7 @@ Gauntlet = function() {
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,   h: TILE          },
         PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2, h: TILE - TILE/4 },
-        WEAPON:  { x: TILE/3, y: TILE/3, w: TILE/3, h: TILE/3        },
+        WEAPON:  { x: TILE/3, y: TILE/3, w: TILE/7, h: TILE/7        },
         MONSTER: { x: 1,      y: 1,      w: TILE-2, h: TILE-2        }, // give monsters 1px wiggle room to get through tight corridors
       },
       PIXEL = {
@@ -1204,7 +1204,8 @@ Gauntlet = function() {
 
     update: function(frame, player, map, viewport) {
       var collision = map.trymove(this, this.dir, this.type.speed, this.owner);
-      if (collision) {
+      if (collision)
+      if (!collision.exit) {
         this.owner.reloading = countdown(this.owner.reloading, this.type.reload/2); // speed up reloading process if previous weapon hit something, makes player feel powerful
         publish(EVENT.WEAPON_COLLIDE, this, collision);
       }
