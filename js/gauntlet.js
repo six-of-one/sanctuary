@@ -68,7 +68,8 @@ Gauntlet = function() {
 // after {n} health tics with no player move / fire, all walls are exits
 		WALLSTALL = 200,
 // after {n} health tics with no player move / fire, all doors open
-		DOORSTALL = 30,
+/// RESTORE to 30
+		DOORSTALL = 10,
 		stalling,
       DOOR = {
         HORIZONTAL: { sx: 16, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
@@ -857,7 +858,6 @@ Gauntlet = function() {
           tw     = source.width,
           th     = source.height,
           self   = this;
-			 if (stalling > 10) self   = reloaded;
 
       self.nlevel   = nlevel;
       self.level    = level;
@@ -894,35 +894,35 @@ Gauntlet = function() {
 
         self.cells[n] = cell = { occupied: [] };
 
-		  if (stalling > 10)
-		  {
-				  if (iswall(pixel))
-					 self.addExit(x, y, DOOR.EXIT);			  
-		  }
+/// do stuff so we can modify cells later
+//		  pcell = self.cells[n];
+		  reloaded = self;
+//		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
+		  self.cells[n].x = tx;
+		  self.cells[n].y = ty;
+//		  alert("cell x,y,n ="+self.cells[n].x+", "+self.cells[n].y+", "+n);
+/// do stuff tier
+
+		  if (isstart(pixel))
+			 self.start = { x: x, y: y }
+
+		  if (iswall(pixel))
+			 cell.wall = walltype(tx, ty, map);
+		  else if (isnothing(pixel))
+			 cell.nothing = true;
 		  else
-			 {
-				  reloaded = self;
-				  if (isstart(pixel))
-					 self.start = { x: x, y: y }
+			 cell.shadow = shadowtype(tx, ty, map);
 
-				  if (iswall(pixel))
-					 cell.wall = walltype(tx, ty, map);
-				  else if (isnothing(pixel))
-					 cell.nothing = true;
-				  else
-					 cell.shadow = shadowtype(tx, ty, map);
-
-				  if (isexit(pixel))
-					 self.addExit(x, y, DOOR.EXIT);
-				  else if (isdoor(pixel))
-					 self.addDoor(x, y, doortype(tx,ty,map));
-				  else if (isgenerator(pixel))
-					 self.addGenerator(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
-				  else if (istreasure(pixel))
-					 self.addTreasure(x, y, TREASURES[type(pixel) < TREASURES.length ? type(pixel) : 0]);
-				  else if (ismonster(pixel))
-					 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
-				}
+		  if (isexit(pixel))
+			 self.addExit(x, y, DOOR.EXIT);
+		  else if (isdoor(pixel))
+			 self.addDoor(x, y, doortype(tx,ty,map));
+		  else if (isgenerator(pixel))
+			 self.addGenerator(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
+		  else if (istreasure(pixel))
+			 self.addTreasure(x, y, TREASURES[type(pixel) < TREASURES.length ? type(pixel) : 0]);
+		  else if (ismonster(pixel))
+			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
       });
 
     },
@@ -1485,7 +1485,16 @@ Gauntlet = function() {
 //				  if (entity.door)
 //						entity.open();
 //				}
-				reloaded.setupLevel(nlevel);
+				var cell, c, nc = cells.length;
+
+				// now loop again checking for walls and other entities
+				for(c = 0 ; c < nc ; c++) {
+					  cell = reloaded.cells[c];
+					  if (cell.wall !== undefined)
+							alert("cell x, y "+cell.x+", "+cell.y);
+							reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
+				}
+
 			}
 
 			if (stalling > WALLSTALL) 
