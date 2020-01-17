@@ -905,8 +905,8 @@ Gauntlet = function() {
 		  reloaded = self;
 		  Mastercell = self.cells[n];
 //		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
-		  self.cells[n].x = tx;
-		  self.cells[n].y = ty;
+		  self.cells[n].x = x;
+		  self.cells[n].y = y;
 //		  alert("cell x,y,n ="+self.cells[n].x+", "+self.cells[n].y+", "+n);
 /// do stuff tier
 
@@ -1499,6 +1499,7 @@ Gauntlet = function() {
 						{
 //								alert("door cell: x, y "+c+": "+cell.x+", "+cell.y);
 								if (!opendr) Musicth.play(Musicth.sounds.opendoor);
+								cell.ptr.door = null;
 								Masterthmp.map.remove(cell.ptr);
 								opendr = true;
 						}
@@ -1513,12 +1514,13 @@ Gauntlet = function() {
 				// now loop again checking for walls and other entities
 				for(c = 0 ; c < nc ; c++) {
 					  cell = cells[c];
-					  if (cell.wall !== undefined)
+					  if (cell.wall !== undefined && cell.wall !== null)
 						{
-//							if (cell.y == 1)
-//								alert("cell: x, y "+c+": "+cell.x+", "+cell.y);
+//							if (cell.y == 1 || cell.y == 2)
+//								alert("cell: x, y "+cell.wall+": "+cell.x+", "+cell.y);
 								if (!walled) Musicth.play(Musicth.sounds.wallexit);
 								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
+								cell.wall = null;	// so we dont fire these wall segs again
 								walled = true;
 						}
 				}
