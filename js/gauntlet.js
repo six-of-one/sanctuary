@@ -66,10 +66,11 @@ Gauntlet = function() {
         LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   }
       },
 // after {n} health tics with no player move / fire, all walls are exits
-		WALLSTALL = 200,
+/// RESTORE to 200
+		WALLSTALL = 10,
 // after {n} health tics with no player move / fire, all doors open
 /// RESTORE to 30
-		DOORSTALL = 10,
+		DOORSTALL = 5,
 		stalling,
       DOOR = {
         HORIZONTAL: { sx: 16, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
@@ -900,6 +901,7 @@ Gauntlet = function() {
 //		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
 		  self.cells[n].x = tx;
 		  self.cells[n].y = ty;
+		  self.cells[n].ptr = self;
 //		  alert("cell x,y,n ="+self.cells[n].x+", "+self.cells[n].y+", "+n);
 /// do stuff tier
 
@@ -1472,12 +1474,13 @@ Gauntlet = function() {
     },
 
     autohurt: function(frame) {
-      if (!DEBUG.NOAUTOHURT && (frame % (FPS/2)) === 0) {// players automatically lose 1 health every 1/2 second
-        this.hurt(1, this, true);
+      if ((frame % (FPS/2)) === 0) {
+// players automatically lose 1 health every 1/2 second
+			if (!DEBUG.NOAUTOHURT)
+				this.hurt(1, this, true);
 
-/// FIX: for some reason this locks up when opening all doors
 			stalling = stalling + 1;		// count health tics
-			if (stalling > DOORSTALL) {
+			if (stalling == DOORSTALL) {
 //			--- new fn() fire all doors
 //      var n, max, entity;
 //				for(n = 0, max = this.entities.length ; n < max ; n++) {
@@ -1485,21 +1488,38 @@ Gauntlet = function() {
 //				  if (entity.door)
 //						entity.open();
 //				}
-				var cell, c, nc = cells.length;
+				var cells   = reloaded.cells,
+					 cell, c, nc = cells.length;
 
 				// now loop again checking for walls and other entities
 				for(c = 0 ; c < nc ; c++) {
-					  cell = reloaded.cells[c];
-					  if (cell.wall !== undefined)
-							alert("cell x, y "+cell.x+", "+cell.y);
-							reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
+					  cell = cells[c];
+					  if (cell.door !== undefined)
+						{
+								cell.ptr.remove();
+						}
 				}
 
 			}
 
-			if (stalling > WALLSTALL) 
+			if (stalling == WALLSTALL) {
 //			--- new fn() fire all walls to exits -- how ?
-				stalling = 0;
+				var cells   = reloaded.cells,
+					 cell, c, nc = cells.length;
+
+				// now loop again checking for walls and other entities
+				for(c = 0 ; c < nc ; c++) {
+					  cell = cells[c];
+					  if (cell.wall !== undefined)
+						{
+//							if (cell.y == 1)
+//								alert("cell: x, y "+c+": "+cell.x+", "+cell.y);
+								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
+						}
+				}
+
+			}
+
 		}
     },
 
