@@ -939,6 +939,7 @@ Gauntlet = function() {
 					case 4: self.addExit(x, y, DOOR.EXITMOVE);
 							break;
 					case 5: self.addExit(x, y, DOOR.TELEPORT);
+							Mastercell.ptr.exit = false;
 				 }
 			 }
 		  else if (isdoor(pixel))
