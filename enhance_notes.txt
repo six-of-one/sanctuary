@@ -38,6 +38,7 @@ movement is quirky compared to original
 
 elements I did not see:
 
+special potions
 shootable food / potions
 multi point death potion kill = 1000, 2000,1000, 4000, 2000, 6000, 2000, 8000
 score multiplier - since multi-player isnt finished I'll gather this was left unfinished as well

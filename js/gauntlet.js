@@ -284,6 +284,7 @@ Gauntlet = function() {
       { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.CONCRETE,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_BRICK,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.PURPLE_TILE,      music: 'bloodyhalo',      score:  1000, help: null },
+      { name: 'Research 2',     url: "levels/glevel65.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
       { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.PURPLE_TILE,      music: 'mountingassault',      score:  1000, help: null },
       { name: 'Level 111',     url: "levels/glevel111.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.PINKSLD,      music: 'mountingassault',      score:  1000, help: null },
       { name: 'Level 95',     url: "levels/glevel95.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.PINKSLD,      music: 'mountingassault',      score:  1000, help: null },
@@ -912,6 +913,7 @@ Gauntlet = function() {
 //		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
 		  self.cells[n].x = x;
 		  self.cells[n].y = y;
+		  self.cells[n].mapcht = ((pixel & 0xa08080) == 0xa08080);
 //		  alert("cell x,y,n ="+self.cells[n].x+", "+self.cells[n].y+", "+n);
 /// do stuff tier
 
@@ -1833,6 +1835,9 @@ Gauntlet = function() {
             this.tile(ctx, sprites, 0, 0, tx, ty);
           else
             this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
+// added a maze cheat - floor tile can be a subtle shift from std tile
+// task: option this
+			  if (cell.mapcht) this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor + 1, 0, tx, ty);
           if (cell.shadow)
             this.tile(ctx, sprites, cell.shadow, WALL.MAX+1, tx, ty);
         }
