@@ -1,17 +1,16 @@
-* leaving out player start...fails - with a black screen
 fails
+* leaving out player start...fails - with a black screen
 , (comma) left out of var list
 if (cell.ptr.door) - when .ptr is undefined
 
+some issue shooting level 1 & 2 gens - see research level
 
-death generator in mapping, but no image shows up
 
 mod list:
 
 (nominal fixes)
 
 diagonal shot fail between walls w/diagonal gap
-cant shoot over exits !
 exits way too touch sensitive for exit maze levels
 monsters seem "too" smart for g1
 
@@ -139,5 +138,6 @@ x-- levels loop with random select
 
 x-- doors auto open on stall timer
 x-- walls -> exits on stall timer long
+x-- cant shoot over exits !
 
 
