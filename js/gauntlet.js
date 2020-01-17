@@ -94,7 +94,7 @@ Gauntlet = function() {
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,   h: TILE          },
         PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2, h: TILE - TILE/4 },
-        WEAPON:  { x: TILE/3, y: TILE/3, w: TILE/7, h: TILE/7        },
+        WEAPON:  { x: TILE/3, y: TILE/3, w: TILE/7, h: TILE/7        },		// w,h tile/7 gives shot thru diagonal gap, sort of
         MONSTER: { x: 1,      y: 1,      w: TILE-2, h: TILE-2        }, // give monsters 1px wiggle room to get through tight corridors
       },
       PIXEL = {
@@ -710,6 +710,7 @@ Gauntlet = function() {
       this.tpos.x = entity.x + (isLeft(dir) ? -speed : isRight(dir) ? speed : 0);
       this.tpos.y = entity.y + (isUp(dir)   ? -speed : isDown(dir)  ? speed : 0);
       collision = this.occupied(this.tpos.x + entity.cbox.x, this.tpos.y + entity.cbox.y, entity.cbox.w, entity.cbox.h, ignore || entity);
+      if (entity.weapon && collision.exit) collision = undefined;
       if (!collision && !dryrun) {
         this.occupy(this.tpos.x, this.tpos.y, entity);
       }
@@ -804,8 +805,9 @@ Gauntlet = function() {
       // now loop again checking for walls and other entities
       for(c = 0 ; c < nc ; c++) {
         cell = cells[c];
-        if (cell.wall !== undefined)
-          return true;
+        if (cell.wall !== undefined && cell.wall !== null)				// walls to exits sets null  
+			  return true;
+
         for(i = 0, ni = cell.occupied.length ; i < ni ; i++) {
           item = cell.occupied[i];
           if ((item != ignore) && !set_contains(checked, item)) {
@@ -1204,8 +1206,7 @@ Gauntlet = function() {
 
     update: function(frame, player, map, viewport) {
       var collision = map.trymove(this, this.dir, this.type.speed, this.owner);
-      if (collision)
-      if (!collision.exit) {
+      if (collision) {
         this.owner.reloading = countdown(this.owner.reloading, this.type.reload/2); // speed up reloading process if previous weapon hit something, makes player feel powerful
         publish(EVENT.WEAPON_COLLIDE, this, collision);
       }
