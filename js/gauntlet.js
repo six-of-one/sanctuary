@@ -22,7 +22,7 @@ Gauntlet = function() {
 		loop_level = 8,
 		rnd_level = 0,
 // save this. to reload level
-		reloaded,
+		reloaded, Mastercell,
 
       FPS      = 60,
       TILE     = 32,
@@ -898,10 +898,10 @@ Gauntlet = function() {
 /// do stuff so we can modify cells later
 //		  pcell = self.cells[n];
 		  reloaded = self;
+		  Mastercell = self.cells[n];
 //		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
 		  self.cells[n].x = tx;
 		  self.cells[n].y = ty;
-		  self.cells[n].ptr = self;
 //		  alert("cell x,y,n ="+self.cells[n].x+", "+self.cells[n].y+", "+n);
 /// do stuff tier
 
@@ -951,6 +951,7 @@ Gauntlet = function() {
         entity.pool  = pool;           // entities track which pool they belong to (if any)
         entity.cells = [];             // entities track which cells they currently occupy
         this.entities.push(entity);
+			Mastercell.ptr = entity;
       }
       this.occupy(x, y, entity);
       entity.active = true;
@@ -1494,13 +1495,16 @@ Gauntlet = function() {
 				// now loop again checking for walls and other entities
 				for(c = 0 ; c < nc ; c++) {
 					  cell = cells[c];
-					  if (cell.door !== undefined)
+if (cell.ptr) alert("cell: ptr, door "+c+": "+cell.ptr+", "+cell.ptr.door);
+else if (0)
+						if (cell.ptr.door !== undefined)
 						{
-								cell.ptr.remove();
+								alert("door cell: x, y "+c+": "+cell.x+", "+cell.y);
+				//				cell.ptr.remove();
 						}
 				}
 
-			}
+			} 	// end doorstall
 
 			if (stalling == WALLSTALL) {
 //			--- new fn() fire all walls to exits -- how ?
@@ -1518,7 +1522,7 @@ Gauntlet = function() {
 						}
 				}
 
-			}
+			}	// end wallstall
 
 		}
     },
