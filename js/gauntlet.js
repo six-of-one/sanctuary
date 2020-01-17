@@ -268,6 +268,10 @@ Gauntlet = function() {
       { id: 'monsterdeath1',   name: 'sounds/monsterdeath1',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'monsterdeath2',   name: 'sounds/monsterdeath2',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'monsterdeath3',   name: 'sounds/monsterdeath3',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 }, //
+      { id: 'wallexit',        name: 'sounds/g1_wallexit',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
+      { id: 'dtouch',        name: 'sounds/g1_deathtouch',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
+      { id: 'infosnd',        name: 'sounds/g1_info',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
+      { id: 'healthcnt',        name: 'sounds/g1_healthcount',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'opendoor',        name: 'sounds/g1_door',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 } //
     ],
 
@@ -1483,17 +1487,11 @@ Gauntlet = function() {
 
 			stalling = stalling + 1;		// count health tics
 			if (stalling == DOORSTALL) {
-//			--- new fn() fire all doors
-//      var n, max, entity;
-//				for(n = 0, max = this.entities.length ; n < max ; n++) {
-//				  entity = this.entities[n];
-//				  if (entity.door)
-//						entity.open();
-//				}
+
 				var cells   = reloaded.cells,
 					 opendr = 0, cell, c, nc = cells.length;
 
-				// now loop again checking for walls and other entities
+				// now loop again checking for walls and other entities - doors
 				for(c = 0 ; c < nc ; c++) {
 					  cell = cells[c];
 						if (cell.ptr)
@@ -1505,8 +1503,6 @@ Gauntlet = function() {
 								opendr = true;
 						}
 				}
-	//3			if (opendr) Masterthmp.play(Masterthmp.sounds.opendoor);
-
 			} 	// end doorstall
 
 			if (stalling == WALLSTALL) {
@@ -1521,6 +1517,7 @@ Gauntlet = function() {
 						{
 //							if (cell.y == 1)
 //								alert("cell: x, y "+c+": "+cell.x+", "+cell.y);
+								if (!walled) Musicth.play(Musicth.sounds.wallexit);
 								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
 								walled = true;
 						}
