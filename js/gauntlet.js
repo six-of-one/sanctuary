@@ -1511,12 +1511,14 @@ Gauntlet = function() {
 			if (stalling == WALLSTALL) {
 //			--- new fn() fire all walls to exits -- how ?
 				var cells   = reloaded.cells,
-					 walled, cell, c, nc = cells.length;
+					 walled, cell, lastcell, c, nc = cells.length;
 
+				lastcell = cells[nc - 1];
 				// now loop again checking for walls and other entities
 				for(c = 0 ; c < nc ; c++) {
 					  cell = cells[c];
 					  if (cell.wall !== undefined && cell.wall !== null)
+					  if (cell.x != 0 &&  cell.y != 0 && cell.y != lastcell.y)
 						{
 //							if (cell.y == 1 || cell.y == 2)
 //								alert("cell: x, y "+cell.wall+": "+cell.x+", "+cell.y);
