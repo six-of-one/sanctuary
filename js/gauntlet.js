@@ -22,7 +22,7 @@ Gauntlet = function() {
 		loop_level = 8,
 		rnd_level = 0,
 // save this. to reload level
-		reloaded, Mastercell, Masterthismap,
+		reloaded, Mastercell, Masterthmp, Musicth,
 
       FPS      = 60,
       TILE     = 32,
@@ -458,7 +458,7 @@ Gauntlet = function() {
     },
 
     onplay: function(event, previous, current, map) {
-		 Masterthismap = this;
+		 Masterthmp = this;
       this.map = map;
       this.saveLevel(map.nlevel);
       this.saveHighScore(); // a convenient place to save in-progress high scores without writing to local storage at 60fps
@@ -1491,7 +1491,7 @@ Gauntlet = function() {
 //						entity.open();
 //				}
 				var cells   = reloaded.cells,
-					 cell, c, nc = cells.length;
+					 opendr = 0, cell, c, nc = cells.length;
 
 				// now loop again checking for walls and other entities
 				for(c = 0 ; c < nc ; c++) {
@@ -1500,16 +1500,19 @@ Gauntlet = function() {
 						if (cell.ptr.door)
 						{
 //								alert("door cell: x, y "+c+": "+cell.x+", "+cell.y);
-								Masterthismap.map.remove(cell.ptr);
+								if (!opendr) Musicth.play(Musicth.sounds.opendoor);
+								Masterthmp.map.remove(cell.ptr);
+								opendr = true;
 						}
 				}
+	//3			if (opendr) Masterthmp.play(Masterthmp.sounds.opendoor);
 
 			} 	// end doorstall
 
 			if (stalling == WALLSTALL) {
 //			--- new fn() fire all walls to exits -- how ?
 				var cells   = reloaded.cells,
-					 cell, c, nc = cells.length;
+					 walled, cell, c, nc = cells.length;
 
 				// now loop again checking for walls and other entities
 				for(c = 0 ; c < nc ; c++) {
@@ -1519,6 +1522,7 @@ Gauntlet = function() {
 //							if (cell.y == 1)
 //								alert("cell: x, y "+c+": "+cell.x+", "+cell.y);
 								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
+								walled = true;
 						}
 				}
 
@@ -1976,6 +1980,7 @@ Gauntlet = function() {
     playMenuMusic: function() {
       this.stopAllMusic();
       this.play(this.sounds.menu);
+		Musicth = this;
     },
 
     playGameMusic: function(sound) {
