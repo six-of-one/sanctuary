@@ -22,7 +22,7 @@ Gauntlet = function() {
 		loop_level = 8,
 		rnd_level = 0,
 // save this. to reload level
-		reloaded, Mastercell,
+		reloaded, Mastercell, Masterthismap,
 
       FPS      = 60,
       TILE     = 32,
@@ -458,6 +458,7 @@ Gauntlet = function() {
     },
 
     onplay: function(event, previous, current, map) {
+		 Masterthismap = this;
       this.map = map;
       this.saveLevel(map.nlevel);
       this.saveHighScore(); // a convenient place to save in-progress high scores without writing to local storage at 60fps
@@ -1495,12 +1496,11 @@ Gauntlet = function() {
 				// now loop again checking for walls and other entities
 				for(c = 0 ; c < nc ; c++) {
 					  cell = cells[c];
-if (cell.ptr) alert("cell: ptr, door "+c+": "+cell.ptr+", "+cell.ptr.door);
-else if (0)
-						if (cell.ptr.door !== undefined)
+						if (cell.ptr)
+						if (cell.ptr.door)
 						{
-								alert("door cell: x, y "+c+": "+cell.x+", "+cell.y);
-				//				cell.ptr.remove();
+//								alert("door cell: x, y "+c+": "+cell.x+", "+cell.y);
+								Masterthismap.map.remove(cell.ptr);
 						}
 				}
 
