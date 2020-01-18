@@ -1341,24 +1341,7 @@ Gauntlet = function() {
 
   });
 
-// in singleplayer, multiplier rots down to 1
-  
-  function multrot () {
-		var rot;
-	
-		rot = 30;
-		player.scmult = player.scmult - 1;
-		if (this.scmult >= 5) this.scmult = 4;
-		if (player.scmult < 1) player.scmult = 1;
-		else
-		{
-				if (this.scmult > 2) rot = 10;
-				if (this.scmult > 3) rot = 5;
-				setTimeout('multrot()',rot)
-		}
-		document.getElementById("wizmult").innerText = this.scmult + "x Score";
-  };
-  
+
   //===========================================================================
   // THE PLAYER
   //===========================================================================
@@ -1465,8 +1448,9 @@ Gauntlet = function() {
 				rot = 30;
 				if (this.scmult > 2) rot = 10;
 				if (this.scmult > 3) rot = 5;
-				setTimeout('multrot()',rot)
-				document.getElementById("wizmult").innerText = this.scmult + "x Score";
+				setTimeout('multrot(this)',rot)
+				document.getElementById("wizmult").value = this.scmult + "x Score";
+			 alert( this.scmult + "x Score");
 		 }
       if (treasure.type.potion)
         this.potions++;

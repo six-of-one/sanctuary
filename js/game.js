@@ -763,3 +763,21 @@ Game.Math = {
 
 	  setTimeout('splashrot()',rot);
   }
+
+// in singleplayer, multiplier rots down to 1
+  
+  function multrot (ply) {
+		var rot;
+	
+		rot = 30;
+		ply.scmult = ply.scmult - 1;
+		if (ply.scmult >= 5) ply.scmult = 4;
+		if (ply.scmult < 1) ply.scmult = 1;
+		else
+		{
+				if (ply.scmult > 2) rot = 10;
+				if (ply.scmult > 3) rot = 5;
+				setTimeout('multrot(ply)',rot)
+		}
+		document.getElementById("wizmult").innerText = ply.scmult + "x Score";
+  };
