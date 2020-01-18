@@ -1378,6 +1378,7 @@ Gauntlet = function() {
 /// debug tier
       this.score     = 0;
       this.scmult     = 1;
+		Mastermult = 1;
       this.dir       = Game.Math.randomInt(0, 7);
       this.health    = type.health;
       publish(EVENT.PLAYER_JOIN, this);
@@ -1443,14 +1444,13 @@ Gauntlet = function() {
 		if (treasure.type.scmult)
 		 {
 				var rot;
-				this.scmult = this.scmult + treasure.type.scmult;
+				this.scmult = Mastermult + treasure.type.scmult;
 				if (this.scmult >= 5) this.scmult = 4;
 				rot = 30;
 				if (this.scmult > 2) rot = 10;
 				if (this.scmult > 3) rot = 5;
 				setTimeout('multrot(this)',rot)
-				document.getElementById("wizmult").value = this.scmult + "x Score";
-			 alert( this.scmult + "x Score");
+				document.getElementById('wizmult').innerHTML = this.scmult + "x Score";
 		 }
       if (treasure.type.potion)
         this.potions++;
@@ -1501,7 +1501,7 @@ Gauntlet = function() {
 			stalling = 0; // reset on player move
     },
 
-    addscore: function(n) { this.score = this.score + (n||0) * this.scmult; },
+    addscore: function(n) { this.score = this.score + (n||0) * Mastermult; },
 
     heal: function(health) {
       this.health  = this.health + health;

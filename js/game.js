@@ -765,19 +765,21 @@ Game.Math = {
   }
 
 // in singleplayer, multiplier rots down to 1
-  
-  function multrot (ply) {
+
+  var Mastermult;
+
+  function multrot () {
 		var rot;
-	
+
 		rot = 30;
-		ply.scmult = ply.scmult - 1;
-		if (ply.scmult >= 5) ply.scmult = 4;
-		if (ply.scmult < 1) ply.scmult = 1;
+		Mastermult= Mastermult - 1;
+		if (Mastermult >= 5) Mastermult = 4;
+		if (Mastermult < 1) Mastermult = 1;
 		else
 		{
-				if (ply.scmult > 2) rot = 10;
-				if (ply.scmult > 3) rot = 5;
-				setTimeout('multrot(ply)',rot)
+				if (Mastermult > 2) rot = 10;
+				if (Mastermult > 3) rot = 5;
+				setTimeout('multrot()',rot)
 		}
-		document.getElementById("wizmult").innerText = ply.scmult + "x Score";
+		document.getElementById("wizmult").innerHTML = Mastermult + "x Score";
   };
