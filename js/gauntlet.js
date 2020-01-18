@@ -61,8 +61,8 @@ Gauntlet = function() {
         FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
         KEY:     { sx: 5, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'key'    },
         POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'potion' },
-        GOLD:    { sx: 0, sy: 10, frames: 3, fpf: FPS/10, score: 100,                sound: 'gold'   },
-        BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   },
+        GOLD:    { sx: 0, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1,              sound: 'gold'   },
+        BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'gold'   },
         LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   }
       },
 // after {n} health tics with no player move / fire, all walls are exits
@@ -1341,6 +1341,24 @@ Gauntlet = function() {
 
   });
 
+// in singleplayer, multiplier rots down to 1
+  
+  function multrot () {
+		var rot;
+	
+		rot = 30;
+		player.scmult = player.scmult - 1;
+		if (this.scmult >= 5) this.scmult = 4;
+		if (player.scmult < 1) player.scmult = 1;
+		else
+		{
+				if (this.scmult > 2) rot = 10;
+				if (this.scmult > 3) rot = 5;
+				setTimeout('multrot()',rot)
+		}
+		document.getElementById("wizmult").innerText = this.scmult + "x Score";
+  };
+  
   //===========================================================================
   // THE PLAYER
   //===========================================================================
@@ -1376,6 +1394,7 @@ Gauntlet = function() {
 					this.potions = 7;
 /// debug tier
       this.score     = 0;
+      this.scmult     = 1;
       this.dir       = Game.Math.randomInt(0, 7);
       this.health    = type.health;
       publish(EVENT.PLAYER_JOIN, this);
@@ -1437,6 +1456,18 @@ Gauntlet = function() {
 
     collect: function(treasure) {
       this.addscore(treasure.type.score);
+		
+		if (treasure.type.scmult)
+		 {
+				var rot;
+				this.scmult = this.scmult + treasure.type.scmult;
+				if (this.scmult >= 5) this.scmult = 4;
+				rot = 30;
+				if (this.scmult > 2) rot = 10;
+				if (this.scmult > 3) rot = 5;
+				setTimeout('multrot()',rot)
+				document.getElementById("wizmult").innerText = this.scmult + "x Score";
+		 }
       if (treasure.type.potion)
         this.potions++;
       else if (treasure.type.key)
@@ -1486,7 +1517,7 @@ Gauntlet = function() {
 			stalling = 0; // reset on player move
     },
 
-    addscore: function(n) { this.score = this.score + (n||0); },
+    addscore: function(n) { this.score = this.score + (n||0) * this.scmult; },
 
     heal: function(health) {
       this.health  = this.health + health;
