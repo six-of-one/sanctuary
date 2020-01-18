@@ -99,6 +99,7 @@ expansion:
 - grunts will throw clubs infreq
 - demons will have "fire"
 
+randomly leave out wall -> exit if more than {X} wall segs
 score mult applies to potion death pts, but perhaps 50% of mult
 yellow teleports that can select further away
 blue or purple teleports that are unit linked - not to nearest visible

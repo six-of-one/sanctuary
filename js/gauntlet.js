@@ -1446,11 +1446,12 @@ Gauntlet = function() {
 				var rot;
 				this.scmult = Mastermult + treasure.type.scmult;
 				if (this.scmult >= 5) this.scmult = 4;
-				rot = 30;
-				if (this.scmult > 2) rot = 10;
-				if (this.scmult > 3) rot = 5;
+				Mastermult = this.scmult;
+				rot = 60000;
+				if (this.scmult > 2) rot = 30000;
+				if (this.scmult > 3) rot = 15000;
 				setTimeout('multrot(this)',rot)
-				document.getElementById('wizmult').innerHTML = this.scmult + "x Score";
+				document.getElementById('wizmult').innerHTML = (rot/1000) +":" + Mastermult + "x Score";
 		 }
       if (treasure.type.potion)
         this.potions++;

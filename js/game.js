@@ -771,15 +771,15 @@ Game.Math = {
   function multrot () {
 		var rot;
 
-		rot = 30;
+		rot = 60000;
 		Mastermult= Mastermult - 1;
 		if (Mastermult >= 5) Mastermult = 4;
 		if (Mastermult < 1) Mastermult = 1;
 		else
 		{
-				if (Mastermult > 2) rot = 10;
-				if (Mastermult > 3) rot = 5;
+				if (Mastermult > 2) rot = 30000;
+				if (Mastermult > 3) rot = 15000;
 				setTimeout('multrot()',rot)
 		}
-		document.getElementById("wizmult").innerHTML = Mastermult + "x Score";
+		document.getElementById("wizmult").innerHTML = (rot/1000) +":" +Mastermult + "x Score";
   };
