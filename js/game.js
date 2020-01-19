@@ -323,11 +323,8 @@ Game = {
 
   renderToCanvas: function(width, height, render, canvas) { // http://kaioa.com/node/103
     canvas = canvas || this.createCanvas(width, height, canvas);
-	  var ctxb = canvas.getContext('2d');
-	  ctxb.rotate(1.5708);
-    render(ctxb);
- //   render(canvas.getContext('2d'));
-    return ctxb;
+    render(canvas.getContext('2d'));
+    return canvas;
   },
 
   parseImage: function(image, callback) {
@@ -343,7 +340,7 @@ Game = {
           pixel: function(tx,ty) { var i = this.index(tx,ty); return this.valid(tx,ty) ? (data[i]<<16)+(data[i+1]<<8)+(data[i+2]) : null; }
         }
 
-    for(ty = 0 ; ty < th ; ty++)
+    for(ty = th ; ty >= 0 ; ty--)
       for(tx = 0 ; tx < tw ; tx++)
         callback(tx, ty, helpers.pixel(tx,ty), helpers);
   },
