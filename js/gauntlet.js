@@ -1126,7 +1126,7 @@ Gauntlet = function() {
 				by.owner.addscore(1);
 				Deathmult = Deathmult + 1;
 				if (Deathmult > Dmmax) Deathmult = 0;
-				document.getElementById('wizmult').innerHTML = Deathscore[Deathmult]+"- Score";
+				document.getElementById('scrmult3').innerHTML = Deathscore[Deathmult]+"- Score";
 				return;
 		 }
       if (nuke && this.type.canbehit == 2) // death nuked
@@ -1473,7 +1473,10 @@ Gauntlet = function() {
 				if (this.scmult > 2) rot = 30000;
 				if (this.scmult > 3) rot = 15000;
 				setTimeout('multrot(this)',rot)
-				document.getElementById('wizmult').innerHTML = (rot/1000) +":" + Mastermult + "x Score";
+				document.getElementById('scrmult1').innerHTML = (rot/1000) +":" + Mastermult + "x Score";
+				document.getElementById('scrmult2').innerHTML = (rot/1000) +":" + Mastermult + "x Score";
+				document.getElementById('scrmult3').innerHTML = (rot/1000) +":" + Mastermult + "x Score";
+				document.getElementById('scrmult4').innerHTML = (rot/1000) +":" + Mastermult + "x Score";
 		 }
       if (treasure.type.potion)
         this.potions++;
