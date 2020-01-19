@@ -925,6 +925,8 @@ Gauntlet = function() {
 //		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
 		  self.cells[n].x = x;
 		  self.cells[n].y = y;
+// make some floor tiles appear slightlyt different - a "GPS" out of complex mazes
+// this is built into the map file as color code #a08080
 		  self.cells[n].mapcht = ((pixel & 0xa08080) == 0xa08080);
 //		  alert("cell x,y,n ="+self.cells[n].x+", "+self.cells[n].y+", "+n);
 /// do stuff tier
