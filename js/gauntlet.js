@@ -67,9 +67,9 @@ Gauntlet = function() {
         GOLD:    { sx: 0, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1,              sound: 'gold'   },
         LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   },
         BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'gold'   },
-        TELEPORT:       { sx: 1, sy: 12, frames:3, speed: 3*FPS, fpf: FPS/30 ,   sound: 'teleport'  },
-        TRAP:       { sx: 22, sy: 10, frames:3, speed: 3*FPS, fpf: FPS/30 ,   sound: 'trap'  },
-        STUN:       { sx: 25, sy: 10, frames:3, speed: 3*FPS, fpf: FPS/30 ,   sound: 'stun'  }
+        TELEPORT:       { sx: 1, sy: 12, frames:3, speed: 1*FPS, fpf: FPS/7 ,   sound: 'teleport'  },
+        TRAP:       { sx: 22, sy: 10, frames:3, speed: 1*FPS, fpf: FPS/5 ,   sound: 'trap'  },
+        STUN:       { sx: 25, sy: 10, frames:3, speed: 1*FPS, fpf: FPS/4 ,   sound: 'stun'  }
       },
 // after {n} health tics with no player move / fire, all walls are exits
 /// RESTORE to 200
@@ -1466,7 +1466,7 @@ Gauntlet = function() {
 
     collect: function(treasure) {
       this.addscore(treasure.type.score);
-		
+
 		if (treasure.type.scmult)
 		 {
 				this.scmult = Mastermult + treasure.type.scmult;
