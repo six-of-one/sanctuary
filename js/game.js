@@ -340,7 +340,6 @@ Game = {
           pixel: function(tx,ty) { var i = this.index(tx,ty); return this.valid(tx,ty) ? (data[i]<<16)+(data[i+1]<<8)+(data[i+2]) : null; }
         }
 
-	 canvas.setAttribute('style','transform:rotate(180deg)');
     for(ty = 0 ; ty < th ; ty++)
       for(tx = 0 ; tx < tw ; tx++)
         callback(tx, ty, helpers.pixel(tx,ty), helpers);
@@ -352,6 +351,7 @@ Game = {
     if (options.onload)
       image.on('load', options.onload);
     image.src = url;
+    image.style.transform = 'rotate(90deg)';
     return image;
   },
 
