@@ -903,6 +903,7 @@ Gauntlet = function() {
 
 // make sure mult is not undefed - later load from cooky
 		if (Deathmult == undefined) Deathmult = 0;
+		if (Masterot == undefined) Masterot = 0;
 
       Game.parseImage(source, function(tx, ty, pixel, map) {
 
@@ -1468,10 +1469,10 @@ Gauntlet = function() {
 				this.scmult = Mastermult + treasure.type.scmult;
 				if (this.scmult >= 5) this.scmult = 4;
 				Mastermult = this.scmult;
+				if (Masterot < 1) setTimeout('multrot()',1000);
 				Masterot = 60
 				if (this.scmult > 2) Masterot = 30;
 				if (this.scmult > 3) Masterot = 15;
-				setTimeout('multrot(this)',1000);
 				document.getElementById('scrmult1').innerHTML = Masterot +":" + Mastermult + "x Score";
 				document.getElementById('scrmult2').innerHTML = Masterot +":" + Mastermult + "x Score";
 				document.getElementById('scrmult3').innerHTML = Masterot +":" + Mastermult + "x Score";
