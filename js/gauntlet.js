@@ -901,7 +901,7 @@ Gauntlet = function() {
       function shadowtype(tx,ty,map) { return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty+1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0); };
       function doortype(tx,ty,map)   { return iswall(map.pixel(tx, ty-1)) || isdoor(map.pixel(tx, ty-1)) ? DOOR.VERTICAL : DOOR.HORIZONTAL; };
 
-// make sure mult is not undefed - later load from cooky
+// make sure mults is not undefed - later load deathmult from cooky
 		if (Deathmult == undefined) Deathmult = 0;
 		if (Masterot == undefined) Masterot = 0;
 
@@ -1135,7 +1135,7 @@ Gauntlet = function() {
 				this.health = Math.max(0, this.health - damage);
 				if (this.health > 0) return;
 				this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null, nuke);
-				by.addscore(Deathscore[Deathmult] - 1);
+				by.addscore(Math.floor( (Deathscore[Deathmult] - 1) /  (by.scmult > 1 ? 1.33333 : 1) ) );
 				return;
 		 }
       if ((by.weapon && this.type.canbeshot) || (by.player && this.type.canbehit) || (by == this) || nuke) {
