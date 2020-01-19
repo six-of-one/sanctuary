@@ -57,19 +57,19 @@ Gauntlet = function() {
       },
 
       TREASURE = {
-        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'food' },
-        POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50,   sound: 'potion' },
-        FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
-        FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
-        FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'food'   },
-        KEY:     { sx: 5, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'key'    },
-        POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'potion' },
-        GOLD:    { sx: 0, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1,              sound: 'gold'   },
-        LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   },
-        BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'gold'   },
-        TELEPORT:       { sx: 1, sy: 12, frames:3, speed: 1*FPS, fpf: FPS/7 ,   sound: 'teleport'  },
-        TRAP:       { sx: 22, sy: 10, frames:3, speed: 1*FPS, fpf: FPS/5 ,   sound: 'trap'  },
-        STUN:       { sx: 25, sy: 10, frames:3, speed: 1*FPS, fpf: FPS/4 ,   sound: 'stun'  }
+        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'collectfood' },
+        POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50,   sound: 'collectpotion' },
+        FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
+        FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
+        FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
+        KEY:     { sx: 5, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'collectkey'    },
+        POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion' },
+        GOLD:    { sx: 0, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1,              sound: 'collectgold'   },
+        LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'collectgold'   },
+        BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'collectgold'   },
+        TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5 ,   sound: 'teleport'  },
+        TRAP:       { sx: 22, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5 ,   sound: 'trap'  },
+        STUN:       { sx: 26, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4 ,   sound: 'stun'  }
       },
 // after {n} health tics with no player move / fire, all walls are exits
 /// RESTORE to 200
@@ -81,16 +81,16 @@ Gauntlet = function() {
       DOOR = {
         HORIZONTAL: { sx: 16, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
         VERTICAL:   { sx: 11, sy: 10, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
-        EXIT:       { sx: 7, sy: 12, speed: 3*FPS, fpf: FPS/30 },
-        EXIT4:       { sx: 8, sy: 12, speed: 3*FPS, fpf: FPS/30 },
-        EXIT8:       { sx: 9, sy: 12, speed: 3*FPS, fpf: FPS/30 },
-        EXIT6:       { sx: 10, sy: 12, speed: 3*FPS, fpf: FPS/30 },
-        EXITMOVE:       { sx: 11, sy: 12, speed: 3*FPS, fpf: FPS/30 }
+        EXIT:       { sx: 9, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+        EXIT4:       { sx: 10, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+        EXIT8:       { sx: 11, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+        EXIT6:       { sx: 12, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+        EXITMOVE:       { sx: 13, sy: 12, speed: 3*FPS, fpf: FPS/30 }
       },
       FX = {
-        GENERATOR_DEATH: { sx: 15, sy: 12, frames: 6, fpf: FPS/10 },
-        MONSTER_DEATH:   { sx: 15, sy: 12, frames: 6, fpf: FPS/20 },
-        WEAPON_HIT:      { sx: 21, sy: 12, frames: 2, fpf: FPS/20 },
+        GENERATOR_DEATH: { sx: 17, sy: 12, frames: 6, fpf: FPS/10 },
+        MONSTER_DEATH:   { sx: 17, sy: 12, frames: 6, fpf: FPS/20 },
+        WEAPON_HIT:      { sx: 23, sy: 12, frames: 2, fpf: FPS/20 },
         PLAYER_GLOW:     { frames: FPS/2, border: 5 }
       },
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
@@ -1994,7 +1994,7 @@ Gauntlet = function() {
     onPlayerFire:        function(player)            { this.play(this.sounds["fire" + player.type.name]);                                                     },
     onMonsterFire:       function(monster)           { this.play(this.sounds.fire);                                                                           },
     onDoorOpen:          function(door)              { this.play(this.sounds.opendoor);                                                                       },
-    onTreasureCollected: function(treasure, player)  { this.play(this.sounds["collect" + treasure.type.sound]);                                               },
+    onTreasureCollected: function(treasure, player)  { this.play(this.sounds[treasure.type.sound]);                                               },
     onMonsterDeath:      function(monster, by, nuke) { this.play(nuke ? this.sounds.generatordeath : this.sounds["monsterdeath" + Game.Math.randomInt(1,3)]); },
     onGeneratorDeath:    function(generator, by)     { this.play(this.sounds.generatordeath);                                                                 },
     onHighScore:         function(player)            { this.play(this.sounds.highscore);                                                                      },
