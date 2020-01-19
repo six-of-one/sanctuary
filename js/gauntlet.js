@@ -23,7 +23,8 @@ Gauntlet = function() {
 		rnd_level = 0,
 // save this. to reload level
 		reloaded, Mastercell, Masterthmp, Musicth,
-		Deathmult
+		Deathmult, Dmmax = 7,
+		Deathscore = [1000, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
 
       FPS      = 60,
       TILE     = 32,
@@ -41,7 +42,7 @@ Gauntlet = function() {
         DEMON:  { sx: 0, sy: 5, frames: 3, fpf: FPS/10, score:  20, health:  4, speed:  80/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 16, speed: 3.0*FPS, max: 40, score: 200, sx: 32, sy: 5 }, name: "demon",  weapon: { speed: 240/FPS, reload: 2*FPS, damage: 10, sx: 24, sy: 5, fpf: FPS/10, monster: true } },
         GRUNT:  { sx: 0, sy: 6, frames: 3, fpf: FPS/10, score:  30, health:  8, speed: 120/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 16, speed: 3.5*FPS, max: 40, score: 300, sx: 32, sy: 6 }, name: "grunt",  weapon: null                                                                                     },
         WIZARD: { sx: 0, sy: 7, frames: 3, fpf: FPS/10, score:  30, health:  8, speed: 120/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 24, speed: 4.0*FPS, max: 20, score: 400, sx: 32, sy: 7 }, name: "sorcerer", weapon: null                                                                                     },
-        DEATH:  { sx: 0, sy: 8, frames: 3, fpf: FPS/10, score: 1000, health: 12, speed: 180/FPS, damage: 120/FPS, selfharm: 6/FPS,  canbeshot: false, canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 16, speed: 5.0*FPS, max: 10, score: 1000, sx: 32, sy: 8 }, name: "death",  weapon: null                                                                                     },
+        DEATH:  { sx: 0, sy: 8, frames: 3, fpf: FPS/10, score: 1, health: 2, speed: 180/FPS, damage: 120/FPS, selfharm: 6/FPS,  canbeshot: false, canbehit: 2, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 16, speed: 5.0*FPS, max: 10, score: 1000, sx: 32, sy: 8 }, name: "death",  weapon: null                                                                                     },
         LOBBER: { sx: 0, sy: 9, frames: 3, fpf: FPS/10, score:  10, health:  4, speed: 60/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 8, speed: 2.5*FPS, max: 20, score: 100, sx: 32, sy: 7 }, name: "lobber", weapon: null                                                                                     },
         GHOST1:  { sx: 0, sy: 4, frames: 3, fpf: FPS/10, score:  10, health:  4, speed: 140/FPS, damage: 100/FPS, selfharm: 30/FPS, canbeshot: true,  canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health:  4, speed: 2.5*FPS, max: 40, score: 50, sx: 34, sy: 4 }, name: "ghost",  weapon: null                                                                                     },
         DEMON1:  { sx: 0, sy: 5, frames: 3, fpf: FPS/10, score:  20, health:  4, speed:  80/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 16, speed: 3.0*FPS, max: 40, score: 200, sx: 34, sy: 5 }, name: "demon",  weapon: { speed: 240/FPS, reload: 2*FPS, damage: 10, sx: 24, sy: 5, fpf: FPS/10, monster: true } },
@@ -54,6 +55,7 @@ Gauntlet = function() {
         WIZARD2: { sx: 0, sy: 7, frames: 3, fpf: FPS/10, score:  30, health:  8, speed: 120/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 24, speed: 4.0*FPS, max: 20, score: 400, sx: 33, sy: 7 }, name: "sorcerer", weapon: null                                                                                     },
         LOBBER2: { sx: 0, sy: 9, frames: 3, fpf: FPS/10, score:  10, health:  4, speed: 60/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 8, speed: 2.5*FPS, max: 20, score: 100, sx: 33, sy: 7 }, name: "lobber", weapon: null                                                                                     }
       },
+
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'food' },
         POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50,   sound: 'potion' },
@@ -899,6 +901,9 @@ Gauntlet = function() {
       function shadowtype(tx,ty,map) { return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty+1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0); };
       function doortype(tx,ty,map)   { return iswall(map.pixel(tx, ty-1)) || isdoor(map.pixel(tx, ty-1)) ? DOOR.VERTICAL : DOOR.HORIZONTAL; };
 
+// make sure mult is not undefed - later load from cooky
+		if (Deathmult == undefined) Deathmult = 0;
+
       Game.parseImage(source, function(tx, ty, pixel, map) {
 
         var cell, x = t2p(tx),
@@ -1115,6 +1120,22 @@ Gauntlet = function() {
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 			 this.remove();
 			 return;
+		 }
+      if (by.weapon && this.type.canbehit == 2) // death shot
+		 {
+				by.owner.addscore(1);
+				Deathmult = Deathmult + 1;
+				if (Deathmult > Dmmax) Deathmult = 0;
+				document.getElementById('wizmult').innerHTML = Deathscore[Deathmult]+"- Score";
+				return;
+		 }
+      if (nuke && this.type.canbehit == 2) // death nuked
+		 {
+				this.health = Math.max(0, this.health - damage);
+				if (this.health > 0) return;
+				this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null, nuke);
+				by.addscore(Deathscore[Deathmult] - 1);
+				return;
 		 }
       if ((by.weapon && this.type.canbeshot) || (by.player && this.type.canbehit) || (by == this) || nuke) {
         this.health = Math.max(0, this.health - damage);
