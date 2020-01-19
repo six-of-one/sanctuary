@@ -1472,10 +1472,10 @@ Gauntlet = function() {
 				if (this.scmult > 2) Masterot = 30;
 				if (this.scmult > 3) Masterot = 15;
 				setTimeout('multrot(this)',1000);
-				document.getElementById('scrmult1').innerHTML = (Masterot/1000) +":" + Mastermult + "x Score";
-				document.getElementById('scrmult2').innerHTML = (Masterot/1000) +":" + Mastermult + "x Score";
-				document.getElementById('scrmult3').innerHTML = (Masterot/1000) +":" + Mastermult + "x Score";
-				document.getElementById('scrmult').innerHTML = (Masterot/1000) +":" + Mastermult + "x Score";
+				document.getElementById('scrmult1').innerHTML = Masterot +":" + Mastermult + "x Score";
+				document.getElementById('scrmult2').innerHTML = Masterot +":" + Mastermult + "x Score";
+				document.getElementById('scrmult3').innerHTML = Masterot +":" + Mastermult + "x Score";
+				document.getElementById('scrmult4').innerHTML = Masterot +":" + Mastermult + "x Score";
 		 }
       if (treasure.type.potion)
         this.potions++;
