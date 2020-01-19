@@ -23,6 +23,7 @@ Gauntlet = function() {
 		rnd_level = 0,
 // save this. to reload level
 		reloaded, Mastercell, Masterthmp, Musicth,
+		Deathmult
 
       FPS      = 60,
       TILE     = 32,
