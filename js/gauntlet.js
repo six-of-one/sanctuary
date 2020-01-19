@@ -65,8 +65,11 @@ Gauntlet = function() {
         KEY:     { sx: 5, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'key'    },
         POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'potion' },
         GOLD:    { sx: 0, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1,              sound: 'gold'   },
+        LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   },
         BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'gold'   },
-        LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'gold'   }
+        TELEPORT:       { sx: 1, sy: 12, frames:3, speed: 3*FPS, fpf: FPS/30 ,   sound: 'teleport'  },
+        TRAP:       { sx: 22, sy: 10, frames:3, speed: 3*FPS, fpf: FPS/30 ,   sound: 'trap'  },
+        STUN:       { sx: 25, sy: 10, frames:3, speed: 3*FPS, fpf: FPS/30 ,   sound: 'stun'  }
       },
 // after {n} health tics with no player move / fire, all walls are exits
 /// RESTORE to 200
@@ -82,8 +85,7 @@ Gauntlet = function() {
         EXIT4:       { sx: 8, sy: 12, speed: 3*FPS, fpf: FPS/30 },
         EXIT8:       { sx: 9, sy: 12, speed: 3*FPS, fpf: FPS/30 },
         EXIT6:       { sx: 10, sy: 12, speed: 3*FPS, fpf: FPS/30 },
-        EXITMOVE:       { sx: 11, sy: 12, frames:4, speed: 3*FPS, fpf: FPS/30 },
-        TELEPORT:       { sx: 1, sy: 12, frames:3, speed: 3*FPS, fpf: FPS/30 }
+        EXITMOVE:       { sx: 11, sy: 12, speed: 3*FPS, fpf: FPS/30 }
       },
       FX = {
         GENERATOR_DEATH: { sx: 15, sy: 12, frames: 6, fpf: FPS/10 },
@@ -93,7 +95,7 @@ Gauntlet = function() {
       },
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
       MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2 ],
-      TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, TREASURE.LOCKED, TREASURE.BAG ],
+      TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN ],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,   h: TILE          },
         PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2, h: TILE - TILE/4 },
@@ -271,6 +273,9 @@ Gauntlet = function() {
       { id: 'monsterdeath1',   name: 'sounds/monsterdeath1',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'monsterdeath2',   name: 'sounds/monsterdeath2',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'monsterdeath3',   name: 'sounds/monsterdeath3',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 }, //
+      { id: 'teleport',        name: 'sounds/g1_teleport',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
+      { id: 'trap',        name: 'sounds/g1_wallexit',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
+      { id: 'stun',        name: 'sounds/g1_deathtouch',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'wallexit',        name: 'sounds/g1_wallexit',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'dtouch',        name: 'sounds/g1_deathtouch',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'infosnd',        name: 'sounds/g1_info',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
@@ -946,9 +951,6 @@ Gauntlet = function() {
 					case 3: self.addExit(x, y, DOOR.EXIT6);
 							break;
 					case 4: self.addExit(x, y, DOOR.EXITMOVE);
-							break;
-					case 5: self.addExit(x, y, DOOR.TELEPORT);
-							Mastercell.ptr.exit = false;
 							break;
 				 }
 			 }
