@@ -498,8 +498,6 @@ Gauntlet = function() {
       else {
         $('booting').show();
         level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
-    level.source.style.transform = 'rotate(90deg)';
-		  document.getElementById('logo').src = level.url;
       }
     },
 
@@ -1536,6 +1534,9 @@ alert("x: "+this.x+" y:"+this.y);
 				var cells   = reloaded.cells,
 					 walled, cell, c, nc = cells.length;
 
+alert("x: "+this.x+" y:"+this.y);
+alert("x: "+treasure.x+" y:"+treasure.y);
+
 				// now loop again checking for all teleporters
 				for(c = 0 ; c < nc ; c++) {
 						cell = cells[c];
@@ -1549,6 +1550,7 @@ alert("x: "+this.x+" y:"+this.y);
 								walled = true;
 						}
 				}
+				return;
 		 }
 
 		 if (treasure.type.trap) {
