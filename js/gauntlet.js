@@ -71,6 +71,7 @@ Gauntlet = function() {
         TRAP:       { sx: 22, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap'  },
         STUN:       { sx: 26, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun'  }
       },
+		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
 		TRAPWALL = 0x404030,
 // after {n} health tics with no player move / fire, all walls are exits
@@ -954,9 +955,9 @@ Gauntlet = function() {
 		  reloaded = self;
 		  Mastercell = self.cells[n];
 //		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
-		  self.cells[n].x = x;
+		  self.cells[n].x = x; // used by walls -> exits
 		  self.cells[n].y = y;
-		  self.cells[n].tx = tx;
+		  self.cells[n].tx = tx; // used by trap: walls -> floor
 		  self.cells[n].ty = ty;
 		  self.cells[n].pixel = pixel;
 // make some floor tiles appear slightlyt different - a "GPS" out of complex mazes
@@ -1487,6 +1488,7 @@ Gauntlet = function() {
           publish(EVENT.PLAYER_FIRE, this);
         }
 			stalling = 0; // reset on player fire
+alert("x: "+this.x+" y:"+this.y);
 			return; // can't fire and move at same time
       }
 
@@ -1529,6 +1531,25 @@ Gauntlet = function() {
 
 		 if (treasure.type.stun)
 			this.stun = 4;
+
+		 if (treasure.type.teleport) {
+				var cells   = reloaded.cells,
+					 walled, cell, c, nc = cells.length;
+
+				// now loop again checking for all teleporters
+				for(c = 0 ; c < nc ; c++) {
+						cell = cells[c];
+						if (cell.pixel == TELEPORTILE)
+						if (Math.abs(this.x - cell.x) > 40 &&  Math.abs(this.y - cell.y) > 40)
+//					  if (cell.x != 0 &&  cell.y != 0)
+						{
+								this.occupy(cell.x, cell.y + 32, this);
+
+								if (!walled) Musicth.play(Musicth.sounds.teleport);
+								walled = true;
+						}
+				}
+		 }
 
 		 if (treasure.type.trap) {
 				var cells   = reloaded.cells,
