@@ -71,6 +71,8 @@ Gauntlet = function() {
         TRAP:       { sx: 22, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap'  },
         STUN:       { sx: 26, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun'  }
       },
+// until target traps are coded any trap will remove these
+		TRAPWALL = 0x404030,
 // after {n} health tics with no player move / fire, all walls are exits
 /// RESTORE to 200
 		WALLSTALL = 10,
@@ -580,7 +582,6 @@ Gauntlet = function() {
 
     onPlayerFire: function(player) {
       this.map.addWeapon(player.x, player.y, player.type.weapon, player.dir, player);
-		 stalling = 0; // reset on player fire
     },
 
     onMonsterFire: function(monster) {
@@ -1412,7 +1413,9 @@ Gauntlet = function() {
       this.ctx    = this.canvas.getContext('2d');
       this.cells  = []; // entities track which cells they currently occupy
 
+// init some control code
 		this.stun = 0;
+		 stalling = 0;
     },
 
     player: true,
@@ -1479,11 +1482,14 @@ Gauntlet = function() {
           this.reloading = this.type.weapon.reload;
           publish(EVENT.PLAYER_FIRE, this);
         }
-        return; // can't fire and move at same time
+			stalling = 0; // reset on player fire
+			return; // can't fire and move at same time
       }
 
       if (is.invalid(this.moving.dir))
         return;
+
+		stalling = 0; // reset on player move
 
       var d, dmax, dir, collision,
           directions = SLIDE_DIRECTIONS[this.moving.dir];
@@ -1564,9 +1570,6 @@ Gauntlet = function() {
         this.dir = this.moving.dir = DIR.RIGHT;
       else
         this.moving.dir = null; // no moving.dir, but still facing this.dir
-
-		 if (this.moving.dir != null)
-			stalling = 0; // reset on player move
     },
 
     addscore: function(n) { this.score = this.score + (n||0) * Mastermult; },
