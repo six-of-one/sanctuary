@@ -1546,7 +1546,7 @@ Gauntlet = function() {
 				for(c = 0 ; c < nc ; c++) {
 						cell = cells[c];
 						if (cell.pixel == TELEPORTILE)
-						if (Math.abs(this.x - cell.x) > 32 ||  Math.abs(this.y - cell.y) > 32)
+						if (Math.abs(treasure.x - cell.x) > 33 ||  Math.abs(treasure.y - cell.y) > 33)
 //					  if (cell.x != 0 &&  cell.y != 0)
 						{
 								Mastermap.occupy(cell.x + DIRTX[ddir], cell.y + DIRTY[ddir], this);
