@@ -22,7 +22,7 @@ Gauntlet = function() {
 		loop_level = 8,
 		rnd_level = 0,
 // save this. to reload level
-		reloaded, Mastercell, Masterthmp, Musicth,Mastermap,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap,
 		Deathmult, Dmmax = 7,
 		Deathscore = [1000, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
 
@@ -31,6 +31,9 @@ Gauntlet = function() {
       STILE    = 32,
       VIEWPORT = { TW: 24, TH: 24 },
       DIR      = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7 },
+// teleport adjust by last player dir
+		DIRTX = [ 0, 32, 32, 32, 0, -32, -32, -32],
+		DIRTY = [ -32, -32, 0, 32, 32, 32, 0 -32],
       PLAYER = {
         WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, health: 2000, speed: 200/FPS, damage: 50/FPS, armor: 2, magic: 16, weapon: { speed: 600/FPS, reload: 0.40*FPS, damage: 4, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior"  }, // Thor
         VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, health: 2000, speed: 220/FPS, damage: 40/FPS, armor: 3, magic: 16, weapon: { speed: 620/FPS, reload: 0.35*FPS, damage: 4, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie" }, // Thyra
@@ -1459,7 +1462,7 @@ Gauntlet = function() {
 //      this.keys    = DEBUG.KEYS || 0;
       this.dead    = false;
       this.exiting = false;
-		Mastermap = map;
+		Mastermap = map; // for teleport reposition
     },
 
     update: function(frame, player, map, viewport) {
@@ -1487,7 +1490,6 @@ Gauntlet = function() {
           publish(EVENT.PLAYER_FIRE, this);
         }
 			stalling = 0; // reset on player fire
-alert("x: "+this.x+" y:"+this.y);
 			return; // can't fire and move at same time
       }
 
@@ -1533,19 +1535,21 @@ alert("x: "+this.x+" y:"+this.y);
 
 		 if (treasure.type.teleport) {
 				var cells   = reloaded.cells,
-					 walled, cell, c, nc = cells.length;
+					 walled, cell, c, nc = cells.length,
+					ddir = this.moving.dir;
 
 //alert("x: "+this.x+" y:"+this.y);
 //alert("x: "+treasure.x+" y:"+treasure.y);
+				if (ddir < 0 || ddir > 7) ddir = 0;
 
 				// now loop again checking for all teleporters
 				for(c = 0 ; c < nc ; c++) {
 						cell = cells[c];
 						if (cell.pixel == TELEPORTILE)
-						if (Math.abs(this.x - cell.x) > 40 ||  Math.abs(this.y - cell.y) > 40)
+						if (Math.abs(this.x - cell.x) > 32 ||  Math.abs(this.y - cell.y) > 32)
 //					  if (cell.x != 0 &&  cell.y != 0)
 						{
-								Mastermap.occupy(cell.x, cell.y + 32, this);
+								Mastermap.occupy(cell.x + DIRTX[ddir], cell.y + DIRTY[ddir], this);
 
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
 								walled = true;
