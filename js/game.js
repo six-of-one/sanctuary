@@ -351,7 +351,6 @@ Game = {
     if (options.onload)
       image.on('load', options.onload);
     image.src = url;
-    image.style.transform = 'rotate(90deg)';
     return image;
   },
 

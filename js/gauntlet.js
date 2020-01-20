@@ -275,7 +275,7 @@ Gauntlet = function() {
       { id: 'monsterdeath3',   name: 'sounds/monsterdeath3',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'teleport',        name: 'sounds/g1_teleport',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'trap',        name: 'sounds/g1_wallexit',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
-      { id: 'stun',        name: 'sounds/g1_deathtouch',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
+      { id: 'stun',        name: 'sounds/g1_stun',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'wallexit',        name: 'sounds/g1_wallexit',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'dtouch',        name: 'sounds/g1_deathtouch',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'infosnd',        name: 'sounds/g1_info',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
@@ -293,7 +293,34 @@ Gauntlet = function() {
       { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_BRICK,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.PURPLE_TILE,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.PURPLE_TILE,      music: 'mountingassault',      score:  1000, help: null },
-      { name: 'Research 2',     url: "levels/glevel13.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel20.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel21.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel52.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel9.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel65.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel15.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel80.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel8.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel82.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel91.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel103.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel102.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel106.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel107.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel108.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel110.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel113.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel114.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel117.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel11.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel13.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel16.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel17.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel18.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel19.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel22.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel1r.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel23.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
       { name: 'Level 111',     url: "levels/glevel111.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.PINKSLD,      music: 'mountingassault',      score:  1000, help: null },
       { name: 'Level 95',     url: "levels/glevel95.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.PINKSLD,      music: 'mountingassault',      score:  1000, help: null },
       { name: 'Level 104',     url: "levels/glevel104.png",  floor: FLOOR.GREEN_BOARDS,      wall: WALL.BLUE,      music: 'mountingassault',      score:  1000, help: null },
@@ -467,6 +494,8 @@ Gauntlet = function() {
       else {
         $('booting').show();
         level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
+    level.source.style.transform = 'rotate(90deg)';
+		  document.getElementById('logo').src = level.url;
       }
     },
 
