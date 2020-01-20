@@ -1539,19 +1539,13 @@ Gauntlet = function() {
       }
     },
 
-    fire:      function(on) { if (this.stun < 1) this.firing       = on;                 },
-    moveUp:    function(on) { if (this.stun < 1) this.moving.up    = on;  this.setDir(); },
-    moveDown:  function(on) { if (this.stun < 1) this.moving.down  = on;  this.setDir(); },
-    moveLeft:  function(on) { if (this.stun < 1) this.moving.left  = on;  this.setDir(); },
-    moveRight: function(on) { if (this.stun < 1) this.moving.right = on;  this.setDir(); },
+    fire:      function(on) { this.firing       = on;   },
+    moveUp:    function(on) { this.moving.up    = on;  this.setDir(); },
+    moveDown:  function(on) { this.moving.down  = on;  this.setDir(); },
+    moveLeft:  function(on) { this.moving.left  = on;  this.setDir(); },
+    moveRight: function(on) { this.moving.right = on;  this.setDir(); },
 
     setDir: function() {
-// stunned - no movement
-		 if (this.stun > 0)
-		 {
-			 this.moving.dir = null;
-			 return;
-		 }
       if (this.moving.up && this.moving.left)
         this.dir = this.moving.dir = DIR.UPLEFT;
       else if (this.moving.up && this.moving.right)
