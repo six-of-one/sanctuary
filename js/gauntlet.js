@@ -87,7 +87,8 @@ Gauntlet = function() {
         EXIT4:       { sx: 10, sy: 12, speed: 3*FPS, fpf: FPS/30 },
         EXIT8:       { sx: 11, sy: 12, speed: 3*FPS, fpf: FPS/30 },
         EXIT6:       { sx: 12, sy: 12, speed: 3*FPS, fpf: FPS/30 },
-        EXITMOVE:       { sx: 13, sy: 12, speed: 3*FPS, fpf: FPS/30 }
+        EXITMOVE:       { sx: 13, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+        EXITNONE:       { sx: 9, sy: 12, speed: 1*FPS, fpf: FPS/30 }
       },
       FX = {
         GENERATOR_DEATH: { sx: 17, sy: 12, frames: 6, fpf: FPS/10 },
@@ -955,6 +956,8 @@ Gauntlet = function() {
 //		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
 		  self.cells[n].x = x;
 		  self.cells[n].y = y;
+		  self.cells[n].tx = tx;
+		  self.cells[n].ty = ty;
 		  self.cells[n].pixel = pixel;
 // make some floor tiles appear slightlyt different - a "GPS" out of complex mazes
 // this is built into the map file as color code #a08080
@@ -1539,6 +1542,7 @@ Gauntlet = function() {
 //					  if (cell.x != 0 &&  cell.y != 0)
 						{
 								if (!walled) Musicth.play(Musicth.sounds.wallexit);
+								cell.tileptr.tile(cell.ctx, cell.sprites, cell.map.level.floor, 0, cell.tx, cell.ty);
 //								cell.wall = 17;//walltype(cell.tx, cell.ty, map);
 //								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
 								cell.wall = null;	// so we dont fire these wall segs again
@@ -1941,7 +1945,13 @@ Gauntlet = function() {
         for(tx = 0, tw = map.tw ; tx < tw ; tx++) {
           cell = map.cell(tx * TILE, ty * TILE);
           if (is.valid(cell.wall))
+			  {
             this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
+				  cell.ctx = ctx;	// for traps turning walls to floor
+				  cell.sprites = sprites;
+				  cell.tileptr = this;
+				  cell.map = map;
+			  }
           else if (cell.nothing)
             this.tile(ctx, sprites, 0, 0, tx, ty);
           else
