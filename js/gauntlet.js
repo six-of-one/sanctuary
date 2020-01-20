@@ -22,7 +22,7 @@ Gauntlet = function() {
 		loop_level = 8,
 		rnd_level = 0,
 // save this. to reload level
-		reloaded, Mastercell, Masterthmp, Musicth,
+		reloaded, Mastercell, Masterthmp, Musicth,Mastermap,
 		Deathmult, Dmmax = 7,
 		Deathscore = [1000, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
 
@@ -1459,6 +1459,7 @@ Gauntlet = function() {
 //      this.keys    = DEBUG.KEYS || 0;
       this.dead    = false;
       this.exiting = false;
+		Mastermap = map;
     },
 
     update: function(frame, player, map, viewport) {
@@ -1534,17 +1535,17 @@ alert("x: "+this.x+" y:"+this.y);
 				var cells   = reloaded.cells,
 					 walled, cell, c, nc = cells.length;
 
-alert("x: "+this.x+" y:"+this.y);
-alert("x: "+treasure.x+" y:"+treasure.y);
+//alert("x: "+this.x+" y:"+this.y);
+//alert("x: "+treasure.x+" y:"+treasure.y);
 
 				// now loop again checking for all teleporters
 				for(c = 0 ; c < nc ; c++) {
 						cell = cells[c];
 						if (cell.pixel == TELEPORTILE)
-						if (Math.abs(this.x - cell.x) > 40 &&  Math.abs(this.y - cell.y) > 40)
+						if (Math.abs(this.x - cell.x) > 40 ||  Math.abs(this.y - cell.y) > 40)
 //					  if (cell.x != 0 &&  cell.y != 0)
 						{
-								this.occupy(cell.x, cell.y + 32, this);
+								Mastermap.occupy(cell.x, cell.y + 32, this);
 
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
 								walled = true;
