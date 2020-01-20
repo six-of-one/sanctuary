@@ -67,9 +67,9 @@ Gauntlet = function() {
         GOLD:    { sx: 0, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1,              sound: 'collectgold'   },
         LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'collectgold'   },
         BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'collectgold'   },
-        TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5 ,   sound: 'teleport'  },
-        TRAP:       { sx: 22, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5 ,   sound: 'trap'  },
-        STUN:       { sx: 26, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4 ,   sound: 'stun'  }
+        TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport'  },
+        TRAP:       { sx: 22, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap'  },
+        STUN:       { sx: 26, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun'  }
       },
 // after {n} health tics with no player move / fire, all walls are exits
 /// RESTORE to 200
@@ -1411,6 +1411,8 @@ Gauntlet = function() {
       this.canvas = Game.createCanvas(STILE + 2*FX.PLAYER_GLOW.border, STILE + 2*FX.PLAYER_GLOW.border);
       this.ctx    = this.canvas.getContext('2d');
       this.cells  = []; // entities track which cells they currently occupy
+
+		this.stun = 0;
     },
 
     player: true,
@@ -1470,6 +1472,8 @@ Gauntlet = function() {
       this.healing   = countdown(this.healing);
       this.reloading = countdown(this.reloading);
 
+      if (this.stun > 0) return;
+		
       if (this.firing) {
         if (!this.reloading) {
           this.reloading = this.type.weapon.reload;
@@ -1512,6 +1516,10 @@ Gauntlet = function() {
 				document.getElementById('scrmult3').innerHTML = Masterot +":" + Mastermult + "x Score";
 				document.getElementById('scrmult4').innerHTML = Masterot +":" + Mastermult + "x Score";
 		 }
+
+		 if (treasure.type.stun)
+			this.stun = 4;
+
       if (treasure.type.potion)
         this.potions++;
       else if (treasure.type.key)
@@ -1531,13 +1539,19 @@ Gauntlet = function() {
       }
     },
 
-    fire:      function(on) { this.firing       = on;                 },
-    moveUp:    function(on) { this.moving.up    = on;  this.setDir(); },
-    moveDown:  function(on) { this.moving.down  = on;  this.setDir(); },
-    moveLeft:  function(on) { this.moving.left  = on;  this.setDir(); },
-    moveRight: function(on) { this.moving.right = on;  this.setDir(); },
+    fire:      function(on) { if (this.stun < 1) this.firing       = on;                 },
+    moveUp:    function(on) { if (this.stun < 1) this.moving.up    = on;  this.setDir(); },
+    moveDown:  function(on) { if (this.stun < 1) this.moving.down  = on;  this.setDir(); },
+    moveLeft:  function(on) { if (this.stun < 1) this.moving.left  = on;  this.setDir(); },
+    moveRight: function(on) { if (this.stun < 1) this.moving.right = on;  this.setDir(); },
 
     setDir: function() {
+// stunned - no movement
+		 if (this.stun > 0)
+		 {
+			 this.moving.dir = null;
+			 return;
+		 }
       if (this.moving.up && this.moving.left)
         this.dir = this.moving.dir = DIR.UPLEFT;
       else if (this.moving.up && this.moving.right)
@@ -1588,7 +1602,10 @@ Gauntlet = function() {
 			if (!DEBUG.NOAUTOHURT)
 				this.hurt(1, this, true);
 
-			stalling = stalling + 1;		// count health tics
+// count down stun
+			if (this.stun > 0) this.stun--;
+// count health tics for stalling
+			stalling = stalling + 1;
 			if (stalling == DOORSTALL) {
 
 				var cells   = reloaded.cells,
