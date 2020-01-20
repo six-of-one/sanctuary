@@ -955,6 +955,7 @@ Gauntlet = function() {
 //		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
 		  self.cells[n].x = x;
 		  self.cells[n].y = y;
+		  self.cells[n].pixel = pixel;
 // make some floor tiles appear slightlyt different - a "GPS" out of complex mazes
 // this is built into the map file as color code #a08080
 		  self.cells[n].mapcht = ((pixel & 0xa08080) == 0xa08080);
@@ -1476,7 +1477,7 @@ Gauntlet = function() {
       this.reloading = countdown(this.reloading);
 
       if (this.stun > 0) return;
-		
+
       if (this.firing) {
         if (!this.reloading) {
           this.reloading = this.type.weapon.reload;
@@ -1525,6 +1526,26 @@ Gauntlet = function() {
 
 		 if (treasure.type.stun)
 			this.stun = 4;
+
+		 if (treasure.type.trap) {
+				var cells   = reloaded.cells,
+					 walled, cell, c, nc = cells.length;
+
+				// now loop again checking for all trap walls
+				for(c = 0 ; c < nc ; c++) {
+					  cell = cells[c];
+					  if (cell.wall !== undefined && cell.wall !== null)
+					  if (cell.pixel == TRAPWALL)
+//					  if (cell.x != 0 &&  cell.y != 0)
+						{
+								if (!walled) Musicth.play(Musicth.sounds.wallexit);
+//								cell.wall = 17;//walltype(cell.tx, cell.ty, map);
+//								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
+								cell.wall = null;	// so we dont fire these wall segs again
+								walled = true;
+						}
+				}
+		 }
 
       if (treasure.type.potion)
         this.potions++;
@@ -1624,7 +1645,7 @@ Gauntlet = function() {
 			} 	// end doorstall
 
 			if (stalling == WALLSTALL) {
-//			--- new fn() fire all walls to exits -- how ?
+
 				var cells   = reloaded.cells,
 					 walled, cell, c, nc = cells.length;
 
