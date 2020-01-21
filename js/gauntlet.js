@@ -302,7 +302,7 @@ Gauntlet = function() {
       { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.CONCRETE,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_BRICK,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.PURPLE_TILE,      music: 'bloodyhalo',      score:  1000, help: null },
-      { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.GREEN,      music: 'mountingassault',      score:  1000, help: null },
+      { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.RED,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel40.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel39.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel38.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
@@ -2008,7 +2008,7 @@ Gauntlet = function() {
             this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
 			else
 			if (cell.shadow)		// dont shadow for invis walls
-            this.tile(ctx, sprites, cell.shadow, WALL.MAX+1, tx, ty);
+            this.tile(ctx, sprites, cell.shadow, WALL.INVIS, tx, ty);
 // added a maze cheat - floor tile can be a subtle shift from std tile
 // task: option this
 			  if (cell.mapcht) this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor + 1, 0, tx, ty);
