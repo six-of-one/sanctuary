@@ -299,7 +299,7 @@ Gauntlet = function() {
       { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.CONCRETE,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_BRICK,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.PURPLE_TILE,      music: 'bloodyhalo',      score:  1000, help: null },
-      { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.PINKSLD,      music: 'mountingassault',      score:  1000, help: null },
+      { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.INVIS,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel40.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel39.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel38.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
@@ -1990,6 +1990,7 @@ Gauntlet = function() {
           cell = map.cell(tx * TILE, ty * TILE);
           if (is.valid(cell.wall))
 			  {
+				  if (map.level.wall != WALL.INVIS)
             this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
 				  cell.ctx = ctx;	// for traps turning walls to floor
 				  cell.sprites = sprites;
@@ -2000,11 +2001,14 @@ Gauntlet = function() {
             this.tile(ctx, sprites, 0, 0, tx, ty);
           else
             this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
+			if (map.level.wall == WALL.INVIS)
+            this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
+			else
+			if (cell.shadow)
+            this.tile(ctx, sprites, cell.shadow, WALL.MAX+1, tx, ty);
 // added a maze cheat - floor tile can be a subtle shift from std tile
 // task: option this
 			  if (cell.mapcht) this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor + 1, 0, tx, ty);
-          if (cell.shadow)
-            this.tile(ctx, sprites, cell.shadow, WALL.MAX+1, tx, ty);
         }
       }
       if (DEBUG.GRID)
