@@ -125,7 +125,7 @@ Gauntlet = function() {
         }
       },
       FLOOR = { BROWN_BOARDS: 1, LIGHBROWN_BOARDS: 2, GREEN_BOARDS: 3, GREY_BOARDS: 4, WOOD: 5, LIGHT_STONE: 6, DARK_STONE: 7, BROWN_LAMINATE: 8, PURPLE_LAMINATE: 9, MIN: 1, MAX: 9 },
-      WALL  = { BLUE: 1, BLUE_BRICK: 2, PURPLE_TILE: 3, BLUE_COBBLE: 4, PURPLE_COBBLE: 5, CONCRETE: 6, PINKSLD: 7, INVIS: 8, MIN: 1, MAX: 8 },
+      WALL  = { BLUE: 1, BLUE_BRICK: 2, PURPLE_TILE: 3, BLUE_COBBLE: 4, PURPLE_COBBLE: 5, CONCRETE: 6, PINKSLD: 7, BROWN: 8, GREEN: 9, INVIS: 10, MIN: 1, MAX: 10 },
       EVENT = {
         START_LEVEL:         0,
         PLAYER_JOIN:         1,
@@ -299,7 +299,7 @@ Gauntlet = function() {
       { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.CONCRETE,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_BRICK,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.PURPLE_TILE,      music: 'bloodyhalo',      score:  1000, help: null },
-      { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.PINKSLD,      music: 'mountingassault',      score:  1000, help: null },
+      { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.GREEN,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel40.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel39.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel38.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
