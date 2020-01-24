@@ -306,7 +306,7 @@ Gauntlet = function() {
       { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 4',       url: "levels/glevel4.png",  floor: FLOOR.WOOD,      wall: WALL.PURPLE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.CONCRETE,      music: 'bloodyhalo',      score:  1000, help: null },
-      { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN3,   brikovr:  WALL.G1BRICKD,   gflr: "gfx/gfloor6.jpg",   music: 'bloodyhalo',      score:  1000, help: null },
+      { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN3,   brikovr:  WALL.G1BRICKD,   gflr: "gfx/g1floor6.jpg",   music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.PURPLE_TILE,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.GREEN3,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel114.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BROWN1,   brikovr:  WALL.XBRIKD,  music: 'mountingassault',      score:  1000, help: null },
@@ -2053,12 +2053,15 @@ Gauntlet = function() {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
 		if (map.level.gflr)
 		 {
+var gimg = document.getElementById("logo");
+//document.getElementById('logo').src = map.level.gflr;
+gimg.src =map.level.gflr;
+gimg.onload = () => getImageData(gimg);
+
 			for(ty = 0, th = map.th ; ty < th ; ty=ty+4) {
 			  for(tx = 0, tw = map.tw ; tx < tw ; tx=tx+4) {
-					cell = map.cell(tx * TILE, ty * TILE);
-					if (!is.valid(cell.wall))
-					if (!cell.nothing)
-						this.tile(ctx, map.level.gflr, 0, 0, tx, ty);
+						ctx.drawImage(gimg, 0, 0, STILE * 4, STILE * 4, tx * TILE * 4, ty * TILE * 4, TILE * 4, TILE * 4);
+//						this.tile(ctx, gimg, 0, 0, tx, ty);
 				  }
 				}
 		 }
