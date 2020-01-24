@@ -2053,14 +2053,14 @@ Gauntlet = function() {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
 		if (map.level.gflr)
 		 {
-var gimg = document.getElementById("logo");
+var gimg = document.getElementById("gfloor");
 //document.getElementById('logo').src = map.level.gflr;
 gimg.src =map.level.gflr;
 gimg.onload = () => getImageData(gimg);
 
-			for(ty = 0, th = map.th ; ty < th ; ty=ty+4) {
-			  for(tx = 0, tw = map.tw ; tx < tw ; tx=tx+4) {
-						ctx.drawImage(gimg, 0, 0, STILE * 4, STILE * 4, tx * TILE * 4, ty * TILE * 4, TILE * 4, TILE * 4);
+			for(ty = 0, th = map.th ; ty < th ; ty=ty+8) {
+			  for(tx = 0, tw = map.tw ; tx < tw ; tx=tx+8) {
+						ctx.drawImage(gimg, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
 //						this.tile(ctx, gimg, 0, 0, tx, ty);
 				  }
 				}
