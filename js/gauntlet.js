@@ -10,7 +10,7 @@ Gauntlet = function() {
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
 // debug - provide a one time start level
-											initlevel = 18,
+											initlevel = 6,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -127,9 +127,13 @@ Gauntlet = function() {
       FLOOR = { 	BROWN_BOARDS: 1, LIGHBROWN_BOARDS: 2, GREEN_BOARDS: 3, GREY_BOARDS: 4, WOOD: 5, LIGHT_STONE: 6, DARK_STONE: 7, BROWN_LAMINATE: 8, 
 									PURPLE_LAMINATE: 9, 
 									MIN: 1, MAX: 9 },
-      WALL  = { 	INVIS: 1, BLUE: 2, BLUE_BRICK: 3, PURPLE_TILE: 4, BLUE_COBBLE: 5, PURPLE_COBBLE: 6, CONCRETE: 7, PINK34: 8, BROWN1: 9, GREEN3: 10, RED5: 11, 
-									GRAY7: 12, BLUE8: 13, ORANG9: 14, YELLOW10: 15, BROWN24: 16, BLUE25:17, BLUE28: 18,  GREEN43: 19, PURPLE30: 20, GREEN50: 21, MAUVE20: 22,
-									PURPLE77: 23, G2DARKSEC: 24, G2GREEN99: 25,
+      WALL  = { 	INVIS: 1, BLUE: 2, BLUE_BRICK: 3, PURPLE_TILE: 4, BLUE_COBBLE: 5, PURPLE_COBBLE: 6, CONCRETE: 7, 
+								G2DARKSEC: 8, GRAY7: 9, MAUVE20: 10, 
+								BROWN1: 11, BROWN24: 12, RED5: 13, ORANG9: 14, YELLOW10: 15, 
+								PINK34: 16, PURPLE77: 17, PURPLE30: 18, 
+								BLUE8: 19, BLUE25:20, BLUE28: 21, 
+								GREEN3: 22, GREEN43: 23, GREEN50: 24, G2GREEN99: 25, 			
+									G1BRICKL: 26, G1BRICKD: 27, BRICK2L: 28, BRICK2D: 29, ASYML: 30, ASYMD: 31, XBRIKL: 32, XBRIKD: 33, G5COBRIK: 34,
 									MIN: 1, MAX: 25 },
       EVENT = {
         START_LEVEL:         0,
@@ -299,13 +303,13 @@ Gauntlet = function() {
       { name: 'Test Level',     url: "levels/testlevel.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: null }, 
       { name: 'Level 1',       url: "levels/glevel1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.PINK34,      music: 'bloodyhalo',      score:  1000, help: "Welcome" },
       { name: 'Level 2',       url: "levels/glevel2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BLUE,      music: 'bloodyhalo',      score:  1000, help: null },
-      { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: null },
+      { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 4',       url: "levels/glevel4.png",  floor: FLOOR.WOOD,      wall: WALL.PURPLE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.CONCRETE,      music: 'bloodyhalo',      score:  1000, help: null },
-      { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_BRICK,      music: 'bloodyhalo',      score:  1000, help: null },
+      { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN3,   brikovr:  WALL.G1BRICKD,   gflr: "gfx/gfloor6.jpg",   music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.PURPLE_TILE,      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.GREEN3,      music: 'mountingassault',      score:  1000, help: null },
-		{ name: 'Research X',     url: "levels/glevel114.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BROWN1,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel114.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BROWN1,   brikovr:  WALL.XBRIKD,  music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel113.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.PINK34,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel112.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN3,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel111.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.PINK34,      music: 'mountingassault',      score:  1000, help: null },
@@ -320,7 +324,7 @@ Gauntlet = function() {
 		{ name: 'Research X',     url: "levels/glevel102.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE25,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel101.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN50,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel100.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN43,      music: 'mountingassault',      score:  1000, help: null },
-		{ name: 'Research X',     url: "levels/glevel99.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel99.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GRAY7,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel98.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel97.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel96.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.BLUE_COBBLE,      music: 'mountingassault',      score:  1000, help: null },
@@ -2047,13 +2051,26 @@ Gauntlet = function() {
 
     maptiles: function(map, ctx) {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
+		if (map.level.gflr)
+		 {
+			for(ty = 0, th = map.th ; ty < th ; ty=ty+4) {
+			  for(tx = 0, tw = map.tw ; tx < tw ; tx=tx+4) {
+					cell = map.cell(tx * TILE, ty * TILE);
+					if (!is.valid(cell.wall))
+					if (!cell.nothing)
+						this.tile(ctx, map.level.gflr, 0, 0, tx, ty);
+				  }
+				}
+		 }
       for(ty = 0, th = map.th ; ty < th ; ty++) {
         for(tx = 0, tw = map.tw ; tx < tw ; tx++) {
           cell = map.cell(tx * TILE, ty * TILE);
           if (is.valid(cell.wall))
 			  {
-				  if (map.level.wall != WALL.INVIS)		// dont load wall tile for invis walls
-            this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
+				  if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls
+						this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
+						if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
+				  }
 				  cell.ctx = ctx;	// for traps turning walls to floor
 				  cell.sprites = sprites;
 				  cell.tileptr = this;
@@ -2062,9 +2079,13 @@ Gauntlet = function() {
           else if (cell.nothing)
             this.tile(ctx, sprites, 0, 0, tx, ty);
           else
+			  if (!map.level.gflr)
             this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
-			if (map.level.wall == WALL.INVIS)		// do floor tile for invis walls
-            this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
+			if (map.level.wall == WALL.INVIS)				// do floor tile for invis walls
+			{
+				if (!map.level.gfl3r)
+						this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
+			}
 			else
 			if (cell.shadow)		// dont shadow for invis walls
             this.tile(ctx, sprites, cell.shadow, WALL.INVIS, tx, ty);
