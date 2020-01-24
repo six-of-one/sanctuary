@@ -540,6 +540,10 @@ Gauntlet = function() {
         this.ready();
       }.bind(this));
 
+		// make sure floor loader is hidden
+		 var img = document.getElementById("gfloor");
+		img.style.visibility = "hidden";
+
     },
 
     //---------------------------
