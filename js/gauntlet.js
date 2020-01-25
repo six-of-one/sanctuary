@@ -79,7 +79,7 @@ Gauntlet = function() {
 		TRAPWALL = 0x404030,
 // after {n} health tics with no player move / fire, all walls are exits
 /// RESTORE to 200
-		WALLSTALL = 7,
+		WALLSTALL = 100,
 // after {n} health tics with no player move / fire, all doors open
 /// RESTORE to 30
 		DOORSTALL = 30,
@@ -1633,14 +1633,14 @@ Gauntlet = function() {
 
 		 if (treasure.type.teleport) {
 				var cells   = reloaded.cells,
-					 walled, cell, c, nc = cells.length, tdist = 100000, cdist, closecell,
-					ddir = this.moving.dir;
+					 walled, cell, c, nc = cells.length, tdist = 100000, cdist, destcell,
+					mxdir = 7, tdir, ddir = this.moving.dir;
 
 //alert("x: "+this.x+" y:"+this.y);
 //alert("x: "+treasure.x+" y:"+treasure.y);
 				if (ddir < 0 || ddir > 7) ddir = 0;
 
-				// now loop again checking for all teleporters
+				// now loop checking for all teleporters
 				for(c = 0 ; c < nc ; c++) {
 						cell = cells[c];
 						if (cell.pixel == TELEPORTILE)
@@ -1651,14 +1651,32 @@ Gauntlet = function() {
 							if (cdist < tdist)
 							{
 									tdist = cdist;
-									closecell = cell;
+									destcell = cell;
 							}
 						}
 						if (tdist < 100000)
 						{
+									tdir = ddir;
+									var px = destcell.x + DIRTX[ddir];
+									var py = destcell.y + DIRTY[ddir];
+									var ocell, tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
 // make sure it isnt a wall - telefrag monsters / death
-
-								Mastermap.occupy(closecell.x + DIRTX[ddir], closecell.y + DIRTY[ddir], this);
+/// note: if one teleport is blocked by walls, we should re-check others, putting a no-flag on the blocked
+								 while (is.valid(tcell.wall))
+								{
+									tcell.tileptr.tile(tcell.ctx, tcell.sprites, 0, 0, tcell.tx, tcell.ty);
+									ocell = tcell;
+									alert("testing td:"+tdir+"- "+ddir+": "+tcell.tx+", "+tcell.ty);
+									ddir++;
+									if (ddir > mxdir) ddir = 0;
+									px = destcell.x + DIRTX[ddir];
+									py = destcell.y + DIRTY[ddir];
+									tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
+									if (tcell == undefined) tcell = ocell;
+//									alert("testing td:"+tdir+"- "+ddir+": "+px+", "+py);
+									if (ddir == tdir) return;
+								}
+								Mastermap.occupy(px, py, this);
 
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
 								walled = true;
