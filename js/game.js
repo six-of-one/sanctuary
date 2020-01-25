@@ -790,3 +790,13 @@ Game.Math = {
 				document.getElementById('scrmult3').innerHTML = Masterot +":" + Mastermult + "x Score";
 				document.getElementById('scrmult4').innerHTML = Masterot +":" + Mastermult + "x Score";
  };
+ 
+ // distance calc
+ 
+ function distance(px,py,qx,qy)
+{ 
+	var dx   = px - qx;
+	var dy   = py - qy;
+	var dist = Math.sqrt( dx*dx + dy*dy );
+	return dist;
+}

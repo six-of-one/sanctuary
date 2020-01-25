@@ -10,7 +10,7 @@ Gauntlet = function() {
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
 // debug - provide a one time start level
-											initlevel = 1,
+											initlevel = 8,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -1633,7 +1633,7 @@ Gauntlet = function() {
 
 		 if (treasure.type.teleport) {
 				var cells   = reloaded.cells,
-					 walled, cell, c, nc = cells.length,
+					 walled, cell, c, nc = cells.length, tdist = 100000, cdist, closecell,
 					ddir = this.moving.dir;
 
 //alert("x: "+this.x+" y:"+this.y);
@@ -1644,10 +1644,21 @@ Gauntlet = function() {
 				for(c = 0 ; c < nc ; c++) {
 						cell = cells[c];
 						if (cell.pixel == TELEPORTILE)
-						if (Math.abs(treasure.x - cell.x) > 33 ||  Math.abs(treasure.y - cell.y) > 33)
+						if (Math.abs(treasure.x - cell.x) > 33 ||  Math.abs(treasure.y - cell.y) > 33)		// find closest teleport not origin
 //					  if (cell.x != 0 &&  cell.y != 0)
 						{
-								Mastermap.occupy(cell.x + DIRTX[ddir], cell.y + DIRTY[ddir], this);
+							cdist = distance(cell.x,cell.y,treasure.x,treasure.y);
+							if (cdist < tdist)
+							{
+									tdist = cdist;
+									closecell = cell;
+							}
+						}
+						if (tdist < 100000)
+						{
+// make sure it isnt a wall - telefrag monsters / death
+
+								Mastermap.occupy(closecell.x + DIRTX[ddir], closecell.y + DIRTY[ddir], this);
 
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
 								walled = true;
