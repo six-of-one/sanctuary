@@ -301,7 +301,6 @@ Gauntlet = function() {
 
     levels: [
       { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",      music: 'bloodyhalo',      score:  1000, help: null }, 
-      { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",      music: 'bloodyhalo',      score:  1000, help: null }, 
       { name: 'Level 1',       url: "levels/glevel1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 2',       url: "levels/glevel2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'bloodyhalo',      score:  1000, help: null },
@@ -598,6 +597,7 @@ Gauntlet = function() {
       }
       else {
         $('booting').show();
+				document.getElementById("gfloor").src = level.gflr;		// set this here so its ready on map build
         level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
       }
     },
@@ -2069,10 +2069,7 @@ Gauntlet = function() {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
 		if (map.level.gflr)
 		 {
-				var gimg = document.getElementById("gfloor");
-				gimg.src =map.level.gflr;
-				gimg.onload = () => getImageData(gimg);		// force load - otherwise might fail
-
+			var gimg = document.getElementById("gfloor");
 			for(ty = 0, th = map.th ; ty < th ; ty=ty+8) {
 			  for(tx = 0, tw = map.tw ; tx < tw ; tx=tx+8) {
 						ctx.drawImage(gimg, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
