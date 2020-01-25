@@ -1657,8 +1657,11 @@ Gauntlet = function() {
 						if (tdist < 100000)
 						{
 									tdir = ddir;
+//									alert("testing td:"+tdir+"- "+ddir+": "+destcell.x+", "+destcell.y);
+									alert("testing td:"+tdir+"- "+ddir+": px:"+(destcell.x + DIRTX[ddir])+" py: "+(destcell.y + DIRTY[ddir]));
 									var px = destcell.x + DIRTX[ddir];
 									var py = destcell.y + DIRTY[ddir];
+//									alert("testing td:"+tdir+"- "+ddir+": "+destcell.x+", "+destcell.y+" px:"+px+" py: "+py);
 									var ocell, tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
 // make sure it isnt a wall - telefrag monsters / death
 /// note: if one teleport is blocked by walls, we should re-check others, putting a no-flag on the blocked
@@ -1666,7 +1669,6 @@ Gauntlet = function() {
 								{
 									tcell.tileptr.tile(tcell.ctx, tcell.sprites, 0, 0, tcell.tx, tcell.ty);
 									ocell = tcell;
-									alert("testing td:"+tdir+"- "+ddir+": "+tcell.tx+", "+tcell.ty);
 									ddir++;
 									if (ddir > mxdir) ddir = 0;
 									px = destcell.x + DIRTX[ddir];
