@@ -323,7 +323,7 @@ Gauntlet = function() {
 		{ name: 'Research X',     url: "levels/glevel103.png",  floor: FLOOR.RND,      wall: WALL.BROWN24,    gflr: "gfx/g1floor103.jpg",      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel102.png",  floor: FLOOR.RND,      wall: WALL.BLUE25,    gflr: "gfx/g1floor102.jpg",      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel101.png",  floor: FLOOR.RND,      wall: WALL.GREEN50,    gflr: "gfx/g1floor28.jpg",      music: 'mountingassault',      score:  1000, help: null },
-		{ name: 'Research X',     url: "levels/glevel100.png",  floor: FLOOR.RND,      wall: WALL.GREEN43,    gflr: "gfx/g1floor67.jpg",      music: 'mountingassault',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel100.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor67.jpg",      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel99.png",  floor: FLOOR.RND,      wall: WALL.GRAY7,    gflr: "gfx/g1floor50.jpg",      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel98.png",  floor: FLOOR.RND,      wall: WALL.PINK34,      gflr: "gfx/g1floor93.jpg",      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel97.png",  floor: FLOOR.RND,      wall: WALL.ORANG9,      gflr: "gfx/g1floor86.jpg",      music: 'mountingassault',      score:  1000, help: null },
