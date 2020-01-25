@@ -21,7 +21,7 @@ Gauntlet = function() {
 // set rnd_level true to indicate running rnd levels from here on out
 		loop_level = 8,
 		rnd_level = 0,
-// save this. to reload level
+// save this. to reload level parts, walls to exits, stall open doors, play sounds for those, and so on
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap,
 		Deathmult, Dmmax = 7,
 		Deathscore = [1000, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
