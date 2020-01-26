@@ -77,6 +77,7 @@ Gauntlet = function() {
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
 		TRAPWALL = 0x404030,
+		TRAPTRIG = 0x0080b0,
 // after {n} health tics with no player move / fire, all walls are exits
 /// RESTORE to 200
 		WALLSTALL = 100,
@@ -308,6 +309,7 @@ Gauntlet = function() {
       { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.RED5,    gflr: "gfx/g1floor5.jpg",      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN3,   brikovr:  WALL.G1BRICKD,   gflr: "gfx/g1floor6.jpg",   music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.GRAY7,    gflr: "gfx/g1floor7.jpg",      music: 'bloodyhalo',      score:  1000, help: null },
+      { name: 'Research Z',     url: "levels/glevelZ.png",  floor: FLOOR.RND,      wall: WALL.ORANG9,    gflr: "gfx/g1floor0z.jpg",      music: 'mountingassault',      score:  1000, help: null },
       { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel114.png",  floor: FLOOR.RND,      wall: WALL.BROWN1,   brikovr:  WALL.XBRIKD,    gflr: "gfx/g1floor6.jpg",      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel113.png",  floor: FLOOR.RND,      wall: WALL.PINK34,    gflr: "gfx/g1floor113.jpg",      music: 'mountingassault',      score:  1000, help: null },
@@ -1659,8 +1661,6 @@ Gauntlet = function() {
 						if (tdist < 100000)
 						{
 									tdir = ddir;
-//															alert("testing td:"+tdir+" +1 "+(ddir+1)+": "+destcell.x+", "+destcell.y+" DRx:"+DIRTX[ddir]+" DRy:"+DIRTY[ddir]);
-//									alert("testing td:"+tdir+"- "+ddir+": "+destcell.x+", "+destcell.y);
 									var px = destcell.x + DIRTX[ddir];
 									var py = destcell.y + DIRTY[ddir];
 									var blokt, tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
@@ -1674,8 +1674,6 @@ Gauntlet = function() {
 /// note: if one teleport is blocked by walls, we should re-check others, putting a no-flag on the blocked
 								 while (blokt)
 								{
-//															alert("testing td:"+tdir+"- "+ddir+": px:"+(destcell.x + DIRTX[ddir])+" py: "+(destcell.y + DIRTY[ddir]));
-//									tcell.tileptr.tile(tcell.ctx, tcell.sprites, 0, 0, tcell.tx, tcell.ty);
 									ddir++;
 									if (ddir > mxdir) ddir = 0;	// loop to 0 at dir array max
 									if (ddir == tdir) // dont need to test orig dir - see if we have other cells
@@ -1685,7 +1683,6 @@ Gauntlet = function() {
 									px = destcell.x + DIRTX[ddir];
 									py = destcell.y + DIRTY[ddir];
 									tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
-//									alert("testing td:"+tdir+"- "+ddir+": "+px+", "+py);
 									if (tcell == undefined) blokt = true;
 									else	
 									{
@@ -1709,11 +1706,17 @@ Gauntlet = function() {
 				for(c = 0 ; c < nc ; c++) {
 					  cell = cells[c];
 					  if (cell.wall !== undefined && cell.wall !== null)
-					  if (cell.pixel == TRAPWALL)
+					  if (cell.pixel == TRAPWALL) // || cell.pixel == TRAPTRIG)
 //					  if (cell.x != 0 &&  cell.y != 0)
 						{
 								if (!walled) Musicth.play(Musicth.sounds.wallexit);
-								cell.tileptr.tile(cell.ctx, cell.sprites, cell.map.level.floor, 0, cell.tx, cell.ty);
+								if (Mastermap.level.gflr)
+								{
+										var gimg = document.getElementById("gfloor");
+										cell.ctx.drawImage(gimg, 0, 0, STILE, STILE, cell.tx * TILE, cell.ty * TILE, TILE, TILE);
+								}
+								else
+									cell.tileptr.tile(cell.ctx, cell.sprites, Mastermap.level.floor, 0, cell.tx, cell.ty);
 //								cell.wall = 17;//walltype(cell.tx, cell.ty, map);
 //								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
 								cell.wall = null;	// so we dont fire these wall segs again
@@ -1735,7 +1738,7 @@ Gauntlet = function() {
 
     exit: function(exit) {
       if (!this.exiting) {
-        this.health  = this.health + (this.health < this.type.health ? 100 : 0);
+        this.health  = this.health + (this.health < this.type.health ? 100 : 0);		/// RUNORG - gauntlet no do this
         this.exiting = { max: exit.type.speed, count: exit.type.speed, fpf: exit.type.fpf, dx: (exit.x - this.x), dy: (exit.y - this.y) };
         publish(EVENT.PLAYER_EXITING, this, exit);
       }
