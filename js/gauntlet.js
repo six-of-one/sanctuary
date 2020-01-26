@@ -1633,7 +1633,7 @@ Gauntlet = function() {
 
 		 if (treasure.type.teleport) {
 				var cells   = reloaded.cells,
-					 walled, cell, c, nc = cells.length, tdist = 100000, cdist, destcell,
+					 walled, cell, c, nc = cells.length, tdist = 100000, cdist, destcell, ldestcell,
 					mxdir = 7, tdir, ddir = this.moving.dir;
 
 //alert("x: "+this.x+" y:"+this.y);
@@ -1651,40 +1651,54 @@ Gauntlet = function() {
 							if (cdist < tdist)
 							{
 									tdist = cdist;
+									ldestcell = destcell;
 									destcell = cell;
 							}
 						}
+				}
 						if (tdist < 100000)
 						{
 									tdir = ddir;
-															alert("testing td:"+tdir+" +1 "+(ddir+1)+": "+destcell.x+", "+destcell.y+" DRx:"+DIRTX[ddir]+" DRy:"+DIRTY[ddir]);
+//															alert("testing td:"+tdir+" +1 "+(ddir+1)+": "+destcell.x+", "+destcell.y+" DRx:"+DIRTX[ddir]+" DRy:"+DIRTY[ddir]);
 //									alert("testing td:"+tdir+"- "+ddir+": "+destcell.x+", "+destcell.y);
 									var px = destcell.x + DIRTX[ddir];
 									var py = destcell.y + DIRTY[ddir];
-									var ocell, tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
+									var obj, blokt, tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
+									if (tcell == undefined) blokt = true;
+									else	
+									{
+											blokt = is.valid(tcell.wall);
+											obj = tcell.occupied[0];
+											if (obj .door && !this.keys) blokt = true;
+									}
 // make sure it isnt a wall - telefrag monsters / death
 /// note: if one teleport is blocked by walls, we should re-check others, putting a no-flag on the blocked
-								 while (is.valid(tcell.wall))
+								 while (blokt)
 								{
 //															alert("testing td:"+tdir+"- "+ddir+": px:"+(destcell.x + DIRTX[ddir])+" py: "+(destcell.y + DIRTY[ddir]));
 									tcell.tileptr.tile(tcell.ctx, tcell.sprites, 0, 0, tcell.tx, tcell.ty);
-									ocell = tcell;
 									ddir++;
-									if (ddir > mxdir) ddir = 0;
+									if (ddir > mxdir) ddir = 0;	// loop to 0 at dir array max
+									if (ddir == tdir) // dont need to test orig dir - see if we have other cells
+									if (ldestcell == undefined || ldestcell == destcell) return;
+									else destcell == ldestcell; // try another close teleport
+
 									px = destcell.x + DIRTX[ddir];
 									py = destcell.y + DIRTY[ddir];
 									tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
-									if (tcell == undefined) tcell = ocell;
 //									alert("testing td:"+tdir+"- "+ddir+": "+px+", "+py);
-									if (ddir == tdir) return;
+									if (tcell == undefined) blokt = true;
+									else	
+									{
+											blokt = is.valid(tcell.wall);
+											if (tcell.occupied[0].door && !this.keys) blokt = true;
+									}
 								}
 								Mastermap.occupy(px, py, this);
 
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
 								walled = true;
-								return;
 						}
-				}
 				return;
 		 }
 
