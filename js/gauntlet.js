@@ -1663,20 +1663,19 @@ Gauntlet = function() {
 //									alert("testing td:"+tdir+"- "+ddir+": "+destcell.x+", "+destcell.y);
 									var px = destcell.x + DIRTX[ddir];
 									var py = destcell.y + DIRTY[ddir];
-									var obj, blokt, tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
+									var blokt, tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
 									if (tcell == undefined) blokt = true;
 									else	
 									{
 											blokt = is.valid(tcell.wall);
-											obj = tcell.occupied[0];
-											if (obj .door && !this.keys) blokt = true;
+											if (Mastermap.door(px,py) && !this.keys) blokt = true;
 									}
 // make sure it isnt a wall - telefrag monsters / death
 /// note: if one teleport is blocked by walls, we should re-check others, putting a no-flag on the blocked
 								 while (blokt)
 								{
 //															alert("testing td:"+tdir+"- "+ddir+": px:"+(destcell.x + DIRTX[ddir])+" py: "+(destcell.y + DIRTY[ddir]));
-									tcell.tileptr.tile(tcell.ctx, tcell.sprites, 0, 0, tcell.tx, tcell.ty);
+//									tcell.tileptr.tile(tcell.ctx, tcell.sprites, 0, 0, tcell.tx, tcell.ty);
 									ddir++;
 									if (ddir > mxdir) ddir = 0;	// loop to 0 at dir array max
 									if (ddir == tdir) // dont need to test orig dir - see if we have other cells
@@ -1691,7 +1690,7 @@ Gauntlet = function() {
 									else	
 									{
 											blokt = is.valid(tcell.wall);
-											if (tcell.occupied[0].door && !this.keys) blokt = true;
+											if (Mastermap.door(px,py) && !this.keys) blokt = true;
 									}
 								}
 								Mastermap.occupy(px, py, this);
