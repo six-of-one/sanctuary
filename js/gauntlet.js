@@ -911,6 +911,14 @@ Gauntlet = function() {
         return;
       }
 
+// test dest before move - otherwise "here be exceptions" can kill the engine
+// so far this is only the case in unwalled areas and walking / shooting top of screen undef area
+      for(c = 0, max = after.length ; c < max ; c++) {
+        cell = after[c];
+        if (!set_contains(before, cell))
+				if (cell == undefined) return;
+      }
+
       // otherwise remove object from previous cells that are no longer occupied
       for(c = 0, max = before.length ; c < max ; c++) {
         cell = before[c];
