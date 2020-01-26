@@ -1126,7 +1126,7 @@ Gauntlet = function() {
 // some treasures operate from sub pixels
 				 var sb = 0xF & pixel;
 				 if (ad == TREASURE.POTION && (sb == 1)) ad = TREASURE.POTIONORG;
-				 if (ad == TREASURE.XSPEED && (sb > 0)) ad = TREASURE.XSPEED + sb;
+				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb];
 				self.addTreasure(x, y, ad);				 
 			 }
 		  else if (ismonster(pixel))
