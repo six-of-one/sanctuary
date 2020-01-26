@@ -21,8 +21,15 @@ Gauntlet = function() {
 // set rnd_level true to indicate running rnd levels from here on out
 		loop_level = 8,
 		rnd_level = 0,
-// save this. to reload level parts, walls to exits, stall open doors, play sounds for those, and so on
+// save to pointers. -> reload level parts, walls to exits, stall open doors, play sounds for those, and so on
+// for some reason beyond me, setTimeout() calls only work in game.js - which has none of the game instances
+// also doors / walls are stalled open from player health rot - which has none of these pointers loaded
+// and could not get exit instance to pass exit to 4, 8 passed into the level load code
+// if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus,
+
+// handle death potion bomb rotating score - 
+//				note: NON g1, this is multiplied by score x {n} by current code!
 		Deathmult, Dmmax = 7,
 		Deathscore = [1000, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
 
@@ -31,7 +38,7 @@ Gauntlet = function() {
       STILE    = 32,
       VIEWPORT = { TW: 24, TH: 24 },
       DIR      = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7 },
-// teleport adjust by last player dir
+// teleport adjust by last player dir		- use player dir code (0 - 7) and these on teleport {x,y} to test surrounding cells
 		DIRTX = [ 0, 32, 32, 32, 0, -32, -32, -32],
 		DIRTY = [ -32, -32, 0, 32, 32, 32, 0, -32],
       PLAYER = {
@@ -47,7 +54,8 @@ Gauntlet = function() {
         WIZARD: { sx: 0, sy: 7, frames: 3, fpf: FPS/10, score:  30, health:  8, speed: 120/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 24, speed: 4.0*FPS, max: 20, score: 400, sx: 32, sy: 7 }, name: "sorcerer", weapon: null                                                                                     },
         DEATH:  { sx: 0, sy: 8, frames: 3, fpf: FPS/10, score: 1, health: 2, speed: 180/FPS, damage: 120/FPS, selfharm: 6/FPS,  canbeshot: false, canbehit: 2, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 16, speed: 5.0*FPS, max: 10, score: 1000, sx: 32, sy: 8 }, name: "death",  weapon: null                                                                                     },
         LOBBER: { sx: 0, sy: 9, frames: 3, fpf: FPS/10, score:  10, health:  4, speed: 60/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 8, speed: 2.5*FPS, max: 20, score: 100, sx: 32, sy: 7 }, name: "lobber", weapon: null                                                                                     },
-        GHOST1:  { sx: 0, sy: 14, frames: 3, fpf: FPS/10, score:  10, health:  4, speed: 140/FPS, damage: 100/FPS, selfharm: 30/FPS, canbeshot: true,  canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health:  4, speed: 2.5*FPS, max: 40, score: 50, sx: 34, sy: 4 }, name: "ghost",  weapon: null                                                                                     },
+// added level 2, level 1 monsters - set above is level 3
+		  GHOST1:  { sx: 0, sy: 14, frames: 3, fpf: FPS/10, score:  10, health:  4, speed: 140/FPS, damage: 100/FPS, selfharm: 30/FPS, canbeshot: true,  canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health:  4, speed: 2.5*FPS, max: 40, score: 50, sx: 34, sy: 4 }, name: "ghost",  weapon: null                                                                                     },
         DEMON1:  { sx: 0, sy: 5, frames: 3, fpf: FPS/10, score:  20, health:  4, speed:  80/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 16, speed: 3.0*FPS, max: 40, score: 200, sx: 34, sy: 5 }, name: "demon",  weapon: { speed: 240/FPS, reload: 2*FPS, damage: 10, sx: 24, sy: 5, fpf: FPS/10, monster: true } },
         GRUNT1:  { sx: 0, sy: 6, frames: 3, fpf: FPS/10, score:  30, health:  8, speed: 120/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 16, speed: 3.5*FPS, max: 40, score: 300, sx: 34, sy: 6 }, name: "grunt",  weapon: null                                                                                     },
         WIZARD1: { sx: 0, sy: 7, frames: 3, fpf: FPS/10, score:  30, health:  8, speed: 120/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 24, speed: 4.0*FPS, max: 20, score: 400, sx: 34, sy: 7 }, name: "sorcerer", weapon: null                                                                                     },
@@ -71,10 +79,12 @@ Gauntlet = function() {
         GOLD:    { sx: 0, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1,              sound: 'collectgold'   },
         LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'collectgold'   },
         BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'collectgold'   },
+// teleport, trap, stun tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport'  },
         TRAP:       { sx: 22, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap'  },
         STUN:       { sx: 26, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun'  },
         PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, push: true,   sound: 'null'  },
+// extra power potions
         XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         XSHOT:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         XSHTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
@@ -97,6 +107,7 @@ Gauntlet = function() {
         HORIZONTAL: { sx: 16, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
         VERTICAL:   { sx: 11, sy: 10, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
         EXIT:       { sx: 9, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+// added "exit to {n}", moving and fake exits
         EXIT4:       { sx: 10, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 4 },
         EXIT8:       { sx: 11, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 8 },
         EXIT6:       { sx: 12, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 6 },
@@ -135,10 +146,12 @@ Gauntlet = function() {
           EXLOW:        0x00000F
         }
       },
+// jvsg floors - g1 floors are handled in a seperate gfx file as they tile (currently) 256 x 256 (4 x 4 cells) over the map due to diff design per tile
       FLOOR = { 	BROWN_BOARDS: 1, LIGHBROWN_BOARDS: 2, GREEN_BOARDS: 3, GREY_BOARDS: 4, WOOD: 5, LIGHT_STONE: 6, DARK_STONE: 7, BROWN_LAMINATE: 8, 
 									PURPLE_LAMINATE: 9, RND: 10,
 									MIN: 1, MAX: 9 },
       WALL  = { 	INVIS: 1, BLUE: 2, BLUE_BRICK: 3, PURPLE_TILE: 4, BLUE_COBBLE: 5, PURPLE_COBBLE: 6, CONCRETE: 7, 
+// g1 wall codes - these are in backgrounds.png
 								G2DARKSEC: 8, GRAY7: 9, MAUVE20: 10, 
 								BROWN1: 11, BROWN24: 12, RED5: 13, ORANG9: 14, ORANG31: 15, YELLOW10: 16,
 								PINK34: 17, PURPLE77: 18, PURPLE30: 19,  
@@ -310,6 +323,8 @@ Gauntlet = function() {
       { id: 'opendoor',        name: 'sounds/g1_door',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 } //
     ],
 
+// added gauntlet 1 levels as g1level{n}
+// gflr is gfx file for floor tiles
     levels: [
       { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",      music: 'bloodyhalo',      score:  1000, help: null }, 
       { name: 'Level 1',       url: "levels/glevel1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'bloodyhalo',      score:  1000, help: null },
@@ -2183,11 +2198,17 @@ Gauntlet = function() {
           else if (cell.nothing)
             this.tile(ctx, sprites, 0, 0, tx, ty);
           else
+			  if (cell.pixel & 0xF)		// special diff floor tiles - up to 15 as of now
+			  {
+				  var nfl = cell.pixel & 0xF;
+				  this.tile(ctx, sprites, nfl, 0, tx, ty);
+			  }
+			  else
 			  if (!map.level.gflr)
             this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
 			if (map.level.wall == WALL.INVIS)				// do floor tile for invis walls
 			{
-				if (!map.level.gfl3r)
+				if (!map.level.gflr)
 						this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
 			}
 			else
