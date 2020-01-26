@@ -787,8 +787,23 @@ Gauntlet = function() {
 
     saveLevel: function(nlevel) { this.storage[STORAGE.NLEVEL] = nlevel;             },
     loadLevel: function()       { return to.number(this.storage[STORAGE.NLEVEL], 1); },
-    nextLevel: function()       { var n = this.map.nlevel + 1; if (rnd_level) n = Game.Math.randomInt(loop_level, cfg.levels.length-1); this.load(n >= cfg.levels.length ? 1                     : n); },
     prevLevel: function()       { var n = this.map.nlevel - 1; this.load(n <= 0                 ? cfg.levels.length - 1 : n); },
+    nextLevel: function()       
+	 { 
+		 var n = this.map.nlevel + 1;
+		 if (rnd_level) n = Game.Math.randomInt(loop_level, cfg.levels.length-1);
+// exit to {4, 8, 6} code
+		 var levelplus = this.lvlp & 0xf0;
+		 if (levelplus)
+		 {
+			 var ad = levelplus >>> 2; // codes - to 4 is 0x10, to 8 is 0x20, to 6 is 0x30
+			 if (levelplus > 8) levelplus = 6;
+			 if (this.map.nlevel < 7) n = levelplus;
+			 else n = this.map.nlevel + levelplus;		// beyond level 7, exit to {n} value will be added to level #
+		 }
+		 
+		 this.load(n >= cfg.levels.length ? 1                     : n); 
+		},
 
     loadHighScore: function() { return to.number(this.storage[STORAGE.SCORE], 10000); },
     loadHighWho:   function() { return this.storage[STORAGE.WHO];                     },
@@ -1125,6 +1140,7 @@ Gauntlet = function() {
         entity = new cfunc();
         entity.pool  = pool;           // entities track which pool they belong to (if any)
         entity.cells = [];             // entities track which cells they currently occupy
+			entity.pixel = this.pixel;
         this.entities.push(entity);
 			Mastercell.ptr = entity;
       }
@@ -1739,7 +1755,7 @@ Gauntlet = function() {
     exit: function(exit) {
       if (!this.exiting) {
         this.health  = this.health + (this.health < this.type.health ? 100 : 0);		/// RUNORG - gauntlet no do this
-        this.exiting = { max: exit.type.speed, count: exit.type.speed, fpf: exit.type.fpf, dx: (exit.x - this.x), dy: (exit.y - this.y) };
+        this.exiting = { max: exit.type.speed, count: exit.type.speed, fpf: exit.type.fpf, dx: (exit.x - this.x), dy: (exit.y - this.y), lvlp: exit.pixel };
         publish(EVENT.PLAYER_EXITING, this, exit);
       }
     },
