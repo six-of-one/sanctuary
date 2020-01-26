@@ -33,7 +33,7 @@ Gauntlet = function() {
       DIR      = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7 },
 // teleport adjust by last player dir
 		DIRTX = [ 0, 32, 32, 32, 0, -32, -32, -32],
-		DIRTY = [ -32, -32, 0, 32, 32, 32, 0 -32],
+		DIRTY = [ -32, -32, 0, 32, 32, 32, 0, -32],
       PLAYER = {
         WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, health: 2000, speed: 200/FPS, damage: 50/FPS, armor: 2, magic: 16, weapon: { speed: 600/FPS, reload: 0.40*FPS, damage: 4, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior"  }, // Thor
         VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, health: 2000, speed: 220/FPS, damage: 40/FPS, armor: 3, magic: 16, weapon: { speed: 620/FPS, reload: 0.35*FPS, damage: 4, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie" }, // Thyra
@@ -1657,16 +1657,16 @@ Gauntlet = function() {
 						if (tdist < 100000)
 						{
 									tdir = ddir;
+															alert("testing td:"+tdir+" +1 "+(ddir+1)+": "+destcell.x+", "+destcell.y+" DRx:"+DIRTX[ddir]+" DRy:"+DIRTY[ddir]);
 //									alert("testing td:"+tdir+"- "+ddir+": "+destcell.x+", "+destcell.y);
-									alert("testing td:"+tdir+"- "+ddir+": px:"+(destcell.x + DIRTX[ddir])+" py: "+(destcell.y + DIRTY[ddir]));
 									var px = destcell.x + DIRTX[ddir];
 									var py = destcell.y + DIRTY[ddir];
-//									alert("testing td:"+tdir+"- "+ddir+": "+destcell.x+", "+destcell.y+" px:"+px+" py: "+py);
 									var ocell, tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
 // make sure it isnt a wall - telefrag monsters / death
 /// note: if one teleport is blocked by walls, we should re-check others, putting a no-flag on the blocked
 								 while (is.valid(tcell.wall))
 								{
+//															alert("testing td:"+tdir+"- "+ddir+": px:"+(destcell.x + DIRTX[ddir])+" py: "+(destcell.y + DIRTY[ddir]));
 									tcell.tileptr.tile(tcell.ctx, tcell.sprites, 0, 0, tcell.tx, tcell.ty);
 									ocell = tcell;
 									ddir++;
@@ -1682,6 +1682,7 @@ Gauntlet = function() {
 
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
 								walled = true;
+								return;
 						}
 				}
 				return;
