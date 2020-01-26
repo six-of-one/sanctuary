@@ -22,7 +22,7 @@ Gauntlet = function() {
 		loop_level = 8,
 		rnd_level = 0,
 // save this. to reload level parts, walls to exits, stall open doors, play sounds for those, and so on
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus,
 		Deathmult, Dmmax = 7,
 		Deathscore = [1000, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
 
@@ -89,9 +89,9 @@ Gauntlet = function() {
         HORIZONTAL: { sx: 16, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
         VERTICAL:   { sx: 11, sy: 10, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
         EXIT:       { sx: 9, sy: 12, speed: 3*FPS, fpf: FPS/30 },
-        EXIT4:       { sx: 10, sy: 12, speed: 3*FPS, fpf: FPS/30 },
-        EXIT8:       { sx: 11, sy: 12, speed: 3*FPS, fpf: FPS/30 },
-        EXIT6:       { sx: 12, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+        EXIT4:       { sx: 10, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 4 },
+        EXIT8:       { sx: 11, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 8 },
+        EXIT6:       { sx: 12, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 6 },
         EXITMOVE:       { sx: 13, sy: 12, speed: 3*FPS, fpf: FPS/30 },
         EXITNONE:       { sx: 9, sy: 12, speed: 1*FPS, fpf: FPS/30 }
       },
@@ -792,16 +792,15 @@ Gauntlet = function() {
 	 { 
 		 var n = this.map.nlevel + 1;
 		 if (rnd_level) n = Game.Math.randomInt(loop_level, cfg.levels.length-1);
-// exit to {4, 8, 6} code
-		 var levelplus = this.lvlp & 0xf0;
+// exit to {4, 8, 6} code - levelplus set when exit type detected on touching exit
 		 if (levelplus)
 		 {
-			 var ad = levelplus >>> 2; // codes - to 4 is 0x10, to 8 is 0x20, to 6 is 0x30
 			 if (levelplus > 8) levelplus = 6;
 			 if (this.map.nlevel < 7) n = levelplus;
 			 else n = this.map.nlevel + levelplus;		// beyond level 7, exit to {n} value will be added to level #
 		 }
-		 
+
+		 levelplus = 0;
 		 this.load(n >= cfg.levels.length ? 1                     : n); 
 		},
 
@@ -1755,7 +1754,8 @@ Gauntlet = function() {
     exit: function(exit) {
       if (!this.exiting) {
         this.health  = this.health + (this.health < this.type.health ? 100 : 0);		/// RUNORG - gauntlet no do this
-        this.exiting = { max: exit.type.speed, count: exit.type.speed, fpf: exit.type.fpf, dx: (exit.x - this.x), dy: (exit.y - this.y), lvlp: exit.pixel };
+        this.exiting = { max: exit.type.speed, count: exit.type.speed, fpf: exit.type.fpf, dx: (exit.x - this.x), dy: (exit.y - this.y) };
+			levelplus = exit.type.lvlp;
         publish(EVENT.PLAYER_EXITING, this, exit);
       }
     },
