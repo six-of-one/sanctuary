@@ -31,6 +31,8 @@ Gauntlet = function() {
 // FCUSTILE is after brikover last wall cover in backgrounds.png
 		ftilestr, fcellstr, FCUSTILE = 36,
 
+		 MEXHIGH = 0xFFFFF0,
+		 MEXLOW = 0x00000F,
 // handle death potion bomb rotating score - 
 //				note: NON g1, this is multiplied by score x {n} by current code!
 		Deathmult, Dmmax = 7,
@@ -1150,7 +1152,7 @@ Gauntlet = function() {
 			 {
 				 var ad = TREASURES[type(pixel) < TREASURES.length ? type(pixel) : 0];
 // some treasures operate from sub pixels
-				 var sb = 0xF & pixel;
+				 var sb = MEXLOW & pixel;
 				 if (ad == TREASURE.POTION && (sb == 1)) ad = TREASURE.POTIONORG;
 				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb];
 				self.addTreasure(x, y, ad);				 
@@ -2204,12 +2206,12 @@ Gauntlet = function() {
           else if (cell.nothing)
             this.tile(ctx, sprites, 0, 0, tx, ty);
           else
-			  if (cell.pixel & 0xF)		// special diff floor tiles - up to 15 as of now
+			  if (cell.pixel & MEXLOW)		// special diff floor tiles - up to 15 as of now
 			  {
-				  var nfl = cell.pixel & 0xF;
-				  if ((cell.pixel & 0xFFFFF0) == 0xA08060)
+				  var nfl = cell.pixel & MEXLOW;
+				  if ((cell.pixel & MEXHIGH) == 0xA08060)
 						this.tile(ctx, sprites, nfl, FCUSTILE, tx, ty);
-				  else if (((fcellstr.pixel & 0xFFFFF0) == 0xA08060) && (fcellstr.pixel & 0xF))
+				  else if (((fcellstr.pixel & MEXHIGH) == 0xA08060) && (fcellstr.pixel & MEXLOW))
 						this.tile(ctx, sprites, ftilestr, FCUSTILE, tx, ty);
 				  ftilestr = nfl; // store for non floor content tests
 			  }
