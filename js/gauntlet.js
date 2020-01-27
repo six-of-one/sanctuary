@@ -95,11 +95,18 @@ Gauntlet = function() {
         PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, push: true,   sound: 'null'  },
 // extra power potions
         XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         XSHOT:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         XSHTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         XARM:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  }
+        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPINV:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPREPUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPREFLC:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPSUPER:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPTELE:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPANK:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  }
       },
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
@@ -132,7 +139,9 @@ Gauntlet = function() {
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
       MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2 ],
       TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
-											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH, TREASURE.XSPEED, TREASURE.XSHOT, TREASURE.XSHTSPD, TREASURE.XARM, TREASURE.XFIGHT, TREASURE.XMAGIC,
+											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
+											TREASURE.XSPEED, TREASURE.XSHOT, TREASURE.XSHTSPD, TREASURE.XARM, TREASURE.XFIGHT, TREASURE.XMAGIC,
+											TREASURE.TMPINVIS, TREASURE.TMPINV, TREASURE.TMPREPUL, TREASURE.TMPREFLC, TREASURE.TMPSUPER, TREASURE.TMPTELE, TREASURE.TMPANK,
 											TREASURE.POTIONORG ],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,   h: TILE          },
@@ -1159,6 +1168,7 @@ Gauntlet = function() {
 				 var sb = MEXLOW & pixel;
 				 if (ad == TREASURE.POTION && (sb == 1)) ad = TREASURE.POTIONORG;
 				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb];
+				 if (ad == TREASURE.TMPINVIS && (sb > 0)) ad =  TREASURES[type(pixel) + sb];
 				self.addTreasure(x, y, ad);
 			 }
 		  else if (ismonster(pixel))
