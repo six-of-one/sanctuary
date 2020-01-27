@@ -33,6 +33,10 @@ Gauntlet = function() {
 
 		 MEXHIGH = 0xFFFFF0,
 		 MEXLOW = 0x00000F,
+
+// g1 custom walls diff from main wall mapped on EXLOW
+			G1WALL = [	8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26	],
+
 // handle death potion bomb rotating score - 
 //				note: NON g1, this is multiplied by score x {n} by current code!
 		Deathmult, Dmmax = 7,
@@ -1155,7 +1159,7 @@ Gauntlet = function() {
 				 var sb = MEXLOW & pixel;
 				 if (ad == TREASURE.POTION && (sb == 1)) ad = TREASURE.POTIONORG;
 				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb];
-				self.addTreasure(x, y, ad);				 
+				self.addTreasure(x, y, ad);
 			 }
 		  else if (ismonster(pixel))
 			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
@@ -1766,22 +1770,30 @@ Gauntlet = function() {
 				for(c = 0 ; c < nc ; c++) {
 					  cell = cells[c];
 					  if (cell.wall !== undefined && cell.wall !== null)
-					  if (cell.pixel == TRAPWALL) // || cell.pixel == TRAPTRIG)
+					 {
+							  if ((cell.pixel & MEXHIGH) == TRAPWALL && ((cell.pixel & MEXLOW) == (treasure.pixel & MEXLOW))) // || cell.pixel == TRAPTRIG)
 //					  if (cell.x != 0 &&  cell.y != 0)
-						{
-								if (!walled) Musicth.play(Musicth.sounds.wallexit);
-								if (Mastermap.level.gflr)
 								{
-										var gimg = document.getElementById("gfloor");
-										cell.ctx.drawImage(gimg, 0, 0, STILE, STILE, cell.tx * TILE, cell.ty * TILE, TILE, TILE);
-								}
-								else
-									cell.tileptr.tile(cell.ctx, cell.sprites, Mastermap.level.floor, 0, cell.tx, cell.ty);
+										if (!walled) Musicth.play(Musicth.sounds.wallexit);
+										if (Mastermap.level.gflr)
+										{
+												var gimg = document.getElementById("gfloor");
+												cell.ctx.drawImage(gimg, 0, 0, STILE, STILE, cell.tx * TILE, cell.ty * TILE, TILE, TILE);
+										}
+										else
+											cell.tileptr.tile(cell.ctx, cell.sprites, Mastermap.level.floor, 0, cell.tx, cell.ty);
 //								cell.wall = 17;//walltype(cell.tx, cell.ty, map);
 //								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
-								cell.wall = null;	// so we dont fire these wall segs again
-								walled = true;
-						}
+										cell.wall = null;	// so we dont fire these wall segs again
+										walled = true;
+								}
+					 }
+					  if (cell.pixel == treasure.pixel)		// matching trap
+					 {
+						 alert(treasure.pixel);
+						 alert(cell.ptr);
+//							Mastermap.remove(cell.ptr);
+					 }
 				}
 		 }
 
@@ -2194,6 +2206,9 @@ Gauntlet = function() {
           if (is.valid(cell.wall))
 			  {
 				  if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls
+					  if ((cell.pixel & MEXLOW) && (cell.pixel & MEXHIGH) == 0x404000)  // diff walls by low nibble
+						this.tile(ctx, sprites, cell.wall, G1WALL[cell.pixel & MEXLOW], tx, ty);
+					  else
 						this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
 						if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
 				  }
