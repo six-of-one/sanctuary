@@ -795,7 +795,10 @@ Gauntlet = function() {
       if (entity.monster || entity.generator)
         entity.hurt(player.type.damage, player);
       else if (entity.treasure)
+		 {
+			if (entity.type.lock && !player.keys) return;		/// need 1st message - need all messages
         player.collect(entity);
+		 }
       else if (entity.door && player.keys && entity.open())
         player.keys--;
       else if (entity.exit)
