@@ -26,7 +26,7 @@ Gauntlet = function() {
 // also doors / walls are stalled open from player health rot - which has none of these pointers loaded
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, refpixel, shotpot,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, refpixel, shotpot, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
 		ftilestr, fcellstr, FCUSTILE = 36,
@@ -684,7 +684,7 @@ Gauntlet = function() {
     },
 
     onenterhelp: function(event, previous, current, msg) { $('help').update(msg).show(); setTimeout(this.autoresume.bind(this), 2000); },
-    onleavehelp: function(event, previous, current)      { $('help').hide();                                                           },
+    onleavehelp: function(event, previous, current)      { $('help').hide();  announcepause = false;                                                         },
 
     autoresume: function() {
       if (this.is('help'))
@@ -702,6 +702,7 @@ Gauntlet = function() {
     //-----------------------
 
     update: function(frame) {
+		 if (!announcepause)		// when announcer talks, flashes message we pause - tried to do with setting state, no effect
       if (this.canUpdate) {
         this.player.update(   frame, this.player, this.map, this.viewport);
         this.map.update(      frame, this.player, this.map, this.viewport);
@@ -1501,7 +1502,7 @@ Gauntlet = function() {
     hurt: function(damage, by, nuke) {
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 			 shotpot = 0.8;	// shot potions are weaker
-			 if (this.type.health) {$('help').update("Dont shoot food").show(); setTimeout(game.autoresume.bind(this), 2000); }
+			 if (this.type.health) {$('help').update("Dont shoot food").show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
 			 if (this.type.potion) Mastermap.nuke(null, by.owner);
 			 if (this.type.poison) alert("shot poison - slow monsters code here");
 			 shotpot = 1;
