@@ -26,7 +26,7 @@ Gauntlet = function() {
 // also doors / walls are stalled open from player health rot - which has none of these pointers loaded
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, 
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, refpixel,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
 		ftilestr, fcellstr, FCUSTILE = 36,
@@ -78,7 +78,7 @@ Gauntlet = function() {
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'collectfood' },
-        POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50,   sound: 'collectpotion' },
+        POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, canbeshot: 2,   sound: 'collectpotion' },
         FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
         FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
         FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
@@ -94,13 +94,13 @@ Gauntlet = function() {
         STUN:       { sx: 26, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun'  },
         PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, push: true,   sound: 'null'  },
 // extra power potions
-        XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, canbeshot: 2,   sound: 'collectpotion'  },
         TMPINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        XSHOT:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        XSHTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        XARM:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        XSHOT:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XSHTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XARM:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, canbeshot: 2,   sound: 'collectpotion'  },
         TMPINV:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         TMPREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         TMPREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
@@ -1129,6 +1129,7 @@ Gauntlet = function() {
 		  self.cells[n].tx = tx; // used by trap: walls -> floor
 		  self.cells[n].ty = ty;
 		  self.cells[n].pixel = pixel;
+		  refpixel = pixel;
 // make some floor tiles appear slightlyt different - a "GPS" out of complex mazes
 // this is built into the map file as color code #a08080
 		  self.cells[n].mapcht = ((pixel & 0xa08080) == 0xa08080);
@@ -1201,7 +1202,7 @@ Gauntlet = function() {
         entity = new cfunc();
         entity.pool  = pool;           // entities track which pool they belong to (if any)
         entity.cells = [];             // entities track which cells they currently occupy
-			entity.pixel = this.pixel;
+			entity.pixel = refpixel;
         this.entities.push(entity);
 			Mastercell.ptr = entity;
       }
@@ -1801,11 +1802,10 @@ Gauntlet = function() {
 										walled = true;
 								}
 					 }
-					  if (cell.pixel == treasure.pixel)		// matching trap
+					  if (cell.pixel == treasure.pixel)		// remove matching trap
 					 {
-						 alert(treasure.pixel);
-						 alert(cell.ptr);
-//							Mastermap.remove(cell.ptr);
+						 if (cell.ptr);
+							Mastermap.remove(cell.ptr);
 					 }
 				}
 		 }
