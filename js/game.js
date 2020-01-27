@@ -750,8 +750,13 @@ Game.Math = {
 	  var rot;
 	  rot = spl_rot;
 
-	  if (spl_cyc < 2 || spl_cyc > 10) spl_cyc = 1;
+	  if (spl_cyc < 2 || spl_cyc > 11) spl_cyc = 1;
 	  spl_cyc++;
+
+// jinky code for alt splash legend instead of / after score box
+	  if (spl_cyc == 11 && (Math.random() > 0.5)) spl_cyc = 12;
+	  else
+	  if (spl_cyc > 10 && (Math.random() > 0.6)) spl_cyc = 2;
 
 	  if (spl_cyc == 2)
 	  {

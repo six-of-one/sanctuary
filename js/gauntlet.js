@@ -84,7 +84,7 @@ Gauntlet = function() {
         FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
         KEY:     { sx: 5, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'collectkey'    },
         POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion' },
-        POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion' },
+        POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion' },
         GOLD:    { sx: 0, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1,              sound: 'collectgold'   },
         LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'collectgold'   },
         BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'collectgold'   },
@@ -94,19 +94,20 @@ Gauntlet = function() {
         STUN:       { sx: 26, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun'  },
         PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, push: true,   sound: 'null'  },
 // extra power potions
-        XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
         TMPINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        XSHOT:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, canbeshot: 2,   sound: 'collectpotion'  },
-        XSHTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, canbeshot: 2,   sound: 'collectpotion'  },
-        XARM:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, canbeshot: 2,   sound: 'collectpotion'  },
-        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, canbeshot: 2,   sound: 'collectpotion'  },
-        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XSHOT:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XSHTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XARM:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
         TMPINV:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         TMPREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         TMPREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         TMPSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         TMPTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        TMPANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  }
+        TMPANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, canbeshot: 2,   sound: 'collectpotion' }
       },
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
@@ -142,7 +143,7 @@ Gauntlet = function() {
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
 											TREASURE.XSPEED, TREASURE.TMPINVIS, TREASURE.XSHOT, TREASURE.XSHTSPD, TREASURE.XARM, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.TMPINV, TREASURE.TMPREPUL, TREASURE.TMPREFLC, TREASURE.TMPSUPER, TREASURE.TMPTELE, TREASURE.TMPANK,
-											TREASURE.POTIONORG ],
+											TREASURE.POTIONORG, TREASURE.BADBOT ],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,   h: TILE          },
         PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2, h: TILE - TILE/4 },
@@ -780,7 +781,7 @@ Gauntlet = function() {
       var x = weapon.x + (entity.x ? (entity.x - weapon.x)/2 : 0),
           y = weapon.y + (entity.y ? (entity.y - weapon.y)/2 : 0);
 
-      if (weapon.type.player && (entity.monster || entity.generator))
+      if (weapon.type.player && (entity.monster || entity.generator || entity.treasure ))
         entity.hurt(weapon.type.damage, weapon);
       else if (weapon.type.monster && entity.player)
         entity.hurt(weapon.type.damage, weapon);
@@ -1171,6 +1172,7 @@ Gauntlet = function() {
 // some treasures operate from sub pixels
 				 var sb = MEXLOW & pixel;
 				 if (ad == TREASURE.POTION && (sb == 1)) ad = TREASURE.POTIONORG;
+				 if (ad == TREASURE.POISON && (sb == 2)) ad = TREASURE.BADPOT;
 				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb + 1];
 				 if (ad == TREASURE.TMPINVIS && (sb > 0)) ad =  TREASURES[type(pixel) + sb + 5];
 				self.addTreasure(x, y, ad);
@@ -1336,11 +1338,6 @@ Gauntlet = function() {
     },
 
     hurt: function(damage, by, nuke) {
-// not living shootables
-		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
-			 this.remove();
-			 return;
-		 }
       if (by.weapon && this.type.canbehit == 2) // death shot
 		 {
 				by.owner.addscore(1);
@@ -1497,6 +1494,16 @@ Gauntlet = function() {
 
     treasure: true,
     cbox: CBOX.FULL,
+
+// not living shootables
+/// message - "dont shoot the {x}"
+    hurt: function(damage, by, nuke) {
+		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
+			 if (this.type.potion) Mastermap.nuke(nuill, by.player);
+			 Mastermap.remove(this);
+			 return;
+		 }
+    },
 
     onrender: function(frame) {
       this.frame = animate(frame, this.type.fpf, this.type.frames);
@@ -1947,7 +1954,7 @@ Gauntlet = function() {
         this.potions--;
 /// debug code - remove pre-release
 			if (DEBUGON)
-					this.potions = 7;
+					this.potions = 3;
 /// debug tier
         publish(EVENT.PLAYER_NUKE, this);
       }
