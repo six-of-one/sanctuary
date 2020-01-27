@@ -66,6 +66,12 @@ cant take keys / bombs after inv. full - cant walk through them either
 
 WIP: arcade sound & gfx
 
+full walk dist (31 tiles)
+warrior:	5.4 sec
+wiz:			5.3 sec
+valk:			4.5 sec
+elf:				3.9 sec
+
 
 door stall is 15 secs - difficult is 0 easiest
 
