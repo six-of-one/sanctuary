@@ -26,7 +26,9 @@ Gauntlet = function() {
 // also doors / walls are stalled open from player health rot - which has none of these pointers loaded
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, 
+//	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
+		ftilestr, fcellstr,
 
 // handle death potion bomb rotating score - 
 //				note: NON g1, this is multiplied by score x {n} by current code!
@@ -2181,6 +2183,8 @@ Gauntlet = function() {
 				  }
 				}
 		 }
+		 fcellstr = map.cell(0, 0); // preload so no undefine
+		 ftilestr = 0;
       for(ty = 0, th = map.th ; ty < th ; ty++) {
         for(tx = 0, tw = map.tw ; tx < tw ; tx++) {
           cell = map.cell(tx * TILE, ty * TILE);
@@ -2201,7 +2205,11 @@ Gauntlet = function() {
 			  if (cell.pixel & 0xF)		// special diff floor tiles - up to 15 as of now
 			  {
 				  var nfl = cell.pixel & 0xF;
-				  this.tile(ctx, sprites, nfl, 0, tx, ty);
+				  if ((cell.pixel & 0xFFFFF0) == 0xA08060)
+						this.tile(ctx, sprites, nfl, 0, tx, ty);
+				  else if (((fcellstr.pixel & 0xFFFFF0) == 0xA08060) && (fcellstr.pixel & 0xF))
+						this.tile(ctx, sprites, ftilestr, 0, tx, ty);
+				  ftilestr = nfl; // store for non floor content tests
 			  }
 			  else
 			  if (!map.level.gflr)
@@ -2217,6 +2225,7 @@ Gauntlet = function() {
 // added a maze cheat - floor tile can be a subtle shift from std tile
 // task: option this
 			  if (cell.mapcht) this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor + 1, 0, tx, ty);
+				fcellstr = cell;
         }
       }
       if (DEBUG.GRID)
