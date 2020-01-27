@@ -28,7 +28,8 @@ Gauntlet = function() {
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, 
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
-		ftilestr, fcellstr,
+// FCUSTILE is after brikover last wall cover in backgrounds.png
+		ftilestr, fcellstr, FCUSTILE = 36,
 
 // handle death potion bomb rotating score - 
 //				note: NON g1, this is multiplied by score x {n} by current code!
@@ -2194,8 +2195,9 @@ Gauntlet = function() {
 						this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
 						if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
 				  }
-				  cell.ctx = ctx;	// for traps turning walls to floor
-				  cell.sprites = sprites;
+				  cell.ctx = ctx;						// for traps turning walls to floor, stalling walls to exits
+				  
+				  cell.sprites = sprites;		//		shootable walls, g2 shot walls, g2 random walls, and so
 				  cell.tileptr = this;
 				  cell.map = map;
 			  }
@@ -2206,9 +2208,9 @@ Gauntlet = function() {
 			  {
 				  var nfl = cell.pixel & 0xF;
 				  if ((cell.pixel & 0xFFFFF0) == 0xA08060)
-						this.tile(ctx, sprites, nfl, 0, tx, ty);
+						this.tile(ctx, sprites, nfl, FCUSTILE, tx, ty);
 				  else if (((fcellstr.pixel & 0xFFFFF0) == 0xA08060) && (fcellstr.pixel & 0xF))
-						this.tile(ctx, sprites, ftilestr, 0, tx, ty);
+						this.tile(ctx, sprites, ftilestr, FCUSTILE, tx, ty);
 				  ftilestr = nfl; // store for non floor content tests
 			  }
 			  else
