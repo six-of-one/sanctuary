@@ -1107,7 +1107,8 @@ Gauntlet = function() {
       function istreasure(pixel)     { return is(pixel, PIXEL.TREASURE);  };
       function walltype(tx,ty,map)   { return (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
       function shadowtype(tx,ty,map) { return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty+1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0); };
-      function doortype(tx,ty,map)   { return iswall(map.pixel(tx, ty-1)) || isdoor(map.pixel(tx, ty-1)) ? DOOR.VERTICAL : DOOR.HORIZONTAL; };
+//      function doortype(tx,ty,map)   { return iswall(map.pixel(tx, ty-1)) || isdoor(map.pixel(tx, ty-1)) ? DOOR.VERTICAL : DOOR.HORIZONTAL; };
+      function doortype(tx,ty,map)   { return (isdoor(map.pixel(tx,   ty-1)) ? 1 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty+1)) ? 4 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 8 : 0); };
 
 // make sure mults is not undefed - later load deathmult from cooky
 		if (Deathmult == undefined) Deathmult = 0;
@@ -1165,7 +1166,11 @@ Gauntlet = function() {
 				 }
 			 }
 		  else if (isdoor(pixel))
-			 self.addDoor(x, y, doortype(tx,ty,map));
+			{
+					self.addDoor(x, y, DOOR.HORIZONTAL);
+					Mastercell.ptr.sx = doortype(tx,ty,map);
+//				alert(Mastercell.ptr.sx);
+			}
 		  else if (isgenerator(pixel))
 			 self.addGenerator(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
 		  else if (istreasure(pixel))
@@ -2337,7 +2342,10 @@ Gauntlet = function() {
       for(n = 0, max = entities.length ; n < max ; n++) {
         entity = entities[n];
         if (entity.active && (!entity.onrender || entity.onrender(frame) !== false) && !viewport.outside(entity.x, entity.y, TILE, TILE)) {
-          this.sprite(ctx, sprites, viewport, entity.type.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+				if (entity.door)
+						this.sprite(ctx, sprites, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+				else
+						this.sprite(ctx, sprites, viewport, entity.type.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
         }
       }
     }
