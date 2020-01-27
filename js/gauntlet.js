@@ -354,7 +354,7 @@ Gauntlet = function() {
       { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN3,   brikovr:  WALL.G1BRICKD,   gflr: "gfx/g1floor6.jpg",   music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.GRAY7,    gflr: "gfx/g1floor7.jpg",      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Research Z',     url: "levels/glevelZ.png",  floor: FLOOR.RND,      wall: WALL.ORANG9,    gflr: "gfx/g1floor0z.jpg",      music: 'mountingassault',      score:  1000, help: null },
-      { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'mountingassault',      score:  1000, help: null },
+      { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'mountingassault',      score:  1000, help: 'welcome to ERR0R' },
 		{ name: 'Research X',     url: "levels/glevel114.png",  floor: FLOOR.RND,      wall: WALL.BROWN1,   brikovr:  WALL.XBRIKD,    gflr: "gfx/g1floor6.jpg",      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel113.png",  floor: FLOOR.RND,      wall: WALL.PINK34,    gflr: "gfx/g1floor113.jpg",      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel112.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor112.jpg",      music: 'mountingassault',      score:  1000, help: null },
@@ -683,7 +683,7 @@ Gauntlet = function() {
       this.player.leave();
     },
 
-    onenterhelp: function(event, previous, current, msg) { $('help').update(msg).show(); setTimeout(this.autoresume.bind(this), 4000); },
+    onenterhelp: function(event, previous, current, msg) { $('help').update(msg).show(); setTimeout(this.autoresume.bind(this), 2000); },
     onleavehelp: function(event, previous, current)      { $('help').hide();                                                           },
 
     autoresume: function() {
@@ -1501,6 +1501,7 @@ Gauntlet = function() {
     hurt: function(damage, by, nuke) {
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 			 shotpot = 0.8;	// shot potions are weaker
+			 if (this.type.health) {$('help').update("Dont shoot food").show(); setTimeout(game.autoresume.bind(this), 2000); }
 			 if (this.type.potion) Mastermap.nuke(null, by.owner);
 			 if (this.type.poison) alert("shot poison - slow monsters code here");
 			 shotpot = 1;
