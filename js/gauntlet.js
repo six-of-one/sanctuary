@@ -90,8 +90,8 @@ Gauntlet = function() {
         BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'collectgold'   },
 // teleport, trap, stun tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport'  },
-        TRAP:       { sx: 22, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap'  },
-        STUN:       { sx: 26, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun'  },
+        TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap'  },
+        STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun'  },
         PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, push: true,   sound: 'null'  },
 // extra power potions
         XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
