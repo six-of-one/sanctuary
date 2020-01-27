@@ -86,7 +86,7 @@ Gauntlet = function() {
         POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion' },
         POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion' },
         GOLD:    { sx: 0, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1,              sound: 'collectgold'   },
-        LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,                sound: 'collectgold'   },
+        LOCKED:    { sx: 3, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'collectgold'   },
         BAG:    { sx: 4, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'collectgold'   },
 // teleport, trap, stun tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport'  },
@@ -101,12 +101,12 @@ Gauntlet = function() {
         XARM:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        TMPINV:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        TMPREPUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        TMPREFLC:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        TMPSUPER:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        TMPTELE:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        TMPANK:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  }
+        TMPINV:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  }
       },
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
@@ -140,8 +140,8 @@ Gauntlet = function() {
       MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2 ],
       TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
-											TREASURE.XSPEED, TREASURE.XSHOT, TREASURE.XSHTSPD, TREASURE.XARM, TREASURE.XFIGHT, TREASURE.XMAGIC,
-											TREASURE.TMPINVIS, TREASURE.TMPINV, TREASURE.TMPREPUL, TREASURE.TMPREFLC, TREASURE.TMPSUPER, TREASURE.TMPTELE, TREASURE.TMPANK,
+											TREASURE.XSPEED, TREASURE.TMPINVIS, TREASURE.XSHOT, TREASURE.XSHTSPD, TREASURE.XARM, TREASURE.XFIGHT, TREASURE.XMAGIC,
+											TREASURE.TMPINV, TREASURE.TMPREPUL, TREASURE.TMPREFLC, TREASURE.TMPSUPER, TREASURE.TMPTELE, TREASURE.TMPANK,
 											TREASURE.POTIONORG ],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,   h: TILE          },
@@ -1167,8 +1167,8 @@ Gauntlet = function() {
 // some treasures operate from sub pixels
 				 var sb = MEXLOW & pixel;
 				 if (ad == TREASURE.POTION && (sb == 1)) ad = TREASURE.POTIONORG;
-				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb];
-				 if (ad == TREASURE.TMPINVIS && (sb > 0)) ad =  TREASURES[type(pixel) + sb];
+				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb + 1];
+				 if (ad == TREASURE.TMPINVIS && (sb > 0)) ad =  TREASURES[type(pixel) + sb + 5];
 				self.addTreasure(x, y, ad);
 			 }
 		  else if (ismonster(pixel))
