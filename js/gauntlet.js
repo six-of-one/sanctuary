@@ -26,7 +26,7 @@ Gauntlet = function() {
 // also doors / walls are stalled open from player health rot - which has none of these pointers loaded
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, refpixel,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, refpixel, shotpot,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
 		ftilestr, fcellstr, FCUSTILE = 36,
@@ -78,7 +78,7 @@ Gauntlet = function() {
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'collectfood' },
-        POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, canbeshot: 2,   sound: 'collectpotion' },
+        POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' },
         FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
         FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
         FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
@@ -107,7 +107,7 @@ Gauntlet = function() {
         TMPSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         TMPTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         TMPANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, canbeshot: 2,   sound: 'collectpotion' }
+        BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
@@ -1044,7 +1044,7 @@ Gauntlet = function() {
         if (entity.monster && entity.active) {
           distance = Math.max(Math.abs(player.x - entity.x), Math.abs(player.y - entity.y)); // rough, but fast, approximation for slower, sqrt(x*x + y*y)
           if (distance < limit)
-            entity.hurt(player.type.magic * (1 - distance/limit), player, true);
+            entity.hurt(player.type.magic * (1 - distance/limit) * shotpot, player, true);
         }
 // cataboligne - add damage to generators
 // rp - re plot dmg, only wiz could kill gens with potion, elf with extra magic power
@@ -1054,7 +1054,7 @@ Gauntlet = function() {
 			  rp = player.type.magic;
 			  if (player.type.magic < 32) rp = player.type.magic / 3;
           if (distance < limit)
-            entity.hurt(rp * (1 - distance/limit), player, true);
+            entity.hurt(rp * (1 - distance/limit) * shotpot, player, true);
         }
 // end mod
       }
@@ -1111,6 +1111,7 @@ Gauntlet = function() {
 // make sure mults is not undefed - later load deathmult from cooky
 		if (Deathmult == undefined) Deathmult = 0;
 		if (Masterot == undefined) Masterot = 0;
+		shotpot = 1;
 
       Game.parseImage(source, function(tx, ty, pixel, map) {
 
@@ -1499,7 +1500,10 @@ Gauntlet = function() {
 /// message - "dont shoot the {x}"
     hurt: function(damage, by, nuke) {
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
-			 if (this.type.potion) Mastermap.nuke(nuill, by.player);
+			 shotpot = 0.8;	// shot potions are weaker
+			 if (this.type.potion) Mastermap.nuke(null, by.owner);
+			 if (this.type.poison) alert("shot poison - slow monsters code here");
+			 shotpot = 1;
 			 Mastermap.remove(this);
 			 return;
 		 }
