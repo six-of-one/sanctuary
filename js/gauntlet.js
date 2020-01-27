@@ -2198,7 +2198,6 @@ Gauntlet = function() {
 						if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
 				  }
 				  cell.ctx = ctx;						// for traps turning walls to floor, stalling walls to exits
-				  
 				  cell.sprites = sprites;		//		shootable walls, g2 shot walls, g2 random walls, and so
 				  cell.tileptr = this;
 				  cell.map = map;
