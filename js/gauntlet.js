@@ -764,24 +764,12 @@ Gauntlet = function() {
       var nextdoor;
       if (nextdoor = this.map.door(door.x-TILE, door.y))
         nextdoor.open(speed);
-if (nextdoor)
-if (nextdoor.stop)
-alert(nextdoor.stop);
       if (nextdoor = this.map.door(door.x+TILE, door.y))
         nextdoor.open(speed);
-if (nextdoor)
-if (nextdoor.stop)
-alert(nextdoor.stop);
       if (nextdoor = this.map.door(door.x, door.y-TILE))
         nextdoor.open(speed);
-if (nextdoor)
-if (nextdoor.stop)
-alert(nextdoor.stop);
       if (nextdoor = this.map.door(door.x, door.y+TILE))
         nextdoor.open(speed);
-if (nextdoor)
-if (nextdoor.stop)
-alert(nextdoor.stop);
     },
 
     onDoorOpen: function(door) {
