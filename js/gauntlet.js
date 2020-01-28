@@ -77,11 +77,11 @@ Gauntlet = function() {
       },
 
       TREASURE = {
-        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'collectfood' },
+        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood' },
         POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' },
-        FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
-        FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
-        FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood'   },
+        FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood'   },
+        FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood'   },
+        FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood'   },
         KEY:     { sx: 21, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'collectkey'    },
         POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion' },
         POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion' },
