@@ -120,6 +120,8 @@ Gauntlet = function() {
 /// RESTORE to 30
 		DOORSTALL = 30,
 		stalling,
+// doors open counter-clockwise and stop opening in a clockwise dir when hitting corners & Ts
+		doorstop = [ 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0 ],
       DOOR = {
         HORIZONTAL: { sx: 10, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
         VERTICAL:   { sx: 5, sy: 10, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
@@ -762,12 +764,24 @@ Gauntlet = function() {
       var nextdoor;
       if (nextdoor = this.map.door(door.x-TILE, door.y))
         nextdoor.open(speed);
+if (nextdoor)
+if (nextdoor.stop)
+alert(nextdoor.stop);
       if (nextdoor = this.map.door(door.x+TILE, door.y))
         nextdoor.open(speed);
+if (nextdoor)
+if (nextdoor.stop)
+alert(nextdoor.stop);
       if (nextdoor = this.map.door(door.x, door.y-TILE))
         nextdoor.open(speed);
+if (nextdoor)
+if (nextdoor.stop)
+alert(nextdoor.stop);
       if (nextdoor = this.map.door(door.x, door.y+TILE))
         nextdoor.open(speed);
+if (nextdoor)
+if (nextdoor.stop)
+alert(nextdoor.stop);
     },
 
     onDoorOpen: function(door) {
@@ -801,8 +815,22 @@ Gauntlet = function() {
 			if (entity.type.lock && !player.keys) return;		/// need 1st message - need all messages
         player.collect(entity);
 		 }
-      else if (entity.door && player.keys && entity.open())
-        player.keys--;
+      else if (entity.door)
+		 {
+				var cell, cells  = reloaded.cells;
+				var c, nc = cells.length;
+				for(c = 0 ; c < nc ; c++) 	// clear all door stop links
+				{
+					  cell = cells[c];
+						if (cell.ptr)
+						if (cell.ptr.door) cell.ptr.door.stop = false;
+				}
+				entity.counterclock(entity); // set door stops so door only opens counterclockwise
+				if (player.keys && entity.open())
+			 {
+					player.keys--;
+			 }
+		 }
       else if (entity.exit)
         player.exit(entity);
     },
@@ -1550,12 +1578,27 @@ Gauntlet = function() {
     },
 
     open: function(speed) {
+		 if (this.stop) return false;
       if (!this.opening) {
         this.opening = (speed || 0) + this.type.speed;
         publish(EVENT.DOOR_OPENING, this, this.opening);
         return true;
       }
-    }
+    },
+
+// trace back clockwise on all doors on first touch
+// place a stop at - corners, Ts
+	counterclock: function(door) {
+			var nextdoor;
+			if (nextdoor = Mastermap.door(door.x+TILE, door.y))
+			if (doorstop[ nextdoor.sx ])
+			  nextdoor.counterclock(nextdoor);
+			else nextdoor.stop = true;
+			if (nextdoor = Mastermap.door(door.x, door.y-TILE))
+			if (doorstop[ nextdoor.sx ])
+			  nextdoor.counterclock(nextdoor);
+			else nextdoor.stop = true;
+		}
 
   });
 
