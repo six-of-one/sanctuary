@@ -1508,8 +1508,12 @@ Gauntlet = function() {
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 			 shotpot = 0.8;	// shot potions are weaker
 			 if (this.type.health) {$('help').update("Dont shoot food").show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
-			 if (this.type.potion) Mastermap.nuke(null, by.owner);
-			 if (this.type.poison) alert("shot poison - slow monsters code here");
+			 if (this.type.potion) 
+			 {
+					Mastermap.nuke(null, by.owner);
+					Musicth.play(Musicth.sounds.nuke);
+			 }
+//			 if (this.type.poison) alert("shot poison - slow monsters code here");
 			 shotpot = 1;
 			 Mastermap.remove(this);
 			 return;
@@ -2342,6 +2346,7 @@ Gauntlet = function() {
       for(n = 0, max = entities.length ; n < max ; n++) {
         entity = entities[n];
         if (entity.active && (!entity.onrender || entity.onrender(frame) !== false) && !viewport.outside(entity.x, entity.y, TILE, TILE)) {
+// note: RUNORG
 				if (entity.door)
 						this.sprite(ctx, sprites, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else
