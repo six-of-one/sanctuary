@@ -334,6 +334,7 @@ Game = {
         canvas  = Game.renderToCanvas(tw, th, function(ctx) { ctx.drawImage(image, 0, 0); }),
         ctx     = canvas.getContext('2d'),
         data    = ctx.getImageData(0, 0, tw, th).data,
+		  ctx = ctx.rotate(90 * Math.PI / 180),
         helpers = {
           valid: function(tx,ty) { return (tx >= 0) && (tx < tw) && (ty >= 0) && (ty < th); },
           index: function(tx,ty) { return (tx + (ty*tw)) * 4; },
