@@ -1133,9 +1133,6 @@ Gauntlet = function() {
 
       Game.parseImage(source, function(tx, ty, pixel, map) {
 
-var twt = tw - 1, txm;
-			txm = tx;
-			tx = twt - txm;
         var cell, x = t2p(tx),
                   y = t2p(ty),
                   n = tx + (ty * tw);
