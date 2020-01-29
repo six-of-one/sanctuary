@@ -342,7 +342,18 @@ Game = {
 
 		  ctx.rotate(90 * Math.PI / 180);
 		  canvas  = Game.renderToCanvas(tw, th, function(ctx) { ctx.drawImage(image, 0, 0); });
+		  ctx.drawImage(image, 0, 0); 
         data    = ctx.getImageData(0, 0, tw, th).data;
+
+ 
+ var offScreenCanvas = document.createElement('canvas');
+
+offScreenCanvasCtx = offScreenCanvas.getContext('2d');
+offScreenCanvas.height = image.width;
+offScreenCanvas.width = image.height;
+offScreenCanvasCtx.rotate(90 * Math.PI / 180);
+offScreenCanvasCtx.translate(0, -offScreenCanvas.width);
+offScreenCanvasCtx.drawImage(image, 0, 0);
 
     for(ty = 0 ; ty < th ; ty++)
       for(tx = 0 ; tx < tw ; tx++)

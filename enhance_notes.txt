@@ -73,6 +73,16 @@ valk:			4.5 sec
 elf:				3.9 sec
 
 
+    var canvas = document.getElementById("c");
+    var ctx = canvas.getContext("2d");
+
+    var image = new Image();
+    image.src = base64data;
+    image.onload = function() {
+        ctx.translate(image.width, image.height);
+        ctx.rotate(180 * Math.PI / 180);
+        ctx.drawImage(image, 0, 0); 
+
 door stall is 15 secs - difficult is 0 easiest
 
 GII elements:

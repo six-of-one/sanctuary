@@ -647,6 +647,7 @@ Gauntlet = function() {
         $('booting').show();
 				document.getElementById("gfloor").src = level.gflr;		// set this here so its ready on map build
         level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
+//		  	  level.source.setAttribute('style','transform:rotate(180deg)');
       }
     },
 
@@ -1133,6 +1134,7 @@ Gauntlet = function() {
 
       Game.parseImage(source, function(tx, ty, pixel, map) {
 
+//			tx = (tw - 1) - tx;
         var cell, x = t2p(tx),
                   y = t2p(ty),
                   n = tx + (ty * tw);
