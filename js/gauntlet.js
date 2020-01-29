@@ -621,7 +621,7 @@ Gauntlet = function() {
     onmenu: function(event, previous, current) {
 // used to play lostcorridors - now plays title music once at init - no loop
       this.sounds.playMenuMusic();
-			setTimeout('3()',19500);
+			setTimeout('splashrot()',19500);
     },
 
     onstart: function(event, previous, current, type, nlevel) {
