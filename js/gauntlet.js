@@ -602,8 +602,6 @@ Gauntlet = function() {
 		// make sure floor loader is hidden
 		 var img = document.getElementById("gfloor");
 		img.style.visibility = "hidden";
-		img = document.getElementById("introvid");
-		img.style.visibility = "hidden";
 
     },
 

@@ -742,18 +742,33 @@ Game.Math = {
   //===========================================================================
 
   var spl_rot = 6000;
-  var spl_cyc = 2;
+  var spl_cyc = 0;
   var spl_loop = "0123456789ABCDEF";
 
   function splashrot () {
 
-	  var rot;
-	  rot = spl_rot;
+		var spl = document.getElementById("splash");
+		var vid = document.getElementById("introvid");
+		var rot;
+		rot = spl_rot;
 
-	  if (spl_cyc < 2 || spl_cyc > 11) spl_cyc = 1;
+	  if (spl_cyc < 1 || spl_cyc > 11) spl_cyc = 0;
 	  spl_cyc++;
 
+	  if (spl_cyc == 1)
+	{
+			vid.height = spl.height;
+			vid.width = spl.width;
+			vid.play(); 
+			vid.style.visibility = "visible";
+			document.splashrot.src = "images/1x1.png";
+			rot = 14000;
+		}
+	else
 // jinky code for alt splash legend instead of / after score box
+	{
+		vid.stop();
+		vid.style.visibility = "hidden";
 	  if (spl_cyc == 11 && (Math.random() > 0.5)) spl_cyc = 12;
 	  else
 	  if (spl_cyc > 10 && (Math.random() > 0.6)) spl_cyc = 2;
@@ -765,10 +780,7 @@ Game.Math = {
 	  }
 	  else
 			document.splashrot.src = "images/splash" + spl_loop.substring(spl_cyc,spl_cyc+1) + ".jpg"
-
-var vid = document.getElementById("introvid");
-    vid.play(); 
-		vid.style.visibility = "visible";
+	}
 
 	  setTimeout('splashrot()',rot);
   }
