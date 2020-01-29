@@ -149,7 +149,7 @@ Gauntlet = function() {
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,   h: TILE          },
         PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2, h: TILE - TILE/4 },
-        WEAPON:  { x: TILE/3, y: TILE/3, w: TILE/7, h: TILE/7        },		// w,h tile/7 gives shot thru diagonal gap, sort of
+        WEAPON:  { x: TILE/3, y: TILE/3, w: TILE-30, h: TILE-30        },		// w,h tile-30 mostly gives shot thru diagonal gap
         MONSTER: { x: 1,      y: 1,      w: TILE-2, h: TILE-2        }, // give monsters 1px wiggle room to get through tight corridors
       },
       PIXEL = {
