@@ -1121,10 +1121,10 @@ Gauntlet = function() {
       function isgenerator(pixel)    { return is(pixel, PIXEL.GENERATOR); };
       function ismonster(pixel)      { return is(pixel, PIXEL.MONSTER);   };
       function istreasure(pixel)     { return is(pixel, PIXEL.TREASURE);  };
-      function walltype(tx,ty,map)   { return (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
-      function shadowtype(tx,ty,map) { return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty+1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0); };
+      function walltype(tx,ty,map)   {  ty = (th - 1) - ty; return (iswall(map.pixel(tx,   ty+1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
+      function shadowtype(tx,ty,map) { ty = (th - 1) - ty; return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty-1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0); };
+      function doortype(tx,ty,map)   { ty = (th - 1) - ty; return (isdoor(map.pixel(tx,   ty+1)) ? 1 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty-1)) ? 4 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 8 : 0); };
 //      function doortype(tx,ty,map)   { return iswall(map.pixel(tx, ty-1)) || isdoor(map.pixel(tx, ty-1)) ? DOOR.VERTICAL : DOOR.HORIZONTAL; };
-      function doortype(tx,ty,map)   { return (isdoor(map.pixel(tx,   ty-1)) ? 1 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty+1)) ? 4 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 8 : 0); };
 
 // make sure mults is not undefed - later load deathmult from cooky
 		if (Deathmult == undefined) Deathmult = 0;
@@ -1132,6 +1132,8 @@ Gauntlet = function() {
 		shotpot = 1;
 
       Game.parseImage(source, function(tx, ty, pixel, map) {
+
+ty = (th - 1) - ty;
 
         var cell, x = t2p(tx),
                   y = t2p(ty),
@@ -1203,18 +1205,6 @@ Gauntlet = function() {
 		  else if (ismonster(pixel))
 			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
       });
-
-
- 
- var offScreenCanvas = document.getElementById("logo");
-var offScreenCanvasCtx;
-
-offScreenCanvasCtx = offScreenCanvas.getContext('2d');
-offScreenCanvas.height = source.width;
-offScreenCanvas.width = source.height;
-offScreenCanvasCtx.rotate(90 * Math.PI / 180);
-offScreenCanvasCtx.translate(0, -offScreenCanvas.width);
-offScreenCanvasCtx.drawImage(source, 0, 0);
 
     },
 
