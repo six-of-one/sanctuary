@@ -101,7 +101,7 @@ Gauntlet = function() {
         XARM:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
         XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
         XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
-        TMPINV:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        TMPINVUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         TMPREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         TMPREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         TMPSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
@@ -144,7 +144,7 @@ Gauntlet = function() {
       TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
 											TREASURE.XSPEED, TREASURE.TMPINVIS, TREASURE.XSHOT, TREASURE.XSHTSPD, TREASURE.XARM, TREASURE.XFIGHT, TREASURE.XMAGIC,
-											TREASURE.TMPINV, TREASURE.TMPREPUL, TREASURE.TMPREFLC, TREASURE.TMPSUPER, TREASURE.TMPTELE, TREASURE.TMPANK,
+											TREASURE.TMPINVUL, TREASURE.TMPREPUL, TREASURE.TMPREFLC, TREASURE.TMPSUPER, TREASURE.TMPTELE, TREASURE.TMPANK,
 											TREASURE.POTIONORG, TREASURE.BADBOT ],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,   h: TILE          },
@@ -1716,6 +1716,20 @@ var ymir = false, xmir = false;
       this.potions   = DEBUG.POTIONS || 0;
 // powers potions
 		this.xspeed = 0;
+		this.xshot = 0;
+		this.xshotspd = 0;
+		this.xarm = 0;
+		this.xfight = 0;
+		this.xmagic = 0;
+// limited powers
+		this.linvis = 0;
+		this.linvuln = 0;
+		this.lrepuls = 0;
+		this.lreflect = 0;
+		this.lsuper = 0;
+		this.ltele = 0;
+		this.lank = 0;
+
 /// debug code - remove pre-release
 			if (0 & DEBUGON)
 					this.potions = 7;
@@ -1739,6 +1753,10 @@ var ymir = false, xmir = false;
       this.dead    = false;
       this.exiting = false;
 		Mastermap = map; // for teleport reposition
+// turn off these limited items
+		this.lreflect = 0;
+		this.ltele = 0;
+		this.linvuln = 0;
     },
 
     update: function(frame, player, map, viewport) {
@@ -1779,7 +1797,7 @@ var ymir = false, xmir = false;
 
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
-        collision = map.trymove(this, dir, this.type.speed + this.xspeed * 1.6);
+        collision = map.trymove(this, dir, this.type.speed + (this.xspeed * 30)/FPS);
         if (collision)
           publish(EVENT.PLAYER_COLLIDE, this, collision); // if we collided with something, publish event and then try next available direction...
         else
@@ -1908,11 +1926,27 @@ var ymir = false, xmir = false;
 				}
 		 }
 
+		var powerp = 0;
       if (treasure.type.powers)		// special power potions, limited items
 		 {
-				if (treasure.type == TREASURE.XSPEED) this.xspeed++;
+
+				if (treasure.type == TREASURE.XSPEED && !this.xspeed) {this.xspeed++; powerp++;}
+				if (treasure.type == TREASURE.XSHOT && !this.xshot) {this.xshot++; powerp++;}
+				if (treasure.type == TREASURE.XSHTSPD && !this.xshotspd) {this.xshotspd++; powerp++;}
+				if (treasure.type == TREASURE.XARM && !this.xarm) {this.xarm++; powerp++;}
+				if (treasure.type == TREASURE.XFIGHT && !this.xfight) {this.xfight++; powerp++;}
+				if (treasure.type == TREASURE.XMAGIC && !this.xmagic) {this.xmagic++; powerp++;}
+
+				if (treasure.type == TREASURE.TMPINVIS) {this.linvis = this.linvis + 30;}
+				if (treasure.type == TREASURE.TMPINVUL) {this.linvuln++;}
+				if (treasure.type == TREASURE.TMPREPUL) {this.lrepuls = this.lrepuls + 30;}
+				if (treasure.type == TREASURE.TMPREFLC) {this.lreflect++;}
+				if (treasure.type == TREASURE.TMPSUPER) {this.lsuper = this.lsuper + 10;}
+				if (treasure.type == TREASURE.TMPTELE) {this.ltele++;}
+				if (treasure.type == TREASURE.TMPANK) {this.lank = this.lank + 60;}
+
 		 }
-      if (treasure.type.potion)
+      if (treasure.type.potion && powerp < 1)
         this.potions++;
       else if (treasure.type.key)
         this.keys++;
