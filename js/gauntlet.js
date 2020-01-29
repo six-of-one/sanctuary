@@ -1403,7 +1403,7 @@ var ymir = false, xmir = false;
     },
 
     hurt: function(damage, by, nuke) {
-      if (by.weapon && this.type.canbehit == 2) // death shot
+      if (by.weapon && this.type.canbehit == 2 && by.player) // death shot
 		 {
 				by.owner.addscore(1);
 				Deathmult = Deathmult + 1;
