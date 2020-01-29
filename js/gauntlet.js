@@ -657,7 +657,7 @@ Gauntlet = function() {
     },
 
     onplay: function(event, previous, current, map) {
-		 Masterthmp = this;
+		 Masterthmp = this;	// jinky - this also stops splashrot, we cant control the autoloop from here
       this.map = map;
       this.saveLevel(map.nlevel);
       this.saveHighScore(); // a convenient place to save in-progress high scores without writing to local storage at 60fps
@@ -689,6 +689,7 @@ Gauntlet = function() {
     onfinish: function(event, previous, current) {
       this.saveHighScore();
       this.player.leave();
+		Masterthmp = null; // so splashrot can run
     },
 
     onenterhelp: function(event, previous, current, msg) { $('help').update(msg).show(); setTimeout(this.autoresume.bind(this), 2000); },

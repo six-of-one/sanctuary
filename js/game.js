@@ -747,6 +747,9 @@ Game.Math = {
 
   function splashrot () {
 
+// shutdown until game over
+	  if (Masterthmp != null) return;
+
 		var spl = document.getElementById("splash");
 		var vid = document.getElementById("introvid");
 		var rot;
