@@ -647,7 +647,6 @@ Gauntlet = function() {
         $('booting').show();
 				document.getElementById("gfloor").src = level.gflr;		// set this here so its ready on map build
         level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
-//		  	  level.source.setAttribute('style','transform:rotate(180deg)');
       }
     },
 
@@ -1134,7 +1133,6 @@ Gauntlet = function() {
 
       Game.parseImage(source, function(tx, ty, pixel, map) {
 
-//			tx = (tw - 1) - tx;
         var cell, x = t2p(tx),
                   y = t2p(ty),
                   n = tx + (ty * tw);
@@ -1205,6 +1203,18 @@ Gauntlet = function() {
 		  else if (ismonster(pixel))
 			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
       });
+
+
+ 
+ var offScreenCanvas = document.getElementById("logo");
+var offScreenCanvasCtx;
+
+offScreenCanvasCtx = offScreenCanvas.getContext('2d');
+offScreenCanvas.height = source.width;
+offScreenCanvas.width = source.height;
+offScreenCanvasCtx.rotate(90 * Math.PI / 180);
+offScreenCanvasCtx.translate(0, -offScreenCanvas.width);
+offScreenCanvasCtx.drawImage(source, 0, 0);
 
     },
 
