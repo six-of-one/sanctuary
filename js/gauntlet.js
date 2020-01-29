@@ -2266,8 +2266,11 @@ Gauntlet = function() {
 		 }
 		 fcellstr = map.cell(0, 0); // preload so no undefine
 		 ftilestr = 0;
+		 var twt, txm;
+		 twt = map.tw - 1;
       for(ty = 0, th = map.th ; ty < th ; ty++) {
-        for(tx = 0, tw = map.tw ; tx < tw ; tx++) {
+        for(txm = 0, tw = map.tw ; txm < tw ; txm++) {
+			  tx = twt - txm;
           cell = map.cell(tx * TILE, ty * TILE);
           if (is.valid(cell.wall))
 			  {
