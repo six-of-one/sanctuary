@@ -340,10 +340,9 @@ Game = {
           pixel: function(tx,ty) { var i = this.index(tx,ty); return this.valid(tx,ty) ? (data[i]<<16)+(data[i+1]<<8)+(data[i+2]) : null; }
         }
 
-var twm = tw - 1;
     for(ty = 0 ; ty < th ; ty++)
       for(tx = 0 ; tx < tw ; tx++)
-        callback(tx, ty, helpers.pixel(twm - tx,ty), helpers);
+        callback(tx, ty, helpers.pixel(tx,ty), helpers);
   },
 
   createImage: function(url, options) {
