@@ -1404,7 +1404,7 @@ var ymir = false, xmir = false;
     },
 
     hurt: function(damage, by, nuke) {
-      if (by.weapon && this.type.canbehit == 2 && by.player) // death shot
+      if (by.weapon && this.type.canbehit == 2 && !by.owner.monster) // death shot
 		 {
 				by.owner.addscore(1);
 				Deathmult = Deathmult + 1;
@@ -1779,7 +1779,7 @@ var ymir = false, xmir = false;
 
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
-        collision = map.trymove(this, dir, this.type.speed + this.xspeed * 5);
+        collision = map.trymove(this, dir, this.type.speed + this.xspeed * 1.6);
         if (collision)
           publish(EVENT.PLAYER_COLLIDE, this, collision); // if we collided with something, publish event and then try next available direction...
         else
