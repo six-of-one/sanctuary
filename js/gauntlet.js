@@ -1121,10 +1121,34 @@ Gauntlet = function() {
       function isgenerator(pixel)    { return is(pixel, PIXEL.GENERATOR); };
       function ismonster(pixel)      { return is(pixel, PIXEL.MONSTER);   };
       function istreasure(pixel)     { return is(pixel, PIXEL.TREASURE);  };
-      function walltype(tx,ty,map)   {  ty = (th - 1) - ty; return (iswall(map.pixel(tx,   ty+1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
-      function shadowtype(tx,ty,map) { ty = (th - 1) - ty; return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty-1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0); };
-      function doortype(tx,ty,map)   { ty = (th - 1) - ty; return (isdoor(map.pixel(tx,   ty+1)) ? 1 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty-1)) ? 4 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 8 : 0); };
-//      function doortype(tx,ty,map)   { return iswall(map.pixel(tx, ty-1)) || isdoor(map.pixel(tx, ty-1)) ? DOOR.VERTICAL : DOOR.HORIZONTAL; };
+      function walltype0(tx,ty,map)   { return (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
+      function shadowtype0(tx,ty,map) { return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty+1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0); };
+      function doortype0(tx,ty,map)   { return (isdoor(map.pixel(tx,   ty-1)) ? 1 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty+1)) ? 4 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 8 : 0); };
+// mirror Y
+      function walltypeYM(tx,ty,map)   {  ty = (th - 1) - ty; return (iswall(map.pixel(tx,   ty+1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
+      function shadowtypeYM(tx,ty,map) { ty = (th - 1) - ty; return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty-1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0); };
+      function doortypeYM(tx,ty,map)   { ty = (th - 1) - ty; return (isdoor(map.pixel(tx,   ty+1)) ? 1 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty-1)) ? 4 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 8 : 0); };
+// mirror X
+      function walltypeXM(tx,ty,map)   { tx = (tw - 1) - tx; return (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx-1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx+1, ty))   ? 8 : 0); };
+      function shadowtypeXM(tx,ty,map) { tx = (tw - 1) - tx; return (iswall(map.pixel(tx+1, ty))   ? 1 : 0) | (iswall(map.pixel(tx+1, ty+1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0); };
+      function doortypeXM(tx,ty,map)   { tx = (tw - 1) - tx; return (isdoor(map.pixel(tx,   ty-1)) ? 1 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty+1)) ? 4 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 8 : 0); };
+
+var ymir = false, xmir = false;
+
+		var walltype = walltype0;
+		var shadowtype = shadowtype0;
+		var doortype = doortype0;
+
+		if (xmir) {
+				walltype = walltypeXM;
+				shadowtype = shadowtypeXM;
+				doortype = doortypeXM;
+		}
+		if (ymir) {
+				walltype = walltypeYM;
+				shadowtype = shadowtypeYM;
+				doortype = doortypeYM;
+		}
 
 // make sure mults is not undefed - later load deathmult from cooky
 		if (Deathmult == undefined) Deathmult = 0;
@@ -1133,7 +1157,8 @@ Gauntlet = function() {
 
       Game.parseImage(source, function(tx, ty, pixel, map) {
 
-ty = (th - 1) - ty;
+			if (xmir) tx = (tw - 1) - tx;
+			if (ymir) ty = (th - 1) - ty;
 
         var cell, x = t2p(tx),
                   y = t2p(ty),
