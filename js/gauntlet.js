@@ -602,6 +602,8 @@ Gauntlet = function() {
 		// make sure floor loader is hidden
 		 var img = document.getElementById("gfloor");
 		img.style.visibility = "hidden";
+		img = document.getElementById("introvid");
+		img.style.visibility = "hidden";
 
     },
 
@@ -619,7 +621,7 @@ Gauntlet = function() {
     onmenu: function(event, previous, current) {
 // used to play lostcorridors - now plays title music once at init - no loop
       this.sounds.playMenuMusic();
-			setTimeout('splashrot()',19500);
+			setTimeout('3()',19500);
     },
 
     onstart: function(event, previous, current, type, nlevel) {
@@ -1899,6 +1901,10 @@ var ymir = false, xmir = false;
 				}
 		 }
 
+      if (treasure.type.powers)		// special power potions, limited items
+		 {
+				if (treasure.type ) alert("power");
+		 }
       if (treasure.type.potion)
         this.potions++;
       else if (treasure.type.key)

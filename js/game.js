@@ -766,6 +766,10 @@ Game.Math = {
 	  else
 			document.splashrot.src = "images/splash" + spl_loop.substring(spl_cyc,spl_cyc+1) + ".jpg"
 
+var vid = document.getElementById("introvid");
+    vid.play(); 
+		vid.style.visibility = "visible";
+
 	  setTimeout('splashrot()',rot);
   }
 
