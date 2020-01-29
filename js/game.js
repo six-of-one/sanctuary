@@ -762,12 +762,13 @@ Game.Math = {
 			vid.play(); 
 			vid.style.visibility = "visible";
 			document.splashrot.src = "images/1x1.png";
-			rot = 14000;
+			rot = 44000;
 		}
 	else
 // jinky code for alt splash legend instead of / after score box
 	{
-		vid.stop();
+		vid.load();
+		vid.pause();
 		vid.style.visibility = "hidden";
 	  if (spl_cyc == 11 && (Math.random() > 0.5)) spl_cyc = 12;
 	  else

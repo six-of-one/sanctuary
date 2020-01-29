@@ -635,6 +635,12 @@ Gauntlet = function() {
 			 		nlevel = initlevel;
 					initlevel = 0;
 		 }
+// clear video - in case it was playing, this is a seperate element that needs turned off
+			var vid = document.getElementById("introvid");
+			vid.load();
+			vid.pause();
+			vid.style.visibility = "hidden";
+
 //					nlevel = 17;
 /// debug tier
       var level    = cfg.levels[nlevel],
