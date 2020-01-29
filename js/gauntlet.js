@@ -1133,6 +1133,9 @@ Gauntlet = function() {
 
       Game.parseImage(source, function(tx, ty, pixel, map) {
 
+var twt = tw - 1, txm;
+			txm = tx;
+			tx = twt - txm;
         var cell, x = t2p(tx),
                   y = t2p(ty),
                   n = tx + (ty * tw);
@@ -2266,11 +2269,8 @@ Gauntlet = function() {
 		 }
 		 fcellstr = map.cell(0, 0); // preload so no undefine
 		 ftilestr = 0;
-		 var twt, txm;
-		 twt = map.tw - 1;
       for(ty = 0, th = map.th ; ty < th ; ty++) {
-        for(txm = 0, tw = map.tw ; txm < tw ; txm++) {
-			  tx = twt - txm;
+        for(tx = 0, tw = map.tw ; tx < tw ; tx++) {
           cell = map.cell(tx * TILE, ty * TILE);
           if (is.valid(cell.wall))
 			  {
