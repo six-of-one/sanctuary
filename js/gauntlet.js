@@ -1713,6 +1713,8 @@ var ymir = false, xmir = false;
       this.healing   = 0;
       this.keys      = DEBUG.KEYS    || 0;
       this.potions   = DEBUG.POTIONS || 0;
+// powers potions
+		this.xspeed = 0;
 /// debug code - remove pre-release
 			if (0 & DEBUGON)
 					this.potions = 7;
@@ -1776,7 +1778,7 @@ var ymir = false, xmir = false;
 
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
-        collision = map.trymove(this, dir, this.type.speed);
+        collision = map.trymove(this, dir, this.type.speed + this.xspeed * 5);
         if (collision)
           publish(EVENT.PLAYER_COLLIDE, this, collision); // if we collided with something, publish event and then try next available direction...
         else
@@ -1907,7 +1909,7 @@ var ymir = false, xmir = false;
 
       if (treasure.type.powers)		// special power potions, limited items
 		 {
-				if (treasure.type ) alert("power");
+				if (treasure.type == TREASURE.XSPEED) this.xspeed++;
 		 }
       if (treasure.type.potion)
         this.potions++;
