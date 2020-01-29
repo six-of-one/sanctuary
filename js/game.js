@@ -334,12 +334,15 @@ Game = {
         canvas  = Game.renderToCanvas(tw, th, function(ctx) { ctx.drawImage(image, 0, 0); }),
         ctx     = canvas.getContext('2d'),
         data    = ctx.getImageData(0, 0, tw, th).data,
-		  ctx = ctx.rotate(90 * Math.PI / 180),
         helpers = {
           valid: function(tx,ty) { return (tx >= 0) && (tx < tw) && (ty >= 0) && (ty < th); },
           index: function(tx,ty) { return (tx + (ty*tw)) * 4; },
           pixel: function(tx,ty) { var i = this.index(tx,ty); return this.valid(tx,ty) ? (data[i]<<16)+(data[i+1]<<8)+(data[i+2]) : null; }
         }
+
+		  ctx.rotate(90 * Math.PI / 180);
+		  canvas  = Game.renderToCanvas(tw, th, function(ctx) { ctx.drawImage(image, 0, 0); });
+        data    = ctx.getImageData(0, 0, tw, th).data;
 
     for(ty = 0 ; ty < th ; ty++)
       for(tx = 0 ; tx < tw ; tx++)
