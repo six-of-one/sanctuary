@@ -95,18 +95,18 @@ Gauntlet = function() {
         PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, push: true,   sound: 'null'  },
 // extra power potions
         XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
-        TMPINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        LIMINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
         XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
         XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
         XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
         XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
-        TMPINVUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        TMPREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        TMPREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        TMPSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        TMPTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        TMPANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        LIMINVUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        LIMREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        LIMREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        LIMSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        LIMTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
 		TELEPORTILE = 0x0080a0,
@@ -143,8 +143,8 @@ Gauntlet = function() {
       MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2 ],
       TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
-											TREASURE.XSPEED, TREASURE.TMPINVIS, TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
-											TREASURE.TMPINVUL, TREASURE.TMPREPUL, TREASURE.TMPREFLC, TREASURE.TMPSUPER, TREASURE.TMPTELE, TREASURE.TMPANK,
+											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
+											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
 											TREASURE.POTIONORG, TREASURE.BADBOT ],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,   h: TILE          },
@@ -1240,7 +1240,7 @@ var ymir = false, xmir = false;
 				 if (ad == TREASURE.POTION && (sb == 1)) ad = TREASURE.POTIONORG;
 				 if (ad == TREASURE.POISON && (sb == 2)) ad = TREASURE.BADPOT;
 				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb + 1];
-				 if (ad == TREASURE.TMPINVIS && (sb > 0)) ad =  TREASURES[type(pixel) + sb + 5];
+				 if (ad == TREASURE.LIMINVIS && (sb > 0)) ad =  TREASURES[type(pixel) + sb + 5];
 				self.addTreasure(x, y, ad);
 			 }
 		  else if (ismonster(pixel))
@@ -1938,13 +1938,13 @@ var ymir = false, xmir = false;
 				if (treasure.type == TREASURE.XMAGIC && !this.xmagic) {this.xmagic++; powerp++;}
 
 // plan: these need either put in type or somehow made code adjustable or both
-				if (treasure.type == TREASURE.TMPINVIS) {this.linvis = this.linvis + 30;}
-				if (treasure.type == TREASURE.TMPINVUL) {this.linvuln++;}
-				if (treasure.type == TREASURE.TMPREPUL) {this.lrepuls = this.lrepuls + 30;}
-				if (treasure.type == TREASURE.TMPREFLC) {this.lreflect++;}
-				if (treasure.type == TREASURE.TMPSUPER) {this.lsuper = this.lsuper + 10;}
-				if (treasure.type == TREASURE.TMPTELE) {this.ltele++;}
-				if (treasure.type == TREASURE.TMPANK) {this.lank = this.lank + 60;}
+				if (treasure.type == TREASURE.LIMINVIS) {this.linvis = this.linvis + 30;}
+				if (treasure.type == TREASURE.LIMINVUL) {this.linvuln  = this.linvuln + 30;}
+				if (treasure.type == TREASURE.LIMREPUL) {this.lrepuls = this.lrepuls + 30;}
+				if (treasure.type == TREASURE.LIMREFLC) {this.lreflect++;}
+				if (treasure.type == TREASURE.LIMSUPER) {this.lsuper = this.lsuper + 10;}
+				if (treasure.type == TREASURE.LIMTELE) {this.ltele++;}
+				if (treasure.type == TREASURE.LIMANK) {this.lank = this.lank + 60;}
 
 		 }
       if (treasure.type.potion && powerp < 1)
@@ -2030,6 +2030,7 @@ var ymir = false, xmir = false;
 					if (this.lank > 0) this.lank--;
 					if (this.lrepuls > 0) this.lrepuls--;
 					if (this.linvis > 0) this.linvis--;
+					if (this.linvuln > 0) this.linvuln--;
 			}
 // count down stun
 			if (this.stun > 0) this.stun--;
@@ -2263,6 +2264,14 @@ var ymir = false, xmir = false;
 		document.getElementById(player.type.name+"xarmor").style.visibility = player.xarmor ? "visible" : "hidden";
 		document.getElementById(player.type.name+"xfight").style.visibility = player.xfight ? "visible" : "hidden";
 		document.getElementById(player.type.name+"xmagic").style.visibility = player.xmagic ? "visible" : "hidden";
+
+		document.getElementById(player.type.name+"linvis").style.visibility = player.linvis ? "visible" : "hidden";
+		document.getElementById(player.type.name+"linvuln").style.visibility = player.linvuln ? "visible" : "hidden";
+		document.getElementById(player.type.name+"lrepuls").style.visibility = player.lrepuls ? "visible" : "hidden";
+		document.getElementById(player.type.name+"lreflect").style.visibility = player.lreflect ? "visible" : "hidden";
+		document.getElementById(player.type.name+"lsuper").style.visibility = player.lsuper ? "visible" : "hidden";
+		document.getElementById(player.type.name+"ltele").style.visibility = player.ltele ? "visible" : "hidden";
+		document.getElementById(player.type.name+"lank").style.visibility = player.lank ? "visible" : "hidden";
 
     },
 
