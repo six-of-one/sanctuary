@@ -2159,6 +2159,12 @@ var ymir = false, xmir = false;
         health:  root.down('.health .value'),
         keys:    root.select('.treasure .key'),
         potions: root.select('.treasure .potion'),
+        xspeed: root.select('.name .xspeed'),
+        xshotpwr: root.select('.xshotpwr'),
+        xshtspd: root.select('.xshtspd'),
+        xarmor: root.select('.xarmor'),
+        xfight: root.select('.xfight'),
+        xmagic: root.select('.xmagic'),
         weak:    new Animator({ repeat: 'toggle', duration: 500, onComplete: function() { root.removeAttribute('style'); } }).addSubject(new CSSStyleSubject(root, "weak", "background-color: #000000; border-color: #000000;"))
       }
       return root;
@@ -2220,6 +2226,7 @@ var ymir = false, xmir = false;
       this.refreshPlayerScore(player);
       this.refreshPlayerKeys(player);
       this.refreshPlayerPotions(player);
+      this.refreshPlayerPowers(player);
     },
 
     refreshPlayerScore: function(player) {
@@ -2252,6 +2259,26 @@ var ymir = false, xmir = false;
     refreshPlayerKeys: function(player) {
       if (player.keys != player.vkeys)
         this.refreshTreasure(player.type.dom.keys, player.vkeys = player.keys);
+    },
+
+    refreshPlayerPowers: function(player) {
+
+//	 document.getElementById("xspd").style.visibility = player.xspeed ? "visible" : "hidden";
+
+//		 player.type.dom.xspeed.style.visibility = player.xspeed ? "visible" : "hidden";
+//		 player.type.dom.xspeed.setAttribute("style", "visibility: "+player.xspeed ? "visible" : "hidden"+";");
+		 var pwr = player.type.dom.xspeed;
+		 pwr.setAttribute("style", "visibility: "+player.xspeed ? "visible" : "hidden"+";");
+/*
+		 player.type.dom.xshotpwr.visibility = player.xshotpwr ? "visible" : "hidden";
+		 player.type.dom.xshtspd.visibility = player.xshtspd ? "visible" : "hidden";
+		 player.type.dom.xarmor.visibility = player.xarmor ? "visible" : "hidden";
+		 player.type.dom.xfight.visibility = player.xfight ? "visible" : "hidden";
+		 player.type.dom.xmagic.visibility = player.xmagic ? "visible" : "hidden";
+*/
+		 if ((player.health & 7) == 3)
+		 alert(document.getElementById("xspd").style.visibility);
+
     },
 
     refreshPlayerPotions: function(player) {
