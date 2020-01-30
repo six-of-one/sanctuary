@@ -96,9 +96,9 @@ Gauntlet = function() {
 // extra power potions
         XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
         TMPINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        XSHOT:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
-        XSHTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
-        XARM:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
+        XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
         XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
         XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
         TMPINVUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
@@ -143,7 +143,7 @@ Gauntlet = function() {
       MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2 ],
       TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
-											TREASURE.XSPEED, TREASURE.TMPINVIS, TREASURE.XSHOT, TREASURE.XSHTSPD, TREASURE.XARM, TREASURE.XFIGHT, TREASURE.XMAGIC,
+											TREASURE.XSPEED, TREASURE.TMPINVIS, TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.TMPINVUL, TREASURE.TMPREPUL, TREASURE.TMPREFLC, TREASURE.TMPSUPER, TREASURE.TMPTELE, TREASURE.TMPANK,
 											TREASURE.POTIONORG, TREASURE.BADBOT ],
       CBOX = {
@@ -1716,9 +1716,9 @@ var ymir = false, xmir = false;
       this.potions   = DEBUG.POTIONS || 0;
 // powers potions
 		this.xspeed = 0;
-		this.xshot = 0;
+		this.xshotpwr = 0;
 		this.xshotspd = 0;
-		this.xarm = 0;
+		this.xarmor = 0;
 		this.xfight = 0;
 		this.xmagic = 0;
 // limited powers
@@ -1931,9 +1931,9 @@ var ymir = false, xmir = false;
 		 {
 
 				if (treasure.type == TREASURE.XSPEED && !this.xspeed) {this.xspeed++; powerp++;}
-				if (treasure.type == TREASURE.XSHOT && !this.xshot) {this.xshot++; powerp++;}
-				if (treasure.type == TREASURE.XSHTSPD && !this.xshotspd) {this.xshotspd++; powerp++;}
-				if (treasure.type == TREASURE.XARM && !this.xarm) {this.xarm++; powerp++;}
+				if (treasure.type == TREASURE.XSHOTPWR && !this.xshotpwr) {this.xshotpwr++; powerp++;}
+				if (treasure.type == TREASURE.XSHOTSPD && !this.xshotspd) {this.xshotspd++; powerp++;}
+				if (treasure.type == TREASURE.XARMOR && !this.xarmor) {this.xarmor++; powerp++;}
 				if (treasure.type == TREASURE.XFIGHT && !this.xfight) {this.xfight++; powerp++;}
 				if (treasure.type == TREASURE.XMAGIC && !this.xmagic) {this.xmagic++; powerp++;}
 
@@ -2159,12 +2159,6 @@ var ymir = false, xmir = false;
         health:  root.down('.health .value'),
         keys:    root.select('.treasure .key'),
         potions: root.select('.treasure .potion'),
-        xspeed: root.select('.name .xspeed'),
-        xshotpwr: root.select('.xshotpwr'),
-        xshtspd: root.select('.xshtspd'),
-        xarmor: root.select('.xarmor'),
-        xfight: root.select('.xfight'),
-        xmagic: root.select('.xmagic'),
         weak:    new Animator({ repeat: 'toggle', duration: 500, onComplete: function() { root.removeAttribute('style'); } }).addSubject(new CSSStyleSubject(root, "weak", "background-color: #000000; border-color: #000000;"))
       }
       return root;
@@ -2263,21 +2257,12 @@ var ymir = false, xmir = false;
 
     refreshPlayerPowers: function(player) {
 
-//	 document.getElementById("xspd").style.visibility = player.xspeed ? "visible" : "hidden";
-
-//		 player.type.dom.xspeed.style.visibility = player.xspeed ? "visible" : "hidden";
-//		 player.type.dom.xspeed.setAttribute("style", "visibility: "+player.xspeed ? "visible" : "hidden"+";");
-		 var pwr = player.type.dom.xspeed;
-		 pwr.setAttribute("style", "visibility: "+player.xspeed ? "visible" : "hidden"+";");
-/*
-		 player.type.dom.xshotpwr.visibility = player.xshotpwr ? "visible" : "hidden";
-		 player.type.dom.xshtspd.visibility = player.xshtspd ? "visible" : "hidden";
-		 player.type.dom.xarmor.visibility = player.xarmor ? "visible" : "hidden";
-		 player.type.dom.xfight.visibility = player.xfight ? "visible" : "hidden";
-		 player.type.dom.xmagic.visibility = player.xmagic ? "visible" : "hidden";
-*/
-		 if ((player.health & 7) == 3)
-		 alert(document.getElementById("xspd").style.visibility);
+		document.getElementById(player.type.name+"xspeed").style.visibility = player.xspeed ? "visible" : "hidden";
+		document.getElementById(player.type.name+"xshotpwr").style.visibility = player.xshotpwr ? "visible" : "hidden";
+		document.getElementById(player.type.name+"xshotspd").style.visibility = player.xshotspd ? "visible" : "hidden";
+		document.getElementById(player.type.name+"xarmor").style.visibility = player.xarmor ? "visible" : "hidden";
+		document.getElementById(player.type.name+"xfight").style.visibility = player.xfight ? "visible" : "hidden";
+		document.getElementById(player.type.name+"xmagic").style.visibility = player.xmagic ? "visible" : "hidden";
 
     },
 
