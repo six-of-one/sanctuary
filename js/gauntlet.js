@@ -2292,8 +2292,8 @@ var ymir = false, xmir = false;
     },
 
     move: function(x, y, map) {
-      this.x = Game.Math.minmax(x, 0, map.w - 1);
-      this.y = Game.Math.minmax(y, 0, map.h - 1);
+      this.x = Game.Math.minmax(x, 0, map.w - this.w - 1);
+      this.y = Game.Math.minmax(y, 0, map.h - this.h - 1);
     },
 
     size: function(tw, map) {
