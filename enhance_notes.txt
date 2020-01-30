@@ -3,31 +3,42 @@ fails
 , (comma) left out of var list
 if (cell.ptr.door) - when .ptr is undefined
 
-some issue shooting level 1 & 2 gens - see research level
 
+port list:
 
-mod list:
+powers - score display
+limited power - (poss. score display as well, why not)
+announcer
+rest of sound effects (thoughts to enhanced sound effects)
+treasure rooms, music, countdown, scoring
+tween level screen (and poss. future options)
+lobber shots & ai
+monster /gen health & kill -- vs. player shot power levels
 
-(nominal fixes)
-
-diagonal shot fail between walls w/diagonal gap		< sort of works...spacing is just a bit off >
-exits way too touch sensitive for exit maze levels
-monsters seem "too" smart for g1
+save system via cooky
 
 
 g1 audio elements swap in
 g1 gfx tiles
 - spirtes
 - walls & floors
+x- floors are (mostly) g1 accurate
+ - walls are an approximation based on gJ designed walls
 
+
+(nominal fixes)
+
+some issue shooting level 1 & 2 gens - see research level
+
+diagonal shot fail between walls w/diagonal gap		< sort of works...spacing is just a bit off >
+exits way too touch sensitive for exit maze levels
+monsters seem "too" smart for g1
+ 
 wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
 - demon shots need checked as well
 
 gens offscreen are active, as are monsters (test original to see if monsters can move off screen)
 
-food values are not g1 accurate
-
-\\\
 do demons fire too fast?
 
 (perhaps persistent issues)
@@ -36,18 +47,13 @@ movement is quirky compared to original
 - not as precise, hard to hit an exact shot line - real joystick might fix this
 - possibly try a controller sensitivity option
 
+
+
 elements I did not see:
 
 special potions
-shootable food / potions
-score multiplier - since multi-player isnt finished I'll gather this was left unfinished as well
-level 1 & 2 gens & monsters set in level
-monster / generator levels ? - by score and monster health I am not sure this is implemented the same as gauntlet arcade
-lobbers missing
 thief & treasure bag from shooting thief
 timed treasure rooms
-teleporters
-traps making walls vanish
 shootable walls - the "dirt" kind
 level wrap to opposite side
 temp invisible
@@ -99,6 +105,10 @@ x--- "IT" - not sure want this
 
 expansion:
 
+difficulty system
+genesis gIV - quest, ? battle, record
++music from this is good too
+
 4th level+ monters & generators
 - ghosts will get to shoot
 - grunts will throw clubs infreq
@@ -146,6 +156,21 @@ x-- levels loop with random select
 x-- doors auto open on stall timer
 x-- walls -> exits on stall timer long
 x-- cant shoot over exits !
+(could also shoot over keys)
+
+x- level 1 & 2 gens & monsters set in level
+x- monster / generator levels ? - by score and monster health I am not sure this is implemented the same as gauntlet arcade
+	- done visually, health & kill must be tested vs. player shots
 
 x- multi point death potion kill = 1000, 2000,1000, 4000, 2000, 6000, 2000, 8000
 
+x- score multiplier - _______- since multi-player isnt finished I'll gather this was left unfinished as well
+	- a single player "times out" multiplier is done
+	- multiplayer followup will expand that code
+
+x- teleporters
+	- the g1 fade controlling which nearest telep is not implemented
+
+x- traps making walls vanish - up to 16 diff trap / wall linked elements as of now
+
+x- shootable food / potions
