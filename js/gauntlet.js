@@ -1937,6 +1937,7 @@ var ymir = false, xmir = false;
 				if (treasure.type == TREASURE.XFIGHT && !this.xfight) {this.xfight++; powerp++;}
 				if (treasure.type == TREASURE.XMAGIC && !this.xmagic) {this.xmagic++; powerp++;}
 
+// plan: these need either put in type or somehow made code adjustable or both
 				if (treasure.type == TREASURE.TMPINVIS) {this.linvis = this.linvis + 30;}
 				if (treasure.type == TREASURE.TMPINVUL) {this.linvuln++;}
 				if (treasure.type == TREASURE.TMPREPUL) {this.lrepuls = this.lrepuls + 30;}
@@ -2017,9 +2018,19 @@ var ymir = false, xmir = false;
     autohurt: function(frame) {
       if ((frame % (FPS/2)) === 0) {
 // players automatically lose 1 health every 1/2 second
+			if (this.lank > 0)
+				this.heal(1);
+			else
 			if (!DEBUG.NOAUTOHURT)
 				this.hurt(1, this, true);
 
+// count down temps - may want a setTimeout fn for these and stalling
+			if ((frame % (FPS)) === 0) 
+			{
+					if (this.lank > 0) this.lank--;
+					if (this.lrepuls > 0) this.lrepuls--;
+					if (this.linvis > 0) this.linvis--;
+			}
 // count down stun
 			if (this.stun > 0) this.stun--;
 // count health tics for stalling
