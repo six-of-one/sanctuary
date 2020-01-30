@@ -45,6 +45,8 @@ elf:				3.9 sec
 >>>>>>>>>>>>>>>>>>>>>>
 (nominal fixes)
 
+can you fight ghosts ?!
+
 gens offscreen are active, as are monsters (test original to see if monsters can move off screen)
 some issue shooting level 1 & 2 gens - see research level
 
@@ -146,6 +148,16 @@ monsters could act even weirder - like a bunch just run off until they "see" a p
 basilisk
 
 buy stuff guy, with new stuffs, keys, food, potions. temps
+
+difficulty title ideas
+
+walk in the park
+monsters with no claws
+dungeon
+nightmare
+walking on spikes
+running in flaming oil
+valley of the shadow of death
 
 
 >>>>>>>>>>>>>>>>>>>>>>
