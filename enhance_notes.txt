@@ -12,6 +12,7 @@ port list:
 >powers - finish
 >limited power - finish
 >rest of tutorial popup text
+>think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
 shootable "dirt" walls
 announcer
 rest of sound effects (thoughts to enhanced sound effects)

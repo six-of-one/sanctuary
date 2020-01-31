@@ -664,11 +664,11 @@ Gauntlet = function() {
 					$('tween').update("<br>LEVEL:&nbsp&nbsp "+nlevel).show(); 
 					setTimeout(game.onleavetween.bind(this), 2000); 
 					announcepause = true;
-					if (map.level.help)
+					if (level.help)
 					{
 							var img = document.getElementById("tweenmsg");
 							img.style.visibility = "visible";
-							img.innerHTML = map.level.help;
+							img.innerHTML = level.help;
 					}
 			}
       }
