@@ -26,7 +26,7 @@ Gauntlet = function() {
 // also doors / walls are stalled open from player health rot - which has none of these pointers loaded
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, refpixel, shotpot, announcepause = false,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, refpixel, shotpot. slowmonster = 1, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
 		ftilestr, fcellstr, FCUSTILE = 36,
@@ -1359,7 +1359,7 @@ var ymir = false, xmir = false;
     },
 
     step: function(map, player, dir, speed, travelling, allowfire) {
-      var collision = map.trymove(this, dir, speed);
+      var collision = map.trymove(this, dir, speed * slowmonster);
       if (!collision) {
         this.dir = dir;
         if (allowfire && this.type.weapon && this.fire(map, player)) {
@@ -1576,7 +1576,7 @@ var ymir = false, xmir = false;
 								if (this.type.help != undefined) {$('help').update(helpdsf).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
 						}
 				}
-				if (this.type.potion) 
+				if (this.type.potion)
 				{
 						if (HELPCLEAR[nohlpsap])
 						{
@@ -1586,7 +1586,7 @@ var ymir = false, xmir = false;
 						Mastermap.nuke(null, by.owner);
 						Musicth.play(Musicth.sounds.nuke);
 				}
-//			 if (this.type.poison) alert("shot poison - slow monsters code here");
+				if (this.type.poison) slowmonster = 0.5;
 				shotpot = 1;
 				Mastermap.remove(this);
 				return;
