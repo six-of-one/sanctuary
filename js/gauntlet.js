@@ -77,9 +77,14 @@ Gauntlet = function() {
       },
 
 		HELPCLEAR = [ ],	// help messages only display one time or can be turned off
+		helpdsf = "Some food destroyed by shots", helpsap = "Shooting a potion has a lesser effect", helpcmb = "Collect magic potion before pressing magic",
+		nohlpdsf = 5, nohlpsap = 6, nohlpcmb = 7,
+// dont shoot food				5
+// shooting a potion			6
+// collect magic before	7
 		helpcleared = 0, // option - tutorial count down 
       TREASURE = {
-        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', help: "Food: health increased by 100", nohlp: 2, help2: "Dont shoot food" },
+        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', help: "Food: health increased by 100", nohlp: 2 },
         POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' },
         FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood', help: "Food: health increased by 100" , nohlp: 2  },
         FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood', help: "Food: health increased by 100" , nohlp: 2  },
@@ -1563,16 +1568,28 @@ var ymir = false, xmir = false;
     hurt: function(damage, by, nuke) {
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 			 shotpot = 0.8;	// shot potions are weaker
-			 if (this.type.health) {$('help').update("Dont shoot food").show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
-			 if (this.type.potion) 
-			 {
-					Mastermap.nuke(null, by.owner);
-					Musicth.play(Musicth.sounds.nuke);
-			 }
+				if (this.type.health)
+				{
+						if (HELPCLEAR[nohlpdsf])
+						{
+								HELPCLEAR[nohlpdsf] = helpcleared;
+								if (this.type.help != undefined) {$('help').update(helpdsf).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
+						}
+				}
+				if (this.type.potion) 
+				{
+						if (HELPCLEAR[nohlpsap])
+						{
+								HELPCLEAR[nohlpsap] = helpcleared;
+								if (this.type.help != undefined) {$('help').update(helpsap).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
+						}
+						Mastermap.nuke(null, by.owner);
+						Musicth.play(Musicth.sounds.nuke);
+				}
 //			 if (this.type.poison) alert("shot poison - slow monsters code here");
-			 shotpot = 1;
-			 Mastermap.remove(this);
-			 return;
+				shotpot = 1;
+				Mastermap.remove(this);
+				return;
 		 }
     },
 

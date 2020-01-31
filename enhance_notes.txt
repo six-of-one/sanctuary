@@ -7,8 +7,8 @@ port list:
 
 powers - score display
 limited power - (poss. score display as well, why not)
-shootable "dirt" walls
 rest of tutorial popup text
+shootable "dirt" walls
 announcer
 rest of sound effects (thoughts to enhanced sound effects)
 treasure rooms, music, countdown, scoring
