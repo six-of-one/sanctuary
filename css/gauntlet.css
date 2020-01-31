@@ -39,7 +39,7 @@ body {
 							padding: 1em; display: inline-block; border-radius: 0.5em; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
 							}
 #tweenmsg     { z-index: 4; position: absolute; width: 75%; height: 10em;   top: 14em; text-align: center; font-size: 1em; font-weight: bold; color: #666666; font-family: "Criffee"; letter-spacing: 1px;
-							padding: 1em; display: inline-block; border-radius: 0.5em; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;	
+							visibility: hidden; padding: 1em; display: inline-block; border-radius: 0.5em; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;	
 							}
 #scoreboard     { display: inline-block; vertical-align: top; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 #stats          { position: absolute; right: -90px; bottom: 0; color: white; }

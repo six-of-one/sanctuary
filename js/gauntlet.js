@@ -656,10 +656,21 @@ Gauntlet = function() {
       if (level.source) {
         onloaded();
       }
-      else {
+      else { 
         $('booting').show();
-				document.getElementById("gfloor").src = level.gflr;		// set this here so its ready on map build
+				document.getElementById("gfloor") .src = level.gflr;		// set this here so its ready on map build
         level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
+			{
+					$('tween').update("<br>LEVEL:&nbsp&nbsp "+nlevel).show(); 
+					setTimeout(game.onleavetween.bind(this), 2000); 
+					announcepause = true;
+					if (map.level.help)
+					{
+							var img = document.getElementById("tweenmsg");
+							img.style.visibility = "visible";
+							img.innerHTML = map.level.help;
+					}
+			}
       }
     },
 
@@ -669,12 +680,11 @@ Gauntlet = function() {
       this.saveLevel(map.nlevel);
       this.saveHighScore(); // a convenient place to save in-progress high scores without writing to local storage at 60fps
       publish(EVENT.START_LEVEL, map);
-      if (map.level.help)
-        this.help(map.level.help);
+//      if (map.level.help)		// moved to tween msg
+//        this.help(map.level.help);
 // stop intro loop
 		var spl = document.getElementById("splash");
 		spl.style.visibility = "hidden";
-		 {$('tween').update("<br>LEVEL:&nbsp&nbsp "+nlevel).show(); setTimeout(game.onleavetween.bind(this), 2000); announcepause = true;}
     },
 
     onwin:  function(event, previous, current) { this.winlosefade(15000); this.saveLevel(8); },
@@ -710,7 +720,7 @@ Gauntlet = function() {
     onleavehelp: function(event, previous, current)      { $('help').hide();  announcepause = false;                                                         },
 
     onentertween: function(event, previous, current, msg) { $('tween').update(msg).show(); setTimeout(this.onleavetween.bind(this), 2500); announcepause = true; },
-    onleavetween: function(event, previous, current)      { $('tween').hide();  announcepause = false;                                                         },
+    onleavetween: function(event, previous, current)      { $('tween').hide();  announcepause = false; var img = document.getElementById("tweenmsg"); img.style.visibility = "hidden"; },
 
     autoresume: function() {
       if (this.is('help'))
