@@ -2252,7 +2252,7 @@ var ymir = false, xmir = false;
     },
 
     formatHealth: function(n) { return to.string(Math.floor(n)); },
-    formatScore:  function(n) { return ("000000" + Math.floor(n)).slice(-6); },
+    formatScore:  function(n) { return ("00000" + Math.floor(n)).slice(-8); },
 
     inc: function(previous, current) {
       previous = previous || 0;
