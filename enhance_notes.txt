@@ -5,6 +5,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 port list:
 
+flash player for invisible
 >tween level screen - finish messages
 + text messages appearing
 + find hidden potion note
@@ -13,7 +14,12 @@ port list:
 >limited power - finish
 >rest of tutorial popup text
 >think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
-shootable "dirt" walls
+shootable "dirt" walls - "some walls may be destroyed" first time shot
+-shootable "standard" wall - gives goody or baddy > need list of items
+-moving "pattern" wall
+-moving "ranodmly" wall
+-- trap walls done
+-invisible "beome temp visible" walls -- likely a code deal with some overlay mask
 announcer
 rest of sound effects (thoughts to enhanced sound effects)
 treasure rooms, music, countdown, scoring
@@ -219,6 +225,9 @@ x-- doors now open nominally as g1, counterclockwise and display as g1 doors
 x-- powers - score display
 x-- gens offscreen are active, as are monsters (test original to see if monsters can move off screen)
 x-- tween level screen (and poss. future options)
+
+x-- fix aminimated grunt club for lvl 1,2
+
 
 expanded done:
 
