@@ -5,16 +5,17 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 port list:
 
-tween level screen (and poss. future options)
-powers - score display
-limited power - (poss. score display as well, why not)
-rest of tutorial popup text
+>tween level screen - finish messages
++ text messages appearing
++ find hidden potion note
+>make monsters slow on shot poison a timed effect - can cross lvl boundary
+>powers - finish
+>limited power - finish
+>rest of tutorial popup text
 shootable "dirt" walls
 announcer
 rest of sound effects (thoughts to enhanced sound effects)
 treasure rooms, music, countdown, scoring
-+ text messages appearing
-+ find hidden potion note
 lobber shots & ai
 thief op & ai
 monster /gen health & kill -- vs. player shot power levels
@@ -214,9 +215,10 @@ x-- shootable food / potions
 x-- doors now open nominally as g1, counterclockwise and display as g1 doors
 	- there may still be corner piece flaws
 
+x-- powers - score display
+x-- gens offscreen are active, as are monsters (test original to see if monsters can move off screen)
+x-- tween level screen (and poss. future options)
 
 expanded done:
 
 x-- score mult applies to potion death pts, but perhaps 50% of mult
-
-x-- gens offscreen are active, as are monsters (test original to see if monsters can move off screen)
