@@ -5,6 +5,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 port list:
 
+tween level screen (and poss. future options)
 powers - score display
 limited power - (poss. score display as well, why not)
 rest of tutorial popup text
@@ -12,7 +13,6 @@ shootable "dirt" walls
 announcer
 rest of sound effects (thoughts to enhanced sound effects)
 treasure rooms, music, countdown, scoring
-tween level screen (and poss. future options)
 + text messages appearing
 + find hidden potion note
 lobber shots & ai
