@@ -1345,7 +1345,7 @@ var ymir = false, xmir = false;
     update: function(frame, player, map, viewport) {
 
       // dont bother trying to update monsters that are far away (a double viewport away)
-      if (viewport.outside(this.x - viewport.w, this.y - viewport.h, 2*viewport.w, 2*viewport.h))
+      if (viewport.outside(this.x - viewport.w, this.y - viewport.h, viewport.w, viewport.h))
         return;
 
       // keep reloading (if applicable)
