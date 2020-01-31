@@ -77,18 +77,19 @@ Gauntlet = function() {
       },
 
 		HELPCLEAR = [ ],	// help messages only display one time or can be turned off
+		helpcleared = 0, // option - tutorial count down 
       TREASURE = {
-        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', help: "Food: health increased by 100", help2: "Dont shoot food" },
+        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', help: "Food: health increased by 100", nohlp: 2, help2: "Dont shoot food" },
         POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' },
-        FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood', help: "Food: health increased by 100"   },
-        FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood', help: "Food: health increased by 100"   },
-        FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood', help: "Food: health increased by 100"   },
-        KEY:     { sx: 21, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'collectkey' , help: "Save keys to open doors"   },
-        POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion', help: "Save potions for later use" },
-        POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', help: "Save potions for later use"  },
+        FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood', help: "Food: health increased by 100" , nohlp: 2  },
+        FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood', help: "Food: health increased by 100" , nohlp: 2  },
+        FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood', help: "Food: health increased by 100", nohlp: 2   },
+        KEY:     { sx: 21, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'collectkey' , help: "Save keys to open doors", nohlp: 3   },
+        POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion', help: "Save potions for later use", nohlp: 4 },
+        POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', help: "Save potions for later use", nohlp: 4  },
         GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1,              sound: 'collectgold', help: "Treasure: 100 points", nohlp: 1   },
         LOCKED:    { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'collectgold', help: "Some chests are locked"   },
-        BAG:    { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'collectgold'   },
+        BAG:    { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'collectgold', help: "Treasure: 500 points", nohlp: 1   },
 // teleport, trap, stun tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport'  },
         TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap'  },
@@ -636,11 +637,6 @@ Gauntlet = function() {
 			 		nlevel = initlevel;
 					initlevel = 0;
 		 }
-// clear video - in case it was playing, this is a seperate element that needs turned off
-			var vid = document.getElementById("introvid");
-			vid.load();
-			vid.pause();
-			vid.style.visibility = "hidden";
 
 //					nlevel = 17;
 /// debug tier
@@ -1741,6 +1737,13 @@ var ymir = false, xmir = false;
       this.dir       = Game.Math.randomInt(0, 7);
       this.health    = type.health;
       publish(EVENT.PLAYER_JOIN, this);
+
+// clear video - in case it was playing, this is a seperate element that needs turned off
+			var vid = document.getElementById("introvid");
+			vid.load();
+			vid.pause();
+			vid.style.visibility = "hidden";
+			for (var c = 0; c < 20; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
     },
 
     leave: function() {
@@ -1809,6 +1812,13 @@ var ymir = false, xmir = false;
 
     collect: function(treasure) {
       this.addscore(treasure.type.score);
+
+		if (treasure.type.nohlp != undefined)
+		if (HELPCLEAR[treasure.type.nohlp])
+		{
+				HELPCLEAR[treasure.type.nohlp] = helpcleared;
+				if (treasure.type.help != undefined) {$('help').update(treasure.type.help).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
+		}
 
 		if (treasure.type.scmult)
 		 {

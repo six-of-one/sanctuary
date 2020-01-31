@@ -31,7 +31,7 @@ body {
 #booting        { position: absolute; width: 6%; left: 30%; top: 40%;      } 
 #splash         { position: absolute; display: none; }
 #canvas         { display: inline-block; vertical-align: top; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
-#help           { position: absolute; width: 33%; left: 22%; top: 30%; text-align: center; font-size: 1.5em; font-weight: bold; background-color: rgba(255, 255, 255, 0.75); border: 6px solid black; color: black; padding: 1em; display: inline-block; border-radius: 0.5em; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+#help           { position: absolute; width: 53%; left: 22%; top: 30%; text-align: center; font-size: 1.5em; font-weight: bold; background-color: rgba(0, 0, 0, 0.75); border: 6px solid red; color: white; padding: 1em; display: inline-block; border-radius: 0.5em; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 #scoreboard     { display: inline-block; vertical-align: top; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 #stats          { position: absolute; right: -90px; bottom: 0; color: white; }
 #instructions   { font-style: italic; color: #999; font-size: 9pt; margin-left: 1em; margin-top: 0.5em; }
