@@ -674,7 +674,7 @@ Gauntlet = function() {
 // stop intro loop
 		var spl = document.getElementById("splash");
 		spl.style.visibility = "hidden";
-		 this.tween("<br>LEVEL:&nbsp&nbsp "+nlevel);
+		 {$('tween').update("<br>LEVEL:&nbsp&nbsp "+nlevel).show(); setTimeout(game.onleavetween.bind(this), 2000); announcepause = true;}
     },
 
     onwin:  function(event, previous, current) { this.winlosefade(15000); this.saveLevel(8); },
