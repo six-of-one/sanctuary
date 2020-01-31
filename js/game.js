@@ -747,12 +747,12 @@ Game.Math = {
 
   function splashrot () {
 
-// shutdown until game over
-	  if (Masterthmp != undefined)
-	  if (Masterthmp != null) return;
-
 		var spl = document.getElementById("splash");
-		var vid = document.getElementById("introvid");
+
+// shutdown until game over
+	  if (spl.style.visibility == "hidden") return;
+
+	  var vid = document.getElementById("introvid");
 		var rot;
 		rot = spl_rot;
 
@@ -766,7 +766,7 @@ Game.Math = {
 			vid.play(); 
 			vid.style.visibility = "visible";
 			document.splashrot.src = "images/1x1.png";
-			rot = 44000;
+			rot = 44400;
 		}
 	else
 // jinky code for alt splash legend instead of / after score box

@@ -659,13 +659,16 @@ Gauntlet = function() {
     },
 
     onplay: function(event, previous, current, map) {
-		 Masterthmp = this;	// jinky - this also stops splashrot, we cant control the autoloop from here
+		 Masterthmp = this;	// why do we need this and Mastermap ??
       this.map = map;
       this.saveLevel(map.nlevel);
       this.saveHighScore(); // a convenient place to save in-progress high scores without writing to local storage at 60fps
       publish(EVENT.START_LEVEL, map);
       if (map.level.help)
         this.help(map.level.help);
+// stop intro loop
+		var spl = document.getElementById("splash");
+		spl.style.visibility = "hidden";
     },
 
     onwin:  function(event, previous, current) { this.winlosefade(15000); this.saveLevel(8); },
@@ -691,7 +694,10 @@ Gauntlet = function() {
     onfinish: function(event, previous, current) {
       this.saveHighScore();
       this.player.leave();
-		Masterthmp = null; // so splashrot can run
+
+// restart intros
+		var spl = document.getElementById("splash");
+		spl.style.visibility = "visible";
     },
 
     onenterhelp: function(event, previous, current, msg) { $('help').update(msg).show(); setTimeout(this.autoresume.bind(this), 2000); },
