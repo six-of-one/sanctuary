@@ -1344,8 +1344,8 @@ var ymir = false, xmir = false;
 
     update: function(frame, player, map, viewport) {
 
-      // dont bother trying to update monsters that are far away (a double viewport away)
-      if (viewport.outside(this.x - viewport.w, this.y - viewport.h, viewport.w, viewport.h))
+      // monsters dont move offscreen g1 / g2 - difficulty option
+      if (viewport.outside(this.x - viewport.w, this.y - viewport.h, viewport.w+5, viewport.h+5))
         return;
 
       // keep reloading (if applicable)
@@ -1504,6 +1504,11 @@ var ymir = false, xmir = false;
     cbox:      CBOX.FULL,
 
     update: function(frame, player, map, viewport) {
+
+      // generators dont offscreen g1 / g2 - difficulty option
+      if (viewport.outside(this.x - viewport.w, this.y - viewport.h, viewport.w+5, viewport.h+5))
+        return;
+
       var pos;
       if ((this.count < this.type.max) && (--this.pending <= 0)) {
         pos = map.canmove(this, Game.Math.randomInt(0,7), TILE);
