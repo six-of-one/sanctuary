@@ -561,6 +561,8 @@ Gauntlet = function() {
                                          entity.cbox.h);
   }
 
+  function timestamp() { return new Date().getTime(); }
+
   //=========================================================================
   // PERFORMANCE - using arrays for (small) sets
   //=========================================================================
@@ -1775,11 +1777,6 @@ var ymir = false, xmir = false;
 		this.lsuper = 0;
 		this.ltele = 0;
 		this.lank = 0;
-
-/// debug code - remove pre-release
-			if (0 & DEBUGON)
-					this.potions = 7;
-/// debug tier
       this.score     = 0;
       this.scmult     = 1;
 		Mastermult = 1;
@@ -1793,6 +1790,17 @@ var ymir = false, xmir = false;
 			vid.pause();
 			vid.style.visibility = "hidden";
 			for (var c = 0; c < 20; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
+/// debug code - remove pre-release
+				if (DEBUGON)
+				{
+					HELPCLEAR[0] = 0;
+					HELPCLEAR[1] = 0;
+					HELPCLEAR[2] = 0;
+					HELPCLEAR[3] = 0;
+					HELPCLEAR[4] = 0;
+				}
+
+/// debug tier
     },
 
     leave: function() {
@@ -2170,6 +2178,9 @@ var ymir = false, xmir = false;
         this.frame = this.type.sx + this.dir + (8 * animate(frame, this.type.fpf, this.type.frames));
       else
         this.frame = this.type.sx + this.dir;
+// invisible status - last 10 secs flicker slows down
+		 if (this.linvis > 10 || (timestamp() & 0x200))
+		 if (this.linvis && (timestamp() & 0x80)) this.frame = 33;
     }
 
   });
