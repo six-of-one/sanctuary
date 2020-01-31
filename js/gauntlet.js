@@ -26,7 +26,7 @@ Gauntlet = function() {
 // also doors / walls are stalled open from player health rot - which has none of these pointers loaded
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, refpixel, shotpot. slowmonster = 1, announcepause = false,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, refpixel, shotpot, slowmonster = 1, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
 		ftilestr, fcellstr, FCUSTILE = 36,
