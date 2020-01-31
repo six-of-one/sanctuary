@@ -47,7 +47,6 @@ elf:				3.9 sec
 
 can you fight ghosts ?!
 
-gens offscreen are active, as are monsters (test original to see if monsters can move off screen)
 some issue shooting level 1 & 2 gens - see research level
 
 diagonal shot fail between walls w/diagonal gap		< sort of works...spacing is just a bit off >
@@ -219,3 +218,5 @@ x-- doors now open nominally as g1, counterclockwise and display as g1 doors
 expanded done:
 
 x-- score mult applies to potion death pts, but perhaps 50% of mult
+
+x-- gens offscreen are active, as are monsters (test original to see if monsters can move off screen)

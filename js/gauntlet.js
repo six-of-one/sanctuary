@@ -1345,7 +1345,7 @@ var ymir = false, xmir = false;
     update: function(frame, player, map, viewport) {
 
       // monsters dont move offscreen g1 / g2 - difficulty option
-      if (viewport.outside(this.x - viewport.w, this.y - viewport.h, viewport.w+5, viewport.h+5))
+      if (viewport.outside(this.x - viewport.w, this.y - viewport.h, viewport.w * 1.07, viewport.h  * 1.07))
         return;
 
       // keep reloading (if applicable)
@@ -1356,8 +1356,10 @@ var ymir = false, xmir = false;
         return;
 
       // am i going towards a live player, or AWAY from a dead one, if away, my speed should be slow (the player is dead, I'm no longer interested in him)
-      var away  = !player.active(),
-          speed = away ? 1 : this.type.speed;
+      var away  = !player.active(), speed;
+		 if (player.linvis) away = true;
+		 
+		speed = away ? 1 : this.type.speed;
 
       // let travelling monsters travel
       if (this.travelling > 0)
