@@ -276,7 +276,8 @@ Gauntlet = function() {
         { name: 'load',   from: ['starting', 'playing'], to: 'loading'  }, // start loading a new level (either to start a new game, or next level while playing)
         { name: 'play',   from: 'loading',               to: 'playing'  }, // play the level after loading it
         { name: 'help',   from: ['loading', 'playing'],  to: 'help'     }, // pause the game to show a help topic
-        { name: 'resume', from: 'help',                  to: 'playing'  }, // resume playing after showing a help topic
+        { name: 'tween',   from: 'playing',  to: 'help'     }, // between level screen
+        { name: 'resume', from: ['help', 'tween' ] ,     to: 'playing'  }, // resume playing after showing a help topic
         { name: 'lose',   from: 'playing',               to: 'lost'     }, // player died
         { name: 'quit',   from: 'playing',               to: 'lost'     }, // player quit
         { name: 'win',    from: 'playing',               to: 'won'      }, // player won
@@ -489,7 +490,8 @@ Gauntlet = function() {
 //      { name: 'Training Five',  url: "levels/trainer5.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Collect treasure for high score" },
 //      { name: 'Training Six',   url: "levels/trainer6.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Destroy monster generators" },
 //      { name: 'Training Seven', url: "levels/trainer7.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Use potions to destroy all monsters" },
-      { name: 'Dungeon One',    url: "levels/level1.png",    floor: FLOOR.WOOD,             wall: WALL.CONCRETE,         music: 'citrinitas',      score:  1000, help: "Training is over!<br><br> Welcome to the Dungeon!" },
+//      { name: 'Dungeon One',    url: "levels/level1.png",    floor: FLOOR.WOOD,             wall: WALL.CONCRETE,         music: 'citrinitas',      score:  1000, help: "Training is over!<br><br> Welcome to the Dungeon!" },
+      { name: 'Dungeon One',    url: "levels/level1.png",    floor: FLOOR.WOOD,             wall: WALL.CONCRETE,         music: 'citrinitas',      score:  1000, help: null },
       { name: 'Dungeon Two',    url: "levels/level2.png",    floor: FLOOR.WOOD,             wall: WALL.CONCRETE,         music: 'citrinitas',      score:  2000, help: null },
       { name: 'Dungeon Three',  url: "levels/level3.png",    floor: FLOOR.DARK_STONE,       wall: WALL.BLUE,             music: 'fleshandsteel',   score:  3000, help: null },
       { name: 'Dungeon Four',   url: "levels/level4.png",    floor: FLOOR.DARK_STONE,       wall: WALL.BLUE,             music: 'fleshandsteel',   score:  4000, help: null },
@@ -522,7 +524,10 @@ Gauntlet = function() {
       { key: Game.Key.RETURN, mode: 'up',   state: 'playing', action: function()    { this.player.nuke();              } },
       { key: Game.Key.ESC,    mode: 'up',   state: 'help',    action: function()    { this.resume();                   } },
       { key: Game.Key.RETURN, mode: 'up',   state: 'help',    action: function()    { this.resume();                   } },
-      { key: Game.Key.SPACE,  mode: 'up',   state: 'help',    action: function()    { this.resume();                   } }
+      { key: Game.Key.SPACE,  mode: 'up',   state: 'help',    action: function()    { this.resume();                   } },
+      { key: Game.Key.ESC,    mode: 'up',   state: 'tween',    action: function()    { this.resume();                   } },
+      { key: Game.Key.RETURN, mode: 'up',   state: 'tween',    action: function()    { this.resume();                   } },
+      { key: Game.Key.SPACE,  mode: 'up',   state: 'tween',    action: function()    { this.resume();                   } }
     ]
 
   };
@@ -669,6 +674,7 @@ Gauntlet = function() {
 // stop intro loop
 		var spl = document.getElementById("splash");
 		spl.style.visibility = "hidden";
+		 this.tween("<br>LEVEL:&nbsp&nbsp "+nlevel);
     },
 
     onwin:  function(event, previous, current) { this.winlosefade(15000); this.saveLevel(8); },
@@ -702,6 +708,9 @@ Gauntlet = function() {
 
     onenterhelp: function(event, previous, current, msg) { $('help').update(msg).show(); setTimeout(this.autoresume.bind(this), 2000); },
     onleavehelp: function(event, previous, current)      { $('help').hide();  announcepause = false;                                                         },
+
+    onentertween: function(event, previous, current, msg) { $('tween').update(msg).show(); setTimeout(this.onleavetween.bind(this), 2500); announcepause = true; },
+    onleavetween: function(event, previous, current)      { $('tween').hide();  announcepause = false;                                                         },
 
     autoresume: function() {
       if (this.is('help'))
