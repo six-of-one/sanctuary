@@ -276,7 +276,7 @@ Gauntlet = function() {
         { name: 'load',   from: ['starting', 'playing'], to: 'loading'  }, // start loading a new level (either to start a new game, or next level while playing)
         { name: 'play',   from: 'loading',               to: 'playing'  }, // play the level after loading it
         { name: 'help',   from: ['loading', 'playing'],  to: 'help'     }, // pause the game to show a help topic
-        { name: 'tween',   from: 'playing',  to: 'help'     }, // between level screen
+        { name: 'tween',   from: 'playing',  to: 'tween'     }, // between level screen
         { name: 'resume', from: ['help', 'tween' ] ,     to: 'playing'  }, // resume playing after showing a help topic
         { name: 'lose',   from: 'playing',               to: 'lost'     }, // player died
         { name: 'quit',   from: 'playing',               to: 'lost'     }, // player quit
