@@ -5,7 +5,6 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 port list:
 
-flash player for invisible
 >tween level screen - finish messages
 + text messages appearing
 + find hidden potion note
@@ -19,7 +18,7 @@ shootable "dirt" walls - "some walls may be destroyed" first time shot
 -moving "pattern" wall
 -moving "ranodmly" wall
 -- trap walls done
--invisible "beome temp visible" walls -- likely a code deal with some overlay mask
+-invisible "become temp visible" walls -- likely a code deal with some overlay mask
 announcer
 rest of sound effects (thoughts to enhanced sound effects)
 treasure rooms, music, countdown, scoring
@@ -227,6 +226,7 @@ x-- gens offscreen are active, as are monsters (test original to see if monsters
 x-- tween level screen (and poss. future options)
 
 x-- fix aminimated grunt club for lvl 1,2
+X-- flash player for invisible
 
 
 expanded done:
