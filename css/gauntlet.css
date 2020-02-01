@@ -37,7 +37,7 @@ body {
   top: 19em;
   height: 10em;
   width: 300%;
-  animation: slideshow 10s linear infinite;
+  animation: slideshow 20s linear infinite;
 }
 
 @keyframes slideshow {
