@@ -79,10 +79,11 @@ Gauntlet = function() {
 
 		HELPCLEAR = [ ],	// help messages only display one time or can be turned off
 		helpdsf = "Some food destroyed by shots", helpsap = "Shooting a potion has a lesser effect", helpcmb = "Collect magic potion before pressing magic",
-		nohlpdsf = 5, nohlpsap = 6, nohlpcmb = 7,
-// dont shoot food				5
-// shooting a potion			6
-// collect magic before	7
+		helppois = "Shooting poison slows monsters",
+		nohlpdsf = 25, nohlpsap = 26, nohlpcmb = 27, nohlppois = 28,
+// dont shoot food				25
+// shooting a potion			26
+// collect magic before	27
 		helpcleared = 0, // option - tutorial count down 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', help: "Food: health increased by 100", nohlp: 2 },
@@ -99,23 +100,23 @@ Gauntlet = function() {
 // teleport, trap, stun tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport', help: "Transporters move you to<br> the closest transporter visible", nohlp: 6  },
         TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap', help: "Traps make walls disappear", nohlp: 5 },
-        STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun'  },
+        STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun', help: "Some tiles stun players", nohlp: 7  },
         PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, push: true,   sound: 'null'  },
 // extra power potions
         XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra speed", nohlp: 10  },
-        LIMINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        LIMINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have limited invisibility", nohlp: 17  },
         SHOTWALL:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , help: "Some walls may be destroyed", nohlp: 7 },
-        XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
-        XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
-        XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
-        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
-        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion'  },
-        LIMINVUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        LIMREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        LIMREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        LIMSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        LIMTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
-        LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion'  },
+        XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra shot power", nohlp: 11  },
+        XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra shot speed", nohlp: 12  },
+        XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra armor", nohlp: 13  },
+        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion' , help: "You got extra fight power", nohlp: 14 },
+        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra magic power", nohlp: 15  },
+        LIMINVUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have invulnerability", nohlp: 18  },
+        LIMREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have extra repulsiveness", nohlp: 19  },
+        LIMREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have reflective shots", nohlp: 20  },
+        LIMSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have super shots", nohlp: 21  },
+        LIMTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have teleportability", nohlp: 22  },
+        LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have the life ankh", nohlp: 23  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
 		TELEPORTILE = 0x0080a0,
@@ -1622,7 +1623,7 @@ var ymir = false, xmir = false;
 						if (HELPCLEAR[nohlpdsf])
 						{
 								HELPCLEAR[nohlpdsf] = helpcleared;
-								if (this.type.help != undefined) {$('help').update(helpdsf).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
+								{$('help').update(helpdsf).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
 						}
 				}
 				if (this.type.potion)
@@ -1630,12 +1631,20 @@ var ymir = false, xmir = false;
 						if (HELPCLEAR[nohlpsap])
 						{
 								HELPCLEAR[nohlpsap] = helpcleared;
-								if (this.type.help != undefined) {$('help').update(helpsap).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
+								{$('help').update(helpsap).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
 						}
 						Mastermap.nuke(null, by.owner);
 						Musicth.play(Musicth.sounds.nuke);
 				}
-				if (this.type.poison) slowmonster = 0.5;
+				if (this.type.poison)
+				{
+						slowmonster = 0.5;
+						if (HELPCLEAR[nohlppois])
+						{
+								HELPCLEAR[nohlppois] = helpcleared;
+								{$('help').update(helppois).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
+						}
+				}
 				shotpot = 1;
 				Mastermap.remove(this);
 				return;
@@ -1804,7 +1813,7 @@ var ymir = false, xmir = false;
 			vid.load();
 			vid.pause();
 			vid.style.visibility = "hidden";
-			for (var c = 0; c < 20; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
+			for (var c = 0; c < 50; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
 /// debug code - remove pre-release
 				if (DEBUGON)
 				{

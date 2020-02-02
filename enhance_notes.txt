@@ -5,6 +5,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 port list:
 
+>powers - finish
 shootable "dirt" walls
 - wall replace routine for surround & shadows
 
@@ -12,7 +13,6 @@ shootable "dirt" walls
 + text messages appearing
 + find hidden potion note
 >make monsters slow on shot poison a timed effect - can cross lvl boundary
->powers - finish
 >limited power - finish
 >rest of tutorial popup text
 >think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
