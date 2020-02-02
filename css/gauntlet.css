@@ -37,7 +37,7 @@ body {
 	top: 19em;
 	width: 75%;
 	animation-iteration-count: infinite;
-	animation: slideshow 10s linear 0s normal forwards 1;
+	animation: slideshow 7s linear 0s normal forwards 1;
 	
 /*	transform: translate3d(0, 0, 0);*/
 }

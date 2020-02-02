@@ -748,7 +748,7 @@ Game.Math = {
   function splashrot () {
 
 		var spl = document.getElementById("splash");
-return;
+
 // shutdown until game over
 	  if (spl.style.visibility == "hidden") return;
 
