@@ -5,11 +5,8 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 port list:
 
-shootable "dirt" walls - "some walls may be destroyed" first time shot
-- use shoot food entry - revise health, 3 shots 
-- make no touch
+shootable "dirt" walls
 - wall replace routine for surround & shadows
-- special overlay gfx on this
 
 >tween level screen - finish messages
 + text messages appearing
@@ -233,6 +230,10 @@ x-- tween level screen (and poss. future options)
 x-- fix aminimated grunt club for lvl 1,2
 X-- flash player for invisible
 
+x-- shootable "dirt" walls - "some walls may be destroyed" first time shot
+	- use shoot food entry - revise health, 3 shots 
+	- make no touch
+	- special overlay gfx on this
 
 expanded done:
 
