@@ -31,7 +31,7 @@ body {
 }
 .roller1 {
 	z-index: 2;
-	visibility: visible;
+	visibility: hidden;
 	background: url(images/titlescroll.3.jpg);
 	position: absolute;
 	top: 19em;
