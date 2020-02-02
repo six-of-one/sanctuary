@@ -26,10 +26,11 @@ Gauntlet = function() {
 // also doors / walls are stalled open from player health rot - which has none of these pointers loaded
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, levelplus, refpixel, shotpot, slowmonster = 1, announcepause = false,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, wallsprite,
+		levelplus, refpixel, shotpot, slowmonster = 1, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
-		ftilestr, fcellstr, FCUSTILE = 36,
+		ftilestr, fcellstr, FCUSTILE = 37,
 
 		 MEXHIGH = 0xFFFFF0,
 		 MEXLOW = 0x00000F,
@@ -186,7 +187,7 @@ Gauntlet = function() {
 								PINK34: 17, PURPLE77: 18, PURPLE30: 19,  
 								BLUE8: 20, BLUE25:21, BLUE28: 22, 
 								GREEN3: 23, GREEN16: 24, GREEN50: 25, G2GREEN99: 26, 
-									G1BRICKL: 27, G1BRICKD: 28, BRICK2L: 29, BRICK2D: 30, ASYML: 31, ASYMD: 32, XBRIKL: 33, XBRIKD: 34, G5COBRIK: 35,
+									G1BRICKL: 27, G1BRICKD: 28, BRICK2L: 29, BRICK2D: 30, ASYML: 31, ASYMD: 32, XBRIKL: 33, XBRIKD: 34, G5COBRIK: 35, DESTBRIK: 36,
 									MIN: 1, MAX: 25 },
       EVENT = {
         START_LEVEL:         0,
@@ -364,7 +365,7 @@ Gauntlet = function() {
       { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.RED5,    gflr: "gfx/g1floor5.jpg",      music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN3,   brikovr:  WALL.G1BRICKD,   gflr: "gfx/g1floor6.jpg",   music: 'bloodyhalo',      score:  1000, help: null },
       { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.GRAY7,    gflr: "gfx/g1floor7.jpg",      music: 'bloodyhalo',      score:  1000, help: null },
-      { name: 'Research Z',     url: "levels/glevelZ.png",  floor: FLOOR.RND,      wall: WALL.ORANG9,    gflr: "gfx/g1floor0z.jpg",      music: 'mountingassault',      score:  1000, help: null },
+      { name: 'Research Z',     url: "levels/glevelZ.png",  floor: FLOOR.RND,      wall: WALL.ORANG9,    brikovr:  WALL.DESTBRIK,		gflr: "gfx/g1floor0z.jpg",      music: 'mountingassault',      score:  1000, help: null },
       { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'mountingassault',      score:  1000, help: 'welcome to ERR0R' },
 		{ name: 'Research X',     url: "levels/glevel114.png",  floor: FLOOR.RND,      wall: WALL.BROWN1,   brikovr:  WALL.XBRIKD,    gflr: "gfx/g1floor6.jpg",      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel113.png",  floor: FLOOR.RND,      wall: WALL.PINK34,    gflr: "gfx/g1floor113.jpg",      music: 'mountingassault',      score:  1000, help: null },
