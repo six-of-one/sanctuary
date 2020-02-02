@@ -31,19 +31,82 @@ body {
 }
 .roller1 {
 	z-index: 2;
-	visibility: hidden;
+	visibility: visible;
 	background: url(images/titlescroll.3.jpg);
 	position: absolute;
 	top: 19em;
-	height: 9em;
-	width: 300%;
-	animation: slideshow 15s linear infinite;
-	transform: translate3d(0, 0, 0);
+	width: 75%;
+	animation-iteration-count: infinite;
+	animation: slideshow 10s linear 0s normal forwards 1;
+	
+/*	transform: translate3d(0, 0, 0);*/
 }
 
 @keyframes slideshow {
-  0%    { left: 0; }
-  100%  { left: -200%; }
+    0% {
+        transform: translateY(0px);
+    }
+    5% {
+        transform: translateY(-30px);
+    }
+    10% {
+        transform: translateY(-60px);
+    }
+    15% {
+        transform: translateY(-90px);
+    }
+    20% {
+        transform: translateY(-120px);
+    }
+    25% {
+        transform: translateY(-150px);
+    }
+    30% {
+        transform: translateY(-180px);
+    }
+    35% {
+        transform: translateY(-210px);
+    }
+    40% {
+        transform: translateY(-240px);
+    }
+    45% {
+        transform: translateY(-270px);
+    }
+    50% {
+        transform: translateY(-300px);
+    }
+    55% {
+        transform: translateY(-330px);
+    }
+     60% {
+        transform: translateY(-360px);
+    }
+    65% {
+        transform: translateY(-390px);
+    }
+     70% {
+        transform: translateY(-420px);
+    }
+    75% {
+        transform: translateY(-450px);
+    }
+     80% {
+        transform: translateY(-480px);
+    }
+    85% {
+        transform: translateY(-510px);
+    }
+     90% {
+        transform: translateY(-540px);
+    }
+    95% {
+        transform: translateY(-570px);
+    }
+   100% {
+        transform: translateY(-600px);
+    }
+
 }
 
 /**************************/
