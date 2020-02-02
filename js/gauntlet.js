@@ -35,7 +35,8 @@ Gauntlet = function() {
 		 MEXHIGH = 0xFFFFF0,
 		 MEXLOW = 0x00000F,
 // uses exlow to select next item in set
-		POWERADD = 3,LIMITEDADD = 7,
+// these are based on where items appear in TREASURES[ ]
+		POWERADD = 4, LIMITEDADD = 8,
 
 // g1 custom walls diff from main wall mapped on EXLOW
 			G1WALL = [	8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26	],
@@ -107,8 +108,11 @@ Gauntlet = function() {
 // extra power potions
         XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra speed", nohlp: 10  },
         LIMINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have limited invisibility", nohlp: 17  },
+// shootable wall - see grid 38 of backgrounds
         SHOTWALL:       { sx: 0, sy: 38, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , help: "Some walls may be destroyed", nohlp: 7 },
-        FAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , help: "Fooled you!", nohlp: 29 },
+// shotable and non-shot fake items, see grid 39 of backgrounds
+        SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , help: "Fooled you!", nohlp: 29 },
+        PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , help: "Fooled you!", nohlp: 29 },
         XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra shot power", nohlp: 11  },
         XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra shot speed", nohlp: 12  },
         XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra armor", nohlp: 13  },
@@ -156,7 +160,8 @@ Gauntlet = function() {
       MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2 ],
       TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
-											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.FAKER, TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
+											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, 
+											TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
 											TREASURE.POTIONORG, TREASURE.BADBOT ],
       CBOX = {
