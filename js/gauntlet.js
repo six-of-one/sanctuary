@@ -30,7 +30,7 @@ Gauntlet = function() {
 		levelplus, refpixel, shotpot, slowmonster = 1, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
-		ftilestr, fcellstr, FCUSTILE = 37, FDESTWALL = 38,
+		ftilestr, fcellstr, FCUSTILE = 37, FDESTWALL = 38, FAKES = 39,
 
 		 MEXHIGH = 0xFFFFF0,
 		 MEXLOW = 0x00000F,
@@ -111,8 +111,8 @@ Gauntlet = function() {
 // shootable wall - see grid 38 of backgrounds
         SHOTWALL:       { sx: 0, sy: 38, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , help: "Some walls may be destroyed", nohlp: 7 },
 // shotable and non-shot fake items, see grid 39 of backgrounds
-        SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , help: "Fooled you!", nohlp: 29 },
-        PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , help: "Fooled you!", nohlp: 29 },
+        SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , help: "Fooled you!  Some items may be fake", nohlp: 29 },
+        PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , help: "Fooled you!  Some items may be fake", nohlp: 29 },
         XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra shot power", nohlp: 11  },
         XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra shot speed", nohlp: 12  },
         XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra armor", nohlp: 13  },
@@ -1613,7 +1613,6 @@ var ymir = false, xmir = false;
 /// message - "dont shoot the {x}"
     hurt: function(damage, by, nuke) {
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
-			 shotpot = 0.8;	// shot potions are weaker
 				if (this.type.wall)
 				{
 						if (this.type.nohlp != undefined)
@@ -1635,6 +1634,7 @@ var ymir = false, xmir = false;
 								{$('help').update(helpdsf).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
 						}
 				}
+			 shotpot = 0.8;	// shot potions are weaker
 				if (this.type.potion)
 				{
 						if (HELPCLEAR[nohlpsap])
@@ -1902,7 +1902,17 @@ var ymir = false, xmir = false;
 
     collect: function(treasure) {
 
-      if (treasure.type.wall) return; //shot wall, go back
+      if (treasure.type.wall)
+		 {3
+				if (treasure.type.sy == FAKES)
+				if (treasure.type.nohlp != undefined)
+				if (HELPCLEAR[treasure.type.nohlp])
+				{
+						HELPCLEAR[treasure.type.nohlp] = helpcleared;
+						if (treasure.type.help != undefined) {$('help').update(treasure.type.help).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
+				}
+				return; //shot wall, go back
+		 }
 
       this.addscore(treasure.type.score);
 
