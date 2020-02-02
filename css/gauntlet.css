@@ -3,42 +3,43 @@
 /*******************************/
 
 body {
-  background: black;
-  color:      #CCC;
-  user-select: none;
+	background: black;
+	color:      #CCC;
+	user-select: none;
 }
 
 .ovrspl {
-  position: relative;
- z-index: 4;
-  top: 0;
-  left: 0;
+	position: relative;
+	z-index: 4;
+	top: 0;
+	left: 0;
 }
 
 .ovrvid {
-  position: absolute;
-  z-index: 3;
-  top: 0;
-  left: 0;
+	position: absolute;
+	z-index: 3;
+	top: 0;
+	left: 0;
 }
 
 .slideshow {
-  z-index: 3:
-  position: relative;
-  width: 42em;
-  left: 1em;
-  overflow: hidden;
+	z-index: 3:
+	position: relative;
+	width: 42em;
+	left: 1em;
+	overflow: hidden;
+	max-width: 42em;
 }
 .roller1 {
-  z-index: 2;
-  visibility: visible;
-  background: url(images/titlescroll.3.jpg);
-  position: absolute;
-  top: 19em;
-  height: 9em;
-  width: 300%;
-  animation: slideshow 15s linear infinite;
-  transform: translate3d(0, 0, 0);
+	z-index: 2;
+	visibility: visible;
+	background: url(images/titlescroll.3.jpg);
+	position: absolute;
+	top: 19em;
+	height: 9em;
+	width: 300%;
+	animation: slideshow 15s linear infinite;
+	transform: translate3d(0, 0, 0);
 }
 
 @keyframes slideshow {
