@@ -22,33 +22,28 @@ body {
 	left: 0;
 }
 
-.titlescrol {
-	z-index: 8:
-	position: absolute;
+.slideshow {
+	z-index: 3:
+	position: relative;
 	width: 42em;
 	left: 1em;
-	height: 11em;
-	margin-top: 18em;
-	background-color: red;
-
-	animation-name: titlescrol;
-	animation-duration: 4s;
-	animation-iteration-count: infinite;
-	 animation-direction: alternate;
+	overflow: hidden;
 }
 .roller1 {
-	z-index: 7;
-
-	animation-name: titlescrol;
-	animation-duration: 4s;
-	animation-iteration-count: infinite;
+	z-index: 2;
+	visibility: visible;
+	background: url(images/titlescroll.3.jpg);
+	position: absolute;
+	top: 19em;
+	height: 9em;
+	width: 300%;
+	animation: slideshow 15s linear infinite;
+	transform: translate3d(0, 0, 0);
 }
 
-@keyframes titlescrol {
-  0%   {background-color: red;}
-  25%  {background-color: yellow;}
-  50%  {background-color: blue;}
-  100% {background-color: green;}
+@keyframes slideshow {
+  0%    { left: 0; }
+  100%  { left: -200%; }
 }
 
 /**************************/
