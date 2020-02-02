@@ -10,34 +10,35 @@ body {
 
 .ovrspl {
   position: relative;
- z-index: 3;
+ z-index: 4;
   top: 0;
   left: 0;
 }
 
 .ovrvid {
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   top: 0;
   left: 0;
 }
 
 .slideshow {
-  z-index: 6; 
+  z-index: 3:
   position: relative;
-  overflow: hidden;
-  left: 2px;
   width: 42em;
+  left: 1em;
+  overflow: hidden;
 }
 .roller1 {
-  z-index: 6; 
-  background: url(images/titlescroll.3.png);
+  z-index: 2;
+  visibility: visible;
+  background: url(images/titlescroll.3.jpg);
   position: absolute;
-  left: 0;
   top: 19em;
-  height: 10em;
+  height: 9em;
   width: 300%;
-  animation: slideshow 20s linear infinite;
+  animation: slideshow 15s linear infinite;
+  transform: translate3d(0, 0, 0);
 }
 
 @keyframes slideshow {
@@ -55,12 +56,12 @@ body {
 #canvas         { display: inline-block; vertical-align: top; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 #help           { position: absolute; width: 53%; left: 22%; top: 30%; text-align: center; font-size: 1.5em; font-weight: bold; background-color: rgba(0, 0, 0, 0.75); border: 6px solid red; color: white; padding: 1em; display: inline-block; border-radius: 0.5em; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 #tween           {
-							z-index: 4; position: absolute; width: 75%; height: 14.2em;   text-align: center; font-family: "Times New Roman";  
+							z-index: 5; position: absolute; width: 75%; height: 14.2em;   text-align: center; font-family: "Times New Roman";  
 							font-size: 3em; text-shadow: -1px 1px 1px #FFF, 1px 1px 1px #FFF, 1px -1px 1px #FFF, -1px -1px 1px #FFF; font-weight: bold; 
 							background-color: rgba(0, 0, 0, 0.85); border: 3px solid #1A1A1A; color: #888888; 
 							padding: 1em; display: inline-block; border-radius: 0.5em; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
 							}
-#tweenmsg     { z-index: 5; position: absolute; width: 75%; height: 10em;   top: 14em; text-align: center; font-size: 1em; font-weight: bold; color: #666666; font-family: "Criffee"; letter-spacing: 1px;
+#tweenmsg     { z-index: 6; position: absolute; width: 75%; height: 10em;   top: 14em; text-align: center; font-size: 1em; font-weight: bold; color: #666666; font-family: "Criffee"; letter-spacing: 1px;
 							visibility: hidden; padding: 1em; display: inline-block; border-radius: 0.5em; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;	
 							}
 #scoreboard     { display: inline-block; vertical-align: top; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
