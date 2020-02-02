@@ -1282,7 +1282,7 @@ var ymir = false, xmir = false;
 				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb + POWERADD];
 				 if (ad == TREASURE.LIMINVIS && (sb > 0)) ad =  TREASURES[type(pixel) + sb + LIMITEDADD];
 				self.addTreasure(x, y, ad);
-				 if (ad == TREASURE.SHOTWALL) Mastercell.ptr.sx = pixel & MEXLOW;
+				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
 			 }
 		  else if (ismonster(pixel))
 			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
@@ -1903,7 +1903,7 @@ var ymir = false, xmir = false;
     collect: function(treasure) {
 
       if (treasure.type.wall)
-		 {3
+		 {
 				if (treasure.type.sy == FAKES)
 				if (treasure.type.nohlp != undefined)
 				if (HELPCLEAR[treasure.type.nohlp])
