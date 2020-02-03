@@ -83,7 +83,7 @@ Gauntlet = function() {
 		HELPCLEAR = [ ],	// help messages only display one time or can be turned off
 		helpdsf = "Some food destroyed by shots", helpsap = "Shooting a potion has a lesser effect", helpcmb = "Collect magic potion before pressing magic",
 		helppois = "Shooting poison slows monsters",
-		nohlpdsf = 25, nohlpsap = 26, nohlpcmb = 27, nohlppois = 28,
+		nohlpdsf = 25, nohlpsap = 26, nohlpcmb = 27, nohlppois = 28, nohlpmagaff = 9,
 // dont shoot food				25
 // shooting a potion			26
 // collect magic before	27
@@ -844,7 +844,12 @@ Gauntlet = function() {
 
     onPlayerCollide: function(player, entity) {
       if (entity.monster || entity.generator)
-        entity.hurt(player.type.damage, player);
+		 {
+				var xdmg = 0;
+				if (player.xfight) xdmg = player.xfight * 0.25 * player.type.damage;
+alert (player.type.damage + xdmg);
+				entity.hurt(player.type.damage + xdmg, player);
+		 }
       else if (entity.treasure)
 		 {
 			if (entity.type.lock && !player.keys) return;		/// need 1st message - need all messages
