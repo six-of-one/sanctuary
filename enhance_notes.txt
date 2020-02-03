@@ -6,7 +6,6 @@ gJ - gauntlet javascript		(gJ.0 - original)
 port list:
 
 >powers - finish
-shootable "dirt" walls
 - wall replace routine for surround & shadows
 
 >tween level screen - finish messages
@@ -235,6 +234,9 @@ x-- shootable "dirt" walls - "some walls may be destroyed" first time shot
 	- make no touch
 	- special overlay gfx on this
 
+x-- shootable "dirt" walls
+
 expanded done:
 
 x-- score mult applies to potion death pts, but perhaps 50% of mult
+-- added more fake items - shotable and permanent
