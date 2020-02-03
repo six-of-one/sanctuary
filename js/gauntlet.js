@@ -2133,7 +2133,7 @@ var ymir = false, xmir = false;
 
     hurt: function(damage, by, automatic) {
       if (this.active() && !DEBUG.NODAMAGE) {
-        damage = automatic ? damage : damage/this.type.armor;
+        damage = automatic ? damage : damage/(this.type.armor + this.xarmor);
         this.health = Math.max(0, this.health - damage);
         if (!automatic) {
           this.hurting = FX.PLAYER_GLOW.frames;
