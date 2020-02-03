@@ -5,7 +5,6 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 port list:
 
->powers - finish
 - wall replace routine for surround & shadows
 
 >tween level screen - finish messages
@@ -223,6 +222,8 @@ x-- doors now open nominally as g1, counterclockwise and display as g1 doors
 	- there may still be corner piece flaws
 
 x-- powers - score display
+-->powers - ops finish
+>> still need tweaked to g1 stats - at least armor and magic are not even boosts for all player classes
 x-- gens offscreen are active, as are monsters (test original to see if monsters can move off screen)
 x-- tween level screen (and poss. future options)
 
