@@ -780,6 +780,7 @@ Gauntlet = function() {
     onPlayerFire: function(player) {
       this.map.addWeapon(player.x, player.y, player.type.weapon, player.dir, player);
 		 Mastercell.ptr.xshotpwr = player.xshotpwr; // weapon fire contains xtra shot power flag
+		 Mastercell.ptr.xshotspd = player.xshotspd; // weapon fire contains xtra shot speed flag
     },
 
     onMonsterFire: function(monster) {
@@ -1593,7 +1594,11 @@ var ymir = false, xmir = false;
     cbox:     CBOX.WEAPON,
 
     update: function(frame, player, map, viewport) {
-      var collision = map.trymove(this, this.dir, this.type.speed, this.owner);
+
+		var xspd = 0;
+		if (this.xshotspd) xspd = 3;
+
+      var collision = map.trymove(this, this.dir, this.type.speed + xspd, this.owner);
       if (collision) {
         this.owner.reloading = countdown(this.owner.reloading, this.type.reload/2); // speed up reloading process if previous weapon hit something, makes player feel powerful
         publish(EVENT.WEAPON_COLLIDE, this, collision);
