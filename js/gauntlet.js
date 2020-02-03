@@ -779,6 +779,7 @@ Gauntlet = function() {
 
     onPlayerFire: function(player) {
       this.map.addWeapon(player.x, player.y, player.type.weapon, player.dir, player);
+		 Mastercell.ptr.xshotpwr = player.xshotpwr; // weapon fire contains xtra shot power flag
     },
 
     onMonsterFire: function(monster) {
@@ -832,7 +833,11 @@ Gauntlet = function() {
           y = weapon.y + (entity.y ? (entity.y - weapon.y)/2 : 0);
 
       if (weapon.type.player && (entity.monster || entity.generator || entity.treasure ))
-        entity.hurt(weapon.type.damage, weapon);
+		 {
+				var xdmg = 0;
+				if (weapon.xshotpwr) xdmg = 2;
+				entity.hurt(weapon.type.damage + xdmg, weapon);
+		 }
       else if (weapon.type.monster && entity.player)
         entity.hurt(weapon.type.damage, weapon);
       else if (weapon.type.monster && entity.monster)
@@ -845,7 +850,7 @@ Gauntlet = function() {
     onPlayerCollide: function(player, entity) {
       if (entity.monster || entity.generator)
 		 {
-				var xdmg = 0;
+				var xdmg = 0;	// calculate extra fight power	-- for now 25% of regular power, should boost ability evenly
 				if (player.xfight) xdmg = player.xfight * 0.25 * player.type.damage;
 alert (player.type.damage + xdmg);
 				entity.hurt(player.type.damage + xdmg, player);
@@ -1318,8 +1323,8 @@ var ymir = false, xmir = false;
         entity.cells = [];             // entities track which cells they currently occupy
 			entity.pixel = refpixel;
         this.entities.push(entity);
-			Mastercell.ptr = entity;
       }
+		Mastercell.ptr = entity;
       this.occupy(x, y, entity);
       entity.active = true;
       return entity;
