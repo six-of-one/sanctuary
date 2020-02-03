@@ -7,11 +7,11 @@ port list:
 
 - wall replace routine for surround & shadows
 
+>limited power - finish
 >tween level screen - finish messages
 + text messages appearing
 + find hidden potion note
 >make monsters slow on shot poison a timed effect - can cross lvl boundary
->limited power - finish
 >rest of tutorial popup text
 >think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
 -shootable "standard" wall - gives goody or baddy > need list of items
