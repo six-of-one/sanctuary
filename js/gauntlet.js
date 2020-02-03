@@ -789,7 +789,7 @@ Gauntlet = function() {
 				Mastercell.ptr.xshotspd = true; // super are fast shot
 		 }
 		 else
-		 {	 
+		 {
 				Mastercell.ptr.xshotpwr = player.xshotpwr; // weapon fire contains xtra shot power flag
 				Mastercell.ptr.xshotspd = player.xshotspd; // weapon fire contains xtra shot speed flag
 		 }
@@ -2152,6 +2152,7 @@ var ymir = false, xmir = false;
     },
 
     hurt: function(damage, by, automatic) {
+		if (automatic || (this.linvuln < 1))
       if (this.active() && !DEBUG.NODAMAGE) {
         damage = automatic ? damage : damage/(this.type.armor + this.xarmor);
         this.health = Math.max(0, this.health - damage);
@@ -2166,12 +2167,14 @@ var ymir = false, xmir = false;
 
     autohurt: function(frame) {
       if ((frame % (FPS/2)) === 0) {
+			var hinv = 0;
+			if (this.linvuln > 0) hinv = 1; // invulnerable takes another health per tick
 // players automatically lose 1 health every 1/2 second
 			if (this.lank > 0)
 				this.heal(1);
 			else
 			if (!DEBUG.NOAUTOHURT)
-				this.hurt(1, this, true);
+				this.hurt(1 + hinv, this, true);
 
 // count down temps - may want a setTimeout fn for these and stalling
 			if ((frame % (FPS)) === 0) 
