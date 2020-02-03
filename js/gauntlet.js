@@ -126,6 +126,7 @@ Gauntlet = function() {
         LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have the life ankh", nohlp: 23  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
+		SUPERSHTFR = 10,		// super shot proj frame
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
 		TRAPWALL = 0x404030,
@@ -779,8 +780,19 @@ Gauntlet = function() {
 
     onPlayerFire: function(player) {
       this.map.addWeapon(player.x, player.y, player.type.weapon, player.dir, player);
-		 Mastercell.ptr.xshotpwr = player.xshotpwr; // weapon fire contains xtra shot power flag
-		 Mastercell.ptr.xshotspd = player.xshotspd; // weapon fire contains xtra shot speed flag
+		 Mastercell.ptr.lsuper = false;
+		 if (player.lsuper > 0) // fire a super shot
+		 {
+				player.lsuper--;
+				Mastercell.ptr.lsuper = true;
+				Mastercell.ptr.damage = 100; // estimate - for damage soaks - dragon, players
+				Mastercell.ptr.xshotspd = true; // super are fast shot
+		 }
+		 else
+		 {	 
+				Mastercell.ptr.xshotpwr = player.xshotpwr; // weapon fire contains xtra shot power flag
+				Mastercell.ptr.xshotspd = player.xshotspd; // weapon fire contains xtra shot speed flag
+		 }
     },
 
     onMonsterFire: function(monster) {
@@ -833,11 +845,17 @@ Gauntlet = function() {
       var x = weapon.x + (entity.x ? (entity.x - weapon.x)/2 : 0),
           y = weapon.y + (entity.y ? (entity.y - weapon.y)/2 : 0);
 
+		 var nosup = true;
       if (weapon.type.player && (entity.monster || entity.generator || entity.treasure ))
 		 {
-				var xdmg = 0;
+				var xdmg = 0, dmg = weapon.type.damage;
+				if (weapon.lsuper)
+				{
+						dmg = weapon.damage;
+						if (entity.canbeshot) nosup = false;			// super shot hit a monster, gen or treasure that is shotable - keep going
+				}
 				if (weapon.xshotpwr) xdmg = 2;
-				entity.hurt(weapon.type.damage + xdmg, weapon);
+				entity.hurt(dmg + xdmg, weapon);
 		 }
       else if (weapon.type.monster && entity.player)
         entity.hurt(weapon.type.damage, weapon);
@@ -845,7 +863,7 @@ Gauntlet = function() {
         entity.hurt(1, weapon);
 
       this.map.addFx(x, y, FX.WEAPON_HIT);
-      this.map.remove(weapon);
+      if (nosup) this.map.remove(weapon);
     },
 
     onPlayerCollide: function(player, entity) {
@@ -853,7 +871,6 @@ Gauntlet = function() {
 		 {
 				var xdmg = 0;	// calculate extra fight power	-- for now 25% of regular power, should boost ability evenly
 				if (player.xfight) xdmg = player.xfight * 0.25 * player.type.damage;
-alert (player.type.damage + xdmg);
 				entity.hurt(player.type.damage + xdmg, player);
 		 }
       else if (entity.treasure)
@@ -1394,7 +1411,7 @@ var ymir = false, xmir = false;
 
       // am i going towards a live player, or AWAY from a dead one, if away, my speed should be slow (the player is dead, I'm no longer interested in him)
       var away  = !player.active(), speed;
-		 if (player.linvis) away = true;
+		 if (player.linvis || player.lrepuls) away = true;		// note: for invisibility monster dir should be set random occasionally
 		 
 		speed = away ? 1 : this.type.speed;
 
@@ -1609,6 +1626,7 @@ var ymir = false, xmir = false;
 
     onrender: function(frame) {
       this.frame = this.type.rotate ? animate(frame, this.type.fpf, 8) : this.dir;
+		if (this.lsuper) this.frame = SUPERSHTFR;
     }
 
   });
