@@ -852,7 +852,7 @@ Gauntlet = function() {
 				if (weapon.lsuper)
 				{
 						dmg = weapon.damage;
-						if (entity.canbeshot) nosup = false;			// super shot hit a monster, gen or treasure that is shotable - keep going
+						if (entity.type.canbeshot) nosup = false;			// super shot hit a monster, gen or treasure that is shotable - keep going
 				}
 				if (weapon.xshotpwr) xdmg = 2;
 				entity.hurt(dmg + xdmg, weapon);
