@@ -124,6 +124,8 @@ x--- "IT" - not sure want this
 >>>>>>>>>>>>>>>>>>>>>>
 expansion:
 
+poss xp system for enhance stuff (sep from buy stuff guy)
+
 difficulty system
 \options on tutorial system, announcer
 genesis gIV - quest, ? battle, record
@@ -134,6 +136,9 @@ genesis gIV - quest, ? battle, record
 - grunts will throw clubs infreq
 - demons will have "fire"
 
+more powerful enemies may drop items - food, treasure, weapons, etc
+
+
 randomly leave out wall -> exit if more than {X} wall segs
 yellow teleports that can select further away
 blue or purple teleports that are unit linked - not to nearest visible
@@ -143,8 +148,9 @@ enhance invisible wall code so - shots, potions, or some limited item makes wall
 
 new maps, perhaps with a maphack type system using the "image" set ops
 "bonkers" level - see 207 img from bkg set - (in this case, do a "close to player" exit incase level is not playable)
-lvl 1-7 as gauntlet
+lvl 1-7 as gauntlet (or alternates)
 level 8-69 from gauntlet set
+\option to randomize these maps -^
 unpin, mirror & flip 70 - 99
 100+ add in new maps, enhancements
 - slow down treasure rooms occur freq, but every 4th have a chance for a "super" treasure room
