@@ -5,6 +5,8 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 port list:
 
+treasure rooms, music, countdown, scoring
+
 - wall replace routine for surround & shadows
 
 >limited power - finish
@@ -21,7 +23,6 @@ port list:
 -invisible "become temp visible" walls -- likely a code deal with some overlay mask
 announcer
 rest of sound effects (thoughts to enhanced sound effects)
-treasure rooms, music, countdown, scoring
 lobber shots & ai
 thief op & ai
 monster /gen health & kill -- vs. player shot power levels
