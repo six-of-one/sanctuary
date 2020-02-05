@@ -741,6 +741,9 @@ Gauntlet = function() {
 			 leveldisp = "<br>LEVEL:&nbsp&nbsp "+nlevel;
 			 levelhelp = undefined;
 //			 treasurerc = 0;		// reset chance after room
+// still :
+			 /// add up bonus on exit - timer == -1 (for now)
+			 /// make extra display lines
 		 }
 		 else
 		 if (treasurerc >= Math.random())
@@ -910,6 +913,7 @@ Gauntlet = function() {
 			if (this.map.last) rnd_level = 1;
 			this.nextLevel();
 		}
+		troomtime = -1; // halt treasure room count
     },
 
     onDoorOpening: function(door, speed) {
@@ -2454,7 +2458,7 @@ var ymir = false, xmir = false;
 
     refreshLevel: function(level) {
       this.level.update(level.name);
-		timerupd = this;
+		timerupd = this;	// for treasure room timer
     },
 
     refreshHighScore: function(score, who) {
