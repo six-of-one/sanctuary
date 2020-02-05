@@ -6,8 +6,13 @@ gJ - gauntlet javascript		(gJ.0 - original)
 port list:
 
 treasure rooms, music, countdown, scoring
+treasure counter - extra .show timeout dealy
+
+adjust teleporters to small random chance select another nearby tele
+maybe make list of teles sorted by dist
 
 - wall replace routine for surround & shadows
+>trap walls, walls to exits, moving wall, random walls, std shot walls -- shootable walls ?
 
 >limited power - finish
 >tween level screen - finish messages
