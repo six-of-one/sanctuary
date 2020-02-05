@@ -124,9 +124,12 @@ x--- "IT" - not sure want this
 >>>>>>>>>>>>>>>>>>>>>>
 expansion:
 
+training level with all aspects of game
+> training "skill" level - no bonus mult, no HS, exits to itself, hints allowed
+
 poss xp system for enhance stuff (sep from buy stuff guy)
 
-difficulty system
+difficulty system >> cheat (no HS, no bonus x), trainer, easy, normal, { }, hard, nightmare
 \options on tutorial system, announcer
 genesis gIV - quest, ? battle, record
 +music from this is good too
