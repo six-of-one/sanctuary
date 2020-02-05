@@ -185,7 +185,7 @@ Gauntlet = function() {
         LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have the life ankh", nohlp: 23  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
-		TREASUREROOM = [ ], tlevel, troomtime, timerupd,
+		TREASUREROOM = [ ], tlevel, troomtime, troomfin, timerupd,
 		SUPERSHTFR = 10,		// super shot proj frame
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
@@ -749,12 +749,13 @@ Gauntlet = function() {
 		 if (treasurerc >= Math.random())
 		 {
 				treasurerc = 3;
+				troomfin = false;
 				tlevel = nlevel;
 				sk = Math.floor(Math.random() * (c - 1));
 				nlevel = TREASUREROOM[sk].lvl;
 				troomtime = TREASUREROOM[sk].rtime;	// run time
 				leveldisp = "<br>TREASURE ROOM";
-				levelhelp = HELPDIS[nohlptr] + "<br><br>" + HELPDIS[nohlpmstex];
+				levelhelp = HELPDIS[nohlptr].replace("#",troomtime) + "<br><br>" + HELPDIS[nohlpmstex];
 		 }
 
       var level    = cfg.levels[nlevel],
@@ -913,7 +914,7 @@ Gauntlet = function() {
 			if (this.map.last) rnd_level = 1;
 			this.nextLevel();
 		}
-		troomtime = -1; // halt treasure room count
+		troomfin = true; // halt treasure room count
     },
 
     onDoorOpening: function(door, speed) {
@@ -2278,6 +2279,7 @@ var ymir = false, xmir = false;
 					if (this.lrepuls > 0) this.lrepuls--;
 					if (this.linvis > 0) this.linvis--;
 					if (this.linvuln > 0) this.linvuln--;
+					if (!troomfin)
 					if (troomtime > 0)
 					{
 							troomtime--;
