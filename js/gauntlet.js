@@ -10,7 +10,7 @@ Gauntlet = function() {
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
 // debug - provide a one time start level
-											initlevel = 1,
+											initlevel = 9,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -83,14 +83,29 @@ Gauntlet = function() {
 // list of tutorial and help messages to display
 		HELPDIS = [
 									"Null 0 entry - no usable",
-									"Treasure: 100 points",
+									"Treasure: 100 points",																				// 1
 									"Food: health increased by 100",
 									"Save keys to open doors",
 									"Save potions for later use",
-									"Traps make walls disappear",
+									"Traps make walls disappear",																// 5
 									"Transporters move you to<br> the closest transporter visible",
 									"Some tiles stun players",
 									"Some walls may be destroyed",
+									"<font color=red>You have # seconds to collect treasures</font>",
+									"<font color=yellow>You must exit to receive bonus points</font>",
+									"You got extra speed",
+									"You got extra shot power",
+									"You got extra shot speed",
+									"You got extra armor",
+									"You got extra fight power",
+									"You got extra magic power",
+									"You now have limited invisibility",
+									"You now have invulnerability",
+									"You now have extra repulsiveness",
+									"You now have reflective shots",
+									"You now have super shots",
+									"You now have teleportability",
+									"You now have the life ankh",
 									
 									"Some food destroyed by shots",
 									"Shooting magic potions has a lesser effect",
@@ -114,11 +129,9 @@ Gauntlet = function() {
 									"Player loses # health<br>Shoot or fight demons",
 									"Player loses # health<br>Shoot or fight sorcerers",
 									"Player loses # health<br>Shoot or fight lobbers",
-									"Find the hidden potion",
+									"<font color=yellow>Find the hidden potion</font>",
 									"Kill thief to recover stolen item",
 									"Item on next level",
-									"You have # seconds to collect treasures",
-									"You must exit to receive bonus points",
 									"Collect magic potion before pressing magic",
 									"Ghosts must be shot",
 									"Some food can be destroyed",
@@ -129,7 +142,7 @@ Gauntlet = function() {
 		HELPCLEAR = [ ],	// help messages only display one time or can be turned off
 		helpdsf = "Some food destroyed by shots", helpsap = "Shooting a potion has a lesser effect", helpcmb = "Collect magic potion before pressing magic",
 		helppois = "Shooting poison slows monsters",
-		nohlpdsf = 25, nohlpsap = 26, nohlpcmb = 27, nohlppois = 28, nohlpmagaff = 9,
+		nohlpdsf = 25, nohlpsap = 26, nohlpcmb = 27, nohlppois = 28, nohlpmagaff = 9, nohlptr = 9, nohlpmstex = 10,
 // dont shoot food				25
 // shooting a potion			26
 // collect magic before	27
@@ -172,6 +185,7 @@ Gauntlet = function() {
         LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have the life ankh", nohlp: 23  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
+		TREASUREROOM = [ ], tlevel, troomtime, timerupd,
 		SUPERSHTFR = 10,		// super shot proj frame
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
@@ -530,17 +544,17 @@ Gauntlet = function() {
 		{ name: 'Research X',     url: "levels/glevel10.png",  floor: FLOOR.RND,      wall: WALL.YELLOW10,      gflr: "gfx/g1floor10.jpg",      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel9.png",  floor: FLOOR.RND,      wall: WALL.ORANG9,      gflr: "gfx/g1floor9.jpg",      music: 'mountingassault',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel8.png",  floor: FLOOR.RND,      wall: WALL.BLUE8,      gflr: "gfx/g1floor8.jpg",      music: 'mountingassault',      score:  1000, help: null },
-		{ name: 'Treasure',     url: "levels/glevel115.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,      music: 'citrinitas',      score:  1000, help: null },
-		{ name: 'Treasure',     url: "levels/glevel116.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,      music: 'citrinitas',      score:  1000, help: null },
-		{ name: 'Treasure',     url: "levels/glevel117.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,      music: 'citrinitas',      score:  1000, help: null },
-		{ name: 'Treasure',     url: "levels/glevel118.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,      music: 'citrinitas',      score:  1000, help: null },
-		{ name: 'Treasure',     url: "levels/glevel119.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,      music: 'citrinitas',      score:  1000, help: null },
-		{ name: 'Treasure',     url: "levels/glevel120.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,      music: 'citrinitas',      score:  1000, help: null },
-		{ name: 'Treasure',     url: "levels/glevel121.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,      music: 'citrinitas',      score:  1000, help: null },
-		{ name: 'Treasure',     url: "levels/glevel122.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,      music: 'citrinitas',      score:  1000, help: null },
-		{ name: 'Treasure',     url: "levels/glevel123.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,      music: 'citrinitas',      score:  1000, help: null },
-      { name: 'Treasure',     url: "levels/glevel124.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,      music: 'citrinitas',      score:  1000, help: null },
-      { name: 'Treasure',     url: "levels/glevel125.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,      music: 'citrinitas',      score:  1000, help: null },
+		{ name: 'Treasure',     url: "levels/glevel115.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 30,    music: 'citrinitas',      score:  1000, help: null },
+		{ name: 'Treasure',     url: "levels/glevel116.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 20,      music: 'citrinitas',      score:  1000, help: null },
+		{ name: 'Treasure',     url: "levels/glevel117.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 22,      music: 'citrinitas',      score:  1000, help: null },
+		{ name: 'Treasure',     url: "levels/glevel118.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 32,      music: 'citrinitas',      score:  1000, help: null },
+		{ name: 'Treasure',     url: "levels/glevel119.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 20,      music: 'citrinitas',      score:  1000, help: null },
+		{ name: 'Treasure',     url: "levels/glevel120.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 25,      music: 'citrinitas',      score:  1000, help: null },
+		{ name: 'Treasure',     url: "levels/glevel121.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 20,      music: 'citrinitas',      score:  1000, help: null },
+		{ name: 'Treasure',     url: "levels/glevel122.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 30,      music: 'citrinitas',      score:  1000, help: null },
+		{ name: 'Treasure',     url: "levels/glevel123.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 20,      music: 'citrinitas',      score:  1000, help: null },
+      { name: 'Treasure',     url: "levels/glevel124.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 25,      music: 'citrinitas',      score:  1000, help: null },
+      { name: 'Treasure',     url: "levels/glevel125.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 30,      music: 'citrinitas',      score:  1000, help: null },
 		{ name: 'Training',       url: "levels/trainer1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Shoot ghosts and find the exit" },
 //      { name: 'Training Two',   url: "levels/trainer2.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Watch out for demon fire" },
 //      { name: 'Training Three', url: "levels/trainer3.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Find keys to open doors" },
@@ -705,11 +719,41 @@ Gauntlet = function() {
 			if (initlevel > 0)
 		 {
 			 		nlevel = initlevel;
+					tlevel = initlevel;
 					initlevel = 0;
 		 }
-
-//					nlevel = 17;
 /// debug tier
+// mark treasure levels
+		 var c = 0, sk, leveldisp, levelhelp;
+/// testing - rearrange
+		 var treasurerc = 1;
+
+		 for (sk = 0;sk < cfg.levels.length;sk++)
+				if (cfg.levels[sk].name == 'Treasure') 
+		 {
+			 TREASUREROOM[c] = cfg.levels[sk];
+			 TREASUREROOM[c++].lvl = sk;
+		 }
+		 if (tlevel > 0) 
+		 {
+			 nlevel = tlevel;		// saved level advance to inject treasure room - resume on nlevel
+			 tlevel  = 0;
+			 leveldisp = "<br>LEVEL:&nbsp&nbsp "+nlevel;
+			 levelhelp = undefined;
+//			 treasurerc = 0;		// reset chance after room
+		 }
+		 else
+		 if (treasurerc >= Math.random())
+		 {
+				treasurerc = 3;
+				tlevel = nlevel;
+				sk = Math.floor(Math.random() * (c - 1));
+				nlevel = TREASUREROOM[sk].lvl;
+				troomtime = TREASUREROOM[sk].rtime;	// run time
+				leveldisp = "<br>TREASURE ROOM";
+				levelhelp = HELPDIS[nohlptr] + "<br><br>" + HELPDIS[nohlpmstex];
+		 }
+
       var level    = cfg.levels[nlevel],
           self     = this,
           onloaded = function() { $('booting').hide(); self.play(new Map(nlevel)); };
@@ -721,14 +765,15 @@ Gauntlet = function() {
 				document.getElementById("gfloor") .src = level.gflr;		// set this here so its ready on map build
         level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
 			{
-					$('tween').update("<br>LEVEL:&nbsp&nbsp "+nlevel).show(); 
+					$('tween').update(leveldisp).show(); 
 					setTimeout(game.onleavetween.bind(this), 2000); 
 					announcepause = true;
-					if (level.help)
+					if (levelhelp == undefined) levelhelp = level.help;
+					if (levelhelp)
 					{
 							var img = document.getElementById("tweenmsg");
 							img.style.visibility = "visible";
-							img.innerHTML = level.help;
+							img.innerHTML = levelhelp;
 					}
 			}
       }
@@ -2229,6 +2274,11 @@ var ymir = false, xmir = false;
 					if (this.lrepuls > 0) this.lrepuls--;
 					if (this.linvis > 0) this.linvis--;
 					if (this.linvuln > 0) this.linvuln--;
+					if (troomtime > 0)
+					{
+							troomtime--;
+							timerupd.level.update("Time: " + troomtime);
+					}
 			}
 // count down stun
 			if (this.stun > 0) this.stun--;
@@ -2404,6 +2454,7 @@ var ymir = false, xmir = false;
 
     refreshLevel: function(level) {
       this.level.update(level.name);
+		timerupd = this;
     },
 
     refreshHighScore: function(score, who) {
