@@ -5,9 +5,6 @@ gJ - gauntlet javascript		(gJ.0 - original)
 sl
 port list:
 
-dont count mult down while tween
-treasure rooms, music, scoring
-treasure counter - extra .show timeout dealy
 
 adjust teleporters to small random chance select another nearby tele
 maybe make list of teles sorted by dist
@@ -15,6 +12,7 @@ maybe make list of teles sorted by dist
 - wall replace routine for surround & shadows
 >trap walls, walls to exits, moving wall, random walls, std shot walls -- shootable walls ?
 
+treasure rooms > music, annc count
 >limited power - finish
 >tween level screen - finish messages
 + text messages appearing
@@ -258,6 +256,8 @@ x-- shootable "dirt" walls - "some walls may be destroyed" first time shot
 	- special overlay gfx on this
 
 x-- shootable "dirt" walls
+
+x-- treasure room, timer, score, fail, msgs
 
 expanded done:
 
