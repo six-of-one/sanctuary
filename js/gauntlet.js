@@ -185,7 +185,7 @@ Gauntlet = function() {
         LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have the life ankh", nohlp: 23  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
-		TREASUREROOM = [ ], tlevel, troomtime = 0, troomfin, timerupd,
+		TREASUREROOM = [ ], tlevel, troomtime = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, 
 		SUPERSHTFR = 10,		// super shot proj frame
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
@@ -719,14 +719,11 @@ Gauntlet = function() {
 			if (initlevel > 0)
 		 {
 			 		nlevel = initlevel;
-					tlevel = initlevel;
 					initlevel = 0;
 		 }
 /// debug tier
 // mark treasure levels
-		 var c = 0, sk, leveldisp, levelhelp, trdisp = false;
-/// testing - rearrange
-		 var treasurerc = 1;
+		 var c = 0, sk, trdisp = false;
 
 		 for (sk = 0;sk < cfg.levels.length;sk++)
 				if (cfg.levels[sk].name == 'Treasure') 
@@ -734,13 +731,14 @@ Gauntlet = function() {
 			 TREASUREROOM[c] = cfg.levels[sk];
 			 TREASUREROOM[c++].lvl = sk;
 		 }
+		 leveldisp = "<br>LEVEL:&nbsp&nbsp "+nlevel;
+		 levelhelp = undefined;
+
 		 if (tlevel > 0) 
 		 {
 			 trdisp = true;			// display treasure room stats first
 			 nlevel = tlevel;		// saved level advance to inject treasure room - resume on nlevel
 			 tlevel  = 0;
-			 leveldisp = "<br>LEVEL:&nbsp&nbsp "+nlevel;
-			 levelhelp = undefined;
 //			 treasurerc = 0;		// reset chance after room
 // still :
 			 /// add up bonus on exit - timer == -1 (for now)
@@ -758,6 +756,7 @@ Gauntlet = function() {
 				leveldisp = "<br>TREASURE ROOM";
 				levelhelp = HELPDIS[nohlptr].replace("#",troomtime) + "<br><br>" + HELPDIS[nohlpmstex];
 		 }
+		 treasurerc = 1;
 
       var level    = cfg.levels[nlevel],
           self     = this,
@@ -770,15 +769,25 @@ Gauntlet = function() {
 				document.getElementById("gfloor") .src = level.gflr;		// set this here so its ready on map build
         level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
 			{
-					$('tween').update(leveldisp).show(); 
-					setTimeout(game.onleavetween.bind(this), 2000); 
 					announcepause = true;
 					if (levelhelp == undefined) levelhelp = level.help;
-					if (levelhelp)
+					var img = document.getElementById("tweenmsg");
+					if (trdisp)
 					{
-							var img = document.getElementById("tweenmsg");
+							$('tween').update("Stats").show();
+							setTimeout(game.onexittreasure.bind(this), 2500); 
 							img.style.visibility = "visible";
-							img.innerHTML = levelhelp;
+							img.innerHTML = game.player.type.fcol+"100 x coins ______ 100<br>TREASURES x __ " + game.player.ctr  + "<br>_____ bonus = " + (game.player.ctr * 100) ;
+					}
+					else
+					{
+							$('tween').update(leveldisp).show(); 
+							setTimeout(game.onleavetween.bind(this), 2000); 
+							if (levelhelp)
+							{
+									img.style.visibility = "visible";
+									img.innerHTML = levelhelp;
+							}
 					}
 			}
       }
@@ -830,6 +839,15 @@ Gauntlet = function() {
     onleavehelp: function(event, previous, current)      { $('help').hide();  announcepause = false;                                                         },
 
     onentertween: function(event, previous, current, msg) { $('tween').update(msg).show(); setTimeout(this.onleavetween.bind(this), 2500); announcepause = true; },
+    onexittreasure: function(event, previous, current, msg) { setTimeout(this.onleavetween.bind(this), 2500);  
+
+					var img = document.getElementById("tween");
+					img.innerHTML = leveldisp;
+					img = document.getElementById("tweenmsg");
+					if (levelhelp) img.innerHTML = levelhelp;
+					else img.style.visibility = "hidden";
+		 },
+
     onleavetween: function(event, previous, current)      { $('tween').hide();  announcepause = false; var img = document.getElementById("tweenmsg"); img.style.visibility = "hidden"; },
 
     autoresume: function() {
