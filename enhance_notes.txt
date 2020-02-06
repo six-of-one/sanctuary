@@ -5,6 +5,8 @@ gJ - gauntlet javascript		(gJ.0 - original)
 sl
 port list:
 
+tween level screen
++ find hidden potion note
 
 adjust teleporters to small random chance select another nearby tele
 maybe make list of teles sorted by dist
@@ -16,7 +18,6 @@ treasure rooms > music, annc count
 >limited power - finish
 >tween level screen - finish messages
 + text messages appearing
-+ find hidden potion note
 >make monsters slow on shot poison a timed effect - can cross lvl boundary
 >rest of tutorial popup text
 >think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
@@ -33,6 +34,7 @@ monster /gen health & kill -- vs. player shot power levels
 player shot speed and power potions
 
 save system via cooky
+> score tables
 
 finish g1 map population
 unpinned corners / edges
