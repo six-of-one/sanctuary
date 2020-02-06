@@ -781,15 +781,19 @@ Gauntlet = function() {
 			{
 					announcepause = true;
 					if (levelhelp == undefined) levelhelp = level.help;
+//		turned on during player exiting
 					var img = document.getElementById("tweenmsg");
-					img.style.visibility = "visible";	// always turn on - blocks scmult rot
-					img.innerHTML = "";
 					if (trdisp)
 					{
 							$('tween').update("Stats").show();
-							setTimeout(game.onexittreasure.bind(this), 2500); 
-							img.innerHTML = game.player.type.fcol+"<table style='text-align: left;'><tr><td>MULTIPLIER:&nbsp&nbsp&nbsp&nbsp&nbsp</td><td>" + game.player.scmult + "</td></tr><tr><td>TREASURES x</td><td>" + game.player.ctr  + "</td></tr><tr><td>BONUS = </td><td>" + (game.player.ctr * 100 * game.player.scmult)  + "</td></tr></table></font>";
-							game.player.addscore(game.player.ctr * 100);
+							setTimeout(game.onexittreasure.bind(this), 2500);
+							if (troomfin)
+							{
+										img.innerHTML = game.player.type.fcol+"<table style='text-align: left;'><tr><td>MULTIPLIER:&nbsp&nbsp&nbsp&nbsp&nbsp</td><td>" + game.player.scmult + "</td></tr><tr><td>TREASURES x</td><td>" + game.player.ctr  + "</td></tr><tr><td>BONUS = </td><td>" + (game.player.ctr * 100 * game.player.scmult)  + "</td></tr></table></font>";
+										game.player.addscore(game.player.ctr * 100);
+							}
+							else
+										img.innerHTML = "better luck next time!"
 							game.player.ctr = 0;
 					}
 					else
@@ -930,7 +934,11 @@ Gauntlet = function() {
 				  this.win();
 		 }
 		troomfin = true; // halt treasure room count - cause treasure add on level load
-		troomtime = 0; // CHECK: was bonus for left over time?
+		troomtime = 0;
+// used between levels
+			var img = document.getElementById("tweenmsg");	// prep this & turn on here for:
+			img.style.visibility = "visible";	// always turn on - blocks scmult rot
+			img.innerHTML = "";
     },
 
     onPlayerExit: function(player) {
@@ -2319,6 +2327,8 @@ var ymir = false, xmir = false;
 					{
 							troomtime--;
 							timerupd.level.update("Time: " + troomtime);
+							if (troomtime < 1) // ran out of time
+									game.nextLevel();
 					}
 			}
 // count down stun
