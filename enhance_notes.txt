@@ -5,6 +5,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 sl
 port list:
 
+dont count mult down while tween
 treasure rooms, music, scoring
 treasure counter - extra .show timeout dealy
 

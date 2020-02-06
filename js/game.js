@@ -797,8 +797,12 @@ Game.Math = {
 
   function multrot () {
 
+		var img = document.getElementById("tweenmsg");
+
+		if (img.style.visibility == "hidden")
 	   if (troomtime < 1)
 			Masterot = Masterot - 1;
+
 		if (Masterot < 1)
 	  {
 			Mastermult= Mastermult - 1;

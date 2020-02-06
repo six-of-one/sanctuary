@@ -782,11 +782,12 @@ Gauntlet = function() {
 					announcepause = true;
 					if (levelhelp == undefined) levelhelp = level.help;
 					var img = document.getElementById("tweenmsg");
+					img.style.visibility = "visible";	// always turn on - blocks scmult rot
+					img.innerHTML = "";
 					if (trdisp)
 					{
 							$('tween').update("Stats").show();
 							setTimeout(game.onexittreasure.bind(this), 2500); 
-							img.style.visibility = "visible";
 							img.innerHTML = game.player.type.fcol+"<table style='text-align: left;'><tr><td>MULTIPLIER:&nbsp&nbsp&nbsp&nbsp&nbsp</td><td>" + game.player.scmult + "</td></tr><tr><td>TREASURES x</td><td>" + game.player.ctr  + "</td></tr><tr><td>BONUS = </td><td>" + (game.player.ctr * 100 * game.player.scmult)  + "</td></tr></table></font>";
 							game.player.addscore(game.player.ctr * 100);
 							game.player.ctr = 0;
@@ -795,11 +796,7 @@ Gauntlet = function() {
 					{
 							$('tween').update(leveldisp).show(); 
 							setTimeout(game.onleavetween.bind(this), 2000); 
-							if (levelhelp)
-							{
-									img.style.visibility = "visible";
-									img.innerHTML = levelhelp;
-							}
+							if (levelhelp) img.innerHTML = levelhelp;
 					}
 			}
       }
@@ -856,8 +853,8 @@ Gauntlet = function() {
 					var img = document.getElementById("tween");
 					img.innerHTML = leveldisp;
 					img = document.getElementById("tweenmsg");
+					img.innerHTML =  "";
 					if (levelhelp) img.innerHTML = levelhelp;
-					else img.style.visibility = "hidden";
 		 },
 
     onleavetween: function(event, previous, current)      { $('tween').hide();  announcepause = false; var img = document.getElementById("tweenmsg"); img.style.visibility = "hidden"; },
