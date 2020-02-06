@@ -156,9 +156,9 @@ Gauntlet = function() {
         KEY:     { sx: 21, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'collectkey' , help: "Save keys to open doors", nohlp: 3   },
         POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion', help: "Save potions for later use", nohlp: 4 },
         POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', help: "Save potions for later use", nohlp: 4  },
-        GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1,              sound: 'collectgold', help: "Treasure: 100 points", nohlp: 1   },
+        GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1, troom: 1,             sound: 'collectgold', help: "Treasure: 100 points", nohlp: 1   },
         LOCKED:    { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'collectgold', help: "Some chests are locked"   },
-        BAG:    { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5,                sound: 'collectgold', help: "Treasure: 500 points", nohlp: 1   },
+        BAG:    { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5, troom: 1,                sound: 'collectgold', help: "Treasure: 500 points", nohlp: 1   },
 // teleport, trap, stun tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport', help: "Transporters move you to<br> the closest transporter visible", nohlp: 6  },
         TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap', help: "Traps make walls disappear", nohlp: 5 },
@@ -185,7 +185,7 @@ Gauntlet = function() {
         LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have the life ankh", nohlp: 23  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
-		TREASUREROOM = [ ], tlevel, troomtime, troomfin, timerupd,
+		TREASUREROOM = [ ], tlevel, troomtime = 0, troomfin, timerupd,
 		SUPERSHTFR = 10,		// super shot proj frame
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
@@ -752,7 +752,7 @@ Gauntlet = function() {
 				troomfin = false;
 				tlevel = nlevel;
 				sk = Math.floor(Math.random() * (c - 1));
-				nlevel = TREASUREROOM[sk].lvl;
+				nlevel = TREASUREROOM[2].lvl;
 				troomtime = TREASUREROOM[sk].rtime;	// run time
 				leveldisp = "<br>TREASURE ROOM";
 				levelhelp = HELPDIS[nohlptr].replace("#",troomtime) + "<br><br>" + HELPDIS[nohlpmstex];
@@ -901,6 +901,8 @@ Gauntlet = function() {
 				if (this.map.last)
 				  this.win();
 		 }
+		troomfin = true; // halt treasure room count - cause treasure add on level load
+		troomtime = 0; // CHECK: was bonus for left over time?
     },
 
     onPlayerExit: function(player) {
@@ -914,7 +916,6 @@ Gauntlet = function() {
 			if (this.map.last) rnd_level = 1;
 			this.nextLevel();
 		}
-		troomfin = true; // halt treasure room count
     },
 
     onDoorOpening: function(door, speed) {
@@ -1943,6 +1944,7 @@ var ymir = false, xmir = false;
 		this.lank = 0;
       this.score     = 0;
       this.scmult     = 1;
+		this.ctr = 0;				// collected treasures
 		Mastermult = 1;
       this.dir       = Game.Math.randomInt(0, 7);
       this.health    = type.health;
@@ -2045,6 +2047,9 @@ var ymir = false, xmir = false;
 				return; //shot wall, go back
 		 }
 
+		if ((troomtime > 0) && treasure.type.troom)
+			this.ctr = this.ctr + (treasure.type.score / 100);
+		else
       this.addscore(treasure.type.score);
 
 		if (treasure.type.nohlp != undefined)
@@ -2279,7 +2284,7 @@ var ymir = false, xmir = false;
 					if (this.lrepuls > 0) this.lrepuls--;
 					if (this.linvis > 0) this.linvis--;
 					if (this.linvuln > 0) this.linvuln--;
-					if (!troomfin)
+ 					if (!troomfin)
 					if (troomtime > 0)
 					{
 							troomtime--;
