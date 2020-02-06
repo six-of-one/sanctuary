@@ -191,6 +191,12 @@ code fails
 if (cell.ptr.door) - when .ptr is undefined
 
 
+issues when going multiplayer:
+
+cli / srv model for over net play
+- cli will just be render engine, have to report all controls back
+
+troomtime counted in autohurt
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
