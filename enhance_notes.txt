@@ -2,10 +2,10 @@ g1 - gauntlet
 gII, g2 - gauntlet 2
 gJ - gauntlet javascript		(gJ.0 - original)
 
-
+sl
 port list:
 
-treasure rooms, music, countdown, scoring
+treasure rooms, music, scoring
 treasure counter - extra .show timeout dealy
 
 adjust teleporters to small random chance select another nearby tele
