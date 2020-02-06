@@ -791,12 +791,14 @@ Game.Math = {
   }
 
 // in singleplayer, multiplier rots down to 1
+// treasure rooms pause rot - have to detect room time here
 
-  var Mastermult, Masterot;
+  var Mastermult, Masterot, troomtime = 0;
 
   function multrot () {
 
-		Masterot = Masterot - 1;
+	   if (troomtime < 1)
+			Masterot = Masterot - 1;
 		if (Masterot < 1)
 	  {
 			Mastermult= Mastermult - 1;

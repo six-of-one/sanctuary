@@ -185,7 +185,7 @@ Gauntlet = function() {
         LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have the life ankh", nohlp: 23  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
-		TREASUREROOM = [ ], tlevel, troomtime = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, 
+		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, 
 		SUPERSHTFR = 10,		// super shot proj frame
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
@@ -723,7 +723,7 @@ Gauntlet = function() {
 		 }
 /// debug tier
 // mark treasure levels
-		 var c = 0, sk, trdisp = false;
+		 var c = 0, sk, trdisp;
 
 		 for (sk = 0;sk < cfg.levels.length;sk++)
 				if (cfg.levels[sk].name == 'Treasure') 
@@ -733,21 +733,20 @@ Gauntlet = function() {
 		 }
 		 leveldisp = "<br>LEVEL:&nbsp&nbsp "+nlevel;
 		 levelhelp = undefined;
+		 trdisp = false;
 
-		 if (tlevel > 0) 
+		 if (tlevel > 7) 				// last level was treasure room
 		 {
 			 trdisp = true;			// display treasure room stats first
 			 nlevel = tlevel;		// saved level advance to inject treasure room - resume on nlevel
 			 tlevel  = 0;
-//			 treasurerc = 0;		// reset chance after room
+			 treasurerc = 0;		// reset chance after treasure room
 // still :
 			 /// add up bonus on exit - timer == -1 (for now)
-			 /// make extra display lines
 		 }
 		 else
-		 if (treasurerc >= Math.random())
+		 if (treasurerc >= Math.random())		// test for treasure room rnd chance
 		 {
-				treasurerc = 3;
 				troomfin = false;
 				tlevel = nlevel;
 				sk = Math.floor(Math.random() * (c - 1));
@@ -756,6 +755,17 @@ Gauntlet = function() {
 				leveldisp = "<br>TREASURE ROOM";
 				levelhelp = HELPDIS[nohlptr].replace("#",troomtime) + "<br><br>" + HELPDIS[nohlpmstex];
 		 }
+		 else
+		{
+// 0 - level after troom - nada
+// 1 - 2nd level after
+// 2 - 3rd level after
+// start room check again
+				if (tlevel > 1)			// wait 3 levels then start rand checks
+					treasurerc = treasurerc + 0.37;
+				else
+				tlevel++;
+		}
 		 treasurerc = 1;
 
       var level    = cfg.levels[nlevel],
@@ -777,7 +787,9 @@ Gauntlet = function() {
 							$('tween').update("Stats").show();
 							setTimeout(game.onexittreasure.bind(this), 2500); 
 							img.style.visibility = "visible";
-							img.innerHTML = game.player.type.fcol+"100 x coins ______ 100<br>TREASURES x __ " + game.player.ctr  + "<br>_____ bonus = " + (game.player.ctr * 100) ;
+							img.innerHTML = game.player.type.fcol+"<table style='text-align: left;'><tr><td>MULTIPLIER:&nbsp&nbsp&nbsp&nbsp&nbsp</td><td>" + game.player.scmult + "</td></tr><tr><td>TREASURES x</td><td>" + game.player.ctr  + "</td></tr><tr><td>BONUS = </td><td>" + (game.player.ctr * 100 * game.player.scmult)  + "</td></tr></table></font>";
+							game.player.addscore(game.player.ctr * 100);
+							game.player.ctr = 0;
 					}
 					else
 					{
@@ -2069,7 +2081,24 @@ var ymir = false, xmir = false;
 		if ((troomtime > 0) && treasure.type.troom)
 			this.ctr = this.ctr + (treasure.type.score / 100);
 		else
-      this.addscore(treasure.type.score);
+		 {
+				this.addscore(treasure.type.score);
+// score multiplier
+				if (treasure.type.scmult)
+				 {
+						this.scmult = Mastermult + treasure.type.scmult;
+						if (this.scmult >= 5) this.scmult = 4;
+						Mastermult = this.scmult;
+						if (Masterot < 1) setTimeout('multrot()',1000);
+						Masterot = 60
+						if (this.scmult > 2) Masterot = 30;
+						if (this.scmult > 3) Masterot = 15;
+						document.getElementById('scrmult1').innerHTML = Masterot +":" + Mastermult + "x Score";
+						document.getElementById('scrmult2').innerHTML = Masterot +":" + Mastermult + "x Score";
+						document.getElementById('scrmult3').innerHTML = Masterot +":" + Mastermult + "x Score";
+						document.getElementById('scrmult4').innerHTML = Masterot +":" + Mastermult + "x Score";
+				 }
+		 }
 
 		if (treasure.type.nohlp != undefined)
 		if (HELPCLEAR[treasure.type.nohlp])
@@ -2077,21 +2106,6 @@ var ymir = false, xmir = false;
 				HELPCLEAR[treasure.type.nohlp] = helpcleared;
 				if (treasure.type.help != undefined) {$('help').update(treasure.type.help).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
 		}
-
-		if (treasure.type.scmult)
-		 {
-				this.scmult = Mastermult + treasure.type.scmult;
-				if (this.scmult >= 5) this.scmult = 4;
-				Mastermult = this.scmult;
-				if (Masterot < 1) setTimeout('multrot()',1000);
-				Masterot = 60
-				if (this.scmult > 2) Masterot = 30;
-				if (this.scmult > 3) Masterot = 15;
-				document.getElementById('scrmult1').innerHTML = Masterot +":" + Mastermult + "x Score";
-				document.getElementById('scrmult2').innerHTML = Masterot +":" + Mastermult + "x Score";
-				document.getElementById('scrmult3').innerHTML = Masterot +":" + Mastermult + "x Score";
-				document.getElementById('scrmult4').innerHTML = Masterot +":" + Mastermult + "x Score";
-		 }
 
 		 if (treasure.type.stun)
 			this.stun = 4;
