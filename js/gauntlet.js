@@ -825,9 +825,6 @@ Gauntlet = function() {
 					setTimeout(game.onleavetween.bind(this), 2000); 
 					img.innerHTML = levelhelp;
 			}
-
-// load special potion
-				
     },
 
     onplay: function(event, previous, current, map) {
@@ -841,6 +838,35 @@ Gauntlet = function() {
 // stop intro loop
 		var spl = document.getElementById("splash");
 		spl.style.visibility = "hidden";
+
+// load special potion
+      function isfloor(pixel)         { return ((pixel & PIXEL.MASK.TYPE) === PIXEL.FLOOR);   };
+
+			if (spotionlv)
+			{
+					var spotct = spotionct, ldrnd = 0.01, seqrnd = false;
+					if (Math.random() < spotionrnd) seqrnd = true;
+					else spotionct++;
+					if (seqrnd || (spotct > spotionmax)) spotct = Game.Math.randomInt(0, spotionmax);
+					var cell, cells  = reloaded.cells;
+					var c, nc = cells.length;
+					for(c = 0 ; c < nc ; c++) 	// clear all door stop links
+					{
+						  cell = cells[c];
+							if (isfloor(cell.pixel))
+							if (Math.random() < ldrnd)
+							{
+									reloaded.addTreasure(cell.x, cell.y, SPOTION[spotct]);
+									return;
+							}
+				// slowly increase rnd until we get a load
+							if (c > (nc * 0.25)) ldrnd = 0.03;
+							if (c > (nc * 0.5)) ldrnd = 0.1;
+							if (c > (nc * 0.75)) ldrnd = 0.15;
+							if (c > (nc * 0.85)) ldrnd = 1;
+					}
+			}
+
     },
 
     onwin:  function(event, previous, current) { this.winlosefade(15000); this.saveLevel(8); },
@@ -1348,6 +1374,7 @@ Gauntlet = function() {
 
       function isnothing(pixel)      { return is(pixel, PIXEL.NOTHING);   };
       function iswall(pixel)         { return is(pixel, PIXEL.WALL);      };
+      function isfloor(pixel)         { return is(pixel, PIXEL.FLOOR);      };
       function isstart(pixel)        { return is(pixel, PIXEL.START);     };
       function isdoor(pixel)         { return is(pixel, PIXEL.DOOR);      }; 
       function isexit(pixel)         { return is(pixel, PIXEL.EXIT);      };

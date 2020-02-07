@@ -5,6 +5,8 @@ gJ - gauntlet javascript		(gJ.0 - original)
 sl
 port list:
 
+fix door by walls
+
 tween level screen
 + find hidden potion note
 
