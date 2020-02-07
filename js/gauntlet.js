@@ -780,9 +780,10 @@ Gauntlet = function() {
 				tlevel++;
 		}
 // testing - restore
-		 treasurerc = 1;
+//		 treasurerc = 1;
 		 spotionlv = 1;
 
+// check for hidden potions
 		if (nlevel > 5)
 		{
 				spotionloop++;
