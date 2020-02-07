@@ -39,6 +39,7 @@ save system via cooky
 > score tables
 
 finish g1 map population
+finish wall layers
 unpinned corners / edges
 level wrap across left / right
 

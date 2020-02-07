@@ -780,7 +780,7 @@ Gauntlet = function() {
 				tlevel++;
 		}
 // testing - restore
-//		 treasurerc = 1;
+		 treasurerc = 1;
 		 spotionlv = 1;
 
 // check for hidden potions
@@ -799,16 +799,17 @@ Gauntlet = function() {
 		}
 
       var level    = cfg.levels[nlevel],
-          self     = this,
-          onloaded = function() { $('booting').hide(); self.play(new Map(nlevel)); };
+		self     = this,
+		onloaded = function() { $('booting').hide(); self.play(new Map(nlevel)); };
+		document.getElementById("gfloor") .src = level.gflr;		// set this here so its ready on map build
       if (level.source) {
-        onloaded();
+				onloaded();
       }
       else {
-        $('booting').show();
-				document.getElementById("gfloor") .src = level.gflr;		// set this here so its ready on map build
-        level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
+			  $('booting').show();
+			  level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
       }
+
 
 			announcepause = true;
 			if (levelhelp == undefined) levelhelp = level.help;
@@ -860,22 +861,16 @@ Gauntlet = function() {
 					else spotionct++;
 					if (seqrnd || (spotct > spotionmax)) spotct = Game.Math.randomInt(0, spotionmax);
 					var cell, cells  = reloaded.cells;
-					var c, nc = cells.length;
-					for(c = 0 ; c < nc ; c++) 	// clear all door stop links
+					var c, nc = cells.length, fnd = 0, sft = 6000;
+
+					while (!fnd && (sft > 0))
 					{
-						  cell = cells[c];
-							if (isfloor(cell.pixel))
-							if (Math.random() < ldrnd)
-							{
-									reloaded.addTreasure(cell.x, cell.y, SPOTION[spotct]);
-									return;
-							}
-				// slowly increase rnd until we get a load
-							if (c > (nc * 0.25)) ldrnd = 0.03;
-							if (c > (nc * 0.5)) ldrnd = 0.1;
-							if (c > (nc * 0.75)) ldrnd = 0.15;
-							if (c > (nc * 0.85)) ldrnd = 1;
+							c = Game.Math.randomInt(0,nc - 1);
+							cell = cells[c];
+							fnd = isfloor(cell.pixel);
+							sft--;
 					}
+					reloaded.addTreasure(cell.x, cell.y, SPOTION[spotct]);
 			}
 
     },
