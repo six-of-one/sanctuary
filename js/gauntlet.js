@@ -241,6 +241,7 @@ Gauntlet = function() {
         START:          0x00F000, // GREEN
         TREASURE:       0x008000, // MEDIUM GREEN
         EXIT:           0x004000, // DARK GREEN
+        FLOOR:			0xA08000, // LT BROWN
         MASK: {
           TYPE:         0xFFF000,
           EXHIGH:       0x000FF0,
@@ -802,6 +803,7 @@ Gauntlet = function() {
 			announcepause = true;
 			if (levelhelp == undefined) levelhelp = level.help;
 			if (levelhelp == undefined) levelhelp = "";
+			levelhelp = levelhelp + potionhelp;
 //		turned on during player exiting
 			var img = document.getElementById("tweenmsg");
 			if (trdisp)
@@ -821,7 +823,7 @@ Gauntlet = function() {
 			{
 					$('tween').update(leveldisp).show(); 
 					setTimeout(game.onleavetween.bind(this), 2000); 
-					img.innerHTML = levelhelp + potionhelp;
+					img.innerHTML = levelhelp;
 			}
 
 // load special potion
@@ -2138,7 +2140,7 @@ var ymir = false, xmir = false;
 
 		 if (treasure.type.teleport) {
 				var cells   = reloaded.cells,
-					 walled, cell, c, nc = cells.length, tdist = 100000, cdist, destcell, ldestcell,
+					 walled, cell, c, nc = cells.length, tdist = 100000, cdist, destcell, ldestcell, swapcell,
 					mxdir = 7, tdir, ddir = this.moving.dir;
 
 //alert("x: "+this.x+" y:"+this.y);
@@ -2161,6 +2163,13 @@ var ymir = false, xmir = false;
 							}
 						}
 				}
+				if (Math.random() < 0.1) // swap last 2
+				{
+					swapcell = destcell;
+					if (ldestcell != undefined) destcell = ldestcell;
+					ldestcell = swapcell;
+				}
+						if (destcell != undefined)
 						if (tdist < 100000)
 						{
 									tdir = ddir;
