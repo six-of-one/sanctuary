@@ -186,7 +186,7 @@ Gauntlet = function() {
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp,
-		spotionlv = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
+		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
 		SUPERSHTFR = 10,		// super shot proj frame
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
@@ -783,9 +783,18 @@ Gauntlet = function() {
 		 treasurerc = 1;
 		 spotionlv = 1;
 
-		if (spotionlv)
+		if (nlevel > 5)
 		{
-				potionhelp = "<br><br><br><font color=yellow>FIND THE HIDDEN POTION</font>";
+				spotionloop++;
+				if (spotionloop > 2) spotionlv = 1;
+// enhanced - g1 had a special every 3 levels
+//				if (Math.random() < 0.33 || (spotionloop > 4)) spotionlv = 1;
+
+				if (spotionlv)
+				{
+						spotionloop = 0;
+						potionhelp = "<br><br><br><font color=yellow>FIND THE HIDDEN POTION</font>";
+				}
 		}
 
       var level    = cfg.levels[nlevel],
@@ -844,6 +853,7 @@ Gauntlet = function() {
 
 			if (spotionlv)
 			{
+					spotionlv = 0;
 					var spotct = spotionct, ldrnd = 0.01, seqrnd = false;
 					if (Math.random() < spotionrnd) seqrnd = true;
 					else spotionct++;
