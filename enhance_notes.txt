@@ -7,6 +7,7 @@ port list:
 
 fix door by walls
 treasure room floors are wrong ?
+- this is prob the load floor issue again...
 
 monster /gen health & kill -- vs. player shot power levels
 - including level down with shot that doesnt take all health
