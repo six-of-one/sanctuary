@@ -797,13 +797,13 @@ Gauntlet = function() {
         $('booting').show();
 				document.getElementById("gfloor") .src = level.gflr;		// set this here so its ready on map build
         level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
+      }
 
 			announcepause = true;
 			if (levelhelp == undefined) levelhelp = level.help;
 			if (levelhelp == undefined) levelhelp = "";
 //		turned on during player exiting
 			var img = document.getElementById("tweenmsg");
-alert(trdisp);
 			if (trdisp)
 			{
 					$('tween').update("Stats").show();
@@ -826,7 +826,6 @@ alert(trdisp);
 
 // load special potion
 				
-      }
     },
 
     onplay: function(event, previous, current, map) {
@@ -874,7 +873,6 @@ alert(trdisp);
     onenterhelp: function(event, previous, current, msg) { $('help').update(msg).show(); setTimeout(this.autoresume.bind(this), 2000); },
     onleavehelp: function(event, previous, current)      { $('help').hide();  announcepause = false;                                                         },
 
-    onentertween: function(event, previous, current, msg) { $('tween').update(msg).show(); setTimeout(this.onleavetween.bind(this), 2500); announcepause = true; },
     onexittreasure: function(event, previous, current, msg) { setTimeout(this.onleavetween.bind(this), 2500);  
 
 					var img = document.getElementById("tween");
