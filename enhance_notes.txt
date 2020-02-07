@@ -13,6 +13,7 @@ monster /gen health & kill -- vs. player shot power levels
 - including level down with shot that doesnt take all health
 player shot speed and power potions
 
+help msg generic routing in game.{x}(n)
 
 - wall replace routine for surround & shadows
 >trap walls, walls to exits, moving wall, random walls, std shot walls -- shootable walls ?
