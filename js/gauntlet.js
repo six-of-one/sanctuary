@@ -185,7 +185,8 @@ Gauntlet = function() {
         LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have the life ankh", nohlp: 23  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
-		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, 
+		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp,
+		spotionlv = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
 		SUPERSHTFR = 10,		// super shot proj frame
 		TELEPORTILE = 0x0080a0,
 // until target traps are coded any trap will remove these
@@ -635,6 +636,8 @@ Gauntlet = function() {
 
   function timestamp() { return new Date().getTime(); }
 
+  function shuffle(array) { array.sort(() => Math.random() - 0.5); }
+  
   //=========================================================================
   // PERFORMANCE - using arrays for (small) sets
   //=========================================================================
@@ -711,6 +714,14 @@ Gauntlet = function() {
     onstart: function(event, previous, current, type, nlevel) {
       this.player.join(type);
       this.load(to.number(nlevel, this.loadLevel()));
+// setup some things for this run - maybe
+			SPOTION[0] = TREASURE.XSPEED;
+			SPOTION[1] = TREASURE.XSHOTPWR;
+			SPOTION[2] = TREASURE.XSHOTSPD;
+			SPOTION[3] = TREASURE.XARMOR;
+			SPOTION[4] = TREASURE.XFIGHT;
+			SPOTION[5] = TREASURE.XMAGIC;
+			shuffle(SPOTION);
     },
 
     onload: function(event, previous, current, nlevel) {
@@ -723,7 +734,7 @@ Gauntlet = function() {
 		 }
 /// debug tier
 // mark treasure levels
-		 var c = 0, sk, trdisp;
+		 var c = 0, sk, trdisp, potionhelp;
 
 		 for (sk = 0;sk < cfg.levels.length;sk++)
 				if (cfg.levels[sk].name == 'Treasure') 
@@ -733,6 +744,7 @@ Gauntlet = function() {
 		 }
 		 leveldisp = "<br>LEVEL:&nbsp&nbsp "+nlevel;
 		 levelhelp = undefined;
+		 potionhelp = "";
 		 trdisp = false;
 
 		 if (tlevel > 7) 				// last level was treasure room
@@ -766,7 +778,14 @@ Gauntlet = function() {
 				else
 				tlevel++;
 		}
+// testing - restore
 		 treasurerc = 1;
+		 spotionlv = 1;
+
+		if (spotionlv)
+		{
+				potionhelp = "<br><br><br><font color=yellow>FIND THE HIDDEN POTION</font>";
+		}
 
       var level    = cfg.levels[nlevel],
           self     = this,
@@ -774,35 +793,39 @@ Gauntlet = function() {
       if (level.source) {
         onloaded();
       }
-      else { 
+      else {
         $('booting').show();
 				document.getElementById("gfloor") .src = level.gflr;		// set this here so its ready on map build
         level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
-			{
-					announcepause = true;
-					if (levelhelp == undefined) levelhelp = level.help;
+
+			announcepause = true;
+			if (levelhelp == undefined) levelhelp = level.help;
+			if (levelhelp == undefined) levelhelp = "";
 //		turned on during player exiting
-					var img = document.getElementById("tweenmsg");
-					if (trdisp)
+			var img = document.getElementById("tweenmsg");
+alert(trdisp);
+			if (trdisp)
+			{
+					$('tween').update("Stats").show();
+					setTimeout(game.onexittreasure.bind(this), 2500);
+					if (troomfin)
 					{
-							$('tween').update("Stats").show();
-							setTimeout(game.onexittreasure.bind(this), 2500);
-							if (troomfin)
-							{
-										img.innerHTML = game.player.type.fcol+"<table style='text-align: left;'><tr><td>MULTIPLIER:&nbsp&nbsp&nbsp&nbsp&nbsp</td><td>" + game.player.scmult + " x 100 pts</td></tr><tr><td>TREASURES x</td><td>" + game.player.ctr  + "</td></tr><tr><td>BONUS = </td><td>" + (game.player.ctr * 100 * game.player.scmult)  + "</td></tr></table></font>";
-										game.player.addscore(game.player.ctr * 100);
-							}
-							else
-										img.innerHTML = "better luck next time!"
-							game.player.ctr = 0;
+								img.innerHTML = game.player.type.fcol+"<table style='text-align: left;'><tr><td>MULTIPLIER:&nbsp&nbsp&nbsp&nbsp&nbsp</td><td>" + game.player.scmult + " x 100 pts</td></tr><tr><td>TREASURES x</td><td>" + game.player.ctr  + "</td></tr><tr><td>BONUS = </td><td>" + (game.player.ctr * 100 * game.player.scmult)  + "</td></tr></table></font>";
+								game.player.addscore(game.player.ctr * 100);
 					}
 					else
-					{
-							$('tween').update(leveldisp).show(); 
-							setTimeout(game.onleavetween.bind(this), 2000); 
-							if (levelhelp) img.innerHTML = levelhelp;
-					}
+								img.innerHTML = "better luck next time!"
+					game.player.ctr = 0;
 			}
+			else
+			{
+					$('tween').update(leveldisp).show(); 
+					setTimeout(game.onleavetween.bind(this), 2000); 
+					img.innerHTML = levelhelp + potionhelp;
+			}
+
+// load special potion
+				
       }
     },
 
