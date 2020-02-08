@@ -93,12 +93,12 @@ Gauntlet = function() {
 									"Some walls may be destroyed",
 									"<font color=red>You have # seconds to collect treasures</font>",
 									"<font color=yellow>You must exit to receive bonus points</font>",
-									"You got extra speed",
-									"You got extra shot power",
-									"You got extra shot speed",
-									"You got extra armor",
-									"You got extra fight power",
-									"You got extra magic power",
+									"You now have extra speed",
+									"You now have extra shot power",
+									"You now have extra shot speed",
+									"You now have extra armor",
+									"You now have extra fight power",
+									"You now have extra magic power",
 									"You now have limited invisibility",
 									"You now have invulnerability",
 									"You now have extra repulsiveness",
@@ -165,18 +165,18 @@ Gauntlet = function() {
         STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun', help: "Some tiles stun players", nohlp: 7  },
         PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, push: true,   sound: 'null'  },
 // extra power potions
-        XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra speed", nohlp: 10  },
+        XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You now have extra speed", nohlp: 10  },
         LIMINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have limited invisibility", nohlp: 17  },
 // shootable wall - see grid 38 of backgrounds
         SHOTWALL:       { sx: 0, sy: 38, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , help: "Some walls may be destroyed", nohlp: 8 },
 // shotable and non-shot fake items, see grid 39 of backgrounds
         SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , help: "Fooled you!  Some items may be fake", nohlp: 29 },
         PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , help: "Fooled you!  Some items may be fake", nohlp: 29 },
-        XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra shot power", nohlp: 11  },
-        XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra shot speed", nohlp: 12  },
-        XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra armor", nohlp: 13  },
-        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion' , help: "You got extra fight power", nohlp: 14 },
-        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You got extra magic power", nohlp: 15  },
+        XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You now have extra shot power", nohlp: 11  },
+        XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You now have extra shot speed", nohlp: 12  },
+        XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You now have extra armor", nohlp: 13  },
+        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion' , help: "You now have extra fight power", nohlp: 14 },
+        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You now have extra magic power", nohlp: 15  },
         LIMINVUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have invulnerability", nohlp: 18  },
         LIMREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have extra repulsiveness", nohlp: 19  },
         LIMREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have reflective shots", nohlp: 20  },
@@ -639,6 +639,15 @@ Gauntlet = function() {
 
   function shuffle(array) { array.sort(() => Math.random() - 0.5); }
   
+  function helpdis(hn, htex)
+  {
+  						if (this.type.nohlp != undefined)
+						if (HELPCLEAR[this.type.nohlp])
+						{
+								HELPCLEAR[this.type.nohlp] = helpcleared;
+								if (this.type.help != undefined) {$('help').update(this.type.help).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
+						}
+	}
   //=========================================================================
   // PERFORMANCE - using arrays for (small) sets
   //=========================================================================
@@ -800,7 +809,7 @@ Gauntlet = function() {
 
       var level    = cfg.levels[nlevel],
 		self     = this,
-		var onloaded = function() { $('booting').hide(); self.play(new Map(nlevel)); };
+		onloaded = function() { $('booting').hide(); self.play(new Map(nlevel)); };
 		document.getElementById("gfloor") .src = level.gflr;		// set this here so its ready on map build
       if (level.source) {
 				onloaded();
