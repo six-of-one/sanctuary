@@ -1347,6 +1347,7 @@ Gauntlet = function() {
     nuke: function(viewport, player) {
       var rp, n, max, entity, distance, limit = TILE*player.type.magic;
 		 var xmg = 0;
+		helpdis(nohlpmagaff, undefined, 2000);
 		 if (player.xmagic) xmg = 4;
       for(n = 0, max = this.entities.length ; n < max ; n++) {
         entity = this.entities[n];
@@ -2079,7 +2080,7 @@ var ymir = false, xmir = false;
 			vid.style.visibility = "hidden";
 			for (var c = 0; c < 50; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
 /// debug code - remove pre-release
-				if (DEBUGON)
+				if (DEBUGON & 0)
 				{
 					HELPCLEAR[0] = 0;
 					HELPCLEAR[1] = 0;
@@ -2480,6 +2481,8 @@ var ymir = false, xmir = false;
 /// debug tier
         publish(EVENT.PLAYER_NUKE, this);
       }
+		else
+				helpdis(nohlpcmb, undefined, 2000);
     },
 
     onrender: function(frame) {
