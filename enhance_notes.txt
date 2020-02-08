@@ -5,7 +5,6 @@ gJ - gauntlet javascript		(gJ.0 - original)
 sl
 port list:
 
-fix door by walls
 treasure room floors are wrong ?
 - this is prob the load floor issue again...
 
@@ -269,6 +268,9 @@ x-- treasure room, timer, score, fail, msgs
 x-- adjust teleporters to small random chance select another nearby tele
 -- as of now it selected the previous nearest - which might be anywhere
 >maybe make list of teles sorted by dist
+
+x-- fix door by walls
+
 
 expanded done:
 
