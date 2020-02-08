@@ -83,106 +83,119 @@ Gauntlet = function() {
 // list of tutorial and help messages to display
 		HELPDIS = [
 									"Null 0 entry - no usable",
-									"Treasure: 100 points",																				// 1
-									"Food: health increased by 100",
-									"Save keys to open doors",
-									"Save potions for later use",
-									"Traps make walls disappear",																// 5
-									"Transporters move you to<br> the closest transporter visible",
-									"Some tiles stun players",
-									"Some walls may be destroyed",
-									"<font color=red>You have # seconds to collect treasures</font>",
-									"<font color=yellow>You must exit to receive bonus points</font>",
-									"You now have extra speed",
+// ops
+									"You now have extra speed",																				// 1
 									"You now have extra shot power",
 									"You now have extra shot speed",
 									"You now have extra armor",
-									"You now have extra fight power",
+									"You now have extra fight power",																			// 5
 									"You now have extra magic power",
 									"You now have limited invisibility",
-									"You now have invulnerability",
-									"You now have extra repulsiveness",
-									"You now have reflective shots",
-									"You now have super shots",
-									"You now have teleportability",
-									"You now have the life ankh",
-									
-									"Some food destroyed by shots",
-									"Shooting magic potions has a lesser effect",
-									"Shooting poison slows monsters",
-									"Find exit to next level",
-									"Get bonus multiplier by collecting treasure",
-									"More players allow higher bonus multiplier",
-									"Have friends join in",
-									"Add more players for greater fire power",
-									"Magic potions work differently for each player",
-									"Stalling will cause doors to open",
-									"Magic potions affect everything on screen",
-									"Collect magic potion before pressing magic",
-									"You are full of bombs and/or keys",
-									"Shots do not hurt other players yet",
+// lvl notification
+									"<font color=yellow>Find the hidden potion</font>",
+									"<font color=red>You have # seconds to collect treasures</font>",
+									"<font color=yellow>You must exit to receive bonus points</font>",				// 10
 									"Player shots now stun other players",
 									"Player shots now hurt other players",
 									"Players can now go off screen",
+// help only
+									"Treasure: 100 points",
+									"Treasure: 500 points",																									// 15
+									"Food: health increased by 100",
+									"Food: health increased by RND",
+// help items & rnd lvl messages
+									"Save keys to open doors",
+									"Save potions for later use",
+									"Traps make walls disappear",																			//20
+									"Some food destroyed by shots",
+									"Shooting magic potions has a lesser effect",
+									"Magic potions work differently for each player",
+									"Magic potions affect everything on screen",
+									"Transporters move you to<br> the closest transporter visible",			// 25
+									"Some walls may be destroyed",
+									"Stalling will cause doors to open",
+									"Find exit to next level",
+									"Get bonus multiplier by collecting treasure",
+									"More players allow higher bonus multiplier",															// 30
+									"Add more players for greater fire power",
+									"Have friends join in",
+									"Kill thief to recover stolen item",
+									"Item on next level",
+// lvl messages 2, 3, 4, 5, 6, 7
+									"Ghosts must be shot",																									// 35
+									"Some food can be destroyed",
+									"Fight hand to hand by running into grunts",
+									"Beware the demons which shoot you",
+									"Sorcerers may be invisible",
+									"Use magic to kill death",																								// 40
+// ply action only
 									"Player loses # health<br>Shoot or avoid ghosts",
 									"Player loses # health<br>Shoot or fight grunts",
 									"Player loses # health<br>Shoot or fight demons",
 									"Player loses # health<br>Shoot or fight sorcerers",
-									"Player loses # health<br>Shoot or fight lobbers",
-									"<font color=yellow>Find the hidden potion</font>",
-									"Kill thief to recover stolen item",
-									"Item on next level",
+									"Player loses # health<br>Shoot or fight lobbers",										// 45
+
 									"Collect magic potion before pressing magic",
-									"Ghosts must be shot",
-									"Some food can be destroyed",
-									"Beware the demons which shoot you",
-									"Sorcerers may be invisible",
-									"Use magic to kill death"
+									"You are full of bombs and/or keys",
+									"Shots do not hurt other players yet",
+// gII
+									"Some tiles stun players",
+									"Shooting poison slows monsters",																			// 50
+									"You now have invulnerability",
+									"You now have extra repulsiveness",
+									"You now have reflective shots",
+									"You now have super shots",
+									"You now have teleportability",																					// 55
+									"Some chests are locked",
+									"Some walls may be pushed",
+// expanded
+									"Fooled you!  Some items may be fake",
+									"You now have the life ankh"
 									],
 		HELPCLEAR = [ ],	// help messages only display one time or can be turned off
-		helpdsf = "Some food destroyed by shots", helpsap = "Shooting a potion has a lesser effect", helpcmb = "Collect magic potion before pressing magic",
-		helppois = "Shooting poison slows monsters",
-		nohlpdsf = 25, nohlpsap = 26, nohlpcmb = 27, nohlppois = 28, nohlpmagaff = 9, nohlptr = 9, nohlpmstex = 10,
+//		helpdsf = "Some food destroyed by shots", helpsap = "Shooting a potion has a lesser effect", helpcmb = "Collect magic potion before pressing magic",
+//		helppois = "Shooting poison slows monsters",
+		nohlpdsf = 21, nohlpsap = 22, nohlpcmb = 46, nohlppois = 50, nohlpmagaff = 24, nohlptr = 9, nohlpmstex = 10,
 // dont shoot food				25
 // shooting a potion			26
 // collect magic before	27
 		helpcleared = 0, // option - tutorial count down 
       TREASURE = {
-        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', help: "Food: health increased by 100", nohlp: 2 },
+        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
         POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' },
-        FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood', help: "Food: health increased by 100" , nohlp: 2  },
-        FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood', help: "Food: health increased by 100" , nohlp: 2  },
-        FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood', help: "Food: health increased by 100", nohlp: 2   },
-        KEY:     { sx: 21, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'collectkey' , help: "Save keys to open doors", nohlp: 3   },
-        POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion', help: "Save potions for later use", nohlp: 4 },
-        POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', help: "Save potions for later use", nohlp: 4  },
-        GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1, troom: 1,             sound: 'collectgold', help: "Treasure: 100 points", nohlp: 1   },
-        LOCKED:    { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'collectgold', help: "Some chests are locked"   },
-        BAG:    { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5, troom: 1,                sound: 'collectgold', help: "Treasure: 500 points", nohlp: 1   },
+        FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
+        FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
+        FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16   },
+        KEY:     { sx: 21, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'collectkey' , nohlp: 18   },
+        POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion', nohlp: 19 },
+        POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', nohlp: 19  },
+        GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1, troom: 1,             sound: 'collectgold', nohlp: 14   },
+        LOCKED:    { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'collectgold', nohlp:   56 },
+        BAG:    { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5, troom: 1,                sound: 'collectgold', nohlp: 15   },
 // teleport, trap, stun tiles as treasure objects for now -- these are animated, and operate on touch so it works
-        TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport', help: "Transporters move you to<br> the closest transporter visible", nohlp: 6  },
-        TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap', help: "Traps make walls disappear", nohlp: 5 },
-        STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun', help: "Some tiles stun players", nohlp: 7  },
-        PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, push: true,   sound: 'null'  },
+        TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport',  nohlp: 25  },
+        TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap', nohlp: 20 },
+        STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun', nohlp: 49  },
+        PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, push: true,   sound: 'null', nohlp: 57  },
 // extra power potions
-        XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You now have extra speed", nohlp: 10  },
-        LIMINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have limited invisibility", nohlp: 17  },
+        XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', nohlp: 1  },
+        LIMINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', nohlp: 7  },
 // shootable wall - see grid 38 of backgrounds
-        SHOTWALL:       { sx: 0, sy: 38, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , help: "Some walls may be destroyed", nohlp: 8 },
+        SHOTWALL:       { sx: 0, sy: 38, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' ,  nohlp: 26},
 // shotable and non-shot fake items, see grid 39 of backgrounds
-        SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , help: "Fooled you!  Some items may be fake", nohlp: 29 },
-        PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , help: "Fooled you!  Some items may be fake", nohlp: 29 },
-        XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You now have extra shot power", nohlp: 11  },
-        XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You now have extra shot speed", nohlp: 12  },
-        XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You now have extra armor", nohlp: 13  },
-        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion' , help: "You now have extra fight power", nohlp: 14 },
-        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', help: "You now have extra magic power", nohlp: 15  },
-        LIMINVUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have invulnerability", nohlp: 18  },
-        LIMREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have extra repulsiveness", nohlp: 19  },
-        LIMREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have reflective shots", nohlp: 20  },
-        LIMSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have super shots", nohlp: 21  },
-        LIMTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have teleportability", nohlp: 22  },
-        LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', help: "You now have the life ankh", nohlp: 23  },
+        SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , nohlp: 58 },
+        PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , nohlp: 58 },
+        XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion',  nohlp: 2  },
+        XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', nohlp: 3  },
+        XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', nohlp: 4  },
+        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion' , nohlp: 5 },
+        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', nohlp: 6  },
+        LIMINVUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 51 },
+        LIMREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 52  },
+        LIMREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', nohlp: 53  },
+        LIMSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', nohlp: 54  },
+        LIMTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 55  },
+        LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 59  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp,
