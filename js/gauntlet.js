@@ -1882,7 +1882,7 @@ var ymir = false, xmir = false;
     cbox: CBOX.FULL,
 
 // not living shootables
-/// message - "dont shoot the {x}"
+
     hurt: function(damage, by, nuke) {
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 				if (this.type.wall)
@@ -2078,7 +2078,7 @@ var ymir = false, xmir = false;
 			vid.load();
 			vid.pause();
 			vid.style.visibility = "hidden";
-			for (var c = 0; c < 50; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
+			for (var c = 0; c < 70; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
 /// debug code - remove pre-release
 				if (DEBUGON & 0)
 				{
