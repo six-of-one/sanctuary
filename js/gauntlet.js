@@ -2623,6 +2623,7 @@ var ymir = false, xmir = false;
           }
         }
       }
+		if (Mastermult != player.scmult) player.scmult = Mastermult;		// ISSUE: not multiplayer compatible
     },
 
     refreshPlayerHealth: function(player) {
