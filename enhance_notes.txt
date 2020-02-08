@@ -5,7 +5,6 @@ gJ - gauntlet javascript		(gJ.0 - original)
 sl
 port list:
 
-help msg generic routing in game.{x}(n)
 
 
 monster /gen health & kill -- vs. player shot power levels
@@ -273,6 +272,7 @@ x-- fix door by walls
 x-- treasure room floors are wrong ?
 --- this is prob the load floor issue again...
 
+x--- help msg generic routing in game.{x}(n)
 
 expanded done:
 
