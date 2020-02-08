@@ -639,14 +639,19 @@ Gauntlet = function() {
 
   function shuffle(array) { array.sort(() => Math.random() - 0.5); }
   
-  function helpdis(hn, htex)
+  function helpdis(hn, htex, hto)		// display text in the tutorial overlay box		passed vars - hn = help # array ref,		htex = override help text,		hto = timeout in millisecs, def to 2000
   {
-  						if (this.type.nohlp != undefined)
-						if (HELPCLEAR[this.type.nohlp])
-						{
-								HELPCLEAR[this.type.nohlp] = helpcleared;
-								if (this.type.help != undefined) {$('help').update(this.type.help).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
-						}
+			if (hto == undefined || (hto < 1) || (hto > 120000)) hto = 2000;
+			if (htex == null || htex == "") htex = undefined;
+			if (htex == undefined)
+			if (nh != undefined)
+			if (HELPCLEAR[nh]) 		// help messages cleared after 1 appearance or blocked by option
+			{
+					HELPCLEAR[nh] = helpcleared;
+					htex = HELPDIS[nh];
+			}
+
+			if (htex != undefined) {$('help').update(htex).show(); setTimeout(game.onleavehelp.bind(this), hto); announcepause = true;}
 	}
   //=========================================================================
   // PERFORMANCE - using arrays for (small) sets
