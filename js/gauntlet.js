@@ -639,7 +639,7 @@ Gauntlet = function() {
 
   function shuffle(array) { array.sort(() => Math.random() - 0.5); }
   
-  function helpdis(hn, htex, hto)		// display text in the tutorial overlay box		passed vars - hn = help # array ref,		htex = override help text,		hto = timeout in millisecs, def to 2000
+  function helpdis(nh, htex, hto)		// display text in the tutorial overlay box		passed vars - nh = help # array ref,		htex = override help text,		hto = timeout in millisecs, def to 2000
   {
 			if (hto == undefined || (hto < 1) || (hto > 120000)) hto = 2000;
 			if (htex == null || htex == "") htex = undefined;
@@ -1873,12 +1873,7 @@ var ymir = false, xmir = false;
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 				if (this.type.wall)
 				{
-						if (this.type.nohlp != undefined)
-						if (HELPCLEAR[this.type.nohlp])
-						{
-								HELPCLEAR[this.type.nohlp] = helpcleared;
-								if (this.type.help != undefined) {$('help').update(this.type.help).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
-						}
+						helpdis(this.type.nohlp, undefined, 2000);
 						 if (this.health == undefined) this.health = this.type.health;
 						 this.health = Math.max(0, this.health - damage);
 						 if (this.health > 0) return;
@@ -1886,31 +1881,19 @@ var ymir = false, xmir = false;
 				else
 				if (this.type.health)
 				{
-						if (HELPCLEAR[nohlpdsf])
-						{
-								HELPCLEAR[nohlpdsf] = helpcleared;
-								{$('help').update(helpdsf).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
-						}
+						helpdis(nohlpdsf, undefined, 2000);
 				}
 			 shotpot = 0.8;	// shot potions are weaker
 				if (this.type.potion)
 				{
-						if (HELPCLEAR[nohlpsap])
-						{
-								HELPCLEAR[nohlpsap] = helpcleared;
-								{$('help').update(helpsap).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
-						}
+						helpdis(nohlpsap, undefined, 2000);
 						Mastermap.nuke(null, by.owner);
 						Musicth.play(Musicth.sounds.nuke);
 				}
 				if (this.type.poison)
 				{
 						slowmonster = 0.5;
-						if (HELPCLEAR[nohlppois])
-						{
-								HELPCLEAR[nohlppois] = helpcleared;
-								{$('help').update(helppois).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
-						}
+						helpdis(nohlppois, undefined, 2000)
 				}
 				shotpot = 1;
 				Mastermap.remove(this);
@@ -2163,13 +2146,7 @@ var ymir = false, xmir = false;
 
       if (treasure.type.wall)
 		 {
-				if (treasure.type.sy == FAKES)
-				if (treasure.type.nohlp != undefined)
-				if (HELPCLEAR[treasure.type.nohlp])
-				{
-						HELPCLEAR[treasure.type.nohlp] = helpcleared;
-						if (treasure.type.help != undefined) {$('help').update(treasure.type.help).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
-				}
+				if (treasure.type.sy == FAKES) helpdis(treasure.type.nohlp, undefined, 2000);
 				return; //shot wall, go back
 		 }
 
@@ -2195,12 +2172,7 @@ var ymir = false, xmir = false;
 				 }
 		 }
 
-		if (treasure.type.nohlp != undefined)
-		if (HELPCLEAR[treasure.type.nohlp])
-		{
-				HELPCLEAR[treasure.type.nohlp] = helpcleared;
-				if (treasure.type.help != undefined) {$('help').update(treasure.type.help).show(); setTimeout(game.onleavehelp.bind(this), 2000); announcepause = true;}
-		}
+		 helpdis(treasure.type.nohlp, undefined, 2000);
 
 		 if (treasure.type.stun)
 			this.stun = 4;
