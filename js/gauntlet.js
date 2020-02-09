@@ -27,7 +27,7 @@ Gauntlet = function() {
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, wallsprites, entsprites,
-		levelplus, refpixel, shotpot, slowmonster = 1, announcepause = false,
+		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
 		ftilestr, fcellstr, FCUSTILE = 37, FDESTWALL = 38, FAKES = 39,
@@ -813,8 +813,8 @@ Gauntlet = function() {
 				tlevel++;
 		}
 // testing - restore
-		 treasurerc = 1;
-		 spotionlv = 1;
+//		 treasurerc = 1;
+//		 spotionlv = 1;
 
 // check for hidden potions
 		if (nlevel > 5)
@@ -1913,6 +1913,8 @@ var ymir = false, xmir = false;
 				}
 				if (this.type.poison)
 				{
+// AUDIO: needs extract from g2
+						slowmonstertime = slowmonstertime + 30;
 						slowmonster = 0.5;
 						helpdis(nohlppois, undefined, 2000, undefined)
 				}
@@ -2419,6 +2421,11 @@ var ymir = false, xmir = false;
 							timerupd.level.update("Time: " + troomtime);
 							if (troomtime < 1) // ran out of time
 									game.nextLevel();
+					}
+					if (slowmonstertime > 0)
+					{
+							slowmonstertime--;
+							if (slowmonstertime < 1) slowmonster = 1;
 					}
 			}
 // count down stun
