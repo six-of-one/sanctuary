@@ -666,8 +666,11 @@ Gauntlet = function() {
 					htex = HELPDIS[nh];
 			}
 
-			if (hrep != undefined) htex.replace("#", hrep);
-			if (htex != undefined) {$('help').update(htex).show(); setTimeout(game.onleavehelp.bind(this), hto); announcepause = true;}
+			if (htex != undefined) 
+			{
+					if (hrep != undefined) htex = htex.replace("#", hrep);
+					$('help').update(htex).show(); setTimeout(game.onleavehelp.bind(this), hto); announcepause = true;
+			}
 	}
   //=========================================================================
   // PERFORMANCE - using arrays for (small) sets
@@ -1118,7 +1121,7 @@ Gauntlet = function() {
 
     onMonsterCollide: function(monster, entity) {
       if (entity.player) {
-			helpdis(monster.type.nohlp, undefined, 2000, monster.type.damage);		// ISSUE: player armor
+			helpdis(monster.type.nohlp, undefined, 2000, Math.floor(monster.type.damage));		// ISSUE: player armor
         entity.hurt(monster.type.damage, monster);
         if (monster.type.selfharm)
           monster.hurt(monster.type.selfharm, monster);
