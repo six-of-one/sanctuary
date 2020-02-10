@@ -438,6 +438,7 @@ Gauntlet = function() {
       { id: 'dtouch',        name: 'sounds/g1_deathtouch',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'infosnd',        name: 'sounds/g1_info',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'healthcnt',        name: 'sounds/g1_healthcount',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
+      { id: 'sbuzz',        name: 'sounds/g1_buzz',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 }, //
       { id: 'opendoor',        name: 'sounds/g1_door',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 } //
     ],
 
@@ -2496,7 +2497,10 @@ var ymir = false, xmir = false;
         publish(EVENT.PLAYER_NUKE, this);
       }
 		else
+		{
 				helpdis(nohlpcmb, undefined, 2000, undefined);
+				Musicth.play(Musicth.sounds.sbuzz);
+		}
     },
 
     onrender: function(frame) {
