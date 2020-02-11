@@ -108,7 +108,8 @@ Gauntlet = function() {
 									"Save potions for later use",
 									"Traps make walls disappear",																			//20
 									"Some food destroyed by shots",
-									"Shooting magic potions has a lesser effect",
+//									"Shooting magic potions has a lesser effect",			// g IV dialog
+									"Shooting a potion has a lesser effect",
 									"Magic potions work differently for each player",
 									"Magic potions affect everything on screen",
 									"Transporters move you to<br> the closest transporter visible",			// 25
@@ -2103,6 +2104,7 @@ var ymir = false, xmir = false;
 			vid.load();
 			vid.pause();
 			vid.style.visibility = "hidden";
+// some help msgs pair with announcer dialog
 			HELPANNC[9] = Musicth.sounds.anchidpot;
 			HELPANNC[14] = Musicth.sounds.anctrs;
 			HELPANNC[18] = Musicth.sounds.anckeys;
