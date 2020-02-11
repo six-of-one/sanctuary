@@ -153,6 +153,7 @@ Gauntlet = function() {
 									"Fooled you!  Some items may be fake",
 									"You now have the life ankh"
 									],
+		HELPANNC = [ ], // announcer help tie ins
 		HELPCLEAR = [ ],	// help messages only display one time or can be turned off
 //		helpdsf = "Some food destroyed by shots", helpsap = "Shooting a potion has a lesser effect", helpcmb = "Collect magic potion before pressing magic",
 //		helppois = "Shooting poison slows monsters",
@@ -411,7 +412,7 @@ Gauntlet = function() {
       { id: 'thebeginning',    name: 'sounds/music.thebeginning',    formats: ['mp3', 'ogg'], volume: 0.25, loop: true             },
       { id: 'warbringer',      name: 'sounds/music.warbringer',      formats: ['mp3', 'ogg'], volume: 0.25, loop: true             },
       { id: 'gameover',        name: 'sounds/gameover',              formats: ['mp3', 'ogg'], volume: 0.3                         },
-      { id: 'victory',      		   name: 'sounds/victory',               formats: ['mp3', 'ogg'], volume: 1.0                         },
+      { id: 'victory',      	name: 'sounds/victory',               formats: ['mp3', 'ogg'], volume: 1.0                         },
       { id: 'femalepain1',     name: 'sounds/femalepain1',           formats: ['mp3', 'ogg'], volume: 0.3                         }, // http://www.premiumbeat.com/sfx/
       { id: 'femalepain2',     name: 'sounds/femalepain2',           formats: ['mp3', 'ogg'], volume: 0.3                         }, // (ditto)
       { id: 'malepain1',       name: 'sounds/malepain1',             formats: ['mp3', 'ogg'], volume: 0.3                         },
@@ -428,7 +429,8 @@ Gauntlet = function() {
       { id: 'ancpots',       name: 'sounds/g1an_svpot.ogg',             formats: ['mp3', 'ogg'], volume: 1.0,                        },
       { id: 'anctrs',       	name: 'sounds/g1an_treas.ogg',             formats: ['mp3', 'ogg'], volume: 1.0,                        },
       { id: 'ancdeath',       name: 'sounds/g1an_usemag.ogg',             formats: ['mp3', 'ogg'], volume: 1.0,                        },
-      { id: 'anc',       		name: 'sounds/g1_exit',             formats: ['mp3', 'ogg'], volume: 1.0,                        },
+      { id: 'anctraps',       name: 'sounds/g1an_traps',             formats: ['mp3', 'ogg'], volume: 1.0,                        },
+      { id: 'ancwaldes',      name: 'sounds/g1an_waldes',             formats: ['mp3', 'ogg'], volume: 1.0,                        },
       { id: 'exitlevel',       name: 'sounds/g1_exit',             formats: ['mp3', 'ogg'], volume: 1.0,                        },
       { id: 'firewarrior',     name: 'sounds/g1fire_war',           formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 }, //   NOTE: ie has limit of 40 <audio> so be careful with pool amounts
       { id: 'firevalkyrie',    name: 'sounds/g1fire_val',          formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
@@ -2101,6 +2103,18 @@ var ymir = false, xmir = false;
 			vid.load();
 			vid.pause();
 			vid.style.visibility = "hidden";
+			HELPANNC[9] = Musicth.sounds.anchidpot;
+			HELPANNC[14] = Musicth.sounds.anctrs;
+			HELPANNC[18] = Musicth.sounds.anckeys;
+			HELPANNC[19] = Musicth.sounds.ancpots;
+			HELPANNC[20] = Musicth.sounds.anctraps;
+			HELPANNC[21] = Musicth.sounds.ancfoodsh;
+			HELPANNC[22] = Musicth.sounds.ancpotsh;
+			HELPANNC[26] = Musicth.sounds.ancwaldes;
+			HELPANNC[28] = Musicth.sounds.ancfindex;
+			HELPANNC[36] = Musicth.sounds.ancbeware;
+			HELPANNC[37] = Musicth.sounds.ancsorc;
+			HELPANNC[58] = Musicth.sounds.ancfooled;
 			for (var c = 0; c < 70; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
 /// debug code - remove pre-release
 				if (DEBUGON & 0)
