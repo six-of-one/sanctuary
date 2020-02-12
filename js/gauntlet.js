@@ -916,7 +916,7 @@ Gauntlet = function() {
 				tlevel++;
 		}
 // testing - restore
-//		 treasurerc = 1;
+		 treasurerc = 1;
 //		 spotionlv = 1;
 
 // check for hidden potions
@@ -2555,6 +2555,7 @@ var ymir = false, xmir = false;
 					{
 							troomtime--;
 							timerupd.level.update("Time: " + troomtime);
+							if (troomtime < 11) Musicth.play(TROOMCNT[troomtime]);
 							if (troomtime < 1) // ran out of time
 									game.nextLevel();
 					}
