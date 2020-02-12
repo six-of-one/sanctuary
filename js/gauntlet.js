@@ -202,6 +202,7 @@ Gauntlet = function() {
         LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 59  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
+		TROOMCNT = [ ],
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp,
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
 		SUPERSHTFR = 10,		// super shot proj frame
@@ -443,9 +444,54 @@ Gauntlet = function() {
       { id: 'ancfooled',       name: 'sounds/g1an_fooled',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'anchidpot',       name: 'sounds/g1an_hidden',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'anckilthf',      name: 'sounds/g1an_kilthf',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'anckilthf',      name: 'sounds/g1an_thislvl',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancthislvl',      name: 'sounds/g1an_thislvl',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anctryfind',      name: 'sounds/g1an_tryfind',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// taunts
+      { id: 'ancletsee',      name: 'sounds/g1an_letsee',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancgcoop',      name: 'sounds/g1an_gcoop',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancghero',      name: 'sounds/g1an_heroic',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancivnot',      name: 'sounds/g1an_ivenot',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancssfood',      name: 'sounds/g1an_ssfood',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancfrnds',      name: 'sounds/g1an_frnds',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancdsyf',      name: 'sounds/g1an_dsyf',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancyssop',      name: 'sounds/g1an_yssop',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancyshop',      name: 'sounds/g1an_yshop',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancploff',      name: 'sounds/g1an_ploff',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancyjsp',      name: 'sounds/g1an_yjsp',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anceyf',      name: 'sounds/g1an_eyf',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancstf',      name: 'sounds/g1an_stf',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },		// 		- delay so char precedes
+      { id: 'ancstp',      name: 'sounds/g1an_stp',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },		// 		- delay so char precedes
+      { id: 'anchasetn',      name: 'sounds/g1an_hasetn',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },		// 		- delay so char precedes
+
+// treasure room annc
+      { id: 'ancftreas',      name: 'sounds/g1an_ftreas',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancwtreas',      name: 'sounds/g1an_wtreas',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc0',      name: 'sounds/g1an_0',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc1',      name: 'sounds/g1an_1',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc2',      name: 'sounds/g1an_2',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc3',      name: 'sounds/g1an_3',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc4',      name: 'sounds/g1an_4',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc5',      name: 'sounds/g1an_5',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc6',      name: 'sounds/g1an_6',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc7',      name: 'sounds/g1an_7',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc8',      name: 'sounds/g1an_8',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc9',      name: 'sounds/g1an_9',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc10',      name: 'sounds/g1an_10',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancmust21',      name: 'sounds/g1_must21',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },		// faster troom music - 21 secs
+      { id: 'ancmust25',      name: 'sounds/g1_must25',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },		// 25 secs
+      { id: 'ancmust27',      name: 'sounds/g1_must27',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },		// 27 secs
+      { id: 'ancmust28',      name: 'sounds/g1_must28',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },		// 28 secs
+// troom taunts
+      { id: 'ancbetr',      name: 'sounds/g1an_better',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancymi',      name: 'sounds/g1an_cymi',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anchurry',      name: 'sounds/g1an_hurry',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anckid',      name: 'sounds/g1an_kidding',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anctimes',      name: 'sounds/g1an_times',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anctoms',      name: 'sounds/g1an_toms',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anculoose',      name: 'sounds/g1an_uloose',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+
 // multi part annc - these are combined into a single msg...which might need to be recorded seperately
-// char pos annc
+// char positive annc
       { id: 'ancwar1',      name: 'sounds/g1an_war0',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancelf1',      name: 'sounds/g1an_elf1',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancwiz1',      name: 'sounds/g1an_wiz1',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
@@ -456,7 +502,7 @@ Gauntlet = function() {
       { id: 'ancelf2',      name: 'sounds/g1an_elf2',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
 // 3rd wiz, not sure
       { id: 'ancwiz3',      	name: 'sounds/g1an_wiz3',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-// powers
+// powers		- delay so "{char} now has" precedes
       { id: 'ancxspd',    	  name: 'sounds/g1an_xspd',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancxshtpwr',      name: 'sounds/g1an_shtpwr',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancxshtspd',      name: 'sounds/g1an_shtspd',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
@@ -465,13 +511,13 @@ Gauntlet = function() {
       { id: 'ancxmag',      name: 'sounds/g1an_xmag',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancinvis',      name: 'sounds/g1an_invis',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
 // bld dialog
-      { id: 'ancnhs',      name: 'sounds/g1an_nowhas',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'anc2die',      name: 'sounds/g1an_abt2die',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancnhs',      name: 'sounds/g1an_nowhas',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },		// 		- delay so char precedes - "elf now has"
       { id: 'ancwelc',      name: 'sounds/g1an_welcome',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-// nearing death
+// nearing death		- delay so char precedes
       { id: 'ancpwrl',      name: 'sounds/g1an_pwrlost',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancruno',      name: 'sounds/g1an_runout',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancndsfd',      name: 'sounds/g1an_needsfood',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc2die',      name: 'sounds/g1an_abt2die',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
 
 // shots
       { id: 'firewarrior',     name: 'sounds/g1fire_war',           formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 }, //   NOTE: ie has limit of 40 <audio> so be careful with pool amounts
@@ -2157,6 +2203,19 @@ var ymir = false, xmir = false;
 			HELPANNC[36] = Musicth.sounds.ancbeware;
 			HELPANNC[37] = Musicth.sounds.ancsorc;
 			HELPANNC[58] = Musicth.sounds.ancfooled;
+// treasure room count down
+			TROOMCNT[0] = Musicth.sounds.anc0;
+			TROOMCNT[1] = Musicth.sounds.anc1;
+			TROOMCNT[2] = Musicth.sounds.anc2;
+			TROOMCNT[3] = Musicth.sounds.anc3;
+			TROOMCNT[4] = Musicth.sounds.anc4;
+			TROOMCNT[5] = Musicth.sounds.anc5;
+			TROOMCNT[6] = Musicth.sounds.anc6;
+			TROOMCNT[7] = Musicth.sounds.anc7;
+			TROOMCNT[8] = Musicth.sounds.anc8;
+			TROOMCNT[9] = Musicth.sounds.anc9;
+			TROOMCNT[10] = Musicth.sounds.anc10;
+
 			for (var c = 0; c < 70; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
 /// debug code - remove pre-release
 				if (DEBUGON & 0)
