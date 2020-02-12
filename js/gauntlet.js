@@ -55,10 +55,10 @@ Gauntlet = function() {
 		DIRTX = [ 0, 32, 32, 32, 0, -32, -32, -32],
 		DIRTY = [ -32, -32, 0, 32, 32, 32, 0, -32],
       PLAYER = {
-        WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, health: 2000, speed: 180/FPS, damage: 50/FPS, armor: 2, magic: 16, weapon: { speed: 600/FPS, reload: 0.40*FPS, damage: 7, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior", fcol: "<font color=red>" }, // Thor
-        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, health: 2000, speed: 215/FPS, damage: 40/FPS, armor: 3, magic: 16, weapon: { speed: 620/FPS, reload: 0.35*FPS, damage: 4, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", fcol: "<font color=blue>" }, // Thyra
-        WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, health: 2000, speed: 190/FPS, damage: 30/FPS, armor: 1, magic: 32, weapon: { speed: 640/FPS, reload: 0.30*FPS, damage: 6, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard", fcol: "<font color=yellow>"   }, // Merlin
-        ELF:      { sx: 0, sy: 3, frames: 3, fpf: FPS/10, health: 2000, speed: 245/FPS, damage: 20/FPS, armor: 1, magic: 24, weapon: { speed: 660/FPS, reload: 0.25*FPS, damage: 4, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf", fcol: "<font color=green>"      }  // Questor
+        WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, health: 2000, speed: 180/FPS, damage: 50/FPS, armor: 2, magic: 16, weapon: { speed: 600/FPS, reload: 0.40*FPS, damage: 7, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior", annc: 'ancwar1', fcol: "<font color=red>" }, // Thor
+        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, health: 2000, speed: 215/FPS, damage: 40/FPS, armor: 3, magic: 16, weapon: { speed: 620/FPS, reload: 0.35*FPS, damage: 4, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", annc: 'ancval1', fcol: "<font color=blue>" }, // Thyra
+        WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, health: 2000, speed: 190/FPS, damage: 30/FPS, armor: 1, magic: 32, weapon: { speed: 640/FPS, reload: 0.30*FPS, damage: 6, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard", annc: 'ancwiz1', fcol: "<font color=yellow>"   }, // Merlin
+        ELF:      { sx: 0, sy: 3, frames: 3, fpf: FPS/10, health: 2000, speed: 245/FPS, damage: 20/FPS, armor: 1, magic: 24, weapon: { speed: 660/FPS, reload: 0.25*FPS, damage: 4, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf", annc: 'ancelf1', fcol: "<font color=green>"      }  // Questor
       },
       MONSTER = {
         GHOST:  { sx: 0, sy: 4, frames: 3, fpf: FPS/10, score:  10, health:  4, speed: 140/FPS, damage: 100/FPS, selfharm: 30/FPS, canbeshot: true,  canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health:  8, speed: 2.5*FPS, max: 40, score: 100, sx: 32, sy: 4 }, name: "ghost",  weapon: null ,     nohlp: 41   },
@@ -182,18 +182,18 @@ Gauntlet = function() {
         STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun', nohlp: 49  },
         PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, push: true,   sound: 'null', nohlp: 57  },
 // extra power potions
-        XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', nohlp: 1  },
-        LIMINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', nohlp: 7  },
+        XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxspd',  sound: 'collectpotion', nohlp: 1  },
+        LIMINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, annc: 'ancinvis',   sound: 'collectpotion', nohlp: 7  },
 // shootable wall - see grid 38 of backgrounds
         SHOTWALL:       { sx: 0, sy: 38, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' ,  nohlp: 26},
 // shotable and non-shot fake items, see grid 39 of backgrounds
         SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:14, wall:true,   sound: 'collectpotion' , nohlp: 58 },
         PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , nohlp: 58 },
-        XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion',  nohlp: 2  },
-        XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', nohlp: 3  },
-        XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', nohlp: 4  },
-        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion' , nohlp: 5 },
-        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2,   sound: 'collectpotion', nohlp: 6  },
+        XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtpwr',   sound: 'collectpotion',  nohlp: 2  },
+        XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtspd',   sound: 'collectpotion', nohlp: 3  },
+        XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxarm',   sound: 'collectpotion', nohlp: 4  },
+        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxft',   sound: 'collectpotion' , nohlp: 5 },
+        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxmag',   sound: 'collectpotion', nohlp: 6  },
         LIMINVUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 51 },
         LIMREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 52  },
         LIMREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', nohlp: 53  },
@@ -444,31 +444,31 @@ Gauntlet = function() {
       { id: 'anchidpot',       name: 'sounds/g1an_hidden',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'anckilthf',      name: 'sounds/g1an_kilthf',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'anckilthf',      name: 'sounds/g1an_thislvl',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-// multi part annc',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-// char pos annc',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// multi part annc - these are combined into a single msg...which might need to be recorded seperately
+// char pos annc
       { id: 'ancwar1',      name: 'sounds/g1an_war0',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancelf1',      name: 'sounds/g1an_elf1',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancwiz1',      name: 'sounds/g1an_wiz1',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancval1',      name: 'sounds/g1an_valk1',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-// char abt to die - xclude warrior, he only has 1',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// char abt to die - xclude warrior, he only has 1
       { id: 'ancwiz2',      name: 'sounds/g1an_wiz2',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancval2',      name: 'sounds/g1an_val2',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancelf2',      name: 'sounds/g1an_elf2',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-// 3rd wiz, not sure',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// 3rd wiz, not sure
       { id: 'ancwiz3',      	name: 'sounds/g1an_wiz3',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-// powers',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// powers
       { id: 'ancxspd',    	  name: 'sounds/g1an_xspd',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'ancshtpwr',      name: 'sounds/g1an_shtpwr',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'ancshtspd',      name: 'sounds/g1an_shtspd',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancxshtpwr',      name: 'sounds/g1an_shtpwr',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancxshtspd',      name: 'sounds/g1an_shtspd',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancxarm',      name: 'sounds/g1an_xarm',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancxft',    		  name: 'sounds/g1an_xft',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancxmag',      name: 'sounds/g1an_xmag',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancinvis',      name: 'sounds/g1an_invis',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-// bld dialog',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// bld dialog
       { id: 'ancnhs',      name: 'sounds/g1an_nowhas',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'anc2die',      name: 'sounds/g1an_abt2die',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancwelc',      name: 'sounds/g1an_welcome',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-// nearing death',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// nearing death
       { id: 'ancpwrl',      name: 'sounds/g1an_pwrlost',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancruno',      name: 'sounds/g1an_runout',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancndsfd',      name: 'sounds/g1an_needsfood',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
@@ -479,7 +479,7 @@ Gauntlet = function() {
       { id: 'firewizard',      name: 'sounds/g1fire_wiz',            formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'fireelf',         		name: 'sounds/g1fire_elf',               formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'potionbang',  	name: 'sounds/g1_potionboom',        formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-// std sound group
+// std sound fx group
       { id: 'exitlevel',       name: 'sounds/g1_exit',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'collectgold',     name: 'sounds/g1_treaspick',           formats: ['mp3', 'ogg'], volume: 0.5, pool: ua.is.ie ? 2 : 4 },
       { id: 'collectpotion',   name: 'sounds/g1_potionpick',         formats: ['mp3', 'ogg'], volume: 0.5, pool: ua.is.ie ? 2 : 4 },
@@ -2377,7 +2377,7 @@ var ymir = false, xmir = false;
 				}
 		 }
 
-		var powerp = 0;
+		var powerp = 0, limitp = 0;
       if (treasure.type.powers)		// special power potions, limited items
 		 {
 
@@ -2389,14 +2389,20 @@ var ymir = false, xmir = false;
 				if (treasure.type == TREASURE.XMAGIC && !this.xmagic) {this.xmagic++; powerp++;}
 
 // plan: these need either put in type or somehow made code adjustable or both
-				if (treasure.type == TREASURE.LIMINVIS) {this.linvis = this.linvis + 30;}
-				if (treasure.type == TREASURE.LIMINVUL) {this.linvuln  = this.linvuln + 30;}
-				if (treasure.type == TREASURE.LIMREPUL) {this.lrepuls = this.lrepuls + 30;}
-				if (treasure.type == TREASURE.LIMREFLC) {this.lreflect++;}
-				if (treasure.type == TREASURE.LIMSUPER) {this.lsuper = this.lsuper + 10;}
-				if (treasure.type == TREASURE.LIMTELE) {this.ltele++;}
-				if (treasure.type == TREASURE.LIMANK) {this.lank = this.lank + 60;}
+				if (treasure.type == TREASURE.LIMINVIS) {this.linvis = this.linvis + 30; limitp++;}
+				if (treasure.type == TREASURE.LIMINVUL) {this.linvuln  = this.linvuln + 30; limitp++;}
+				if (treasure.type == TREASURE.LIMREPUL) {this.lrepuls = this.lrepuls + 30; limitp++;}
+				if (treasure.type == TREASURE.LIMREFLC) {this.lreflect++; limitp++;}
+				if (treasure.type == TREASURE.LIMSUPER) {this.lsuper = this.lsuper + 10; limitp++;}
+				if (treasure.type == TREASURE.LIMTELE) {this.ltele++; limitp++;}
+				if (treasure.type == TREASURE.LIMANK) {this.lank = this.lank + 60; limitp++;}
 
+				if (powerp > 0 || limitp > 0)
+				{
+						Musicth.play(Musicth.sounds[this.type.annc]);
+						Musicth.play(Musicth.sounds.ancnhs);
+						Musicth.play(Musicth.sounds[treasure.type.annc]);
+				}3
 		 }
       if (treasure.type.potion && powerp < 1)
         this.potions++;
@@ -3071,7 +3077,7 @@ var ymir = false, xmir = false;
 
     isMute:    function()  { return to.bool(game.storage.mute);     },
     isNotMute: function()  { return !this.isMute();                 },
-    play:      function(s) { if (this.isNotMute()) return s.play(); },
+    play:      function(s) { if (s != undefined) if (this.isNotMute()) return s.play(); },
 
     stopAllMusic: function() {
       this.sounds.menu.stop();
