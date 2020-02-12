@@ -401,9 +401,9 @@ Gauntlet = function() {
 
     sounds: [
 /// RESTORE!
-//      { id: 'gtitle',      name: 'sounds/music.title',      formats: ['mp3', 'ogg'], volume: 1.0, loop: false             },
-      { id: 'gtitle',      name: 'sounds/music.4sec',      formats: ['mp3', 'ogg'], volume: 1.0, loop: false             },
+      { id: 'gtitle',      name: 'sounds/music.title',      formats: ['mp3', 'ogg'], volume: 1.0, loop: false             },
       { id: 'g4sec',      name: 'sounds/music.4sec',      formats: ['mp3', 'ogg'], volume: 1.0, loop: false             },
+// previous music / audio fx
       { id: 'lostcorridors',   name: 'sounds/music.lostcorridors',   formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, // http://luckylionstudios.com/
       { id: 'bloodyhalo',      name: 'sounds/music.bloodyhalo',      formats: ['mp3', 'ogg'], volume: 0.25, loop: true             }, // (ditto)
       { id: 'citrinitas',      name: 'sounds/music.citrinitas',      formats: ['mp3', 'ogg'], volume: 0.25, loop: true             }, 
@@ -414,46 +414,83 @@ Gauntlet = function() {
       { id: 'warbringer',      name: 'sounds/music.warbringer',      formats: ['mp3', 'ogg'], volume: 0.25, loop: true             },
       { id: 'gameover',        name: 'sounds/gameover',              formats: ['mp3', 'ogg'], volume: 0.3                         },
       { id: 'victory',      	name: 'sounds/victory',               formats: ['mp3', 'ogg'], volume: 1.0                         },
+// org fx
       { id: 'femalepain1',     name: 'sounds/femalepain1',           formats: ['mp3', 'ogg'], volume: 0.3                         }, // http://www.premiumbeat.com/sfx/
       { id: 'femalepain2',     name: 'sounds/femalepain2',           formats: ['mp3', 'ogg'], volume: 0.3                         }, // (ditto)
       { id: 'malepain1',       name: 'sounds/malepain1',             formats: ['mp3', 'ogg'], volume: 0.3                         },
       { id: 'malepain2',       name: 'sounds/malepain2',             formats: ['mp3', 'ogg'], volume: 0.3                         },
       { id: 'highscore',       name: 'sounds/highscore',             formats: ['mp3', 'ogg'], volume: 1.0,                        },
+      { id: 'generatordeath',  name: 'sounds/generatordeath',        formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
+      { id: 'monsterdeath1',   name: 'sounds/monsterdeath1',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
+      { id: 'monsterdeath2',   name: 'sounds/monsterdeath2',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
+      { id: 'monsterdeath3',   name: 'sounds/monsterdeath3',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
+
+// correspond to lvl 1 - 7 messages
       { id: 'ancbeware',       name: 'sounds/g1an_beware',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },	// announcer messages
+      { id: 'ancsorc',       name: 'sounds/g1an_sorc',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancdeath',       name: 'sounds/g1an_usemag',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// other single display msgs
+      { id: 'anctrs',       	name: 'sounds/g1an_treas',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anckeys',       name: 'sounds/g1an_svkey',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancpots',       name: 'sounds/g1an_svpot',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anctraps',       name: 'sounds/g1an_traps',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancwaldes',      name: 'sounds/g1an_waldes',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// poss multi-use annc
+      { id: 'infosnd',        name: 'sounds/g1_info',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancfoodsh',       name: 'sounds/g1an_dsf',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancpotsh',       name: 'sounds/g1an_dstp',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancfindex',       name: 'sounds/g1an_fex',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancfooled',       name: 'sounds/g1an_fooled',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'anchidpot',       name: 'sounds/g1an_hidden',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'ancsorc',       name: 'sounds/g1an_sorc',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'anckeys',       name: 'sounds/g1an_svkey',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'ancpots',       name: 'sounds/g1an_svpot',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'anctrs',       	name: 'sounds/g1an_treas',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'ancdeath',       name: 'sounds/g1an_usemag',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'anctraps',       name: 'sounds/g1an_traps',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'ancwaldes',      name: 'sounds/g1an_waldes',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'anckilthf',      name: 'sounds/g1an_kilthf',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'exitlevel',       name: 'sounds/g1_exit',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anckilthf',      name: 'sounds/g1an_thislvl',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// multi part annc',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// char pos annc',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancwar1',      name: 'sounds/g1an_war0',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancelf1',      name: 'sounds/g1an_elf1',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancwiz1',      name: 'sounds/g1an_wiz1',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancval1',      name: 'sounds/g1an_valk1',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// char abt to die - xclude warrior, he only has 1',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancwiz2',      name: 'sounds/g1an_wiz2',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancval2',      name: 'sounds/g1an_val2',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancelf2',      name: 'sounds/g1an_elf2',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// 3rd wiz, not sure',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancwiz3',      	name: 'sounds/g1an_wiz3',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// powers',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancxspd',    	  name: 'sounds/g1an_xspd',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancshtpwr',      name: 'sounds/g1an_shtpwr',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancshtspd',      name: 'sounds/g1an_shtspd',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancxarm',      name: 'sounds/g1an_xarm',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancxft',    		  name: 'sounds/g1an_xft',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancxmag',      name: 'sounds/g1an_xmag',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancinvis',      name: 'sounds/g1an_invis',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// bld dialog',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancnhs',      name: 'sounds/g1an_nowhas',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'anc2die',      name: 'sounds/g1an_abt2die',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancwelc',      name: 'sounds/g1an_welcome',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// nearing death',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancpwrl',      name: 'sounds/g1an_pwrlost',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancruno',      name: 'sounds/g1an_runout',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'ancndsfd',      name: 'sounds/g1an_needsfood',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+
+// shots
       { id: 'firewarrior',     name: 'sounds/g1fire_war',           formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 }, //   NOTE: ie has limit of 40 <audio> so be careful with pool amounts
       { id: 'firevalkyrie',    name: 'sounds/g1fire_val',          formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'firewizard',      name: 'sounds/g1fire_wiz',            formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'fireelf',         		name: 'sounds/g1fire_elf',               formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+      { id: 'potionbang',  	name: 'sounds/g1_potionboom',        formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
+// std sound group
+      { id: 'exitlevel',       name: 'sounds/g1_exit',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'collectgold',     name: 'sounds/g1_treaspick',           formats: ['mp3', 'ogg'], volume: 0.5, pool: ua.is.ie ? 2 : 4 },
       { id: 'collectpotion',   name: 'sounds/g1_potionpick',         formats: ['mp3', 'ogg'], volume: 0.5, pool: ua.is.ie ? 2 : 4 },
       { id: 'collectkey',      name: 'sounds/g1_key',            formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'collectfood',     name: 'sounds/g1_foodsnrf',           formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'potionbang',  	name: 'sounds/g1_potionboom',        formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
-      { id: 'generatordeath',  name: 'sounds/generatordeath',        formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
-      { id: 'monsterdeath1',   name: 'sounds/monsterdeath1',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
-      { id: 'monsterdeath2',   name: 'sounds/monsterdeath2',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
-      { id: 'monsterdeath3',   name: 'sounds/monsterdeath3',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
       { id: 'opendoor',        name: 'sounds/g1_door',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
       { id: 'teleport',        	name: 'sounds/g1_teleport',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
       { id: 'trap',        			name: 'sounds/g1_wallexit',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
       { id: 'stun',      		  name: 'sounds/g1_stun',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
       { id: 'wallexit',        name: 'sounds/g1_wallexit',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
       { id: 'dtouch',        name: 'sounds/g1_deathtouch',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
-      { id: 'infosnd',        name: 'sounds/g1_info',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
       { id: 'healthcnt',      name: 'sounds/g1_healthcount',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
       { id: 'sbuzz',      		  name: 'sounds/g1_buzz',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 } 
     ],
@@ -689,7 +726,7 @@ Gauntlet = function() {
 					if (hrep != undefined) htex = htex.replace("#", hrep);
 					$('help').update(htex).show(); setTimeout(game.onleavehelp.bind(this), hto); announcepause = true;
 					if (nh != undefined)
-					if (HELPANNC[nh] != undefined) {Musicth.play(HELPANNC[nh]); alert(HELPANNC[nh]);}
+					if (HELPANNC[nh] != undefined) Musicth.play(HELPANNC[nh]);
 			}
 	}
   //=========================================================================
