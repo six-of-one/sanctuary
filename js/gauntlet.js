@@ -416,10 +416,6 @@ Gauntlet = function() {
       { id: 'gameover',        name: 'sounds/gameover',              formats: ['mp3', 'ogg'], volume: 0.3                         },
       { id: 'victory',      	name: 'sounds/victory',               formats: ['mp3', 'ogg'], volume: 1.0                         },
 // org fx
-      { id: 'femalepain1',     name: 'sounds/femalepain1',           formats: ['mp3', 'ogg'], volume: 0.3                         }, // http://www.premiumbeat.com/sfx/
-      { id: 'femalepain2',     name: 'sounds/femalepain2',           formats: ['mp3', 'ogg'], volume: 0.3                         }, // (ditto)
-      { id: 'malepain1',       name: 'sounds/malepain1',             formats: ['mp3', 'ogg'], volume: 0.3                         },
-      { id: 'malepain2',       name: 'sounds/malepain2',             formats: ['mp3', 'ogg'], volume: 0.3                         },
       { id: 'highscore',       name: 'sounds/highscore',             formats: ['mp3', 'ogg'], volume: 1.0,                        },
       { id: 'generatordeath',  name: 'sounds/generatordeath',        formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
       { id: 'monsterdeath1',   name: 'sounds/monsterdeath1',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
@@ -2005,12 +2001,42 @@ var ymir = false, xmir = false;
 				else
 				if (this.type.health)
 				{
-						helpdis(nohlpdsf, undefined, 2000, undefined, undefined);
+						if (HELPCLEAR[nohlpdsf])		// pre-test so we can run taunts when the helpannc is done
+								helpdis(nohlpdsf, undefined, 2000, undefined, undefined);
+						else
+						{
+								var r = Game.Math.randomInt(0, 5);			// shot food taunts
+								switch(r) {
+										case 0: Musicth.play(Musicth.sounds.anceyf);
+												break;
+										case 1: Musicth.play(Musicth.sounds.ancstf);
+														  Musicth.play(Musicth.sounds[by.owner.type.annc]);
+												break;
+										case 2: Musicth.play(Musicth.sounds.ancfoodsh);
+												break;
+										case 3: Musicth.play(Musicth.sounds.ancssfood);
+												break;
+								}
+						}
 				}
 			 shotpot = 0.8;	// shot potions are weaker
 				if (this.type.potion)
 				{
-						helpdis(nohlpsap, undefined, 2000, undefined, undefined);
+						if (HELPCLEAR[nohlpsap])
+								helpdis(nohlpsap, undefined, 2000, undefined, undefined);
+						else
+						{
+								var r = Game.Math.randomInt(0, 5);
+								switch(r) {
+										case 0: Musicth.play(Musicth.sounds.ancyjsp);
+												break;
+										case 1: Musicth.play(Musicth.sounds.ancstp);
+														  Musicth.play(Musicth.sounds[by.owner.type.annc]);
+												break;
+										case 2: Musicth.play(Musicth.sounds.ancpotsh);
+												break;
+								}
+						}
 						Mastermap.nuke(null, by.owner);
 						Musicth.play(Musicth.sounds.nuke);
 				}
