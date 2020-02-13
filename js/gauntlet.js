@@ -2206,6 +2206,7 @@ var ymir = false, xmir = false;
       this.score     = 0;
       this.scmult     = 1;
 		this.ctr = 0;				// collected treasures
+		this.msgtimer = 0;				// message timer for repeat msgs
 		Mastermult = 1;
       this.dir       = Game.Math.randomInt(0, 7);
       this.health    = type.health;
@@ -2589,6 +2590,28 @@ var ymir = false, xmir = false;
 					{
 							slowmonstertime--;
 							if (slowmonstertime < 1) slowmonster = 1;
+					}
+// low health taunt
+					this.health = 80;
+					this.msgtimer--;
+					if (this.weak() && this.msgtimer < 1)
+					{
+								this.msgtimer = 25 + Game.Math.randomInt(-5, 5);
+								var r = Game.Math.randomInt(0, 3);			// near death taunts
+								switch(r) {
+										case 0: Musicth.play(Musicth.sounds.ancpwrl);
+														  Musicth.play(Musicth.sounds[this.type.annc]);
+												break;
+										case 1: Musicth.play(Musicth.sounds.anc2die);
+														  Musicth.play(Musicth.sounds[this.type.annc]);
+												break;
+										case 2: Musicth.play(Musicth.sounds.ancndsfd);
+														  Musicth.play(Musicth.sounds[this.type.annc]);
+												break;
+										case 3: Musicth.play(Musicth.sounds.ancruno);
+														  Musicth.play(Musicth.sounds[this.type.annc]);
+												break;
+								}
 					}
 			}
 // count down stun
