@@ -14,6 +14,7 @@ Gauntlet = function() {
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
+/// before restoring music load must be cleaned up !
 		NOBKGMUSIC = 1,
 // set to 1 to run original code
 		RUNORG = 0,
@@ -405,6 +406,7 @@ Gauntlet = function() {
       { id: 'gtitle',      name: 'sounds/music.title',      formats: ['mp3', 'ogg'], volume: 1.0, loop: false             },
       { id: 'g4sec',      name: 'sounds/music.4sec',      formats: ['mp3', 'ogg'], volume: 1.0, loop: false             },
 // previous music / audio fx
+/*
       { id: 'lostcorridors',   name: 'sounds/music.lostcorridors',   formats: ['mp3', 'ogg'], volume: 0.5, loop: true             }, // http://luckylionstudios.com/
       { id: 'bloodyhalo',      name: 'sounds/music.bloodyhalo',      formats: ['mp3', 'ogg'], volume: 0.25, loop: true             }, // (ditto)
       { id: 'citrinitas',      name: 'sounds/music.citrinitas',      formats: ['mp3', 'ogg'], volume: 0.25, loop: true             }, 
@@ -413,6 +415,7 @@ Gauntlet = function() {
       { id: 'phantomdrone',    name: 'sounds/music.phantomdrone',    formats: ['mp3', 'ogg'], volume: 0.25, loop: true             },
       { id: 'thebeginning',    name: 'sounds/music.thebeginning',    formats: ['mp3', 'ogg'], volume: 0.25, loop: true             },
       { id: 'warbringer',      name: 'sounds/music.warbringer',      formats: ['mp3', 'ogg'], volume: 0.25, loop: true             },
+*/
       { id: 'gameover',        name: 'sounds/gameover',              formats: ['mp3', 'ogg'], volume: 0.3                         },
       { id: 'victory',      	name: 'sounds/victory',               formats: ['mp3', 'ogg'], volume: 1.0                         },
 // org fx
@@ -911,8 +914,8 @@ Gauntlet = function() {
 				else
 				tlevel++;
 		}
-// testing - restore
-		 treasurerc = 1;
+/// testing - REMOVE
+//		 treasurerc = 1;
 //		 spotionlv = 1;
 
 // check for hidden potions
@@ -3125,7 +3128,7 @@ var ymir = false, xmir = false;
       this.sounds      = sounds;
 //      this.sounds.menu = this.sounds.lostcorridors;
       this.sounds.menu = this.sounds.gtitle;
-      this.sounds.game = this.sounds.thebeginning;
+      this.sounds.game = this.sounds.gtitle;
       this.sounds.fire = this.sounds.firewizard;     // re-use wizard firing sound for monster (demon) fire
       this.sounds.nuke = this.sounds.potionbang; // TODO: find a big bang explosion
       this.toggleMute(this.isMute());
