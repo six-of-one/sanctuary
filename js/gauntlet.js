@@ -159,7 +159,7 @@ Gauntlet = function() {
 //		helpdsf = "Some food destroyed by shots", helpsap = "Shooting a potion has a lesser effect", helpcmb = "Collect magic potion before pressing magic",
 //		helppois = "Shooting poison slows monsters",
 		nohlpdsf = 21, nohlpsap = 22, nohlpcmb = 46, nohlppois = 50, nohlpmagaff = 24, nohlptr = 9, nohlpmstex = 10,
-		nohlplvl = 18, nohlplvlend = 38,
+		nohlplvl = 18, nohlplvlend = 38, haseatenall = 0, whohaseaten = [ ],
 // dont shoot food				25
 // shooting a potion			26
 // collect magic before	27
@@ -540,14 +540,14 @@ Gauntlet = function() {
 // added gauntlet 1 levels as g1level{n}
 // gflr is gfx file for floor tiles
     levels: [
-      { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",      music: 'bloodyhalo',      score:  1000, help: null }, 
-      { name: 'Level 1',       url: "levels/glevel1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'bloodyhalo',      score:  1000, help: null },
-      { name: 'Level 2',       url: "levels/glevel2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'bloodyhalo',      score:  1000, help: "Ghosts must be shot" },
-      { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'bloodyhalo',      score:  1000, help: "Some food can be destroyed" },
-      { name: 'Level 4',       url: "levels/glevel4.png",  floor: FLOOR.WOOD,      wall: WALL.GRAY7,    gflr: "gfx/g1floor4.jpg",      music: 'bloodyhalo',      score:  1000, help: "Fight hand to hand by running into grunts" },
-      { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.RED5,    gflr: "gfx/g1floor5.jpg",      music: 'bloodyhalo',      score:  1000, help: "Beware the demons which shoot you" },
-      { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN3,   brikovr:  WALL.G1BRICKD,   gflr: "gfx/g1floor6.jpg",   music: 'bloodyhalo',      score:  1000, help: "Sorcerers may be invisible" },
-      { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.GRAY7,    gflr: "gfx/g1floor7.jpg",      music: 'bloodyhalo',      score:  1000, help: "Use magic to kill death" },
+      { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",      music: 'mountingassault',      score:  1000, help: null }, 
+      { name: 'Level 1',       url: "levels/glevel1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'mountingassault',      score:  1000, help: null },
+      { name: 'Level 2',       url: "levels/glevel2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'mountingassault',      score:  1000, help: "Ghosts must be shot" },
+      { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'mountingassault',      score:  1000, help: "Some food can be destroyed" },
+      { name: 'Level 4',       url: "levels/glevel4.png",  floor: FLOOR.WOOD,      wall: WALL.GRAY7,    gflr: "gfx/g1floor4.jpg",      music: 'mountingassault',      score:  1000, help: "Fight hand to hand by running into grunts" },
+      { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.RED5,    gflr: "gfx/g1floor5.jpg",      music: 'mountingassault',      score:  1000, help: "Beware the demons which shoot you" },
+      { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN3,   brikovr:  WALL.G1BRICKD,   gflr: "gfx/g1floor6.jpg",   music: 'mountingassault',      score:  1000, help: "Sorcerers may be invisible" },
+      { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.GRAY7,    gflr: "gfx/g1floor7.jpg",      music: 'mountingassault',      score:  1000, help: "Use magic to kill death" },
       { name: 'Research Z',     url: "levels/glevelZ.png",  floor: FLOOR.RND,      wall: WALL.ORANG9,    brikovr:  WALL.DESTBRIK,		gflr: "gfx/g1floor0z.jpg",      music: 'mountingassault',      score:  1000, help: null },
       { name: 'Research 1',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'mountingassault',      score:  1000, help: "welcome to ERR0R" },
 		{ name: 'Research X',     url: "levels/glevel114.png",  floor: FLOOR.RND,      wall: WALL.BROWN1,   brikovr:  WALL.XBRIKD,    gflr: "gfx/g1floor6.jpg",      music: 'mountingassault',      score:  1000, help: null },
@@ -2488,14 +2488,30 @@ var ymir = false, xmir = false;
 						Musicth.play(Musicth.sounds[this.type.annc]);
 						Musicth.play(Musicth.sounds.ancnhs);
 						Musicth.play(Musicth.sounds[treasure.type.annc]);
-				}3
+				}
 		 }
       if (treasure.type.potion && powerp < 1)
         this.potions++;
       else if (treasure.type.key)
         this.keys++;
       else if (treasure.type.health)
+		{
         this.heal(treasure.type.health);
+			if (treasure.type.nohlp == 16) // record for eaten all food lately taunt, & rnd on 3 eats
+			{
+					whohaseaten[haseatenall++] = this;
+					if (haseatenall > 2)
+					{
+							if (whohaseaten[0] === whohaseaten[1] && whohaseaten[1] === whohaseaten[2])
+							{
+									Musicth.play(Musicth.sounds.anchasetn);
+									Musicth.play(Musicth.sounds[this.type.annc]);
+							}
+							while (haseatenall > 0) whohaseaten[haseatenall--] = haseatenall;
+							haseatenall = 0;
+					}
+			}
+		}
       else if (treasure.type.damage)
         this.hurt(treasure.type.damage);
       publish(EVENT.TREASURE_COLLECTED, treasure, this);
@@ -2592,11 +2608,10 @@ var ymir = false, xmir = false;
 							if (slowmonstertime < 1) slowmonster = 1;
 					}
 // low health taunt
-					this.health = 80;
 					this.msgtimer--;
 					if (this.weak() && this.msgtimer < 1)
 					{
-								this.msgtimer = 25 + Game.Math.randomInt(-5, 5);
+								this.msgtimer = 15 + Game.Math.randomInt(-5, 5);
 								var r = Game.Math.randomInt(0, 3);			// near death taunts
 								switch(r) {
 										case 0: Musicth.play(Musicth.sounds.ancpwrl);
