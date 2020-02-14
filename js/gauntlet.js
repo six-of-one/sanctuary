@@ -904,6 +904,15 @@ Gauntlet = function() {
 				troomtime = TREASUREROOM[sk].rtime;	// run time
 				leveldisp = "<br>TREASURE ROOM";
 				levelhelp = HELPDIS[nohlptr].replace("#",troomtime) + "<br><br>" + HELPDIS[nohlpmstex];
+				var r = Game.Math.randomInt(0, 3);			// treasure room failure taunts
+				switch(r) {
+						case 0: Musicth.play(Musicth.sounds.ancftreas);
+								break;
+						case 1: Musicth.play(Musicth.sounds.ancwtreas);
+								break;
+						case 2: Musicth.play(Musicth.sounds.ancwtreas);
+								break;
+				}
 		 }
 		 else
 		{
@@ -2623,7 +2632,19 @@ var ymir = false, xmir = false;
 									}
 							}
 							if (troomtime < 1) // ran out of time
+							{
+									levelhelp = "<font color=yellow>YOU LOST!</font>"
+									var r = Game.Math.randomInt(0, 1);			// treasure room failure taunts
+									if (Math.random() < 0.66)
+									switch(r) {
+											case 0: Musicth.play(Musicth.sounds.ancbetr);
+													levelhelp = "<font color=yellow>YOU DIDNT MAKE IT!</font>"
+													break;
+											case 1: Musicth.play(Musicth.sounds.anculoose);
+													break;
+									}
 									game.nextLevel();
+							}
 					}
 					if (slowmonstertime > 0)
 					{
