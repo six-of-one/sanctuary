@@ -204,7 +204,7 @@ Gauntlet = function() {
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
 		TROOMCNT = [ ],
-		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp,
+		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
 		SUPERSHTFR = 10,		// super shot proj frame
 		TELEPORTILE = 0x0080a0,
@@ -2603,11 +2603,14 @@ var ymir = false, xmir = false;
 					if (troomtime > 0)
 					{
 							troomtime--;
+							var taunt = 50 % troomtime;		// time mod 50 - see image cap chart, hit values 48, 42, 24, 21, 16, 14, 12 -- (either 2 or 8 result)
 							timerupd.level.update("Time: " + troomtime);
 							if (troomtime < 11) Musicth.play(TROOMCNT[troomtime]);
-							else
+							else if ((taunt == 2 || taunt == 8) && Math.random() < trtauntrnd)
 							{
-									var r = Game.Math.randomInt(0, 5);			// treasure room hurry taunts
+									var r = Game.Math.randomInt(0, 3);			// treasure room hurry taunts
+									if (r == lastrt) r++;
+									lastrt = r;
 									switch(r) {
 											case 0: Musicth.play(Musicth.sounds.ancymi);
 													break;
