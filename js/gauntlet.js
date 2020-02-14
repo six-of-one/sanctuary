@@ -958,8 +958,9 @@ Gauntlet = function() {
 
 
 			announcepause = true;
-			if (levelhelp == undefined) levelhelp = level.help;
+			if (levelhelp == undefined) levelhelp = level.help;		/// NOTE: test & add in level msgs that have annc (5, 6, 7)
 			if (levelhelp == undefined) levelhelp = HELPDIS[Game.Math.randomInt(nohlplvl,nohlplvlend)];
+/// NOTE: special level notes & annc here - shots stun & hurt, ploff
 			levelhelp = levelhelp + potionhelp;
 //		turned on during player exiting
 			var img = document.getElementById("tweenmsg");
