@@ -670,15 +670,16 @@ Gauntlet = function() {
 		{ name: 'Treasure',     url: "levels/glevel122.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 30,      music: 'citrinitas',      score:  1000, help: null },
 		{ name: 'Treasure',     url: "levels/glevel123.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 20,      music: 'citrinitas',      score:  1000, help: null },
       { name: 'Treasure',     url: "levels/glevel124.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 25,      music: 'citrinitas',      score:  1000, help: null },
-      { name: 'Treasure',     url: "levels/glevel125.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 30,      music: 'citrinitas',      score:  1000, help: null },
+      { name: 'Treasure',     url: "levels/glevel125.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 30,      music: 'citrinitas',      score:  1000, help: null }
+/*
 		{ name: 'Training',       url: "levels/trainer1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Shoot ghosts and find the exit" },
-//      { name: 'Training Two',   url: "levels/trainer2.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Watch out for demon fire" },
-//      { name: 'Training Three', url: "levels/trainer3.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Find keys to open doors" },
-//      { name: 'Training Four',  url: "levels/trainer4.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Eat and drink to restore health" },
-//      { name: 'Training Five',  url: "levels/trainer5.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Collect treasure for high score" },
-//      { name: 'Training Six',   url: "levels/trainer6.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Destroy monster generators" },
-//      { name: 'Training Seven', url: "levels/trainer7.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Use potions to destroy all monsters" },
-//      { name: 'Dungeon One',    url: "levels/level1.png",    floor: FLOOR.WOOD,             wall: WALL.CONCRETE,         music: 'citrinitas',      score:  1000, help: "Training is over!<br><br> Welcome to the Dungeon!" },
+      { name: 'Training Two',   url: "levels/trainer2.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Watch out for demon fire" },
+      { name: 'Training Three', url: "levels/trainer3.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Find keys to open doors" },
+      { name: 'Training Four',  url: "levels/trainer4.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Eat and drink to restore health" },
+      { name: 'Training Five',  url: "levels/trainer5.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Collect treasure for high score" },
+      { name: 'Training Six',   url: "levels/trainer6.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Destroy monster generators" },
+      { name: 'Training Seven', url: "levels/trainer7.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: "Use potions to destroy all monsters" },
+      { name: 'Dungeon One',    url: "levels/level1.png",    floor: FLOOR.WOOD,             wall: WALL.CONCRETE,         music: 'citrinitas',      score:  1000, help: "Training is over!<br><br> Welcome to the Dungeon!" },
       { name: 'Dungeon One',    url: "levels/level1.png",    floor: FLOOR.WOOD,             wall: WALL.CONCRETE,         music: 'citrinitas',      score:  1000, help: null },
       { name: 'Dungeon Two',    url: "levels/level2.png",    floor: FLOOR.WOOD,             wall: WALL.CONCRETE,         music: 'citrinitas',      score:  2000, help: null },
       { name: 'Dungeon Three',  url: "levels/level3.png",    floor: FLOOR.DARK_STONE,       wall: WALL.BLUE,             music: 'fleshandsteel',   score:  3000, help: null },
@@ -691,6 +692,7 @@ Gauntlet = function() {
       { name: 'Dungeon Ten',    url: "levels/level10.png",   floor: FLOOR.WOOD,             wall: WALL.BLUE_BRICK,       music: 'warbringer',      score: 10000, help: null },
       { name: 'Dungeon Eleven',    url: "levels/level11.png",   floor: FLOOR.LIGHT_STONE,             wall: WALL.CONCRETE,       music: 'warbringer',      score: 11000, help: null },
       { name: 'Test Level',     url: "levels/testlevel.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, help: null }
+*/
     ],
 
     keys: [
