@@ -160,7 +160,7 @@ Gauntlet = function() {
 //		helpdsf = "Some food destroyed by shots", helpsap = "Shooting a potion has a lesser effect", helpcmb = "Collect magic potion before pressing magic",
 //		helppois = "Shooting poison slows monsters",
 		nohlpdsf = 21, nohlpsap = 22, nohlpcmb = 46, nohlppois = 50, nohlpmagaff = 24, nohlptr = 9, nohlpmstex = 10,
-		nohlplvl = 18, nohlplvlend = 38, haseatenall = 0, whohaseaten = [ ],
+		nohlplvl = 18, nohlplvlend = 38, haseatenplay = 0.3, haseatenall = 0, whohaseaten = [ ],
 // dont shoot food				25
 // shooting a potion			26
 // collect magic before	27
@@ -2506,6 +2506,7 @@ var ymir = false, xmir = false;
 					if (haseatenall > 2)
 					{
 							if (whohaseaten[0] === whohaseaten[1] && whohaseaten[1] === whohaseaten[2])
+							if (Math.random() < haseatenplay)
 							{
 									Musicth.play(Musicth.sounds.anchasetn);
 									Musicth.play(Musicth.sounds[this.type.annc]);
