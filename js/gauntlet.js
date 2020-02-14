@@ -915,7 +915,7 @@ Gauntlet = function() {
 				tlevel++;
 		}
 /// testing - REMOVE
-//		 treasurerc = 1;
+		 treasurerc = 1;
 //		 spotionlv = 1;
 
 // check for hidden potions
@@ -2603,6 +2603,20 @@ var ymir = false, xmir = false;
 							troomtime--;
 							timerupd.level.update("Time: " + troomtime);
 							if (troomtime < 11) Musicth.play(TROOMCNT[troomtime]);
+							else
+							{
+									var r = Game.Math.randomInt(0, 5);			// treasure room hurry taunts
+									switch(r) {
+											case 0: Musicth.play(Musicth.sounds.ancymi);
+													break;
+											case 1: Musicth.play(Musicth.sounds.anchurry);
+													break;
+											case 2: Musicth.play(Musicth.sounds.anctimes);
+													break;
+											case 3: Musicth.play(Musicth.sounds.anctoms);
+													break;
+									}
+							}
 							if (troomtime < 1) // ran out of time
 									game.nextLevel();
 					}
