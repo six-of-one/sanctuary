@@ -927,7 +927,7 @@ Gauntlet = function() {
 		}
 /// testing - REMOVE
 		 treasurerc = 1;
-//		 spotionlv = 1;
+		 spotionlv = 1;
 
 // check for hidden potions
 		if (nlevel > 5)
@@ -941,6 +941,8 @@ Gauntlet = function() {
 				{
 						spotionloop = 0;
 						potionhelp = "<br><br><br><font color=yellow>FIND THE HIDDEN POTION</font>";
+// NOTE: overlap can occur if treasure room taunt happens in 3 secs or extended announce occurs
+						if (Math.random() < 0.66) Musicth.play(Musicth.sounds.anchidpot);
 				}
 		}
 
