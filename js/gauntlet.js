@@ -3170,11 +3170,10 @@ var ymir = false, xmir = false;
 
     initialize: function(sounds) {
       this.sounds      = sounds;
-//      this.sounds.menu = this.sounds.lostcorridors;
       this.sounds.menu = this.sounds.gtitle;
       this.sounds.game = this.sounds.gtitle;
       this.sounds.fire = this.sounds.firewizard;     // re-use wizard firing sound for monster (demon) fire
-      this.sounds.nuke = this.sounds.potionbang; // TODO: find a big bang explosion
+      this.sounds.nuke = this.sounds.potionbang;
       this.toggleMute(this.isMute());
 
       $('sound').on('click', this.onClickMute.bind(this)).show();
