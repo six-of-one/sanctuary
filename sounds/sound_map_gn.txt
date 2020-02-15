@@ -52,7 +52,7 @@ g110: "lets see you get out of here"
 g111: "good cooperation"
 g112: "i've not seen such bravery"
 g113: "that was a heroic effort"
-g114: "i've not seen such bravery"
+g114: "someone shot the food"
 
 g115: "laugh" - thief
 g116: "you cant catch me" - thief
