@@ -1085,11 +1085,11 @@ Gauntlet = function() {
 /// NOTE: special until treasures are mapped into treasure rooms !
 			if (troomtime > 0)
 			{
-					var cell, cells  = reloaded.cells;
-					var c, nc = cells.length, fnd = 0, sft, tind;
-
+					var tind;
+alert("special treasure load");
 					for (var tl = 0; tl++; tl < 100)	// temp load 100 treasures
 					{
+							fnd = 0;
 							tind = 1;
 							if (Math.random() < 0.1) tind = 2;
 							if (Math.random() < 0.05) tind = 3;
@@ -1105,7 +1105,6 @@ Gauntlet = function() {
 							reloaded.addTreasure(cell.x, cell.y, TROOMSUP[tind]);
 					}
 			}
-
     },
 
     onwin:  function(event, previous, current) { this.winlosefade(15000); this.saveLevel(8); },
