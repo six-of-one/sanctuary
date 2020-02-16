@@ -203,7 +203,7 @@ Gauntlet = function() {
         LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 59  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
-		TROOMCNT = [ ],
+		TROOMCNT = [ ], TROOMSUP = [ ],
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
 		SUPERSHTFR = 10,		// super shot proj frame
@@ -915,6 +915,11 @@ Gauntlet = function() {
 			SPOTION[4] = TREASURE.XFIGHT;
 			SPOTION[5] = TREASURE.XMAGIC;
 			shuffle(SPOTION);
+// special treasure room deal
+			TROOMSUP[1] = TREASURE.GOLD;
+			TROOMSUP[2] = TREASURE.BAG;
+			TROOMSUP[3] = TREASURE.LOCKED;
+			TROOMSUP[4] = TREASURE.KEY;
     },
 
     onload: function(event, previous, current, nlevel) {
@@ -1075,6 +1080,30 @@ Gauntlet = function() {
 							sft--;
 					}
 					reloaded.addTreasure(cell.x, cell.y, SPOTION[spotct]);
+			}
+
+/// NOTE: special until treasures are mapped into treasure rooms !
+			if (troomtime > 0)
+			{
+					var cell, cells  = reloaded.cells;
+					var c, nc = cells.length, fnd = 0, sft, tind;
+
+					for (var tl = 0; tl++; tl < 100)	// temp load 100 treasures
+					{
+							tind = 1;
+							if (Math.random() < 0.1) tind = 2;
+							if (Math.random() < 0.05) tind = 3;
+							if (Math.random() < 0.05) tind = 4;
+							sft = 6000;
+							while (!fnd && (sft > 0))
+							{
+									c = Game.Math.randomInt(0,nc - 1);
+									cell = cells[c];
+									fnd = isfloor(cell.pixel);
+									sft--;
+							}
+							reloaded.addTreasure(cell.x, cell.y, TROOMSUP[tind]);
+					}
 			}
 
     },
