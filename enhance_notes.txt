@@ -11,24 +11,15 @@ monster /gen health & kill -- vs. player shot power levels
 - including level down with shot that doesnt take all health
 player shot speed and power potions
 
+>a few announce & help msg left - ssop, etc.
+>not all g1 audio fx in use
+- thought to limit announce during treasure room count down
 
 - wall replace routine for surround & shadows
 >trap walls, walls to exits, moving wall, random walls, std shot walls -- shootable walls ?
 
-treasure rooms > music, annc count
->limited power - finish
->tween level screen - finish messages
-+ text messages appearing
 >make monsters slow on shot poison a timed effect - can cross lvl boundary
->rest of tutorial popup text
 >think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
--shootable "standard" wall - gives goody or baddy > need list of items
--moving "pattern" wall
--moving "ranodmly" wall
--- trap walls done
--invisible "become temp visible" walls -- likely a code deal with some overlay mask
-announcer
-rest of sound effects (thoughts to enhanced sound effects)
 lobber shots & ai
 thief op & ai
 
@@ -45,9 +36,15 @@ g1 gfx tiles
 - spirtes		-- decide how much of this we want / can use
 - walls & floors
 
+g2:
+-shootable "standard" wall - gives goody or baddy > need list of items
+-moving "pattern" wall
+-moving "ranodmly" wall
+-- trap walls done
+-invisible "become temp visible" walls -- likely a code deal with some overlay mask
+
 >>>>>>>>>>>>>>>>>>>>>>
 WIP: arcade sound & gfx
-tutorial messaging system
 
 
 full walk dist (31 tiles)
@@ -273,6 +270,16 @@ x-- treasure room floors are wrong ?
 --- this is prob the load floor issue again...
 
 x--- help msg generic routing in game.{x}(n)
+
+x-- treasure rooms > music, annc count
+-->limited power - finish
+-->tween level screen - finish messages
++ text messages appearing
+-->rest of tutorial popup text
+
+x-- announcer
+--rest of sound effects (thoughts to enhanced sound effects)
+
 
 expanded done:
 
