@@ -15,7 +15,7 @@ Gauntlet = function() {
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
 /// before restoring music load must be cleaned up !
-		NOBKGMUSIC = 1,
+		NOBKGMUSIC = 0,
 // set to 1 to run original code
 		RUNORG = 0,
 // when hitting last seq level, pick a random # between loop start and last level
@@ -590,13 +590,14 @@ Gauntlet = function() {
       { id: 'wallexit',        name: 'sounds/g1_wallexit',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
       { id: 'dtouch',        name: 'sounds/g1_deathtouch',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
       { id: 'healthcnt',      name: 'sounds/g1_healthcount',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
-      { id: 'sbuzz',      		  name: 'sounds/g1_buzz',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 } 
+      { id: 'sbuzz',      		  name: 'sounds/g1_buzz',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
+      { id: 'nullm',      		  name: 'sounds/null',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 } 
     ],
 
 // added gauntlet 1 levels as g1level{n}
 // gflr is gfx file for floor tiles
     levels: [
-      { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",      score:  1000, help: null }, 
+      { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',      score:  1000, help: null }, 
       { name: 'Level 1',       url: "levels/glevel1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      score:  1000, help: null },
       { name: 'Level 2',       url: "levels/glevel2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      score:  1000, help: "Ghosts must be shot" },
       { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      score:  1000, help: "Some food can be destroyed" },
@@ -953,7 +954,7 @@ Gauntlet = function() {
 				troomfin = false;
 				tlevel = nlevel;
 				sk = Math.floor(Math.random() * (c - 1));
-				nlevel = TREASUREROOM[2].lvl;
+				nlevel = TREASUREROOM[sk].lvl;
 				troomtime = TREASUREROOM[sk].rtime;	// run time
 				leveldisp = "<br>TREASURE ROOM";
 				levelhelp = HELPDIS[nohlptr].replace("#",troomtime) + "<br><br>" + HELPDIS[nohlpmstex];
