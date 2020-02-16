@@ -379,8 +379,8 @@ Gauntlet = function() {
     },
 
     pubsub: [
-      { event: EVENT.MONSTER_DEATH,      action: function(monster, by, nuke) { this.onMonsterDeath(monster, by, nuke);     } },
-      { event: EVENT.GENERATOR_DEATH,    action: function(generator, by)     { this.onGeneratorDeath(generator, by);       } },
+//      { event: EVENT.MONSTER_DEATH,      action: function(monster, by, nuke) { this.onMonsterDeath(monster, by, nuke);     } },
+//      { event: EVENT.GENERATOR_DEATH,    action: function(generator, by)     { this.onGeneratorDeath(generator, by);       } },
       { event: EVENT.DOOR_OPENING,       action: function(door, speed)       { this.onDoorOpening(door, speed);            } },
       { event: EVENT.DOOR_OPEN,          action: function(door)              { this.onDoorOpen(door);                      } },
       { event: EVENT.TREASURE_COLLECTED, action: function(treasure, player)  { this.onTreasureCollected(treasure, player); } },
@@ -420,10 +420,6 @@ Gauntlet = function() {
       { id: 'victory',      	name: 'sounds/victory',               formats: ['mp3', 'ogg'], volume: 1.0                         },
 // org fx
       { id: 'highscore',       name: 'sounds/highscore',             formats: ['mp3', 'ogg'], volume: 1.0,                        },
-      { id: 'generatordeath',  name: 'sounds/generatordeath',        formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
-      { id: 'monsterdeath1',   name: 'sounds/monsterdeath1',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
-      { id: 'monsterdeath2',   name: 'sounds/monsterdeath2',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
-      { id: 'monsterdeath3',   name: 'sounds/monsterdeath3',         formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
 
 // correspond to lvl 1 - 7 messages
       { id: 'ancbeware',       name: 'sounds/g1an_beware',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },	// announcer messages
@@ -1298,21 +1294,14 @@ Gauntlet = function() {
           monster.hurt(monster.type.selfharm, monster);
       }
     },
-
-    onMonsterDeath: function(monster, by, nuke) {
-      if (by)
-        by.addscore(monster.type.score);
-      this.map.addMultipleFx(3, monster, FX.MONSTER_DEATH, TILE/2, nuke ? FPS/2 : FPS/6);
-      this.map.remove(monster);
-    },
-
+/*
     onGeneratorDeath: function(generator, by) {
       if (by)
         by.addscore(generator.type.score);
       this.map.addMultipleFx(20, generator, FX.GENERATOR_DEATH, TILE, FPS/2);
       this.map.remove(generator);
     },
-
+*/
     //------
     // MISC
     //------
@@ -3250,8 +3239,8 @@ var ymir = false, xmir = false;
       subscribe(EVENT.PLAYER_NUKE,        this.onPlayerNuke.bind(this));
       subscribe(EVENT.DOOR_OPEN,          this.onDoorOpen.bind(this));
       subscribe(EVENT.TREASURE_COLLECTED, this.onTreasureCollected.bind(this));
-      subscribe(EVENT.MONSTER_DEATH,      this.onMonsterDeath.bind(this));
-      subscribe(EVENT.GENERATOR_DEATH,    this.onGeneratorDeath.bind(this));
+//      subscribe(EVENT.MONSTER_DEATH,      this.onMonsterDeath.bind(this));
+//      subscribe(EVENT.GENERATOR_DEATH,    this.onGeneratorDeath.bind(this));
       subscribe(EVENT.HIGH_SCORE,         this.onHighScore.bind(this));
       subscribe(EVENT.PLAYER_DEATH,       this.onPlayerDeath.bind(this));
     },
