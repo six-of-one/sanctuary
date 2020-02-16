@@ -415,11 +415,13 @@ Gauntlet = function() {
       { id: 'phantomdrone',    name: 'sounds/music.phantomdrone',    formats: ['mp3', 'ogg'], volume: 0.25, loop: true             },
       { id: 'thebeginning',    name: 'sounds/music.thebeginning',    formats: ['mp3', 'ogg'], volume: 0.25, loop: true             },
       { id: 'warbringer',      name: 'sounds/music.warbringer',      formats: ['mp3', 'ogg'], volume: 0.25, loop: true             },
-*/
+// player die and end of game
       { id: 'gameover',        name: 'sounds/gameover',              formats: ['mp3', 'ogg'], volume: 0.3                         },
       { id: 'victory',      	name: 'sounds/victory',               formats: ['mp3', 'ogg'], volume: 1.0                         },
+*/
 // org fx
       { id: 'highscore',       name: 'sounds/highscore',             formats: ['mp3', 'ogg'], volume: 1.0,                        },
+//      { id: 'generatordeath',  name: 'sounds/generatordeath',        formats: ['mp3', 'ogg'], volume: 0.3, pool: ua.is.ie ? 2 : 4 },
 
 // correspond to lvl 1 - 7 messages
       { id: 'ancbeware',       name: 'sounds/g1an_beware',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },	// announcer messages
@@ -3262,7 +3264,7 @@ var ymir = false, xmir = false;
 		 {
 				if (this.nlevel === (cfg.levels.length-1)) {
 				  this.sounds.game.stop();
-				  this.play(this.sounds.victory);
+//				  this.play(this.sounds.victory);
 				}
 				else if (cfg.levels[this.nlevel].music != cfg.levels[this.nlevel+1].music) {
 				  this.sounds.game.fade(3000);
