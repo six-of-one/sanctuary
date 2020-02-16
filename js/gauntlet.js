@@ -379,8 +379,8 @@ Gauntlet = function() {
     },
 
     pubsub: [
-//      { event: EVENT.MONSTER_DEATH,      action: function(monster, by, nuke) { this.onMonsterDeath(monster, by, nuke);     } },
-//      { event: EVENT.GENERATOR_DEATH,    action: function(generator, by)     { this.onGeneratorDeath(generator, by);       } },
+      { event: EVENT.MONSTER_DEATH,      action: function(monster, by, nuke) { this.onMonsterDeath(monster, by, nuke);     } },
+      { event: EVENT.GENERATOR_DEATH,    action: function(generator, by)     { this.onGeneratorDeath(generator, by);       } },
       { event: EVENT.DOOR_OPENING,       action: function(door, speed)       { this.onDoorOpening(door, speed);            } },
       { event: EVENT.DOOR_OPEN,          action: function(door)              { this.onDoorOpen(door);                      } },
       { event: EVENT.TREASURE_COLLECTED, action: function(treasure, player)  { this.onTreasureCollected(treasure, player); } },
@@ -1297,14 +1297,21 @@ Gauntlet = function() {
           monster.hurt(monster.type.selfharm, monster);
       }
     },
-/*
+
+    onMonsterDeath: function(monster, by, nuke) {
+      if (by)
+        by.addscore(monster.type.score);
+      this.map.addMultipleFx(3, monster, FX.MONSTER_DEATH, TILE/2, nuke ? FPS/2 : FPS/6);
+      this.map.remove(monster);
+    },
+
     onGeneratorDeath: function(generator, by) {
       if (by)
         by.addscore(generator.type.score);
       this.map.addMultipleFx(20, generator, FX.GENERATOR_DEATH, TILE, FPS/2);
       this.map.remove(generator);
     },
-*/
+
     //------
     // MISC
     //------
@@ -3253,8 +3260,8 @@ var ymir = false, xmir = false;
     onMonsterFire:       function(monster)           { this.play(this.sounds.fire);                                                                           },
     onDoorOpen:          function(door)              { this.play(this.sounds.opendoor);                                                                       },
     onTreasureCollected: function(treasure, player)  { this.play(this.sounds[treasure.type.sound]);                                               },
-    onMonsterDeath:      function(monster, by, nuke) { this.play(nuke ? this.sounds.generatordeath : this.sounds["monsterdeath" + Game.Math.randomInt(1,3)]); },
-    onGeneratorDeath:    function(generator, by)     { this.play(this.sounds.generatordeath);                                                                 },
+//    onMonsterDeath:      function(monster, by, nuke) { this.play(nuke ? this.sounds.generatordeath : this.sounds["monsterdeath" + Game.Math.randomInt(1,3)]); },
+//    onGeneratorDeath:    function(generator, by)     { this.play(this.sounds.generatordeath);                                                                 },
     onHighScore:         function(player)            { this.play(this.sounds.highscore);                                                                      },
     onPlayerNuke:        function(player)            { this.play(this.sounds.nuke);                                                                           },
     onPlayerDeath:       function(player)            { this.stopAllMusic(); this.play(Musicth.sounds[player.type.name + "die" + Game.Math.randomInt(1,2)]); },
