@@ -476,8 +476,8 @@ Gauntlet = function() {
       { id: 'anc10',      name: 'sounds/g1an_10',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'must21',      name: 'sounds/g1_must21',             formats: ['mp3', 'ogg'], volume: 0.7 },		// faster troom music - 21 secs
       { id: 'must25',      name: 'sounds/g1_must25',             formats: ['mp3', 'ogg'], volume: 0.7 },		// 25 secs
-      { id: 'must30',      name: 'sounds/g1_must30',             formats: ['mp3', 'ogg'], volume: 0.7 },		// 27 secs
-      { id: 'must60',      name: 'sounds/g1_must60',             formats: ['mp3', 'ogg'], volume: 0.7 },		// 28 secs
+      { id: 'must30',      name: 'sounds/g1_must30',             formats: ['mp3', 'ogg'], volume: 0.7 },		// 30 secs
+      { id: 'must60',      name: 'sounds/g1_must60',             formats: ['mp3', 'ogg'], volume: 0.7 },		// 60 secs
 // troom taunts
       { id: 'ancbetr',      name: 'sounds/g1an_better',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
       { id: 'ancymi',      name: 'sounds/g1an_cymi',             formats: ['mp3', 'ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 4 },
@@ -591,6 +591,7 @@ Gauntlet = function() {
       { id: 'dtouch',        name: 'sounds/g1_deathtouch',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
       { id: 'healthcnt',      name: 'sounds/g1_healthcount',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
       { id: 'sbuzz',      		  name: 'sounds/g1_buzz',              formats: ['mp3', 'ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 4 },
+// let levels not have music
       { id: 'nullm',      		  name: 'sounds/null',              formats: ['mp3', 'ogg'], volume: 0.8 } 
     ],
 
