@@ -2709,7 +2709,11 @@ var ymir = false, xmir = false;
 							slowmonstertime--;
 							if (slowmonstertime < 1) slowmonster = 1;
 					}
-// low health taunt
+// low health "badump" & taunt
+					if (this.health < 20) { if ((frame % (FPS)) === 0) Musicth.play(Musicth.sounds.healthcnt); }
+					else if (this.health < 40) { if ((frame % (FPS * 2)) === 0) Musicth.play(Musicth.sounds.healthcnt); }
+					else if (this.health < 100) { if ((frame % (FPS * 3)) === 0) Musicth.play(Musicth.sounds.healthcnt); }
+
 					this.msgtimer--;
 					if (this.weak() && this.msgtimer < 1)
 					{
