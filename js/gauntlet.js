@@ -1086,8 +1086,7 @@ Gauntlet = function() {
 			if (troomtime > 0)
 			{
 					var tind;
-alert("special treasure load");
-					for (var tl = 0; tl++; tl < 100)	// temp load 100 treasures
+					for (var tl = 0; tl < 100; tl++)	// temp load 100 treasures
 					{
 							fnd = 0;
 							tind = 1;
