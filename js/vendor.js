@@ -2087,6 +2087,9 @@ AudioFX = function() {
 
   //---------------------------------------------------------------------------
 
+// if media fails to load the try wrapped code below fails - fixes unknown at this point, so we count errors
+var auderr = 0;
+
   var wrapper = function(src, options, onload) {
 
     var pool = [];
@@ -2126,7 +2129,7 @@ AudioFX = function() {
             audio.pause();
 	try {
             audio.currentTime = 0;
-	} catch(err) { alert("audio.currentTime "+err); }
+	} catch(err) { auderr++; }			// just wrap this - nothing we can do here if audio resource fails to load - this may be a pool issue
           }
         }
       },
@@ -2141,7 +2144,7 @@ AudioFX = function() {
                 audio.pause();
 	try {
                 audio.currentTime = 0;
-	} catch(err) { alert("audio.currentTime "+err); }
+	} catch(err) { auderr++; }
                 audio.volume = max;
                 return;
               }
