@@ -203,7 +203,7 @@ Gauntlet = function() {
         LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 59  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
-		TROOMCNT = [ ], TROOMSUP = [ ],
+		TROOMCNT = [ ], TROOMSUP = [ ], RNGLOAD = [ ],
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
 		SUPERSHTFR = 10,		// super shot proj frame
@@ -918,6 +918,8 @@ Gauntlet = function() {
 			TROOMSUP[2] = TREASURE.BAG;
 			TROOMSUP[3] = TREASURE.LOCKED;
 			TROOMSUP[4] = TREASURE.KEY;
+// autoload
+			RNGLOAD[1] = 
     },
 
     onload: function(event, previous, current, nlevel) {
