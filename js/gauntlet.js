@@ -1077,9 +1077,10 @@ Gauntlet = function() {
 							c = Game.Math.randomInt(0,nc - 1);
 							cell = cells[c];
 							fnd = isfloor(cell.pixel);
+//							if (cell.occupied[0]) fnd = false;		// not needed pre game ops - maps will only have is{X}() loaded stuff at this point -- we would need this in a map reload situ
 							sft--;
 					}
-					reloaded.addTreasure(cell.x, cell.y, SPOTION[spotct]);
+					if (fnd) reloaded.addTreasure(cell.x, cell.y, SPOTION[spotct]);		// NOTE: fnd could fail, then we have hidden notification with no potion
 			}
 
 /// NOTE: special until treasures are mapped into treasure rooms !
@@ -1099,9 +1100,10 @@ Gauntlet = function() {
 									c = Game.Math.randomInt(0,nc - 1);
 									cell = cells[c];
 									fnd = isfloor(cell.pixel);
+									if (cell.occupied[0]) fnd = false;
 									sft--;
 							}
-							reloaded.addTreasure(cell.x, cell.y, TROOMSUP[tind]);
+							if (fnd) reloaded.addTreasure(cell.x, cell.y, TROOMSUP[tind]);
 					}
 			}
     },
