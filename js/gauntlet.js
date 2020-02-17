@@ -1077,10 +1077,14 @@ Gauntlet = function() {
 							c = Game.Math.randomInt(0,nc - 1);
 							cell = cells[c];
 							fnd = isfloor(cell.pixel);
-//							if (cell.occupied[0]) fnd = false;		// not needed pre game ops - maps will only have is{X}() loaded stuff at this point -- we would need this in a map reload situ
+//							if (cell.loaded != undefined) fnd = false;		// not needed pre game ops - maps will only have is{X}() loaded stuff at this point -- we would need this in a map reload situ
 							sft--;
 					}
-					if (fnd) reloaded.addTreasure(cell.x, cell.y, SPOTION[spotct]);		// NOTE: fnd could fail, then we have hidden notification with no potion
+					if (fnd)
+					{
+							reloaded.addTreasure(cell.x, cell.y, SPOTION[spotct]);		// NOTE: fnd could fail, then we have hidden notification with no potion
+							cell.loaded = true;
+					}
 			}
 
 /// NOTE: special until treasures are mapped into treasure rooms !
@@ -1100,10 +1104,14 @@ Gauntlet = function() {
 									c = Game.Math.randomInt(0,nc - 1);
 									cell = cells[c];
 									fnd = isfloor(cell.pixel);
-									if (cell.occupied[0]) fnd = false;
+									if (cell.loaded != undefined) fnd = false;		// for some reason the .occupied() fn fails here, so we do our own thing
 									sft--;
 							}
-							if (fnd) reloaded.addTreasure(cell.x, cell.y, TROOMSUP[tind]);
+							if (fnd)
+							{
+									reloaded.addTreasure(cell.x, cell.y, TROOMSUP[tind]);
+									cell.loaded = true;
+							}
 					}
 			}
     },
