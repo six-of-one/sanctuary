@@ -2124,7 +2124,9 @@ AudioFX = function() {
           audio = pool[n];
           if (isplaying(audio)) {
             audio.pause();
+	try {
             audio.currentTime = 0;
+	} catch(err) { alert("audio.currentTime "+err); }
           }
         }
       },
@@ -2137,7 +2139,9 @@ AudioFX = function() {
               audio.volume = Math.max(0, audio.volume - (max/((over||1000)/dt)));
               if (audio.volume === 0) {
                 audio.pause();
+	try {
                 audio.currentTime = 0;
+	} catch(err) { alert("audio.currentTime "+err); }
                 audio.volume = max;
                 return;
               }

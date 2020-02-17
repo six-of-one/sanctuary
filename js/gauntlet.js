@@ -1114,6 +1114,10 @@ Gauntlet = function() {
 							}
 					}
 			}
+			else if (Mastermap.level.nornd != undefined)
+			{
+				
+			}
     },
 
     onwin:  function(event, previous, current) { this.winlosefade(15000); this.saveLevel(8); },
