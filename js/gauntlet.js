@@ -312,9 +312,7 @@ Gauntlet = function() {
       DEBUG = {
         RESET:      Game.qsBool("reset"),
         GRID:       Game.qsBool("grid"),
-/// RESTORE !
         NOMONSTERS: Game.qsBool("nomonsters"),
-//        NOMONSTERS: 1, //: Game.qsBool("nomonsters"),
         NODAMAGE:   Game.qsBool("nodamage"),
         NOAUTOHURT: Game.qsBool("noautohurt"),
         POTIONS:    Game.qsNumber("potions"),
