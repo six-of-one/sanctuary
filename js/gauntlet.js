@@ -80,6 +80,8 @@
         WIZARD2: { sx: 0, sy: 19, frames: 3, fpf: FPS/10, score:  30, health:  8, speed: 120/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 10, speed: 4.0*FPS, max: 20, score: 400, sx: 33, sy: 6 }, name: "sorcerer", weapon: null     ,     nohlp: 44            },
         LOBBER2: { sx: 0, sy: 21, frames: 3, fpf: FPS/10, score:  10, health:  4, speed: 60/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 10, speed: 2.5*FPS, max: 20, score: 100, sx: 33, sy: 6 }, name: "lobber", weapon: null  ,     nohlp: 45               }
       },
+// track a potential "richest" player path - (really have to track them all...)
+		THIEFTR = [ ], thieftrack = 0,
 
 // list of tutorial and help messages to display
 		HELPDIS = [
@@ -2355,6 +2357,7 @@ var ymir = false, xmir = false;
 			TROOMCNT[8] = Musicth.sounds.anc8;
 			TROOMCNT[9] = Musicth.sounds.anc9;
 			TROOMCNT[10] = Musicth.sounds.anc10;
+			THEIFTR[0] = null;
 
 			for (var c = 0; c < 70; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
 /// debug code - remove pre-release
@@ -2539,6 +2542,10 @@ var ymir = false, xmir = false;
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
 								walled = true;
 						}
+/// REMOVE - testing
+var tt = "";
+for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THEIFTR[thieftrack].x + " y:" +THEIFTR[thieftrack].y + ", ";
+alert(tt);
 				return;
 		 }
 
@@ -3246,6 +3253,23 @@ var ymir = false, xmir = false;
         player.ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, maxglow, maxglow, STILE, STILE);
 
         ctx.drawImage(player.canvas, 0, 0, STILE + 2*maxglow, STILE + 2*maxglow, x + dx - maxglow + shrink/2 - viewport.x, y + dy - maxglow + shrink/2 - viewport.y, TILE + 2*maxglow - shrink, TILE + 2*maxglow - shrink);
+// thief tracker
+		  if (thieftrack > 0)
+		  {
+					if ((x != THEIFTR[thieftrack - 1].x) || (y != THEIFTR[thieftrack - 1].y))
+					{
+							THEIFTR[thieftrack].x = x;
+							THEIFTR[thieftrack].y = y;
+							thieftrack++;
+					}
+		  }
+		  else if (thieftrack === 0)
+		  {
+					THEIFTR[thieftrack].x = x;
+					THEIFTR[thieftrack].y = y;
+					thieftrack++;
+		  }
+		  else thieftrack = 0;
       }
     },
 
