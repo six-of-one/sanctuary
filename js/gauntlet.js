@@ -10,7 +10,7 @@
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
 // debug - provide a one time start level
-											initlevel = 8,
+											initlevel = 9,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -2543,7 +2543,7 @@ var ymir = false, xmir = false;
 						}
 /// REMOVE - testing
 var tt = "";
-for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTR[thieftrack].x + " y:" +THIEFTR[thieftrack].y + ", ";
+for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTR[f].x + " y:" +THIEFTR[f].y + ", ";
 alert(tt);
 				return;
 		 }
@@ -3257,6 +3257,7 @@ alert(tt);
 		  {
 					if ((x != THIEFTR[thieftrack - 1].x) || (y != THIEFTR[thieftrack - 1].y))
 					{
+							THIEFTR[thieftrack] = thieftrack;
 							THIEFTR[thieftrack].x = x;
 							THIEFTR[thieftrack].y = y;
 							thieftrack++;
@@ -3264,6 +3265,7 @@ alert(tt);
 		  }
 		  else if (thieftrack === 0)
 		  {
+					THIEFTR[thieftrack] = 0;
 					THIEFTR[thieftrack].x = x;
 					THIEFTR[thieftrack].y = y;
 					thieftrack++;
