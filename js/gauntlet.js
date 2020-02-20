@@ -2357,7 +2357,6 @@ var ymir = false, xmir = false;
 			TROOMCNT[8] = Musicth.sounds.anc8;
 			TROOMCNT[9] = Musicth.sounds.anc9;
 			TROOMCNT[10] = Musicth.sounds.anc10;
-			THEIFTR[0] = null;
 
 			for (var c = 0; c < 70; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
 /// debug code - remove pre-release
@@ -2544,7 +2543,7 @@ var ymir = false, xmir = false;
 						}
 /// REMOVE - testing
 var tt = "";
-for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THEIFTR[thieftrack].x + " y:" +THEIFTR[thieftrack].y + ", ";
+for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTR[thieftrack].x + " y:" +THIEFTR[thieftrack].y + ", ";
 alert(tt);
 				return;
 		 }
@@ -3256,17 +3255,17 @@ alert(tt);
 // thief tracker
 		  if (thieftrack > 0)
 		  {
-					if ((x != THEIFTR[thieftrack - 1].x) || (y != THEIFTR[thieftrack - 1].y))
+					if ((x != THIEFTR[thieftrack - 1].x) || (y != THIEFTR[thieftrack - 1].y))
 					{
-							THEIFTR[thieftrack].x = x;
-							THEIFTR[thieftrack].y = y;
+							THIEFTR[thieftrack].x = x;
+							THIEFTR[thieftrack].y = y;
 							thieftrack++;
 					}
 		  }
 		  else if (thieftrack === 0)
 		  {
-					THEIFTR[thieftrack].x = x;
-					THEIFTR[thieftrack].y = y;
+					THIEFTR[thieftrack].x = x;
+					THIEFTR[thieftrack].y = y;
 					thieftrack++;
 		  }
 		  else thieftrack = 0;
