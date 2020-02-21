@@ -81,7 +81,7 @@
         LOBBER2: { sx: 0, sy: 21, frames: 3, fpf: FPS/10, score:  10, health:  4, speed: 60/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, generator: { health: 10, speed: 2.5*FPS, max: 20, score: 100, sx: 33, sy: 6 }, name: "lobber", weapon: null  ,     nohlp: 45               }
       },
 // track a potential "richest" player path - (really have to track them all...)
-		THIEFTR = [ ], thieftrack = 0,
+		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0,
 
 // list of tutorial and help messages to display
 		HELPDIS = [
@@ -2543,7 +2543,7 @@ var ymir = false, xmir = false;
 						}
 /// REMOVE - testing
 var tt = "";
-for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTR[f].x + " y:" +THIEFTR[f].y + ", ";
+for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +THIEFTRY[f] + ", ";
 alert(tt);
 				return;
 		 }
@@ -3255,19 +3255,17 @@ alert(tt);
 // thief tracker
 		  if (thieftrack > 0)
 		  {
-					if ((x != THIEFTR[thieftrack - 1].x) || (y != THIEFTR[thieftrack - 1].y))
+					if ((+Math.floor(x) != THIEFTRX[thieftrack - 1]) || (+Math.floor(y) != THIEFTRY[thieftrack - 1]))
 					{
-							THIEFTR[thieftrack] = thieftrack;
-							THIEFTR[thieftrack].x = x;
-							THIEFTR[thieftrack].y = y;
+							THIEFTRX[thieftrack] = +Math.floor(x);
+							THIEFTRY[thieftrack] = +Math.floor(y);
 							thieftrack++;
 					}
 		  }
 		  else if (thieftrack === 0)
 		  {
-					THIEFTR[thieftrack] = 0;
-					THIEFTR[thieftrack].x = x;
-					THIEFTR[thieftrack].y = y;
+					THIEFTRX[thieftrack] = +Math.floor(x);
+					THIEFTRY[thieftrack] = +Math.floor(y);
 					thieftrack++;
 		  }
 		  else thieftrack = 0;
