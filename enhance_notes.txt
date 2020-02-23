@@ -6,7 +6,7 @@ sl
 port list:
 
 
-
+ 
 monster /gen health & kill -- vs. player shot power levels
 - including level down with shot that doesnt take all health
 player shot speed and power potions
