@@ -1954,6 +1954,11 @@ var ymir = false, xmir = false;
 		 }
       if ((by.weapon && this.type.canbeshot) || (by.player && this.type.canbehit) || (by == this) || nuke) {
         this.health = Math.max(0, this.health - damage);
+
+			var lvl = Math.max(0, Math.ceil(this.health / 10));
+			var monlvl = this.type.mlvl[lvl];
+			this.type = MONSTERS[monlvl];
+
         if (this.health === 0)
           this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null, nuke);
       }
@@ -2050,7 +2055,7 @@ var ymir = false, xmir = false;
     },
 
     onrender: function(frame) {
-		 var lvl = Math.ceil(this.health / 10);
+		 var lvl = Math.max(0, Math.ceil(this.health / 10));
       this.frame = lvl - 1;		//(2 - Math.floor(3 * (this.health / (this.type.health + 1))));
 		var genlvl = this.type.glvl[lvl];
 		this.mtype = MONSTERS[genlvl];
