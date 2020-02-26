@@ -2052,7 +2052,7 @@ var ymir = false, xmir = false;
     onrender: function(frame) {
 		 var lvl = Math.ceil(this.health / 10);
       this.frame = lvl - 1;		//(2 - Math.floor(3 * (this.health / (this.type.health + 1))));
-		var genlvl = this.glvl[lvl];
+		var genlvl = this.type.glvl[lvl];
 		this.mtype = MONSTERS[genlvl];
     }
 
