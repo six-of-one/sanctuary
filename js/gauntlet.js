@@ -57,7 +57,7 @@
 		DIRTY = [ -32, -32, 0, 32, 32, 32, 0, -32],
       PLAYER = {
         WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, health: 80, speed: 180/FPS, damage: 50/FPS, armor: 2, magic: 16, weapon: { speed: 600/FPS, reload: 0.40*FPS, damage: 20, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior", annc: 'ancwar1', fcol: "<font color=red>" }, // Thor
-        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, health: 80, speed: 215/FPS, damage: 40/FPS, armor: 3, magic: 16, weapon: { speed: 620/FPS, reload: 0.35*FPS, damage: 10, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", annc: 'ancval1', fcol: "<font color=blue>" }, // Thyra
+        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, health: 80, speed: 215/FPS, damage: 40/FPS, armor: 3, magic: 16, weapon: { speed: 620/FPS, reload: 0.35*FPS, damage: 10, weprng: 0.4, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", annc: 'ancval1', fcol: "<font color=blue>" }, // Thyra
         WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, health: 80, speed: 190/FPS, damage: 30/FPS, armor: 1, magic: 32, weapon: { speed: 640/FPS, reload: 0.30*FPS, damage: 10, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard", annc: 'ancwiz1', fcol: "<font color=yellow>"   }, // Merlin
         ELF:      { sx: 0, sy: 3, frames: 3, fpf: FPS/10, health: 80, speed: 245/FPS, damage: 20/FPS, armor: 1, magic: 24, weapon: { speed: 660/FPS, reload: 0.25*FPS, damage: 10, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf", annc: 'ancelf1', fcol: "<font color=green>"      }  // Questor
       },
@@ -1284,14 +1284,18 @@
 		 var nosup = true;
       if (weapon.type.player && (entity.monster || entity.generator || entity.treasure ))
 		 {
-				var xdmg = 0, dmg = weapon.type.damage;
+				var rdmg = 0, xdmg = 0, dmg = weapon.type.damage;
+				if (weapon.type.weprng != undefined)
+				{
+						if (weapon.type.weprng < Math.random()) rdmg = weapon.type.damage;
+				}
 				if (weapon.lsuper)
 				{
 						dmg = weapon.damage;
 						if (entity.type.canbeshot) nosup = false;			// super shot hit a monster, gen or treasure that is shotable - keep going
 				}
 				if (weapon.xshotpwr) xdmg = 10;
-				entity.hurt(dmg + xdmg, weapon);
+				entity.hurt(dmg + rdmg + xdmg, weapon);
 		 }
       else if (weapon.type.monster && entity.player)
         entity.hurt(weapon.type.damage, weapon);
