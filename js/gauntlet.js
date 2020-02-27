@@ -55,11 +55,14 @@
 // teleport adjust by last player dir		- use player dir code (0 - 7) and these on teleport {x,y} to test surrounding cells
 		DIRTX = [ 0, 32, 32, 32, 0, -32, -32, -32],
 		DIRTY = [ -32, -32, 0, 32, 32, 32, 0, -32],
+// abiility & power potion enhance
+		ABILIND = [ 10, 0, 10, 10, 0, 10, 10, 10, 30, 30, 20, 30, 30, 30, 30, 30, 30, 30, 30, 10, 20, 20, 10, 20, 20, 20, 30, 30, 10, 20, 20, 20, 30, 30, 0.15, 0, 0, 0.3, 0, 0, 1, 0.8, 0.65, 1, 1, 0.85 ],
+		ABILRNG = [ 0, 0, 0, 10.25, 0, 0, 10.25, 0, 0, 0, 0, 0, 0, 0, 0, 5.25, 0, 0, 5.25, 0, 0, 10.25, 0, 0, 5.2, 0, 0, 5.2, 10.5, 10.5, 10.85, 10.4, 0, 5.2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       PLAYER = {
-        WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, health: 80, speed: 180/FPS, damage: 50/FPS, armor: 2, magic: 16, weapon: { speed: 600/FPS, reload: 0.8*FPS, damage: 20, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior", annc: 'ancwar1', fcol: "<font color=red>" }, // Thor
-        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, health: 80, speed: 215/FPS, damage: 40/FPS, armor: 3, magic: 16, weapon: { speed: 620/FPS, reload: 0.7*FPS, damage: 10, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", annc: 'ancval1', fcol: "<font color=blue>" }, // Thyra
-        WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, health: 80, speed: 190/FPS, damage: 30/FPS, armor: 1, magic: 32, weapon: { speed: 640/FPS, reload: 0.75*FPS, damage: 10, weprng: 0.4, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard", annc: 'ancwiz1', fcol: "<font color=yellow>"   }, // Merlin
-        ELF:          { sx: 0, sy: 3, frames: 3, fpf: FPS/10, health: 80, speed: 245/FPS, damage: 20/FPS, armor: 1, magic: 24, weapon: { speed: 660/FPS, reload: 0.7*FPS, damage: 10, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf", annc: 'ancelf1', fcol: "<font color=green>"      }  // Questor
+        WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, health: 80, speed: 180/FPS, damage: 50/FPS, armor: 2, magic: 16, weapon: { speed: 600/FPS, reload: 1.15*FPS, damage: 20, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior", annc: 'ancwar1', fcol: "<font color=red>" }, // Thor
+        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, health: 80, speed: 215/FPS, damage: 40/FPS, armor: 3, magic: 16, weapon: { speed: 620/FPS, reload: 1*FPS, damage: 10, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", annc: 'ancval1', fcol: "<font color=blue>" }, // Thyra
+        WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, health: 80, speed: 190/FPS, damage: 30/FPS, armor: 1, magic: 32, weapon: { speed: 640/FPS, reload: 1.1*FPS, damage: 10, weprng: 0.4, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard", annc: 'ancwiz1', fcol: "<font color=yellow>"   }, // Merlin
+        ELF:          { sx: 0, sy: 3, frames: 3, fpf: FPS/10, health: 80, speed: 245/FPS, damage: 20/FPS, armor: 1, magic: 24, weapon: { speed: 660/FPS, reload: 1*FPS, damage: 10, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf", annc: 'ancelf1', fcol: "<font color=green>"      }  // Questor
       },
       MONSTER = {
         GHOST:  { sx: 0, sy: 4, frames: 3, fpf: FPS/10, score:  10, health:  30, speed: 120/FPS, damage: 100/FPS, selfharm: 30/FPS, canbeshot: true,  canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 11, 11, 6, 0 ], generator: { glvl: [ 11, 11, 6, 0 ], health:  30, speed: 2.5*FPS, max: 40, score: 100, sx: 32, sy: 4 }, name: "ghost",  weapon: null ,     nohlp: 41   },
@@ -2091,7 +2094,7 @@ var ymir = false, xmir = false;
       var collision = map.trymove(this, this.dir, this.type.speed + xspd, this.owner);
       if (collision) {
 			if (!this.type.monster)
-				this.owner.reloading = 0; //countdown(this.owner.reloading, this.type.reload/2); // speed up reloading process if previous weapon hit something, makes player feel powerful
+				this.owner.reloading = countdown(this.owner.reloading, this.type.reload * 0.8); // speed up reloading process if previous weapon hit something, makes player feel powerful
         publish(EVENT.WEAPON_COLLIDE, this, collision);
       }
     },
