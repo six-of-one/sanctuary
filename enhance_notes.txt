@@ -5,8 +5,12 @@ gJ - gauntlet javascript		(gJ.0 - original)
 sl
 port list:
 
+player dmg: shot, melee, potion, shot potion
+melee mis gens
+monster dmg: melee - turn off autohurt to test
 
- 
+remove some aduio pool stuff & test
+
 player shot speed and power potions
 
 >a few announce & help msg left - ssop, etc.
