@@ -61,10 +61,10 @@
 		ABILIND = [ 10, 0, 10, 10, 0, 10, 10, 10, 30, 30, 20, 30, 30, 30, 30, 30, 30, 30, 30, 10, 20, 20, 10, 20, 20, 20, 30, 30, 10, 20, 20, 20, 30, 30, 0.15, 0, 0, 0.3, 0, 0, 1, 0.8, 0.65, 1, 1, 0.85 ],
 		ABILRNG = [ 0, 0, 0, 10.25, 0, 0, 10.25, 0, 0, 0, 0, 0, 0, 0, 0, 5.25, 0, 0, 5.25, 0, 0, 10.25, 0, 0, 5.2, 0, 0, 5.2, 10.5, 10.5, 10.85, 10.4, 0, 5.2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       PLAYER = {
-        WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, health: 80, speed: 180/FPS, damage: 50/FPS, armor: 2, magic: 16, mind:10, mindg:4, weapon: { speed: 600/FPS, reload: 1.15*FPS, damage: 20, wind:10, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior", annc: 'ancwar1', fcol: "<font color=red>" }, // Thor
-        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, health: 80, speed: 215/FPS, damage: 40/FPS, armor: 3, magic: 16, mind:10, mindg:4, weapon: { speed: 620/FPS, reload: 1*FPS, damage: 10, wind:19, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", annc: 'ancval1', fcol: "<font color=blue>" }, // Thyra
-        WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, health: 80, speed: 190/FPS, damage: 30/FPS, armor: 1, magic: 32, mind:16, mindg:13, weapon: { speed: 640/FPS, reload: 1.1*FPS, damage: 10,  wind:28, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard", annc: 'ancwiz1', fcol: "<font color=yellow>"   }, // Merlin
-        ELF:          { sx: 0, sy: 3, frames: 3, fpf: FPS/10, health: 80, speed: 245/FPS, damage: 20/FPS, armor: 1, magic: 24, mind:16, mindg:25, weapon: { speed: 660/FPS, reload: 1*FPS, damage: 10, wind:22, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf", annc: 'ancelf1', fcol: "<font color=green>"      }  // Questor
+        WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, health: 80, speed: 180/FPS, damage: 50/FPS, armor: 2, magic: 10, mind:10, mindg:4, weapon: { speed: 600/FPS, reload: 1.15*FPS, damage: 20, wind:10, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior", annc: 'ancwar1', fcol: "<font color=red>" }, // Thor
+        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, health: 80, speed: 215/FPS, damage: 40/FPS, armor: 3, magic: 10, mind:10, mindg:4, weapon: { speed: 620/FPS, reload: 1*FPS, damage: 10, wind:19, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", annc: 'ancval1', fcol: "<font color=blue>" }, // Thyra
+        WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, health: 80, speed: 190/FPS, damage: 30/FPS, armor: 1, magic: 30, mind:16, mindg:13, weapon: { speed: 640/FPS, reload: 1.1*FPS, damage: 10,  wind:28, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard", annc: 'ancwiz1', fcol: "<font color=yellow>"   }, // Merlin
+        ELF:          { sx: 0, sy: 3, frames: 3, fpf: FPS/10, health: 80, speed: 245/FPS, damage: 20/FPS, armor: 1, magic: 30, mind:16, mindg:25, weapon: { speed: 660/FPS, reload: 1*FPS, damage: 10, wind:22, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf", annc: 'ancelf1', fcol: "<font color=green>"      }  // Questor
       },
       MONSTER = {
         GHOST:  { sx: 0, sy: 4, frames: 3, fpf: FPS/10, score:  10, health:  30, speed: 120/FPS, damage: 100/FPS, selfharm: 30/FPS, canbeshot: true,  canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 11, 11, 6, 0 ], generator: { glvl: [ 11, 11, 6, 0 ], health:  30, speed: 2.5*FPS, max: 40, score: 100, sx: 32, sy: 4 }, name: "ghost",  weapon: null ,     nohlp: 41   },
@@ -1290,7 +1290,7 @@
       if (weapon.type.player && (entity.monster || entity.generator || entity.treasure ))
 		 {
 				var r, rn, xdmg = 0, dmg, vdmg = weapon.type.wind;
-				if (weapon.xshotpwr) vdmg = vdmg + Math.min(ppotmax, weapon.xshotpwr);
+				if (weapon.xshotpwr) vdmg = vdmg + Math.min(weapon.xshotpwr, ppotmax);
 				dmg = ABILIND[vdmg];
 				r = ABILRNG[vdmg];			// cursed potions could make this neg val - Math.abs needed
 				rn = r - Math.floor(r);
@@ -1581,29 +1581,53 @@
     //-------------------------------------------------------------------------
 
     nuke: function(viewport, player) {
-      var rp, n, max, entity, distance, limit = TILE*player.type.magic;
-		 var xmg = 0;
+      var n, max, entity, distance, limit = TILE*player.type.magic;
+		var r, r2, rn, rg, xdm = 0, xdg = 0, dmg, dgg, vdm = player.type.mind, vdg = player.type.mindg;
+		if (player.xmagic)			// xtra magic boosts damages
+		 {
+				vdm = vdm + Math.min(player.xmagic, ppotmax);
+				vdg = vdg + Math.min(player.xmagic, ppotmax);
+		 }
+		 if (shotpot)					// player shot potions are less powerful
+		 {
+				vdm = Math.min(0, (vdm - 3));
+				vdg = Math.min(0, (vdg - 3));
+		 }
+		dmg = ABILIND[vdm];
+		dgg = ABILIND[vdg];
+
+// get chance for random boost - applied per ent below
+		r = ABILRNG[vdm];
+		rn = r - Math.floor(r);
+		r2 = ABILRNG[vdg];
+		rg = r2 - Math.floor(r2);
+
 		helpdis(nohlpmagaff, undefined, 2000, undefined, undefined);
 		 if (player.xmagic) xmg = 4;
       for(n = 0, max = this.entities.length ; n < max ; n++) {
         entity = this.entities[n];
         if (entity.monster && entity.active) {
-          distance = Math.max(Math.abs(player.x - entity.x), Math.abs(player.y - entity.y)); // rough, but fast, approximation for slower, sqrt(x*x + y*y)
-          if (distance < limit)
-            entity.hurt((player.type.magic +xmg) * (1 - distance/limit) * shotpot, player, true);
+				distance = Math.max(Math.abs(player.x - entity.x), Math.abs(player.y - entity.y)); // rough, but fast, approximation for slower, sqrt(x*x + y*y)
+				xdm = 0;
+				if (rn > 0)
+				{
+						if (rn > Math.random()) xdm = Math.floor(r);
+				}
+				 if (distance < limit)
+					entity.hurt(dmg + xdm, player, true);
         }
 // cataboligne - add damage to generators
-// rp - re plot dmg, only wiz could kill gens with potion, elf with extra magic power
         if (entity.generator && entity.active) {
-          distance = Math.max(Math.abs(player.x - entity.x), Math.abs(player.y - entity.y)); // rough, but fast, approximation for slower, sqrt(x*x + y*y)
-// hacky calc for now
-			  rp = player.type.magic + xmg;
-			  if (player.type.magic < 32) rp = player.type.magic / 3;
-          if (distance < limit)
-            entity.hurt(rp * (1 - distance/limit) * shotpot, player, true);
+				distance = Math.max(Math.abs(player.x - entity.x), Math.abs(player.y - entity.y)); // rough, but fast, approximation for slower, sqrt(x*x + y*y)
+				xdg = 0;
+				if (rg > 0)
+				{
+					if (rg > Math.random()) xdg = Math.floor(r2);
+				}
+				if (distance < limit)
+						entity.hurt(dgg + xdg, player, true);
         }
-// end mod
-      }
+      }							// nuke ent loop++
     },
 
     //-------------------------------------------------------------------------
