@@ -1590,8 +1590,8 @@
 		 }
 		 if (shotpot)					// player shot potions are less powerful
 		 {
-				vdm = Math.min(0, (vdm - 3));
-				vdg = Math.min(0, (vdg - 3));
+				vdm = Math.max(0, (vdm - 3));
+				vdg = Math.max(0, (vdg - 3));
 		 }
 		dmg = ABILIND[vdm];
 		dgg = ABILIND[vdg];
@@ -1603,8 +1603,8 @@
 		rg = r2 - Math.floor(r2);
 
 		helpdis(nohlpmagaff, undefined, 2000, undefined, undefined);
-		 if (player.xmagic) xmg = 4;
-      for(n = 0, max = this.entities.length ; n < max ; n++) {
+
+		for(n = 0, max = this.entities.length ; n < max ; n++) {
         entity = this.entities[n];
         if (entity.monster && entity.active) {
 				distance = Math.max(Math.abs(player.x - entity.x), Math.abs(player.y - entity.y)); // rough, but fast, approximation for slower, sqrt(x*x + y*y)
@@ -1736,7 +1736,7 @@ var ymir = false, xmir = false;
 // make sure mults is not undefed - later load deathmult from cooky
 		if (Deathmult == undefined) Deathmult = 0;
 		if (Masterot == undefined) Masterot = 0;
-		shotpot = 1;
+		shotpot = 0;
 
       Game.parseImage(source, function(tx, ty, pixel, map) {
 
@@ -2182,7 +2182,7 @@ var ymir = false, xmir = false;
 								}
 						}
 				}
-			 shotpot = 0.8;	// shot potions are weaker
+			 shotpot = 1;	// shot potions are weaker
 				if (this.type.potion)
 				{
 						if (HELPCLEAR[nohlpsap])
@@ -2210,7 +2210,7 @@ var ymir = false, xmir = false;
 						slowmonster = 0.5;
 						helpdis(nohlppois, undefined, 2000, undefined, undefined);
 				}
-				shotpot = 1;
+				shotpot = 0;
 				Mastermap.remove(this);
 				return;
 		 }
