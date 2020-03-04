@@ -832,3 +832,52 @@ Game.Math = {
 	var dist = Math.sqrt( dx*dx + dy*dy );
 	return dist;
 }
+
+// cookie selector
+
+
+function createCookie(name,value,days)
+{
+var domain = "";
+
+//	if (is_ie) domain = ";domain=.newmarkscenic.com";
+	if (days) 
+		{
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+		}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/"+domain;//+";domain=www.newmarkscenic.com";
+}
+
+function readCookie(name)
+{
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function readCookieDef(name,val,days)
+{
+	var v = readCookie(name);
+
+	if (v == null)
+	{
+		createCookie(name,val,days);
+		return(val);
+	}
+	else
+		return(v);
+}
+
+function deleteCookie(name)
+{
+	createCookie(name,"",-1);
+}
