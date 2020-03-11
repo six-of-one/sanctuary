@@ -1827,6 +1827,78 @@ var ymir = false, xmir = false;
           th     = source.height,
           self   = this;
 
+// parseimg setup dups
+      function is(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
+      function type(pixel)     { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
+
+      function isnothing(pixel)      { return is(pixel, PIXEL.NOTHING);   };
+      function iswall(pixel)         { return is(pixel, PIXEL.WALL);      };
+      function isfloor(pixel)         { return is(pixel, PIXEL.FLOOR);      };
+      function isstart(pixel)        { return is(pixel, PIXEL.START);     };
+      function isdoor(pixel)         { return is(pixel, PIXEL.DOOR);      }; 
+      function isexit(pixel)         { return is(pixel, PIXEL.EXIT);      };
+      function isgenerator(pixel)    { return is(pixel, PIXEL.GENERATOR); };
+      function ismonster(pixel)      { return is(pixel, PIXEL.MONSTER);   };
+      function istreasure(pixel)     { return is(pixel, PIXEL.TREASURE);  };
+      function walltype0(tx,ty,map)   { return (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
+      function shadowtype0(tx,ty,map) { return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty+1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0); };
+      function doortype0(tx,ty,map)   {
+				var dr = (isdoor(map.pixel(tx,   ty-1)) ? 1 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty+1)) ? 4 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0);
+				return (dr);
+		};
+																											
+// mirror Y
+      function walltypeYM(tx,ty,map)   {  ty = (th - 1) - ty; return (iswall(map.pixel(tx,   ty+1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
+      function shadowtypeYM(tx,ty,map) { ty = (th - 1) - ty; return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty-1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0); };
+		function doortypeYM(tx,ty,map)   {
+				ty = (th - 1) - ty;
+				var dr = (isdoor(map.pixel(tx,   ty+1)) ? 1 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty-1)) ? 4 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(map.pixel(tx,   ty+1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0);
+				return (dr);
+			};
+// mirror X
+      function walltypeXM(tx,ty,map)   { tx = (tw - 1) - tx; return (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx-1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx+1, ty))   ? 8 : 0); };
+      function shadowtypeXM(tx,ty,map) { tx = (tw - 1) - tx; return (iswall(map.pixel(tx+1, ty))   ? 1 : 0) | (iswall(map.pixel(tx+1, ty+1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0); };
+		function doortypeXM(tx,ty,map)   {
+				tx = (tw - 1) - tx;
+				var dr = (isdoor(map.pixel(tx,   ty-1)) ? 1 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty+1)) ? 4 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx-1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx+1, ty))   ? 8 : 0);
+				return (dr);
+			};
+// 180
+      function walltype180(tx,ty,map)   { tx = (tw - 1) - tx; ty = (th - 1) - ty; return (iswall(map.pixel(tx,   ty+1)) ? 1 : 0) | (iswall(map.pixel(tx-1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0) | (iswall(map.pixel(tx+1, ty))   ? 8 : 0); };
+      function shadowtype180(tx,ty,map) { tx = (tw - 1) - tx; ty = (th - 1) - ty; return (iswall(map.pixel(tx+1, ty))   ? 1 : 0) | (iswall(map.pixel(tx+1, ty-1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0); };
+		function doortype180(tx,ty,map)   {
+				tx = (tw - 1) - tx; ty = (th - 1) - ty;
+				var dr = (isdoor(map.pixel(tx,   ty+1)) ? 1 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty-1)) ? 4 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(map.pixel(tx,   ty+1)) ? 1 : 0) | (iswall(map.pixel(tx-1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0) | (iswall(map.pixel(tx+1, ty))   ? 8 : 0);
+				return (dr);
+			};
+
+var ymir = false, xmir = false;
+
+		var walltype = walltype0;
+		var shadowtype = shadowtype0;
+		var doortype = doortype0;
+
+		if (xmir) {
+				walltype = walltypeXM;
+				shadowtype = shadowtypeXM;
+				doortype = doortypeXM;
+		}
+		if (ymir) {
+				walltype = walltypeYM;
+				shadowtype = shadowtypeYM;
+				doortype = doortypeYM;
+		}
+		if (xmir && ymir) {
+				walltype = walltype180;
+				shadowtype = shadowtype180;
+				doortype = doortype180;
+		}
+
+// parsing here
 			if (xmir) tx = (tw - 1) - tx;
 			if (ymir) ty = (th - 1) - ty;
 
