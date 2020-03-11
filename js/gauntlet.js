@@ -1144,7 +1144,6 @@
 							sft = 6000;
 							while (RLOAD[f] > 0 && (sft > 0))
 							{
-alert(RLOAD[f]);
 									fnd = 0;
 									while (!fnd && (sft > 0))
 									{
@@ -1154,9 +1153,10 @@ alert(RLOAD[f]);
 											if (cell.loaded != undefined) fnd = false;		// for some reason the .occupied() fn fails here, so we do our own thing
 											sft--;
 									}
+alert(RLOAD[f]+" sf:"+sft+" fn:"+fnd);
 									if (fnd)
 									{
-											load_cell(cell.tx, cell.ty, RLPROF[0][f],Mastermap);
+											load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
 											cell.loaded = true;
 											RLOAD[f]--;
 									}
