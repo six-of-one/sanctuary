@@ -317,6 +317,16 @@
         SCORE:   "gauntlet.score",
         WHO:     "gauntlet.who"
       },
+// rnd load profiles
+		rlloop = 3,
+		rlline = 5,
+		RLPROF = [
+		[0xF00060, 10, 20, 0, 0, 0],
+		[0xF00080, 0, 10, 20, 0, 0],
+		[0x008050, 2, 2, 5, 5, 5],
+		[0x008070, 10, 10, 15, 15, 5]		
+		],
+		RLOAD = [0, 0, 0, 0, 0, 0],
       DEBUG = {
         RESET:      Game.qsBool("reset"),
         GRID:       Game.qsBool("grid"),
@@ -1124,7 +1134,32 @@
 			}
 			else if (Mastermap.level.nornd == undefined)	// random load a level
 			{
-					
+					var f, rprof;
+				
+					rprof = Game.Math.randomInt(1,rlline);			// for now pick a random profile
+					for (f = 0;f <= rlloop;f++) RLOAD[f] = RLPROF[rprof, f];		// get item counts for a profile
+					for (f = 0;f <= rlloop;f++)
+					{
+							sft = 6000;
+							while (RLOAD[f] > 0 && (sft > 0))
+							{
+									fnd = 0;
+									while (!fnd && (sft > 0))
+									{
+											c = Game.Math.randomInt(0,nc - 1);
+											cell = cells[c];
+											fnd = isfloor(cell.pixel);
+											if (cell.loaded != undefined) fnd = false;		// for some reason the .occupied() fn fails here, so we do our own thing
+											sft--;
+									}
+									if (fnd)
+									{
+											load_cell(cell.x, cell.y, RLPROF[0, f],Mastermap);
+											cell.loaded = true;
+											RLOAD[f]--;
+									}
+							}
+					}					
 			}
     },
 
