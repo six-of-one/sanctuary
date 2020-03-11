@@ -1135,14 +1135,16 @@
 			else if (Mastermap.level.nornd == undefined)	// random load a level
 			{
 					var f, rprof;
-				
+
 					rprof = Game.Math.randomInt(1,rlline);			// for now pick a random profile
-					for (f = 0;f <= rlloop;f++) RLOAD[f] = RLPROF[rprof, f];		// get item counts for a profile
+					for (f = 0;f <= rlloop;f++) RLOAD[f] = RLPROF[f][rprof];		// get item counts for a profile
+
 					for (f = 0;f <= rlloop;f++)
 					{
 							sft = 6000;
 							while (RLOAD[f] > 0 && (sft > 0))
 							{
+alert(RLOAD[f]);
 									fnd = 0;
 									while (!fnd && (sft > 0))
 									{
@@ -1154,7 +1156,7 @@
 									}
 									if (fnd)
 									{
-											load_cell(cell.x, cell.y, RLPROF[0, f],Mastermap);
+											load_cell(cell.tx, cell.ty, RLPROF[0][f],Mastermap);
 											cell.loaded = true;
 											RLOAD[f]--;
 									}
@@ -1861,6 +1863,8 @@ var ymir = false, xmir = false;
           tw     = source.width,
           th     = source.height,
           self   = this;
+
+alert("load_cell: "+tx+":"+ty+" -"+pixel);
 
 // parseimg setup dups
       function is(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
@@ -2784,7 +2788,7 @@ var ymir = false, xmir = false;
 /// REMOVE - testing
 var tt = "";
 for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +THIEFTRY[f] + ", ";
-alert(tt);
+//alert(tt);
 				return;
 		 }
 
