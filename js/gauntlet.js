@@ -1473,6 +1473,7 @@ alert(RLOAD[f]+" sf:"+sft+" fn:"+fnd);
   //===========================================================================
   // THE MAP
   //===========================================================================
+	var mtw, mth;
 
   var Map = Class.create({
 
@@ -1859,15 +1860,22 @@ var ymir = false, xmir = false;
 
     //-------------------------------------------------------------------------
 
-    load_cell: function(tx, ty, pixel, map) {
+	valid: function(tx,ty) { return (tx >= 0) && (tx < mtw) && (ty >= 0) && (ty < mth); },
+	index: function(tx,ty) { return (tx + (ty*mtw)) * 4; },
+	pixel: function(tx,ty) { var i = this.index(tx,ty); return this.valid(tx,ty) ? (data[i]<<16)+(data[i+1]<<8)+(data[i+2]) : null; },
+
+	load_cell: function(tx, ty, pixel, map) {
 
 alert("enter load_cell: "+tx+":"+ty+" -"+pixel);
 
-      var level  = cfg.levels[nlevel],
+      var level  = cfg.levels[Mastermap.nlevel],
           source = level.source,
           tw     = source.width,
           th     = source.height,
           self   = this;
+		
+		mtw = tw;
+		mth = th;
 
 
 // parseimg setup dups
