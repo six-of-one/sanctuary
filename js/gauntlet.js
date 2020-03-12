@@ -1155,12 +1155,13 @@ alert("Rand load loop cnt:"+f+" loading cnt:"+RLOAD[f]);
 											if (cell.loaded != undefined) fnd = false;		// for some reason the .occupied() fn fails here, so we do our own thing
 											sft--;
 									}
-alert(RLOAD[f]+" sf:"+sft+" fn:"+fnd);
 									if (fnd)
 									{
-											load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
+alert("Rand load pre load_cell");
+											Mastermap.load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
 											cell.loaded = true;
 											RLOAD[f]--;
+alert(RLOAD[f]+" sf:"+sft+" fn:"+fnd);
 									}
 							}
 					}					
@@ -1860,13 +1861,14 @@ var ymir = false, xmir = false;
 
     load_cell: function(tx, ty, pixel, map) {
 
+alert("enter load_cell: "+tx+":"+ty+" -"+pixel);
+
       var level  = cfg.levels[nlevel],
           source = level.source,
           tw     = source.width,
           th     = source.height,
           self   = this;
 
-alert("load_cell: "+tx+":"+ty+" -"+pixel);
 
 // parseimg setup dups
       function is(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
