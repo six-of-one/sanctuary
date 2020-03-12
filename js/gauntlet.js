@@ -1138,14 +1138,12 @@
 
 					rprof = Game.Math.randomInt(1,rlline);			// for now pick a random profile
 					for (f = 0;f <= rlloop;f++) RLOAD[f] = RLPROF[f][rprof];		// get item counts for a profile
-alert("In rand load RLOAD:"+RLOAD);
 
 					for (f = 0;f <= rlloop;f++)
 					{
 							sft = 6000;
 							while (RLOAD[f] > 0 && (sft > 0))
 							{
-alert("Rand load loop cnt:"+f+" loading cnt:"+RLOAD[f]);
 									fnd = 0;
 									while (!fnd && (sft > 0))
 									{
@@ -1157,11 +1155,9 @@ alert("Rand load loop cnt:"+f+" loading cnt:"+RLOAD[f]);
 									}
 									if (fnd)
 									{
-alert("Rand load pre load_cell");
 											Mastermap.load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
 											cell.loaded = true;
 											RLOAD[f]--;
-alert(RLOAD[f]+" sf:"+sft+" fn:"+fnd);
 									}
 							}
 					}					
@@ -1859,16 +1855,7 @@ var ymir = false, xmir = false;
 
     //-------------------------------------------------------------------------
 
-	mpixel: function(tw, tx,ty) { 
-
-		var n = tx + (ty * tw);
-		
-		return self.cells[n].pixel;
-		},
-
 	load_cell: function(tx, ty, pixel, map) {
-
-alert("enter load_cell: "+tx+":"+ty+" -"+pixel);
 
       var level  = cfg.levels[Mastermap.nlevel],
           source = level.source,
@@ -1876,6 +1863,13 @@ alert("enter load_cell: "+tx+":"+ty+" -"+pixel);
           th     = source.height,
           self   = this;
 
+// repl the other ref
+	function mpixel(tw, tx,ty) { 
+
+		var n = tx + (ty * tw);
+		
+		return self.cells[n].pixel;
+		};
 
 // parseimg setup dups
       function is(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
@@ -1890,7 +1884,7 @@ alert("enter load_cell: "+tx+":"+ty+" -"+pixel);
       function isgenerator(pixel)    { return is(pixel, PIXEL.GENERATOR); };
       function ismonster(pixel)      { return is(pixel, PIXEL.MONSTER);   };
       function istreasure(pixel)     { return is(pixel, PIXEL.TREASURE);  };
-      function walltype0(tx,ty,map)   { return (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
+      function walltype0(tx,ty,map)   { return (iswall(mpixel(tw,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tw,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tw,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tw,tx-1, ty))   ? 8 : 0); };
       function shadowtype0(tx,ty,map) { return (iswall(mpixel(tw,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tw,tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tw,tx,   ty+1)) ? 4 : 0); };
       function doortype0(tx,ty,map)   {
 				var dr = (isdoor(mpixel(tw,tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(tw,tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(tw,tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(tw,tx-1, ty))   ? 8 : 0);
