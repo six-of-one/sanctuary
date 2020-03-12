@@ -1079,6 +1079,8 @@
 
 // load special potion
       function isfloor(pixel)         { return ((pixel & PIXEL.MASK.TYPE) === PIXEL.FLOOR);   };
+		var cell, cells  = reloaded.cells;
+		var c, nc = cells.length, fnd = 0, sft = 6000;
 
 			if (spotionlv)
 			{
@@ -1087,8 +1089,6 @@
 					if (Math.random() < spotionrnd) seqrnd = true;
 					else spotionct++;
 					if (seqrnd || (spotct > spotionmax)) spotct = Game.Math.randomInt(0, spotionmax);
-					var cell, cells  = reloaded.cells;
-					var c, nc = cells.length, fnd = 0, sft = 6000;
 
 					while (!fnd && (sft > 0))
 					{
@@ -1138,12 +1138,14 @@
 
 					rprof = Game.Math.randomInt(1,rlline);			// for now pick a random profile
 					for (f = 0;f <= rlloop;f++) RLOAD[f] = RLPROF[f][rprof];		// get item counts for a profile
+alert("In rand load RLOAD:"+RLOAD);
 
 					for (f = 0;f <= rlloop;f++)
 					{
 							sft = 6000;
 							while (RLOAD[f] > 0 && (sft > 0))
 							{
+alert("Rand load loop cnt:"+f+" loading cnt:"+RLOAD[f]);
 									fnd = 0;
 									while (!fnd && (sft > 0))
 									{
