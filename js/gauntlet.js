@@ -219,6 +219,8 @@
 // until target traps are coded any trap will remove these
 		TRAPWALL = 0x404030,
 		TRAPTRIG = 0x0080b0,
+// tell load a start was found - if not randomly add one to prevent load fail
+		fndstart = 0,
 // after {n} health tics with no player move / fire, all walls are exits
 /// RESTORE to 200
 		WALLSTALL = 100,
@@ -949,6 +951,8 @@
 					initlevel = 0;
 		 }
 /// debug tier
+// clear found start
+		 fndstart = false;
 // mark treasure levels
 		 var c = 0, sk, trdisp, potionhelp;
 
@@ -1035,6 +1039,7 @@
 			  $('booting').show();
 			  level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
       }
+alert(fndstart);
 
 
 			announcepause = true;
@@ -1803,7 +1808,10 @@ var ymir = false, xmir = false;
 /// do stuff tier
 
 		  if (isstart(pixel))
-			 self.start = { x: x, y: y }
+		  {
+				 self.start = { x: x, y: y }
+				 fndstart = true;
+			}
 
 		  if (iswall(pixel))
 			 cell.wall = walltype(tx, ty, map);
@@ -1970,7 +1978,10 @@ var ymir = false, xmir = false;
 /// do stuff tier
 
 		  if (isstart(pixel))
-			 self.start = { x: x, y: y }
+		  {
+				 self.start = { x: x, y: y }
+				 fndstart = true;
+			}
 
 		  if (iswall(pixel))
 			 cell.wall = walltype(tx, ty, map);
