@@ -5,13 +5,12 @@ gJ - gauntlet javascript		(gJ.0 - original)
 sl
 port list:
 
-player dmg: shot, melee, potion, shot potion
+player dmg: melee
 melee mis gens
 monster dmg: melee - turn off autohurt to test
 
-remove some aduio pool stuff & test
 
-player shot speed and power potions
+player shot speed
 
 >a few announce & help msg left - ssop, etc.
 >not all g1 audio fx in use
@@ -71,7 +70,6 @@ wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
 
 do demons fire too fast?
 
-> add a random start if map lacks one -- not g1 element, but to stop exception fault
 
 >>>>>>>>>>>>>>>>>>>>>>
 (perhaps persistent issues)
@@ -285,8 +283,14 @@ x-- announcer
 x-- monster /gen health & kill -- vs. player shot power levels
 -- including level down with shot that doesnt take all health
 
+x-- player dmg: shot, , potion, shot potion
+
 
 expanded done:
 
 x-- score mult applies to potion death pts, but perhaps 50% of mult
 -- added more fake items - shotable and permanent
+
+x-- add a random start if map lacks one -- not g1 element, but to stop exception fault
+
+remove some aduio pool stuff & test --- this test failed btw
