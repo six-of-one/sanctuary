@@ -2851,10 +2851,11 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 										cell.wall = null;	// so we dont fire these wall segs again
 										walled = true;
 // fix surround walls & shadows
-										for(ddir = 0 ; ddir <= mxdir ; ddir++) {
-												px = cell.x + DIRTX[ddir];
-												py = cell.y + DIRTY[ddir];
+										for(tdir = 0 ; tdir <= mxdir ; tdir++) {
+												px = cell.x + DIRTX[tdir];
+												py = cell.y + DIRTY[tdir];
 												tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
+												alert("tcell wall: "+tcell.wall);
 												if (tcell.wall) Mastermap.load_cell(tcell.tx, tcell.ty, tcell.pixel,Mastermap);
 //												if (tcell.shadow && (ddir < 3)) Mastermap.load_cell(tcell.tx, tcell.ty, tcell.pixel,Mastermap);
 										}
