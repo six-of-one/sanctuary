@@ -769,7 +769,7 @@ Game.Math = {
 			if (Math.random() < 0.3)
 			{
 					vid.src = "images/g2intro.ogg";
-					rot = 119750;
+					rot = 119850;
 			}
 			vid.play(); 
 			vid.style.visibility = "visible";
