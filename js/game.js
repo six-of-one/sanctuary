@@ -756,7 +756,7 @@ Game.Math = {
 		var rot;
 		rot = spl_rot;
 
-	  if (spl_cyc < 1 || spl_cyc > 11) spl_cyc = 0;
+	  if (spl_cyc < 1 || spl_cyc > 12) spl_cyc = 0;
 	  spl_cyc++;
 
 	  if (spl_cyc == 1)
@@ -766,7 +766,7 @@ Game.Math = {
 			document.splashrot.src = "images/1x1.png";
 			vid.src = "images/intro.ogg";
 			rot = 44400;
-			if (Math.random() < 0.3)
+			if (Math.random() < 0.3)		// randomly select g2 intro vid
 			{
 					vid.src = "images/g2intro.ogg";
 					rot = 119850;
@@ -780,9 +780,10 @@ Game.Math = {
 		vid.load();
 		vid.pause();
 		vid.style.visibility = "hidden";
-	  if (spl_cyc == 11 && (Math.random() > 0.5)) spl_cyc = 12;
-	  else
-	  if (spl_cyc > 10 && (Math.random() > 0.6)) spl_cyc = 2;
+//	  if (spl_cyc == 11 && (Math.random() > 0.5)) spl_cyc = 12;
+//	  else
+//	  if (spl_cyc > 10 && (Math.random() > 0.6)) spl_cyc = 2;
+	  if (spl_cyc == 3 && (Math.random() > 0.6)) spl_cyc = 12;
 
 	  if (spl_cyc == 2)
 	  {
@@ -791,6 +792,8 @@ Game.Math = {
 	  }
 	  else
 			document.splashrot.src = "images/splash" + spl_loop.substring(spl_cyc,spl_cyc+1) + ".jpg"
+
+	  if (spl_cyc == 11 && (Math.random() > 0.2)) spl_cyc = 2;
 	}
 
 	  setTimeout('splashrot()',rot);
