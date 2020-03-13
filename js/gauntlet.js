@@ -1039,8 +1039,6 @@
 			  $('booting').show();
 			  level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
       }
-alert(fndstart);
-
 
 			announcepause = true;
 			if (levelhelp == undefined) levelhelp = level.help;		/// NOTE: test & add in level msgs that have annc (5, 6, 7)
@@ -1166,6 +1164,25 @@ alert(fndstart);
 									}
 							}
 					}					
+			}
+			if (!fndstart)		// the map has no start - may be a "random" rogue style map - add random start
+			{
+						fnd = 0;
+						sft = 6000;
+						while (!fnd && (sft > 0))
+						{
+								c = Game.Math.randomInt(0,nc - 1);
+								cell = cells[c];
+								fnd = isfloor(cell.pixel);
+								if (cell.loaded != undefined) fnd = false;		// for some reason the .occupied() fn fails here, so we do our own thing
+								sft--;
+						}
+						if (fnd)
+						{
+								reloaded.start = { x: x, y: y }
+								cell.loaded = true;
+						}
+					fndstart = true;
 			}
     },
 
