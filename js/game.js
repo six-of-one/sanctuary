@@ -763,10 +763,16 @@ Game.Math = {
 	{
 			vid.height = spl.height;
 			vid.width = spl.width;
+			document.splashrot.src = "images/1x1.png";
+			vid.src = "images/intro.ogg";
+			rot = 44400;
+			if (Math.random() < 0.3)
+			{
+					vid.src = "images/g2intro.ogg";
+					rot = 119750;
+			}
 			vid.play(); 
 			vid.style.visibility = "visible";
-			document.splashrot.src = "images/1x1.png";
-			rot = 44400;
 		}
 	else
 // jinky code for alt splash legend instead of / after score box
