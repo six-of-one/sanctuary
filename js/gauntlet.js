@@ -1165,25 +1165,6 @@
 							}
 					}					
 			}
-			if (!fndstart)		// the map has no start - may be a "random" rogue style map - add random start
-			{
-						fnd = 0;
-						sft = 6000;
-						while (!fnd && (sft > 0))
-						{
-								c = Game.Math.randomInt(0,nc - 1);
-								cell = cells[c];
-								fnd = isfloor(cell.pixel);
-								if (cell.loaded != undefined) fnd = false;		// for some reason the .occupied() fn fails here, so we do our own thing
-								sft--;
-						}
-						if (fnd)
-						{
-								reloaded.start = { x: x, y: y }
-								cell.loaded = true;
-						}
-					fndstart = true;
-			}
     },
 
     onwin:  function(event, previous, current) { this.winlosefade(15000); this.saveLevel(8); },
@@ -2654,6 +2635,26 @@ var ymir = false, xmir = false;
     },
 
     onStartLevel: function(map) {
+			function isfloor(pixel)         { return ((pixel & PIXEL.MASK.TYPE) === PIXEL.FLOOR);   };
+			if (!fndstart)		// the map has no start - may be a "random" rogue style map - add random start
+			{
+						var cell, cells  = reloaded.cells;
+						var c, nc = cells.length, fnd = 0, sft = 6000;
+						while (!fnd && (sft > 0))
+						{
+								c = Game.Math.randomInt(0,nc - 1);
+								cell = cells[c];
+								fnd = isfloor(cell.pixel);
+								if (cell.loaded != undefined) fnd = false;		// for some reason the .occupied() fn fails here, so we do our own thing
+								sft--;
+						}
+						if (fnd)
+						{
+								reloaded.start = { x: cell.x, y: cell.y }
+								cell.loaded = true;
+						}
+					fndstart = true;
+			}
       map.occupy(map.start.x, map.start.y, this);
 // original code cleared keys every level - set PLAYMODE detect here
 //      this.keys    = DEBUG.KEYS || 0;
