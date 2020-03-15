@@ -2716,6 +2716,16 @@ var ymir = false, xmir = false;
 
     collect: function(treasure) {
 
+// wall adjust
+      var level  = cfg.levels[Mastermap.nlevel],
+          source = level.source,
+          tw     = source.width,
+          th     = source.height;
+		function mpixel(tw, tx,ty) { var n = tx + (ty * tw); return reloaded.cells[n].pixel; };
+      function isy(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
+      function iswall(pixel)         { return isy(pixel, PIXEL.WALL);      };
+      function walltype(tx,ty,map)   { return (iswall(mpixel(tw,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tw,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tw,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tw,tx-1, ty))   ? 8 : 0); };
+
       if (treasure.type.wall)
 		 {
 				if (treasure.type.sy == FAKES) helpdis(treasure.type.nohlp, undefined, 2000, undefined, undefined);
@@ -2828,7 +2838,7 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 
 		 if (treasure.type.trap) {
 				var cells   = reloaded.cells,
-					 walled, cell, c, nc = cells.length;
+					 cell, c, nc = cells.length, px, py, mxdir = 7, wdir, walled;
 
 				// now loop again checking for all trap walls
 				for(c = 0 ; c < nc ; c++) {
@@ -2851,12 +2861,12 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 										cell.wall = null;	// so we dont fire these wall segs again
 										walled = true;
 // fix surround walls & shadows
-										for(tdir = 0 ; tdir <= mxdir ; tdir++) {
-												px = cell.x + DIRTX[tdir];
-												py = cell.y + DIRTY[tdir];
+										for(wdir = 0 ; wdir <= mxdir ; wdir++) {
+												px = cell.x + DIRTX[wdir];
+												py = cell.y + DIRTY[wdir];
 												tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
-alert("tcell wall: "+tcell.wall);
-												if (tcell.wall) Mastermap.load_cell(tcell.tx, tcell.ty, tcell.pixel,Mastermap);			/// needs drawimage perhaps
+//alert("wdir loop: "+c+" - "+(p2t(px) + p2t(py) *  Mastermap.tw));
+												if (tcell.wall) {alert("walltype reass"+tcell.wall+" = "+walltype(tcell.tx, tcell.ty, Mastermap)); tcell.wall = walltype(tcell.tx, tcell.ty, Mastermap);}
 //												if (tcell.shadow && (ddir < 3)) Mastermap.load_cell(tcell.tx, tcell.ty, tcell.pixel,Mastermap);
 												if (tcell.shadow && (ddir < 3))
 												{	alert("remove shadow");
