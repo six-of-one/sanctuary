@@ -2848,10 +2848,10 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 							  if ((cell.pixel & MEXHIGH) == TRAPWALL && ((cell.pixel & MEXLOW) == (treasure.pixel & MEXLOW))) // || cell.pixel == TRAPTRIG)
 //					  if (cell.x != 0 &&  cell.y != 0)
 								{
+										var gimg = document.getElementById("gfloor");
 										if (!walled) Musicth.play(Musicth.sounds.wallexit);
 										if (Mastermap.level.gflr)
 										{
-												var gimg = document.getElementById("gfloor");
 												cell.ctx.drawImage(gimg, 0, 0, STILE, STILE, cell.tx * TILE, cell.ty * TILE, TILE, TILE);
 										}
 										else
@@ -2867,13 +2867,22 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 												py = cell.y + DIRTY[wdir];
 												tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
 //alert("wdir loop: "+c+" - "+(p2t(px) + p2t(py) *  Mastermap.tw));
-												if (tcell.wall) {alert("walltype"+tcell.wall); tcell.wall = walltype(tcell.tx, tcell.ty, Mastermap); alert("walltype reass"+tcell.wall);}
-//												if (tcell.shadow && (ddir < 3)) Mastermap.load_cell(tcell.tx, tcell.ty, tcell.pixel,Mastermap);
+												if (tcell.wall)
+												{
+														tcell.wall = walltype(tcell.tx, tcell.ty, Mastermap);
+													  if (Mastermap.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls
+														  if ((tcell.pixel & MEXLOW) && (tcell.pixel & MEXHIGH) == 0x404000)  // diff walls by low nibble
+															Mastermap.tile(tcell.ctx, tcell.sprites, tcell.wall, G1WALL[tcell.pixel & MEXLOW], tcell.tx, tcell.ty);
+														  else
+															Mastermap.tile(tcell.ctx, tcell.sprites, tcell.wall, DEBUG.WALL || Mastermap.level.wall, tcell.tx, tcell.ty);
+															if (Mastermap.level.brikovr) this.tile(tcell.ctx, tcell.sprites, tcell.wall, Mastermap.level.brikovr, tcell.tx, tcell.ty);
+													  }
+												}
 												if (tcell.shadow && (ddir < 3))
 												{	alert("remove shadow");
+														tcell.shadow = 0;
 														if (Mastermap.level.gflr)
 														{
-																var gimg = document.getElementById("gfloor");
 																tcell.ctx.drawImage(gimg, 0, 0, STILE, STILE, tcell.tx * TILE, tcell.ty * TILE, TILE, TILE);
 														}
 														else
