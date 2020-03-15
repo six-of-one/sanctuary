@@ -2725,6 +2725,7 @@ var ymir = false, xmir = false;
       function isy(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
       function iswall(pixel)         { return isy(pixel, PIXEL.WALL);      };
       function walltype(tx,ty,map)   { return (iswall(mpixel(tw,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tw,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tw,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tw,tx-1, ty))   ? 8 : 0); };
+      function shadowtype(tx,ty,map) { return (iswall(mpixel(tw,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tw,tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tw,tx,   ty+1)) ? 4 : 0); };
 
       if (treasure.type.wall)
 		 {
@@ -2838,7 +2839,7 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 
 		 if (treasure.type.trap) {
 				var cells   = reloaded.cells,
-					 cell, c, nc = cells.length, px, py, mxdir = 7, wdir, walled;
+					 cell, bcell, c, nc = cells.length, px, py, mxdir = 7, wdir, walled;
 
 				// now loop again checking for all trap walls
 				for(c = 0 ; c < nc ; c++) {
@@ -2866,7 +2867,6 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 												px = cell.x + DIRTX[wdir];
 												py = cell.y + DIRTY[wdir];
 												tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
-//alert("wdir loop: "+c+" - "+(p2t(px) + p2t(py) *  Mastermap.tw));
 												if (tcell.wall)
 												{
 														tcell.wall = walltype(tcell.tx, tcell.ty, Mastermap);
@@ -2877,7 +2877,25 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 															tcell.tileptr.tile(tcell.ctx, tcell.sprites, tcell.wall, DEBUG.WALL || Mastermap.level.wall, tcell.tx, tcell.ty);
 															if (Mastermap.level.brikovr) this.tile(tcell.ctx, tcell.sprites, tcell.wall, Mastermap.level.brikovr, tcell.tx, tcell.ty);
 													  }
+// reshadow adjusted walls
+													  for(ddir = 0 ; ddir <= 3; ddir++) {
+															px = tcell.x + DIRTX[ddir];
+															py = tcell.y + DIRTY[ddir];
+															bcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];														  
+															bcell.shadow = shadowtype(bcell.tx, bcell.ty, Mastermap);
+															if (bcell.shadow && !bcell.wall)
+															{
+																	bcell.shadow = 0;
+																	if (Mastermap.level.gflr)
+																	{
+																			bcell.ctx.drawImage(gimg, 0, 0, STILE, STILE, bcell.tx * TILE, bcell.ty * TILE, TILE, TILE);
+																	}
+																	else
+																		bcell.tileptr.tile(bcell.ctx, bcell.sprites, Mastermap.level.floor, 0, bcell.tx, bcell.ty);
+															}
+													  }
 												}
+// remove shadows from removed walls
 												if (tcell.shadow && (wdir < 3))
 												{
 														tcell.shadow = 0;
