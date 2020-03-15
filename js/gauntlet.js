@@ -2859,6 +2859,7 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 //								cell.wall = 17;//walltype(cell.tx, cell.ty, map);
 //								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
 										cell.wall = null;	// so we dont fire these wall segs again
+										cell.pixel = 0xa08060;	// need to be floor value correct?
 										walled = true;
 // fix surround walls & shadows
 										for(wdir = 0 ; wdir <= mxdir ; wdir++) {
@@ -2866,7 +2867,7 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 												py = cell.y + DIRTY[wdir];
 												tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
 //alert("wdir loop: "+c+" - "+(p2t(px) + p2t(py) *  Mastermap.tw));
-												if (tcell.wall) {alert("walltype reass"+tcell.wall+" = "+walltype(tcell.tx, tcell.ty, Mastermap)); tcell.wall = walltype(tcell.tx, tcell.ty, Mastermap);}
+												if (tcell.wall) {alert("walltype"+tcell.wall); tcell.wall = walltype(tcell.tx, tcell.ty, Mastermap); alert("walltype reass"+tcell.wall);}
 //												if (tcell.shadow && (ddir < 3)) Mastermap.load_cell(tcell.tx, tcell.ty, tcell.pixel,Mastermap);
 												if (tcell.shadow && (ddir < 3))
 												{	alert("remove shadow");
