@@ -2863,7 +2863,7 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 										cell.wall = null;	// so we dont fire these wall segs again
 										cell.pixel = 0xa08060;	// need to be floor value correct?
 										walled = true;
-// fix surround walls & shadows
+// reshape surround walls
 										for(wdir = 0 ; wdir <= mxdir ; wdir++) {
 												px = cell.x + DIRTX[wdir];
 												py = cell.y + DIRTY[wdir];
@@ -2877,22 +2877,6 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 														  else
 															tcell.tileptr.tile(tcell.ctx, tcell.sprites, tcell.wall, DEBUG.WALL || Mastermap.level.wall, tcell.tx, tcell.ty);
 															if (Mastermap.level.brikovr) this.tile(tcell.ctx, tcell.sprites, tcell.wall, Mastermap.level.brikovr, tcell.tx, tcell.ty);
-													  }
-// reshadow adjusted walls
-													  for(ddir = 0 ; ddir <= 3; ddir++) {
-															px = tcell.x + DIRTX[ddir];
-															py = tcell.y + DIRTY[ddir];
-															bcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];														  
-															bcell.shadow = shadowtype(bcell.tx, bcell.ty, Mastermap);
-															if (bcell.shadow && isfloor(bcell.pixel))
-															{
-																	if (Mastermap.level.gflr)
-																	{
-																			bcell.ctx.drawImage(gimg, 0, 0, STILE, STILE, bcell.tx * TILE, bcell.ty * TILE, TILE, TILE);
-																	}
-																	else
-																		bcell.tileptr.tile(bcell.ctx, bcell.sprites, Mastermap.level.floor, 0, bcell.tx, bcell.ty);
-															}
 													  }
 												}
 // remove shadows from removed walls
