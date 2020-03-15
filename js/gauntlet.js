@@ -2872,14 +2872,14 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 														tcell.wall = walltype(tcell.tx, tcell.ty, Mastermap);
 													  if (Mastermap.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls
 														  if ((tcell.pixel & MEXLOW) && (tcell.pixel & MEXHIGH) == 0x404000)  // diff walls by low nibble
-															Mastermap.tile(tcell.ctx, tcell.sprites, tcell.wall, G1WALL[tcell.pixel & MEXLOW], tcell.tx, tcell.ty);
+															tcell.tileptr.tile(tcell.ctx, tcell.sprites, tcell.wall, G1WALL[tcell.pixel & MEXLOW], tcell.tx, tcell.ty);
 														  else
-															Mastermap.tile(tcell.ctx, tcell.sprites, tcell.wall, DEBUG.WALL || Mastermap.level.wall, tcell.tx, tcell.ty);
+															tcell.tileptr.tile(tcell.ctx, tcell.sprites, tcell.wall, DEBUG.WALL || Mastermap.level.wall, tcell.tx, tcell.ty);
 															if (Mastermap.level.brikovr) this.tile(tcell.ctx, tcell.sprites, tcell.wall, Mastermap.level.brikovr, tcell.tx, tcell.ty);
 													  }
 												}
-												if (tcell.shadow && (ddir < 3))
-												{	alert("remove shadow");
+												if (tcell.shadow && (wdir < 3))
+												{
 														tcell.shadow = 0;
 														if (Mastermap.level.gflr)
 														{
@@ -3467,6 +3467,10 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
       for(ty = 0, th = map.th ; ty < th ; ty++) {
         for(tx = 0, tw = map.tw ; tx < tw ; tx++) {
           cell = map.cell(tx * TILE, ty * TILE);
+			  cell.ctx = ctx;						// for traps turning walls to floor, stalling walls to exits
+			  cell.sprites = sprites;		//		shootable walls, g2 shot walls, g2 random walls, and so
+			  cell.tileptr = this;
+			  cell.map = map;
           if (is.valid(cell.wall))
 			  {
 				  if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls
@@ -3476,10 +3480,6 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 						this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
 						if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
 				  }
-				  cell.ctx = ctx;						// for traps turning walls to floor, stalling walls to exits
-				  cell.sprites = sprites;		//		shootable walls, g2 shot walls, g2 random walls, and so
-				  cell.tileptr = this;
-				  cell.map = map;
 			  }
           else if (cell.nothing)
             this.tile(ctx, sprites, 0, 0, tx, ty);
