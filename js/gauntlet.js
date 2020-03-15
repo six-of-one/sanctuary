@@ -2726,6 +2726,7 @@ var ymir = false, xmir = false;
       function iswall(pixel)         { return isy(pixel, PIXEL.WALL);      };
       function walltype(tx,ty,map)   { return (iswall(mpixel(tw,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tw,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tw,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tw,tx-1, ty))   ? 8 : 0); };
       function shadowtype(tx,ty,map) { return (iswall(mpixel(tw,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tw,tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tw,tx,   ty+1)) ? 4 : 0); };
+      function isfloor(pixel)         { return ((pixel & PIXEL.MASK.TYPE) === PIXEL.FLOOR);   };
 
       if (treasure.type.wall)
 		 {
@@ -2883,9 +2884,8 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 															py = tcell.y + DIRTY[ddir];
 															bcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];														  
 															bcell.shadow = shadowtype(bcell.tx, bcell.ty, Mastermap);
-															if (bcell.shadow && !bcell.wall)
+															if (bcell.shadow && isfloor(bcell.pixel))
 															{
-																	bcell.shadow = 0;
 																	if (Mastermap.level.gflr)
 																	{
 																			bcell.ctx.drawImage(gimg, 0, 0, STILE, STILE, bcell.tx * TILE, bcell.ty * TILE, TILE, TILE);
