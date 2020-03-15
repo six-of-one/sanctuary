@@ -2855,9 +2855,19 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 												px = cell.x + DIRTX[tdir];
 												py = cell.y + DIRTY[tdir];
 												tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
-												alert("tcell wall: "+tcell.wall);
-												if (tcell.wall) Mastermap.load_cell(tcell.tx, tcell.ty, tcell.pixel,Mastermap);
+alert("tcell wall: "+tcell.wall);
+												if (tcell.wall) Mastermap.load_cell(tcell.tx, tcell.ty, tcell.pixel,Mastermap);			/// needs drawimage perhaps
 //												if (tcell.shadow && (ddir < 3)) Mastermap.load_cell(tcell.tx, tcell.ty, tcell.pixel,Mastermap);
+												if (tcell.shadow && (ddir < 3))
+												{	alert("remove shadow");
+														if (Mastermap.level.gflr)
+														{
+																var gimg = document.getElementById("gfloor");
+																tcell.ctx.drawImage(gimg, 0, 0, STILE, STILE, tcell.tx * TILE, tcell.ty * TILE, TILE, TILE);
+														}
+														else
+															tcell.tileptr.tile(tcell.ctx, tcell.sprites, Mastermap.level.floor, 0, tcell.tx, tcell.ty);
+												}
 										}
 								}
 					 }
