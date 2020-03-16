@@ -17,6 +17,8 @@ player shot speed
 - thought to limit announce during treasure room count down
 
 - wall replace routine for surround & shadows
+-- partial done with trap walls
+-- shadows are trickier
 >trap walls, walls to exits, moving wall, random walls, std shot walls -- shootable walls ?
 
 >make monsters slow on shot poison a timed effect - can cross lvl boundary
@@ -127,6 +129,10 @@ x--- "IT" - not sure want this
 
 >>>>>>>>>>>>>>>>>>>>>>
 expansion:
+
+Gauntlet anti-hero -- play as DM, stock dungeons with elements to stop AI heros
+-- cost system - if adding extra 5 3lvl ghost gen, have to put in 2 potions or 4 shot foods, etc
+-- use rng load profiles basis
 
 training level with all aspects of game
 > training "skill" level - no bonus mult, no HS, exits to itself, hints allowed
