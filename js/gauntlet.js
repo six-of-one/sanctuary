@@ -3441,10 +3441,15 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
     },
 
     sprite: function(ctx, sprites, viewport, sx, sy, x, y, w, h) {
-      ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - viewport.x, y - viewport.y, w || TILE, h || TILE);
+		 var xv = x - viewport.x;
+		 if (xv < 0) xv = xv + Mastermap.w;
+		 if (sx < 0) sx = sx + Mastermap.w;
+      ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, xv, y - viewport.y, w || TILE, h || TILE);
     },
 
     tile: function(ctx, sprites, sx, sy, tx, ty) {
+		 if (tx < 0) tx = tx + Mastermap.w;
+		 if (sx < 0) sx = sx + Mastermap.w;
       ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, tx * TILE, ty * TILE, TILE, TILE);
     },
 
@@ -3452,8 +3457,8 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
       var w = Math.min(map.w, viewport.w),
           h = Math.min(map.h, viewport.h);
       map.background = map.background || Game.renderToCanvas(map.w, map.h, this.maptiles.bind(this, map));
-		 if (viewport.x > w)
-				ctx.drawImage(map.background, (viewport.x - w), viewport.y, w, h, 0, 0, w, h);		 
+		 if (viewport.x > map.w)
+				ctx.drawImage(map.background, (viewport.x - map.w), viewport.y, w, h, 0, 0, w, h);		 
 		 else if (viewport.x < 0)
 				ctx.drawImage(map.background, (map.w + viewport.x), viewport.y, w, h, 0, 0, w, h);		 
 		 else
