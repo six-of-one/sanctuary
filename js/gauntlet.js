@@ -3441,17 +3441,10 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
     },
 
     sprite: function(ctx, sprites, viewport, sx, sy, x, y, w, h) {
-		 var xv = x - viewport.x;
-		 if (xv < 0) xv = xv + Mastermap.w;
-		 if (sx < 0) sx = sx + Mastermap.w;
-		 if (xv > Mastermap.w) xv = xv - Mastermap.w;
-		 if (sx > Mastermap.w) sx = sx - Mastermap.w;
-      ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, xv, y - viewport.y, w || TILE, h || TILE);
+      ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - viewport.x, y - viewport.y, w || TILE, h || TILE);
     },
 
     tile: function(ctx, sprites, sx, sy, tx, ty) {
-		 if (tx < 0) tx = tx + Mastermap.w;
-		 if (sx < 0) sx = sx + Mastermap.w;
       ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, tx * TILE, ty * TILE, TILE, TILE);
     },
 
