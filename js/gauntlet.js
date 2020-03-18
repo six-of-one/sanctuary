@@ -3444,6 +3444,8 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 		 var xv = x - viewport.x;
 		 if (xv < 0) xv = xv + Mastermap.w;
 		 if (sx < 0) sx = sx + Mastermap.w;
+		 if (xv > Mastermap.w) xv = xv - Mastermap.w;
+		 if (sx > Mastermap.w) sx = sx - Mastermap.w;
       ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, xv, y - viewport.y, w || TILE, h || TILE);
     },
 
