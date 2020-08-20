@@ -2530,6 +2530,8 @@ var ymir = false, xmir = false;
   //===========================================================================
   // THE PLAYER
   //===========================================================================
+/// remove
+var txsv = ":";
 
   var Player = Class.create({
 
@@ -2706,10 +2708,33 @@ var ymir = false, xmir = false;
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
         collision = map.trymove(this, dir, this.type.speed + (this.xspeed * 30)/FPS);
+
+
+/// remove
+txsv = Math.floor(this.x) +"," + Math.floor(this.y) + " map: " + Math.floor(map.w) +"," + Math.floor(map.h);
+txsv = txsv.substring(0,100);
+document.title = "-pl  "+txsv;
+///
+
+
         if (collision)
           publish(EVENT.PLAYER_COLLIDE, this, collision); // if we collided with something, publish event and then try next available direction...
         else
-          return; // ... otherwise we moved, so we're done trying
+			{
+					if (this.x < 2)
+					if (!Mastermap.occupied(map.w - 30, this.y, TILE, TILE, this))
+						Mastermap.occupy(map.w - 30, this.y, this);
+					if (this.x > (map.w - 30))
+					if (!Mastermap.occupied(5, this.y, TILE, TILE, this))
+						Mastermap.occupy(5, this.y, this);
+					if (this.y < 3)
+					if (!Mastermap.occupied(this.x, map.h - 38, TILE, TILE, this))
+						Mastermap.occupy(this.x, map.h - 38, this);
+					if (this.y > (map.h - 37))
+					if (!Mastermap.occupied(this.x, 5, TILE, TILE, this))
+						Mastermap.occupy(this.x, 5, this);
+					return; // ... otherwise we moved, so we're done trying
+			}
       }
 
     },
@@ -3397,10 +3422,10 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
     },
 
     move: function(x, y, map) {
-		 if (map.level.unpinx != undefined)
+//		 if (map.level.unpinx != undefined)
 //				this.x = Game.Math.minmax(x, 0, map.w - 1);
-				this.x = Math.min(x, map.w - 1);
-		 else
+//				this.x = Math.min(x, map.w - 1);
+//		 else
 				this.x = Game.Math.minmax(x, 0, map.w - this.w - 1);
       this.y = Game.Math.minmax(y, 0, map.h - this.h - 1);
     },
@@ -3433,8 +3458,6 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
   //===========================================================================
   // RENDERING CODE
   //===========================================================================
-/// remove
-var txsv = ":";
 
   var Render = Class.create({
 
@@ -3453,11 +3476,6 @@ var txsv = ":";
     map: function(ctx, frame, viewport, map) {
       var w = Math.min(map.w, viewport.w),
           h = Math.min(map.h, viewport.h);
-/// remove
-txsv = Math.floor(viewport.x) +"," + Math.floor(viewport.y) + " map: " + Math.floor(map.w) +"," + Math.floor(map.h) + " min: " + Math.floor(w) +"," + Math.floor(h) + " >"+ txsv;
-txsv = txsv.substring(0,100);
-document.title = "-sprite(xxx) x = "+txsv;
-///
       map.background = map.background || Game.renderToCanvas(map.w, map.h, this.maptiles.bind(this, map));
 		 if (viewport.x > map.w)
 				ctx.drawImage(map.background, (viewport.x - map.w), viewport.y, w, h, 0, 0, w, h);		 
