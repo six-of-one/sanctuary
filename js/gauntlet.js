@@ -6,7 +6,7 @@
   // CONFIGURATION CONSTANTS and ENUM's
   //===========================================================================
 
-  var VERSION  = "1.0.1",
+  var VERSION  = "1.0.2",
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
 // debug - provide a one time start level
