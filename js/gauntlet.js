@@ -10,7 +10,7 @@
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 1,
 // debug - provide a one time start level
-											initlevel = 8,
+											initlevel = 9,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -354,7 +354,10 @@
       ],
 
 		RLOAD = [0, 0, 0, 0, 0, 0],
-      DEBUG = {
+// difficulty level for rnd load profile
+		diff_level = 0.75, def_diff = 3,
+
+	DEBUG = {
         RESET:      Game.qsBool("reset"),
         GRID:       Game.qsBool("grid"),
         NOMONSTERS: Game.qsBool("nomonsters"),
@@ -1162,10 +1165,11 @@
 			}
 			else if (Mastermap.level.nornd == undefined)	// random load a level
 			{
-					var f, rprof;
+					var f, rprof, ldiff;
 
+					ldiff = diff_level / def_diff;
 					rprof = Game.Math.randomInt(1,rlline);			// for now pick a random profile
-					for (f = 0;f <= rlloop;f++) RLOAD[f] = RLPROF[f][rprof];		// get item counts for a profile
+					for (f = 0;f <= rlloop;f++) RLOAD[f] = Math.ceil(RLPROF[f][rprof] * ldiff);		// get item counts for a profile
 
 					for (f = 0;f <= rlloop;f++)
 					{
@@ -2741,25 +2745,40 @@ txsv = txsv.substring(0,100);
 document.title = "-pl  "+txsv;
 ///
 
-
-        if (collision)
-          publish(EVENT.PLAYER_COLLIDE, this, collision); // if we collided with something, publish event and then try next available direction...
-        else
+        if (!collision)
 			{
 					if (this.x < 2)
+				{
 					if (!Mastermap.occupied(map.w - 30, this.y, TILE, TILE, this))
 						Mastermap.occupy(map.w - 30, this.y, this);
+					else this.x = 2;
+				}
+				else
 					if (this.x > (map.w - 30))
+				{
 					if (!Mastermap.occupied(5, this.y, TILE, TILE, this))
 						Mastermap.occupy(5, this.y, this);
+					else this.x = map.w - 30;
+				}
+				else				
 					if (this.y < 3)
+				{
 					if (!Mastermap.occupied(this.x, map.h - 38, TILE, TILE, this))
 						Mastermap.occupy(this.x, map.h - 38, this);
+					else this.y = 3;
+				}
+				else
 					if (this.y > (map.h - 37))
 					if (!Mastermap.occupied(this.x, 5, TILE, TILE, this))
 						Mastermap.occupy(this.x, 5, this);
-					return; // ... otherwise we moved, so we're done trying
+					else this.y = map.h - 37;
 			}
+
+
+        if (collision)
+          publish(EVENT.PLAYER_COLLIDE, this, collision); // if we collided with something, publish event and then try next available direction...
+		else
+					return; // ... otherwise we moved, so we're done trying
       }
 
     },
