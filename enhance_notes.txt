@@ -2,6 +2,14 @@ g1 - gauntlet
 gII, g2 - gauntlet 2
 gJ - gauntlet javascript		(gJ.0 - original)
 
+release list pr1:
+
+diffiictulty selector -- read an option box into diff_level (maybe put bounds & sanity check...)
+score saver - poss. high score disp as well
+random exits on treasure levels
+-- level name - random gen
+
+
 sl
 port list:
 
