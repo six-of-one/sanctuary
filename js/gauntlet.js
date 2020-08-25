@@ -991,6 +991,7 @@
 			 TREASUREROOM[c] = cfg.levels[sk];
 			 TREASUREROOM[c++].lvl = sk;
 		 }
+// rename any level named "Research X"
 				 if (cfg.levels[sk].name == "Research X")
 						cfg.levels[sk].name = generateName();
 		 }
