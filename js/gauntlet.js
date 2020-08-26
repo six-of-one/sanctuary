@@ -1151,7 +1151,7 @@
 					var f, rprof, ldiff;
 
 					diff_level = document.getElementById("seldiff").value;
-				alert("difficulty: "+ diff_level);
+//				alert("difficulty: "+ diff_level);
 					ldiff = diff_level / def_diff;
 // treasure will come thru here unless blocked
 					rprof = Game.Math.randomInt(1,rlline);			// for now pick a random profile
