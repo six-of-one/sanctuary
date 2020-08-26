@@ -7,6 +7,7 @@ release list pr1:
 diffiictulty selector -- read an option box into diff_level (maybe put bounds & sanity check...)
 score saver - poss. high score disp as well
 random exits on treasure levels
+std gauntlet start on level 1 -- add save option
 -- level name - random gen
 
 

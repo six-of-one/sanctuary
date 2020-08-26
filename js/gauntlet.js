@@ -355,7 +355,7 @@
 
 		RLOAD = [0, 0, 0, 0, 0, 0],
 // difficulty level for rnd load profile
-		diff_level = 0.75, def_diff = 3,
+		diff_level = 1, def_diff = 6,
 
 	DEBUG = {
         RESET:      Game.qsBool("reset"),
@@ -1150,6 +1150,8 @@
 			{
 					var f, rprof, ldiff;
 
+					diff_level = document.getElementById("seldiff").value;
+				alert("difficulty: "+ diff_level);
 					ldiff = diff_level / def_diff;
 					rprof = Game.Math.randomInt(1,rlline);			// for now pick a random profile
 					for (f = 0;f <= rlloop;f++) RLOAD[f] = Math.ceil(RLPROF[f][rprof] * ldiff);		// get item counts for a profile
