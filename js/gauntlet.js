@@ -1146,14 +1146,16 @@
 							}
 					}
 			}
-			else if (Mastermap.level.nornd == undefined)	// random load a level
+			if (Mastermap.level.nornd == undefined)	// random load a level
 			{
 					var f, rprof, ldiff;
 
 					diff_level = document.getElementById("seldiff").value;
 				alert("difficulty: "+ diff_level);
 					ldiff = diff_level / def_diff;
+// treasure will come thru here unless blocked
 					rprof = Game.Math.randomInt(1,rlline);			// for now pick a random profile
+					if (troomtime > 0) rprof = rlline + 1;
 					for (f = 0;f <= rlloop;f++) RLOAD[f] = Math.ceil(RLPROF[f][rprof] * ldiff);		// get item counts for a profile
 
 					for (f = 0;f <= rlloop;f++)
