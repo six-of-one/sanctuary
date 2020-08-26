@@ -5,10 +5,15 @@ gJ - gauntlet javascript		(gJ.0 - original)
 release list pr1:
 
 score saver - poss. high score disp as well
-- random exits on treasure levels
+-- random exits on treasure levels
+\ remove std exits?
 std gauntlet start on level 1 -- add save option
 -- level name - random gen
 -- diffiictulty selector -- read an option box into diff_level (maybe put bounds & sanity check...)
+
+issue list:
+
+occasionally see a level with NO floor tex ?!
 
 
 sl
