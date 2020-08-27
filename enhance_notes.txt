@@ -5,7 +5,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 release list pr1:
 
 score saver - poss. high score disp as well
-std gauntlet start on level 1 -- add save option
+new game starts on level 1 -- add option
 -- level name - random gen
 -- diffiictulty selector -- read an option box into diff_level (maybe put bounds & sanity check...)
 -- random exits on treasure levels
@@ -46,7 +46,7 @@ save system via cooky
 finish g1 map population
 finish wall layers
 unpinned corners / edges
-level wrap across left / right
+level wrap across left / right			-- workaround - silent teleport
 
 g1 audio elements swap in	-> ref genesis sound test for note s
 g1 gfx tiles

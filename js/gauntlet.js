@@ -39,6 +39,9 @@
 // these are based on where items appear in TREASURES[ ]
 		POWERADD = 4, LIMITEDADD = 8,
 
+// highscores
+	scoredex = 0,
+	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOW
 			G1WALL = [	8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26	],
 
@@ -926,6 +929,15 @@
 // used to play lostcorridors - now plays title music once at init - no loop
       this.sounds.playMenuMusic();
 			setTimeout('splashrot()',19500);
+
+		 scoredex = readCookieDef("hindex",0,0);
+		if (scoredex > 0)
+		for (var i = 1; i <= scoredex; i++)
+		 {
+				HSCORE[i,0] = readCookie(i+"score");
+				HSCORE[i,1] = readCookie(i+"name");
+				HSCORE[i,2] = readCookie(i+"char");
+		 }
     },
 
     onstart: function(event, previous, current, type, nlevel) {
@@ -1457,6 +1469,14 @@
         this.storage[STORAGE.SCORE] = this.player.score;
         this.storage[STORAGE.WHO]   = this.player.type.name;
       }
+		scoredex++;
+		createCookie(scoredex+"char", this.player.type.name,0)
+		createCookie(scoredex+"score", this.player.score,0)
+		createCookie(scoredex+"name", "proggy-nif",0)
+		createCookie("hindex", scoredex,0)
+//		HSCORE[scoredex,0] = readCookie(scoredex+"score");
+//		HSCORE[scoredex,1] = readCookie(scoredex+"name");
+//		HSCORE[scoredex,2] = readCookie(scoredex+"char");
     },
 
     debugWall:  function(back) { DEBUG.WALL  = (DEBUG.WALL  || this.map.level.wall)  + (back ? -1 : 1); if (DEBUG.WALL  > WALL.MAX)  DEBUG.WALL  = WALL.MIN;  if (DEBUG.WALL  < WALL.MIN)  DEBUG.WALL  = WALL.MAX;  console.log("WALL = "  + DEBUG.WALL);  this.map.background = null; },
