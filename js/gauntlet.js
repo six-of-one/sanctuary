@@ -1474,9 +1474,17 @@
 		createCookie(scoredex+"score", this.player.score,0)
 		createCookie(scoredex+"name", "proggy-nif",0)
 		createCookie("hindex", scoredex,0)
+		HSCORE[scoredex,0] = this.player.score
+		HSCORE[scoredex,1] = "proggy-nif";
+		HSCORE[scoredex,2] = this.player.type.name;
 //		HSCORE[scoredex,0] = readCookie(scoredex+"score");
 //		HSCORE[scoredex,1] = readCookie(scoredex+"name");
 //		HSCORE[scoredex,2] = readCookie(scoredex+"char");
+						HSCORE.sort((a,b) => a[0] - b[0]);
+						var tstr = "";
+						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + ";; ";
+						 alert(tstr);
+
     },
 
     debugWall:  function(back) { DEBUG.WALL  = (DEBUG.WALL  || this.map.level.wall)  + (back ? -1 : 1); if (DEBUG.WALL  > WALL.MAX)  DEBUG.WALL  = WALL.MIN;  if (DEBUG.WALL  < WALL.MIN)  DEBUG.WALL  = WALL.MAX;  console.log("WALL = "  + DEBUG.WALL);  this.map.background = null; },

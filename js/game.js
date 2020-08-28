@@ -793,7 +793,26 @@ Game.Math = {
 	  else
 			document.splashrot.src = "images/splash" + spl_loop.substring(spl_cyc,spl_cyc+1) + ".jpg"
 
-	  if (spl_cyc == 11 && (Math.random() > 0.2)) spl_cyc = 2;
+		if (spl_cyc == 11)
+		if (Math.random() > 0.9) spl_cyc = 2;
+		else
+		{
+				var HSCORE = [ 0, "Names", "character" ];
+				var scoredex = readCookieDef("hindex",0,0);
+				if (scoredex > 0)
+				{
+						for (var i = 1; i <= scoredex; i++)
+						 {
+								HSCORE[i,0] = readCookie(i+"score");
+								HSCORE[i,1] = readCookie(i+"name");
+								HSCORE[i,2] = readCookie(i+"char");
+						 }
+						HSCORE.sort((a,b) => a[0] - b[0]);
+						var tstr = "";
+						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + ";; ";
+//						 alert(tstr);
+				 }
+		}
 	}
 
 	  setTimeout('splashrot()',rot);

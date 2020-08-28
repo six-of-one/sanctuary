@@ -11,6 +11,8 @@ new game starts on level 1 -- add option
 -- random exits on treasure levels
 -- remove std exits?
 
+-- put back - death dmg, 4 sec sound bite
+
 issue list:
 
 occasionally see a level with NO floor tex ?!
