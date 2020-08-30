@@ -358,7 +358,7 @@
 
 		RLOAD = [0, 0, 0, 0, 0, 0],
 // difficulty level for rnd load profile
-		diff_level = 1, def_diff = 6,
+		diff_level = 1, def_diff = 7, def_tut = document.getElementById("seltut").checked,
 
 	DEBUG = {
         RESET:      Game.qsBool("reset"),
@@ -469,7 +469,7 @@
       { id: 'victory',      	name: 'sounds/victory',               formats: ['ogg'], volume: 1.0                         },
 */
 // org fx
-      { id: 'highscore',       name: 'sounds/highscore',             formats: ['ogg'], volume: 1.0,                        },
+      { id: 'highscore',       name: 'sounds/highscore',             formats: ['ogg'], volume: 0.5,                        },
 //      { id: 'generatordeath',  name: 'sounds/generatordeath',        formats: ['ogg'], volume: 0.3, pool:  },
 
 // correspond to lvl 1 - 7 messages
@@ -839,6 +839,7 @@
   
   function helpdis(nh, htex, hto, hrep, hannc)		// display text in the tutorial overlay box		passed vars - nh = help # array ref,		htex = override help text,		hto = timeout in millisecs, def to 2000,		hrep - replace str,	hannc - announcer code to play after delay
   {
+			if (!document.getElementById("seltut").checked) return;
 			if (hto == undefined || (hto < 1) || (hto > 120000)) hto = 2000;
 			if (htex == null || htex == "") htex = undefined;
 			if (htex == undefined)

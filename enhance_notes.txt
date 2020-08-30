@@ -13,6 +13,7 @@ new game starts on level 1 -- add option
 -- random exits on treasure levels
 -- remove std exits?
 
+document.getElementById("seltut").checked
 
 issue list:
 
