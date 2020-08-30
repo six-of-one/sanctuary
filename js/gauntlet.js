@@ -8,7 +8,7 @@
 
   var VERSION  = "1.0.2",
 /// allow debug mode testing - code should be removed pre-release
-											DEBUGON = 1,
+											DEBUGON = 0,
 // debug - provide a one time start level
 											initlevel = 9,
 /// end debug tier
@@ -647,16 +647,14 @@
 // added gauntlet 1 levels as g1level{n}
 // gflr is gfx file for floor tiles
     levels: [
-      { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',      score:  1000, help: null }, 
-      { name: 'Level 1',       url: "levels/glevel1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',      score:  1000, help: null },
-      { name: 'Level 2',       url: "levels/glevel2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',      score:  1000, help: "Ghosts must be shot" },
-      { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'nullm',      score:  1000, help: "Some food can be destroyed" },
-      { name: 'Level 4',       url: "levels/glevel4.png",  floor: FLOOR.WOOD,      wall: WALL.GRAY7,    gflr: "gfx/g1floor4.jpg",      music: 'nullm',      score:  1000, help: "Fight hand to hand by running into grunts" },
-      { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.RED5,    gflr: "gfx/g1floor5.jpg",      music: 'nullm',      score:  1000, help: "Beware the demons which shoot you" },
-      { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN3,   brikovr:  WALL.G1BRICKD,   gflr: "gfx/g1floor6.jpg",   music: 'nullm',      score:  1000, help: "Sorcerers may be invisible" },
-      { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.GRAY7,    gflr: "gfx/g1floor7.jpg",      music: 'nullm',      score:  1000, help: "Use magic to kill death" },
-      { name: 'Research Z',     url: "levels/glevelZ.png",  floor: FLOOR.RND,      wall: WALL.ORANG9,    brikovr:  WALL.DESTBRIK,		gflr: "gfx/g1floor0z.jpg",      music: 'nullm',  score:  1000, help: null },
-      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
+      { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null }, 
+      { name: 'Level 1',       url: "levels/glevel1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
+      { name: 'Level 2',       url: "levels/glevel2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
+      { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Some food can be destroyed" },
+      { name: 'Level 4',       url: "levels/glevel4.png",  floor: FLOOR.WOOD,      wall: WALL.GRAY7,    gflr: "gfx/g1floor4.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Fight hand to hand by running into grunts" },
+      { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.RED5,    gflr: "gfx/g1floor5.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Beware the demons which shoot you" },
+      { name: 'Level 6',       url: "levels/glevel6.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.GREEN3,   brikovr:  WALL.G1BRICKD,   gflr: "gfx/g1floor6.jpg",   music: 'nullm',   nornd: 1,      score:  1000, help: "Sorcerers may be invisible" },
+      { name: 'Level 7',       url: "levels/glevel7.png",  floor: FLOOR.GREY_BOARDS,      wall: WALL.GRAY7,    gflr: "gfx/g1floor7.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Use magic to kill death" },
 		{ name: 'Research X',     url: "levels/glevel114.png",  floor: FLOOR.RND,      wall: WALL.BROWN1,   brikovr:  WALL.XBRIKD,    gflr: "gfx/g1floor6.jpg",      music: 'nullm',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel113.png",  floor: FLOOR.RND,      wall: WALL.PINK34,    gflr: "gfx/g1floor113.jpg",      music: 'nullm',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel112.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor112.jpg",      music: 'nullm',      score:  1000, help: null },
@@ -775,6 +773,8 @@
 		{ name: 'Treasure',     url: "levels/glevel123.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 20,	unpinx: 1,      music: 'must21',      score:  1000, help: null },
       { name: 'Treasure',     url: "levels/glevel124.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 25,      music: 'must25',      score:  1000, help: null },
       { name: 'Treasure',     url: "levels/glevel125.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 30,      music: 'must30',      score:  1000, help: null }
+//      { name: 'Research Z',     url: "levels/glevelZ.png",  floor: FLOOR.RND,      wall: WALL.ORANG9,    brikovr:  WALL.DESTBRIK,		gflr: "gfx/g1floor0z.jpg",      music: 'nullm',  score:  1000, help: null },
+ //     { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
     ],
 
     keys: [
@@ -941,6 +941,7 @@
     },
 
     onstart: function(event, previous, current, type, nlevel) {
+		scoredex++;
       this.player.join(type);
       this.load(to.number(nlevel, this.loadLevel()));
 // setup some things for this run - maybe
@@ -1442,8 +1443,15 @@
     // MISC
     //------
 
-    saveLevel: function(nlevel) { this.storage[STORAGE.NLEVEL] = nlevel;             },
-    loadLevel: function()       { return to.number(this.storage[STORAGE.NLEVEL], 1); },
+    saveLevel: function(nlevel) { if ((nlevel > 7) && (nlevel < 115)) this.storage[STORAGE.NLEVEL] = nlevel;             },
+    loadLevel: function()       
+	 { 
+// let player select any of 1st 7 levels or last saved level
+			var slvl = to.number(document.getElementById("sellvl").value, 1);		 
+			if (slvl == 8) slvl = to.number(this.storage[STORAGE.NLEVEL], 1);
+
+			return slvl;
+	},
     prevLevel: function()       { var n = this.map.nlevel - 1; this.load(n <= 0                 ? cfg.levels.length - 1 : n); },
     nextLevel: function()       
 	 { 
@@ -1469,7 +1477,6 @@
         this.storage[STORAGE.SCORE] = this.player.score;
         this.storage[STORAGE.WHO]   = this.player.type.name;
       }
-		scoredex++;
 		createCookie(scoredex+"char", this.player.type.name,0)
 		createCookie(scoredex+"score", this.player.score,0)
 		createCookie(scoredex+"name", "proggy-nif",0)
@@ -1480,10 +1487,13 @@
 //		HSCORE[scoredex,0] = readCookie(scoredex+"score");
 //		HSCORE[scoredex,1] = readCookie(scoredex+"name");
 //		HSCORE[scoredex,2] = readCookie(scoredex+"char");
-						HSCORE.sort((a,b) => a[0] - b[0]);
-						var tstr = "";
+//						HSCORE.sort((a,b) => a[0] - b[0]);
+		if (DEBUGON)
+		{
+						var tstr = scoredex + ":";
 						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + ";; ";
 						 alert(tstr);
+		}
 
     },
 
