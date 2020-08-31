@@ -22,6 +22,8 @@
 // set rnd_level true to indicate running rnd levels from here on out
 		loop_level = 8,
 		rnd_level = 0,
+// 30% chance to play g4sec short intro
+		g4rc = 0.3,
 // save to pointers. -> reload level parts, walls to exits, stall open doors, play sounds for those, and so on
 // for some reason beyond me, setTimeout() calls only work in game.js - which has none of the game instances
 // also doors / walls are stalled open from player health rot - which has none of these pointers loaded
@@ -74,7 +76,7 @@
         DEMON:  { sx: 0, sy: 5, frames: 3, fpf: FPS/10, score:  20, health:  30, speed:  120/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 12, 12, 7, 1 ], generator: { glvl: [ 12, 12, 7, 1 ], health: 30, speed: 3.0*FPS, max: 40, score: 200, sx: 32, sy: 5 }, name: "demon",  weapon: { speed: 240/FPS, reload: 2*FPS, damage: 10, sx: 24, sy: 5, fpf: FPS/10, monster: true } ,     nohlp: 43 },
         GRUNT:  { sx: 0, sy: 6, frames: 3, fpf: FPS/10, score:  30, health:  30, speed: 110/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 13, 13, 8, 2 ], generator: { glvl: [ 13, 13, 8, 2 ], health: 30, speed: 3.5*FPS, max: 40, score: 300, sx: 32, sy: 6 }, name: "grunt",  weapon: null     ,     nohlp: 42            },
         WIZARD: { sx: 0, sy: 7, frames: 3, fpf: FPS/10, score:  30, health:  30, speed: 120/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 14, 14, 9, 3 ], generator: { glvl: [ 14, 14, 9, 3 ], health: 30, speed: 4.0*FPS, max: 20, score: 400, sx: 32, sy: 6 }, name: "sorcerer", weapon: null   ,     nohlp: 44               },
-        DEATH:  { sx: 0, sy: 8, frames: 3, fpf: FPS/10, score: 1, health: 2, speed: 125/FPS, damage: 120/FPS, selfharm: 6/FPS,  canbeshot: false, canbehit: 2, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 4, 4, 4, 4 ], generator: { glvl: [ 4, 4, 4, 4 ], health: 30, speed: 5.0*FPS, max: 10, score: 1000, sx: 32, sy: 8 }, name: "death",  weapon: null                 },
+        DEATH:  { sx: 0, sy: 8, frames: 3, fpf: FPS/10, score: 1, health: 200, speed: 125/FPS, damage: 120/FPS, selfharm: 6/FPS,  canbeshot: false, canbehit: 2, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 4, 4, 4, 4 ], generator: { glvl: [ 4, 4, 4, 4 ], health: 60, speed: 5.0*FPS, max: 10, score: 1000, sx: 32, sy: 8 }, name: "death",  weapon: null                 },
         LOBBER: { sx: 0, sy: 9, frames: 3, fpf: FPS/10, score:  10, health:  30, speed: 80/FPS, damage:  0/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.3*FPS, thinking: 0.5*FPS, mlvl: [ 15, 15, 10, 5 ], generator: { glvl: [ 15, 15, 10, 5 ], health: 30, speed: 2.5*FPS, max: 20, score: 100, sx: 32, sy: 6 }, name: "lobber", weapon: null    ,     nohlp: 45                },
 // added level 2, level 1 monsters - set above is level 3
         GHOST2:  { sx: 0, sy: 13, frames: 3, fpf: FPS/10, score:  10, health:  20, speed: 120/FPS, damage: 100/FPS, selfharm: 30/FPS, canbeshot: true,  canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 11, 11, 6, 0 ], generator: { glvl: [ 11, 11, 6, 0 ], health:  20, speed: 2.5*FPS, max: 40, score: 50, sx: 32, sy: 4 }, name: "ghost",  weapon: null  ,     nohlp: 41        },
@@ -171,7 +173,7 @@
 //		helpdsf = "Some food destroyed by shots", helpsap = "Shooting a potion has a lesser effect", helpcmb = "Collect magic potion before pressing magic",
 //		helppois = "Shooting poison slows monsters",
 		nohlpdsf = 21, nohlpsap = 22, nohlpcmb = 46, nohlppois = 50, nohlpmagaff = 24, nohlptr = 9, nohlpmstex = 10,
-		nohlplvl = 18, nohlplvlend = 38, haseatenplay = 0.3, haseatenall = 0, whohaseaten = [ ],
+		nohlplvl = 18, nohlplvlend = 38, haseatenplay = 0.05, haseatenall = 0, whohaseaten = [ ],
 // dont shoot food				25
 // shooting a potion			26
 // collect magic before	27
@@ -985,7 +987,11 @@
 		 }
 // rename any level named "Research X"
 				 if (cfg.levels[sk].name == "Research X")
+				{
 						cfg.levels[sk].name = generateName();
+// randomly play 4 sec intro title bit on these levels
+						 if (g4rc >= Math.random()) Musicth.play(Musicth.sounds.g4sec);
+				}
 		 }
 		 leveldisp = "<br>LEVEL:&nbsp&nbsp "+nlevel;
 		 levelhelp = undefined;
