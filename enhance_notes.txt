@@ -4,10 +4,10 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 release list pr1:
 
+fix monster gen rate
 
 check:
 
-check monster gen rate
 level progression - seems like it starts randomized
 make sure treasure rooms work right
 test death health drain
