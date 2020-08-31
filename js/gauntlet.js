@@ -2844,6 +2844,11 @@ document.title = "-pl  "+txsv;
 				if (treasure.type.scmult)
 				 {
 						this.scmult = Mastermult + treasure.type.scmult;
+// diff level affects mult - mult cant be more than 1 for diff 1 & 2, 2 for diff 3 & 4, 3 for diff 5 & 6
+						var dlim = Math.ceil(diff_level / 2)
+						if (diff_level < def_diff)
+						if (this.scmult > dlim) this.scmult = dlim;
+// max (hard coded for now) mult is 4.9 - if you can hit that, you can get 4.5 on a treasure bag
 						if (this.scmult >= 5) this.scmult = 4;
 						Mastermult = this.scmult;
 						if (Masterot < 1) setTimeout('multrot()',1000);
