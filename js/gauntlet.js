@@ -2167,7 +2167,7 @@ var ymir = false, xmir = false;
     update: function(frame, player, map, viewport) {
 
       // monsters dont move offscreen g1 / g2 - difficulty option
-      if (viewport.outside(this.x - viewport.w, this.y - viewport.h, viewport.w * 1.07, viewport.h  * 1.07))
+      if (viewport.outside(this.x, this.y, TILE, TILE))
         return;
 
       // keep reloading (if applicable)
@@ -2346,6 +2346,7 @@ var ymir = false, xmir = false;
           map.addMonster(pos.x, pos.y, this.mtype, this);
           this.count++;
           this.pending = Game.Math.randomInt(1, this.type.speed);
+			this.pending = this.pending + 10 * Math.ceil(Math.max(-6,(def_diff - diff_level)));
         }
       }
     },
