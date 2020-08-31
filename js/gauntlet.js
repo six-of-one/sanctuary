@@ -2335,7 +2335,7 @@ var ymir = false, xmir = false;
     update: function(frame, player, map, viewport) {
 
       // generators dont offscreen g1 / g2 - difficulty option
-      if (viewport.outside(this.x - viewport.w, this.y - viewport.h, viewport.w+5, viewport.h+5))
+      if (viewport.outside(this.x, this.y, TILE, TILE))
         return;
 
       var pos;
