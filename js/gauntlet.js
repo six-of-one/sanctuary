@@ -2307,6 +2307,7 @@ var ymir = false, xmir = false;
     },
 
     onrender: function(frame) {
+		if (this.type.invisibility != undefined)
       if (this.type.invisibility && ((frame+this.df)%(this.type.invisibility.on + this.type.invisibility.off) < this.type.invisibility.on))
         return false;
 
