@@ -3577,11 +3577,12 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 		 if (wallsprites == undefined) wallsprites = sprites;
 		if (map.level.gflr)
 		 {
+			var gbas = document.getElementById("gfloorbas");
 			var gimg = document.getElementById("gfloor");
 			for(ty = 0, th = map.th ; ty < th ; ty=ty+8) {
 			  for(tx = 0, tw = map.tw ; tx < tw ; tx=tx+8) {
+						this.tile(ctx, gbas, 0, 0, tx, ty);
 						ctx.drawImage(gimg, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
-//						this.tile(ctx, gimg, 0, 0, tx, ty);
 				  }
 				}
 		 }
