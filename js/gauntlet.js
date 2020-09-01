@@ -76,7 +76,7 @@
         DEMON:  { sx: 0, sy: 5, frames: 3, fpf: FPS/10, score:  20, health:  30, speed:  120/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 12, 12, 7, 1 ], generator: { glvl: [ 12, 12, 7, 1 ], health: 30, speed: 3.5*FPS, max: 40, score: 200, sx: 32, sy: 5 }, name: "demon",  weapon: { speed: 240/FPS, reload: 2*FPS, damage: 10, sx: 24, sy: 5, fpf: FPS/10, monster: true } ,     nohlp: 43 },
         GRUNT:  { sx: 0, sy: 6, frames: 3, fpf: FPS/10, score:  30, health:  30, speed: 110/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 13, 13, 8, 2 ], generator: { glvl: [ 13, 13, 8, 2 ], health: 30, speed: 3.5*FPS, max: 40, score: 300, sx: 32, sy: 6 }, name: "grunt",  weapon: null     ,     nohlp: 42            },
         WIZARD: { sx: 0, sy: 7, frames: 3, fpf: FPS/10, score:  30, health:  30, speed: 120/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 14, 14, 9, 3 ], generator: { glvl: [ 14, 14, 9, 3 ], health: 30, speed: 4.0*FPS, max: 20, score: 400, sx: 32, sy: 6 }, name: "sorcerer", weapon: null   ,     nohlp: 44               },
-        DEATH:  { sx: 0, sy: 8, frames: 3, fpf: FPS/10, score: 1, health: 20, speed: 125/FPS, damage: 59/FPS, selfharm: 6/FPS,  canbeshot: false, canbehit: 2, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 4, 4, 4, 4 ], generator: { glvl: [ 4, 4, 4, 4 ], health: 60, speed: 5.0*FPS, max: 10, score: 1000, sx: 32, sy: 8 }, name: "death",  weapon: null                 },
+        DEATH:  { sx: 0, sy: 8, frames: 3, fpf: FPS/10, score: 1, health: 20, speed: 125/FPS, damage: 59.2/FPS, selfharm: 6/FPS,  canbeshot: false, canbehit: 2, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 4, 4, 4, 4 ], generator: { glvl: [ 4, 4, 4, 4 ], health: 60, speed: 5.0*FPS, max: 10, score: 1000, sx: 32, sy: 8 }, name: "death",  weapon: null                 },
         LOBBER: { sx: 0, sy: 9, frames: 3, fpf: FPS/10, score:  10, health:  30, speed: 80/FPS, damage:  0/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.3*FPS, thinking: 0.5*FPS, mlvl: [ 15, 15, 10, 5 ], generator: { glvl: [ 15, 15, 10, 5 ], health: 30, speed: 3.5*FPS, max: 20, score: 100, sx: 32, sy: 6 }, name: "lobber", weapon: null    ,     nohlp: 45                },
 // added level 2, level 1 monsters - set above is level 3
         GHOST2:  { sx: 0, sy: 13, frames: 3, fpf: FPS/10, score:  10, health:  20, speed: 120/FPS, damage: 100/FPS, selfharm: 30/FPS, canbeshot: true,  canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 11, 11, 6, 0 ], generator: { glvl: [ 11, 11, 6, 0 ], health:  20, speed: 3.5*FPS, max: 40, score: 50, sx: 32, sy: 4 }, name: "ghost",  weapon: null  ,     nohlp: 41        },
@@ -3123,7 +3123,7 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
     },
 
     autohurt: function(frame) {
-      if ((frame % (FPS/2)) === 0) {
+      if ((frame % (FPS/1)) === 0) {
 			var hinv = 0;
 			if (this.linvuln > 0) hinv = 1; // invulnerable takes another health per tick
 // players automatically lose 1 health every 1/2 second
