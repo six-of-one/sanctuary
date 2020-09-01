@@ -3126,10 +3126,13 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
       if ((frame % (FPS/1)) === 0) {
 			var hinv = 0;
 			if (this.linvuln > 0) hinv = 1; // invulnerable takes another health per tick
-// players automatically lose 1 health every 1/2 second
+// difficulty > 7 (std hard) adds dmg at 1% per diff
+			if (diff_level > 7) hinv = hinv + (diff_level / 100);
+// ankh item - found in amiga sprites - add 1 health per sec + diff/100
 			if (this.lank > 0)
-				this.heal(1);
+				this.heal(1+ (diff_level / 100));
 			else
+// players automatically lose 1 health every second
 			if (!DEBUG.NOAUTOHURT)
 				this.hurt(1 + hinv, this, true);
 
