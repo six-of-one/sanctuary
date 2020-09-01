@@ -4,14 +4,12 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 release list pr1:
 
-fix monster gen rate
 
 check:
 
+(can be after pre-beta-test)
 level progression - seems like it starts randomized
 make sure treasure rooms work right
-test death health drain
-
 
 table score saver - poss. high score disp as well			== issue - cookies not being saved
 
@@ -23,14 +21,19 @@ table score saver - poss. high score disp as well			== issue - cookies not being
 -- new game starts on level 1 -- add option
 -- has eaten all the food set to 5% (was 30%)
 -- treasure multiplier needs a skill limit
+-- fixed death health drain -- appx 200
+-- fixed monster gen rate
+-- fixed ghosts are not "1" touch - they do seq damage instead of going away
+-- Xed - cfg line options - remain selected when starting - interferes with some controls
+\_  changed start controls
+-- with higher skills bumping up health tick down, no need for bounds check
 
 issue list:
 
+
 occasionally see a level with NO floor tex ?!
-cfg line options - remain selected when starting - interferes with some controls
 cookie code not setting cookies when run from file:///index.html			(I suspect this issue)
 
-- is monster gen too fast?
 
 sl
 port list:
