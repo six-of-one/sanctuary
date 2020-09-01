@@ -1450,7 +1450,8 @@
     // MISC
     //------
 
-    saveLevel: function(nlevel) { if ((nlevel > 7) && (nlevel < 115)) this.storage[STORAGE.NLEVEL] = nlevel;             },
+// dont save for lvl 8 replay - levels 1 - 7 & treasure rooms
+    saveLevel: function(nlevel) { if ((nlevel > 7) && (nlevel < 115)) this.storage[STORAGE.NLEVEL] = nlevel;    },
     loadLevel: function()       
 	 { 
 // let player select any of 1st 7 levels or last saved level
@@ -1459,7 +1460,7 @@
 
 			return slvl;
 	},
-    prevLevel: function()       { var n = this.map.nlevel - 1; this.load(n <= 0                 ? cfg.levels.length - 1 : n); },
+    prevLevel: function()       { var n = this.map.nlevel - 1; this.load(n <= 0  ? cfg.levels.length - 1 : n); },
     nextLevel: function()       
 	 { 
 		 var n = this.map.nlevel + 1;
