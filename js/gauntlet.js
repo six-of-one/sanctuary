@@ -3247,7 +3247,7 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 				for(c = 0 ; c < nc ; c++) {
 					  cell = cells[c];
 					  if (cell.wall !== undefined && cell.wall !== null)
-					  if (cell.x != 0 &&  cell.y != 0)
+//					  if (cell.x != 0 &&  cell.y != 0) 			/// restore for std G1 ops - the top wall & left wall did not exitify
 						{
 //							if (cell.y == 1 || cell.y == 2)
 //								alert("cell: x, y "+cell.wall+": "+cell.x+", "+cell.y);
