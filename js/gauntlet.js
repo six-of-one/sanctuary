@@ -914,7 +914,8 @@
 		// make sure floor loader is hidden
 		 var img = document.getElementById("gfloor");
 		img.style.visibility = "hidden";
-
+		img = document.getElementById("gfloorbas");
+		img.style.visibility = "hidden";
     },
 
     //---------------------------
@@ -3574,6 +3575,7 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 
     maptiles: function(map, ctx) {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
+var ctst = 0;
 		 if (wallsprites == undefined) wallsprites = sprites;
 		if (map.level.gflr)
 		 {
@@ -3581,10 +3583,12 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 			var gimg = document.getElementById("gfloor");
 			for(ty = 0, th = map.th ; ty < th ; ty=ty+8) {
 			  for(tx = 0, tw = map.tw ; tx < tw ; tx=tx+8) {
-						this.tile(ctx, gbas, 0, 0, tx, ty);
+						ctx.drawImage(gbas, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
 						ctx.drawImage(gimg, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
+				  ctst = ctst + 1;
 				  }
 				}
+if (document.getElementById("seltut").checked) alert("map tiling: "+map.th+"- "+map.tw+" -- "+Mastermap.nlevel + " -> "+ctst);
 		 }
 		 fcellstr = map.cell(0, 0); // preload so no undefine
 		 ftilestr = 0;

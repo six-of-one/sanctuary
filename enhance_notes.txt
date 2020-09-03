@@ -4,6 +4,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 release list pr1:
 
+occasionally see a level with NO floor tex ?!
 
 check:
 
@@ -30,8 +31,6 @@ table score saver - poss. high score disp as well			== issue - cookies not being
 
 issue list:
 
-
-occasionally see a level with NO floor tex ?!
 cookie code not setting cookies when run from file:///index.html			(I suspect this issue)
 
 
