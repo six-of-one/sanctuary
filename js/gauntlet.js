@@ -3588,7 +3588,6 @@ var ctst = 0;
 				  ctst = ctst + 1;
 				  }
 				}
-if (document.getElementById("seltut").checked) alert("map tiling: "+map.th+"- "+map.tw+" -- "+Mastermap.nlevel + " -> "+ctst);
 		 }
 		 fcellstr = map.cell(0, 0); // preload so no undefine
 		 ftilestr = 0;
