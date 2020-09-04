@@ -4,8 +4,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 release list pr1:
 
-food lvl3, check 5, 6, 7
-
+rnd load profile tweak
 
 check:
 
@@ -33,6 +32,7 @@ table score saver - poss. high score disp as well			== issue - cookies not being
 -- teleport -> wall trap
 	- stuck in wall & walls to exit need to work
 -- fixed g1floor48.jpg missing -- was really supposed to be floor81
+--- food lvl3, check 5, 6, 7
 
 issue list:
 
