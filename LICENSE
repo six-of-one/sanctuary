@@ -1,4 +1,7 @@
-Copyright (c) 2013, 2014, 2015, 2016 Jake Gordon and contributors
+Copyright (c) 020 Six and previous contributors
+
+- only applies to js/*, css/*, gemfile, rakefile, index.html and sanctuary.bat -- the "code"
+- any other materials required to use software are Your Responsibility to obtain
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
