@@ -1034,6 +1034,7 @@
 // 1 - 2nd level after
 // 2 - 3rd level after
 // start room check again
+				if (nlevel > 9)			// not needed before - logic changed...
 				if (tlevel > 1)			// wait 3 levels then start rand checks
 					treasurerc = treasurerc + 0.37;
 				else
