@@ -4,6 +4,8 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 release list pr1:
 
+food lvl3, check 5, 6, 7
+
 
 check:
 
@@ -30,6 +32,7 @@ table score saver - poss. high score disp as well			== issue - cookies not being
 -- occasionally see a level with NO floor tex ?!
 -- teleport -> wall trap
 	- stuck in wall & walls to exit need to work
+-- fixed g1floor48.jpg missing -- was really supposed to be floor81
 
 issue list:
 
@@ -94,9 +97,6 @@ elf:				3.9 sec
 
 >>>>>>>>>>>>>>>>>>>>>>
 (nominal fixes)
-
-can you fight ghosts ?!
--- they do seem to scale down levels instead of one health womp (3rd level ghost hits for 10 pts 3 times)
 
 some issue shooting level 1 & 2 gens - see research level
 
