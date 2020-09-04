@@ -8,7 +8,7 @@
 
   var VERSION  = "1.0.2",
 /// allow debug mode testing - code should be removed pre-release
-											DEBUGON = 1,
+											DEBUGON = 0,
 // debug - provide a one time start level
 											initlevel = 115,
 /// end debug tier
@@ -1502,7 +1502,7 @@
 		{
 						var tstr = scoredex + ":";
 						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + ";; ";
-						 alert(tstr);
+//						 alert(tstr);
 		}
 
     },
