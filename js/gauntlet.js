@@ -3576,7 +3576,6 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 
     maptiles: function(map, ctx) {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
-var ctst = 0;
 		 if (wallsprites == undefined) wallsprites = sprites;
 		if (map.level.gflr)
 		 {
@@ -3586,7 +3585,6 @@ var ctst = 0;
 			  for(tx = 0, tw = map.tw ; tx < tw ; tx=tx+8) {
 						ctx.drawImage(gbas, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
 						ctx.drawImage(gimg, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
-				  ctst = ctst + 1;
 				  }
 				}
 		 }
