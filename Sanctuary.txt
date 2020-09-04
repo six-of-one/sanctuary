@@ -4,6 +4,10 @@ Gauntlet Sanctuary
 why "sanctuary" ?
 I didnt feel like calling it a "port"
 
+web: https://www.moddb.com/mods/gauntlet-sanctuary
+forum: https://www.moddb.com/mods/gauntlet-sanctuary/forum
+bug submit: https://discord.com/channels/708519047712735302/732784469072674817
+live streams: https://www.twitch.tv/number_s1x
 
 warning:
 
@@ -15,7 +19,7 @@ warning:
 
 running:
 
-unpack zip
+unpack Gauntlet.sanctuary.zip
 open Gauntlet.sanctuary folder
 1. click on sanctuary.bat
 ----> you must have chrome.exe installed in "C:\Program Files\chrome-win\chrome.exe"
@@ -91,3 +95,9 @@ soon we can get our old school 80s arcade
 gauntlet fix with NEW adventures!
 
 -Six
+
+
+
+PS: based in part on -
+
+https://codeincomplete.com/articles/javascript-gauntlet/
