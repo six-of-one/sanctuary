@@ -8,9 +8,9 @@
 
   var VERSION  = "1.0.2",
 /// allow debug mode testing - code should be removed pre-release
-											DEBUGON = 1,
+											DEBUGON = 0,
 // debug - provide a one time start level
-											initlevel = 48,
+											initlevel = 0,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -724,7 +724,7 @@
 		{ name: 'Research X',     url: "levels/glevel51.png",  floor: FLOOR.RND,      wall: WALL.GREEN16,      gflr: "gfx/g1floor28.jpg",      music: 'nullm',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel50.png",  floor: FLOOR.RND,      wall: WALL.GREEN50,      gflr: "gfx/g1floor50.jpg",      music: 'nullm',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel49.png",  floor: FLOOR.RND,      wall: WALL.BROWN1,      gflr: "gfx/g1floor49.jpg",      music: 'nullm',      score:  1000, help: null },
-		{ name: 'Research X',     url: "levels/glevel48.png",  floor: FLOOR.RND,      wall: WALL.MAUVE20,      gflr: "gfx/g1floor48.jpg",      music: 'nullm',      score:  1000, help: null },
+		{ name: 'Research X',     url: "levels/glevel48.png",  floor: FLOOR.RND,      wall: WALL.MAUVE20,      gflr: "gfx/g1floor81.jpg",      music: 'nullm',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel47.png",  floor: FLOOR.RND,      wall: WALL.BROWN1,      gflr: "gfx/g1floor47.jpg",      music: 'nullm',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel46.png",  floor: FLOOR.RND,      wall: WALL.BROWN1,      gflr: "gfx/g1floor34.jpg",      music: 'nullm',      score:  1000, help: null },
 		{ name: 'Research X',     url: "levels/glevel45.png",  floor: FLOOR.RND,      wall: WALL.BROWN1,      gflr: "gfx/g1floor45.jpg",      music: 'nullm',      score:  1000, help: null },
