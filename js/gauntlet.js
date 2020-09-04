@@ -8,9 +8,9 @@
 
   var VERSION  = "1.0.2",
 /// allow debug mode testing - code should be removed pre-release
-											DEBUGON = 0,
+											DEBUGON = 1,
 // debug - provide a one time start level
-											initlevel = 0,
+											initlevel = 115,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -1173,6 +1173,7 @@
 					var f, rprof, ldiff;
 
 					diff_level = document.getElementById("seldiff").value;
+//				alert("difficulty: "+ diff_level);
 					ldiff = diff_level / def_diff;
 // treasure will come thru here unless blocked
 					rprof = Game.Math.randomInt(1,rlline);			// for now pick a random profile
@@ -1501,7 +1502,7 @@
 		{
 						var tstr = scoredex + ":";
 						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + ";; ";
-//						 alert(tstr);
+						 alert(tstr);
 		}
 
     },
@@ -1855,6 +1856,7 @@ var ymir = false, xmir = false;
 //		  pcell = self.cells[n];
 		  reloaded = self;
 		  Mastercell = self.cells[n];
+//		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
 		  self.cells[n].x = x; // used by walls -> exits
 		  self.cells[n].y = y;
 		  self.cells[n].tx = tx; // used by trap: walls -> floor
@@ -1864,6 +1866,7 @@ var ymir = false, xmir = false;
 // make some floor tiles appear slightlyt different - a "GPS" out of complex mazes
 // this is built into the map file as color code #a08080
 		  self.cells[n].mapcht = ((pixel & 0xa08080) == 0xa08080);
+//		  alert("cell x,y,n ="+self.cells[n].x+", "+self.cells[n].y+", "+n);
 /// do stuff tier
 
 		  if (isstart(pixel))
@@ -1898,6 +1901,7 @@ var ymir = false, xmir = false;
 			{
 					self.addDoor(x, y, DOOR.HORIZONTAL);
 					Mastercell.ptr.sx = doortype(tx,ty,map);
+//				alert(Mastercell.ptr.sx);
 			}
 		  else if (isgenerator(pixel))
 			 self.addGenerator(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
@@ -2022,6 +2026,7 @@ var ymir = false, xmir = false;
 //		  pcell = self.cells[n];
 		  reloaded = self;
 		  Mastercell = self.cells[n];
+//		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
 		  self.cells[n].x = x; // used by walls -> exits
 		  self.cells[n].y = y;
 		  self.cells[n].tx = tx; // used by trap: walls -> floor
@@ -2031,6 +2036,7 @@ var ymir = false, xmir = false;
 // make some floor tiles appear slightlyt different - a "GPS" out of complex mazes
 // this is built into the map file as color code #a08080
 		  self.cells[n].mapcht = ((pixel & 0xa08080) == 0xa08080);
+//		  alert("cell x,y,n ="+self.cells[n].x+", "+self.cells[n].y+", "+n);
 /// do stuff tier
 
 		  if (isstart(pixel))
@@ -2065,6 +2071,7 @@ var ymir = false, xmir = false;
 			{
 					self.addDoor(x, y, DOOR.HORIZONTAL);
 					Mastercell.ptr.sx = doortype(tx,ty,map);
+//				alert(Mastercell.ptr.sx);
 			}
 		  else if (isgenerator(pixel))
 			 self.addGenerator(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
@@ -2770,9 +2777,9 @@ var txsv = ":";
 
 
 /// remove
-txsv = Math.floor(this.x) +"," + Math.floor(this.y) + " map: " + Math.floor(map.w) +"," + Math.floor(map.h);
-txsv = txsv.substring(0,100);
-document.title = "-lvl  "+Mastermap.nlevel;
+//txsv = Math.floor(this.x) +"," + Math.floor(this.y) + " map: " + Math.floor(map.w) +"," + Math.floor(map.h);
+//txsv = txsv.substring(0,100);
+//document.title = "-pl  "+txsv;
 ///
 
         if (!collision)
@@ -2871,6 +2878,8 @@ document.title = "-lvl  "+Mastermap.nlevel;
 					 walled, cell, c, nc = cells.length, tdist = 100000, cdist, destcell, ldestcell, swapcell,
 					mxdir = 7, tdir, ddir = this.moving.dir;
 
+//alert("x: "+this.x+" y:"+this.y);
+//alert("x: "+treasure.x+" y:"+treasure.y);
 				if (ddir < 0 || ddir > 7) ddir = 0;
 
 				// now loop checking for all teleporters
@@ -3221,6 +3230,7 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 						if (cell.ptr)
 						if (cell.ptr.door)
 						{
+//								alert("door cell: x, y "+c+": "+cell.x+", "+cell.y);
 								if (!opendr) Musicth.play(Musicth.sounds.opendoor);
 								cell.ptr.door = null;
 								Masterthmp.map.remove(cell.ptr);
@@ -3241,6 +3251,7 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 //					  if (cell.x != 0 &&  cell.y != 0) 			/// restore for std G1 ops - the top wall & left wall did not exitify
 						{
 //							if (cell.y == 1 || cell.y == 2)
+//								alert("cell: x, y "+cell.wall+": "+cell.x+", "+cell.y);
 								if (!walled) Musicth.play(Musicth.sounds.wallexit);
 								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
 								cell.wall = null;	// so we dont fire these wall segs again
@@ -3573,7 +3584,7 @@ var ctst = 0;
 			var gimg = document.getElementById("gfloor");
 			for(ty = 0, th = map.th ; ty < th ; ty=ty+8) {
 			  for(tx = 0, tw = map.tw ; tx < tw ; tx=tx+8) {
-//						ctx.drawImage(gbas, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
+						ctx.drawImage(gbas, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
 						ctx.drawImage(gimg, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
 				  ctst = ctst + 1;
 				  }
