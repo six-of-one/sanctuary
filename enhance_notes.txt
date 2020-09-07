@@ -4,7 +4,6 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 followup list pr1:
 
-add screenshot key
 
 check:
 
@@ -33,6 +32,8 @@ table score saver - poss. high score disp as well			== issue - cookies not being
 -- fixed g1floor48.jpg missing -- was really supposed to be floor81
 --- food lvl3, check 5, 6, 7
 --- rnd load profile tweak - random items added
+-- added screenshot key
+\_ *** does not work
 
 issue list:
 
