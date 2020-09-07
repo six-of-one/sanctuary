@@ -27,9 +27,11 @@ or
 2. click on index.html to launch in your default browser
 ----> the chances of this working are sort of slim
 
+- in chrome I have to further click on a "(i) file " icon before the address "file:///F:/gauntlet.sanctuary.pr1/gauntlet.sanctuary.pr1/index.html" to run the first time
+
 playing:
 
-- option are below main screen:
+- options are below main screen:
 Difficulty:  3  ARROW keys to move, HOLD SPACE to fire, ENTER to use potion - start on:  Level 1   Tutorial: <x>
 
 1 should be pretty easy

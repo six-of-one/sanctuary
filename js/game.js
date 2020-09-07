@@ -910,6 +910,34 @@ function deleteCookie(name)
 	createCookie(name,"",-1);
 }
 
+// screen shot code bite sample from Javascript Jeep
+
+const img = document.querySelector('#screenshot img');
+const video = document.querySelector('#screenshot video');
+const canvas = document.createElement('canvas');
+
+function screenshot()
+{
+// size it
+	canvas.width = video.videoWidth;
+	canvas.height = video.videoHeight;
+
+// draw it
+	canvas.getContext('2d').drawImage(video, 0, 0);
+
+// url it
+	let dataUrl = canvas.toDataURL('image/png');
+	img.src = dataUrl;
+
+// download it
+	var hrefElement = document.createElement('a');
+	hrefElement=href = dataUrl;
+	document.body.append(hrefElement);
+	hrefElement.download = `sanctuary$.jpg`; // download name
+	hrefElement.click();
+	hrefElement.remove();
+}
+
 /*
 (c) by Thomas Konings
 Random Name Generator for Javascript

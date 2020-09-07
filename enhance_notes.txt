@@ -10,7 +10,6 @@ check:
 
 (can be after pre-beta-test)
 level progression - seems like it starts randomized
-make sure treasure rooms work right
 
 table score saver - poss. high score disp as well			== issue - cookies not being saved
 
