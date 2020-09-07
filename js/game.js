@@ -926,7 +926,7 @@ function screenshot()
 
 alert( "scrn: "+canvas.width+ " by "+canvas.height);
 // draw it
-	canvas.getContext('2d').drawImage(video, 0, 0);
+	canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 
 // url it
 	let dataUrl = canvas.toDataURL('image/jpg');
