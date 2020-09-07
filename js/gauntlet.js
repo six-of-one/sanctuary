@@ -786,6 +786,8 @@
       { key: Game.Key.V,    mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.VALKYRIE);     } },
       { key: Game.Key.Z,  mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.WIZARD);       } },
       { key: Game.Key.E,   mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.ELF);          } },
+      { key: Game.Key.F12,    mode: 'up',   state: 'menu', action: function()    { screenshot();                     } },
+      { key: Game.Key.F12,    mode: 'up',   state: 'playing', action: function()    { screenshot();                     } },
       { key: Game.Key.ESC,    mode: 'up',   state: 'playing', action: function()    { this.quit();                     } },
       { key: Game.Key.LEFT,   mode: 'down', state: 'playing', action: function()    { this.player.moveLeft(true);      } },
       { key: Game.Key.RIGHT,  mode: 'down', state: 'playing', action: function()    { this.player.moveRight(true);     } },
@@ -801,6 +803,7 @@
       { key: Game.Key.ESC,    mode: 'up',   state: 'help',    action: function()    { this.resume();                   } },
       { key: Game.Key.RETURN, mode: 'up',   state: 'help',    action: function()    { this.resume();                   } },
       { key: Game.Key.SPACE,  mode: 'up',   state: 'help',    action: function()    { this.resume();                   } },
+      { key: Game.Key.F12,    mode: 'up',   state: 'tween', action: function()    { screenshot();                     } },
       { key: Game.Key.ESC,    mode: 'up',   state: 'tween',    action: function()    { this.resume();                   } },
       { key: Game.Key.RETURN, mode: 'up',   state: 'tween',    action: function()    { this.resume();                   } },
       { key: Game.Key.SPACE,  mode: 'up',   state: 'tween',    action: function()    { this.resume();                   } }

@@ -666,6 +666,8 @@ Game.Key = {
   ZERO:     48, ONE: 49, TWO: 50, THREE: 51, FOUR: 52, FIVE: 53, SIX: 54, SEVEN: 55, EIGHT: 56, NINE: 57,
   A:        65, B: 66, C: 67, D: 68, E: 69, F: 70, G: 71, H: 72, I: 73, J: 74, K: 75, L: 76, M: 77, N: 78, O: 79, P: 80, Q: 81, R: 82, S: 83, T: 84, U: 85, V: 86, W: 87, X: 88, Y: 89, Z: 90,
   TILDA:    192,
+	F12: 123,
+	SCROLL: 145,
 
   map: function(map, context, cfg) {
     cfg = cfg || {};
@@ -926,12 +928,12 @@ function screenshot()
 	canvas.getContext('2d').drawImage(video, 0, 0);
 
 // url it
-	let dataUrl = canvas.toDataURL('image/png');
+	let dataUrl = canvas.toDataURL('image/jpg');
 	img.src = dataUrl;
 
 // download it
 	var hrefElement = document.createElement('a');
-	hrefElement=href = dataUrl;
+	hrefElement.href = dataUrl;
 	document.body.append(hrefElement);
 	hrefElement.download = `sanctuary$.jpg`; // download name
 	hrefElement.click();
