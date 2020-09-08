@@ -10,7 +10,7 @@
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 0,
 // debug - provide a one time start level
-											initlevel = 115,
+											initlevel = 0,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -1575,7 +1575,7 @@
 		 if (entity.lobsht != undefined)
 		 if (entity.lobsht)
 		 {
-			 if ((tos - entity.timeout)  < 2000) // lobber shot doesnt collide for 2 secs
+			 if ((tos - entity.timeout)  < 1000) // lobber shot doesnt collide for 2 secs
 					nocoll = false;
 		 }
 
