@@ -2243,6 +2243,7 @@ var ymir = false, xmir = false;
           this.thinking   = this.type.thinking;
           this.travelling = 0;
         }
+// maybe could fix odd lobber move here with if (collision || lob)
         else {
           this.thinking   = 0;
           this.travelling = travelling;
