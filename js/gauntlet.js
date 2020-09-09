@@ -1933,8 +1933,9 @@ var ymir = false, xmir = false;
 					Mastercell.ptr.sx = doortype(tx,ty,map);
 //				alert(Mastercell.ptr.sx);
 			}
-		  else if (isgenerator(pixel))
-			 self.addGenerator(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
+		  else if (isgenerator(pixel)) {
+			 self.addGenerator(x, y, MONSTERS[(type(pixel) < MONSTERS.length) ? type(pixel) : 0]);
+			}
 		  else if (istreasure(pixel))
 			 {
 				 var ad = TREASURES[type(pixel) < TREASURES.length ? type(pixel) : 0];
