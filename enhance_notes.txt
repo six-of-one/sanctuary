@@ -4,6 +4,11 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 followup list pr1:
 
+lobbers now shoot
+- timeout to turn back on collision should be linked to dist to targ
+- animation to show going up & back down not done
+- shot is straight & not arc, but animation might change that
+- aim does not attempt to track player
 
 check:
 
@@ -61,7 +66,7 @@ player shot speed
 
 >make monsters slow on shot poison a timed effect - can cross lvl boundary
 >think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
-lobber shots & ai
+lobber  ai
 thief op & ai
 
 save system via cooky

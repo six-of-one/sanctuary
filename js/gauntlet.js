@@ -978,7 +978,7 @@
     onload: function(event, previous, current, nlevel) {
 /// debug code - remove pre-release
 			if (DEBUGON)
-			if (initlevel > 0)
+			if (initlevel > -1)
 		 {
 			 		nlevel = initlevel;
 					initlevel = 0;
@@ -2712,17 +2712,6 @@ var txsv = ":";
 			TROOMCNT[10] = Musicth.sounds.anc10;
 
 			for (var c = 0; c < 70; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
-/// debug code - remove pre-release
-				if (DEBUGON & 0)
-				{
-					HELPCLEAR[0] = 0;
-					HELPCLEAR[1] = 0;
-					HELPCLEAR[2] = 0;
-					HELPCLEAR[3] = 0;
-					HELPCLEAR[4] = 0;
-				}
-
-/// debug tier
     },
 
     leave: function() {
