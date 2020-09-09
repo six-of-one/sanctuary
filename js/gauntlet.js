@@ -2440,11 +2440,13 @@ var ymir = false, xmir = false;
     },
 
     onrender: function(frame) {
+		var tos = timestamp();
 // animate lobber shot
-		if (this.lobsht)
+		 if (this.lobsht != undefined)
+		 if (this.lobsht)
 		 {
-				this.frame++;
-				if (this.frame > 8) this.frame = 0;
+				this.frame = Math.floor((tos - this.timeout) / 100);
+				if (this.frame > 9) this.frame = 8;
 		 }
 		 else
       this.frame = this.type.rotate ? animate(frame, this.type.fpf, 8) : this.dir;
