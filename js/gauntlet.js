@@ -2233,7 +2233,11 @@ var ymir = false, xmir = false;
 
     step: function(map, player, dir, speed, travelling, allowfire) {
       var collision = map.trymove(this, dir, speed * slowmonster);
-      if (!collision) {
+// lobber always has chance at shot
+		var lob = false;
+		if (this.type.weapon != undefined)
+		if (this.type.weapon.lobsht) lob = true;
+      if (!collision || lob) {
         this.dir = dir;
         if (allowfire && this.type.weapon && this.fire(map, player)) {
           this.thinking   = this.type.thinking;
@@ -2259,16 +2263,20 @@ var ymir = false, xmir = false;
       return false;
     },
 
+
     fire: function(map, player) {
-      var dx, dy, dd;
+      var dx, dy, dd, lob = false;
       if (this.type.weapon) {
         if (!this.reloading) {
           dx = Math.abs(p2t(this.x) - p2t(player.x));
           dy = Math.abs(p2t(this.y) - p2t(player.y));
           dd = Math.abs(dx-dy);
-          if (((dx < 2) && isVertical(this.dir))   ||
+// lobber can fire if blocked
+			  if ((this.type.weapon.lobsht) && (dd < 2) && (Math.random() < 0.5)) lob = true;
+
+          if ( lob || (((dx < 2) && isVertical(this.dir))   ||
               ((dy < 2) && isHorizontal(this.dir)) ||
-              ((dd < 2) && isDiagonal(this.dir))) {
+              ((dd < 2) && isDiagonal(this.dir)))) {
             this.reloading = this.type.weapon.reload;
             publish(EVENT.MONSTER_FIRE, this);
             return true;
