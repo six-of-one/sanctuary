@@ -63,7 +63,6 @@ player shot speed
 
 >make monsters slow on shot poison a timed effect - can cross lvl boundary
 >think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
-lobber  ai
 thief op & ai
 
 save system via cooky
@@ -105,7 +104,7 @@ some issue shooting level 1 & 2 gens - see research level
 
 diagonal shot fail between walls w/diagonal gap		< sort of works...spacing is just a bit off >
 exits way too touch sensitive for exit maze levels
-monsters seem "too" smart for g1 -- these are good for g2 "monsters may move differently"
+wmonsters seem "too" smart for g1 -- these are good for g2 "monsters may move differently"
  
 wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
 - demon shots need checked as well
@@ -172,7 +171,7 @@ expansion:
 
 coins - ?
 
-Gauntlet anti-hero -- play as DM, stock dungeons with elements to stop AI heros
+Gauntlet anti-hero -- play as DM, stock dungeons with elements to stop AI heros (or real players)
 -- cost system - if adding extra 5 3lvl ghost gen, have to put in 2 potions or 4 shot foods, etc
 -- use rng load profiles basis
 
