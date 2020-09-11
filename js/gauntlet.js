@@ -1482,15 +1482,15 @@ Gauntlet = function() {
     loadHighWho:   function() { return this.storage[STORAGE.WHO];                     },
 
     saveHighScore: function() {
-      if (this.player.score > this.loadHighScore()) {
-        this.storage[STORAGE.SCORE] = this.player.score;
+      if ((this.player.score / this.player.droppedcoins) > this.loadHighScore()) {
+        this.storage[STORAGE.SCORE] = (this.player.score / this.player.droppedcoins);
         this.storage[STORAGE.WHO]   = this.player.type.name;
       }
-		createCookie(scoredex+"char", this.player.type.name,0)
-		createCookie(scoredex+"score", this.player.score,0)
-		createCookie(scoredex+"name", "proggy-nif",0)
-		createCookie("hindex", scoredex,0)
-		HSCORE[scoredex,0] = this.player.score
+		createCookie(scoredex+"char", this.player.type.name,0);
+		createCookie(scoredex+"score",(this.player.score / this.player.droppedcoins),0);
+		createCookie(scoredex+"name", "proggy-nif",0);
+		createCookie("hindex", scoredex,0);
+		HSCORE[scoredex,0] = (this.player.score / this.player.droppedcoins);
 		HSCORE[scoredex,1] = "proggy-nif";
 		HSCORE[scoredex,2] = this.player.type.name;
 //		HSCORE[scoredex,0] = readCookie(scoredex+"score");
@@ -2690,6 +2690,7 @@ var txsv = ":";
       this.dir       = Game.Math.randomInt(0, 7);
       this.health    = type.health;
       this.coins    = type.coins;
+		this.droppedcoins = 1;
       publish(EVENT.PLAYER_JOIN, this);
 
 // clear video - in case it was playing, this is a seperate element that needs turned off
@@ -3110,11 +3111,11 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
     moveLeft:  function(on) { this.moving.left  = on;  this.setDir(); },
     moveRight: function(on) { this.moving.right = on;  this.setDir(); },
     coindrop: function() {
-			 alert("coindrop: "+this.coins);
 		 if (this.coins > 0)
 		 {
 				this.heal(this.type.health);
 				this.coins--;
+				this.droppedcoins++;
 				Musicth.play(Musicth.sounds.coindrp);
 		 }
 	},
