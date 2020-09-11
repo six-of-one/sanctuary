@@ -322,6 +322,7 @@
         NLEVEL:  "gauntlet.nlevel",
         SCORE:   "gauntlet.score",
         WHO:     "gauntlet.who"
+        COINS:     "gauntlet.coins"
       },
 // rnd load profiles
 		rlloop = 32,
@@ -632,6 +633,7 @@
       { id: 'dtouch',        name: 'sounds/g1_deathtouch',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'healthcnt',      name: 'sounds/g1_healthcount',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'sbuzz',      		  name: 'sounds/g1_buzz',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
+      { id: 'coindrp',      		  name: 'sounds/g1_coindrop',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
 // let levels not have music
       { id: 'nullm',      		  name: 'sounds/null',              formats: ['ogg'], volume: 0.8 } 
     ],
@@ -776,6 +778,7 @@
       { key: Game.Key.E,   mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.ELF);          } },
       { key: Game.Key.F12,    mode: 'up',   state: 'menu', action: function()    { screenshot();                     } },
       { key: Game.Key.F12,    mode: 'up',   state: 'playing', action: function()    { screenshot();                     } },
+      { key: Game.Key.ONE,    mode: 'up',   state: 'playing', action: function()    { this.player.coindrop();                     } },
       { key: Game.Key.ESC,    mode: 'up',   state: 'playing', action: function()    { this.quit();                     } },
       { key: Game.Key.LEFT,   mode: 'down', state: 'playing', action: function()    { this.player.moveLeft(true);      } },
       { key: Game.Key.RIGHT,  mode: 'down', state: 'playing', action: function()    { this.player.moveRight(true);     } },
