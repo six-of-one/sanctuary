@@ -228,10 +228,8 @@
 // tell load a start was found - if not randomly add one to prevent load fail
 		fndstart = 0,
 // after {n} health tics with no player move / fire, all walls are exits
-/// RESTORE to 200
 		WALLSTALL = 100,
 // after {n} health tics with no player move / fire, all doors open
-/// RESTORE to 30
 		DOORSTALL = 30,
 		stalling,
 // doors open counter-clockwise and stop opening in a clockwise dir when hitting corners & Ts
@@ -460,23 +458,8 @@
     ],
 
     sounds: [
-/// RESTORE!
       { id: 'gtitle',      name: 'sounds/music.title',      formats: ['ogg'], volume: 1.0, loop: false             },
       { id: 'g4sec',      name: 'sounds/music.4sec',      formats: ['ogg'], volume: 1.0, loop: false             },
-// previous music / audio fx
-/*
-      { id: 'lostcorridors',   name: 'sounds/music.lostcorridors',   formats: ['ogg'], volume: 0.5, loop: true             }, // http://luckylionstudios.com/
-      { id: 'bloodyhalo',      name: 'sounds/music.bloodyhalo',      formats: ['ogg'], volume: 0.25, loop: true             }, // (ditto)
-      { id: 'citrinitas',      name: 'sounds/music.citrinitas',      formats: ['ogg'], volume: 0.25, loop: true             }, 
-      { id: 'fleshandsteel',   name: 'sounds/music.fleshandsteel',   formats: ['ogg'], volume: 0.25, loop: true             }, 
-      { id: 'mountingassault', name: 'sounds/music.mountingassault', formats: ['ogg'], volume: 0.25, loop: true             }, 
-      { id: 'phantomdrone',    name: 'sounds/music.phantomdrone',    formats: ['ogg'], volume: 0.25, loop: true             },
-      { id: 'thebeginning',    name: 'sounds/music.thebeginning',    formats: ['ogg'], volume: 0.25, loop: true             },
-      { id: 'warbringer',      name: 'sounds/music.warbringer',      formats: ['ogg'], volume: 0.25, loop: true             },
-// player die and end of game
-      { id: 'gameover',        name: 'sounds/gameover',              formats: ['ogg'], volume: 0.3                         },
-      { id: 'victory',      	name: 'sounds/victory',               formats: ['ogg'], volume: 1.0                         },
-*/
 // org fx
       { id: 'highscore',       name: 'sounds/highscore',             formats: ['ogg'], volume: 0.5,                        },
 //      { id: 'generatordeath',  name: 'sounds/generatordeath',        formats: ['ogg'], volume: 0.3, pool:  },
