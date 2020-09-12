@@ -48,8 +48,6 @@ port list:
 player dmg: melee
 melee mis gens
 monster dmg: melee - turn off autohurt to test
-
-
 player shot speed
 
 >a few announce & help msg left - ssop, etc.
@@ -67,8 +65,6 @@ thief op & ai
 
 save system via cooky
 > score tables
-
-document.getElementById("seltut").checked
 
 finish g1 map population 				== on hold, have random load now
 finish wall layers
@@ -88,88 +84,10 @@ g2:
 -invisible "become temp visible" walls -- likely a code deal with some overlay mask
 
 >>>>>>>>>>>>>>>>>>>>>>
-WIP: arcade sound & gfx
-
-
-full walk dist (31 tiles)
-warrior:	5.4 sec
-wiz:			5.3 sec
-valk:			4.5 sec
-elf:				3.9 sec
-
->>>>>>>>>>>>>>>>>>>>>>
-(nominal fixes)
-
-some issue shooting level 1 & 2 gens - see research level
-
-diagonal shot fail between walls w/diagonal gap		< sort of works...spacing is just a bit off >
-exits way too touch sensitive for exit maze levels
-wmonsters seem "too" smart for g1 -- these are good for g2 "monsters may move differently"
- 
-wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
-- demon shots need checked as well
-
-do demons fire too fast?
-
-
->>>>>>>>>>>>>>>>>>>>>>
-(perhaps persistent issues)
-
-movement is quirky compared to original
-- not as precise, hard to hit an exact shot line - real joystick might fix this
-- possibly check for a controller sensitivity option
-
-    <div id="tween" ><br>LEVEL:&nbsp&nbsp 1</div>
-    <div id="tweenmsg" >Get bonus multiplier by collecting treasure<br><br><br><br><font color="yellow">FIND THE HIDDEN POTION</font></div>
-
->>>>>>>>>>>>>>>>>>>>>>
-elements I did not see:
-
-special potions
-temp invisible
-shootable walls - the "dirt" kind
-timed treasure rooms
-thief & treasure bag from shooting thief
-level wrap to opposite side
-
-limited maps - many arcade maps are left out (though its likely the creator wanted original maps)
-
-other elements to check:
-
-corner unpin above level 100
-levels flip / mirror above 100 -- code is done, needs logic control
-shots stun & hurt other player levels
-cant take keys / bombs after inv. full - cant walk through them either
-
-door stall is 15 secs - difficult is 0 easiest
-
->>>>>>>>>>>>>>>>>>>>>>
-
-GII elements:
-
-locked treasures
-> poison food / potion that slows monsters
-moving exits
-moving walls (regular phase, not random)
-"flicker" random walls
-invisible walls (need a 50% vis on touch or shot option cooling to invisible after 4 mins) -- code to handle these as gII is done
-super sorceror
-mugger - thief that steals food
-dragon
-temp potions - repulse, invuln, super shot, reflective, teleport		-- code done on 1 - 3
-> stun tiles
-force fields
-moveable (pushable) walls
-shootable "regular" walls that give goody
-"special" treasure room
-monsters move different, or faster
-x--- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or super / reflect shot destroys)
-x--- "IT" - not sure want this
-
->>>>>>>>>>>>>>>>>>>>>>
 expansion:
 
-coins - ?
+earn coins or collect - ?			(secret treasure room)
+should high score table include tiers for difficulty levels
 
 Gauntlet anti-hero -- play as DM, stock dungeons with elements to stop AI heros (or real players)
 -- cost system - if adding extra 5 3lvl ghost gen, have to put in 2 potions or 4 shot foods, etc
@@ -182,6 +100,7 @@ poss xp system for enhance stuff (sep from buy stuff guy)
 
 difficulty system >> cheat (no HS, no bonus x), trainer, easy, normal, { }, hard, nightmare
 \options on tutorial system, announcer
+
 genesis gIV - quest, ? battle, record
 +music from this is good too
 
@@ -227,6 +146,80 @@ walking on spikes
 running in flaming oil
 valley of the shadow of death
 
+
+
+>>>>>>>>>>>>>>>>>>>>>>
+WIP: arcade sound & gfx
+
+
+full walk dist (31 tiles)
+warrior:	5.4 sec
+wiz:			5.3 sec
+valk:			4.5 sec
+elf:				3.9 sec
+
+>>>>>>>>>>>>>>>>>>>>>>
+(nominal fixes)
+
+some issue shooting level 1 & 2 gens - see research level
+
+diagonal shot fail between walls w/diagonal gap		< sort of works...spacing is just a bit off >
+exits way too touch sensitive for exit maze levels
+wmonsters seem "too" smart for g1 -- these are good for g2 "monsters may move differently"
+ 
+wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
+- demon shots need checked as well
+
+do demons fire too fast?
+
+
+>>>>>>>>>>>>>>>>>>>>>>
+(perhaps persistent issues)
+
+movement is quirky compared to original
+- not as precise, hard to hit an exact shot line - real joystick might fix this
+- possibly check for a controller sensitivity option
+
+    <div id="tween" ><br>LEVEL:&nbsp&nbsp 1</div>
+    <div id="tweenmsg" >Get bonus multiplier by collecting treasure<br><br><br><br><font color="yellow">FIND THE HIDDEN POTION</font></div>
+
+>>>>>>>>>>>>>>>>>>>>>>
+elements I did not see:
+
+thief & treasure bag from shooting thief
+level wrap to opposite side
+
+other elements to check:
+
+corner unpin above level 100
+levels flip / mirror above 100 -- code is done, needs logic control
+shots stun & hurt other player levels
+cant take keys / bombs after inv. full - cant walk through them either
+
+door stall is 15 secs - difficult is 0 easiest
+
+>>>>>>>>>>>>>>>>>>>>>>
+
+GII elements:
+
+locked treasures
+> poison food / potion that slows monsters
+moving exits
+moving walls (regular phase, not random)
+"flicker" random walls
+invisible walls (need a 50% vis on touch or shot option cooling to invisible after 4 mins) -- code to handle these as gII is done
+super sorceror
+mugger - thief that steals food
+dragon
+temp potions - repulse, invuln, super shot, reflective, teleport		-- code done on 1 - 3
+> stun tiles
+force fields
+moveable (pushable) walls
+shootable "regular" walls that give goody
+"special" treasure room
+monsters move different, or faster
+x--- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or super / reflect shot destroys)
+x--- "IT" - not sure want this
 
 >>>>>>>>>>>>>>>>>>>>>>
 code fails
