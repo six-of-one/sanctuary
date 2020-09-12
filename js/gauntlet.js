@@ -1482,6 +1482,7 @@ Gauntlet = function() {
     loadHighWho:   function() { return this.storage[STORAGE.WHO];                     },
 
     saveHighScore: function() {
+		if (diff_level > 9) return;
       if ((this.player.score / this.player.droppedcoins) > this.loadHighScore()) {
         this.storage[STORAGE.SCORE] = (this.player.score / this.player.droppedcoins);
         this.storage[STORAGE.WHO]   = this.player.type.name;
