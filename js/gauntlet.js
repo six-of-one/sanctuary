@@ -2787,6 +2787,12 @@ var txsv = ":";
 						{
 								reloaded.start = { x: cell.x, y: cell.y }
 								cell.loaded = true;
+								if (thieftrack === 0)
+								{
+										THIEFTRX[thieftrack] = cell.tx;
+										THIEFTRY[thieftrack] = cell.ty;
+										thieftrack++;
+								}
 						}
 					fndstart = true;
 			}
