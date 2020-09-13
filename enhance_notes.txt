@@ -4,6 +4,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 followup list pr1:
 
+thief op & ai
 
 check:
 
@@ -61,7 +62,6 @@ player shot speed
 
 >make monsters slow on shot poison a timed effect - can cross lvl boundary
 >think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
-thief op & ai
 
 save system via cooky
 > score tables

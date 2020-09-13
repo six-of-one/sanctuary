@@ -92,7 +92,7 @@ Gauntlet = function() {
         THIEF: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  500, health:  10, speed: 200/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6 }, name: "thief", weapon: null  ,     nohlp: 39               }
       },
 // track a potential "richest" player path - (really have to track them all...)
-		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0,
+		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100,
 
 // list of tutorial and help messages to display
 		HELPDIS = [
@@ -777,6 +777,7 @@ Gauntlet = function() {
       { key: Game.Key.Z,  mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.WIZARD);       } },
       { key: Game.Key.E,   mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.ELF);          } },
       { key: Game.Key.F12,    mode: 'up',   state: 'menu', action: function()    { screenshot();                     } },
+      { key: Game.Key.X,    mode: 'up',   state: 'playing', action: function()    { spawn();                     } },
       { key: Game.Key.F12,    mode: 'up',   state: 'playing', action: function()    { screenshot();                     } },
       { key: Game.Key.ONE,    mode: 'up',   state: 'playing', action: function()    { this.player.coindrop();     } },
       { key: Game.Key.ESC,    mode: 'up',   state: 'playing', action: function()    { this.quit();                     } },
@@ -869,6 +870,35 @@ Gauntlet = function() {
     set_clear(arr);
     for(var n = 0, max = source.length ; n < max ; n++)
       arr.push(source[n]);
+  }
+
+// xperimental - doin mod stuff
+  function spawn()
+  {
+	  function isfloor(pixel)         { return ((pixel & PIXEL.MASK.TYPE) === PIXEL.FLOOR);   };
+		var thcell,cell, cells  = reloaded.cells;
+		var c, nc = cells.length, fnd = 0, sft = 6000;
+
+		for (c = 0;c < nc;c++)
+		{
+				cell = cells[c];
+				if (cell.tx == THIEFTRX[0] && cell.ty == THIEFTRY[0]) thcell = cell;
+				fnd = true;
+		}
+		if (thcell == undefined)
+		{
+				fnd = 0;
+				while (!fnd && (sft > 0))
+				{
+						c = Game.Math.randomInt(0,nc - 1);
+						thcell = cells[c];
+						fnd = isfloor(thcell.pixel);
+						if (cell.loaded != undefined) fnd = false;		// for some reason the .occupied() fn fails here, so we do our own thing
+						sft--;
+				}
+		}
+		if (fnd)
+				Mastermap.load_cell(thcell.tx, thcell.ty, theif_ad,Mastermap);
   }
 
   //=========================================================================
@@ -1890,7 +1920,14 @@ var ymir = false, xmir = false;
 		  {
 				 self.start = { x: x, y: y }
 				 fndstart = true;
-			}
+// save player start for theif entry
+				if (thieftrack === 0)
+				{
+						THIEFTRX[thieftrack] = tx;
+						THIEFTRY[thieftrack] = ty;
+						thieftrack++;
+				}
+		  }
 
 		  if (iswall(pixel))
 			 cell.wall = walltype(tx, ty, map);
@@ -2975,7 +3012,7 @@ var txsv = ":";
 /// REMOVE - testing
 var tt = "";
 for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +THIEFTRY[f] + ", ";
-//alert(tt);
+alert(tt); 
 				return;
 		 }
 
@@ -3744,13 +3781,6 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 							thieftrack++;
 					}
 		  }
-		  else if (thieftrack === 0)
-		  {
-					THIEFTRX[thieftrack] = +Math.floor(x);
-					THIEFTRY[thieftrack] = +Math.floor(y);
-					thieftrack++;
-		  }
-		  else thieftrack = 0;
       }
     },
 
