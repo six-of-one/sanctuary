@@ -2250,13 +2250,14 @@ var ymir = false, xmir = false;
 // theif trax
 		if (this.type.theif && thieftrack > 4)
 		{
-			var dumt;
+			var dumt = new Object();
+
 			if (this.thieftrack == undefined) this.thieftrack = 4;
 			dumt.x = THIEFTRX[this.thieftrack];
 			dumt.y = THIEFTRX[this.thieftrack];
 			this.thieftrack = this.thieftrack + 4;
 			if (this.thieftrack >= thieftrack) this.thieftrack = thieftrack - 1;
-			dirs[0] = this.directionTo(dumt, away);
+			dirs = PREFERRED_DIRECTIONS[this.directionTo(dumt, away)];
 		}
 		else
 			dirs = PREFERRED_DIRECTIONS[this.directionTo(player, away)];
@@ -3031,7 +3032,7 @@ var txsv = ":";
 /// REMOVE - testing
 var tt = "";
 for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +THIEFTRY[f] + ", ";
-//alert(tt); 
+alert(tt); 
 				return;
 		 }
 
