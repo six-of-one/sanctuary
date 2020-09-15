@@ -92,7 +92,7 @@ Gauntlet = function() {
         THIEF: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  500, health:  10, speed: 200/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               }
       },
 // track a potential "richest" player path - (really have to track them all...)
-		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100,
+		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0,
 
 // list of tutorial and help messages to display
 		HELPDIS = [
@@ -991,6 +991,7 @@ Gauntlet = function() {
 			RNGLOAD[1] = TREASURE.GOLD;
 // reset theif 
 			thieftrack = 0;
+//			stolen_load = 0;
     },
 
     onload: function(event, previous, current, nlevel) {
@@ -1233,6 +1234,24 @@ Gauntlet = function() {
 									}
 							}
 					}					
+			}
+			if (stolen_load > 0 && stolen_load <= rlloop)
+			{
+					sft = 6000;
+					fnd = 0;
+					while (!fnd && (sft > 0))
+					{
+							c = Game.Math.randomInt(0,nc - 1);
+							cell = cells[c];
+							fnd = isfloor(cell.pixel);
+							if (cell.loaded != undefined) fnd = false;		// for some reason the .occupied() fn fails here, so we do our own thing
+							sft--;
+					}
+					if (fnd)
+					{
+							Mastermap.load_cell(cell.tx, cell.ty, RLPROF[stolen_load][0],Mastermap);
+							stolen_load = 0;
+					}
 			}
     },
 
@@ -2260,7 +2279,7 @@ var ymir = false, xmir = false;
 			if (this.stolen > 0)
 			{
 					this.thieftrack = this.thieftrack - 1;
-					if (this.thieftrack < 1) this.thieftrack = 1;
+					if (this.thieftrack < 1) this.thieftrack = 1;		// eliminate theif ent & store stolen item for next level
 					this.x = THIEFTRX[this.thieftrack];
 					this.y = THIEFTRY[this.thieftrack];
 			}
@@ -3047,7 +3066,7 @@ var txsv = ":";
 /// REMOVE - testing
 var tt = "";
 for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +THIEFTRY[f] + ", ";
-alert(tt); 
+//alert(tt); 
 				return;
 		 }
 
