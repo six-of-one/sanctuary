@@ -989,6 +989,8 @@ Gauntlet = function() {
 			TROOMSUP[4] = TREASURE.KEY;
 // autoload
 			RNGLOAD[1] = TREASURE.GOLD;
+// reset theif 
+			thieftrack = 0;
     },
 
     onload: function(event, previous, current, nlevel) {
@@ -2258,13 +2260,16 @@ var ymir = false, xmir = false;
 			this.thieftrack = this.thieftrack + 4;
 			if (this.thieftrack >= thieftrack) this.thieftrack = thieftrack - 1;
 			dirs = PREFERRED_DIRECTIONS[this.directionTo(dumt, away)];
+			this.step(map, player, dirs[0], speed, n < 2 ? 0 : this.type.travelling * (n-2), !away);
 		}
 		else
+		{
 			dirs = PREFERRED_DIRECTIONS[this.directionTo(player, away)];
 
-      for(n = 0, max = dirs.length ; n < max ; n++) {
-        if (this.step(map, player, dirs[n], speed, n < 2 ? 0 : this.type.travelling * (n-2), !away))
-          return;
+			for(n = 0, max = dirs.length ; n < max ; n++) {
+			  if (this.step(map, player, dirs[n], speed, n < 2 ? 0 : this.type.travelling * (n-2), !away))
+				 return;
+			}
       }
 
     },
