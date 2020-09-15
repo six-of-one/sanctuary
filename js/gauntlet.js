@@ -330,8 +330,8 @@ Gauntlet = function() {
 	RLPROF = [
 [	0x008070,	13,	20,	13,	20,	17,	14,	3,	11,	0,	0	],
 [	0x008050,	1,	1,	1,	0,	3,	1,	0,	1,	2,	0	],
-[	0x008060,	2,	2,	0,	3,	1,	2,	0,	1,	0,	1	],
 [	0x008061,	0,	0,	1,	2,	2,	0,	1,	0,	0,	0	],
+[	0x008060,	2,	2,	0,	3,	1,	2,	0,	1,	0,	1	],
 [	0x008000,	4,	4,	6,	4,	6,	8,	2,	2,	5,	2	],
 [	0x008020,	1,	0,	2,	2,	1,	0,	0,	1,	5,	0	],
 [	0x008040,	1,	1,	0,	2,	3,	0,	1,	1,	5,	0	],
@@ -2252,15 +2252,25 @@ var ymir = false, xmir = false;
 // theif trax
 		if (this.type.theif && thieftrack > 4)
 		{
-			var dumt = new Object();
-
-			if (this.thieftrack == undefined) this.thieftrack = 4;
-			dumt.x = THIEFTRX[this.thieftrack];
-			dumt.y = THIEFTRX[this.thieftrack];
-			this.thieftrack = this.thieftrack + 4;
-			if (this.thieftrack >= thieftrack) this.thieftrack = thieftrack - 1;
-			dirs = PREFERRED_DIRECTIONS[this.directionTo(dumt, away)];
-			this.step(map, player, dirs[0], speed, n < 2 ? 0 : this.type.travelling * (n-2), !away);
+			if (this.thieftrack == undefined) 
+			{	
+				this.thieftrack = 0;
+				this.stolen = 0;
+			}
+			if (this.stolen > 0)
+			{
+					this.thieftrack = this.thieftrack - 1;
+					if (this.thieftrack < 1) this.thieftrack = 1;
+					this.x = THIEFTRX[this.thieftrack];
+					this.y = THIEFTRY[this.thieftrack];
+			}
+			else
+			{
+					this.thieftrack = this.thieftrack + 1;
+					if (this.thieftrack >= thieftrack) this.thieftrack = thieftrack - 1;
+					this.x = THIEFTRX[this.thieftrack];
+					this.y = THIEFTRY[this.thieftrack];
+			}
 		}
 		else
 		{
