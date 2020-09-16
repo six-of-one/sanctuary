@@ -92,7 +92,7 @@ Gauntlet = function() {
         THIEF: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  500, health:  10, speed: 200/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               }
       },
 // track a potential "richest" player path - (really have to track them all...)
-		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0,
+		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 11,
 
 // list of tutorial and help messages to display
 		HELPDIS = [
@@ -1249,7 +1249,7 @@ Gauntlet = function() {
 					}
 					if (fnd)
 					{
-							Mastermap.load_cell(cell.tx, cell.ty, RLPROF[stolen_load][0],Mastermap);
+							Mastermap.load_cell(cell.tx, cell.ty, RLPROF[(stolen_load - 1)][0],Mastermap);
 							stolen_load = 0;
 					}
 			}
@@ -1481,6 +1481,11 @@ Gauntlet = function() {
         entity.hurt(monster.type.damage, monster);
         if (monster.type.selfharm)
           monster.hurt(monster.type.selfharm, monster);
+        if (monster.type.theif && monster.stolen == 0)
+		{
+				entity.player.score = entity.player.score - 500;
+				monster.stolen = 1;
+		}
       }
     },
 
@@ -1488,6 +1493,11 @@ Gauntlet = function() {
       if (by)
         by.addscore(monster.type.score);
       this.map.addMultipleFx(3, monster, FX.MONSTER_DEATH, TILE/2, nuke ? FPS/2 : FPS/6);
+// shot thief drops item
+        if (monster.type.theif && (monster.stolen > 0))
+		 {
+				Mastermap.load_cell(monster.tx, monster.ty, RLPROF[(monster.stolen - 1)][0],Mastermap);
+		 }
       this.map.remove(monster);
     },
 
@@ -1785,6 +1795,7 @@ Gauntlet = function() {
 						if (rn > Math.random()) xdm = Math.floor(r);
 				}
 				 if (distance < limit)
+				if (entity.type.theif == 0 || entity.type.theif == undefined)		// magic has no effect on theif
 					entity.hurt(dmg + xdm, player, true);
         }
 // cataboligne - add damage to generators
@@ -2278,8 +2289,13 @@ var ymir = false, xmir = false;
 			}
 			if (this.stolen > 0)
 			{
+// Musicth.play(Musicth.sounds.anckilthf);
 					this.thieftrack = this.thieftrack - 1;
-					if (this.thieftrack < 1) this.thieftrack = 1;		// eliminate theif ent & store stolen item for next level
+					if (this.thieftrack < 2)
+					{
+							stolen_load = this.stolen;
+							Mastermap.remove(this); // theif escaped
+					}
 					this.x = THIEFTRX[this.thieftrack];
 					this.y = THIEFTRY[this.thieftrack];
 			}
