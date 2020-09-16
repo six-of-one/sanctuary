@@ -92,7 +92,7 @@ Gauntlet = function() {
         THIEF: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  500, health:  10, speed: 200/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: 1, name: "thief", weapon: null  ,     nohlp: 39               }
       },
 // track a potential "richest" player path - (really have to track them all...)
-		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 11,
+		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 11, NOSPAWNTHF = 4,
 
 // list of tutorial and help messages to display
 		HELPDIS = [
@@ -873,6 +873,7 @@ Gauntlet = function() {
   }
 
 // xperimental - doin mod stuff
+// currently spawns theif for std g1 ops
   function spawn()
   {
 	  function isfloor(pixel)         { return ((pixel & PIXEL.MASK.TYPE) === PIXEL.FLOOR);   };
@@ -898,7 +899,10 @@ Gauntlet = function() {
 				}
 		}
 		if (fnd)
+		{
 				Mastermap.load_cell(thcell.tx, thcell.ty, theif_ad,Mastermap);
+				Mastercell.ptr.theif = 0;	// spawned -- NOT generated or placed
+		}
   }
 
   //=========================================================================
@@ -2251,7 +2255,7 @@ var ymir = false, xmir = false;
       this.dy         = Game.Math.randomInt(-4, 0);  // (ditto)
       this.df         = Game.Math.randomInt(0, 100); // a little random frame offset to keep monster animations out-of-sync
 
-		 if (generator != undefined)  this.theif       = generator.type.theif;	// so genned thiefs do not auto track
+		 if (type.theif)  this.theif       = NOSPAWNTHF;	// so placed & genned thiefs do not auto track
     },
 
     monster: true,
@@ -2283,7 +2287,7 @@ var ymir = false, xmir = false;
       // otherwise find a new direction
       var dirs, n, max;
 // theif trax
-		if (this.type.theif && thieftrack > 4 && this.theif != 4)
+		if (this.type.theif && thieftrack > 4 && this.theif != NOSPAWNTHF)
 		{
 			if (this.thieftrack == undefined) 
 			{	
