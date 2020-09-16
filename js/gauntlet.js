@@ -326,13 +326,14 @@ Gauntlet = function() {
         COINS:     "gauntlet.coins"
       },
 // rnd load profiles
-		rlloop = 32,
+		rlloop = 33,
 		rlline = 9,
 	RLPROF = [
-[	0x008070,	13,	20,	13,	20,	17,	14,	3,	11,	0,	0	],
+[	0x008090,	1	,	0	,	0	,	0	,	0	,	0	,	0	,	2	,	1	,	0	],
 [	0x008050,	1,	1,	1,	0,	3,	1,	0,	1,	2,	0	],
 [	0x008061,	0,	0,	1,	2,	2,	0,	1,	0,	0,	0	],
 [	0x008060,	2,	2,	0,	3,	1,	2,	0,	1,	0,	1	],
+[	0x008070,	13,	20,	13,	20,	17,	14,	3,	11,	0,	0	],
 [	0x008000,	4,	4,	6,	4,	6,	8,	2,	2,	5,	2	],
 [	0x008020,	1,	0,	2,	2,	1,	0,	0,	1,	5,	0	],
 [	0x008040,	1,	1,	0,	2,	3,	0,	1,	1,	5,	0	],
@@ -1488,11 +1489,6 @@ Gauntlet = function() {
           monster.hurt(monster.type.selfharm, monster);
         if (monster.type.theif)// && (monster.stolen == 0 || monster.stolen == undefined))
 		{
-if (vardbg < timestamp())
-{
-alert("thf: "+monster.stolen);
-vardbg = timestamp() + 2000;
-}
 			if (monster.stolen == 0 || monster.stolen == undefined)
 /// TDO - rest of stealies - potions, keys
 		 {
@@ -1510,7 +1506,8 @@ vardbg = timestamp() + 2000;
 // shot thief drops item
         if (monster.type.theif && (monster.stolen > 0))
 		 {
-				Mastermap.load_cell(monster.tx, monster.ty, RLPROF[(monster.stolen - 1)][0],Mastermap);
+				var tcell = reloaded.cells[p2t(monster.x) + p2t(monster.y) *  Mastermap.tw];
+				Mastermap.load_cell(tcell.tx, tcell.ty, RLPROF[(monster.stolen - 1)][0],Mastermap);
 		 }
       this.map.remove(monster);
     },
@@ -2325,6 +2322,8 @@ var ymir = false, xmir = false;
 					if (this.thieftrack >= thieftrack) this.thieftrack = thieftrack - 1;
 					this.x = THIEFTRX[this.thieftrack];
 					this.y = THIEFTRY[this.thieftrack];
+					this.step(map, player, 0, 0, 0, 0);
+					this.travelling = 0;
 			}
 		}
 		else
