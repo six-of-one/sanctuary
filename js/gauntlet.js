@@ -3982,7 +3982,12 @@ for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +TH
 
     onStartLevel:        function(map)               { if (!NOBKGMUSIC) this.playGameMusic(this.sounds[DEBUG.MUSIC || map.level.music]); this.nlevel = map.nlevel;             },
     onPlayerFire:        function(player)            { this.play(this.sounds["fire" + player.type.name]);                                                     },
-    onMonsterFire:       function(monster)           { this.play(this.sounds.fire);                                                                           },
+    onMonsterFire:       function(monster)
+	 {
+			if (monster.type.weapon != undefined)
+			if (monster.type.weapon.foir != undefined) { Musicth.play(Musicth.sounds[monster.type.weapon.foir]); return; }
+			this.play(this.sounds.fire);
+	 },
     onDoorOpen:          function(door)              { this.play(this.sounds.opendoor);                                                                       },
     onTreasureCollected: function(treasure, player)  { this.play(this.sounds[treasure.type.sound]);                                               },
 //    onMonsterDeath:      function(monster, by, nuke) { this.play(nuke ? this.sounds.generatordeath : this.sounds["monsterdeath" + Game.Math.randomInt(1,3)]); },
