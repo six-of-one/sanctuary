@@ -2321,6 +2321,8 @@ var ymir = false, xmir = false;
 
     update: function(frame, player, map, viewport) {
 
+// theif works offscreen
+		 if (!(this.type.theif && this.theif != NOSPAWNTHF))
       // monsters dont move offscreen g1 / g2 - difficulty option
       if (viewport.outside(this.x, this.y, TILE, TILE))
         return;
@@ -2370,6 +2372,7 @@ var ymir = false, xmir = false;
 					if (this.thieftrack >= thieftrack) this.thieftrack = thieftrack - 1;
 					this.x = THIEFTRX[this.thieftrack];
 					this.y = THIEFTRY[this.thieftrack];
+/// theif needs collision detect
 //					this.step(map, player, 0, 0, 0, 0);
 //					this.travelling = 0;
 			}
