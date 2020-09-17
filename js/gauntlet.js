@@ -2381,7 +2381,8 @@ var ymir = false, xmir = false;
 					this.y = THIEFTRY[this.thieftrack];
 /// theif needs collision detect
 					collision = Mastermap.occupied(this.x, this.y, this.w, this.h, this);
-					if (collision.player || collision.weapon) publish(EVENT.MONSTER_COLLIDE, this, collision);
+					if (collision.player) publish(EVENT.MONSTER_COLLIDE, this, collision);
+					if (collision.weapon) publish(EVENT.WEAPON_COLLIDE, this, collision);
 			}
 		}
 		else
