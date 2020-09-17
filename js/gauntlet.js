@@ -90,7 +90,7 @@ Gauntlet = function() {
         GRUNT1:  { sx: 0, sy: 18, frames: 3, fpf: FPS/10, score:  30, health:  10, speed: 100/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 13, 13, 8, 2 ], generator: { glvl: [ 13, 13, 8, 2 ], health: 10, speed: 3.5*FPS, max: 40, score: 300, sx: 32, sy: 6 }, name: "grunt",  weapon: null     ,     nohlp: 42              },
         WIZARD1: { sx: 0, sy: 20, frames: 3, fpf: FPS/10, score:  30, health:  10, speed: 110/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 14, 14, 9, 3 ], generator: { glvl: [ 14, 14, 9, 3 ], health: 10, speed: 4.0*FPS, max: 20, score: 400, sx: 32, sy: 6 }, name: "sorcerer", weapon: null     ,     nohlp: 44            },
         LOBBER1: { sx: 0, sy: 22, frames: 3, fpf: FPS/10, score:  10, health:  10, speed: 80/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 15, 15, 10, 5 ], generator: { glvl: [ 15, 15, 10, 5 ], health: 10, speed: 3.5*FPS, max: 20, score: 100, sx: 32, sy: 6 }, name: "lobber", weapon: { speed: 180/FPS, reload: 1.9*FPS, damage: 10, sx: 24, sy: 9, fpf: FPS/10, monster: true, lobsht: true }   ,     nohlp: 45                 },
-        THIEF: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  500, health:  10, speed: 200/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               }
+        THIEF: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 200/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               }
       },
 // track a potential "richest" player path - (really have to track them all...)
 		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 11, NOSPAWNTHF = 4,
@@ -2370,8 +2370,8 @@ var ymir = false, xmir = false;
 					if (this.thieftrack >= thieftrack) this.thieftrack = thieftrack - 1;
 					this.x = THIEFTRX[this.thieftrack];
 					this.y = THIEFTRY[this.thieftrack];
-					this.step(map, player, 0, 0, 0, 0);
-					this.travelling = 0;
+//					this.step(map, player, 0, 0, 0, 0);
+//					this.travelling = 0;
 			}
 		}
 		else
