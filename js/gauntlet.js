@@ -1488,14 +1488,62 @@ Gauntlet = function() {
         if (monster.type.selfharm)
           monster.hurt(monster.type.selfharm, monster);
         if (monster.type.theif)// && (monster.stolen == 0 || monster.stolen == undefined))
-		{
-			if (monster.stolen == 0 || monster.stolen == undefined)
-/// TDO - rest of stealies - potions, keys
-		 {
-				entity.score = entity.score - 500;
-				monster.stolen = 1;
-		  }
-		}
+			{
+				if (monster.stolen == 0 || monster.stolen == undefined)
+				 {
+						if (entity.xspeed > 0)
+						{
+								entity.xspeed = entity.xspeed - 1;
+								if (entity.xspeed < 0) entity.xspeed = 0;
+								monster.stolen = 3;
+						}
+						else if (entity.xshotpwr > 0)
+						{
+								entity.xshotpwr = entity.xshotpwr - 1;
+								if (entity.xshotpwr < 0) entity.xshotpwr = 0;
+								monster.stolen = 3;
+						}
+						else if (entity.xshotspd > 0)
+						{
+								entity.xshotspd = entity.xshotspd - 1;
+								if (entity.xshotspd < 0) entity.xshotspd = 0;
+								monster.stolen = 3;
+						}
+						else if (entity.xmagic > 0)
+						{
+								entity.xmagic = entity.xmagic - 1;
+								if (entity.xmagic < 0) entity.xmagic = 0;
+								monster.stolen = 3;
+						}
+						else if (entity.xarmor > 0)
+						{
+								entity.xarmor = entity.xarmor - 1;
+								if (entity.xarmor < 0) entity.xarmor = 0;
+								monster.stolen = 3;
+						}
+						else if (entity.xfight > 0)
+						{
+								entity.xfight = entity.xfight - 1;
+								if (entity.xfight < 0) entity.xfight = 0;
+								monster.stolen = 3;
+						}
+						else if (entity.potions > 0)
+						{
+								entity.potions = entity.potions - 1;
+								monster.stolen = 3;
+						}
+						else if (entity.keys > 0)
+						{
+								entity.keys = entity.keys - 1;
+								monster.stolen = 2;
+						}
+						else if (entity.score > 500)
+						{
+							entity.score = entity.score - 500;
+							monster.stolen = 1;
+						}
+				  }
+			}
       }
     },
 
