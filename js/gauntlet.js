@@ -93,7 +93,7 @@ Gauntlet = function() {
         THIEF: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 200/FPS, damage:  5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               }
       },
 // track a potential "richest" player path - (really have to track them all...)
-		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 11, NOSPAWNTHF = 4,
+		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 11, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40,
 
 // list of tutorial and help messages to display
 		HELPDIS = [
@@ -1542,6 +1542,7 @@ Gauntlet = function() {
 							entity.score = entity.score - 500;
 							monster.stolen = 1;
 						}
+						if (monster.stolen) helpdis(nohlpkth, undefined, 2000, undefined, undefined);
 				  }
 			}
       }
@@ -2362,6 +2363,7 @@ var ymir = false, xmir = false;
 					{
 							stolen_load = this.stolen;
 							Mastermap.remove(this); // theif escaped
+							helpdis(nohlpinl, undefined, 2000, undefined, undefined);
 					}
 					this.x = THIEFTRX[this.thieftrack];
 					this.y = THIEFTRY[this.thieftrack];
@@ -2373,11 +2375,8 @@ var ymir = false, xmir = false;
 					this.x = THIEFTRX[this.thieftrack];
 					this.y = THIEFTRY[this.thieftrack];
 /// theif needs collision detect
-					collision = this.occupied(this.tpos.x + this.cbox.x, this.tpos.y + this.cbox.y, this.cbox.w, this.cbox.h, this);
-					if (collision.player) publish(EVENT.MONSTER_COLLIDE, this, collision);
-//					if (!collision.player && entity.weapon && collision.exit) collision = undefined;
-//					this.step(map, player, 0, 0, 0, 0);
-//					this.travelling = 0;
+					collision = Mastermap.occupied(this.x, this.y, this.w, this.h, this);
+					if (collision.player || collision.weapon) publish(EVENT.MONSTER_COLLIDE, this, collision);
 			}
 		}
 		else
