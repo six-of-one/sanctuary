@@ -4,7 +4,17 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 followup list pr1:
 
+annc entry - this works?
+hit sounds
+
 thief op & ai
+- needs to get shot
+-- collide with player -- steal & get shot
+-- has to operate off screen
+-- has to deposite item on next level
+-- announce
+-- audio
+-- melee dmg on non-spawned is iffy
 
 check:
 
@@ -82,6 +92,13 @@ g2:
 -moving "ranodmly" wall
 -- trap walls done
 -invisible "become temp visible" walls -- likely a code deal with some overlay mask
+
+
+if (vardbg < timestamp())
+{
+alert("thf: "+monster.stolen);
+vardbg = timestamp() + 2000;
+}
 
 >>>>>>>>>>>>>>>>>>>>>>
 expansion:

@@ -114,6 +114,7 @@
 
     <div id='instructions'>
 	<label for="fname">Difficulty: </label><input type="number" value="3" id="seldiff" name="seldiff" min="1" max="30" title="1 = easy, 3 = medium, 6 = hard, 9 = nightmare, > 10 wut?"> &nbsp;<b>ARROW</b> keys to move, <b>HOLD SPACE</b> to fire, <b>ENTER</b> to use potion - start on: <select  id="sellvl" title="level to start - saved: last level played">
+          <option value="0">research</option>
           <option value="1">level 1</option>
           <option value="2">level 2</option>
           <option value="3">level 3</option>
@@ -122,8 +123,7 @@
           <option value="6">level 6</option>
           <option value="7">level 7</option>
           <option value="8">saved</option>
-          <option value="0">research</option>
-</select> tutorial: <input type="checkbox" id="seltut" name="seltut" value="1" title="check to display tutorial boxes once" checked="1">
+</select> tutorial: <input type="checkbox" id="seltut" name="seltut" value="1" title="check to display tutorial boxes once" >
     </div>
 <img id="gfloor" src="gfx/g1floor0.jpg">
 <img id="gfloorbas" src="gfx/g1floorb.jpg">
