@@ -992,6 +992,10 @@ Gauntlet = function() {
       this.load(to.number(nlevel, this.loadLevel()));
 // intro
 		  Musicth.play(Musicth.sounds[type.blip]);
+// announce intro
+		  Musicth.play(Musicth.sounds.ancwelc);
+		  Musicth.play(Musicth.sounds[type.annc]);
+
 // setup some things for this run - maybe
 			SPOTION[0] = TREASURE.XSPEED;
 			SPOTION[1] = TREASURE.XSHOTPWR;
