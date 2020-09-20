@@ -1038,7 +1038,6 @@ Gauntlet = function() {
 				{
 						cfg.levels[sk].name = generateName();
 // randomly play 4 sec intro title bit on these levels
-						 if (g4rc >= Math.random()) Musicth.play(Musicth.sounds.g4sec);
 				}
 		 }
 		 leveldisp = "<br>LEVEL:&nbsp&nbsp "+nlevel;
@@ -1215,6 +1214,8 @@ Gauntlet = function() {
 							}
 					}
 			}
+			else
+					if (g4rc >= Math.random()) Musicth.play(Musicth.sounds.g4sec);		// rnd play 4 sec, but not treasure rooms
 			if (Mastermap.level.nornd == undefined)	// random load a level
 			{
 					var f, rprof, ldiff;
