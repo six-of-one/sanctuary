@@ -2362,7 +2362,6 @@ var ymir = false, xmir = false;
 			}
 			if (this.stolen > 0)
 			{
-// Musicth.play(Musicth.sounds.anckilthf);
 					this.thieftrack = this.thieftrack - 1;
 					if (this.thieftrack < 2)
 					{
@@ -2381,8 +2380,9 @@ var ymir = false, xmir = false;
 					this.y = THIEFTRY[this.thieftrack];
 /// theif needs collision detect
 					collision = Mastermap.occupied(this.x, this.y, this.w, this.h, this);
-					if (collision.player) publish(EVENT.MONSTER_COLLIDE, this, collision);
-					if (collision.weapon) publish(EVENT.WEAPON_COLLIDE, this, collision);
+					if (collision.player) 
+					if (distance(this.x,this.y,collision.x,collision.y) < 10)
+							publish(EVENT.MONSTER_COLLIDE, this, collision);
 			}
 		}
 		else
