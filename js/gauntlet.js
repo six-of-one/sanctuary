@@ -93,7 +93,7 @@ Gauntlet = function() {
         THIEF: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 200/FPS, damage:  5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               }
       },
 // track a potential "richest" player path - (really have to track them all...)
-		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 11, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40,
+		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40,
 
 // list of tutorial and help messages to display
 		HELPDIS = [
@@ -1244,8 +1244,9 @@ Gauntlet = function() {
 											if ((RLOAD[f] == 1) && (Math.random() < 0.25)) RLOAD[f]--;
 									}
 							}
-					}					
+					}
 			}
+// theif escaped with item - 
 			if (stolen_load > 0 && stolen_load <= rlloop)
 			{
 					sft = 6000;
@@ -1558,8 +1559,9 @@ Gauntlet = function() {
         by.addscore(monster.type.score);
       this.map.addMultipleFx(3, monster, FX.MONSTER_DEATH, TILE/2, nuke ? FPS/2 : FPS/6);
 // shot thief drops item
-        if (monster.type.theif && (monster.stolen > 0))
+        if (monster.type.theif && (monster.stolen > 0 || monster.theif != NOSPAWNTHF))
 		 {
+				if (monster.stolen == 0) monster.stole = 1; // theif is innocent - give him a bag of gold, 		yes planting evidence occured
 				var tcell = reloaded.cells[p2t(monster.x) + p2t(monster.y) *  Mastermap.tw];
 				Mastermap.load_cell(tcell.tx, tcell.ty, RLPROF[(monster.stolen - 1)][0],Mastermap);
 		 }
