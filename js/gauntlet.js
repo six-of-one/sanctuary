@@ -67,10 +67,10 @@ Gauntlet = function() {
 		ABILIND = [ 10, 0, 10, 10, 0, 10, 10, 10, 30, 30, 20, 30, 30, 30, 30, 30, 30, 30, 30, 10, 20, 20, 10, 20, 20, 20, 30, 30, 10, 20, 20, 20, 30, 30, 0.15, 0, 0, 0.3, 0, 0, 1, 0.8, 0.65, 1, 1, 0.85 ],
 		ABILRNG = [ 0, 0, 0, 10.25, 0, 0, 10.25, 0, 0, 0, 0, 0, 0, 0, 0, 5.25, 0, 0, 5.25, 0, 0, 10.25, 0, 0, 5.2, 0, 0, 5.2, 10.5, 10.5, 10.85, 10.4, 0, 5.2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       PLAYER = {
-        WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 180/FPS, damage: 50/FPS, armor: 2, magic: 10, mind:10, mindg:4, weapon: { speed: 600/FPS, reload: 1.15*FPS, damage: 20, wind:10, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior", annc: 'ancwar1', fcol: "<font color=red>" }, // Thor
-        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 215/FPS, damage: 40/FPS, armor: 3, magic: 10, mind:10, mindg:4, weapon: { speed: 620/FPS, reload: 1*FPS, damage: 10, wind:19, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", annc: 'ancval1', fcol: "<font color=blue>" }, // Thyra
-        WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 190/FPS, damage: 30/FPS, armor: 1, magic: 30, mind:16, mindg:13, weapon: { speed: 640/FPS, reload: 1.1*FPS, damage: 10,  wind:28, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard", annc: 'ancwiz1', fcol: "<font color=yellow>"   }, // Merlin
-        ELF:          { sx: 0, sy: 3, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 245/FPS, damage: 20/FPS, armor: 1, magic: 30, mind:16, mindg:25, weapon: { speed: 660/FPS, reload: 1*FPS, damage: 10, wind:22, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf", annc: 'ancelf1', fcol: "<font color=green>"      }  // Questor
+        WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 180/FPS, damage: 50/FPS, armor: 2, magic: 10, mind:10, mindg:4, weapon: { speed: 600/FPS, reload: 1.15*FPS, damage: 20, wind:10, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior", annc: 'ancwar1', blip: 'blipwarrior', fcol: "<font color=red>" }, // Thor
+        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 215/FPS, damage: 40/FPS, armor: 3, magic: 10, mind:10, mindg:4, weapon: { speed: 620/FPS, reload: 1*FPS, damage: 10, wind:19, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", annc: 'ancval1', blip: 'blipvalkyrie', fcol: "<font color=blue>" }, // Thyra
+        WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 190/FPS, damage: 30/FPS, armor: 1, magic: 30, mind:16, mindg:13, weapon: { speed: 640/FPS, reload: 1.1*FPS, damage: 10,  wind:28, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard", annc: 'ancwiz1', blip: 'blipwizard', fcol: "<font color=yellow>"   }, // Merlin
+        ELF:          { sx: 0, sy: 3, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 245/FPS, damage: 20/FPS, armor: 1, magic: 30, mind:16, mindg:25, weapon: { speed: 660/FPS, reload: 1*FPS, damage: 10, wind:22, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf", annc: 'ancelf1', blip: 'blipelf', fcol: "<font color=green>"      }  // Questor
       },
       MONSTER = {
         GHOST:  { sx: 0, sy: 4, frames: 3, fpf: FPS/10, score:  10, health:  30, speed: 120/FPS, damage: 30, selfharm: 300, canbeshot: true,  canbehit: false, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 11, 11, 6, 0 ], generator: { glvl: [ 11, 11, 6, 0 ], health:  30, speed: 3.5*FPS, max: 40, score: 100, sx: 32, sy: 4 }, name: "ghost",  weapon: null ,  hits: 'hitghost',     nohlp: 41   },
@@ -560,6 +560,11 @@ Gauntlet = function() {
       { id: 'ancndsfd',      name: 'sounds/g1an_needsfood',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'anc2die',      name: 'sounds/g1an_abt2die',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
 
+// blip intro
+      { id: 'blipwarrior',     name: 'sounds/g1intr_war',           formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 }, //   NOTE: ie has limit of 40 <audio> so be careful with pool amounts
+      { id: 'blipvalkyrie',    name: 'sounds/g1intr_val',          formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'blipwizard',      name: 'sounds/g1intr_wiz',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'blipelf',         		name: 'sounds/g1intr_elf',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
 // shots
       { id: 'firewarrior',     name: 'sounds/g1fire_war',           formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 }, //   NOTE: ie has limit of 40 <audio> so be careful with pool amounts
       { id: 'firevalkyrie',    name: 'sounds/g1fire_val',          formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
@@ -985,6 +990,8 @@ Gauntlet = function() {
 		scoredex++;
       this.player.join(type);
       this.load(to.number(nlevel, this.loadLevel()));
+// intro
+		  Musicth.play(Musicth.sounds[type.blip]);
 // setup some things for this run - maybe
 			SPOTION[0] = TREASURE.XSPEED;
 			SPOTION[1] = TREASURE.XSHOTPWR;

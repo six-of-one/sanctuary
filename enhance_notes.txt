@@ -4,11 +4,17 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 followup list pr1:
 
-annc entry - this works?
+annc entry - 
+- welcome
+- char name
+- blip sound
+
 hit sounds
 
 thief op & ai
-- needs to get shot
+- random run code
+- yccm, or hehe audio on theft
+-- needs to get shot& always drops bag
 -- collide with player -- steal & get shot
 -- has to operate off screen
 -- has to deposite item on next level
