@@ -1561,7 +1561,7 @@ Gauntlet = function() {
 // shot thief drops item
         if (monster.type.theif && (monster.stolen > 0 || monster.theif != NOSPAWNTHF))
 		 {
-				if (monster.stolen == 0) monster.stole = 1; // theif is innocent - give him a bag of gold, 		yes planting evidence occured
+				if (monster.stolen < 1 || monster.stolen == undefined) monster.stolen = 1; // theif is innocent - give him a bag of gold, 		yes planting evidence occured
 				var tcell = reloaded.cells[p2t(monster.x) + p2t(monster.y) *  Mastermap.tw];
 				Mastermap.load_cell(tcell.tx, tcell.ty, RLPROF[(monster.stolen - 1)][0],Mastermap);
 		 }
