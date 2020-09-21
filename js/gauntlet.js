@@ -536,7 +536,7 @@ Gauntlet = function() {
       { id: 'hlowar1',      name: 'sounds/g1an_hlowar1',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'hloelf1',      name: 'sounds/g1an_hloelf1',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'hlowiz1',      name: 'sounds/g1an_hlowiz1',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
-      { id: 'hloval1',      name: 'sounds/g1an_hlovalk1',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'hloval1',      name: 'sounds/g1an_hloval1',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
 // char positive id
       { id: 'ancwar1',      name: 'sounds/g1an_war0',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'ancelf1',      name: 'sounds/g1an_elf1',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
