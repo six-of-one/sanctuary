@@ -100,7 +100,7 @@ Gauntlet = function() {
       },
 // track a potential "richest" player path - (really have to track them all...)
 		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40,
-
+		THFTALK = [  'thfycc1',  'thfycc2', 'thfheh1', 'thfheh2', 'thfheh3' ],
 // list of tutorial and help messages to display
 		HELPDIS = [
 									"Null 0 entry - no usable",
@@ -585,7 +585,13 @@ Gauntlet = function() {
       { id: 'firelob',         		name: 'sounds/g1lobsht',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'hitghost',         		name: 'sounds/g1hit_ghost',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'hithump',         		name: 'sounds/g1hit_grunt',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+// theif
       { id: 'hitheif',         		name: 'sounds/g1thf_appr',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'thfycc1',         		name: 'sounds/g1thf_yccm',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'thfycc2',         		name: 'sounds/g1thf_ycc2',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'thfheh1',         		name: 'sounds/g1thf_hehe1',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'thfheh2',         		name: 'sounds/g1thf_hehe2',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'thfheh3',         		name: 'sounds/g1thf_hehe3',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
 // aches / pains
       { id: 'warriorpain1',    name: 'sounds/g1pain_war1',          formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'warriorpain2',    name: 'sounds/g1pain_war2',          formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
@@ -2928,6 +2934,7 @@ var txsv = ":";
 			HELPANNC[28] = Musicth.sounds.ancfindex;
 			HELPANNC[36] = Musicth.sounds.ancbeware;
 			HELPANNC[37] = Musicth.sounds.ancsorc;
+			HELPANNC[39] = Musicth.sounds.anckilthf;
 			HELPANNC[58] = Musicth.sounds.ancfooled;
 // treasure room count down
 			TROOMCNT[0] = Musicth.sounds.anc0;
