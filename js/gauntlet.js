@@ -925,6 +925,7 @@ Gauntlet = function() {
 //document.title = "THFC:  "+thcell.tx+" : "+thcell.ty;
 				Mastermap.load_cell(thcell.tx, thcell.ty, theif_ad,Mastermap);
 				Mastercell.ptr.theif = 0;	// spawned -- NOT generated or placed
+				Mastercell.ptr.thieftrack = 0;	// spawned -- NOT generated or placed
 				Musicth.play(Musicth.sounds.hitheif);
 		}
   }
