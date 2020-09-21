@@ -14,6 +14,8 @@ hit sounds
 thief op & ai
 - random run code
 - yccm, or hehe audio on theft
+-- every new theif starts at start instead of old treasure bag
+-- shoot thief running away
 -- thief faces wrong way in 7 direction
 -- needs to get shot & always drops bag
 -- collide with player -- steal & get shot

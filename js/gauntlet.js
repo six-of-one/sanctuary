@@ -2417,7 +2417,7 @@ var ymir = false, xmir = false;
 			collision = Mastermap.occupied(this.x, this.y, this.w, this.h, this);
 			if (collision.player) 
 // theif could have "hookshot" method here - increase dist
-			if (distance(this.x,this.y,collision.x,collision.y) < 10)
+			if (distance(this.x,this.y,collision.x,collision.y) < 20)
 					publish(EVENT.MONSTER_COLLIDE, this, collision);
 
 // point theif the right way
