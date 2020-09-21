@@ -61,11 +61,12 @@ Gauntlet = function() {
 // teleport adjust by last player dir		- use player dir code (0 - 7) and these on teleport {x,y} to test surrounding cells
 		DIRTX = [ 0, 32, 32, 32, 0, -32, -32, -32],
 		DIRTY = [ -32, -32, 0, 32, 32, 32, 0, -32],
+// point spawned theif in the dir his path indicates
 		THFDIR = [
 					[ 7, 0, 1 ],
 					[ 6, 4, 2 ],
 					[ 5, 4, 3 ],
-		],
+							],
 // abiility & power potion enhance
 		ppotmax = 2,
 		abshotpot = -3,
@@ -2416,7 +2417,6 @@ var ymir = false, xmir = false;
 					if (distance(this.x,this.y,collision.x,collision.y) < 10)
 							publish(EVENT.MONSTER_COLLIDE, this, collision);
 			}
-document.title = "TH FRM:  "+(Math.sign(this.y - psy) + 1)+" : "+(Math.sign(this.x - psx) + 1)+" - "+THFDIR[(Math.sign(this.y - psy) + 1)][(Math.sign(this.x - psx) + 1)];
 			this.dir = THFDIR[(Math.sign(this.y - psy) + 1)][(Math.sign(this.x - psx) + 1)];
 		}
 		else
