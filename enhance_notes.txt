@@ -14,7 +14,7 @@ hit sounds
 thief op & ai
 - random run code
 - yccm, or hehe audio on theft
--- needs to get shot& always drops bag
+-- needs to get shot & always drops bag
 -- collide with player -- steal & get shot
 -- has to operate off screen
 -- has to deposite item on next level
