@@ -2409,14 +2409,16 @@ var ymir = false, xmir = false;
 					if (this.thieftrack >= thieftrack) this.thieftrack = thieftrack - 1;
 					this.x = THIEFTRX[this.thieftrack];
 					this.y = THIEFTRY[this.thieftrack];
-					Mastermap.occupy(this.x, this.y, this);
-// theif need collision detect
-					collision = Mastermap.occupied(this.x, this.y, this.w, this.h, this);
-					if (collision.player) 
-// theif could have "hookshot" method here - increase dist
-					if (distance(this.x,this.y,collision.x,collision.y) < 10)
-							publish(EVENT.MONSTER_COLLIDE, this, collision);
 			}
+			Mastermap.occupy(this.x, this.y, this);
+// theif need collision detect
+			collision = Mastermap.occupied(this.x, this.y, this.w, this.h, this);
+			if (collision.player) 
+// theif could have "hookshot" method here - increase dist
+			if (distance(this.x,this.y,collision.x,collision.y) < 10)
+					publish(EVENT.MONSTER_COLLIDE, this, collision);
+
+// point theif the right way
 			this.dir = THFDIR[(Math.sign(this.y - psy) + 1)][(Math.sign(this.x - psx) + 1)];
 		}
 		else
