@@ -61,6 +61,11 @@ Gauntlet = function() {
 // teleport adjust by last player dir		- use player dir code (0 - 7) and these on teleport {x,y} to test surrounding cells
 		DIRTX = [ 0, 32, 32, 32, 0, -32, -32, -32],
 		DIRTY = [ -32, -32, 0, 32, 32, 32, 0, -32],
+		THFDIR = [
+					[ 7, 0, 1 ],
+					[ 6, 4, 2 ],
+					[ 5, 4, 3 ],
+		],
 // abiility & power potion enhance
 		ppotmax = 2,
 		abshotpot = -3,
@@ -916,6 +921,7 @@ Gauntlet = function() {
 		}
 		if (fnd)
 		{
+//document.title = "THFC:  "+thcell.tx+" : "+thcell.ty;
 				Mastermap.load_cell(thcell.tx, thcell.ty, theif_ad,Mastermap);
 				Mastercell.ptr.theif = 0;	// spawned -- NOT generated or placed
 				Musicth.play(Musicth.sounds.hitheif);
@@ -1224,7 +1230,10 @@ Gauntlet = function() {
 					}
 			}
 			else
+			{
+// setup theif check
 					if (g4rc >= Math.random()) Musicth.play(Musicth.sounds.g4sec);		// rnd play 4 sec, but not treasure rooms
+			}
 			if (Mastermap.level.nornd == undefined)	// random load a level
 			{
 					var f, rprof, ldiff;
@@ -2370,7 +2379,7 @@ var ymir = false, xmir = false;
         return this.step(map, player, this.dir, speed, countdown(this.travelling), !away);
 
       // otherwise find a new direction
-      var dirs, n, max;
+      var dirs, n, max, psx, psy;
 // theif trax
 		if (this.type.theif && thieftrack > 4 && this.theif != NOSPAWNTHF)
 		{
@@ -2379,6 +2388,8 @@ var ymir = false, xmir = false;
 				this.thieftrack = 0;
 				this.stolen = 0;
 			}
+			psx = this.x;
+			psy = this.y;
 			if (this.stolen > 0)
 			{
 					this.thieftrack = this.thieftrack - 1;
@@ -2405,6 +2416,8 @@ var ymir = false, xmir = false;
 					if (distance(this.x,this.y,collision.x,collision.y) < 10)
 							publish(EVENT.MONSTER_COLLIDE, this, collision);
 			}
+document.title = "TH FRM:  "+(Math.sign(this.y - psy) + 1)+" : "+(Math.sign(this.x - psx) + 1)+" - "+THFDIR[(Math.sign(this.y - psy) + 1)][(Math.sign(this.x - psx) + 1)];
+			this.dir = THFDIR[(Math.sign(this.y - psy) + 1)][(Math.sign(this.x - psx) + 1)];
 		}
 		else
 		{

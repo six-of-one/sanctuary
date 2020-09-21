@@ -12,6 +12,7 @@ annc entry -
 hit sounds
 
 thief op & ai
+- thief faces wrong way in 7 direction & does not animate
 - random run code
 - yccm, or hehe audio on theft
 -- needs to get shot & always drops bag
