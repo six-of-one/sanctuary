@@ -13,7 +13,7 @@ hit sounds
 
 thief op & ai
 - random run code
-- yccm, or hehe audio on theft
+-- yccm, or hehe audio on theft
 -- every new theif starts at start instead of old treasure bag
 -- shoot thief running away
 -- thief faces wrong way in 7 direction
@@ -94,6 +94,12 @@ g1 audio elements swap in	-> ref genesis sound test for note s
 g1 gfx tiles
 - spirtes		-- decide how much of this we want / can use
 - walls & floors
+
+(maybe) checklist:
+
+- set aside - g1 sprite data
+g1 gfx tiles (floor ? - walls may not have all overlay as orig levels)
+g1 audio - no precise match on this
 
 g2:
 -shootable "standard" wall - gives goody or baddy > need list of items

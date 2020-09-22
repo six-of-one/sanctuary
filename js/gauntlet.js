@@ -1583,7 +1583,11 @@ Gauntlet = function() {
 							entity.score = entity.score - 500;
 							monster.stolen = 1;
 						}
-						if (monster.stolen) helpdis(nohlpkth, undefined, 2000, undefined, undefined);
+						if (monster.stolen)
+						{
+							monster.thcount = 35;
+							helpdis(nohlpkth, undefined, 2000, undefined, undefined);
+						}
 				  }
 			}
       }
@@ -2401,7 +2405,10 @@ var ymir = false, xmir = false;
 			psy = this.y;
 			if (this.stolen > 0)
 			{
+					this.thcount--;
 					this.thieftrack = this.thieftrack - 1;
+					if (this.thcount == 5) Musicth.play(Musicth.sounds[THFTALK[Game.Math.randomInt(2, 4)]]);
+					if (this.thieftrack == 15) Musicth.play(Musicth.sounds[THFTALK[Game.Math.randomInt(0, 1)]]);
 					if (this.thieftrack < 2)
 					{
 							stolen_load = this.stolen;
