@@ -4,26 +4,11 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 followup list pr1:
 
-annc entry - 
-- welcome
-- char name
-- blip sound
-
-hit sounds
-
 thief op & ai
 - random run code
--- yccm, or hehe audio on theft
--- every new theif starts at start instead of old treasure bag
--- shoot thief running away
--- thief faces wrong way in 7 direction
--- needs to get shot & always drops bag
--- collide with player -- steal & get shot
--- has to operate off screen
--- has to deposite item on next level
--- announce
--- audio
--- melee dmg on non-spawned is iffy
+
+monster melee / ghost hit sounds
+
 
 check:
 
@@ -56,13 +41,26 @@ table score saver - poss. high score disp as well			== issue - cookies not being
 \_ *** does not work
 -- lobbers now shoot
 - aim does not attempt to track player
+-- annc entry - - welcome - char name - blip sound
+thief op & ai
+- random run code
+-- yccm, or hehe audio on theft
+-- every new theif starts at start instead of old treasure bag
+-- shoot thief running away
+-- thief faces wrong way in 7 direction
+-- needs to get shot & always drops bag
+-- collide with player -- steal & get shot
+-- has to operate off screen
+-- has to deposite item on next level
+-- announce
+-- audio
+-- melee dmg on non-spawned is iffy
 
 issue list:
 
 cookie code not setting cookies when run from file:///index.html			(I suspect this issue)
 
 
-sl
 port list:
 
 player dmg: melee
@@ -70,36 +68,28 @@ melee mis gens
 monster dmg: melee - turn off autohurt to test
 player shot speed
 
->a few announce & help msg left - ssop, etc.
->not all g1 audio fx in use
-- thought to limit announce during treasure room count down
-
-- wall replace routine for surround & shadows
--- partial done with trap walls
--- shadows are trickier
->trap walls, walls to exits, moving wall, random walls, std shot walls -- shootable walls ?
-
->make monsters slow on shot poison a timed effect - can cross lvl boundary
->think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
+CHECK: monsters slow on shot poison --- are they faster when this wears off?
 
 save system via cooky
 > score tables
 
-finish g1 map population 				== on hold, have random load now
-finish wall layers
 unpinned corners / edges				== engine (so far) does not agree with this
 level wrap across left / right			== workaround - silent teleport
 
-g1 audio elements swap in	-> ref genesis sound test for note s
-g1 gfx tiles
-- spirtes		-- decide how much of this we want / can use
-- walls & floors
 
 (maybe) checklist:
 
-- set aside - g1 sprite data
+- set aside - g1 sprite data		-- decide how much of this we want / can use
 g1 gfx tiles (floor ? - walls may not have all overlay as orig levels)
-g1 audio - no precise match on this
+- finish wall layers
+g1 audio - no precise match on this			-> ref genesis sound test for note s
+>not all g1 audio fx in use			-- ssop, plofscr, hurt / stun
+>not all g1 audio fx in use			-- ssop, plofscr, hurt / stun
+finish g1 map population 				== on hold, have random load now
+>think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
+- partial done with trap walls mapping
+shadows not changed for now - wall replace routine for surround & shadows
+- thought to limit announce during treasure room count down
 
 g2:
 -shootable "standard" wall - gives goody or baddy > need list of items
@@ -193,16 +183,13 @@ elf:				3.9 sec
 >>>>>>>>>>>>>>>>>>>>>>
 (nominal fixes)
 
-some issue shooting level 1 & 2 gens - see research level
-
 diagonal shot fail between walls w/diagonal gap		< sort of works...spacing is just a bit off >
 exits way too touch sensitive for exit maze levels
-wmonsters seem "too" smart for g1 -- these are good for g2 "monsters may move differently"
+monsters seem "too" smart for g1 -- these are good for g2 "monsters may move differently"
  
 wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
 - demon shots need checked as well
 
-do demons fire too fast?
 
 
 >>>>>>>>>>>>>>>>>>>>>>
@@ -216,11 +203,6 @@ movement is quirky compared to original
     <div id="tweenmsg" >Get bonus multiplier by collecting treasure<br><br><br><br><font color="yellow">FIND THE HIDDEN POTION</font></div>
 
 >>>>>>>>>>>>>>>>>>>>>>
-elements I did not see:
-
-thief & treasure bag from shooting thief
-level wrap to opposite side
-
 other elements to check:
 
 corner unpin above level 100
