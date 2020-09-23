@@ -1241,6 +1241,8 @@ Gauntlet = function() {
 			else
 			{
 // setup theif check
+			/// rnd check that varies - similar to treasure room
+			/// perhaps relate to how many special potions, multiplier, score gained, etc
 					if (g4rc >= Math.random()) Musicth.play(Musicth.sounds.g4sec);		// rnd play 4 sec, but not treasure rooms
 			}
 			if (Mastermap.level.nornd == undefined)	// random load a level
@@ -2425,7 +2427,7 @@ var ymir = false, xmir = false;
 					this.x = THIEFTRX[this.thieftrack];
 					this.y = THIEFTRY[this.thieftrack];
 			}
-			Mastermap.occupy(this.x, this.y, this);
+			Mastermap.occupy(this.x, this.y, this);		// allow spawn theif to collide / be shot
 // theif need collision detect
 			collision = Mastermap.occupied(this.x, this.y, this.w, this.h, this);
 			if (collision.player) 
@@ -3209,10 +3211,6 @@ var txsv = ":";
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
 								walled = true;
 						}
-/// REMOVE - testing
-var tt = "";
-for (var f = 0;f < thieftrack;f++) tt = tt + f + " x:" + THIEFTRX[f] + " y:" +THIEFTRY[f] + ", ";
-//alert(tt); 
 				return;
 		 }
 

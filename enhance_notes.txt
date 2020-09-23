@@ -97,7 +97,7 @@ g2:
 -moving "ranodmly" wall
 -- trap walls done
 -invisible "become temp visible" walls -- likely a code deal with some overlay mask
-
+- supersorceror, dragon, acid puddle, it
 
 if (vardbg < timestamp())
 {
