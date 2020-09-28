@@ -1535,6 +1535,8 @@ Gauntlet = function() {
       if (entity.player) {
 			helpdis(monster.type.nohlp, undefined, 2000, Math.floor(monster.type.damage), undefined);		// ISSUE: player armor
         entity.hurt(monster.type.damage, monster);
+// monster hit player sound
+		Musicth.play(Musicth.sounds[monster.type.hits]);
         if (monster.type.selfharm)
           monster.hurt(monster.type.selfharm, monster);
         if (monster.type.theif)// && (monster.stolen == 0 || monster.stolen == undefined))
