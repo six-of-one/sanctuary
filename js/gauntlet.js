@@ -3976,6 +3976,14 @@ var txsv = ":";
 // thief tracker
 		  if (thieftrack > 0)
 		  {
+					if (thieftim  != 0 && (thieftim < timestamp()))
+					{
+							spawn(); // start theif
+							if (Math.random() < thiefrnd * 0.25)	// enhanced - 1/4 chance to start another theif
+									thieftim = 1000 * (thieftotim + (thieftotim * Math.random())) + timestamp();
+							else
+									thieftim = 0; // stop timer
+					}
 					if ((+Math.floor(x) != THIEFTRX[thieftrack - 1]) || (+Math.floor(y) != THIEFTRY[thieftrack - 1]))
 					{
 							THIEFTRX[thieftrack] = +Math.floor(x);
