@@ -99,7 +99,7 @@ Gauntlet = function() {
         THIEF: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 200/FPS, damage:  5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               }
       },
 // track a potential "richest" player path - (really have to track them all...)
-		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40,
+		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25,
 		THFTALK = [  'thfycc1',  'thfycc2', 'thfheh1', 'thfheh2', 'thfheh3' ],
 // list of tutorial and help messages to display
 		HELPDIS = [
@@ -1240,9 +1240,13 @@ Gauntlet = function() {
 			}
 			else
 			{
-// setup theif check
+// theif check
+					if (Math.random() < thiefrnd)
+					{
 			/// rnd check that varies - similar to treasure room
 			/// perhaps relate to how many special potions, multiplier, score gained, etc
+							thieftim = 1000 * (thieftotim + (thieftotim * Math.random())) + timestamp();
+					}
 					if (g4rc >= Math.random()) Musicth.play(Musicth.sounds.g4sec);		// rnd play 4 sec, but not treasure rooms
 			}
 			if (Mastermap.level.nornd == undefined)	// random load a level
