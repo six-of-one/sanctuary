@@ -5,7 +5,6 @@ gJ - gauntlet javascript		(gJ.0 - original)
 followup list pr1:
 
 
-monster melee / ghost hit sounds
 
 
 check:
@@ -54,6 +53,8 @@ thief op & ai
 -- audio
 -- melee dmg on non-spawned is iffy
 -- random run code
+-- monster melee / ghost hit sounds
+
 
 issue list:
 
