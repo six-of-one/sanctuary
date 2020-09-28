@@ -1031,8 +1031,6 @@ Gauntlet = function() {
 			TROOMSUP[4] = TREASURE.KEY;
 // autoload
 			RNGLOAD[1] = TREASURE.GOLD;
-// reset theif 
-			thieftrack = 0;
 //			stolen_load = 0;
     },
 
@@ -1044,6 +1042,9 @@ Gauntlet = function() {
 			 		nlevel = initlevel;
 					initlevel = 0;
 		 }
+// reset theif trax
+					thieftrack = 0;
+
 /// debug tier
 // clear found start
 		 fndstart = false;
@@ -1240,7 +1241,7 @@ Gauntlet = function() {
 			}
 			else
 			{
-// theif check
+// check theif check
 					if (Math.random() < thiefrnd)
 					{
 			/// rnd check that varies - similar to treasure room
@@ -3976,6 +3977,9 @@ var txsv = ":";
 // thief tracker
 		  if (thieftrack > 0)
 		  {
+/// TEST - remove
+document.title = "TFTM:  "+ ((thieftim - timestamp())/1000);
+/// remove
 					if (thieftim  != 0 && (thieftim < timestamp()))
 					{
 							spawn(); // start theif
