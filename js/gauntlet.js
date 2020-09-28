@@ -99,7 +99,7 @@ Gauntlet = function() {
         THIEF: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 200/FPS, damage:  5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               }
       },
 // track a potential "richest" player path - (really have to track them all...)
-		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25,
+		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25, thiefexit = false,
 		THFTALK = [  'thfycc1',  'thfycc2', 'thfheh1', 'thfheh2', 'thfheh3' ],
 // list of tutorial and help messages to display
 		HELPDIS = [
@@ -1044,6 +1044,7 @@ Gauntlet = function() {
 		 }
 // reset theif trax
 					thieftrack = 0;
+					thiefexit = false;
 
 /// debug tier
 // clear found start
@@ -1424,6 +1425,7 @@ Gauntlet = function() {
 		 }
 		troomfin = true; // halt treasure room count - cause treasure add on level load
 		troomtime = 0;
+		 thiefexit = true;
 // used between levels
 			var img = document.getElementById("tweenmsg");	// prep this & turn on here for:
 			img.style.visibility = "visible";	// always turn on - blocks scmult rot
@@ -2403,6 +2405,7 @@ var ymir = false, xmir = false;
 // theif trax
 		if (this.type.theif && thieftrack > 4 && this.theif != NOSPAWNTHF)
 		{
+			if (thiefexit) return;
 			if (this.thieftrack == undefined) 
 			{	
 				this.thieftrack = 0;
