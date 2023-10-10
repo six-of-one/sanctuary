@@ -6,7 +6,7 @@ followup list pr1:
 
 
 
-
+ 
 check:
 
 (can be after pre-beta-test)
@@ -66,6 +66,8 @@ port list:
 player dmg: melee
 melee mis gens
 monster dmg: melee - turn off autohurt to test
+
+
 player shot speed
 
 CHECK: monsters slow on shot poison --- are they faster when this wears off?
@@ -73,7 +75,7 @@ CHECK: monsters slow on shot poison --- are they faster when this wears off?
 save system via cooky
 > score tables
 
-unpinned corners / edges				== engine (so far) does not agree with this
+unpinned corners / edges			== engine (so far) does not agree with this
 level wrap across left / right			== workaround - silent teleport
 
 
@@ -98,6 +100,7 @@ g2:
 -- trap walls done
 -invisible "become temp visible" walls -- likely a code deal with some overlay mask
 - supersorceror, dragon, acid puddle, it
+-moving exits
 
 if (vardbg < timestamp())
 {
@@ -129,7 +132,7 @@ genesis gIV - quest, ? battle, record
 4th level+ monters & generators
 - ghosts will get to shoot
 - grunts will throw clubs infreq
-- demons will have "fire"
+- demons will have "fire" -- ? was this flamethrower, or area blaze...
 
 more powerful enemies may drop items - food, treasure, weapons, etc
 
@@ -148,7 +151,7 @@ level 8-69 from gauntlet set
 \option to randomize these maps -^
 unpin, mirror & flip 70 - 99
 100+ add in new maps, enhancements
-- slow down treasure rooms occur freq, but every 4th have a chance for a "super" treasure room
+- slow down treasure rooms [ occur freq, ] but every 4th have a chance for a "super" treasure room
 - super treasure room idea - potion bomb "key" blocks & perm potion "key" blocks
 
 monsters could act even weirder - like a bunch just run off until they "see" a player later
@@ -158,6 +161,21 @@ basilisk
 
 buy stuff guy, with new stuffs, keys, food, potions. temps
 
+- inventory key - inv key + fire but activate special items
+\_ inventory mode can select extra items - torches, food kits, magic, weapons, etc.
+- rogue style loads with seeds that have reproducable psuedo rand designs
+- multiple levels (stairs up/ down) dungeons
+- red keys open gold doors / locked gold chests (gold doors dont auto open in x ticks)
+- locked platinum chests require special potion (starting with speed) to open
+- weapon upgrade every so many levels in arcade mode, or quests or in locked special chest
+\_ axe of hammerhand, axe of smiting, sword of flight, sword of song, bomb arrows, piercing arrows, fireball lob, lightning bolts -- these could have cooldown or limited uses
+- special dropper potion to drop keys, spe. potions, give potions to other players or drop potions (shoot effect) to a lower floor
+- new decor - fires, breakable windows, closeable doors, patio furniture, some terrarria elements
+- play styles items adopt from - sword of fargoal, gateway to apshai, apshai tril, wizards crown
+- char/ weps from - victory road, doom, others (time permitting)
+
+story / quest mode
+
 difficulty title ideas
 
 walk in the park
@@ -166,7 +184,7 @@ dungeon
 nightmare
 walking on spikes
 running in flaming oil
-valley of the shadow of death
+vale of death
 
 
 

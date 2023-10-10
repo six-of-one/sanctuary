@@ -1,5 +1,5 @@
-Gauntlet Sanctuary
-===================
+/// Gauntlet Sanctuary \\\
+==========================
 
 why "sanctuary" ?
 I didnt feel like calling it a "port"
@@ -41,7 +41,7 @@ Difficulty:  3  ARROW keys to move, HOLD SPACE to fire, ENTER to use potion - st
 
 the dial goes up to 30 - you can edit in any number you want  (heh heh)
 keys are not yet reasign-able
-Level 8 is the last level past 7 played - these are the random levels
+Level 8 is the last level past 7 played - these are the semi-random levels
 tutorial items only run once with announcer dialog
 
 notes:
@@ -77,8 +77,8 @@ enhancements:
 
 left on main dev path:
 
-- lobbers need to shoot
-- thief spawn, chase, steal & retreat to next lvl
+- lobbers need to shoot correctly
+- thief spawn, chase, steal & retreat to next lvl	(rn he performs oddly)
 - some gauntlet 2 elements
 
 furture dev to consider:
