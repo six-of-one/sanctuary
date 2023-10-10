@@ -2,65 +2,7 @@ g1 - gauntlet
 gII, g2 - gauntlet 2
 gJ - gauntlet javascript		(gJ.0 - original)
 
-followup list pr1:
-
-
-
- 
-check:
-
-(can be after pre-beta-test)
-level progression - seems like it starts randomized
-
-table score saver - poss. high score disp as well			== issue - cookies not being saved
-
--- level name - random gen
--- diffiictulty selector -- read an option box into diff_level (maybe put bounds & sanity check...)
--- random exits on treasure levels - removed std exits
--- put back - death dmg, 4 sec sound bite
--- all pre loaded monsters gens on levels > 7 are removed
--- new game starts on level 1 -- add option
--- has eaten all the food set to 5% (was 30%)
--- treasure multiplier needs a skill limit
--- fixed death health drain -- appx 200
--- fixed monster gen rate
--- fixed ghosts are not "1" touch - they do seq damage instead of going away
--- Xed - cfg line options - remain selected when starting - interferes with some controls
-\_  changed start controls
--- with higher skills bumping up health tick down, no need for bounds check
--- occasionally see a level with NO floor tex ?!
--- teleport -> wall trap
-	- stuck in wall & walls to exit need to work
--- fixed g1floor48.jpg missing -- was really supposed to be floor81
---- food lvl3, check 5, 6, 7
---- rnd load profile tweak - random items added
--- added screenshot key
-\_ *** does not work
--- lobbers now shoot
-- aim does not attempt to track player
--- annc entry - - welcome - char name - blip sound
-thief op & ai
-- random run code
--- yccm, or hehe audio on theft
--- every new theif starts at start instead of old treasure bag
--- shoot thief running away
--- thief faces wrong way in 7 direction
--- needs to get shot & always drops bag
--- collide with player -- steal & get shot
--- has to operate off screen
--- has to deposite item on next level
--- announce
--- audio
--- melee dmg on non-spawned is iffy
--- random run code
--- monster melee / ghost hit sounds
-
-
-issue list:
-
-cookie code not setting cookies when run from file:///index.html			(I suspect this issue)
-
-
+sl
 port list:
 
 player dmg: melee
@@ -70,28 +12,32 @@ monster dmg: melee - turn off autohurt to test
 
 player shot speed
 
-CHECK: monsters slow on shot poison --- are they faster when this wears off?
+>a few announce & help msg left - ssop, etc.
+>not all g1 audio fx in use
+- thought to limit announce during treasure room count down
+
+- wall replace routine for surround & shadows
+-- partial done with trap walls
+-- shadows are trickier
+>trap walls, walls to exits, moving wall, random walls, std shot walls -- shootable walls ?
+
+>make monsters slow on shot poison a timed effect - can cross lvl boundary
+>think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
+lobber shots & ai
+thief op & ai
 
 save system via cooky
 > score tables
 
-unpinned corners / edges			== engine (so far) does not agree with this
-level wrap across left / right			== workaround - silent teleport
+finish g1 map population
+finish wall layers
+unpinned corners / edges
+level wrap across left / right
 
-
-(maybe) checklist:
-
-- set aside - g1 sprite data		-- decide how much of this we want / can use
-g1 gfx tiles (floor ? - walls may not have all overlay as orig levels)
-- finish wall layers
-g1 audio - no precise match on this			-> ref genesis sound test for note s
->not all g1 audio fx in use			-- ssop, plofscr, hurt / stun
->not all g1 audio fx in use			-- ssop, plofscr, hurt / stun
-finish g1 map population 				== on hold, have random load now
->think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
-- partial done with trap walls mapping
-shadows not changed for now - wall replace routine for surround & shadows
-- thought to limit announce during treasure room count down
+g1 audio elements swap in	-> ref genesis sound test for note s
+g1 gfx tiles
+- spirtes		-- decide how much of this we want / can use
+- walls & floors
 
 g2:
 -shootable "standard" wall - gives goody or baddy > need list of items
@@ -99,22 +45,92 @@ g2:
 -moving "ranodmly" wall
 -- trap walls done
 -invisible "become temp visible" walls -- likely a code deal with some overlay mask
-- supersorceror, dragon, acid puddle, it
--moving exits
 
-if (vardbg < timestamp())
-{
-alert("thf: "+monster.stolen);
-vardbg = timestamp() + 2000;
-}
+>>>>>>>>>>>>>>>>>>>>>>
+WIP: arcade sound & gfx
+
+
+full walk dist (31 tiles)
+warrior:	5.4 sec
+wiz:			5.3 sec
+valk:			4.5 sec
+elf:				3.9 sec
+
+>>>>>>>>>>>>>>>>>>>>>>
+(nominal fixes)
+
+can you fight ghosts ?!
+
+some issue shooting level 1 & 2 gens - see research level
+
+diagonal shot fail between walls w/diagonal gap		< sort of works...spacing is just a bit off >
+exits way too touch sensitive for exit maze levels
+monsters seem "too" smart for g1 -- these are good for g2 "monsters may move differently"
+ 
+wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
+- demon shots need checked as well
+
+do demons fire too fast?
+
+
+>>>>>>>>>>>>>>>>>>>>>>
+(perhaps persistent issues)
+
+movement is quirky compared to original
+- not as precise, hard to hit an exact shot line - real joystick might fix this
+- possibly check for a controller sensitivity option
+
+    <div id="tween" ><br>LEVEL:&nbsp&nbsp 1</div>
+    <div id="tweenmsg" >Get bonus multiplier by collecting treasure<br><br><br><br><font color="yellow">FIND THE HIDDEN POTION</font></div>
+
+>>>>>>>>>>>>>>>>>>>>>>
+elements I did not see:
+
+special potions
+temp invisible
+shootable walls - the "dirt" kind
+timed treasure rooms
+thief & treasure bag from shooting thief
+level wrap to opposite side
+
+limited maps - many arcade maps are left out (though its likely the creator wanted original maps)
+
+other elements to check:
+
+corner unpin above level 100
+levels flip / mirror above 100 -- code is done, needs logic control
+shots stun & hurt other player levels
+cant take keys / bombs after inv. full - cant walk through them either
+
+door stall is 15 secs - difficult is 0 easiest
+
+>>>>>>>>>>>>>>>>>>>>>>
+
+GII elements:
+
+locked treasures
+poison food / potion that slows monsters
+moving exits
+moving walls (regular phase, not random)
+invisible walls (need a 50% vis on touch or shot option cooling to invisible after 4 mins) -- code to handle these as gII is done
+super sorceror
+mugger - thief that steals food
+dragon
+temp potions - repulse, invuln, super shot, reflective, teleport		-- code done on 1 - 3
+stun tiles
+force fields
+moveable (pushable) walls
+shootable "regular" walls that give goody
+"flicker" random walls
+"special" treasure room
+monsters move different, or faster
+x--- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or super / reflect shot destroys)
+x--- "IT" - not sure want this
 
 >>>>>>>>>>>>>>>>>>>>>>
 expansion:
 
-earn coins or collect - ?			(secret treasure room)
-should high score table include tiers for difficulty levels
-
-Gauntlet anti-hero -- play as DM, stock dungeons with elements to stop AI heros (or real players)
+Gauntlet anti-hero -- play as DM, stock dungeons with elements to stop AI heros
 -- cost system - if adding extra 5 3lvl ghost gen, have to put in 2 potions or 4 shot foods, etc
 -- use rng load profiles basis
 
@@ -125,14 +141,13 @@ poss xp system for enhance stuff (sep from buy stuff guy)
 
 difficulty system >> cheat (no HS, no bonus x), trainer, easy, normal, { }, hard, nightmare
 \options on tutorial system, announcer
-
 genesis gIV - quest, ? battle, record
 +music from this is good too
 
 4th level+ monters & generators
 - ghosts will get to shoot
 - grunts will throw clubs infreq
-- demons will have "fire" -- ? was this flamethrower, or area blaze...
+- demons will have "fire"
 
 more powerful enemies may drop items - food, treasure, weapons, etc
 
@@ -151,7 +166,7 @@ level 8-69 from gauntlet set
 \option to randomize these maps -^
 unpin, mirror & flip 70 - 99
 100+ add in new maps, enhancements
-- slow down treasure rooms [ occur freq, ] but every 4th have a chance for a "super" treasure room
+- slow down treasure rooms occur freq, but every 4th have a chance for a "super" treasure room
 - super treasure room idea - potion bomb "key" blocks & perm potion "key" blocks
 
 monsters could act even weirder - like a bunch just run off until they "see" a player later
@@ -161,21 +176,6 @@ basilisk
 
 buy stuff guy, with new stuffs, keys, food, potions. temps
 
-- inventory key - inv key + fire but activate special items
-\_ inventory mode can select extra items - torches, food kits, magic, weapons, etc.
-- rogue style loads with seeds that have reproducable psuedo rand designs
-- multiple levels (stairs up/ down) dungeons
-- red keys open gold doors / locked gold chests (gold doors dont auto open in x ticks)
-- locked platinum chests require special potion (starting with speed) to open
-- weapon upgrade every so many levels in arcade mode, or quests or in locked special chest
-\_ axe of hammerhand, axe of smiting, sword of flight, sword of song, bomb arrows, piercing arrows, fireball lob, lightning bolts -- these could have cooldown or limited uses
-- special dropper potion to drop keys, spe. potions, give potions to other players or drop potions (shoot effect) to a lower floor
-- new decor - fires, breakable windows, closeable doors, patio furniture, some terrarria elements
-- play styles items adopt from - sword of fargoal, gateway to apshai, apshai tril, wizards crown
-- char/ weps from - victory road, doom, others (time permitting)
-
-story / quest mode
-
 difficulty title ideas
 
 walk in the park
@@ -184,74 +184,8 @@ dungeon
 nightmare
 walking on spikes
 running in flaming oil
-vale of death
+valley of the shadow of death
 
-
-
->>>>>>>>>>>>>>>>>>>>>>
-WIP: arcade sound & gfx
-
-
-full walk dist (31 tiles)
-warrior:	5.4 sec
-wiz:			5.3 sec
-valk:			4.5 sec
-elf:				3.9 sec
-
->>>>>>>>>>>>>>>>>>>>>>
-(nominal fixes)
-
-diagonal shot fail between walls w/diagonal gap		< sort of works...spacing is just a bit off >
-exits way too touch sensitive for exit maze levels
-monsters seem "too" smart for g1 -- these are good for g2 "monsters may move differently"
- 
-wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
-- demon shots need checked as well
-
-
-
->>>>>>>>>>>>>>>>>>>>>>
-(perhaps persistent issues)
-
-movement is quirky compared to original
-- not as precise, hard to hit an exact shot line - real joystick might fix this
-- possibly check for a controller sensitivity option
-
-    <div id="tween" ><br>LEVEL:&nbsp&nbsp 1</div>
-    <div id="tweenmsg" >Get bonus multiplier by collecting treasure<br><br><br><br><font color="yellow">FIND THE HIDDEN POTION</font></div>
-
->>>>>>>>>>>>>>>>>>>>>>
-other elements to check:
-
-corner unpin above level 100
-levels flip / mirror above 100 -- code is done, needs logic control
-shots stun & hurt other player levels
-cant take keys / bombs after inv. full - cant walk through them either
-
-door stall is 15 secs - difficult is 0 easiest
-
->>>>>>>>>>>>>>>>>>>>>>
-
-GII elements:
-
-locked treasures
-> poison food / potion that slows monsters
-moving exits
-moving walls (regular phase, not random)
-"flicker" random walls
-invisible walls (need a 50% vis on touch or shot option cooling to invisible after 4 mins) -- code to handle these as gII is done
-super sorceror
-mugger - thief that steals food
-dragon
-temp potions - repulse, invuln, super shot, reflective, teleport		-- code done on 1 - 3
-> stun tiles
-force fields
-moveable (pushable) walls
-shootable "regular" walls that give goody
-"special" treasure room
-monsters move different, or faster
-x--- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or super / reflect shot destroys)
-x--- "IT" - not sure want this
 
 >>>>>>>>>>>>>>>>>>>>>>
 code fails
