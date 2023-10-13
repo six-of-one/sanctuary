@@ -1,6 +1,12 @@
 g1 - gauntlet
 gII, g2 - gauntlet 2
+g3 - 2 candidates - g3l - lynx, g3a - g3 final quest
+gIV - genesis  release
+gN - NES release
+gar - garrison on amiga
+
 gJ - gauntlet javascript		(gJ.0 - original)
+
 
 sl
 port list:
