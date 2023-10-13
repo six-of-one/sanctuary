@@ -8,7 +8,7 @@ gar - garrison on amiga
 gJ - gauntlet javascript		(gJ.0 - original)
 
 
-sl
+
 port list:
 
 player dmg: melee
