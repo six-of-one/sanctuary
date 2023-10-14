@@ -16,6 +16,7 @@ warning:
 - it could FAIL completely or partially for any number of reasons
 - I can only get it to run in chrome with command line tweaks !
 - see note on "unpinned edge" maps
+- the github repository at this time does NOT contain a playable release...
 
 running:
 
