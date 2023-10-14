@@ -1,40 +1,31 @@
 Javascript Gauntlet
 ===================
 
-An HTML5 Gauntlet-style Game
+A Gauntlet-style Game
 
- * [play the game](http://codeincomplete.com/projects/gauntlet/index.html)
- * read a [blog article](http://codeincomplete.com/posts/2013/4/30/javascript_gauntlet/)
- * view the [source](https://github.com/jakesgordon/javascript-gauntlet)
-
->> NOTE: single player only at this time, multiplayer coming later
+ - not ready for distribution, though it is very playable
+ - a few serious hurdles stand in the way of any public release
 
 SUPPORTED BROWSERS
 ==================
 
- - Chrome 24+
- - Firefox 18+
- - IE 9+
+ - this is a real mixed bag - all new browsers either fail miserably or require significant
+   command line workarounds - honestly the best result for local play is firefox vers 0.57 or earlier
 
 KNOWN ISSUES
 ============
 
+ - new browser versions will likely not run this due to all kinds of "feature" additions
+   \ planned instructions will be added to the eventual release with an archive copy of firefox
  - No support for touch/mobile devices
- - Startup (and level transition) can be slow over a slow network connection (duh)
-
-TODO
-====
-
- * POLISH - better scoreboard fonts
- * POLISH - let doors have corners (and choose more wisely between horz/vert when up against odd walls)
- * POLISH - render monsters top down with slight overlap  for pseudo-3d
+ - unknown possibilities for local multiplayer support
 
 DEVELOPMENT
 ===========
 
-The game is 100% client side javascript and css. It should run when served up by any web server.
+The game is 100% client side javascript and css.
 
-Any changes to the following files will be reflected immediately on refresh of the browser
+Any changes to these files will be reflected immediately on refresh
 
   - js/gauntlet.js
   - css/gauntlet.css
@@ -55,23 +46,16 @@ If you have the Ruby language available, Rake tasks can be used to auto generate
 Attributions
 =============
 
-All music is licensed, royalty-free, from [Lucky Lion Studios](http://luckylionstudios.com/) for this project only. If you re-use this
-project for your own purposes you must license your own music please.
+based in part on -
 
-All sound effects are licensed, royalty-free from [Premium Beat](http://www.premiumbeat.com/sfx) for this project only. If you re-use this
-project for your own purposes you must license your own sound effects please.
-
-Background tilesets (walls, floors, doors) are provided by
-
- - [Ricardo Chirino](ricardochirino.com)
- - [Open Game Art](http://opengameart.org/content/gauntlet-like-tiles)
-
-Entity sprites (players, monsters, treasure, etc) are almost certainly ripped from an old (s)NES console ?
-
- - [Open Game Art](http://opengameart.org/forumtopic/request-for-tileset-spritesheet-similar-to-gauntlet-ii)
+https://codeincomplete.com/articles/javascript-gauntlet/
 
 License
 =======
 
+new code and various:
+[GPL2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+
+original code and engine package:
 [MIT](http://en.wikipedia.org/wiki/MIT_License) license.
 
