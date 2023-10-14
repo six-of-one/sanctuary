@@ -6,7 +6,7 @@ gN - NES release
 gar - garrison on amiga
 
 gJ - gauntlet javascript		(gJ.0 - original)
-
+================================================================================================================================================
 
 
 port list:
@@ -51,6 +51,7 @@ g2:
 -moving "ranodmly" wall
 -- trap walls done
 -invisible "become temp visible" walls -- likely a code deal with some overlay mask
+
 
 >>>>>>>>>>>>>>>>>>>>>>
 WIP: arcade sound & gfx

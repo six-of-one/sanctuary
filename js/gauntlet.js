@@ -670,7 +670,7 @@ Gauntlet = function() {
 // added gauntlet 1 levels as g1level{n}
 // gflr is gfx file for floor tiles
     levels: [
-      { name: 'Research 6',     url: "levels/g2level1.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
  //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null }, 
       { name: 'Level 1',       url: "levels/glevel1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
@@ -1138,7 +1138,7 @@ Gauntlet = function() {
       var level    = cfg.levels[nlevel],
 		self     = this,
 		onloaded = function() { $('booting').hide(); self.play(new Map(nlevel)); };
-		document.getElementById("gfloor") .src = level.gflr;		// set this here so its ready on map build
+		document.getElementById("gfloor").src = level.gflr;		// set this here so its ready on map build
       if (level.source) {
 				onloaded();
       }
