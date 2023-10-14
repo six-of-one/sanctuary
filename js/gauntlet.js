@@ -1138,7 +1138,7 @@ Gauntlet = function() {
       var level    = cfg.levels[nlevel],
 		self     = this,
 		onloaded = function() { $('booting').hide(); self.play(new Map(nlevel)); };
-		document.getElementById("gfloor")git .src = level.gflr;		// set this here so its ready on map build
+		document.getElementById("gfloor").src = level.gflr;		// set this here so its ready on map build
       if (level.source) {
 				onloaded();
       }
