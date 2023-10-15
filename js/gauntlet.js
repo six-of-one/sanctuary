@@ -273,6 +273,7 @@ Gauntlet = function() {
         WEAPON:  { x: TILE/3, y: TILE/3, w: TILE-30, h: TILE-30        },		// w,h tile-30 mostly gives shot thru diagonal gap
         MONSTER: { x: 1,      y: 1,      w: TILE-2, h: TILE-2        }, // give monsters 1px wiggle room to get through tight corridors
       },
+// test masks for 1 px units of level.png files
       PIXEL = {
         NOTHING:        0x000000, // BLACK
         DOOR:           0xC0C000, // YELLOW
@@ -289,12 +290,17 @@ Gauntlet = function() {
           EXLOW:        0x00000F
         }
       },
-// jvsg floors - g1 floors are handled in a seperate gfx file as they tile (currently) 256 x 256 (4 x 4 cells) over the map due to diff design per tile
+// jvsg floors - 1 tile per map cell - 32 x 32 px per each stored 0th row of backgrounds.png
+// --- g1 floors are handled in a seperate gfx file as they tile (currently) 256 x 256 px (4 x 4 map cells) over the map due to diff design per tile
       FLOOR = { 	BROWN_BOARDS: 1, LIGHBROWN_BOARDS: 2, GREEN_BOARDS: 3, GREY_BOARDS: 4, WOOD: 5, LIGHT_STONE: 6, DARK_STONE: 7, BROWN_LAMINATE: 8, 
 									PURPLE_LAMINATE: 9, RND: 10,
 									MIN: 1, MAX: 9 },
+// jvsg walls - 32 x 32 px per each wall "unit" - rows 1 - 7 of backgrounds.png
       WALL  = { 	INVIS: 1, BLUE: 2, BLUE_BRICK: 3, PURPLE_TILE: 4, BLUE_COBBLE: 5, PURPLE_COBBLE: 6, CONCRETE: 7, 
-// g1 wall codes - these are in backgrounds.png
+// g1 wall codes - rows 8 - 36 in backgrounds.png
+// --- rows 27 - 36 are overlay patterns with the previous walls all being solid colors
+// --- these consist of 2 versions same pattern x 4 - a "light" and a "dark", not precise opposites but optimized
+// --- and a 5th pattern of rubble topped walls and destroyable (shootable) walls
 								G2DARKSEC: 8, GRAY7: 9, MAUVE20: 10, 
 								BROWN1: 11, BROWN24: 12, RED5: 13, ORANG9: 14, ORANG31: 15, YELLOW10: 16,
 								PINK34: 17, PURPLE77: 18, PURPLE30: 19,  
