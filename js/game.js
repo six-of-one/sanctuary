@@ -771,6 +771,7 @@ Game.Math = {
 			if (Math.random() < 0.3)		// randomly select g2 intro vid
 			{
 					vid.src = "images/g2intro.ogg";
+					if (Math.random() < 0.22) vid.src = "images/gNS_intro.ogg";
 					rot = 119850;
 			}
 			vid.play(); 
