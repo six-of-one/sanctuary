@@ -1,3 +1,5 @@
+/// Praise His holy name: LORD JESUS CHRIST
+
 g1 - gauntlet
 gII, g2 - gauntlet 2
 g3 - 2 candidates - g3l - lynx, g3a - g3 final quest
@@ -46,6 +48,7 @@ g1 gfx tiles
 - walls & floors
 
 g2:
+-shooting poison should play the sound
 -shootable "standard" wall - gives goody or baddy > need list of items
 -moving "pattern" wall
 -moving "ranodmly" wall

@@ -789,7 +789,7 @@ Game.Math = {
 
 	  if (spl_cyc == 2)
 	  {
-			document.splashrot.src = "images/splash2.gif"
+			document.splashrot.src = "images/splash2b.gif"
 			rot = 12700;
 	  }
 	  else
