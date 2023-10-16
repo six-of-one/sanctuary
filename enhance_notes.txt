@@ -145,7 +145,7 @@ Gauntlet anti-hero -- play as DM, stock dungeons with elements to stop AI heros
 -- use rng load profiles basis
 
 training level with all aspects of game
-> training "skill" level - no bonus mult, no HS, exits to itself, hints allowed
+> training "skill" level - no bonus mult, no HS, exits to itself, hints allowed, random load items only
 
 poss xp system for enhance stuff (sep from buy stuff guy)
 
