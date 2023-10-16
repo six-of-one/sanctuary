@@ -766,11 +766,14 @@ Game.Math = {
 			vid.height = spl.height;
 			vid.width = spl.width;
 			document.splashrot.src = "images/1x1.png";
-			vid.src = "images/intro.ogg";
+			vid.src = "images/gII_intro.ogg";
+//			vid.src = "images/intro.ogg";
 			rot = 44400;
 			if (Math.random() < 0.3)		// randomly select g2 intro vid
 			{
-					vid.src = "images/g2intro.ogg";
+			vid.src = "images/gII_intro.ogg";
+//					vid.src = "images/g2intro.ogg";
+					if (Math.random() < 0.4) vid.src = "images/gII_intro.ogg";
 					if (Math.random() < 0.22) vid.src = "images/gNS_intro.ogg";
 					rot = 119850;
 			}
