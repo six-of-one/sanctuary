@@ -1,0 +1,312 @@
+/// Praise His holy name: LORD JESUS CHRIST
+
+g1 - gauntlet
+gII, g2 - gauntlet 2
+g3 - 2 candidates - g3l - lynx, g3a - g3 final quest
+gIV - genesis  release
+gN - NES release
+gar - garrison on amiga
+
+gJ - gauntlet javascript		(gJ.0 - original)
+================================================================================================================================================
+
+
+port list:
+
+player dmg: melee
+melee mis gens
+monster dmg: melee - turn off autohurt to test
+
+
+player shot speed
+
+>a few announce & help msg left - ssop, etc.
+>not all g1 audio fx in use
+- thought to limit announce during treasure room count down
+
+- wall replace routine for surround & shadows
+-- partial done with trap walls
+-- shadows are trickier
+>trap walls, walls to exits, moving wall, random walls, std shot walls -- shootable walls ?
+
+>make monsters slow on shot poison a timed effect - can cross lvl boundary
+>think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
+lobber shots & ai
+thief op & ai
+
+save system via cooky
+> score tables
+
+finish g1 map population
+finish wall layers
+unpinned corners / edges
+level wrap across left / right
+
+g1 audio elements swap in	-> ref genesis sound test for note s
+g1 gfx tiles
+- spirtes		-- decide how much of this we want / can use
+- walls & floors
+
+g2:
+-shooting poison should play the sound
+-shootable "standard" wall - gives goody or baddy > need list of items
+-moving "pattern" wall
+-moving "ranodmly" wall
+-- trap walls done
+-invisible "become temp visible" walls -- likely a code deal with some overlay mask
+
+
+>>>>>>>>>>>>>>>>>>>>>>
+WIP: arcade sound & gfx
+
+
+full walk dist (31 tiles)
+warrior:	5.4 sec
+wiz:			5.3 sec
+valk:			4.5 sec
+elf:				3.9 sec
+
+>>>>>>>>>>>>>>>>>>>>>>
+(nominal fixes)
+
+can you fight ghosts ?!
+
+some issue shooting level 1 & 2 gens - see research level
+
+diagonal shot fail between walls w/diagonal gap		< sort of works...spacing is just a bit off >
+exits way too touch sensitive for exit maze levels
+monsters seem "too" smart for g1 -- these are good for g2 "monsters may move differently"
+ 
+wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
+- demon shots need checked as well
+
+do demons fire too fast?
+
+
+>>>>>>>>>>>>>>>>>>>>>>
+(perhaps persistent issues)
+
+movement is quirky compared to original
+- not as precise, hard to hit an exact shot line - real joystick might fix this
+- possibly check for a controller sensitivity option
+
+    <div id="tween" ><br>LEVEL:&nbsp&nbsp 1</div>
+    <div id="tweenmsg" >Get bonus multiplier by collecting treasure<br><br><br><br><font color="yellow">FIND THE HIDDEN POTION</font></div>
+
+>>>>>>>>>>>>>>>>>>>>>>
+elements I did not see:
+
+special potions
+temp invisible
+shootable walls - the "dirt" kind
+timed treasure rooms
+thief & treasure bag from shooting thief
+level wrap to opposite side
+
+limited maps - many arcade maps are left out (though its likely the creator wanted original maps)
+
+other elements to check:
+
+corner unpin above level 100
+levels flip / mirror above 100 -- code is done, needs logic control
+shots stun & hurt other player levels
+cant take keys / bombs after inv. full - cant walk through them either
+
+door stall is 15 secs - difficult is 0 easiest
+
+>>>>>>>>>>>>>>>>>>>>>>
+
+GII elements:
+
+locked treasures
+poison food / potion that slows monsters
+moving exits
+moving walls (regular phase, not random)
+invisible walls (need a 50% vis on touch or shot option cooling to invisible after 4 mins) -- code to handle these as gII is done
+super sorceror
+mugger - thief that steals food
+dragon
+temp potions - repulse, invuln, super shot, reflective, teleport		-- code done on 1 - 3
+stun tiles
+force fields
+moveable (pushable) walls
+shootable "regular" walls that give goody
+"flicker" random walls
+"special" treasure room
+monsters move different, or faster
+x--- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or super / reflect shot destroys)
+x--- "IT" - not sure want this
+
+>>>>>>>>>>>>>>>>>>>>>>
+expansion:
+
+Gauntlet anti-hero -- play as DM, stock dungeons with elements to stop AI heros
+-- cost system - if adding extra 5 3lvl ghost gen, have to put in 2 potions or 4 shot foods, etc
+-- use rng load profiles basis
+
+training level with all aspects of game
+> training "skill" level - no bonus mult, no HS, exits to itself, hints allowed
+
+poss xp system for enhance stuff (sep from buy stuff guy)
+
+difficulty system >> cheat (no HS, no bonus x), trainer, easy, normal, { }, hard, nightmare
+\options on tutorial system, announcer
+genesis gIV - quest, ? battle, record
++music from this is good too
+
+4th level+ monters & generators
+- ghosts will get to shoot
+- grunts will throw clubs infreq
+- demons will have "fire"
+
+more powerful enemies may drop items - food, treasure, weapons, etc
+
+
+randomly leave out wall -> exit if more than {X} wall segs
+yellow teleports that can select further away
+blue or purple teleports that are unit linked - not to nearest visible
+pushable or shootable walls to temp block a teleport
+respawning generators (none respawn > level 4)
+enhance invisible wall code so - shots, potions, or some limited item makes walls slightly visible
+
+new maps, perhaps with a maphack type system using the "image" set ops
+"bonkers" level - see 207 img from bkg set - (in this case, do a "close to player" exit incase level is not playable)
+lvl 1-7 as gauntlet (or alternates)
+level 8-69 from gauntlet set
+\option to randomize these maps -^
+unpin, mirror & flip 70 - 99
+100+ add in new maps, enhancements
+- slow down treasure rooms occur freq, but every 4th have a chance for a "super" treasure room
+- super treasure room idea - potion bomb "key" blocks & perm potion "key" blocks
+
+monsters could act even weirder - like a bunch just run off until they "see" a player later
+- some might be "bonkers", attacking other monsters, taking & holding keys or treasures
+- "patrol" monsters that walk a beat until they "see" a player
+basilisk
+
+buy stuff guy, with new stuffs, keys, food, potions. temps
+
+difficulty title ideas
+
+walk in the park
+monsters with no claws
+dungeon
+nightmare
+walking on spikes
+running in flaming oil
+valley of the shadow of death
+
+
+>>>>>>>>>>>>>>>>>>>>>>
+code fails
+* leaving out player start...fails - with a black screen
+, (comma) left out of var list or anywhere else it expects one
+-- strangely ; is not much of an issue in similar places
+if (cell.ptr.door) - when .ptr is undefined
+
+
+issues when going multiplayer:
+
+cli / srv model for over net play
+- cli will just be render engine, have to report all controls back
+
+troomtime counted in autohurt
+all the non player count down items should prob. be on setTimeout() or locked out timer
+
+>>>>>>>>>>>>>>>>>>>>>>
+done:
+
+x-- wiz potion fire does not kill gens
+	- killing gens is now distance (radius) derived - even warrior does some damage close up
+
+x-- title screen scroll
+-- can this be a .gif anim ?
+x-- intro screen sequence
+-- rotate thru image set
+-- with demo play (ogg vid)
+	> excepting posting saved scores
+	> and monster level > 3 boost stats display -- if we want to give those
+
+x-- levels loop with random select
+
+x-- doors auto open on stall timer
+x-- walls -> exits on stall timer long
+x-- cant shoot over exits !
+	(could also shoot over keys)
+
+x-- level 1 & 2 gens & monsters set in level
+x-- monster / generator levels ? - by score and monster health I am not sure this is implemented the same as gauntlet arcade
+	- done visually, health & kill must be tested vs. player shots
+
+x-- multi point death potion kill = 1000, 2000,1000, 4000, 2000, 6000, 2000, 8000
+
+x-- score multiplier - _______- since multi-player isnt finished I'll gather this was left unfinished as well
+	- a single player "times out" multiplier is done
+	- multiplayer followup will expand that code
+
+x-- floors are (mostly) g1 accurate
+	- walls are an approximation based on gJ designed walls
+
+x-- teleporters
+	- the g1 fade controlling which nearest telep is not implemented
+
+x-- traps making walls vanish - up to 16 diff trap / wall linked elements as of now
+
+x-- shootable food / potions
+
+x-- doors now open nominally as g1, counterclockwise and display as g1 doors
+	- there may still be corner piece flaws
+
+x-- powers - score display
+-->powers - ops finish
+>> still need tweaked to g1 stats - at least armor and magic are not even boosts for all player classes
+x-- gens offscreen are active, as are monsters (test original to see if monsters can move off screen)
+x-- tween level screen (and poss. future options)
+--+ find hidden potion note
+
+x-- fix aminimated grunt club for lvl 1,2
+X-- flash player for invisible
+
+x-- shootable "dirt" walls - "some walls may be destroyed" first time shot
+	- use shoot food entry - revise health, 3 shots 
+	- make no touch
+	- special overlay gfx on this
+
+x-- shootable "dirt" walls
+
+x-- treasure room, timer, score, fail, msgs
+
+x-- adjust teleporters to small random chance select another nearby tele
+-- as of now it selected the previous nearest - which might be anywhere
+>maybe make list of teles sorted by dist
+
+x-- fix door by walls
+
+x-- treasure room floors are wrong ?
+--- this is prob the load floor issue again...
+
+x--- help msg generic routing in game.{x}(n)
+
+x-- treasure rooms > music, annc count
+-->limited power - finish
+-->tween level screen - finish messages
++ text messages appearing
+-->rest of tutorial popup text
+
+x-- announcer
+--rest of sound effects (thoughts to enhanced sound effects)
+
+x-- monster /gen health & kill -- vs. player shot power levels
+-- including level down with shot that doesnt take all health
+
+x-- player dmg: shot, , potion, shot potion
+
+
+expanded done:
+
+x-- score mult applies to potion death pts, but perhaps 50% of mult
+-- added more fake items - shotable and permanent
+
+x-- add a random start if map lacks one -- not g1 element, but to stop exception fault
+
+remove some aduio pool stuff & test --- this test failed btw

@@ -1,0 +1,106 @@
+/// Gauntlet Sanctuary \\\
+==========================
+
+why "sanctuary" ?
+I didnt feel like calling it a "port"
+
+web: https://www.moddb.com/mods/gauntlet-sanctuary
+forum: https://www.moddb.com/mods/gauntlet-sanctuary/forum
+bug submit: https://discord.com/channels/708519047712735302/732784469072674817
+live streams: https://www.twitch.tv/number_s1x
+
+warning:
+
+- this code is barely even beta - with almost no serious playtest
+- there _are_ unfound bugs
+- it could FAIL completely or partially for any number of reasons
+- I can only get it to run in chrome with command line tweaks !
+- see note on "unpinned edge" maps
+- the github repository at this time does NOT contain a playable release...
+
+running:
+
+unpack Gauntlet.sanctuary.zip
+open Gauntlet.sanctuary folder
+1. click on sanctuary.bat
+----> you must have chrome.exe installed in "C:\Program Files\chrome-win\chrome.exe"
+or
+2. click on index.html to launch in your default browser
+----> the chances of this working are sort of slim
+
+- in chrome I have to further click on a "(i) file " icon before the address "file:///F:/gauntlet.sanctuary.pr1/gauntlet.sanctuary.pr1/index.html" to run the first time
+
+playing:
+
+- options are below main screen:
+Difficulty:  3  ARROW keys to move, HOLD SPACE to fire, ENTER to use potion - start on:  Level 1   Tutorial: <x>
+
+1 should be pretty easy
+3 is gauged to be medium
+6 is somewhat hard
+9 and up will be bonkers
+
+the dial goes up to 30 - you can edit in any number you want  (heh heh)
+keys are not yet reasign-able
+Level 8 is the last level past 7 played - these are the semi-random levels
+tutorial items only run once with announcer dialog
+
+notes:
+
+the only real fix for problems right now is a reload - the current game is lost
+
+oddball lockups are possible - hitting F12 brings up a debugger in most browsers
+the debugger is not likely to be of any help to anyone but me
+you could screenshot the debug screen if you'd like and put it on the chan6 discord #qode
+
+"unpinned edge" maps
+some gauntlet maps scrolled endlessly across
+this engine does NOT handle those
+I made a silent edge swap teleport for the player - monsters and shots do not teleport
+its very easy to get stuck on an edge
+there is a 100 health tick safety system that will get you off the map
+I'm not sure how to retool this engine to operate like gauntlet yet
+
+
+current status:
+
+- plays exactly like gauntlet 1
+- it uses the gauntlet 1 maze layout mapping
+- a random profile is used to load each maze
+- treasure rooms are upscaled a bit with a longer timer
+
+enhancements:
+
+- select level 1 - 8 to start		(level 8 is whatever level past 7 was last played)
+- turn off tutorial text checkbox
+- skill level - random loads will be boosted by skill level -- you have been WARNED
+
+
+left on main dev path:
+
+- lobbers need to shoot correctly
+- thief spawn, chase, steal & retreat to next lvl	(rn he performs oddly)
+- some gauntlet 2 elements
+
+furture dev to consider:
+
+- bot players in lieu of multiplayer
+- actual single system multiplayer on top that
+- online cli / srv multiplayer		-- please dont invest heavily in this - it may NOT happen, ever
+
+- procedure generated mazes
+- buy stuff guy with more boost items & potions
+- higher monster levels and new monsters
+- possible new gameplay 		- play as dungeon master loading levels to stop bot players in a defense style game		-- again do NOT get hopes up on this
+
+
+soon we can get our old school 80s arcade
+gauntlet fix with NEW adventures!
+
+-Six
+
+
+
+PS: based in part on -
+
+https://codeincomplete.com/articles/javascript-gauntlet/

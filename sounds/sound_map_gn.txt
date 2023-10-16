@@ -1,0 +1,152 @@
+
+
+g009: "sprang" sound - not sure which effect
+g010: "wah" sound
+g011: "wah" sound variant
+g012: quick "bip-it bip" sound
+g013 - g016: food scarf, 4 variant
+g017 - g020: exit, 4 variants (1 for each player type ?)
+g021: door open
+g022 - g025: key collected, 4 variant
+g026 - g029: 4 variant of "ba-da-da-da-du"
+g030 - g033: 4 tones of health count down soun
+g034: info snd
+g038: potion (shot?)
+g039: grunt hit
+g043: ghost hit
+g047: death touch
+g055 - g058: 4 variant of "bong" - all coin drop sounds
+g059: "psht" sound - collect potion
+g063: traps open sound
+g064: teleport
+g065: thief start
+g066: full title music
+g068 - g071: treasure room music - 4 variants
+g073: 4 sec title music
+g074: "buzz" sound
+g075: short "buzz" sound -- one of these is the 'no potion' pushing button buzz
+g076 - g079: player shots
+g080: lobber shot
+
+these following until end note all spoken by announcer
+g081 - g091: "1-9, 10, 0"
+g093: "try and find the way out"
+g094: "welcome to the treasure room"
+g095: "you have found my treasure"
+g096: "try this level now"
+
+g097: "warrior"
+g098: "valkyrie"
+g099: "wizard"
+g100: "elf"
+g101: "welcome"
+g102: "elf"
+g103: "needs food badly"
+g104: "valkyrie"
+g105: "wizard"
+g106: "wizard"
+g107: "your life force is running out"
+g108: "all your powers will be lost"
+g109: "is about to die"
+g110: "lets see you get out of here"
+g111: "good cooperation"
+g112: "i've not seen such bravery"
+g113: "that was a heroic effort"
+g114: "someone shot the food"
+
+g115: "laugh" - thief
+g116: "you cant catch me" - thief
+g117: "laugh" - 2nd var thief
+g118: "you cant catch me" - thief
+g119: "han-han" - thief
+g120: "ha-ha" - thief
+g121: "han-ha han-ha" - thief
+
+some food sounds
+g122: "mmm-hum" - wiz
+g123: "aahhh" - wiz
+g124: "aahhh" - wiz, 2
+g125: "uhhh" - wiz
+g126: "oofff" - wiz
+g127: "ohhh" - wiz
+g128: "ahhh" - wiz
+g129: "gush-uh" - wiz
+g130: "mmm-hum, yeah" - wiz
+g131: "uhh-yeah-uz" - wiz
+g132: "gaz-yeah-uh" - wiz
+g133: "urz-yeah-de" - wiz
+g134: "ufh" - wiz
+
+g135: "he he he" - elf
+g136: "mmm" - elf
+g137: "ahhh" - elf
+g138: "oohhh" - elf
+g139: "oohhh" - elf
+g140: "ah" - elf
+g144: "yow" - elf
+g145: "oofff" - elf
+
+g146: "umm" - war
+
+g154: "ohhh" - valk
+g155: "ulp" - valk
+
+back to announce
+g156: "eat your food, dont shoot it"
+g157: "you just shot the potion"
+g158: "your shots now stun other players"
+g159: "friends can join in any time"
+g160: "now has"
+g161: "limited invisibility"
+g162: "extra armor"
+g163: "extra speed"
+g164: "extra magic power"
+g165: "extra shot power"
+g166: "extra shot speed"
+g167: "extra fight power"
+
+g168 - g170: wiz hurt sounds
+
+g171: "dont shoot your friends on this level"
+g172: "your shots now hurt other players"
+g173: "shot the food"
+g174: "find the hidden potion"
+g175: "players can now go off screen"
+g176: "beware the demons"
+g177: "shot the potion"
+g178: "use magic to kill death"
+g179: "remember dont shoot food"
+g180: "save keys to open doors"
+g181: "save potions for later use"
+g182: "sorcerers may be invisible"
+g183: "shots do not hurt other players...yet"
+g184: "find the exit"
+g185: "has eaten all the food lately"
+g186: "better luck next time" -- poss treasure room exit fail
+g187: "better hurry"
+g188: "times running out"
+g189: "times on my side"
+g190: "can you make it"
+g191: "just kidding"
+g192: "fooled you"
+g193: "looks like you loose"
+g194: "treasure 100 points"
+g195: "buzz" annoying
+g196: "dont shoot the potion"
+
+g197: "yum" - valk
+g198: "ow" - valk
+g199: "ouch" - valk
+g200: "uhh" - valk
+g204: "yow" - valk
+g209: "uuhhhh" - valk
+
+g210: "kill thief to recover stolen item"
+g211: "some walls may be destroyed"
+g212: "traps make walls disappear"
+
+g213: "ohhh" - elf
+- g220: vars tones of "uhhhh"
+
+
+

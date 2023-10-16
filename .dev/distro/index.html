@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+  <link href="css/normalize.css" media="screen, print" rel="stylesheet" type="text/css" />
+  <link href="css/gauntlet.css"  media="screen, print" rel="stylesheet" type="text/css" />
+  <title>Gauntlet  Sanctuary ver 1.0.2</title>
+</head>
+
+<body>
+
+  <div id="gauntlet">
+
+		<img id="booting" src='images/booting.gif'>
+  
+
+<div style="position: relative; left: 0; top: 0;">
+
+
+    <div id="tween" style="display:none;"></div>
+    <div id="tweenmsg"></div>
+		<img class="ovrspl" id="splash" name="splashrot" src='images/splash2.gif'>
+		<video class="ovrvid" id="introvid" width="582" height="530" style="visibility: hidden;">
+		  <source src="images/intro.ogg" type="video/ogg">
+		  Hey buddy, this browser is not supporting HTML5 video.
+		</video>
+
+</div>
+
+    <canvas id="canvas">
+      <div class="unsupported">
+        Look buddy - Gauntlet Sanctuary can not run because your browser is not supporting the &lt;canvas&gt; element
+      </div>
+    </canvas>
+
+    <div id="help" style="display:none;"></div>
+
+    <div id="scoreboard">
+
+      <img id="logo" src="images/logo.gif">
+
+      <h3 class="level"> &nbsp; </h3>
+
+      <hr>
+
+      <div class="high">High Score: <span class='value'>000000</span></div>
+
+      <div id='warrior' class='player'>
+        <div class='name'>Warrior
+					<img class='powers' id='warriorxspeed' src="images/xspeed.png"><img class='powers' id='warriorxshotpwr' src="images/xshotpwr.png"><img class='powers' id='warriorxshotspd' src="images/xshotspd.png"><img class='powers' id='warriorxarmor' src="images/xarmor.png"><img class='powers' id='warriorxfight' src="images/xfight.png"><img class='powers' id='warriorxmagic' src="images/xmagic.png">
+		  </div>
+        <div class='score'><div class='label' id='scrmult1'>1x Score</div><div class='value'>000000</div></div>
+        <div class='health'><div class='label'>Health</div><div class='value'>000</div></div>
+        <div class='treasure'>
+					<img class='key' src="images/key.png"><img class='key' src="images/key.png"><img class='key' src="images/key.png">
+					<img class='limited' id='warriorlinvis' id='xspd' src="images/linvis.png"><img class='limited' id='warriorlinvuln' src="images/linvuln.png"><img class='limited' id='warriorlrepuls' src="images/lrepuls.png"><img class='limited' id='warriorlreflect' src="images/lreflect.png"><img class='limited' id='warriorltele' src="images/ltele.png"><img class='limited' id='warriorlsuper' src="images/lsuper.png"><img class='limited' id='warriorlank' src="images/lank.png">
+					<img class='potion' src="images/potion.png"><img class='potion' src="images/potion.png"><img class='potion' src="images/potion.png"><img class='potion' src="images/potion.png">
+        </div>
+        <div class='press'>PRESS <b>W</b> TO START</div>
+        <div class='multi'>multiplayer coming soon</div>
+      </div>
+
+      <div id='valkyrie' class='player'>
+        <div class='name'>Valkyrie
+					<img class='powers' id='valkyriexspeed' src="images/xspeed.png"><img class='powers' id='valkyriexshotpwr' src="images/xshotpwr.png"><img class='powers' id='valkyriexshotspd' src="images/xshotspd.png"><img class='powers' id='valkyriexarmor' src="images/xarmor.png"><img class='powers' id='valkyriexfight' src="images/xfight.png"><img class='powers' id='valkyriexmagic' src="images/xmagic.png">
+		  </div>
+        <div class='score'><div class='label' id='scrmult2'>1x Score</div><div class='value'>000000</div></div>
+        <div class='health'><div class='label'>Health</div><div class='value'>000</div></div>
+        <div class='treasure'>
+					<img class='key' src="images/key.png"><img class='key' src="images/key.png"><img class='key' src="images/key.png">
+					<img class='limited' id='valkyrielinvis' id='xspd' src="images/linvis.png"><img class='limited' id='valkyrielinvuln' src="images/linvuln.png"><img class='limited' id='valkyrielrepuls' src="images/lrepuls.png"><img class='limited' id='valkyrielreflect' src="images/lreflect.png"><img class='limited' id='valkyrieltele' src="images/ltele.png"><img class='limited' id='valkyrielsuper' src="images/lsuper.png"><img class='limited' id='valkyrielank' src="images/lank.png">
+					<img class='potion' src="images/potion.png"><img class='potion' src="images/potion.png"><img class='potion' src="images/potion.png"><img class='potion' src="images/potion.png">
+        </div>
+        <div class='press'>PRESS <b>V</b> TO START</div>
+        <div class='multi'>multiplayer coming soon</div>
+      </div>
+
+      <div id='wizard' class='player'>
+		
+        <div class='name '>Wizard
+					<img class='powers' id='wizardxspeed' id='xspd' src="images/xspeed.png"><img class='powers' id='wizardxshotpwr' src="images/xshotpwr.png"><img class='powers' id='wizardxshotspd' src="images/xshotspd.png"><img class='powers' id='wizardxarmor' src="images/xarmor.png"><img class='powers' id='wizardxfight' src="images/xfight.png"><img class='powers' id='wizardxmagic' src="images/xmagic.png">
+</div>
+        <div class='score'><div class='label' id='scrmult3'>1x Score</div><div class='value'>000000</div></div>
+        <div class='health'><div class='label'>Health</div><div class='value'>000</div></div>
+        <div class='treasure'>
+				<img class='key' src="images/key.png"><img class='key' src="images/key.png"><img class='key' src="images/key.png">
+				<img class='limited' id='wizardlinvis' id='xspd' src="images/linvis.png"><img class='limited' id='wizardlinvuln' src="images/linvuln.png"><img class='limited' id='wizardlrepuls' src="images/lrepuls.png"><img class='limited' id='wizardlreflect' src="images/lreflect.png"><img class='limited' id='wizardltele' src="images/ltele.png"><img class='limited' id='wizardlsuper' src="images/lsuper.png"><img class='limited' id='wizardlank' src="images/lank.png">
+				<img class='potion' src="images/potion.png"><img class='potion' src="images/potion.png"><img class='potion' src="images/potion.png"><img class='potion' src="images/potion.png">
+        </div>
+        <div class='press'>PRESS <b>Z</b> TO START</div>
+        <div class='multi'>multiplayer coming soon</div>
+      </div>
+
+      <div id='elf' class='player'>
+        <div class='name'>Elf
+					<img class='powers' id='elfxspeed' src="images/xspeed.png"><img class='powers' id='elfxshotpwr' src="images/xshotpwr.png"><img class='powers' id='elfxshotspd' src="images/xshotspd.png"><img class='powers' id='elfxarmor' src="images/xarmor.png"><img class='powers' id='elfxfight' src="images/xfight.png"><img class='powers' id='elfxmagic' src="images/xmagic.png">
+		  </div>
+        <div class='score'><div class='label' id='scrmult4'>1x Score</div><div class='value'>000000</div></div>
+        <div class='health'><div class='label'>Health</div><div class='value'>000</div></div>
+        <div class='treasure'>
+				<img class='key' src="images/key.png"><img class='key' src="images/key.png"><img class='key' src="images/key.png">
+				<img class='limited' id='elflinvis' id='xspd' src="images/linvis.png"><img class='limited' id='elflinvuln' src="images/linvuln.png"><img class='limited' id='elflrepuls' src="images/lrepuls.png"><img class='limited' id='elflreflect' src="images/lreflect.png"><img class='limited' id='elfltele' src="images/ltele.png"><img class='limited' id='elflsuper' src="images/lsuper.png"><img class='limited' id='elflank' src="images/lank.png">
+				<img class='potion' src="images/potion.png"><img class='potion' src="images/potion.png"><img class='potion' src="images/potion.png"><img class='potion' src="images/potion.png">
+        </div>
+        <div class='press'>PRESS <b>E</b> TO START</div>
+        <div class='multi'>multiplayer coming soon</div>
+      </div>
+
+      <div id='sound' class='on' title='toggle music and fx' style='display:none;'></div>
+
+    </div>
+
+    <div id='instructions'>
+	<label for="fname">Difficulty: </label><input type="number" value="3" id="seldiff" name="seldiff" min="1" max="30" title="1 = easy, 3 = medium, 6 = hard, 9 = nightmare, > 10 wut?"> &nbsp;<b>ARROW</b> keys to move, <b>HOLD SPACE</b> to fire, <b>ENTER</b> to use potion - start on: <select  id="sellvl" title="level to start - saved: last level played">
+          <option value="1">level 1</option>
+          <option value="2">level 2</option>
+          <option value="3">level 3</option>
+          <option value="4">level 4</option>
+          <option value="5">level 5</option>
+          <option value="6">level 6</option>
+          <option value="7">level 7</option>
+          <option value="8">saved</option>
+</select> tutorial: <input type="checkbox" id="seltut" name="seltut" value="1" title="check to display tutorial boxes once" checked="1">
+    </div>
+<img id="gfloor" src="gfx/g1floor0.jpg">
+<img id="gfloorbas" src="gfx/g1floorb.jpg">
+
+  </div>
+
+  <script src="js/vendor.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/gauntlet.js"></script>
+  <script>
+    Game.run(Gauntlet);
+  </script>
+<noscript> Final warning buddy - this browser is not running JavaScript!</noscript>
+
+</body>
+</html>
