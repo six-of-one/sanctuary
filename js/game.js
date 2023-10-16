@@ -749,12 +749,12 @@ Game.Math = {
 
   function splashrot () {
 
+	  var vid = document.getElementById("introvid");
 		var spl = document.getElementById("splash");
 
 // shutdown until game over
 	  if (spl.style.visibility == "hidden") return;
 
-	  var vid = document.getElementById("introvid");
 		var rot;
 		rot = spl_rot;
 
@@ -933,7 +933,7 @@ alert( "scrn: "+canvas.width+ " by "+canvas.height);
 	canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 
 // url it
-	let dataUrl = canvas.toDataURL('image/jpg');
+	dataUrl = canvas.toDataURL('image/jpg');
 	img.src = dataUrl;
 
 // download it
