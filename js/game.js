@@ -767,15 +767,16 @@ Game.Math = {
 			vid.width = spl.width;
 			document.splashrot.src = "images/1x1.png";
 // sample play vid - gauntlet 1, quiet
-			vid.src = "images/g1samply_q.ogg";
+			vid.src = "images/g1samply_q.ogv";
 /// TEST - REMOVE
-		vid.src = "images/gII_intro.ogv";
+		vid.src = "images/gN_intro.ogv";
 			rot = 44400;
+/// RESTORE !
 			if (0) //Math.random() < 0.3)		// randomly select g2 intro vid
 			{
-					vid.src = "images/g2samply_q.ogg";
+					vid.src = "images/g2samply_q.ogv";
 					if (Math.random() < 0.4) vid.src = "images/gII_intro.ogv";
-					if (Math.random() < 0.22) vid.src = "images/gNS_intro.ogv";
+					if (Math.random() < 0.22) vid.src = "images/gN_intro.ogv";
 					rot = 119850;
 			}
 			vid.play(); 
