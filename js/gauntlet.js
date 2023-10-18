@@ -307,7 +307,7 @@ Gauntlet = function() {
 								BLUE8: 20, BLUE25:21, BLUE28: 22, 
 								GREEN3: 23, GREEN16: 24, GREEN50: 25, G2GREEN99: 26, 
 									G1BRICKL: 27, G1BRICKD: 28, BRICK2L: 29, BRICK2D: 30, ASYML: 31, ASYMD: 32, XBRIKL: 33, XBRIKD: 34, G5COBRIK: 35, DESTBRIK: 36,
-									MIN: 1, MAX: 25 },
+									MIN: 1, MAX: 36 },
       EVENT = {
         START_LEVEL:         0,
         PLAYER_JOIN:         1,
