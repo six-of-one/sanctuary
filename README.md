@@ -1,7 +1,8 @@
-Javascript Gauntlet
-===================
+Sanctuary
+=========
 
-A Gauntlet-style Game
+Javascript engine;
+ Gauntlet-style Game
 
  - not ready for distribution, though it is very playable
  - a few serious hurdles stand in the way of any public release
