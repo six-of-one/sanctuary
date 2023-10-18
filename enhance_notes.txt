@@ -10,6 +10,10 @@ gar - garrison on amiga
 gJ - gauntlet javascript		(gJ.0 - original)
 ================================================================================================================================================
 
+imm issues:
+
+x-- purple walls 40400A have corner mismatches - see screen
+   \ and a bunch more on L T and + sections
 
 port list:
 
