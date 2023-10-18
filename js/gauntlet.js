@@ -3996,7 +3996,7 @@ var txsv = ":";
 		  if (thieftrack > 0)
 		  {
 /// TEST - remove
-document.title = "TFTM:  "+thieftim+" :tftm - stamp/1000: "+ ((thieftim - timestamp())/1000);
+document.title = thieftim+":TFTM  "+ ((thieftim - timestamp())/1000)+" :tft - stmp/1000: ";
 /// remove
 					if (thieftim  != 0 && (thieftim < timestamp()))
 					{
