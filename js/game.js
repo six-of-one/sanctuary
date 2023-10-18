@@ -239,6 +239,8 @@ Game = {
           'class': 'extra',
           'style': 'font-size: 8pt; position: absolute; top: -50px;',
           html: "<span class='update'></span><br><span class='draw'></span>"
+// but i dont want any span...
+// look waiter, have you got anything without span in it?
         }));
         this.stats.updateCounter = $(this.stats.domElement).down('div.extra span.update');
         this.stats.drawCounter   = $(this.stats.domElement).down('div.extra span.draw');
