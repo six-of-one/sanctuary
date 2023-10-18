@@ -766,13 +766,12 @@ Game.Math = {
 			vid.height = spl.height;
 			vid.width = spl.width;
 			document.splashrot.src = "images/1x1.png";
-// sample play vid - gauntlet 1, quiet
+// play demo - gauntlet 1, quiet
 			vid.src = "images/g1samply_q.ogv";
 /// TEST - REMOVE
-		vid.src = "images/gN_intro.ogv";
+//		vid.src = "images/gN_intro.ogv";
 			rot = 44400;
-/// RESTORE !
-			if (0) //Math.random() < 0.3)		// randomly select g2 intro vid
+			if (Math.random() < 0.3)		// randomly select g2 intro and other vids
 			{
 					vid.src = "images/g2samply_q.ogv";
 					if (Math.random() < 0.4) vid.src = "images/gII_intro.ogv";
@@ -876,7 +875,7 @@ function createCookie(name,value,days)
 {
 var domain = "";
 
-//	if (is_ie) domain = ";domain=.newmarkscenic.com";
+//	if (is_ie) domain = ";domain=.{name}.com";
 	if (days) 
 		{
 		var date = new Date();
@@ -884,7 +883,7 @@ var domain = "";
 		var expires = "; expires="+date.toGMTString();
 		}
 	else var expires = "";
-	document.cookie = name+"="+value+expires+"; path=/"+domain;//+";domain=www.newmarkscenic.com";
+	document.cookie = name+"="+value+expires+"; path=/"+domain;//+";domain=www.{name}.com";
 }
 
 function readCookie(name)
