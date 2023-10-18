@@ -2020,6 +2020,11 @@ Gauntlet = function() {
 
 var ymir = false, xmir = false;
 
+/// TESTING - remove
+			xmir = document.getElementById("xmiror").checked;
+			ymir = document.getElementById("ymiror").checked;
+/// TESTING
+
 		var walltype = walltype0;
 		var shadowtype = shadowtype0;
 		var doortype = doortype0;
