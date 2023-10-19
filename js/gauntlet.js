@@ -3119,7 +3119,7 @@ var txsv = ":";
           source = level.source,
           tw     = source.width,
           th     = source.height;
-		function mpixel(tw, tx,ty) { var n = tx + (ty * tw); return reloaded.cells[n].pixel; };
+		function mpixel(tw, tx,ty) { var n = tx + (ty * tw); if (reloaded.cells[n] !== undefined && reloaded.cells[n] !== null) return reloaded.cells[n].pixel; };
       function isy(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
       function iswall(pixel)         { return isy(pixel, PIXEL.WALL);      };
       function walltype(tx,ty,map)   { return (iswall(mpixel(tw,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tw,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tw,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tw,tx-1, ty))   ? 8 : 0); };
