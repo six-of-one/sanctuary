@@ -777,6 +777,7 @@ Game.Math = {
 			{
 					vid.src = "images/g2samply_q.ogv";
 					if (Math.random() < 0.4) vid.src = "images/gII_intro.ogv";
+					if (Math.random() < 0.27) vid.src = "images/gIV_intro.ogv";
 					if (Math.random() < 0.22) vid.src = "images/gN_intro.ogv";
 					rot = 119850;
 			}
