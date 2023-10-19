@@ -52,8 +52,8 @@ Gauntlet = function() {
 // highscores
 	scoredex = 0,
 	HSCORE = [ 0, "Names", "character" ],
-// g1 custom walls diff from main wall mapped on EXLOW
-			G1WALL = [	8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26	],
+// g1 custom walls diff from main wall mapped on EXLOB (special handle)
+			G1WALL = [	5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 26	],
 
 // handle death potion bomb rotating score - 
 //				note: NON g1, this is multiplied by score x {n} by current code!
@@ -3914,9 +3914,9 @@ var spdp = "pixels: \n";
           if (is.valid(cell.wall))
 			  {
 				  if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls
-					  if ((cell.pixel & MEXLOW) && ((cell.pixel & MEXHIGH) == 0x404000 || (cell.pixel & MEXHIGH) == 0x404010))  {// diff walls by low nibble
-						this.tile(ctx, sprites, cell.wall, G1WALL[cell.pixel & MEXLOW], tx, ty);
-						  spds = spds + "cp:"+cell.pixel+"cw:"+cell.wall+" -- res:"+G1WALL[cell.pixel & MEXLOW]+"\n"
+					  if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000)  {// diff walls by low nibble
+						this.tile(ctx, sprites, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
+						  spds = spds + "cp:"+cell.pixel+"cw:"+cell.wall+" -- res:"+G1WALL[cell.pixel & MEXLOB]+"\n"
 					  }
 					  else
 						this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
