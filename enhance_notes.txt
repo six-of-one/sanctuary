@@ -12,8 +12,8 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 imm issues:
 
-x-- purple walls 40400A have corner mismatches - see screen
-   \ and a bunch more on L T and + sections
+you CAN fight death!
+dead player is only lvl 1 bone pile
 
 port list:
 
@@ -220,6 +220,9 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
+x-- purple walls 40400A have corner mismatches - see screen
+   \ and a bunch more on L T and + sections
+
 x-- wiz potion fire does not kill gens
 	- killing gens is now distance (radius) derived - even warrior does some damage close up
 
@@ -255,6 +258,7 @@ x-- teleporters
 	- the g1 fade controlling which nearest telep is not implemented
 
 x-- traps making walls vanish - up to 16 diff trap / wall linked elements as of now
+    - traps have some issue where invalid cells are picked in mpixel while removing walls
 
 x-- shootable food / potions
 
