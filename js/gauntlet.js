@@ -679,8 +679,8 @@ Gauntlet = function() {
       { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
  //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null }, 
-      { name: 'Level 1',       url: "levels/glevel1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
-      { name: 'Level 2',       url: "levels/glevel2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
+      { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
+      { name: 'Level 2',       url: "levels/g2level2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
       { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Some food can be destroyed" },
       { name: 'Level 4',       url: "levels/glevel4.png",  floor: FLOOR.WOOD,      wall: WALL.GRAY7,    gflr: "gfx/g1floor4.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Fight hand to hand by running into grunts" },
       { name: 'Level 5',       url: "levels/glevel5.png",  floor: FLOOR.PURPLE_LAMINATE,      wall: WALL.RED5,    gflr: "gfx/g1floor5.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Beware the demons which shoot you" },
@@ -3844,6 +3844,8 @@ var txsv = ":";
   //===========================================================================
   // RENDERING CODE
   //===========================================================================
+///TEST REMOVE
+var spds = "special: \n";
 
   var Render = Class.create({
 
@@ -3897,8 +3899,10 @@ var txsv = ":";
           if (is.valid(cell.wall))
 			  {
 				  if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls
-					  if ((cell.pixel & MEXLOW) && (cell.pixel & MEXHIGH) == 0x404000)  // diff walls by low nibble
+					  if ((cell.pixel & MEXLOW) && (cell.pixel & MEXHIGH) == 0x404000)  {// diff walls by low nibble
 						this.tile(ctx, sprites, cell.wall, G1WALL[cell.pixel & MEXLOW], tx, ty);
+						  spds = spds + "cp:"+cell.pixel+"cw:"+cell.wall+" -- res:"+G1WALL[cell.pixel & MEXLOW]+"\n"
+					  }
 					  else
 						this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
 						if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
@@ -3933,6 +3937,13 @@ var txsv = ":";
 				fcellstr = cell;
         }
       }
+/// TESTING
+				  if (document.getElementById("spedis").checked)
+				  {
+					  alert(spds);
+					  spds = "special: \n";
+				  }
+/// TESTING
       if (DEBUG.GRID)
         this.grid(ctx, map);
     },
