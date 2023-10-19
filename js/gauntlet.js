@@ -38,6 +38,13 @@ Gauntlet = function() {
 
 		 MEXHIGH = 0xFFFFF0,
 		 MEXLOW = 0x00000F,
+// special because some colors are not properly discerned by parseImage
+// bit 16 is shifted to exlow
+// this should be stable as most codes using 0x10 also use more bits masked with 0xE0
+// having said, this has a bug watch and a reminder to look for odd behavior for all ops with low bits of MEXHIGH
+		 MEXHIGB = 0xFFFFE0,
+		 MEXLOB = 0x00001F,
+
 // uses exlow to select next item in set
 // these are based on where items appear in TREASURES[ ]
 		POWERADD = 4, LIMITEDADD = 8,
@@ -2052,6 +2059,12 @@ var ymir = false, xmir = false;
 
       Game.parseImage(source, function(tx, ty, pixel, map) {
 
+///TEST REMOVE
+spdp = spdp + "p: "+pixel+" x:"+tx+" y:"+ty;
+if (tx == 32) spdp = spdp +"\n";
+else spdp = spdp + " :: ";
+///TEST REMOVE
+
 			if (xmir) tx = (tw - 1) - tx;
 			if (ymir) ty = (th - 1) - ty;
 
@@ -3846,6 +3859,8 @@ var txsv = ":";
   //===========================================================================
 ///TEST REMOVE
 var spds = "special: \n";
+var spdp = "pixels: \n";
+///TEST REMOVE
 
   var Render = Class.create({
 
@@ -3899,7 +3914,7 @@ var spds = "special: \n";
           if (is.valid(cell.wall))
 			  {
 				  if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls
-					  if ((cell.pixel & MEXLOW) && (cell.pixel & MEXHIGH) == 0x404000)  {// diff walls by low nibble
+					  if ((cell.pixel & MEXLOW) && ((cell.pixel & MEXHIGH) == 0x404000 || (cell.pixel & MEXHIGH) == 0x404010))  {// diff walls by low nibble
 						this.tile(ctx, sprites, cell.wall, G1WALL[cell.pixel & MEXLOW], tx, ty);
 						  spds = spds + "cp:"+cell.pixel+"cw:"+cell.wall+" -- res:"+G1WALL[cell.pixel & MEXLOW]+"\n"
 					  }
@@ -3940,6 +3955,8 @@ var spds = "special: \n";
 /// TESTING
 				  if (document.getElementById("spedis").checked)
 				  {
+					  alert(spdp);
+					  spdp = "pixel: \n";
 					  alert(spds);
 					  spds = "special: \n";
 				  }
