@@ -3896,6 +3896,9 @@ var txsv = ":";
 		 }
 		 fcellstr = map.cell(0, 0); // preload so no undefine
 		 ftilestr = 0;
+/// TEST - remove
+		 if (document.getElementById("invwal").checked) map.level.wall = WALL.INVIS;
+/// TEST - remove
       for(ty = 0, th = map.th ; ty < th ; ty++) {
         for(tx = 0, tw = map.tw ; tx < tw ; tx++) {
           cell = map.cell(tx * TILE, ty * TILE);
