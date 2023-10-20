@@ -1783,17 +1783,19 @@ Gauntlet = function() {
 		 {
 				collision = this.occupied(this.tpos.x + entity.cbox.x, this.tpos.y + entity.cbox.y, entity.cbox.w, entity.cbox.h, ignore || entity);
 				var subcol = collision.exit;
+				var ffcol = false;
 // collect subcollisions for weapon non-hits
 				if (collision.type != undefined) {
 					if (collision.type.key != undefined) subcol = subcol || collision.type.key;
 					if (collision.type.nohlp != undefined) 
 					{
-						if (collision.type.nohlp == FFHLP) subcol = subcol || true;
+						if (collision.type.nohlp == FFHLP) { subcol = subcol || true; ffcol = true };
 						if (collision.type.nohlp == STNHLP) subcol = subcol || true;
 						if (collision.type.nohlp == TRPHLP) subcol = subcol || true;
 					}
 				}
 				if (!collision.player && entity.weapon && subcol) collision = undefined;
+				else if (entity.player && (ffcol == true)) collision = undefined;
 		 }
       if (!collision && !dryrun) {
         this.occupy(this.tpos.x, this.tpos.y, entity);
