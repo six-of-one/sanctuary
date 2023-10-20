@@ -1789,13 +1789,24 @@ Gauntlet = function() {
 					if (collision.type.key != undefined) subcol = subcol || collision.type.key;
 					if (collision.type.nohlp != undefined) 
 					{
-						if (collision.type.nohlp == FFHLP) { subcol = subcol || true; ffcol = true };
+						if (collision.type.nohlp == FFHLP) ffcol = true ;
 						if (collision.type.nohlp == STNHLP) subcol = subcol || true;
 						if (collision.type.nohlp == TRPHLP) subcol = subcol || true;
 					}
 				}
 				if (!collision.player && entity.weapon && subcol) collision = undefined;
-				else if (entity.player && (ffcol == true)) collision = undefined;
+				else if (ffcol == true) 
+				{
+					if (entity.player) // dmg players in FF
+					{
+						helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
+//						if (!walled) 
+						Musicth.play(Musicth.sounds.ffield);
+//						walled = true;
+						entity.hurt(treasure.type.damage);
+					}
+					collision = undefined;
+				}
 		 }
       if (!collision && !dryrun) {
         this.occupy(this.tpos.x, this.tpos.y, entity);
@@ -3172,6 +3183,7 @@ var txsv = ":";
 
 		 if ((treasure.pixel & MEXHIGH) == FFIELDTILE)
 		 {
+// technically this no longer happens as collisions are blocked so fields can be walked over
 				if (treasure.pixel & MEXLOW)
 				{
 					helpdis(treasure.type.nohlp, undefined, 2000, treasure.type.damage, undefined);
