@@ -12,6 +12,9 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 imm issues:
 
+need sounds:
+- ffield, acid, it, wall move (all gII)
+
 you CAN fight death!
 dead player is only lvl 1 bone pile
 
