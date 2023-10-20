@@ -222,7 +222,7 @@ Gauntlet = function() {
         SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:16, wall:true,   sound: 'collectpotion' , nohlp: 58 },
         PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , nohlp: 58 },
 // this is the red wall pillar thingy
-        FFIELDUNIT:       { sx: 5, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 3, sound: 'ffield',  nohlp: 61  },
+        FFIELDUNIT:       { sx: 5, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'ffield',  nohlp: 61  },
         XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtpwr',   sound: 'collectpotion',  nohlp: 2  },
         XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtspd',   sound: 'collectpotion', nohlp: 3  },
         XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxarm',   sound: 'collectpotion', nohlp: 4  },
@@ -238,7 +238,7 @@ Gauntlet = function() {
 // this is the field down
         FFIELDDIM:       { sx: 27, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 61  },
 // this is the field power that damages
-        FFIELDPOW:       { sx: 28, sy: 12, frames:8, speed: 0.5*FPS, fpf: FPS/5, damage: 3, sound: 'ffield',  nohlp: 61  },
+        FFIELDPOW:       { sx: 28, sy: 12, frames:8, speed: 0.25*FPS, fpf: FPS/5, damage: 3, sound: 'ffield',  nohlp: 61  },
       },
 		TROOMCNT = [ ], TROOMSUP = [ ], RNGLOAD = [ ],
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
@@ -3157,7 +3157,7 @@ var txsv = ":";
 
       if (treasure.pixel & MEXHIGH == FFIELDTILE)
 		 {
-//				if (treasure.pixel & MEXLOW)
+				if (treasure.pixel & MEXLOW)
 				{
 					helpdis(treasure.type.nohlp, undefined, 2000, treasure.type.damage, undefined);
 					if (!walled) Musicth.play(Musicth.sounds.ffield);
