@@ -1,4 +1,4 @@
-Gauntlet = function() {
+$ffGauntlet = function() {
 
 //  'use strict';
 
@@ -181,7 +181,9 @@ Gauntlet = function() {
 // expanded
 									"Fooled you!  Some items may be fake",
 									"You now have the life ankh",
-									"Player loses # health<br>use magic to kill death"										// 60
+									"Player loses # health<br>use magic to kill death",										// 60
+									"Avoid force fields, player loses # health"																// 61
+
 									],
 		HELPANNC = [ ], // announcer help tie ins
 		HELPCLEAR = [ ],	// help messages only display one time or can be turned off
@@ -205,7 +207,7 @@ Gauntlet = function() {
         GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1, troom: 1,             sound: 'collectgold', nohlp: 14, blkhlp: 15   },
         LOCKED:    { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'collectgold', nohlp:   56 },
         BAG:    { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5, troom: 1,                sound: 'collectgold', nohlp: 15, blkhlp: 14   },
-// teleport, trap, stun tiles as treasure objects for now -- these are animated, and operate on touch so it works
+// teleport, trap, stun, force field tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport',  nohlp: 25  },
         TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap', nohlp: 20 },
         STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun', nohlp: 49  },
@@ -229,6 +231,7 @@ Gauntlet = function() {
         LIMSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', nohlp: 54  },
         LIMTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 55  },
         LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 59  },
+        FFIELD:       { sx: 5, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, wall: true,   sound: 'null',  nohlp: 61  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' }
       },
 		TROOMCNT = [ ], TROOMSUP = [ ], RNGLOAD = [ ],
@@ -236,6 +239,7 @@ Gauntlet = function() {
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
 		SUPERSHTFR = 10,		// super shot proj frame
 		TELEPORTILE = 0x0080a0,
+		FFIELDTILE = 0x0080a5,
 // until target traps are coded any trap will remove these
 		TRAPWALL = 0x404030,
 		TRAPTRIG = 0x0080b0,
@@ -269,7 +273,7 @@ Gauntlet = function() {
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
       MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2, MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, MONSTER.THIEF ],
       TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
-											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
+											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.FFIELD, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
 											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, 
 											TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
