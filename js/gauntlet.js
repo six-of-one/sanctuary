@@ -2027,10 +2027,10 @@ Gauntlet = function() {
 
 var ymir = false, xmir = false;
 
-/// TESTING - remove
+/// TEST - remove
 			xmir = document.getElementById("xmiror").checked;
 			ymir = document.getElementById("ymiror").checked;
-/// TESTING
+/// TEST - remove
 
 		var walltype = walltype0;
 		var shadowtype = shadowtype0;
@@ -2059,11 +2059,6 @@ var ymir = false, xmir = false;
 
       Game.parseImage(source, function(tx, ty, pixel, map) {
 
-///TEST REMOVE
-spdp = spdp + "p: "+pixel+" x:"+tx+" y:"+ty;
-if (tx == 32) spdp = spdp +"\n";
-else spdp = spdp + " :: ";
-///TEST REMOVE
 
 			if (xmir) tx = (tw - 1) - tx;
 			if (ymir) ty = (th - 1) - ty;
@@ -3034,6 +3029,7 @@ var txsv = ":";
       this.dead    = false;
       this.exiting = false;
 		Mastermap = map; // for teleport reposition
+
 // turn off these limited items
 		this.lreflect = 0;
 		this.ltele = 0;
@@ -3857,10 +3853,6 @@ var txsv = ":";
   //===========================================================================
   // RENDERING CODE
   //===========================================================================
-///TEST REMOVE
-var spds = "special: \n";
-var spdp = "pixels: \n";
-///TEST REMOVE
 
   var Render = Class.create({
 
@@ -3916,7 +3908,6 @@ var spdp = "pixels: \n";
 				  if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls
 					  if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000)  {// diff walls by low nibble
 						this.tile(ctx, sprites, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
-						  spds = spds + "cp:"+cell.pixel+"cw:"+cell.wall+" -- res:"+G1WALL[cell.pixel & MEXLOB]+"\n"
 					  }
 					  else
 						this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
@@ -3952,15 +3943,6 @@ var spdp = "pixels: \n";
 				fcellstr = cell;
         }
       }
-/// TESTING
-				  if (document.getElementById("spedis").checked)
-				  {
-					  alert(spdp);
-					  spdp = "pixel: \n";
-					  alert(spds);
-					  spds = "special: \n";
-				  }
-/// TESTING
       if (DEBUG.GRID)
         this.grid(ctx, map);
     },
@@ -4024,8 +4006,8 @@ var spdp = "pixels: \n";
 		  if (thieftrack > 0)
 		  {
 /// TEST - remove
-document.title = thieftim+":TFTM  "+ ((thieftim - timestamp())/1000)+" :tft - stmp/1000: ";
-/// remove
+document.title = thieftim+": "+ ((thieftim - timestamp())/1000)+" :tft (&-stmp)/1000: ";
+/// TEST - remove
 					if (thieftim  != 0 && (thieftim < timestamp()))
 					{
 							spawn(); // start theif
