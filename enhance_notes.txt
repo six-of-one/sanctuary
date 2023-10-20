@@ -18,6 +18,9 @@ need sounds:
 you CAN fight death!
 dead player is only lvl 1 bone pile
 
+mute button & NOBKGMUSIC do not work with ogv that has audio
+
+
 port list:
 
 player dmg: melee
