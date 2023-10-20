@@ -1790,9 +1790,13 @@ Gauntlet = function() {
 					if (collision.type.nohlp != undefined) 
 					{
 						if (collision.type.nohlp == FFHLP) ffcol = true ;
-						if (collision.type.nohlp == STNHLP) subcol = subcol || true;
-						if (collision.type.nohlp == TRPHLP) subcol = subcol || true;
+						if (collision.type.nohlp == STNHLP) subcol = true;
+						if (collision.type.nohlp == TRPHLP) subcol = true;
 					}
+				}
+				if (collision.pixel != undefined) {
+					if (collision.pixel == 0x8125) subcol = true;	// fake key, pfi
+					if (collision.pixel == 0x8122) subcol = true; // fake exit; pfi
 				}
 				if (!collision.player && entity.weapon && subcol) collision = undefined;
 				else if (ffcol == true) 
@@ -1803,7 +1807,7 @@ Gauntlet = function() {
 //						if (!walled) 
 						Musicth.play(Musicth.sounds.ffield);
 //						walled = true;
-						entity.hurt(treasure.type.damage);
+						entity.hurt(collision.type.damage);
 					}
 					collision = undefined;
 				}
