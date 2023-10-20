@@ -222,7 +222,7 @@ Gauntlet = function() {
         SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:16, wall:true,   sound: 'collectpotion' , nohlp: 58 },
         PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , nohlp: 58 },
 // this is the red wall pillar thingy
-        FFIELDUNIT:       { sx: 5, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 61  },
+        FFIELDUNIT:       { sx: 5, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
         XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtpwr',   sound: 'collectpotion',  nohlp: 2  },
         XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtspd',   sound: 'collectpotion', nohlp: 3  },
         XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxarm',   sound: 'collectpotion', nohlp: 4  },
@@ -246,6 +246,8 @@ Gauntlet = function() {
 		SUPERSHTFR = 10,		// super shot proj frame
 		TELEPORTILE = 0x0080a0,
 		FFIELDTILE = 0x008130,
+// easy way to detect non shootables
+		FFHLP = 61, TRPHLP = 20, STNHLP = 49,
 // until target traps are coded any trap will remove these
 		TRAPWALL = 0x404030,
 		TRAPTRIG = 0x0080b0,
@@ -1781,6 +1783,16 @@ Gauntlet = function() {
 		 {
 				collision = this.occupied(this.tpos.x + entity.cbox.x, this.tpos.y + entity.cbox.y, entity.cbox.w, entity.cbox.h, ignore || entity);
 				var subcol = collision.exit;
+// collect subcollisions for weapon non-hits
+				if (collision.type != undefined) {
+					if (collision.type.key != undefined) subcol = subcol || collision.type.key;
+					if (collision.type.nohlp != undefined) 
+					{
+						if (collision.type.nohlp == FFHLP) subcol = subcol || true;
+						if (collision.type.nohlp == STNHLP) subcol = subcol || true;
+						if (collision.type.nohlp == TRPHLP) subcol = subcol || true;
+					}
+				}
 				if (!collision.player && entity.weapon && subcol) collision = undefined;
 		 }
       if (!collision && !dryrun) {
