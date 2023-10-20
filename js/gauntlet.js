@@ -1780,7 +1780,8 @@ Gauntlet = function() {
 // end lobber shot
 		 {
 				collision = this.occupied(this.tpos.x + entity.cbox.x, this.tpos.y + entity.cbox.y, entity.cbox.w, entity.cbox.h, ignore || entity);
-				if (!collision.player && entity.weapon && collision.exit) collision = undefined;
+				var subcol = collision.exit;
+				if (!collision.player && entity.weapon && subcol) collision = undefined;
 		 }
       if (!collision && !dryrun) {
         this.occupy(this.tpos.x, this.tpos.y, entity);
