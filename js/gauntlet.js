@@ -1572,11 +1572,11 @@ Gauntlet = function() {
 
 			 if (dx < 9) {
 				 if (player.x > entity.x) drop = 26;
-					else drop = 35;	// if player is above exit, drop dist is further away
+					else drop = 36;	// if player is above exit, drop dist is further away
 					}
 			 if (dy < 9) drop = 26;
-			 if (dt <= drop)
-					player.exit(entity);
+			 if (dt <= drop) alert("exit!");
+//					player.exit(entity);
 		 }
     },
 
