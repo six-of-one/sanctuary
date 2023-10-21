@@ -11,11 +11,17 @@ gJ - gauntlet javascript		(gJ.0 - original)
 ================================================================================================================================================
 
 imm issues:
+
+exits way too touch sensitive for exit maze levels
+
+you CAN fight death!
+can you fight ghosts ?!
+
  
 need sounds:
 - ffield, acid, it, wall move (all gII)
 
-you CAN fight death!
+
 dead player is only lvl 1 bone pile
 
 mute button & NOBKGMUSIC do not work with ogv that has audio
@@ -79,12 +85,11 @@ elf:				3.9 sec
 >>>>>>>>>>>>>>>>>>>>>>
 (nominal fixes)
 
-can you fight ghosts ?!
 
 some issue shooting level 1 & 2 gens - see research level
 
 diagonal shot fail between walls w/diagonal gap		< sort of works...spacing is just a bit off >
-exits way too touch sensitive for exit maze levels
+
 monsters seem "too" smart for g1 -- these are good for g2 "monsters may move differently"
  
 wiz fires pretty fast prior to extra shot speed (more than one shot on screen)
@@ -227,7 +232,7 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 done:
 
 x-- things that dont get shot: keys, stun, trap, forcefield tiles
-	\ adding the fake items (not shootable) ext: key, exit
+	\ adding the fake items (not shootable) extra: key, exit
 
 x-- purple walls 40400A have corner mismatches - see screen
    \ and a bunch more on L T and + sections

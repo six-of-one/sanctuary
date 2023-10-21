@@ -1532,6 +1532,8 @@ Gauntlet = function() {
 		 {
 				var xdmg = 0;	// calculate extra fight power	-- for now 25% of regular power, should boost ability evenly
 				if (player.xfight) xdmg = player.xfight * 0.25 * player.type.damage;
+// player cant fight ghosts or death or acid blobs or IT
+
 				entity.hurt(player.type.damage + xdmg, player);
 		 }
       else if (entity.treasure)
@@ -1556,8 +1558,13 @@ Gauntlet = function() {
 			 }
 		 }
       else if (entity.exit)
+		 {
+
+			document.title = "dx: "+distance(player.x,player.y,entity.x,player.y)+" -- dy: "+distance(player.x,player.y,player.x,entity.y)+" -- delt:"+distance(player.x,player.y,entity.x,entity.y);
+			 
 // FIXT - make less sensitive for exit maze
-        player.exit(entity);
+//        player.exit(entity);
+		 }
     },
 
     onMonsterCollide: function(monster, entity) {
@@ -4066,7 +4073,7 @@ var txsv = ":";
 		  if (thieftrack > 0)
 		  {
 /// TEST - remove
-document.title = thieftim+": "+ ((thieftim - timestamp())/1000)+" :tft (&-stmp)/1000: ";
+//document.title = thieftim+": "+ ((thieftim - timestamp())/1000)+" :tft (&-stmp)/1000: ";
 /// TEST - remove
 					if (thieftim  != 0 && (thieftim < timestamp()))
 					{
