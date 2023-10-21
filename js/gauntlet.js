@@ -1561,9 +1561,22 @@ Gauntlet = function() {
 		 {
 
 			document.title = "dx: "+distance(player.x,player.y,entity.x,player.y)+" -- dy: "+distance(player.x,player.y,player.x,entity.y)+" -- delt:"+distance(player.x,player.y,entity.x,entity.y);
-			 
-// FIXT - make less sensitive for exit maze
-//        player.exit(entity);
+// make less sensitive for exit maze
+// computation by how close to center of x or y exit edge
+			 var dx = distance(player.x,player.y,entity.x,player.y);
+			 var dy = distance(player.x,player.y,player.x,entity.y);
+			 var dt = distance(player.x,player.y,entity.x,entity.y);
+
+			 var drop = 37;	// distance to exit center to drop the player
+			 if (player.x > entity.x) drop = 31;
+
+			 if (dx < 9) {
+				 if (player.x > entity.x) drop = 26;
+					else drop = 35;	// if player is above exit, drop dist is further away
+					}
+			 if (dy < 9) drop = 26;
+			 if (dt <= drop)
+					player.exit(entity);
 		 }
     },
 
