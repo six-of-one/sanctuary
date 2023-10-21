@@ -291,7 +291,7 @@ Gauntlet = function() {
         PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2, h: TILE - TILE/4 },
         WEAPON:  { x: TILE/3, y: TILE/3, w: TILE-30, h: TILE-30        },		// w,h tile-30 mostly gives shot thru diagonal gap
         MONSTER: { x: 1,      y: 1,      w: TILE-2, h: TILE-2        }, // give monsters 1px wiggle room to get through tight corridors
-        EXIT: { x: 8,      y: 10,      w: TILE-8, h: TILE-8        }			 // exit touch is too easy on exit maze wall level
+        EXIT: { x: 4,      y: 12,      w: TILE-12, h: TILE-6        }			 // exit touch is too easy on exit maze wall level
       },
 // test masks for 1 px units of level.png files
       PIXEL = {
@@ -1567,7 +1567,7 @@ Gauntlet = function() {
       else if (entity.exit)
 		 {
 
-			document.title = "dx: "+distance(player.x,player.y,entity.x,player.y)+" -- dy: "+distance(player.x,player.y,player.x,entity.y)+" -- delt:"+distance(player.x,player.y,entity.x,entity.y);
+			document.title = player.x+"."+player.y+":x.y - dx: "+distance(player.x,player.y,entity.x,player.y)+" -- dy: "+distance(player.x,player.y,player.x,entity.y)+" -- delt:"+distance(player.x,player.y,entity.x,entity.y);
 					player.exit(entity);
 		 }
     },
