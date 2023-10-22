@@ -105,6 +105,9 @@ Gauntlet = function() {
         WIZARD1: { sx: 0, sy: 20, frames: 3, fpf: FPS/10, score:  30, health:  10, speed: 110/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 14, 14, 9, 3 ], generator: { glvl: [ 14, 14, 9, 3 ], health: 10, speed: 4.0*FPS, max: 20, score: 400, sx: 32, sy: 6 }, name: "sorcerer", weapon: null , hits: 'hithump',     nohlp: 44            },
         LOBBER1: { sx: 0, sy: 22, frames: 3, fpf: FPS/10, score:  10, health:  10, speed: 80/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 15, 15, 10, 5 ], generator: { glvl: [ 15, 15, 10, 5 ], health: 10, speed: 3.5*FPS, max: 20, score: 100, sx: 32, sy: 6 }, name: "lobber", weapon: { speed: 180/FPS, reload: 1.9*FPS, damage: 10, sx: 24, sy: 9, fpf: FPS/10, monster: true, lobsht: true, foir: 'firelob' }   ,     nohlp: 45                 },
         THIEF: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 200/FPS, damage:  5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               }
+        MUGGER: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 200/FPS, damage:  5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger", weapon: null  ,     nohlp: 62               }
+// g2 calls this the acid blob - it looks like an angry pickle...
+        PICKLE: { sx: 0, sy: 24, frames: 3, fpf: FPS/10, score:  50, health:  60, speed: 200/FPS, damage:  5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 63               }
       },
 // track a potential "richest" player path - (really have to track them all...)
 		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25, thiefexit = false,
@@ -183,7 +186,35 @@ Gauntlet = function() {
 									"Fooled you!  Some items may be fake",
 									"You now have the life ankh",
 									"Player loses # health<br>use magic to kill death",										// 60
-									"Avoid force fields, player loses # health"																// 61
+// g2 messages start here
+									"Avoid force fields<br>player loses # health"																// 61
+// mugger msg
+									"Kill mugger to recover stolen health",
+									"Avoid acid puddles<br>Player loses # health",
+									"Acid puddles move randomly"
+//									"Some walls can be shot and turn into good or bad",
+//									"Push movable walls",
+//									"Save keys to open doors",
+//									"Some treasure requires keys",
+//									"There can be more than one trap",
+//									"Death 'dies' after taking<br>up to 200 health",
+//									"Death disappears after<br>taking up to 200 health",
+//									"Shoot super sorceror<br>Player loses # health",
+// this is g2 msg
+//									"Have friends join in any time",
+//									"You are now IT",
+//									"Monsters follow player<br>who is IT",
+//									"Tag, you're IT",
+//									"Some walls move randomly",
+//									"Monsters may move differently",
+//									"",
+
+// these are in the g1 intro, but not coded in
+//									"Shoot ghosts",
+//									"Shoot ghost generators",
+//									"Some ghosts take more shots",
+//									"Fight grunts",
+//									"Your goal: find exit"
 
 									],
 		HELPANNC = [ ], // announcer help tie ins
