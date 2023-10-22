@@ -323,11 +323,11 @@ Gauntlet = function() {
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
 											TREASURE.POTIONORG, TREASURE.BADBOT ],
       CBOX = {
-        FULL:    { x: 0,      y: 0,      w: TILE,   h: TILE          },
-        PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2, h: TILE - TILE/4 },
-        WEAPON:  { x: TILE/3, y: TILE/3, w: TILE-30, h: TILE-30        },		// w,h tile-30 mostly gives shot thru diagonal gap
-        MONSTER: { x: 1,      y: 1,      w: TILE-2, h: TILE-2        }, // give monsters 1px wiggle room to get through tight corridors
-        EXIT: { x: 4,      y: 12,      w: TILE-12, h: TILE-6        }			 // exit touch is too easy on exit maze wall level
+        FULL:    { x: 0,      y: 0,      w: TILE,    h: TILE          },
+        PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2,  h: TILE - TILE/4 },
+        WEAPON:  { x: TILE/3, y: TILE/3, w: TILE-30, h: TILE-30       },		// w,h tile-30 mostly gives shot thru diagonal gap
+        MONSTER: { x: 1,      y: 1,      w: TILE-2,  h: TILE-2        }, // give monsters 1px wiggle room to get through tight corridors
+        EXIT:    { x: 4,      y: 12,     w: TILE-12, h: TILE-6        }			 // exit touch is too easy on exit maze wall level
       },
 // test masks for 1 px units of level.png files
       PIXEL = {
