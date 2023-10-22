@@ -187,7 +187,8 @@ Gauntlet = function() {
 									"You now have the life ankh",
 									"Player loses # health<br>use magic to kill death",										// 60
 // g2 messages start here
-									"Avoid force fields<br>player loses # health"																// 61
+// g2 also reverses monster hit msg, to say player loses {N} health second, as here
+									"Avoid force fields<br>Player loses # health"																// 61
 // mugger msg
 									"Kill mugger to recover stolen health",
 									"Avoid acid puddles<br>Player loses # health",
@@ -198,6 +199,7 @@ Gauntlet = function() {
 //									"Some treasure requires keys",
 //									"There can be more than one trap",
 //									"Death 'dies' after taking<br>up to 200 health",
+// alt idea, sounds better
 //									"Death disappears after<br>taking up to 200 health",
 //									"Shoot super sorceror<br>Player loses # health",
 // this is g2 msg

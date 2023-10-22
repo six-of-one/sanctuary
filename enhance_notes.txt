@@ -17,9 +17,7 @@ exits way too touch sensitive for exit maze levels
 you CAN fight death!
 can you fight ghosts ?!
 
-"Use magic to kill death<br>Player loses # health",
--- a seperate message from lvl 7 intro
- 
+
 need sounds:
 - ffield, acid, it, wall move (all gII)
 
