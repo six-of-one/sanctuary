@@ -150,7 +150,7 @@ shootable "regular" walls that give goody
 "special" treasure room
 monsters move different, or faster
 x--- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or super / reflect shot destroys)
-x--- "IT" - not sure want this
+x--- "IT" - not sure want this - 10 pts for getting tho, no pts on tag
 
 >>>>>>>>>>>>>>>>>>>>>>
 expansion:

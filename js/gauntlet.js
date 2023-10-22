@@ -105,9 +105,9 @@ Gauntlet = function() {
         WIZARD1: { sx: 0, sy: 20, frames: 3, fpf: FPS/10, score:  30, health:  10, speed: 110/FPS, damage:  60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 14, 14, 9, 3 ], generator: { glvl: [ 14, 14, 9, 3 ], health: 10, speed: 4.0*FPS, max: 20, score: 400, sx: 32, sy: 6 }, name: "sorcerer", weapon: null , hits: 'hithump',     nohlp: 44            },
         LOBBER1: { sx: 0, sy: 22, frames: 3, fpf: FPS/10, score:  10, health:  10, speed: 80/FPS, damage:  40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 15, 15, 10, 5 ], generator: { glvl: [ 15, 15, 10, 5 ], health: 10, speed: 3.5*FPS, max: 20, score: 100, sx: 32, sy: 6 }, name: "lobber", weapon: { speed: 180/FPS, reload: 1.9*FPS, damage: 10, sx: 24, sy: 9, fpf: FPS/10, monster: true, lobsht: true, foir: 'firelob' }   ,     nohlp: 45                 },
         THIEF: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 200/FPS, damage:  5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               }
-        MUGGER: { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 200/FPS, damage:  5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger", weapon: null  ,     nohlp: 62               }
+        MUGGER: { sx: 0, sy: 24, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 200/FPS, damage:  5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger", weapon: null  ,     nohlp: 62               }
 // g2 calls this the acid blob - it looks like an angry pickle...
-        PICKLE: { sx: 0, sy: 24, frames: 3, fpf: FPS/10, score:  50, health:  60, speed: 200/FPS, damage:  5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 63               }
+        PICKLE: { sx: 0, sy: 25, frames: 3, fpf: FPS/10, score:  200, health:  60, speed: 60/FPS, damage:  5/FPS, selfharm: 0,      canbeshot: false,  canbehit: false,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 1.5*FPS, max: 20, score: 500, sx: 32, sy: 8 }, name: "Acid blob", weapon: null  ,     nohlp: 63               }
       },
 // track a potential "richest" player path - (really have to track them all...)
 		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25, thiefexit = false,
@@ -202,7 +202,7 @@ Gauntlet = function() {
 // alt idea, sounds better
 //									"Death disappears after<br>taking up to 200 health",
 //									"Shoot super sorceror<br>Player loses # health",
-// this is g2 msg
+// this is g2 msg, diff from g1 msg
 //									"Have friends join in any time",
 //									"You are now IT",
 //									"Monsters follow player<br>who is IT",
@@ -312,7 +312,10 @@ Gauntlet = function() {
         PLAYER_GLOW:     { frames: FPS/2, border: 5 }
       },
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
-      MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2, MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, MONSTER.THIEF ],
+      MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, 
+											MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2, 
+											MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, 
+											MONSTER.THIEF, MONSTER.MUGGER, MONSTER.PICKLE ],
       TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
 											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT,
