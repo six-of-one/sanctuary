@@ -339,7 +339,7 @@ Gauntlet = function() {
         START:          0x00F000, // GREEN
         TREASURE:       0x008000, // MEDIUM GREEN
         EXIT:           0x004000, // DARK GREEN
-        FLOOR:			0xA08000, // LT BROWN
+        FLOOR:			   0xA08000, // LT BROWN
         MASK: {
           TYPE:         0xFFF000,
           EXHIGH:       0x000FF0,
