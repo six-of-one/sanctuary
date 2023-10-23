@@ -349,8 +349,8 @@ Gauntlet = function() {
 // jvsg floors - 1 tile per map cell - 32 x 32 px per each stored 0th row of backgrounds.png
 // --- g1 floors are handled in a seperate gfx file as they tile (currently) 256 x 256 px (4 x 4 map cells) over the map due to diff design per tile
       FLOOR = { 	BROWN_BOARDS: 1, LIGHBROWN_BOARDS: 2, GREEN_BOARDS: 3, GREY_BOARDS: 4, WOOD: 5, LIGHT_STONE: 6, DARK_STONE: 7, BROWN_LAMINATE: 8, 
-									PURPLE_LAMINATE: 9, RND: 10,
-									MIN: 1, MAX: 9 },
+									PURPLE_LAMINATE: 9, PURPLEPHASE: 10, MULTIC: 11, BEES: 12, BOOK: 13, MTILE: 14, YELLOWBR: 15, RND: 16,
+									MIN: 1, MAX: 14 },
 // jvsg walls - 32 x 32 px per each wall "unit" - rows 1 - 7 of backgrounds.png
       WALL  = { 	INVIS: 1, BLUE: 2, BLUE_BRICK: 3, PURPLE_TILE: 4, BLUE_COBBLE: 5, PURPLE_COBBLE: 6, CONCRETE: 7, 
 // g1 wall codes - rows 8 - 36 in backgrounds.png
