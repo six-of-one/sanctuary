@@ -1316,6 +1316,7 @@ Gauntlet = function() {
 					}
 					if (g4rc >= Math.random()) Musicth.play(Musicth.sounds.g4sec);		// rnd play 4 sec, but not treasure rooms
 			}
+// dev controls - block rnd loads, or force them on levels
 			var blrnd = document.getElementById("blrndlod").checked;
 			var frnd = document.getElementById("forndlod").checked;
 
