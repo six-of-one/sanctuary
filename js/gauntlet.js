@@ -1316,7 +1316,10 @@ Gauntlet = function() {
 					}
 					if (g4rc >= Math.random()) Musicth.play(Musicth.sounds.g4sec);		// rnd play 4 sec, but not treasure rooms
 			}
-			if (Mastermap.level.nornd == undefined)	// random load a level
+			var blrnd = document.getElementById("blrndlod").checked;
+			var frnd = document.getElementById("forndlod").checked;
+
+			if ((Mastermap.level.nornd == undefined || frnd == true) && blrnd != true)	// random load a level
 			{
 					var f, rprof, ldiff;
 

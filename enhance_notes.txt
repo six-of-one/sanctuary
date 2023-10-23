@@ -12,6 +12,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 imm issues:
 
+acid blob entry is spawning ghosts
 
 you CAN fight death!
 can you fight ghosts ?!
