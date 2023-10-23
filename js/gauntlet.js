@@ -4037,6 +4037,10 @@ var txsv = ":";
 			  else
 			  if (!map.level.gflr)
             this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
+// map gps
+			  if (document.getElementById("mazsolv").checked)
+			  if (cell.mapcht) this.tile(ctx, sprites,  15, 0, tx, ty);
+
 			if (map.level.wall == WALL.INVIS)				// do floor tile for invis walls
 			{
 				if (!map.level.gflr)
@@ -4046,8 +4050,6 @@ var txsv = ":";
 			if (cell.shadow)		// dont shadow for invis walls
             this.tile(ctx, sprites, cell.shadow, WALL.INVIS, tx, ty);
 // added a maze cheat - floor tile can be a subtle shift from std tile
-// task: option this
-			  if (cell.mapcht) this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor + 1, 0, tx, ty);
 				fcellstr = cell;
         }
       }
