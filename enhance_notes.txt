@@ -13,7 +13,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 imm issues:
 
 
-jsgv maze tiles are not proper update on floor obscuring-ent removal
+jsgv maze tiles are not proper update on floor obscuring-ent removal and some direct displays
 
 forcefield ops cycles
 

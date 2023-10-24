@@ -772,16 +772,16 @@ Game.Math = {
 			document.splashrot.src = "images/1x1.png";
 // play demo - gauntlet 1, quiet
 			vid.src = "images/g1samply_q.ogv";
+			rot = 44400;								// 44 secs - len of g1 sample play
 /// TEST - REMOVE
 //		vid.src = "images/gN_intro.ogv";
-			rot = 44400;
 			if (Math.random() < 0.3)		// randomly select g2 intro and other vids
 			{
 					vid.src = "images/g2samply_q.ogv";
-					if (Math.random() < 0.4) vid.src = "images/gII_intro.ogv";
-					if (Math.random() < 0.27) vid.src = "images/gIV_intro.ogv";
-					if (Math.random() < 0.22) vid.src = "images/gN_intro.ogv";
-					rot = 119850;
+					rot = 119700;
+					if (Math.random() < 0.4) { vid.src = "images/gII_intro.ogv"; rot = 25200; }
+					if (Math.random() < 0.27) { vid.src = "images/gIV_intro.ogv"; rot = 20650; }
+					if (Math.random() < 0.22) { vid.src = "images/gN_intro.ogv"; rot = 34210; }
 			}
 			vid.play(); 
 			vid.style.visibility = "visible";
