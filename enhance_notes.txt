@@ -15,9 +15,6 @@ imm issues:
 
 jsgv maze tiles are not proper update on floor obscuring-ent removal
 
-you CAN fight death!
-can you fight ghosts ?!
-
 forcefield ops cycles
 
 need sounds:
@@ -234,6 +231,10 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- you CAN fight death!
+    can you fight ghosts ?!
+   \_ notfot var - if true you can not fight this ent
 
 x-- acid blob entry is spawning ghosts
 
