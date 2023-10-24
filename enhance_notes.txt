@@ -12,6 +12,8 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 imm issues:
 
+jsgv maze tiles are not proper update on floor obscuring-ent removal
+
 acid blob entry is spawning ghosts
 
 you CAN fight death!

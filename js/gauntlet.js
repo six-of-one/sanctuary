@@ -733,7 +733,7 @@ Gauntlet = function() {
 // added gauntlet 1 levels as g1level{n}
 // gflr is gfx file for floor tiles
     levels: [
-      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,         music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
  //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null }, 
       { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
@@ -4030,6 +4030,7 @@ var txsv = ":";
 				  var nfl = cell.pixel & MEXLOW;
 				  if ((cell.pixel & MEXHIGH) == 0xA08060)
 						this.tile(ctx, sprites, nfl, FCUSTILE, tx, ty);
+// if cust tile in an area and a cell is occupied by ent or removable - this sets it to prev tiles cust state
 				  else if (((fcellstr.pixel & MEXHIGH) == 0xA08060) && (fcellstr.pixel & MEXLOW))
 						this.tile(ctx, sprites, ftilestr, FCUSTILE, tx, ty);
 				  ftilestr = nfl; // store for non floor content tests
@@ -4039,7 +4040,7 @@ var txsv = ":";
             this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
 // map gps
 			  if (document.getElementById("mazsolv").checked)
-			  if (cell.mapcht) this.tile(ctx, sprites,  15, 0, tx, ty);
+			  if (cell.mapcht) this.tile(ctx, sprites,  15, 0, tx, ty);			// currently unit 15 of row 0 backgrounds.png is the yellow brick overlay
 
 			if (map.level.wall == WALL.INVIS)				// do floor tile for invis walls
 			{
@@ -4049,7 +4050,7 @@ var txsv = ":";
 			else
 			if (cell.shadow)		// dont shadow for invis walls
             this.tile(ctx, sprites, cell.shadow, WALL.INVIS, tx, ty);
-// added a maze cheat - floor tile can be a subtle shift from std tile
+// when a following tile is covered and being revealed, this sets it to the prev. tile if area is cust tile (differ from spec tile on map)
 				fcellstr = cell;
         }
       }
