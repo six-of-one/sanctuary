@@ -1574,7 +1574,7 @@ Gauntlet = function() {
 				var xdmg = 0;	// calculate extra fight power	-- for now 25% of regular power, should boost ability evenly
 				if (player.xfight) xdmg = player.xfight * 0.25 * player.type.damage;
 // player cant fight ghosts or death or acid blobs or IT
-				if (entity.notfot != true)
+				if (entity.type.notfot != true)
 					entity.hurt(player.type.damage + xdmg, player);
 		 }
       else if (entity.treasure)
