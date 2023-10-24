@@ -733,7 +733,7 @@ Gauntlet = function() {
 // added gauntlet 1 levels as g1level{n}
 // gflr is gfx file for floor tiles
     levels: [
-      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,         music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
  //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null }, 
       { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
@@ -3671,6 +3671,23 @@ var txsv = ":";
 				}
 
 			}	// end wallstall
+
+// ffield ops
+				var n, k = stalling & 0xF, max, entity;
+				for(n = 0, max = Mastermap.entities.length ; n < max ; n++) {
+					  entity = Mastermap.entities[n];
+
+					if (entity.type.nohlp == FFHLP)
+					if (!game.viewport.outside(entity.x, entity.y, TILE, TILE))
+					{
+						if (k == 3 || k == 8 || k == 14)
+							entity.type = TREASURE.FFIELDPOW;
+						if (k == 6 || k == 10 || k == 0)
+							entity.type = TREASURE.FFIELDDIM;
+					}
+					else
+						entity.type = TREASURE.FFIELDDIM;
+				}
 
 		}
     },
