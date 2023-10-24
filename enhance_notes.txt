@@ -12,13 +12,13 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 imm issues:
 
-jsgv maze tiles are not proper update on floor obscuring-ent removal
 
-acid blob entry is spawning ghosts
+jsgv maze tiles are not proper update on floor obscuring-ent removal
 
 you CAN fight death!
 can you fight ghosts ?!
 
+forcefield ops cycles
 
 need sounds:
 - ffield, acid, it, wall move (all gII)
@@ -234,6 +234,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- acid blob entry is spawning ghosts
 
 x-- exits way too touch sensitive for exit maze levels
    \ better but still touchy with xspeed & elf
