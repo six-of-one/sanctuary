@@ -292,7 +292,7 @@ Gauntlet = function() {
 // after {n} health tics with no player move / fire, all doors open
 		DOORSTALL = 30,
 		stalling,
-		ffieldpulse,
+		ffieldpulse = 0,
 // doors open counter-clockwise and stop opening in a clockwise dir when hitting corners & Ts
 		doorstop = [ 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0 ],
       DOOR = {
@@ -4015,13 +4015,21 @@ var txsv = ":";
 		var rw = w, rh = h;
       map.background = map.background || Game.renderToCanvas(map.w, map.h, this.maptiles.bind(this, map));
 
-		 if ((viewport.x + viewport.w) > map.w) rx = (viewport.x - map.w);
+		 if ((viewport.x + viewport.w) > map.w) 
+		 {
+			 rx = 0;
+			 w = (viewport.x + viewport.w) - map.w;
+			 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
+			 rx = viewport.x;
+			 w = map.w - rx;
+		 }
+		 else
 		 if (viewport.x < 0) {
 			 rx = (map.w + viewport.x);
 			 w = 0 - viewport.x;
 			 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
-			 rx = 0 - viewport.x;
-			 w = rw - rx;
+			 w = rw + viewport.x;
+			 rx = 0;
 		 }
 		 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
     },
