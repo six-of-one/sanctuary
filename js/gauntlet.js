@@ -734,7 +734,7 @@ Gauntlet = function() {
 // added gauntlet 1 levels as g1level{n}
 // gflr is gfx file for floor tiles
     levels: [
-      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1,	score:  1000, help: "welcome to ERR0R" },
  //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null }, 
       { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
@@ -1208,6 +1208,11 @@ Gauntlet = function() {
       }
       else {
 			  $('booting').show();
+/// TEST - remove
+var lvu = document.getElementById("flvl").value;
+if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION , { onload: onloaded });
+		else
+/// TEST - remove
 			  level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
       }
 
