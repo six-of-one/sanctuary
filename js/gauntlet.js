@@ -4230,7 +4230,7 @@ var txsv = ":";
         entity = entities[n];
         if (entity.active && (!entity.onrender || entity.onrender(frame) !== false) && !viewport.outside(entity.x, entity.y, TILE, TILE)) {
 // note: RUNORG
-if (viewport.x < 0 && entity.x > (viewport.w - viewport.x)) alert("-v.x ent: "+entity+" : "+entity.x);
+//if (viewport.x < 0 && entity.x > (viewport.w - viewport.x)) alert("-v.x ent: "+entity+" : "+entity.x);
 				if (entity.type.wall)
 						this.sprite(ctx, wallsprites, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else if (entity.door)
