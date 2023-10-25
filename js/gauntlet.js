@@ -292,6 +292,7 @@ Gauntlet = function() {
 // after {n} health tics with no player move / fire, all doors open
 		DOORSTALL = 30,
 		stalling,
+		ffieldpulse,
 // doors open counter-clockwise and stop opening in a clockwise dir when hitting corners & Ts
 		doorstop = [ 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0 ],
       DOOR = {
@@ -1601,7 +1602,8 @@ Gauntlet = function() {
       else if (entity.exit)
 		 {
 
-			document.title = player.x+"."+player.y+":x.y - dx: "+distance(player.x,player.y,entity.x,player.y)+" -- dy: "+distance(player.x,player.y,player.x,entity.y)+" -- delt:"+distance(player.x,player.y,entity.x,entity.y);
+/// TEST - remove
+//			document.title = player.x+"."+player.y+":x.y - dx: "+distance(player.x,player.y,entity.x,player.y)+" -- dy: "+distance(player.x,player.y,player.x,entity.y)+" -- delt:"+distance(player.x,player.y,entity.x,entity.y);
 					player.exit(entity);
 		 }
     },
@@ -3673,7 +3675,8 @@ var txsv = ":";
 			}	// end wallstall
 
 // ffield ops
-				var n, k = stalling & 0xF, max, entity;
+				ffieldpulse = ffieldpulse + 1;
+				var n, k = ffieldpulse & 0xF, max, entity;
 				for(n = 0, max = Mastermap.entities.length ; n < max ; n++) {
 					  entity = Mastermap.entities[n];
 
@@ -4006,6 +4009,8 @@ var txsv = ":";
     maptiles: function(map, ctx) {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
 		 if (wallsprites == undefined) wallsprites = sprites;
+/// TEST - remove
+//alert("mvp: "+game.viewport.x);
 		if (map.level.gflr)
 		 {
 			var gbas = document.getElementById("gfloorbas");
