@@ -3171,7 +3171,7 @@ var txsv = ":";
         collision = map.trymove(this, dir, this.type.speed + (this.xspeed * 30)/FPS);
 
 
-/// remove
+/// TEST - remove
 //txsv = Math.floor(this.x) +"," + Math.floor(this.y) + " map: " + Math.floor(map.w) +"," + Math.floor(map.h);
 //txsv = txsv.substring(0,100);
 //document.title = "-pl  "+txsv;
@@ -3181,29 +3181,29 @@ var txsv = ":";
 			{
 					if (this.x < 2)
 				{
-					if (!Mastermap.occupied(map.w - 30, this.y, TILE, TILE, this))
-						Mastermap.occupy(map.w - 30, this.y, this);
+					if (!Mastermap.occupied(map.w - 2, this.y, TILE, TILE, this))
+						Mastermap.occupy(map.w - 2, this.y, this);
 					else this.x = 2;
 				}
 				else
-					if (this.x > (map.w - 30))
+					if (this.x > (map.w - 2))
 				{
 					if (!Mastermap.occupied(5, this.y, TILE, TILE, this))
 						Mastermap.occupy(5, this.y, this);
-					else this.x = map.w - 30;
+					else this.x = map.w - 2;
 				}
 				else				
-					if (this.y < 3)
+					if (this.y < 2)
 				{
-					if (!Mastermap.occupied(this.x, map.h - 38, TILE, TILE, this))
-						Mastermap.occupy(this.x, map.h - 38, this);
-					else this.y = 3;
+					if (!Mastermap.occupied(this.x, map.h - 3, TILE, TILE, this))
+						Mastermap.occupy(this.x, map.h - 3, this);
+					else this.y = 2;
 				}
 				else
-					if (this.y > (map.h - 37))
-					if (!Mastermap.occupied(this.x, 5, TILE, TILE, this))
-						Mastermap.occupy(this.x, 5, this);
-					else this.y = map.h - 37;
+					if (this.y > (map.h - 3))
+					if (!Mastermap.occupied(this.x, 2, TILE, TILE, this))
+						Mastermap.occupy(this.x, 2, this);
+					else this.y = map.h - 3;
 			}
 
 
