@@ -4012,16 +4012,19 @@ var txsv = ":";
           h = Math.min(map.h, viewport.h)
 			 rx = viewport.x,
 			 ry = viewport.y;
-		var rw = w, rh = h;
+		var rw = w, rh = h, xz = 0, yz = 0;
       map.background = map.background || Game.renderToCanvas(map.w, map.h, this.maptiles.bind(this, map));
 
+// draw the map background unpinned !
 		 if ((viewport.x + viewport.w) > map.w) 
 		 {
 			 rx = 0;
+			 xz = map.w - viewport.x;
 			 w = (viewport.x + viewport.w) - map.w;
-			 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
+			 ctx.drawImage(map.background, rx, ry, w, h, xz, 0, w, h);
 			 rx = viewport.x;
-			 w = map.w - rx;
+			 w = xz;
+			 xz = 0;
 		 }
 		 else
 		 if (viewport.x < 0) {
@@ -4030,8 +4033,9 @@ var txsv = ":";
 			 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
 			 w = rw + viewport.x;
 			 rx = 0;
+			 xz = 0 - viewport.x;
 		 }
-		 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
+		 ctx.drawImage(map.background, rx, ry, w, h, xz, yz, w, h);
     },
 
     maptiles: function(map, ctx) {
