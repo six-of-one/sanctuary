@@ -3939,10 +3939,10 @@ var txsv = ":";
     },
 
     move: function(x, y, map) {
-//		 if (map.level.unpinx != undefined)
+		 if (map.level.unpinx != undefined)
 //				this.x = Game.Math.minmax(x, 0, map.w - 1);
-//				this.x = Math.min(x, map.w - 1);
-//		 else
+				this.x = Math.min(x, map.w - 1);
+		 else
 				this.x = Game.Math.minmax(x, 0, map.w - this.w - 1);
       this.y = Game.Math.minmax(y, 0, map.h - this.h - 1);
     },
@@ -3992,14 +3992,15 @@ var txsv = ":";
 
     map: function(ctx, frame, viewport, map) {
       var w = Math.min(map.w, viewport.w),
-          h = Math.min(map.h, viewport.h);
+          h = Math.min(map.h, viewport.h)
+			 rx = viewport.x,
+			 ry = viewport.y;
       map.background = map.background || Game.renderToCanvas(map.w, map.h, this.maptiles.bind(this, map));
-		 if (viewport.x > map.w)
-				ctx.drawImage(map.background, (viewport.x - map.w), viewport.y, w, h, 0, 0, w, h);		 
-		 else if (viewport.x < 0)
-				ctx.drawImage(map.background, (map.w + viewport.x), viewport.y, w, h, 0, 0, w, h);		 
-		 else
-				ctx.drawImage(map.background, viewport.x, viewport.y, w, h, 0, 0, w, h);
+
+		 if (viewport.x > map.w) rx = (viewport.x - map.w);
+		 else if (viewport.x < 0) rx = (map.w + viewport.x);
+
+		 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
     },
 
     maptiles: function(map, ctx) {
