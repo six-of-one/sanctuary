@@ -2127,6 +2127,10 @@ var ymir = false, xmir = false;
 /// TEST - remove
 			xmir = document.getElementById("xmiror").checked;
 			ymir = document.getElementById("ymiror").checked;
+			var cb = document.getElementById("xunp").checked;
+			if (cb == true) level.unpinx = cb;
+			var cb = document.getElementById("yunp").checked;
+			if (cb == true) level.unpiny = cb;
 /// TEST - remove
 
 		var walltype = walltype0;
