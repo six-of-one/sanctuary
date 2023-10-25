@@ -3939,6 +3939,7 @@ var txsv = ":";
     },
 
     outside: function(x, y, w, h) {
+// handle unpin areas in display test
 		var rx = this.x, ry = this.y, rw = this.w, rh = this.h, k = false;
 		if (this.x < 0) {
 			rx = Mastermap.w + this.x;
@@ -3951,7 +3952,7 @@ var txsv = ":";
 			rw = (this.x + this.w) - Mastermap.w;
 			k = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
 		}
-		if (k != false) return(k);
+		if (k != false) return(false);
 
       return !Game.Math.overlap(x, y, w, h, this.x, this.y, this.w, this.h);
     },
@@ -4225,6 +4226,7 @@ var txsv = ":";
         entity = entities[n];
         if (entity.active && (!entity.onrender || entity.onrender(frame) !== false) && !viewport.outside(entity.x, entity.y, TILE, TILE)) {
 // note: RUNORG
+if (viewport.x < 0 && entity.x > (viewport.w - viewport.x)) alert("-v.x ent: "+entity+" : "+entity.x);
 				if (entity.type.wall)
 						this.sprite(ctx, wallsprites, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else if (entity.door)
