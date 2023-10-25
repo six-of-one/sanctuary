@@ -3193,17 +3193,17 @@ var txsv = ":";
 					else this.x = map.w - 2;
 				}
 				else				
-					if (this.y < 2)
+					if (this.y < 3)
 				{
-					if (!Mastermap.occupied(this.x, map.h - 3, TILE, TILE, this))
-						Mastermap.occupy(this.x, map.h - 3, this);
-					else this.y = 2;
+					if (!Mastermap.occupied(this.x, map.h - 38, TILE, TILE, this))
+						Mastermap.occupy(this.x, map.h - 38, this);
+					else this.y = 3;
 				}
 				else
-					if (this.y > (map.h - 3))
-					if (!Mastermap.occupied(this.x, 2, TILE, TILE, this))
-						Mastermap.occupy(this.x, 2, this);
-					else this.y = map.h - 3;
+					if (this.y > (map.h - 37))
+					if (!Mastermap.occupied(this.x, 5, TILE, TILE, this))
+						Mastermap.occupy(this.x, 5, this);
+					else this.y = map.h - 37;
 			}
 
 
