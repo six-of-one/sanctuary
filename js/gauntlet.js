@@ -4005,6 +4005,25 @@ var txsv = ":";
     },
 
     sprite: function(ctx, sprites, viewport, sx, sy, x, y, w, h) {
+
+		var rx = viewport.x,
+			 ry = viewport.y;
+// draw the spriotes unpinned !
+		 if ((viewport.x + viewport.w) > Mastermap.w) 
+		 {
+			 rx = 0;
+//			 ctx.drawImage(map.background, rx, ry, w, h, xz, 0, w, h);
+			 ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - rx, y - ry, w || TILE, h || TILE);
+			 rx = viewport.x;
+		 }
+		 else
+		 if (viewport.x < 0) {
+			 rx = (Mastermap.w + viewport.x);
+//			 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
+			 ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - rx, y - ry, w || TILE, h || TILE);
+			 rx = 0;
+		 }
+		 else
       ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - viewport.x, y - viewport.y, w || TILE, h || TILE);
     },
 
