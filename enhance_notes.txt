@@ -12,6 +12,8 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 imm issues:
 
+teleport on death needs to remove death (or any other teleported on monster)
+- limited transportability needs to remove just about everything
 
 jsgv maze tiles are not proper update on floor obscuring-ent removal and some direct displays
 
