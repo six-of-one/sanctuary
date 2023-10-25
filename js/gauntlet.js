@@ -3934,6 +3934,20 @@ var txsv = ":";
     },
 
     outside: function(x, y, w, h) {
+		var rx = this.x, ry = this.y, rw = this.w, rh = this.h, k = false;
+		if (this.x < 0) {
+			rx = Mastermap.w + this.x;
+			rw = 0 - this.x;
+			k = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
+		}
+		else if ((this.x + this.w) > Mastermap.w)
+		{
+			rx = 0;
+			rw = (this.x + this.w) - Mastermap.w;
+			k = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
+		}
+		if (k != false) return(k);
+
       return !Game.Math.overlap(x, y, w, h, this.x, this.y, this.w, this.h);
     },
 
@@ -3998,11 +4012,17 @@ var txsv = ":";
           h = Math.min(map.h, viewport.h)
 			 rx = viewport.x,
 			 ry = viewport.y;
+		var rw = w, rh = h;
       map.background = map.background || Game.renderToCanvas(map.w, map.h, this.maptiles.bind(this, map));
 
-		 if (viewport.x > map.w) rx = (viewport.x - map.w);
-		 else if (viewport.x < 0) rx = (map.w + viewport.x);
-
+		 if ((viewport.x + viewport.w) > map.w) rx = (viewport.x - map.w);
+		 if (viewport.x < 0) {
+			 rx = (map.w + viewport.x);
+			 w = 0 - viewport.x;
+			 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
+			 rx = 0 - viewport.x;
+			 w = rw - rx;
+		 }
 		 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
     },
 
