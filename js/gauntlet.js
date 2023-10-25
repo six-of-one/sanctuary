@@ -4073,14 +4073,14 @@ var txsv = ":";
 			  cell.map = map;
           if (is.valid(cell.wall))
 			  {
-				  if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls
 					  if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000)  {// diff walls by low nibble
 						this.tile(ctx, sprites, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
 					  }
 					  else
-						this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
-						if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
-				  }
+						if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls -- only applies to std level walls
+							this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
+							if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
+						}
 			  }
           else if (cell.nothing)
             this.tile(ctx, sprites, 0, 0, tx, ty);
