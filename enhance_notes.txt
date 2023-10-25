@@ -15,7 +15,6 @@ imm issues:
 
 jsgv maze tiles are not proper update on floor obscuring-ent removal and some direct displays
 
-forcefield ops cycles
 
 need sounds:
 - ffield, acid, it, wall move (all gII)
@@ -231,6 +230,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- forcefield ops cycles
 
 x-- you CAN fight death!
     can you fight ghosts ?!
