@@ -2129,7 +2129,7 @@ var ymir = false, xmir = false;
 			ymir = document.getElementById("ymiror").checked;
 			var cb = document.getElementById("xunp").checked;
 			if (cb == true) level.unpinx = cb;
-			var cb = document.getElementById("yunp").checked;
+			cb = document.getElementById("yunp").checked;
 			if (cb == true) level.unpiny = cb;
 /// TEST - remove
 
@@ -3944,7 +3944,7 @@ var txsv = ":";
 
     outside: function(x, y, w, h) {
 // handle unpin areas in display test
-		var rx = this.x, ry = this.y, rw = this.w, rh = this.h, k = false;
+		var rx = this.x, ry = this.y, rw = this.w, rh = this.h, j = false, k = false;
 		if (this.x < 0) {
 			rx = Mastermap.w + this.x;
 			rw = 0 - this.x;
@@ -3956,7 +3956,19 @@ var txsv = ":";
 			rw = (this.x + this.w) - Mastermap.w;
 			k = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
 		}
-		if (k != false) return(false);
+		if (this.y < 0) {
+			ry = Mastermap.h + this.y;
+			rh = 0 - this.y;
+			j = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
+		}
+		else if ((this.y + this.h) > Mastermap.h)
+		{
+			ry = 0;
+			rh = (this.y + this.h) - Mastermap.h;
+			j = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
+		}
+
+		if (k != false || j != false) return(false);		// return is false if overlap happens
 
       return !Game.Math.overlap(x, y, w, h, this.x, this.y, this.w, this.h);
     },
@@ -3971,7 +3983,11 @@ var txsv = ":";
 				this.x = Math.min(x, map.w - 1);
 		 else
 				this.x = Game.Math.minmax(x, 0, map.w - this.w - 1);
-      this.y = Game.Math.minmax(y, 0, map.h - this.h - 1);
+
+		 if (map.level.unpiny != undefined)
+				this.y = Math.min(y, map.h - 1);
+		 else
+				this.y = Game.Math.minmax(y, 0, map.h - this.h - 1);
     },
 
     size: function(tw, map) {
