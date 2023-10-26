@@ -3944,31 +3944,46 @@ var txsv = ":";
 
     outside: function(x, y, w, h) {
 // handle unpin areas in display test
-		var rx = this.x, ry = this.y, rw = this.w, rh = this.h, j = false, k = false;
+		var rx = this.x, ry = this.y, rw = this.w, rh = this.h, j = false, k = false, m = false;
+		var txu = tyu = txo = tyo = false;
+
+// middle underpins
 		if (this.x < 0) {
+			txu = true;
 			rx = Mastermap.w + this.x;
 			rw = 0 - this.x;
 			k = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
 		}
 		else if ((this.x + this.w) > Mastermap.w)
 		{
+			txo = true;
 			rx = 0;
 			rw = (this.x + this.w) - Mastermap.w;
 			k = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
 		}
 		if (this.y < 0) {
+			tyu = true;
 			ry = Mastermap.h + this.y;
 			rh = 0 - this.y;
 			j = Game.Math.overlap(x, y, w, h, this.x, ry, this.w, rh);
 		}
 		else if ((this.y + this.h) > Mastermap.h)
 		{
+			tyo = true;
 			ry = 0;
 			rh = (this.y + this.h) - Mastermap.h;
 			j = Game.Math.overlap(x, y, w, h, this.x, ry, this.w, rh);
 		}
+// corner underpins
+		if (txu && tyu) {
+			rx = Mastermap.w + this.x;
+			rw = 0 - this.x;
+			ry = Mastermap.h + this.y;
+			rh = 0 - this.y;
+			m = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
+		}
 
-		if (k != false || j != false) return(false);		// return is false if overlap happens
+		if (k != false || j != false || m != false) return(false);		// return is false if overlap happens
 
       return !Game.Math.overlap(x, y, w, h, this.x, this.y, this.w, this.h);
     },
