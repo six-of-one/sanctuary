@@ -4160,6 +4160,15 @@ var txsv = ":";
 			 nh = 0 - viewport.y;
 			 ctx.drawImage(map.background, arx, ary, nw, nh, nxz, nyz, nw, nh);
 		 }
+		 if (txu && tyo) {
+			 arx = (map.w + viewport.x);
+			 ary = 0;
+			 nxz = 0;
+			 nyz = map.h - viewport.y;
+			 nw = 0 - viewport.x;
+			 nh = (viewport.y + viewport.h) - map.h;
+			 ctx.drawImage(map.background, arx, ary, nw, nh, nxz, nyz, nw, nh);
+		 }
 
 // normal viewport adjust for chunks of unpin overscan
 		 ctx.drawImage(map.background, rx, ry, w, h, xz, yz, w, h);
