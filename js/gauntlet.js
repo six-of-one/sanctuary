@@ -4068,6 +4068,9 @@ var txsv = ":";
 			 nx = 0, ny = 0;
 		 var txu = tyu = txo = tyo = false;
 // draw the spriotes unpinned !
+// the early returns had  to be removed - they blocked the corner tests
+// -- this likely means sprites are being called outside display area
+
 // middle unpin overscan sprites
 		 if ((viewport.x + viewport.w) > Mastermap.w)
 		 {
@@ -4076,7 +4079,7 @@ var txsv = ":";
 			 nx = viewport.w - (rx - x);
 			 if (x < rx && nx >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
-				return;
+//				return;
 			 }
 //			 nvx = Mastermap.w - viewport.x;
 		 }
@@ -4087,7 +4090,7 @@ var txsv = ":";
 			 nx = (0 - viewport.x) - (Mastermap.w - x);
 			 if (x > rx && nx >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
-				return;
+//				return;
 			 }
 //			 nvx = viewport.x;
 		 }
@@ -4099,7 +4102,7 @@ var txsv = ":";
 			 ny = viewport.h - (ry - y);
 			 if (y < ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - nvx, ny, w || TILE, h || TILE);
-				return;
+//				return;
 			 }
 		 }
 		 else
@@ -4107,11 +4110,9 @@ var txsv = ":";
 			 tyu = true;
 			 ry = (Mastermap.h + viewport.y);
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
-/// TEST - remove
-//document.title = "spr y<0:"+sx+":"+sy+" (sx/sy) "+(x-nvx)+" (x - nvx) "+ny+" ny "+ry+" ry "+x+":"+y+" (x:y) "+viewport.y+" v.y "+Mastermap.h+" Mm.h";
 			 if (y > ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - nvx, ny, w || TILE, h || TILE);
-				return;
+//				return;
 			 }
 		 }
 // corner unpin overscan sprites
@@ -4120,6 +4121,8 @@ var txsv = ":";
 			 nx = (0 - viewport.x) - (Mastermap.w - x);
 			 ry = (Mastermap.h + viewport.y);
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
+/// TEST - remove
+//document.title = "spr x<0 y<0:"+sx+":"+sy+" (sx/sy) "+nx+" nx "+ny+" ny "+rx+" rx "+ry+" ry "+x+":"+y+" (x:y) "+viewport.x+":"+viewport.y+" v.x:y "+Mastermap.w+":"+Mastermap.h+" Mm.w:h";
 			 if (x > rx && nx >= 0 && y > ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
 				return;
