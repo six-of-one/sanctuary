@@ -4145,10 +4145,19 @@ var txsv = ":";
 		 if (txo && tyo) {
 			 arx = 0;
 			 ary = 0;
-			 var nyz = map.h - viewport.y;
 			 var nxz = map.w - viewport.x;
+			 var nyz = map.h - viewport.y;
 			 nw = (viewport.x + viewport.w) - map.w;
 			 nh = (viewport.y + viewport.h) - map.h;
+			 ctx.drawImage(map.background, arx, ary, nw, nh, nxz, nyz, nw, nh);
+		 }
+		 if (txo && tyu) {
+			 arx = 0;
+			 ary = (map.h + viewport.y);
+			 nxz = map.w - viewport.x;
+			 nyz = 0;
+			 nw = (viewport.x + viewport.w) - map.w;
+			 nh = 0 - viewport.y;
 			 ctx.drawImage(map.background, arx, ary, nw, nh, nxz, nyz, nw, nh);
 		 }
 
