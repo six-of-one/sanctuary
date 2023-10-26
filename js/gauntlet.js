@@ -4091,6 +4091,7 @@ var txsv = ":";
 
 // draw the map background unpinned !
 
+// the middle single unpin overscans
 		 if ((viewport.x + viewport.w) > map.w) 
 		 {
 			 txo = true;
@@ -4133,7 +4134,6 @@ var txsv = ":";
 			 ry = 0;
 			 yz = 0 - viewport.y;
 		 }
-
 // corners of dual unpin overscan
 		 if (txu && tyu) {
 			 var arx = (map.w + viewport.x);
@@ -4143,12 +4143,15 @@ var txsv = ":";
 			 ctx.drawImage(map.background, arx, ary, nw, nh, 0, 0, nw, nh);
 		 }
 		 if (txo && tyo) {
-			 var arx = 0;
-			 var ary = 0;
+			 arx = 0;
+			 ary = 0;
+			 var nyz = map.h - viewport.y;
+			 var nxz = map.w - viewport.x;
 			 nw = 0 - viewport.x;
 			 nh = (viewport.x + viewport.w) - map.w;
-			 ctx.drawImage(map.background, arx, ary, nw, nh, 0, 0, nw, nh);
+			 ctx.drawImage(map.background, arx, ary, nw, nh, nxz, nyz, nw, nh);
 		 }
+
 // normal viewport adjust for chunks of unpin overscan
 		 ctx.drawImage(map.background, rx, ry, w, h, xz, yz, w, h);
     },
