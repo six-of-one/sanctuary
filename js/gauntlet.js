@@ -4050,6 +4050,16 @@ var txsv = ":";
 			 }
 		 }
 
+		 if ((viewport.y + viewport.h) > Mastermap.h)
+		 {
+			 ry = (viewport.y + viewport.h) - Mastermap.h;
+			 ny = viewport.h - (ry - y);
+			 if (y < ry && ny >= 0) {
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - viewport.x, ny, w || TILE, h || TILE);
+				return;
+			 }
+		 }
+		 else
 		 if (viewport.y < 0) {
 			 ry = (Mastermap.h + viewport.y);
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
