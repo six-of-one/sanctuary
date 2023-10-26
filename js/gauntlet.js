@@ -4147,8 +4147,8 @@ var txsv = ":";
 			 ary = 0;
 			 var nyz = map.h - viewport.y;
 			 var nxz = map.w - viewport.x;
-			 nw = 0 - viewport.x;
-			 nh = (viewport.x + viewport.w) - map.w;
+			 nw = (viewport.x + viewport.w) - map.w;
+			 nh = (viewport.y + viewport.h) - map.h;
 			 ctx.drawImage(map.background, arx, ary, nw, nh, nxz, nyz, nw, nh);
 		 }
 
