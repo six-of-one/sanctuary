@@ -3989,6 +3989,20 @@ var txsv = ":";
 			rh = (this.y + this.h) - Mastermap.h;
 			m = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
 		}
+		if (txo && tyu) {
+			rx = 0;
+			rw = (this.x + this.w) - Mastermap.w;
+			ry = Mastermap.h + this.y;
+			rh = 0 - this.y;
+			m = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
+		}
+		if (txu && tyo) {
+			rx = Mastermap.w + this.x;
+			rw = 0 - this.x;
+			ry = 0;
+			rh = (this.y + this.h) - Mastermap.h;
+			m = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
+		}
 
 		if (k != false || j != false || m != false) return(false);		// return is false if overlap happens
 
