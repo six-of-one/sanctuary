@@ -3959,13 +3959,13 @@ var txsv = ":";
 		if (this.y < 0) {
 			ry = Mastermap.h + this.y;
 			rh = 0 - this.y;
-			j = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
+			j = Game.Math.overlap(x, y, w, h, this.x, ry, this.w, rh);
 		}
 		else if ((this.y + this.h) > Mastermap.h)
 		{
 			ry = 0;
 			rh = (this.y + this.h) - Mastermap.h;
-			j = Game.Math.overlap(x, y, w, h, rx, ry, rw, rh);
+			j = Game.Math.overlap(x, y, w, h, this.x, ry, this.w, rh);
 		}
 
 		if (k != false || j != false) return(false);		// return is false if overlap happens
@@ -4027,7 +4027,7 @@ var txsv = ":";
 
     sprite: function(ctx, sprites, viewport, sx, sy, x, y, w, h) {
 
-		var rx = viewport.x,
+		var nvx = rx = viewport.x,
 			 ry = viewport.y,
 			 nx = 0, ny = 0;
 // draw the spriotes unpinned !
@@ -4039,6 +4039,7 @@ var txsv = ":";
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
 				return;
 			 }
+//			 nvx = Mastermap.w - viewport.x;
 		 }
 		 else
 		 if (viewport.x < 0) {
@@ -4048,6 +4049,7 @@ var txsv = ":";
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
 				return;
 			 }
+//			 nvx = viewport.x;
 		 }
 
 		 if ((viewport.y + viewport.h) > Mastermap.h)
@@ -4055,7 +4057,7 @@ var txsv = ":";
 			 ry = (viewport.y + viewport.h) - Mastermap.h;
 			 ny = viewport.h - (ry - y);
 			 if (y < ry && ny >= 0) {
-				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - viewport.x, ny, w || TILE, h || TILE);
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - nvx, ny, w || TILE, h || TILE);
 				return;
 			 }
 		 }
@@ -4063,8 +4065,10 @@ var txsv = ":";
 		 if (viewport.y < 0) {
 			 ry = (Mastermap.h + viewport.y);
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
+/// TEST - remove
+//document.title = "spr y<0:"+sx+":"+sy+" (sx/sy) "+(x-nvx)+" (x - nvx) "+ny+" ny "+ry+" ry "+x+":"+y+" (x:y) "+viewport.y+" v.y "+Mastermap.h+" Mm.h";
 			 if (y > ry && ny >= 0) {
-				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - viewport.x, ny, w || TILE, h || TILE);
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - nvx, ny, w || TILE, h || TILE);
 				return;
 			 }
 		 }
