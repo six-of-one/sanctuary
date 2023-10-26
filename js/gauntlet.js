@@ -4085,6 +4085,14 @@ var txsv = ":";
       map.background = map.background || Game.renderToCanvas(map.w, map.h, this.maptiles.bind(this, map));
 
 // draw the map background unpinned !
+		 if (viewport.x < 0 && viewport.y < 0) {
+			 rx = (map.w + viewport.x);
+			 ry = (map.h + viewport.y);
+			 w = 0 - viewport.x;
+			 h = 0 - viewport.y;
+			 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
+		 }
+
 		 if ((viewport.x + viewport.w) > map.w) 
 		 {
 			 rx = 0;
