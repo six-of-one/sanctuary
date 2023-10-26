@@ -4086,12 +4086,14 @@ var txsv = ":";
 			 rx = viewport.x,
 			 ry = viewport.y;
 		var rw = w, rh = h, xz = 0, yz = 0, nw, nh;
+		var txu = tyu = txo = tyo = false;
       map.background = map.background || Game.renderToCanvas(map.w, map.h, this.maptiles.bind(this, map));
 
 // draw the map background unpinned !
 
 		 if ((viewport.x + viewport.w) > map.w) 
 		 {
+			 txo = true;
 			 rx = 0;
 			 xz = map.w - viewport.x;
 			 w = (viewport.x + viewport.w) - map.w;
@@ -4102,6 +4104,7 @@ var txsv = ":";
 		 }
 		 else
 		 if (viewport.x < 0) {
+			 txu = true;
 			 rx = (map.w + viewport.x);
 			 w = 0 - viewport.x;
 			 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
@@ -4111,6 +4114,7 @@ var txsv = ":";
 		 }
 		 if ((viewport.y + viewport.h) > map.h)
 		 {
+			 tyo = true;
 			 ry = 0;
 			 yz = map.h - viewport.y;
 			 h = (viewport.y + viewport.h) - map.h;
@@ -4121,6 +4125,7 @@ var txsv = ":";
 		 }
 		 else
 		 if (viewport.y < 0) {
+			 tyu = true;
 			 ry = (map.h + viewport.y);
 			 h = 0 - viewport.y;
 			 ctx.drawImage(map.background, rx, ry, w, h, xz, yz, w, h);
@@ -4129,14 +4134,22 @@ var txsv = ":";
 			 yz = 0 - viewport.y;
 		 }
 
-		 if (viewport.x < 0 && viewport.y < 0) {
+// corners of dual unpin overscan
+		 if (txu && tyu) {
 			 var arx = (map.w + viewport.x);
 			 var ary = (map.h + viewport.y);
 			 nw = 0 - viewport.x;
 			 nh = 0 - viewport.y;
 			 ctx.drawImage(map.background, arx, ary, nw, nh, 0, 0, nw, nh);
 		 }
-
+		 if (txo && tyo) {
+			 var arx = 0;
+			 var ary = 0;
+			 nw = 0 - viewport.x;
+			 nh = (viewport.x + viewport.w) - map.w;
+			 ctx.drawImage(map.background, arx, ary, nw, nh, 0, 0, nw, nh);
+		 }
+// normal viewport adjust for chunks of unpin overscan
 		 ctx.drawImage(map.background, rx, ry, w, h, xz, yz, w, h);
     },
 
