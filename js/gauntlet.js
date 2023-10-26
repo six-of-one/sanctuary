@@ -737,7 +737,7 @@ Gauntlet = function() {
       { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
  //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null }, 
-      { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
+      { name: 'Level 1',       url: "levels/g2level1.pngu",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 2',       url: "levels/g2level2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
       { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Some food can be destroyed" },
       { name: 'Level 4',       url: "levels/glevel4.png",  floor: FLOOR.WOOD,      wall: WALL.GRAY7,    gflr: "gfx/g1floor4.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Fight hand to hand by running into grunts" },
@@ -4081,17 +4081,10 @@ var txsv = ":";
           h = Math.min(map.h, viewport.h)
 			 rx = viewport.x,
 			 ry = viewport.y;
-		var rw = w, rh = h, xz = 0, yz = 0;
+		var rw = w, rh = h, xz = 0, yz = 0, nw, nh;
       map.background = map.background || Game.renderToCanvas(map.w, map.h, this.maptiles.bind(this, map));
 
 // draw the map background unpinned !
-		 if (viewport.x < 0 && viewport.y < 0) {
-			 rx = (map.w + viewport.x);
-			 ry = (map.h + viewport.y);
-			 w = 0 - viewport.x;
-			 h = 0 - viewport.y;
-			 ctx.drawImage(map.background, rx, ry, w, h, 0, 0, w, h);
-		 }
 
 		 if ((viewport.x + viewport.w) > map.w) 
 		 {
@@ -4117,7 +4110,7 @@ var txsv = ":";
 			 ry = 0;
 			 yz = map.h - viewport.y;
 			 h = (viewport.y + viewport.h) - map.h;
-			 ctx.drawImage(map.background, rx, ry, w, h, 0, yz, w, h);
+			 ctx.drawImage(map.background, rx, ry, w, h, xz, yz, w, h);
 			 ry = viewport.y;
 			 h = yz;
 			 yz = 0;
@@ -4126,10 +4119,18 @@ var txsv = ":";
 		 if (viewport.y < 0) {
 			 ry = (map.h + viewport.y);
 			 h = 0 - viewport.y;
-			 ctx.drawImage(map.background, rx, ry, w, h, 0, yz, w, h);
+			 ctx.drawImage(map.background, rx, ry, w, h, xz, yz, w, h);
 			 h = rh + viewport.y;
 			 ry = 0;
 			 yz = 0 - viewport.y;
+		 }
+
+		 if (viewport.x < 0 && viewport.y < 0) {
+			 var arx = (map.w + viewport.x);
+			 var ary = (map.h + viewport.y);
+			 nw = 0 - viewport.x;
+			 nh = 0 - viewport.y;
+			 ctx.drawImage(map.background, arx, ary, nw, nh, 0, 0, nw, nh);
 		 }
 
 		 ctx.drawImage(map.background, rx, ry, w, h, xz, yz, w, h);
