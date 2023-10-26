@@ -4031,13 +4031,16 @@ var txsv = ":";
 			 ry = viewport.y,
 			 nx = 0, ny = 0;
 // draw the spriotes unpinned !
-/*		 if ((viewport.x + viewport.w) > Mastermap.w) 
+		 if ((viewport.x + viewport.w) > Mastermap.w)
 		 {
-			 rx = 0;
-//			 ctx.drawImage(map.background, rx, ry, w, h, xz, 0, w, h);
-			 ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - rx, y - ry, w || TILE, h || TILE);
+			 rx = (viewport.x + viewport.w) - Mastermap.w;
+			 nx = viewport.w - (rx - x);
+			 if (x < rx && nx >= 0) {
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
+				return;
+			 }
 		 }
-		 else */
+		 else
 		 if (viewport.x < 0) {
 			 rx = (Mastermap.w + viewport.x);
 			 nx = (0 - viewport.x) - (Mastermap.w - x);
