@@ -4125,6 +4125,36 @@ var txsv = ":";
 				return;
 			 }
 		 }
+		 if (txo && tyu) {
+			 rx = (viewport.x + viewport.w) - Mastermap.w;
+			 nx = viewport.w - (rx - x);
+			 ry = (Mastermap.h + viewport.y);
+			 ny = (0 - viewport.y) - (Mastermap.h - y);
+			 if (x < rx && nx >= 0 && y > ry && ny >= 0) {
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
+				return;
+			 }
+		 }
+		 if (txu && tyo) {
+			 rx = (Mastermap.w + viewport.x);
+			 nx = (0 - viewport.x) - (Mastermap.w - x);
+			 ry = (viewport.y + viewport.h) - Mastermap.h;
+			 ny = viewport.h - (ry - y);
+			 if (x > rx && nx >= 0 && y < ry && ny >= 0) {
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
+				return;
+			 }
+		 }
+		 if (txo && tyo) {
+			 rx = (viewport.x + viewport.w) - Mastermap.w;
+			 nx = viewport.w - (rx - x);
+			 ry = (viewport.y + viewport.h) - Mastermap.h;
+			 ny = viewport.h - (ry - y);
+			 if (x < rx && nx >= 0 && y < ry && ny >= 0) {
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
+				return;
+			 }
+		 }
 
 // normal viewport sprites
       ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - viewport.x, y - viewport.y, w || TILE, h || TILE);
