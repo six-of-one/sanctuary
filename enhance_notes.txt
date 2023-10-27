@@ -10,6 +10,12 @@ gar - garrison on amiga
 gJ - gauntlet javascript		(gJ.0 - original)
 ================================================================================================================================================
 
+dev:
+
+freeze monster / sotp gen
+stop health -1 / sec
+
+
 imm issues:
 
 teleport on death needs to remove death (or any other teleported on monster)

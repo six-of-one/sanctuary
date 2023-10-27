@@ -107,7 +107,7 @@ Gauntlet = function() {
         THIEF:   { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 220/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               },
         MUGGER:  { sx: 0, sy: 24, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 233/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 17, 17, 17, 17 ], generator: { glvl: [ 17, 17, 17, 17 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger", weapon: null  ,     nohlp: 62               },
 // g2 calls this the acid blob - it looks like an angry pickle...
-        PICKLE:  { sx: 0, sy: 25, frames: 3, fpf: FPS/10, score:  200, health:  60, speed: 40/FPS, damage:  60, selfharm: 300,      canbeshot: false,  canbehit: false, notfot: true, invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 18, 18, 18, 18 ], generator: { glvl: [ 18, 18, 18, 18 ], health: 10, speed: 1.5*FPS, max: 20, score: 500, sx: 32, sy: 8 }, name: "Acid blob", weapon: null  ,     nohlp: 63               }
+        PICKLE:  { sx: 0, sy: 25, frames: 3, fpf: FPS/10, score:  200, health:  60, speed: 40/FPS, damage:  60, selfharm: 300,      canbeshot: false,  canbehit: false, notfot: true, invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 18, 18, 18, 18 ], generator: { glvl: [ 18, 18, 18, 18 ], health: 10, speed: 1.5*FPS, max: 20, score: 500, sx: 32, sy: 8 }, name: "Acid blob", weapon: null  ,  hits: 'hitpickle',   nohlp: 63               }
       },
 // track a potential "richest" player path - (really have to track them all...)
 		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25, thiefexit = false,
@@ -646,7 +646,7 @@ Gauntlet = function() {
       { id: 'firewizard',      name: 'sounds/g1fire_wiz',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'fireelf',         		name: 'sounds/g1fire_elf',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'potionbang',  	name: 'sounds/g1_potionboom',        formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
-      { id: 'firelob',         		name: 'sounds/g1lobsht',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'firelob',         		name: 'sounds/g2-lobshot',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'hitghost',         		name: 'sounds/g1hit_ghost',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'hithump',         		name: 'sounds/g1hit_grunt',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
 // theif
@@ -727,6 +727,8 @@ Gauntlet = function() {
       { id: 'healthcnt',      name: 'sounds/g1_healthcount',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'sbuzz',      		  name: 'sounds/g1_buzz',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'coindrp',      		  name: 'sounds/g1_coindrop',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
+// gII sounds
+      { id: 'hitpickle',         		name: 'sounds/g2-pickle',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
 // let levels not have music
       { id: 'nullm',      		  name: 'sounds/null',              formats: ['ogg'], volume: 0.8 } 
     ],
