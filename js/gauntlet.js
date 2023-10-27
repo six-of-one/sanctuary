@@ -3736,6 +3736,14 @@ var txsv = ":";
 						entity.type = TREASURE.FFIELDDIM;
 				}
 
+/// TEST - remove
+// dev: sound test
+				var nsnd = to.number(document.getElementById("nsnd").value, 1);
+				if (document.getElementById("playsnd").checked) {
+					Musicth.play(Musicth.sounds[nsnd]);
+					document.getElementById("playsnd").checked = false;
+				}
+/// TEST - remove
 		}
     },
 
