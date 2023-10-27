@@ -728,9 +728,9 @@ Gauntlet = function() {
       { id: 'sbuzz',      		  name: 'sounds/g1_buzz',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'coindrp',      		  name: 'sounds/g1_coindrop',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
 // gII sounds
-      { id: 'stmug',      name: 'sounds/g2_slopoisn.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
-      { id: 'stheif',      name: 'sounds/g2_slopoisn.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
-      { id: 'unlkches',      name: 'sounds/g2_unlkches.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'stmug',      name: 'sounds/g2_stmugger.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'stheif',      name: 'sounds/g2_sttheif.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'unlkches',      name: 'sounds/g2_unlkchest.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'movexit',      name: 'sounds/g2_movexit.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'shotwall',      name: 'sounds/g2_shotwall.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'g2_wallexit',      name: 'sounds/g2_wallexit.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
@@ -3738,7 +3738,7 @@ var txsv = ":";
 
 /// TEST - remove
 // dev: sound test
-				var nsnd = to.number(document.getElementById("nsnd").value, 1);
+				var nsnd = document.getElementById("nsnd").value;
 				if (document.getElementById("playsnd").checked) {
 					if (Musicth.sounds[nsnd] != undefined)
 						Musicth.play(Musicth.sounds[nsnd]);
