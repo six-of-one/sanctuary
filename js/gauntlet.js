@@ -239,7 +239,7 @@ Gauntlet = function() {
         POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion', nohlp: 19 },
         POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', nohlp: 19  },
         GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1, troom: 1,             sound: 'collectgold', nohlp: 14, blkhlp: 15   },
-        LOCKED:    { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'collectgold', nohlp:   56 },
+        LOCKED:    { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'unlkches', nohlp:   56 },
         BAG:    { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5, troom: 1,                sound: 'collectgold', nohlp: 15, blkhlp: 14   },
 // teleport, trap, stun, force field tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport',  nohlp: 25  },
@@ -3112,6 +3112,7 @@ var txsv = ":";
 			HELPANNC[36] = Musicth.sounds.ancbeware;
 			HELPANNC[37] = Musicth.sounds.ancsorc;
 			HELPANNC[39] = Musicth.sounds.anckilthf;
+//			HELPANNC[56] = Musicth.sounds.g2antrlok;
 			HELPANNC[58] = Musicth.sounds.ancfooled;
 // treasure room count down
 			TROOMCNT[0] = Musicth.sounds.anc0;
