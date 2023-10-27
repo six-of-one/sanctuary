@@ -3740,7 +3740,8 @@ var txsv = ":";
 // dev: sound test
 				var nsnd = to.number(document.getElementById("nsnd").value, 1);
 				if (document.getElementById("playsnd").checked) {
-					Musicth.play(Musicth.sounds[nsnd]);
+					if (Musicth.sounds[nsnd] != undefined)
+						Musicth.play(Musicth.sounds[nsnd]);
 					document.getElementById("playsnd").checked = false;
 				}
 /// TEST - remove
