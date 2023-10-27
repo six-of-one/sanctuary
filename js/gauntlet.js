@@ -738,7 +738,18 @@ Gauntlet = function() {
       { id: 'slopoisn',      name: 'sounds/g2_slopoisn.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'bouncshot',      name: 'sounds/g2_bouncshot.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'hitpickle',         		name: 'sounds/g2_pickle',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'dragror',         		name: 'sounds/g2_drag',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+// g2 annc
+      { id: 'g2antrlok',      name: 'sounds/g2an_trlok',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'g2aninvw',      name: 'sounds/g2an_invwal',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'g2anmovx',      name: 'sounds/g2an_movex',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'g2anrefls',      name: 'sounds/g2an_reflsh',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'g2antt',      name: 'sounds/g2an_ttrn',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'g2anrep',      name: 'sounds/g2an_rep',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'g2anist',      name: 'sounds/g2an_isit',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'g2annwit',      name: 'sounds/g2an_nwit',             formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
 
+      { id: 'g4sec2',      name: 'sounds/music.g2.4sec',      formats: ['ogg'], volume: 1.0, loop: false             },
 
 // let levels not have music
       { id: 'nullm',      		  name: 'sounds/null',              formats: ['ogg'], volume: 0.8 } 
