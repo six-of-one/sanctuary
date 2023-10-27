@@ -1209,6 +1209,7 @@ Gauntlet = function() {
       else {
 			  $('booting').show();
 /// TEST - remove
+// this works - but it refuses to refresh if flvl is changed
 var lvu = document.getElementById("flvl").value;
 if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION , { onload: onloaded });
 		else
@@ -1718,6 +1719,11 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 // let player select any of 1st 7 levels or last saved level
 			var slvl = to.number(document.getElementById("sellvl").value, 1);		 
 			if (slvl == 8) slvl = to.number(this.storage[STORAGE.NLEVEL], 1);
+/// TEST - remove
+// dev - override level load with an internal level number
+	var dlvl = to.number(document.getElementById("nlvl").value, 1);
+		 if (dlvl > 7) slvl = dlvl; 
+/// TEST - remove
 
 			return slvl;
 	},

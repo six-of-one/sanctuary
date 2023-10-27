@@ -773,7 +773,7 @@ Game.Math = {
 // play demo - gauntlet 1, quiet
 			vid.src = "images/g1samply_q.ogv";
 			rot = 44400;								// 44 secs - len of g1 sample play
-/// TEST - REMOVE
+/// TEST - remove
 //		vid.src = "images/gN_intro.ogv";
 			if (Math.random() < 0.3)		// randomly select g2 intro and other vids
 			{
