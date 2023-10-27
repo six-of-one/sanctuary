@@ -729,6 +729,21 @@ Gauntlet = function() {
       { id: 'coindrp',      		  name: 'sounds/g1_coindrop',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
 // gII sounds
       { id: 'hitpickle',         		name: 'sounds/g2-pickle',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+
+/*
+sounds/g2-bouncshot.ogg
+sounds/g2_ffield.ogg
+sounds/g2-lobshot.ogg
+sounds/g2-movexit.ogg
+sounds/g2-pickle.ogg
+sounds/g2-shotwall.ogg
+sounds/g2-slopoisn.ogg
+sounds/g2_stmugger.ogg
+sounds/g2-stthief.ogg
+sounds/g2-unlkchest.ogg
+sounds/g2-wallexit.ogg
+sounds/g2-wallphase.ogg
+*/
 // let levels not have music
       { id: 'nullm',      		  name: 'sounds/null',              formats: ['ogg'], volume: 0.8 } 
     ],
