@@ -25,7 +25,6 @@ jsgv maze tiles are not proper update on floor obscuring-ent removal and some di
 
 
 need sounds:
-- ffield, acid, it, wall move (all gII)
 
 
 dead player is only lvl 1 bone pile
@@ -238,6 +237,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- ffield, acid, it, wall move (all gII)
 
 x-- forcefield ops cycles
 

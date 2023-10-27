@@ -646,7 +646,7 @@ Gauntlet = function() {
       { id: 'firewizard',      name: 'sounds/g1fire_wiz',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'fireelf',         		name: 'sounds/g1fire_elf',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'potionbang',  	name: 'sounds/g1_potionboom',        formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
-      { id: 'firelob',         		name: 'sounds/g2-lobshot',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'firelob',         		name: 'sounds/g2_lobshot',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'hitghost',         		name: 'sounds/g1hit_ghost',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'hithump',         		name: 'sounds/g1hit_grunt',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
 // theif
@@ -719,7 +719,7 @@ Gauntlet = function() {
       { id: 'collectfood',     name: 'sounds/g1_foodsnrf',           formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'opendoor',        name: 'sounds/g1_door',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'teleport',        	name: 'sounds/g1_teleport',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
-      { id: 'ffield',        	name: 'sounds/g2_ffield',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
+      { id: 'ffield',        	name: 'sounds/g2_ffield',              formats: ['ogg'], volume: 0.6, pool: ua.is.ie ? 2 : 6 },
       { id: 'trap',        			name: 'sounds/g1_wallexit',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'stun',      		  name: 'sounds/g1_stun',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'wallexit',        name: 'sounds/g1_wallexit',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
@@ -728,22 +728,18 @@ Gauntlet = function() {
       { id: 'sbuzz',      		  name: 'sounds/g1_buzz',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'coindrp',      		  name: 'sounds/g1_coindrop',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
 // gII sounds
-      { id: 'hitpickle',         		name: 'sounds/g2-pickle',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'stmug',      name: 'sounds/g2_slopoisn.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'stheif',      name: 'sounds/g2_slopoisn.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'unlkches',      name: 'sounds/g2_unlkches.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'movexit',      name: 'sounds/g2_movexit.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'shotwall',      name: 'sounds/g2_shotwall.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'g2_wallexit',      name: 'sounds/g2_wallexit.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'wallphase',      name: 'sounds/g2_wallphase.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'slopoisn',      name: 'sounds/g2_slopoisn.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'bouncshot',      name: 'sounds/g2_bouncshot.ogg',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'hitpickle',         		name: 'sounds/g2_pickle',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
 
-/*
-sounds/g2-bouncshot.ogg
-sounds/g2_ffield.ogg
-sounds/g2-lobshot.ogg
-sounds/g2-movexit.ogg
-sounds/g2-pickle.ogg
-sounds/g2-shotwall.ogg
-sounds/g2-slopoisn.ogg
-sounds/g2_stmugger.ogg
-sounds/g2-stthief.ogg
-sounds/g2-unlkchest.ogg
-sounds/g2-wallexit.ogg
-sounds/g2-wallphase.ogg
-*/
+
 // let levels not have music
       { id: 'nullm',      		  name: 'sounds/null',              formats: ['ogg'], volume: 0.8 } 
     ],
