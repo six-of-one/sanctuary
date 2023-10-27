@@ -52,8 +52,8 @@ player shot speed
 
 >make monsters slow on shot poison a timed effect - can cross lvl boundary
 >think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
-lobber shots & ai
-thief op & ai
+lobber shots & move logig
+thief op & logic
 
 save system via cooky
 > score tables
@@ -160,7 +160,7 @@ x--- "IT" - not sure want this - 10 pts for getting tho, no pts on tag
 >>>>>>>>>>>>>>>>>>>>>>
 expansion:
 
-Gauntlet anti-hero -- play as DM, stock dungeons with elements to stop AI heros
+Gauntlet anti-hero -- play as DM, stock dungeons with elements to stop bot heros
 -- cost system - if adding extra 5 3lvl ghost gen, have to put in 2 potions or 4 shot foods, etc
 -- use rng load profiles basis
 

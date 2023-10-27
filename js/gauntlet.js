@@ -2556,6 +2556,10 @@ var ymir = false, xmir = false;
 		 
 		speed = away ? 1 : this.type.speed;
 
+/// TEST - remove
+// dev: no move
+			if (document.getElementById("nommv").checked) return;
+/// TEST - remove
       // let travelling monsters travel
       if (this.travelling > 0)
         return this.step(map, player, this.dir, speed, countdown(this.travelling), !away);
@@ -2642,6 +2646,10 @@ var ymir = false, xmir = false;
         return true;
       }
 
+/// TEST - remove
+// dev: no move
+			if (document.getElementById("nommv").checked) return;
+/// TEST - remove
       // if we couldn't move in that direction at full speed, try a baby step before giving up
       if (speed > 1)
         return this.step(map, player, dir, 1, travelling, allowfire);
@@ -2768,6 +2776,11 @@ var ymir = false, xmir = false;
       // generators dont offscreen g1 / g2 - difficulty option
       if (viewport.outside(this.x, this.y, TILE, TILE))
         return;
+
+/// TEST - remove
+// dev: no gen
+			if (document.getElementById("nogen").checked) return;
+/// TEST - remove
 
       var pos;
       if ((this.count < this.type.max) && (--this.pending <= 0)) {
@@ -3594,6 +3607,10 @@ var txsv = ":";
 			else
 // players automatically lose 1 health every second
 			if (!DEBUG.NOAUTOHURT)
+/// TEST - remove
+// dev: no autohurt
+		if (!document.getElementById("noah").checked)
+/// TEST - remove
 				this.hurt(1 + hinv, this, true);
 
 // count down temps - may want a setTimeout fn for these and stalling
@@ -3676,6 +3693,10 @@ var txsv = ":";
 			if (this.stun > 0) this.stun--;
 // count health tics for stalling
 			stalling = stalling + 1;
+/// TEST - remove
+// dev: no stalling
+		if (!document.getElementById("nostal").checked)
+/// TEST - remove
 			if (stalling == DOORSTALL) {
 
 				var cells   = reloaded.cells,
@@ -3696,6 +3717,10 @@ var txsv = ":";
 				}
 			} 	// end doorstall
 
+/// TEST - remove
+// dev: no stalling
+		if (!document.getElementById("nostal").checked)
+/// TEST - remove
 			if (stalling == WALLSTALL) {
 
 				var cells   = reloaded.cells,
