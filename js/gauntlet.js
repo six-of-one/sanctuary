@@ -2270,8 +2270,12 @@ var ymir = false, xmir = false;
 	function mpixel(tw, tx,ty) { 
 
 		var n = tx + (ty * tw);
-		
-		return self.cells[n].pixel;
+
+// bombed out somehow in a thief encounter stuck around max.w-h testing walk across unpin
+		if (self.cells[n] != undefined)
+			return self.cells[n].pixel;
+		else
+			return false;
 		};
 
 // parseimg setup dups
@@ -3007,7 +3011,7 @@ var ymir = false, xmir = false;
   //===========================================================================
   // THE PLAYER
   //===========================================================================
-/// remove
+/// TEST - remove
 var txsv = ":";
 
   var Player = Class.create({
@@ -3204,20 +3208,20 @@ var txsv = ":";
 					if (this.x > (map.w - 2))
 				{
 					if (!Mastermap.occupied(5, this.y, TILE, TILE, this))
-						Mastermap.occupy(5, this.y, this);
+						Mastermap.occupy(3, this.y, this);
 					else this.x = map.w - 2;
 				}
 				else				
-					if (this.y < 3)
+					if (this.y < 1)
 				{
 					if (!Mastermap.occupied(this.x, map.h - 38, TILE, TILE, this))
-						Mastermap.occupy(this.x, map.h - 38, this);
-					else this.y = 3;
+						Mastermap.occupy(this.x, map.h - 36, this);
+					else this.y = 1;
 				}
 				else
 					if (this.y > (map.h - 37))
-					if (!Mastermap.occupied(this.x, 5, TILE, TILE, this))
-						Mastermap.occupy(this.x, 5, this);
+					if (!Mastermap.occupied(this.x, 4, TILE, TILE, this))
+						Mastermap.occupy(this.x, 3, this);
 					else this.y = map.h - 37;
 			}
 
