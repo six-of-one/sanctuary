@@ -1901,15 +1901,13 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 						if (collision.type.damage > 0) // dmg players in active FF
 						{
 							helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
-							var asnd = collision.type.sound;
-							Musicth.play(Musicth.sounds.asnd);
+							Musicth.play(Musicth.sounds[collision.type.sound]);
 							entity.hurt(collision.type.damage);
 						}
 // non damage tiles like water
 						else if (collision.type.nohlp != FFHLP) {
 							helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
-							asnd = collision.type.sound;
-							Musicth.play(Musicth.sounds.asnd);
+							Musicth.play(Musicth.sounds[collision.type.sound]);
 						}
 					}
 					collision = undefined;
