@@ -1905,7 +1905,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 							entity.hurt(collision.type.damage);
 						}
 // non damage tiles like water
-						else if (collision.type.nohlp != FFHLP) {
+						else if (collision.type.nohlp != FFHLP) 		// ffdim still uses FFHLP with no dmg
+						{
 							helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
 							Musicth.play(Musicth.sounds[collision.type.sound]);
 						}
