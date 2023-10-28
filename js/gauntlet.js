@@ -233,7 +233,7 @@ Gauntlet = function() {
 		helpcleared = 0, // option - tutorial count down 
 // uses exlow to select next item in set (but has to skip over intervening items)
 // these are based on where items appear in TREASURES[ ]
-		POWERADD = 6, LIMITEDADD = 10,
+		POWERADD = 6, LIMITEDADD = 10, WATADD = 12,
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
@@ -275,6 +275,10 @@ Gauntlet = function() {
         LIMTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 55  },
         LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 59  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' },
+// series of water boundary blocks
+        WATERT:       { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
+        WATERC:       { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
+        WATERR:       { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
 // this is the field down
         FFIELDDIM:       { sx: 27, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 61  },
 // this is the field power that damages
@@ -2287,6 +2291,7 @@ var ymir = false, xmir = false;
 				 if (ad == TREASURE.POISON && (sb == 2)) ad = TREASURE.BADPOT;
 				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb + POWERADD];
 				 if (ad == TREASURE.LIMINVIS && (sb > 0)) ad =  TREASURES[type(pixel) + sb + LIMITEDADD];
+				 if (ad == TREASURE.WATER && (sb > 0)) ad =  TREASURES[type(pixel) + sb + WATADD];
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) ad =  TREASURE.FFIELDDIM;
 				self.addTreasure(x, y, ad);
 				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
