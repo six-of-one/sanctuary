@@ -284,6 +284,7 @@ Gauntlet = function() {
 // this is the field power that damages
         FFIELDPOW:       { sx: 28, sy: 12, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 3, sound: 'ffield',  nohlp: 61  },
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
+// note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
       },
 		TROOMCNT = [ ], TROOMSUP = [ ], RNGLOAD = [ ],
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
@@ -334,7 +335,7 @@ Gauntlet = function() {
 											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER,
 											TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
-											TREASURE.POTIONORG, TREASURE.BADBOT ],
+											TREASURE.POTIONORG, TREASURE.BADBOT, TREASURE.WATERT, TREASURE.WATERC, TREASURE.WATERR ],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,    h: TILE          },
         PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2,  h: TILE - TILE/4 },
