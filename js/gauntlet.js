@@ -218,8 +218,7 @@ Gauntlet = function() {
 //									"Shoot ghost generators",
 //									"Some ghosts take more shots",
 //									"Fight grunts",
-//									"Your goal: find exit"
-									"end slot - do not display"
+									"Your goal: find exit"
 
 									],
 		HELPANNC = [ ], // announcer help tie ins
@@ -3205,7 +3204,7 @@ var txsv = ":";
 			TROOMCNT[9] = Musicth.sounds.anc9;
 			TROOMCNT[10] = Musicth.sounds.anc10;
 
-			for (var c = 0; c < 70; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
+			for (var c = 0; c < 100; c++) HELPCLEAR[c] = 1;	// option here would zero to turn off tutorial msgs
     },
 
     leave: function() {
