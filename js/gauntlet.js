@@ -3080,6 +3080,7 @@ var txsv = ":";
     initialize: function() {
 
 // load user options here
+				ffieldpulse = 0; // used by saver
 				document.getElementById("seldiff").value = readCookie("_ops_"+"seldiff");
 				document.getElementById("sellvl").value = readCookie("_ops_"+"sellvl");
 				document.getElementById("seltut").checked = readCookie("_ops_"+"seltut");
@@ -3819,6 +3820,7 @@ var txsv = ":";
 // dev cook storage
 //				createCookie("_dev_"+, document.getElementById().checked,7777);
 // the first 5 are (planned) normal ops and should be kept after TEST is removed...
+				if (ffieldpulse > 3 && (ffieldpulse & 15 == 15)) {
 				createCookie("_ops_"+"seldiff", document.getElementById("seldiff").value,7777);
 				createCookie("_ops_"+"sellvl", document.getElementById("sellvl").value,7777);
 				createCookie("_ops_"+"seltut", document.getElementById("seltut").checked,7777);
@@ -3837,7 +3839,7 @@ var txsv = ":";
 				createCookie("_dev_"+"noah", document.getElementById("noah").checked,7777);
 				createCookie("_dev_"+"nommv", document.getElementById("nommv").checked,7777);
 				createCookie("_dev_"+"nogen", document.getElementById("nogen").checked,7777);
-
+				}
 /// TEST - remove
 		}
     },
