@@ -12,11 +12,21 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 dev:
 
-freeze monster / sotp gen
-stop health -1 / sec
-
 
 imm issues:
+
+shorten ffield sound
+- some g2 sounds may need vol atten
+- g2 announcer does not match g1
+
+slowpoison sound on shot
+check sound for picking poison
+
+should locked chest display help/annc on touch w/o key?
+shot a shotable fake item: help/ annc ?
+
+move across unpin in 1/ 2 unit tunnel fails
+
 
 teleport on death needs to remove death (or any other teleported on monster)
 - limited transportability needs to remove just about everything
@@ -24,15 +34,22 @@ teleport on death needs to remove death (or any other teleported on monster)
 jsgv maze tiles are not proper update on floor obscuring-ent removal and some direct displays
 
 
-need sounds:
-
-
 dead player is only lvl 1 bone pile
 
 mute button & NOBKGMUSIC do not work with ogv that has audio
 
 
+
+need sounds:
+
+(rest of them...)
+
+
+
 port list:
+
+g2 phase wall, rnd wall, std wall shotable
+locked treasure needs item load
 
 player dmg: melee
 melee mis gens
@@ -69,13 +86,23 @@ g1 gfx tiles
 - walls & floors
 
 g2:
+-push wall pushing
 -shooting poison should play the sound
 -shootable "standard" wall - gives goody or baddy > need list of items
 -moving "pattern" wall
 -moving "ranodmly" wall
 -- trap walls done
 -invisible "become temp visible" walls -- likely a code deal with some overlay mask
+sngl potion stuns, dbl potion kills pickles (sup sorc too)
 
+new-ish:
+
+hue shift floors & loadable wall segment
+loadable wall seg, other modes (a la druid)
+color match 40400F walls & loadable wall with them | _ section
+:- possible multiple floor tile loader	(bigger tile area - victory road tex)
+trainable map reader (load g2 maps from maze ed, speccy maps)
+2nd player local
 
 >>>>>>>>>>>>>>>>>>>>>>
 WIP: arcade sound & gfx
@@ -237,6 +264,9 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- dev: freeze monster / sotp gen
+x--      stop health -1 / sec
 
 x-- ffield, acid, it, wall move (all gII)
 
