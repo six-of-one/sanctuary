@@ -771,7 +771,7 @@ Gauntlet = function() {
 // added gauntlet 1 levels as g1level{n}
 // gflr is gfx file for floor tiles
     levels: [
-      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor013.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
  //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null }, 
       { name: 'Level 1',       url: "levels/g2level1.pngu",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
@@ -3793,6 +3793,28 @@ var txsv = ":";
 						Musicth.play(Musicth.sounds[nsnd]);
 					document.getElementById("playsnd").checked = false;
 				}
+// dev cook storage
+//				createCookie("_dev_"+, document.getElementById().checked,0);
+// the first 5 are (planned) normal ops and should be kept after TEST is removed...
+				createCookie("_ops_"+"seldiff", document.getElementById("seltut").value,0);
+				createCookie("_ops_"+"sellvl", document.getElementById("seltut").value,0);
+				createCookie("_dev_"+"seltut", document.getElementById("seltut").checked,0);
+				createCookie("_dev_"+"seltutx", document.getElementById("seltutx").checked,0);
+				createCookie("_dev_"+"mazsolv", document.getElementById("mazsolv").checked,0);
+// keep     -^
+				createCookie("_dev_"+"xunp", document.getElementById("xunp").checked,0);
+				createCookie("_dev_"+"yunp", document.getElementById("yunp").checked,0);
+				createCookie("_dev_"+"xmiror", document.getElementById("xmiror").checked,0);
+				createCookie("_dev_"+"ymiror", document.getElementById("ymiror").checked,0);
+				createCookie("_dev_"+"invwal", document.getElementById("invwal").checked,0);
+				createCookie("_dev_"+"spedis", document.getElementById("invwal").checked,0);
+				createCookie("_dev_"+"blrndlod", document.getElementById("blrndlod").checked,0);
+				createCookie("_dev_"+"forndlod", document.getElementById("forndlod").checked,0);
+				createCookie("_dev_"+"nostal", document.getElementById("nostal").checked,0);
+				createCookie("_dev_"+"noah", document.getElementById("noah").checked,0);
+				createCookie("_dev_"+"nommv", document.getElementById("nommv").checked,0);
+				createCookie("_dev_"+"nogen", document.getElementById("nogen").checked,0);
+
 /// TEST - remove
 		}
     },
