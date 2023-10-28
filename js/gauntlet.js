@@ -1107,6 +1107,27 @@ Gauntlet = function() {
 				HSCORE[i,1] = readCookie(i+"name");
 				HSCORE[i,2] = readCookie(i+"char");
 		 }
+// load user options here
+				document.getElementById("seldiff").value = readCookie("_ops_"+"seldiff");
+				document.getElementById("sellvl").value = readCookie("_ops_"+"sellvl");
+				document.getElementById("seltut").checked = readCookie("_ops_"+"seltut");
+				document.getElementById("seltutx").checked = readCookie("_ops_"+"seltutx");
+				document.getElementById("mazsolv").checked = readCookie("_dev_"+"mazsolv");
+/// TEST - remove
+				document.getElementById("xunp").checked = readCookie("_dev_"+"xunp");
+				document.getElementById("yunp").checked = readCookie("_dev_"+"yunp");
+				document.getElementById("xmiror").checked = readCookie("_dev_"+"xmiror");
+				document.getElementById("ymiror").checked = readCookie("_dev_"+"ymiror");
+				document.getElementById("invwal").checked = readCookie("_dev_"+"invwal");
+				document.getElementById("spedis").checked = readCookie("_dev_"+"spedis");
+				document.getElementById("blrndlod").checked = readCookie("_dev_"+"blrndlod");
+				document.getElementById("forndlod").checked = readCookie("_dev_"+"forndlod");
+				document.getElementById("nostal").checked = readCookie("_dev_"+"nostal");
+				document.getElementById("noah").checked = readCookie("_dev_"+"noah");
+				document.getElementById("nommv").checked = readCookie("_dev_"+"nommv");
+				document.getElementById("nogen").checked = readCookie("_dev_"+"nogen");
+/// TEST - remove
+
     },
 
     onstart: function(event, previous, current, type, nlevel) {
@@ -3079,29 +3100,6 @@ var txsv = ":";
 
     initialize: function() {
 
-// load user options here
-				ffieldpulse = 0; // used by saver
-				document.getElementById("seldiff").value = readCookie("_ops_"+"seldiff");
-				document.getElementById("sellvl").value = readCookie("_ops_"+"sellvl");
-				document.getElementById("seltut").checked = readCookie("_ops_"+"seltut");
-				document.getElementById("seltutx").checked = readCookie("_ops_"+"seltutx");
-				document.getElementById("mazsolv").checked = readCookie("_dev_"+"mazsolv");
-/// TEST - remove
-				document.getElementById("xunp").checked = readCookie("_dev_"+"xunp");
-				document.getElementById("yunp").checked = readCookie("_dev_"+"yunp");
-				document.getElementById("xmiror").checked = readCookie("_dev_"+"xmiror");
-				document.getElementById("ymiror").checked = readCookie("_dev_"+"ymiror");
-				document.getElementById("invwal").checked = readCookie("_dev_"+"invwal");
-				document.getElementById("spedis").checked = readCookie("_dev_"+"spedis");
-				document.getElementById("blrndlod").checked = readCookie("_dev_"+"blrndlod");
-				document.getElementById("forndlod").checked = readCookie("_dev_"+"forndlod");
-				document.getElementById("nostal").checked = readCookie("_dev_"+"nostal");
-				document.getElementById("noah").checked = readCookie("_dev_"+"noah");
-				document.getElementById("nommv").checked = readCookie("_dev_"+"nommv");
-				document.getElementById("nogen").checked = readCookie("_dev_"+"nogen");
-/// TEST - remove
-
-
       subscribe(EVENT.START_LEVEL, this.onStartLevel.bind(this));
 
       this.canvas = Game.createCanvas(STILE + 2*FX.PLAYER_GLOW.border, STILE + 2*FX.PLAYER_GLOW.border);
@@ -3820,7 +3818,7 @@ var txsv = ":";
 // dev cook storage
 //				createCookie("_dev_"+, document.getElementById().checked,7777);
 // the first 5 are (planned) normal ops and should be kept after TEST is removed...
-				if (ffieldpulse > 3 && (ffieldpulse & 15 == 15)) {
+				if ((ffieldpulse & 15) == 7) {
 				createCookie("_ops_"+"seldiff", document.getElementById("seldiff").value,7777);
 				createCookie("_ops_"+"sellvl", document.getElementById("sellvl").value,7777);
 				createCookie("_ops_"+"seltut", document.getElementById("seltut").checked,7777);
