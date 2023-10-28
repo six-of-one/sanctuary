@@ -2292,7 +2292,7 @@ var ymir = false, xmir = false;
 				 if (ad == TREASURE.POISON && (sb == 2)) ad = TREASURE.BADPOT;
 				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb + POWERADD];
 				 if (ad == TREASURE.LIMINVIS && (sb > 0)) ad =  TREASURES[type(pixel) + sb + LIMITEDADD];
-				 if (ad == TREASURE.WATER && (sb > 0)) ad =  TREASURES[type(pixel) + sb + WATADD];
+				 if (ad == TREASURE.WATER && (sb > 0)) switch(sb) { case 1: ad = TREASURE.WATERT; break; case 2: ad = TREASURE.WATERC; break; case 3: ad = TREASURE.WATERR; break; }
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) ad =  TREASURE.FFIELDDIM;
 				self.addTreasure(x, y, ad);
 				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
@@ -2468,7 +2468,7 @@ var ymir = false, xmir = false;
 				 if (ad == TREASURE.POISON && (sb == 2)) ad = TREASURE.BADPOT;
 				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb + POWERADD];
 				 if (ad == TREASURE.LIMINVIS && (sb > 0)) ad =  TREASURES[type(pixel) + sb + LIMITEDADD];
-				 if (ad == TREASURE.WATER && (sb > 0)) ad =  TREASURES[type(pixel) + sb + WATADD];
+				 if (ad == TREASURE.WATER && (sb > 0)) switch(sb) { case 1: ad = TREASURE.WATERT; break; case 2: ad = TREASURE.WATERC; break; case 3: ad = TREASURE.WATERR; break; }
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) ad =  TREASURE.FFIELDDIM;
 				self.addTreasure(x, y, ad);
 				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
