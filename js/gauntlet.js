@@ -45,10 +45,6 @@ Gauntlet = function() {
 		 MEXHIGB = 0xFFFFE0,
 		 MEXLOB = 0x00001F,
 
-// uses exlow to select next item in set (but has to skip over intervening items)
-// these are based on where items appear in TREASURES[ ]
-		POWERADD = 5, LIMITEDADD = 9,
-
 // highscores
 	scoredex = 0,
 	HSCORE = [ 0, "Names", "character" ],
@@ -107,7 +103,7 @@ Gauntlet = function() {
         THIEF:   { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 220/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               },
         MUGGER:  { sx: 0, sy: 24, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 233/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 17, 17, 17, 17 ], generator: { glvl: [ 17, 17, 17, 17 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger", weapon: null  ,     nohlp: 62               },
 // g2 calls this the acid blob - it looks like an angry pickle...
-        PICKLE:  { sx: 0, sy: 25, frames: 3, fpf: FPS/10, score:  200, health:  60, speed: 40/FPS, damage:  60, selfharm: 300,      canbeshot: false,  canbehit: false, notfot: true, invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 18, 18, 18, 18 ], generator: { glvl: [ 18, 18, 18, 18 ], health: 10, speed: 1.5*FPS, max: 20, score: 500, sx: 32, sy: 8 }, name: "Acid blob", weapon: null  ,  hits: 'hitpickle',   nohlp: 63               }
+        PICKLE:  { sx: 0, sy:  25, frames: 3, fpf: FPS/10, score:  200, health:  60, speed: 40/FPS, damage:  60, selfharm: 300,      canbeshot: false,  canbehit: false, notfot: true, invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 18, 18, 18, 18 ], generator: { glvl: [ 18, 18, 18, 18 ], health: 10, speed: 1.5*FPS, max: 20, score: 500, sx: 32, sy: 8 }, name: "Acid blob", weapon: null  ,  hits: 'hitpickle',   nohlp: 63               }
       },
 // track a potential "richest" player path - (really have to track them all...)
 		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25, thiefexit = false,
@@ -230,6 +226,10 @@ Gauntlet = function() {
 // shooting a potion			26
 // collect magic before	27
 		helpcleared = 0, // option - tutorial count down 
+// uses exlow to select next item in set (but has to skip over intervening items)
+// these are based on where items appear in TREASURES[ ]
+		POWERADD = 6, LIMITEDADD = 10,
+
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
         POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' },
@@ -257,6 +257,7 @@ Gauntlet = function() {
         PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , nohlp: 58 },
 // this is the red wall pillar thingy
         FFIELDUNIT:       { sx: 5, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
+        WATER:       { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
         XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtpwr',   sound: 'collectpotion',  nohlp: 2  },
         XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtspd',   sound: 'collectpotion', nohlp: 3  },
         XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxarm',   sound: 'collectpotion', nohlp: 4  },
@@ -321,7 +322,7 @@ Gauntlet = function() {
 											MONSTER.THIEF, MONSTER.MUGGER, MONSTER.PICKLE ],
       TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
-											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT,
+											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER,
 											TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
 											TREASURE.POTIONORG, TREASURE.BADBOT ],

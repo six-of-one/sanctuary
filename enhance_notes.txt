@@ -97,6 +97,8 @@ sngl potion stuns, dbl potion kills pickles (sup sorc too)
 
 new-ish:
 
+water, lava, toxic sludge, glue - need slow effect
+
 hue shift floors & loadable wall segment
 loadable wall seg, other modes (a la druid)
 color match 40400F walls & loadable wall with them | _ section
