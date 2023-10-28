@@ -187,24 +187,29 @@ Gauntlet = function() {
 // g2 messages start here
 // g2 also reverses monster hit msg, to say player loses {N} health second, as here
 									"Avoid force fields<br>Player loses # health",																// 61
+
 // mugger msg
 									"Kill mugger to recover stolen health",
 									"Avoid acid puddles<br>Player loses # health",
-									"Acid puddles move randomly",
+									"Acid puddles move randomly",																						// 64
 									"Some walls can be shot and turn into good or bad",
-//									"Save keys to open doors or chests",
+									"Save keys to open doors or chests",
 									"There can be more than one trap",
 //									"Death 'dies' after taking<br>up to 200 health",
 // alt idea, sounds better
-//									"Death disappears after<br>taking up to 200 health",
+									"Death disappears after<br>taking up to 200 health",
 									"Shoot super sorceror<br>Player loses # health",
 // this is g2 msg, diff from g1 msg
 //									"Have friends join in any time",
-									"You are now IT",
+									"You are now IT",																										// 70
 //									"Monsters follow player<br>who is IT",
 									"Tag, you're IT",
 									"Some walls move randomly",
 //									"Monsters may move differently",
+
+// expanded
+									"Water slows you down",
+
 //									"",
 
 // these are in the g1 intro, but not coded in
@@ -283,7 +288,7 @@ Gauntlet = function() {
 		TELEPORTILE = 0x0080a0,
 		FFIELDTILE = 0x008130,
 // easy way to detect non shootables
-		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63,
+		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, WTHLP = 73,
 // until target traps are coded any trap will remove these
 		TRAPWALL = 0x404030,
 		TRAPTRIG = 0x0080b0,
@@ -1876,6 +1881,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 					if (collision.type.nohlp != undefined) 
 					{
 						if (collision.type.nohlp == FFHLP) ffcol = true ;
+						if (collision.type.nohlp == WTHLP) ffcol = true ;
 						if (collision.type.nohlp == STNHLP) subcol = true;
 						if (collision.type.nohlp == TRPHLP) subcol = true;
 						if (collision.type.nohlp == PCKLHLP) subcol = true;
@@ -1892,9 +1898,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 					if (entity.player && collision.type.damage > 0) // dmg players in active FF
 					{
 						helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
-//						if (!walled) 
-						Musicth.play(Musicth.sounds.ffield);
-//						walled = true;
+						Musicth.play(collision.type.sound);
 						entity.hurt(collision.type.damage);
 					}
 					collision = undefined;
