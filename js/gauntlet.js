@@ -1790,10 +1790,10 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
         this.storage[STORAGE.SCORE] = (this.player.score / this.player.droppedcoins);
         this.storage[STORAGE.WHO]   = this.player.type.name;
       }
-		createCookie(scoredex+"char", this.player.type.name,0);
-		createCookie(scoredex+"score",(this.player.score / this.player.droppedcoins),0);
-		createCookie(scoredex+"name", "proggy-nif",0);
-		createCookie("hindex", scoredex,0);
+		createCookie(scoredex+"char", this.player.type.name,7777);
+		createCookie(scoredex+"score",(this.player.score / this.player.droppedcoins),7777);
+		createCookie(scoredex+"name", "proggy-nif",7777);
+		createCookie("hindex", scoredex,7777);
 		HSCORE[scoredex,0] = (this.player.score / this.player.droppedcoins);
 		HSCORE[scoredex,1] = "proggy-nif";
 		HSCORE[scoredex,2] = this.player.type.name;
@@ -3080,8 +3080,8 @@ var txsv = ":";
     initialize: function() {
 
 // load user options here
-				document.getElementById("seltut").value = readCookie("_ops_"+"seldiff");
-				document.getElementById("seltut").value = readCookie("_ops_"+"sellvl");
+				document.getElementById("seldiff").value = readCookie("_ops_"+"seldiff");
+				document.getElementById("sellvl").value = readCookie("_ops_"+"sellvl");
 				document.getElementById("seltut").checked = readCookie("_ops_"+"seltut");
 				document.getElementById("seltutx").checked = readCookie("_ops_"+"seltutx");
 				document.getElementById("mazsolv").checked = readCookie("_dev_"+"mazsolv");
@@ -3091,7 +3091,7 @@ var txsv = ":";
 				document.getElementById("xmiror").checked = readCookie("_dev_"+"xmiror");
 				document.getElementById("ymiror").checked = readCookie("_dev_"+"ymiror");
 				document.getElementById("invwal").checked = readCookie("_dev_"+"invwal");
-				document.getElementById("invwal").checked = readCookie("_dev_"+"spedis");
+				document.getElementById("spedis").checked = readCookie("_dev_"+"spedis");
 				document.getElementById("blrndlod").checked = readCookie("_dev_"+"blrndlod");
 				document.getElementById("forndlod").checked = readCookie("_dev_"+"forndlod");
 				document.getElementById("nostal").checked = readCookie("_dev_"+"nostal");
@@ -3817,26 +3817,26 @@ var txsv = ":";
 					document.getElementById("playsnd").checked = false;
 				}
 // dev cook storage
-//				createCookie("_dev_"+, document.getElementById().checked,0);
+//				createCookie("_dev_"+, document.getElementById().checked,7777);
 // the first 5 are (planned) normal ops and should be kept after TEST is removed...
-				createCookie("_ops_"+"seldiff", document.getElementById("seltut").value,0);
-				createCookie("_ops_"+"sellvl", document.getElementById("seltut").value,0);
-				createCookie("_ops_"+"seltut", document.getElementById("seltut").checked,0);
-				createCookie("_ops_"+"seltutx", document.getElementById("seltutx").checked,0);
-				createCookie("_dev_"+"mazsolv", document.getElementById("mazsolv").checked,0);
+				createCookie("_ops_"+"seldiff", document.getElementById("seldiff").value,7777);
+				createCookie("_ops_"+"sellvl", document.getElementById("sellvl").value,7777);
+				createCookie("_ops_"+"seltut", document.getElementById("seltut").checked,7777);
+				createCookie("_ops_"+"seltutx", document.getElementById("seltutx").checked,7777);
+				createCookie("_dev_"+"mazsolv", document.getElementById("mazsolv").checked,7777);
 // keep     -^
-				createCookie("_dev_"+"xunp", document.getElementById("xunp").checked,0);
-				createCookie("_dev_"+"yunp", document.getElementById("yunp").checked,0);
-				createCookie("_dev_"+"xmiror", document.getElementById("xmiror").checked,0);
-				createCookie("_dev_"+"ymiror", document.getElementById("ymiror").checked,0);
-				createCookie("_dev_"+"invwal", document.getElementById("invwal").checked,0);
-				createCookie("_dev_"+"spedis", document.getElementById("invwal").checked,0);
-				createCookie("_dev_"+"blrndlod", document.getElementById("blrndlod").checked,0);
-				createCookie("_dev_"+"forndlod", document.getElementById("forndlod").checked,0);
-				createCookie("_dev_"+"nostal", document.getElementById("nostal").checked,0);
-				createCookie("_dev_"+"noah", document.getElementById("noah").checked,0);
-				createCookie("_dev_"+"nommv", document.getElementById("nommv").checked,0);
-				createCookie("_dev_"+"nogen", document.getElementById("nogen").checked,0);
+				createCookie("_dev_"+"xunp", document.getElementById("xunp").checked,7777);
+				createCookie("_dev_"+"yunp", document.getElementById("yunp").checked,7777);
+				createCookie("_dev_"+"xmiror", document.getElementById("xmiror").checked,7777);
+				createCookie("_dev_"+"ymiror", document.getElementById("ymiror").checked,7777);
+				createCookie("_dev_"+"invwal", document.getElementById("invwal").checked,7777);
+				createCookie("_dev_"+"spedis", document.getElementById("spedis").checked,7777);
+				createCookie("_dev_"+"blrndlod", document.getElementById("blrndlod").checked,7777);
+				createCookie("_dev_"+"forndlod", document.getElementById("forndlod").checked,7777);
+				createCookie("_dev_"+"nostal", document.getElementById("nostal").checked,7777);
+				createCookie("_dev_"+"noah", document.getElementById("noah").checked,7777);
+				createCookie("_dev_"+"nommv", document.getElementById("nommv").checked,7777);
+				createCookie("_dev_"+"nogen", document.getElementById("nogen").checked,7777);
 
 /// TEST - remove
 		}
