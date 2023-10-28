@@ -15,7 +15,7 @@ dev:
 
 imm issues:
 
-shorten ffield sound
+x- shorten ffield sound -- done to 4.5 secs, 1/2 sec fade, but needs further testing
 - some g2 sounds may need vol atten
 - g2 announcer does not match g1
 
@@ -269,6 +269,7 @@ done:
 
 x-- dev: freeze monster / sotp gen
 x--      stop health -1 / sec
+x-- dev / options sticky via cooky
 
 x-- ffield, acid, it, wall move (all gII)
 
