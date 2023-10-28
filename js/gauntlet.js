@@ -209,6 +209,7 @@ Gauntlet = function() {
 
 // expanded
 									"Water slows you down",
+									"Lava is very dangerous<br>Avoid lava or take # damage",
 
 //									"",
 
@@ -282,6 +283,7 @@ Gauntlet = function() {
         WATERT:       { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
         WATERC:       { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
         WATERR:       { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
+        LAVA:       { sx: 16, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
       },
@@ -333,7 +335,7 @@ Gauntlet = function() {
 											MONSTER.THIEF, MONSTER.MUGGER, MONSTER.PICKLE ],
       TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
-											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER,
+											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER, TREASURE.LAVA,
 // these are selected by MEXLOW case {}, or other code
 											TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
@@ -1924,7 +1926,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 					if (collision.type.nohlp != undefined) 
 					{
 						if (collision.type.nohlp == FFHLP) ffcol = true ;
-						if (collision.type.nohlp == WTHLP) ffcol = true ;
+						if (collision.type.nohlp >= WTHLP) ffcol = true ;
 						if (collision.type.nohlp == STNHLP) subcol = true;
 						if (collision.type.nohlp == TRPHLP) subcol = true;
 						if (collision.type.nohlp == PCKLHLP) subcol = true;
