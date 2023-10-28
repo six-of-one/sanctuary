@@ -3078,6 +3078,29 @@ var txsv = ":";
   var Player = Class.create({
 
     initialize: function() {
+
+// load user options here
+				document.getElementById("seltut").value = readCookie("_ops_"+"seldiff");
+				document.getElementById("seltut").value = readCookie("_ops_"+"sellvl");
+				document.getElementById("seltut").checked = readCookie("_ops_"+"seltut");
+				document.getElementById("seltutx").checked = readCookie("_ops_"+"seltutx");
+				document.getElementById("mazsolv").checked = readCookie("_dev_"+"mazsolv");
+/// TEST - remove
+				document.getElementById("xunp").checked = readCookie("_dev_"+"xunp");
+				document.getElementById("yunp").checked = readCookie("_dev_"+"yunp");
+				document.getElementById("xmiror").checked = readCookie("_dev_"+"xmiror");
+				document.getElementById("ymiror").checked = readCookie("_dev_"+"ymiror");
+				document.getElementById("invwal").checked = readCookie("_dev_"+"invwal");
+				document.getElementById("invwal").checked = readCookie("_dev_"+"spedis");
+				document.getElementById("blrndlod").checked = readCookie("_dev_"+"blrndlod");
+				document.getElementById("forndlod").checked = readCookie("_dev_"+"forndlod");
+				document.getElementById("nostal").checked = readCookie("_dev_"+"nostal");
+				document.getElementById("noah").checked = readCookie("_dev_"+"noah");
+				document.getElementById("nommv").checked = readCookie("_dev_"+"nommv");
+				document.getElementById("nogen").checked = readCookie("_dev_"+"nogen");
+/// TEST - remove
+
+
       subscribe(EVENT.START_LEVEL, this.onStartLevel.bind(this));
 
       this.canvas = Game.createCanvas(STILE + 2*FX.PLAYER_GLOW.border, STILE + 2*FX.PLAYER_GLOW.border);
@@ -3798,8 +3821,8 @@ var txsv = ":";
 // the first 5 are (planned) normal ops and should be kept after TEST is removed...
 				createCookie("_ops_"+"seldiff", document.getElementById("seltut").value,0);
 				createCookie("_ops_"+"sellvl", document.getElementById("seltut").value,0);
-				createCookie("_dev_"+"seltut", document.getElementById("seltut").checked,0);
-				createCookie("_dev_"+"seltutx", document.getElementById("seltutx").checked,0);
+				createCookie("_ops_"+"seltut", document.getElementById("seltut").checked,0);
+				createCookie("_ops_"+"seltutx", document.getElementById("seltutx").checked,0);
 				createCookie("_dev_"+"mazsolv", document.getElementById("mazsolv").checked,0);
 // keep     -^
 				createCookie("_dev_"+"xunp", document.getElementById("xunp").checked,0);
