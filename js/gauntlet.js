@@ -116,98 +116,98 @@ Gauntlet = function() {
 		HELPDIS = [
 									"Null 0 entry - no usable",
 // ops
-									"You now have extra speed",																				// 1
+									"You now have extra speed",																						// 1
 									"You now have extra shot power",
 									"You now have extra shot speed",
 									"You now have extra armor",
-									"You now have extra fight power",																			// 5
+									"You now have extra fight power",																				// 5
 									"You now have extra magic power",
 									"You now have limited invisibility",
 // lvl notification
 									"<font color=yellow>Find the hidden potion</font>",
 									"<font color=red>You have # seconds to collect treasures</font>",
-									"<font color=yellow>You must exit to receive bonus points</font>",				// 10
+									"<font color=yellow>You must exit to receive bonus points</font>",									// 10
 									"Player shots now stun other players",
 									"Player shots now hurt other players",
 									"Players can now go off screen",
 // help only
 									"Treasure: 100 points",
-									"Treasure: 500 points",																									// 15
+									"Treasure: 500 points",																								// 15
 									"Food: health increased by 100",
 									"Food: health increased by RND",
 // help items & rnd lvl messages
 									"Save keys to open doors",
 									"Save potions for later use",
-									"Traps make walls disappear",																			//20
+									"Traps make walls disappear",																						// 20
 									"Some food destroyed by shots",
-//									"Shooting magic potions has a lesser effect",			// g IV dialog
+//									"Shooting magic potions has a lesser effect",							// g IV dialog
 									"Shooting a potion has a lesser effect",
 									"Magic potions work differently for each player",
 									"Magic potions affect everything on screen",
-									"Transporters move you to<br> the closest transporter visible",			// 25
+									"Transporters move you to<br> the closest transporter visible",										// 25
 									"Some walls may be destroyed",
 									"Stalling will cause doors to open",
 									"Find exit to next level",
 									"Get bonus multiplier by collecting treasure",
-									"More players allow higher bonus multiplier",															// 30
+									"More players allow higher bonus multiplier",																// 30
 									"Add more players for greater fire power",
 									"Have friends join in",
 // lvl messages 2, 3, 4, 5, 6, 7
 									"Ghosts must be shot",
 									"Some food can be destroyed",
-									"Fight hand to hand by running into grunts",															// 35
+									"Fight hand to hand by running into grunts",																	// 35
 									"Beware the demons which shoot you",
 									"Sorcerers may be invisible",
 									"Use magic to kill death",
 // thief msg
 									"Kill thief to recover stolen item",
-									"Item on next level",																												// 40
+									"Item on next level",																								// 40
 // ply action only
 									"Player loses # health<br>Shoot or avoid ghosts",
 									"Player loses # health<br>Shoot or fight grunts",
 									"Player loses # health<br>Shoot or fight demons",
 									"Player loses # health<br>Shoot or fight sorcerers",
-									"Player loses # health<br>Shoot or fight lobbers",										// 45
+									"Player loses # health<br>Shoot or fight lobbers",															// 45
 
 									"Collect magic potion before pressing magic",
 									"You are full of bombs and/or keys",
 									"Shots do not hurt other players yet",
 // gII
 									"Some tiles stun players",
-									"Shooting poison slows monsters",																			// 50
+									"Shooting poison slows monsters",																				// 50
 									"You now have invulnerability",
 									"You now have extra repulsiveness",
 									"You now have reflective shots",
 									"You now have super shots",
 									"You now have teleportability",																					// 55
-									"Some chests are locked",
-									"Some walls may be pushed",
+//									"Some chests are locked",
+									"Some treasure requires keys",
+//									"Some walls may be pushed",
+									"Push movable walls",																								// 57	
 // expanded
 									"Fooled you!  Some items may be fake",
 									"You now have the life ankh",
-									"Player loses # health<br>use magic to kill death",										// 60
+									"Player loses # health<br>use magic to kill death",														// 60
 // g2 messages start here
 // g2 also reverses monster hit msg, to say player loses {N} health second, as here
 									"Avoid force fields<br>Player loses # health",																// 61
 // mugger msg
 									"Kill mugger to recover stolen health",
 									"Avoid acid puddles<br>Player loses # health",
-									"Acid puddles move randomly"
-//									"Some walls can be shot and turn into good or bad",
-//									"Push movable walls",
-//									"Save keys to open doors",
-//									"Some treasure requires keys",
-//									"There can be more than one trap",
+									"Acid puddles move randomly",
+									"Some walls can be shot and turn into good or bad",
+//									"Save keys to open doors or chests",
+									"There can be more than one trap",
 //									"Death 'dies' after taking<br>up to 200 health",
 // alt idea, sounds better
 //									"Death disappears after<br>taking up to 200 health",
-//									"Shoot super sorceror<br>Player loses # health",
+									"Shoot super sorceror<br>Player loses # health",
 // this is g2 msg, diff from g1 msg
 //									"Have friends join in any time",
-//									"You are now IT",
+									"You are now IT",
 //									"Monsters follow player<br>who is IT",
-//									"Tag, you're IT",
-//									"Some walls move randomly",
+									"Tag, you're IT",
+									"Some walls move randomly",
 //									"Monsters may move differently",
 //									"",
 
@@ -217,6 +217,7 @@ Gauntlet = function() {
 //									"Some ghosts take more shots",
 //									"Fight grunts",
 //									"Your goal: find exit"
+									"end slot - do not display"
 
 									],
 		HELPANNC = [ ], // announcer help tie ins
@@ -271,7 +272,8 @@ Gauntlet = function() {
 // this is the field down
         FFIELDDIM:       { sx: 27, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 61  },
 // this is the field power that damages
-        FFIELDPOW:       { sx: 28, sy: 12, frames:8, speed: 0.25*FPS, fpf: FPS/5, damage: 3, sound: 'ffield',  nohlp: 61  },
+        FFIELDPOW:       { sx: 28, sy: 12, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 3, sound: 'ffield',  nohlp: 61  },
+// note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
       },
 		TROOMCNT = [ ], TROOMSUP = [ ], RNGLOAD = [ ],
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
