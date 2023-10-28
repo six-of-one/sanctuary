@@ -2467,6 +2467,7 @@ var ymir = false, xmir = false;
 				 if (ad == TREASURE.POISON && (sb == 2)) ad = TREASURE.BADPOT;
 				 if (ad == TREASURE.XSPEED && (sb > 0)) ad =  TREASURES[type(pixel) + sb + POWERADD];
 				 if (ad == TREASURE.LIMINVIS && (sb > 0)) ad =  TREASURES[type(pixel) + sb + LIMITEDADD];
+				 if (ad == TREASURE.WATER && (sb > 0)) ad =  TREASURES[type(pixel) + sb + WATADD];
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) ad =  TREASURE.FFIELDDIM;
 				self.addTreasure(x, y, ad);
 				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
