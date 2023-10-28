@@ -262,7 +262,7 @@ Gauntlet = function() {
         PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , nohlp: 58 },
 // this is the red wall pillar thingy
         FFIELDUNIT:       { sx: 5, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
-        WATER:       { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
+        WATER:       { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
         XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtpwr',   sound: 'collectpotion',  nohlp: 2  },
         XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtspd',   sound: 'collectpotion', nohlp: 3  },
         XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxarm',   sound: 'collectpotion', nohlp: 4  },
@@ -1895,11 +1895,20 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				if (!collision.player && entity.weapon && subcol) collision = undefined;
 				else if (ffcol == true) 
 				{
-					if (entity.player && collision.type.damage > 0) // dmg players in active FF
+					if (entity.player)
 					{
-						helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
-						Musicth.play(collision.type.sound);
-						entity.hurt(collision.type.damage);
+// handle tiles that do dmg - forcefield, liquids, etc
+						if (collision.type.damage > 0) // dmg players in active FF
+						{
+							helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
+							Musicth.play(collision.type.sound);
+							entity.hurt(collision.type.damage);
+						}
+// non damage tiles like water
+						else if (collision.type.nohlp != FFHLP) {
+							helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
+							Musicth.play(collision.type.sound);
+						}
 					}
 					collision = undefined;
 				}
