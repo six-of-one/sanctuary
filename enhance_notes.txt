@@ -19,8 +19,8 @@ x- shorten ffield sound -- done to 4.5 secs, 1/2 sec fade, but needs further tes
 - some g2 sounds may need vol atten
 - g2 announcer does not match g1
 
-slowpoison sound on shot
-check sound for picking poison
+g2 ? food research (find in files, or redo)
+check sound for picking poison (is potion pick sound, need g2 ref)
 
 should locked chest display help/annc on touch w/o key?
 shot a shotable fake item: help/ annc ?
@@ -266,6 +266,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- slowpoison sound on shot, extend 30 secs, attenuate slow fade, lower vol
 
 x-- dev: freeze monster / sotp gen
 x--      stop health -1 / sec
