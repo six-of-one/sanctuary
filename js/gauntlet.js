@@ -3009,7 +3009,7 @@ var ymir = false, xmir = false;
 				}
 				if (this.type.poison)
 				{
-// AUDIO: needs extract from g2
+						Musicth.play(Musicth.sounds.slopoisn);
 						slowmonstertime = slowmonstertime + 30;
 						slowmonster = 0.5;
 						helpdis(nohlppois, undefined, 2000, undefined, undefined);
