@@ -16,6 +16,7 @@ dev:
 imm issues:
 
 x- shorten ffield sound -- done to 4.5 secs, 1/2 sec fade, but needs further testing
+   \ lower vol as well
 - some g2 sounds may need vol atten
 - g2 announcer does not match g1
 
