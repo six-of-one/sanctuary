@@ -211,6 +211,8 @@ Gauntlet = function() {
 									"Water slows you down",
 									"Lava is very dangerous<br>Avoid lava or take # damage",
 
+//									"Level 4+ grunts can throw clubs",
+//									"Heavy death can shoot to drain life",
 //									"",
 
 // these are in the g1 intro, but not coded in
@@ -234,6 +236,7 @@ Gauntlet = function() {
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
+        HEALRND:   { sx: 2, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood',  nohlp: 16   },
         FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
         FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
         FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16   },
@@ -338,14 +341,14 @@ Gauntlet = function() {
 											MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2, 
 											MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, 
 											MONSTER.THIEF, MONSTER.MUGGER, MONSTER.PICKLE ],
-      TREASURES = [ TREASURE.HEALTH, TREASURE.POISON, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
+      TREASURES = [ TREASURE.HEALTH, TREASURE.HEALRND, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
 											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER, TREASURE.LAVA, TREASURE.FIRESTK,
 											TREASURE.BARLFL,
 // these are selected by MEXLOW case {}, or other code
 											TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
-											TREASURE.POTIONORG, TREASURE.BADBOT, TREASURE.WATERT, TREASURE.WATERC, TREASURE.WATERR, TREASURE.LAVAT, TREASURE.LAVAC, TREASURE.LAVAR ],
+											TREASURE.POTIONORG, TREASURE.BADBOT, TREASURE.POISON, TREASURE.WATERT, TREASURE.WATERC, TREASURE.WATERR, TREASURE.LAVAT, TREASURE.LAVAC, TREASURE.LAVAR ],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,    h: TILE          },
         PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2,  h: TILE - TILE/4 },
@@ -2335,8 +2338,8 @@ var ymir = false, xmir = false;
 				 var ad = TREASURES[type(pixel) < TREASURES.length ? type(pixel) : 0];
 // some treasures operate from sub pixels
 				 var sb = MEXLOW & pixel;
-				 if (ad == TREASURE.POTION && (sb == 1)) ad = TREASURE.POTIONORG;
-				 if (ad == TREASURE.POISON && (sb == 2)) ad = TREASURE.BADPOT;
+				 if (ad == TREASURE.POTION && (sb > 0)) switch(sb) { case 1: ad = TREASURE.POTIONORG; break; }
+				 if (ad == TREASURE.HEALRND && (sb > 0)) switch(sb) { case 1: ad = TREASURE.POISON; break; case 2: ad = TREASURE.BADPOT; break;}
 				 if (ad == TREASURE.XSPEED && (sb > 0)) switch(sb) { case 1: ad = TREASURE.XSHOTPWR; break; case 2: ad = TREASURE.XSHOTSPD; break; case 3: ad = TREASURE.XARMOR; break; case 4: ad = TREASURE.XFIGHT; break; case 5: ad = TREASURE.XMAGIC; break; }
 				 if (ad == TREASURE.LIMINVIS && (sb > 0)) switch(sb) { case 1: ad = TREASURE.LIMINVUL; break; case 2: ad = TREASURE.LIMREPUL; break; case 3: ad = TREASURE.LIMREFLC; break; case 4: ad = TREASURE.LIMSUPER; break; case 5: ad = TREASURE.LIMTELE; break; case 6: ad = TREASURE.LIMANK; break; }
 				 if (ad == TREASURE.WATER && (sb > 0)) switch(sb) { case 1: ad = TREASURE.WATERT; break; case 2: ad = TREASURE.WATERC; break; case 3: ad = TREASURE.WATERR; break; }
@@ -2512,8 +2515,8 @@ var ymir = false, xmir = false;
 				 var ad = TREASURES[type(pixel) < TREASURES.length ? type(pixel) : 0];
 // some treasures operate from sub pixels
 				 var sb = MEXLOW & pixel;
-				 if (ad == TREASURE.POTION && (sb == 1)) ad = TREASURE.POTIONORG;
-				 if (ad == TREASURE.POISON && (sb == 2)) ad = TREASURE.BADPOT;
+				 if (ad == TREASURE.POTION && (sb > 0)) switch(sb) { case 1: ad = TREASURE.POTIONORG; break; }
+				 if (ad == TREASURE.HEALRND && (sb > 0)) switch(sb) { case 1: ad = TREASURE.POISON; break; case 2: ad = TREASURE.BADPOT; break;}
 				 if (ad == TREASURE.XSPEED && (sb > 0)) switch(sb) { case 1: ad = TREASURE.XSHOTPWR; break; case 2: ad = TREASURE.XSHOTSPD; break; case 3: ad = TREASURE.XARMOR; break; case 4: ad = TREASURE.XFIGHT; break; case 5: ad = TREASURE.XMAGIC; break; }
 				 if (ad == TREASURE.LIMINVIS && (sb > 0)) switch(sb) { case 1: ad = TREASURE.LIMINVUL; break; case 2: ad = TREASURE.LIMREPUL; break; case 3: ad = TREASURE.LIMREFLC; break; case 4: ad = TREASURE.LIMSUPER; break; case 5: ad = TREASURE.LIMTELE; break; case 6: ad = TREASURE.LIMANK; break; }
 				 if (ad == TREASURE.WATER && (sb > 0)) switch(sb) { case 1: ad = TREASURE.WATERT; break; case 2: ad = TREASURE.WATERC; break; case 3: ad = TREASURE.WATERR; break; }
@@ -3429,6 +3432,7 @@ var txsv = ":";
 //					  if (cell.x != 0 &&  cell.y != 0)
 						{
 							cdist = distance(cell.x,cell.y,treasure.x,treasure.y);
+// need to handle unpinned here
 							if (cdist < tdist)
 							{
 									tdist = cdist;
@@ -3476,6 +3480,7 @@ var txsv = ":";
 											if (Mastermap.door(px,py) && !this.keys) blokt = true;
 									}
 								}
+								if (isy(tcell.pixel, PIXEL.MONSTER)) alert("need to telefrag a monster");
 								Mastermap.occupy(px, py, this);
 
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
