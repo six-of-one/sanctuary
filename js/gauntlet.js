@@ -766,7 +766,7 @@ Gauntlet = function() {
       { id: 'shotwall',      name: 'sounds/g2_shotwall',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'g2_wallexit',      name: 'sounds/g2_wallexit',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'wallphase',      name: 'sounds/g2_wallphase',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
-      { id: 'slopoisn',      name: 'sounds/g2_slopoisn',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'slopoisn',      name: 'sounds/g2_slopoisn',            formats: ['ogg'], volume: 0.7, pool: ua.is.ie ? 2 : 6 },
       { id: 'bouncshot',      name: 'sounds/g2_bouncshot',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'hitpickle',         		name: 'sounds/g2_pickle',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'dragror',         		name: 'sounds/g2_drag',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
