@@ -273,21 +273,22 @@ Gauntlet = function() {
 // shotable and non-shot fake items, see grid 39 of backgrounds
         SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:16, wall:true,   sound: 'collectpotion' , nohlp: 58 },
         PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , nohlp: 58 },
-// this is the red wall pillar thingy
+// this is the red wall pillar thingy code:0x8130 with [ inward ] facing up, down, left, right by MEXLOW bits 0, 1, 2, 3
         FFIELDUNIT:       { sx: 0, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
         FFIELDUNITD:       { sx: 4, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
         FFIELDUNITL:       { sx: 8, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
         FFIELDUNITR:       { sx: 12, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
-// this is the field down
+// this is the power field down - specced by MEXLOW bit 4 of FFIELDUNIT = 0x8130
         FFIELDDIM:       { sx: 27, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 61  },
-// this is the field power that damages
+// this is the field power that damages, this is toggled on by ffieldpulse ops
         FFIELDPOW:       { sx: 28, sy: 12, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 3, sound: 'ffield',  nohlp: 61  },
 // animated floor items
         WATER:       { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
-// series of water boundary blocks
+// series of water boundary blocks code: 0x8140, with a pool wall appearing top, center and right, selected by MEXLOW 1, 2, 3
         WATERT:       { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
         WATERC:       { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
         WATERR:       { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
+// series of lava blocks code: 0x8150. with MEXLOW as water
         LAVA:       { sx: 16, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
         LAVAT:       { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
         LAVAC:       { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
@@ -3372,20 +3373,20 @@ var txsv = ":";
 				if (treasure.type.sy == FAKES) helpdis(treasure.type.nohlp, undefined, 2000, undefined, undefined);
 				return; //shot wall, go back
 		 }
-/*
+
 		 if ((treasure.pixel & MEXHIGH) == FFIELDTILE)
 		 {
 // technically this no longer happens as collisions are blocked so fields can be walked over
+// future plans include blue field gen pillars that make an unpassable lightning fence
 				if (treasure.pixel & MEXLOW)
 				{
 					helpdis(treasure.type.nohlp, undefined, 2000, treasure.type.damage, undefined);
-					if (!walled) Musicth.play(Musicth.sounds.ffield);
-					walled = true;
+					Musicth.play(Musicth.sounds.ffield);
 					this.hurt(treasure.type.damage);
 				}
 				return; //field wall, go back
 		 }
-*/
+
 		if ((troomtime > 0) && treasure.type.troom)
 			this.ctr = this.ctr + (treasure.type.score / 100);
 		else
