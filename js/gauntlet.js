@@ -3369,7 +3369,7 @@ var txsv = ":";
 		 if ((treasure.pixel & MEXHIGH) == FFIELDTILE)
 		 {
 // technically this no longer happens as collisions are blocked so fields can be walked over
-				if (treasure.pixel & MEXLOW)
+/*				if (treasure.pixel & MEXLOW)
 				{
 					helpdis(treasure.type.nohlp, undefined, 2000, treasure.type.damage, undefined);
 					if (!walled) Musicth.play(Musicth.sounds.ffield);
@@ -3378,7 +3378,7 @@ var txsv = ":";
 				}
 				return; //field wall, go back
 		 }
-
+*/
 		if ((troomtime > 0) && treasure.type.troom)
 			this.ctr = this.ctr + (treasure.type.score / 100);
 		else
