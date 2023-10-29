@@ -3378,7 +3378,7 @@ var txsv = ":";
 		 {
 // technically this no longer happens as collisions are blocked so fields can be walked over
 // future plans include blue field gen pillars that make an unpassable lightning fence
-				if (treasure.pixel & MEXLOW)
+				if ((treasure.pixel & MEXLOW) > 3)		// MEXLOW 0 - 3 are pillars
 				{
 					helpdis(treasure.type.nohlp, undefined, 2000, treasure.type.damage, undefined);
 					Musicth.play(Musicth.sounds.ffield);
