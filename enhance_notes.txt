@@ -15,8 +15,6 @@ dev:
 
 imm issues:
 
-what is being recorded in cookies ? (char...)
-
 - some g2 sounds may need vol atten
 - g2 announcer does not match g1
 

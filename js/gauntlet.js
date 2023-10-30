@@ -194,6 +194,7 @@ Gauntlet = function() {
 									"Avoid acid puddles<br>Player loses # health",
 									"Acid puddles move randomly",																						// 64
 									"Some walls can be shot and turn into good or bad",
+// use if g2 mode is active, when getting a key
 									"Save keys to open doors or chests",
 									"There can be more than one trap",
 //									"Death 'dies' after taking<br>up to 200 health",
@@ -207,9 +208,12 @@ Gauntlet = function() {
 									"Tag, you're IT",
 									"Some walls move randomly",
 //									"Monsters may move differently",
+
+/// --------------------------------------------------------------------------------------
+// extended tut for new items & significant points of previous items not already declared
 									"Some fake items can be shot",
+									"Food: health increased by RND",
 // placeholders for expansion
-									"help # 74",
 									"help # 75",
 									"help # 76",
 									"help # 77",
@@ -245,11 +249,13 @@ Gauntlet = function() {
 // collect magic before	27
 		helpcleared = 0, // option - tutorial count down 
 // easy way to detect non shootables - via help codes
-		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, WTHLP = 80,
+		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, WTHLP = 80, 
+// help message ranges for tutorial exclusion
+		G1HLP = 49, G2HLP = 72,
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
-        HEALRND:   { sx: 2, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood',  nohlp: 16   },
+        HEALRND:   { sx: 2, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood',  nohlp: 74   },
         FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
         FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
         FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16   },
@@ -484,7 +490,7 @@ Gauntlet = function() {
 
 		RLOAD = [0, 0, 0, 0, 0, 0],
 // difficulty level for rnd load profile
-		diff_level = 1, def_diff = 7, def_tut = document.getElementById("seltut").checked,
+		diff_level = 1, def_diff = 7,
 
 	DEBUG = {
         RESET:      Game.qsBool("reset"),
@@ -1011,6 +1017,9 @@ Gauntlet = function() {
 			{
 					HELPCLEAR[nh] = helpcleared;
 					htex = HELPDIS[nh];
+					if (!document.getElementById("seltut").checked && nh <= G1HLP) return;							// g1 tut not enabled
+					if (!document.getElementById("selg2tut").checked && (nh > G1HLP && nh <= G2HLP)) return;	// g2 tut not enabled
+					if (!document.getElementById("seltutx").checked && nh > G2HLP) return;							// ext tut not enabled
 			}
 
 			if (htex != undefined) 
@@ -1146,6 +1155,7 @@ Gauntlet = function() {
 		document.getElementById("whue").value = readCookie("_ops_"+"whue");
 		document.getElementById("fhue").value = readCookie("_ops_"+"fhue");
 		document.getElementById("seltut").checked = false;
+		document.getElementById("selg2tut").checked = false;
 		document.getElementById("seltutx").checked = false;
 		document.getElementById("mazsolv").checked = false;
 		document.getElementById("xunp").checked = false;
@@ -1162,6 +1172,7 @@ Gauntlet = function() {
 		document.getElementById("nogen").checked = false;
 
 		if (readCookie("_ops_"+"seltut") == "true") document.getElementById("seltut").checked = true;
+		if (readCookie("_ops_"+"selg2tut") == "true") document.getElementById("selg2tut").checked = true;
 		if (readCookie("_ops_"+"seltutx") == "true") document.getElementById("seltutx").checked = true;
 		if (readCookie("_dev_"+"mazsolv") == "true") document.getElementById("mazsolv").checked = true;
 		if (readCookie("_dev_"+"xunp") == "true") document.getElementById("xunp").checked = true;
@@ -3897,6 +3908,7 @@ var txsv = ":";
 				createCookie("_ops_"+"seldiff", document.getElementById("seldiff").value,7777);
 				createCookie("_ops_"+"sellvl", document.getElementById("sellvl").value,7777);
 				createCookie("_ops_"+"seltut", document.getElementById("seltut").checked,7777);
+				createCookie("_ops_"+"selg2tut", document.getElementById("selg2tut").checked,7777);
 				createCookie("_ops_"+"seltutx", document.getElementById("seltutx").checked,7777);
 				createCookie("_dev_"+"mazsolv", document.getElementById("mazsolv").checked,7777);
 // keep     -^
