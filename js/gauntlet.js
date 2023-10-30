@@ -177,7 +177,8 @@ Gauntlet = function() {
 									"You now have super shots",
 									"You now have teleportability",																					// 55
 //									"Some chests are locked",
-									"Some treasure requires keys",
+//									"Some treasure requires keys",
+									"Use key to open treasure chest",
 //									"Some walls may be pushed",
 									"Push movable walls",																								// 57	
 // expanded
@@ -1684,7 +1685,10 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		 }
       else if (entity.treasure)
 		 {
-			if (entity.type.lock && !player.keys) return;		/// need 1st message - need all messages
+			if (entity.type.lock && !player.keys) {
+				helpdis(entity.type.nohlp, undefined, 2000, undefined, undefined);
+				return;
+			}
         player.collect(entity);
 		 }
       else if (entity.door)
@@ -3216,7 +3220,7 @@ var txsv = ":";
 			HELPANNC[36] = Musicth.sounds.ancbeware;
 			HELPANNC[37] = Musicth.sounds.ancsorc;
 			HELPANNC[39] = Musicth.sounds.anckilthf;
-//			HELPANNC[56] = Musicth.sounds.g2antrlok;
+			HELPANNC[56] = Musicth.sounds.g2antrlok;
 			HELPANNC[58] = Musicth.sounds.ancfooled;
 // treasure room count down
 			TROOMCNT[0] = Musicth.sounds.anc0;
