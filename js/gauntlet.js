@@ -3465,7 +3465,7 @@ var txsv = ":";
 											blokt = is.valid(tcell.wall);
 											if (Mastermap.door(px,py) && !this.keys) blokt = true;
 									}
-// make sure it isnt a wall - telefrag monsters / death
+// make sure it isnt a wall
 /// note: if one teleport is blocked by walls, we should re-check others, putting a no-flag on the blocked
 								 while (blokt)
 								{
@@ -3485,7 +3485,15 @@ var txsv = ":";
 											if (Mastermap.door(px,py) && !this.keys) blokt = true;
 									}
 								}
-								if (isy(tcell.pixel, PIXEL.MONSTER)) alert("need to telefrag a monster - "+tcell.ptr);
+//								if (isy(tcell.pixel, PIXEL.MONSTER)) alert("need to telefrag a monster - "+tcell.ptr.type);
+// - telefrag monsters / death
+								if (isy(tcell.pixel, PIXEL.MONSTER))
+									if (tcell.ptr != undefined)
+									if (tcell.ptr.hurt != undefined) {
+											var tfrag = 10000;
+											if (tcell.ptr.health != undefined) tfrag = tcell.ptr.health+10;
+											tcell.ptr.hurt(tfrag, tcell.ptr);
+									}
 								Mastermap.occupy(px, py, this);
 
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
