@@ -210,6 +210,7 @@ Gauntlet = function() {
 // expanded
 									"Water slows you down",
 									"Lava is very dangerous<br>Avoid lava or take # damage",
+									"Nuclear waste is dangerous<br>Avoid waste or take # damage",
 
 //									"Level 4+ grunts can throw clubs",
 //									"Heavy death can shoot to drain life",
@@ -293,8 +294,11 @@ Gauntlet = function() {
         LAVAT:       { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
         LAVAC:       { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
         LAVAR:       { sx: 28, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
+        NWASTE:       { sx: 16, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 75  },
+        NWASTET:       { sx: 19, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 75  },
+        NWASTEC:       { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 75  },
+        NWASTER:       { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 75  },
         FIRESTK:       { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
-        BARLFL:       { sx: 25, sy: 25, frames:2, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -347,12 +351,13 @@ Gauntlet = function() {
 											MONSTER.THIEF, MONSTER.MUGGER, MONSTER.PICKLE ],
       TREASURES = [ TREASURE.HEALTH, TREASURE.HEALRND, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
-											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER, TREASURE.LAVA, TREASURE.FIRESTK,
-											TREASURE.BARLFL,
+											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER, TREASURE.LAVA, TREASURE.NWASTE,
+											TREASURE.FIRESTK,
 // these are selected by MEXLOW case {}, or other code
 											TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
 											TREASURE.POTIONORG, TREASURE.BADBOT, TREASURE.POISON, TREASURE.WATERT, TREASURE.WATERC, TREASURE.WATERR, TREASURE.LAVAT, TREASURE.LAVAC, TREASURE.LAVAR,
+											TREASURE.NWASTET, TREASURE.NWASTEC, TREASURE.NWASTER, 
 											TREASURE.FFIELDUNITD, TREASURE.FFIELDUNITL, TREASURE.FFIELDUNITR		],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,    h: TILE          },
@@ -2349,6 +2354,7 @@ var ymir = false, xmir = false;
 				 if (ad == TREASURE.LIMINVIS && (sb > 0)) switch(sb) { case 1: ad = TREASURE.LIMINVUL; break; case 2: ad = TREASURE.LIMREPUL; break; case 3: ad = TREASURE.LIMREFLC; break; case 4: ad = TREASURE.LIMSUPER; break; case 5: ad = TREASURE.LIMTELE; break; case 6: ad = TREASURE.LIMANK; break; }
 				 if (ad == TREASURE.WATER && (sb > 0)) switch(sb) { case 1: ad = TREASURE.WATERT; break; case 2: ad = TREASURE.WATERC; break; case 3: ad = TREASURE.WATERR; break; }
 				 if (ad == TREASURE.LAVA && (sb > 0)) switch(sb) { case 1: ad = TREASURE.LAVAT; break; case 2: ad = TREASURE.LAVAC; break; case 3: ad = TREASURE.LAVAR; break; }
+				 if (ad == TREASURE.NWASTE && (sb > 0)) switch(sb) { case 1: ad = TREASURE.NWASTET; break; case 2: ad = TREASURE.NWASTEC; break; case 3: ad = TREASURE.NWASTER; break; }
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
 				self.addTreasure(x, y, ad);
 				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
@@ -2526,6 +2532,7 @@ var ymir = false, xmir = false;
 				 if (ad == TREASURE.LIMINVIS && (sb > 0)) switch(sb) { case 1: ad = TREASURE.LIMINVUL; break; case 2: ad = TREASURE.LIMREPUL; break; case 3: ad = TREASURE.LIMREFLC; break; case 4: ad = TREASURE.LIMSUPER; break; case 5: ad = TREASURE.LIMTELE; break; case 6: ad = TREASURE.LIMANK; break; }
 				 if (ad == TREASURE.WATER && (sb > 0)) switch(sb) { case 1: ad = TREASURE.WATERT; break; case 2: ad = TREASURE.WATERC; break; case 3: ad = TREASURE.WATERR; break; }
 				 if (ad == TREASURE.LAVA && (sb > 0)) switch(sb) { case 1: ad = TREASURE.LAVAT; break; case 2: ad = TREASURE.LAVAC; break; case 3: ad = TREASURE.LAVAR; break; }
+				 if (ad == TREASURE.NWASTE && (sb > 0)) switch(sb) { case 1: ad = TREASURE.NWASTET; break; case 2: ad = TREASURE.NWASTEC; break; case 3: ad = TREASURE.NWASTER; break; }
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
 				self.addTreasure(x, y, ad);
 				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;

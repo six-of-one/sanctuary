@@ -267,6 +267,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
+x-- g2 sound samples at low-med volume
+
 x--figure out how to write a color to a 32x32 tile
 
 		ctx.rect(32, 64, 32, 32);	// x,y,w,h
