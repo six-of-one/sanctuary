@@ -13,7 +13,6 @@ gJ - gauntlet javascript		(gJ.0 - original)
 dev:
 
 figure out how to write a color to a 32x32 tile
-find out if all drawImage() can bue hue shifted -- looks to be possible
 
 imm issues:
 
@@ -268,6 +267,9 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- find out if all drawImage() can bue hue shifted -- looks to be possible
+	\ any write can be hue shifted with ctx.filter = "hue-rotate({N}deg)";
 
 ------------------- 023.10.29
 
