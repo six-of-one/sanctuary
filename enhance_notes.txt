@@ -13,7 +13,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 dev:
 
 figure out how to write a color to a 32x32 tile
-find out if all drawImage() can bue hue shifted
+find out if all drawImage() can bue hue shifted -- looks to be possible
 
 imm issues:
 
@@ -31,7 +31,6 @@ shot a shotable fake item: help/ annc ?
 move across unpin in 1/ 2 unit tunnel fails
 
 
-teleport on death needs to remove death (or any other teleported on monster)
 - limited transportability needs to remove just about everything
 
 jsgv maze tiles are not proper update on floor obscuring-ent removal and some direct displays
@@ -270,6 +269,10 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
+------------------- 023.10.29
+
+x-- teleport on death needs to remove death (or any other teleported on monster)
+
 x-- shorten ffield sound -- done to 4.5 secs, 1/2 sec fade, but needs further testing
 	| now 3.5 secs, fade last 0.4 sec
     \ lower vol as well
@@ -310,6 +313,8 @@ x-- intro screen sequence
 -- with demo play (ogg vid)
 	> excepting posting saved scores
 	> and monster level > 3 boost stats display -- if we want to give those
+
+------------------- pre 023
 
 x-- levels loop with random select
 

@@ -1546,9 +1546,15 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
     draw: function(ctx, frame) {
       if (this.canDraw) {
+//			ctx.filter = "sepia(100%)";
         this.render.map(     ctx, frame, this.viewport, this.map);
         this.render.entities(ctx, frame, this.viewport, this.map.entities);
         this.render.player(  ctx, frame, this.viewport, this.player);
+
+var gradientColors = createGradient('#0096ff', '#ff00f0');
+var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+applyGradient(imageData.data);
+
         this.scoreboard.refreshPlayer(this.player);
       }
       this.debugHeap(frame);
