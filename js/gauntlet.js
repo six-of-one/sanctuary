@@ -183,7 +183,7 @@ Gauntlet = function() {
 									"Push movable walls",																								// 57	
 // expanded
 									"Fooled you!  Some items may be fake",
-									"You now have the life ankh",
+									"You now have the healing ankh",
 									"Player loses # health<br>use magic to kill death",														// 60
 // g2 messages start here
 // g2 also reverses monster hit msg, to say player loses {N} health second, as here
@@ -214,16 +214,16 @@ Gauntlet = function() {
 									"Some fake items can be shot",
 									"Food: # health<br>Some food provides variable health",
 // placeholders for expansion
-									"help # 75",
-									"help # 76",
+									"You now have the healing ankh",
+									"Walls may be invisible",
 									"help # 77",
-									"help # 78",
+									"Some invisible walls can be shot",
 									"help # 79",
 
 // expanded - liquids - all help after this makes a nonsolid item that can be walked through, damage still occurs
 									"Water slows you down",																								// 80
 									"Lava is very dangerous<br>Avoid lava or take # damage",
-									"Nuclear waste is dangerous<br>Avoid waste or take # damage",
+									"Toxic ooze is dangerous<br>Avoid slime or take # damage",
 
 
 //									"Level 4+ grunts can throw clubs",
@@ -252,6 +252,8 @@ Gauntlet = function() {
 		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, WTHLP = 80, 
 // help message ranges for tutorial exclusion
 		G1HLP = 48, G2HLP = 72,
+// special help for invisible walls
+		INVSWALCD = 0x812F, INVWALCD = 0x812F, IVWHLP = 76, IVWSHLP = 78,
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
@@ -286,7 +288,7 @@ Gauntlet = function() {
         LIMREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', nohlp: 53  },
         LIMSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion', nohlp: 54  },
         LIMTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 55  },
-        LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 59  },
+        LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 75  },
 // shootable wall - see grid 38 of backgrounds
         SHOTWALL:       { sx: 0, sy: 38, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:30, wall:true,   sound: 'collectpotion' ,  nohlp: 26},
 // shotable and non-shot fake items, see grid 39 of backgrounds
@@ -3001,6 +3003,9 @@ var ymir = false, xmir = false;
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 				if (this.type.wall)
 				{
+						if (this.pixel == INVSWALCD)
+							helpdis(IVWSHLP, undefined, 2000, undefined, undefined);
+						else
 						if (this.type.nohlp == FITCH) 	// diff msg when shooting fake items
 							helpdis(FICBS, undefined, 2000, undefined, undefined);
 						else
@@ -3248,6 +3253,7 @@ var txsv = ":";
 			HELPANNC[39] = Musicth.sounds.anckilthf;
 			HELPANNC[56] = Musicth.sounds.g2antrlok;
 			HELPANNC[58] = Musicth.sounds.ancfooled;
+			HELPANNC[76] = Musicth.sounds.g2aninvw;
 // treasure room count down
 			TROOMCNT[0] = Musicth.sounds.anc0;
 			TROOMCNT[1] = Musicth.sounds.anc1;
@@ -3409,6 +3415,9 @@ var txsv = ":";
 
       if (treasure.type.wall)
 		 {
+				if (this.pixel == INVWALCD)
+					helpdis(IVWHLP, undefined, 2000, undefined, undefined);
+				else
 				if (treasure.type.sy == FAKES) helpdis(treasure.type.nohlp, undefined, 2000, undefined, undefined);
 				return; //shot wall, go back
 		 }
