@@ -244,6 +244,8 @@ Gauntlet = function() {
 // shooting a potion			26
 // collect magic before	27
 		helpcleared = 0, // option - tutorial count down 
+// easy way to detect non shootables - via help codes
+		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, WTHLP = 80,
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
@@ -319,8 +321,6 @@ Gauntlet = function() {
 		SUPERSHTFR = 10,		// super shot proj frame
 		TELEPORTILE = 0x0080a0,
 		FFIELDTILE = 0x008130,
-// easy way to detect non shootables
-		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, WTHLP = 80,
 // until target traps are coded any trap will remove these
 		TRAPWALL = 0x404030,
 		TRAPTRIG = 0x0080b0,
@@ -2987,7 +2987,10 @@ var ymir = false, xmir = false;
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 				if (this.type.wall)
 				{
-						helpdis(this.type.nohlp, undefined, 2000, undefined, undefined);
+						if (this.type.nohlp == FITCH) 	// diff msg when shooting fake items
+							helpdis(FICBS, undefined, 2000, undefined, undefined);
+						else
+							helpdis(this.type.nohlp, undefined, 2000, undefined, undefined);
 						 if (this.health == undefined) this.health = this.type.health;
 						 this.health = Math.max(0, this.health - damage);
 						 if (this.health > 0) return;
