@@ -1546,7 +1546,6 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
     draw: function(ctx, frame) {
       if (this.canDraw) {
-			ctx.filter = "hue-rotate(200deg)";
         this.render.map(     ctx, frame, this.viewport, this.map);
         this.render.entities(ctx, frame, this.viewport, this.map.entities);
         this.render.player(  ctx, frame, this.viewport, this.player);
@@ -4481,8 +4480,10 @@ var txsv = ":";
 					  }
 					  else
 						if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls -- only applies to std level walls
+							ctx.filter = "hue-rotate(180deg)";
 							this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
 							if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
+							ctx.filter = "hue-rotate(0deg)";
 						}
 			  }
           else if (cell.nothing)
