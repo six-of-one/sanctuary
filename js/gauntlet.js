@@ -211,7 +211,7 @@ Gauntlet = function() {
 
 /// --------------------------------------------------------------------------------------
 // extended tut for new items & significant points of previous items not already declared
-									"Some fake items can be shot",
+									"Some fake items can be shot",																					// 73 - these may seem like g2, but they are extended
 									"Food: # health<br>Some food provides variable health",
 // placeholders for expansion
 									"You now have the healing ankh",
@@ -253,7 +253,7 @@ Gauntlet = function() {
 // help message ranges for tutorial exclusion
 		G1HLP = 48, G2HLP = 72,
 // special help for invisible walls
-		INVSWALCD = 0x812F, INVWALCD = 0x812F, IVWHLP = 76, IVWSHLP = 78,
+		INVSWALCD = 0x811F, INVWALCD = 0x812F, IVWHLP = 76, IVWSHLP = 78,
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
@@ -3415,7 +3415,7 @@ var txsv = ":";
 
       if (treasure.type.wall)
 		 {
-				if (this.pixel == INVWALCD)
+				if (treasure.pixel == INVWALCD)
 					helpdis(IVWHLP, undefined, 2000, undefined, undefined);
 				else
 				if (treasure.type.sy == FAKES) helpdis(treasure.type.nohlp, undefined, 2000, undefined, undefined);
