@@ -1,4 +1,4 @@
-/// Praise His holy name: LORD JESUS CHRIST
+/// Praise His holy name: LORD JESUS C HRIST
 
 g1 - gauntlet
 gII, g2 - gauntlet 2
@@ -23,7 +23,6 @@ what is being recorded in cookies ? (char...)
 g2 ? food research (find in files, or redo)
 check sound for picking poison (is potion pick sound, need g2 ref)
 
-should locked chest display help/annc on touch w/o key?
 shot a shotable fake item: help/ annc ?
 
 move across unpin in 1/ 2 unit tunnel fails
@@ -266,6 +265,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- should locked chest display help/annc on touch w/o key? - yes, done
 
 x-- g2 sound samples at low-med volume
 

@@ -207,11 +207,20 @@ Gauntlet = function() {
 									"Tag, you're IT",
 									"Some walls move randomly",
 //									"Monsters may move differently",
+									"Some fake items can be shot",
+// placeholders for expansion
+									"help # 74",
+									"help # 75",
+									"help # 76",
+									"help # 77",
+									"help # 78",
+									"help # 79",
 
-// expanded
-									"Water slows you down",
+// expanded - liquids - all help after this makes a nonsolid item that can be walked through, damage still occurs
+									"Water slows you down",																								// 80
 									"Lava is very dangerous<br>Avoid lava or take # damage",
 									"Nuclear waste is dangerous<br>Avoid waste or take # damage",
+
 
 //									"Level 4+ grunts can throw clubs",
 //									"Heavy death can shoot to drain life",
@@ -285,20 +294,20 @@ Gauntlet = function() {
 // this is the field power that damages, this is toggled on by ffieldpulse ops
         FFIELDPOW:       { sx: 28, sy: 12, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 3, sound: 'ffield',  nohlp: 61  },
 // animated floor items
-        WATER:       { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
+        WATER:       { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
 // series of water boundary blocks code: 0x8140, with a pool wall appearing top, center and right, selected by MEXLOW 1, 2, 3
-        WATERT:       { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
-        WATERC:       { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
-        WATERR:       { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 73  },
+        WATERT:       { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
+        WATERC:       { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
+        WATERR:       { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
 // series of lava blocks code: 0x8150. with MEXLOW as water
-        LAVA:       { sx: 16, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
-        LAVAT:       { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
-        LAVAC:       { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
-        LAVAR:       { sx: 28, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
-        NWASTE:       { sx: 16, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 75  },
-        NWASTET:       { sx: 19, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 75  },
-        NWASTEC:       { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 75  },
-        NWASTER:       { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 75  },
+        LAVA:       { sx: 16, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
+        LAVAT:       { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
+        LAVAC:       { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
+        LAVAR:       { sx: 28, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
+        NWASTE:       { sx: 16, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
+        NWASTET:       { sx: 19, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
+        NWASTEC:       { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
+        NWASTER:       { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
         FIRESTK:       { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
@@ -311,7 +320,7 @@ Gauntlet = function() {
 		TELEPORTILE = 0x0080a0,
 		FFIELDTILE = 0x008130,
 // easy way to detect non shootables
-		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, WTHLP = 73,
+		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, WTHLP = 80,
 // until target traps are coded any trap will remove these
 		TRAPWALL = 0x404030,
 		TRAPTRIG = 0x0080b0,
