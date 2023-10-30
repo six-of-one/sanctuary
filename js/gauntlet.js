@@ -1177,6 +1177,7 @@ Gauntlet = function() {
 		if (readCookie("_dev_"+"nommv") == "true") document.getElementById("nommv").checked = true;
 		if (readCookie("_dev_"+"nogen") == "true") document.getElementById("nogen").checked = true;
 /// TEST - remove
+//for (i = 1; i <= 81; i++) { deleteCookie(i+"char"); deleteCookie(i+"score"); deleteCookie(i+"name"); }
 
     },
 
