@@ -1133,6 +1133,8 @@ Gauntlet = function() {
 // load user options here
 		document.getElementById("seldiff").value = readCookie("_ops_"+"seldiff");
 		document.getElementById("sellvl").value = readCookie("_ops_"+"sellvl");
+		document.getElementById("whue").value = readCookie("_ops_"+"whue");
+		document.getElementById("fhue").value = readCookie("_ops_"+"fhue");
 		document.getElementById("seltut").checked = false;
 		document.getElementById("seltutx").checked = false;
 		document.getElementById("mazsolv").checked = false;
@@ -3890,6 +3892,8 @@ var txsv = ":";
 				createCookie("_dev_"+"noah", document.getElementById("noah").checked,7777);
 				createCookie("_dev_"+"nommv", document.getElementById("nommv").checked,7777);
 				createCookie("_dev_"+"nogen", document.getElementById("nogen").checked,7777);
+				createCookie("_ops_"+"whue", document.getElementById("whue").value,7777);
+				createCookie("_ops_"+"fhue", document.getElementById("fhue").value,7777);
 				}
 /// TEST - remove
 		}
