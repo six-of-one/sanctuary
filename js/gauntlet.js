@@ -4457,7 +4457,13 @@ var txsv = ":";
 			for(ty = 0, th = map.th ; ty < th ; ty=ty+8) {
 			  for(tx = 0, tw = map.tw ; tx < tw ; tx=tx+8) {
 						ctx.drawImage(gbas, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
+/// TEST - update
+							var flhue = document.getElementById("fhue").value;
+							if (flhue <0 || flhue > 360) flhue = 0;
+							ctx.filter = "hue-rotate("+flhue+"deg)";
+/// TEST - update
 						ctx.drawImage(gimg, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
+							ctx.filter = "hue-rotate(0deg)";
 				  }
 				}
 		 }
@@ -4475,16 +4481,20 @@ var txsv = ":";
 			  cell.map = map;
           if (is.valid(cell.wall))
 			  {
-							ctx.filter = "hue-rotate(90deg)";
 					  if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000)  {// diff walls by low nibble
 						this.tile(ctx, sprites, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
 					  }
 					  else
 						if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls -- only applies to std level walls
+/// TEST - update
+							var wallhue = document.getElementById("whue").value;
+							if (wallhue <0 || wallhue > 360) wallhue = 0;
+							ctx.filter = "hue-rotate("+wallhue+"deg)";
+/// TEST - update
 							this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
+							ctx.filter = "hue-rotate(0deg)";
 							if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
 						}
-							ctx.filter = "hue-rotate(0deg)";
 			  }
           else if (cell.nothing)
             this.tile(ctx, sprites, 0, 0, tx, ty);
