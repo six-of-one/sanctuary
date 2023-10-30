@@ -212,7 +212,7 @@ Gauntlet = function() {
 /// --------------------------------------------------------------------------------------
 // extended tut for new items & significant points of previous items not already declared
 									"Some fake items can be shot",
-									"Food: health increased by RND",
+									"Food: # health<br>Some food provides variable health",
 // placeholders for expansion
 									"help # 75",
 									"help # 76",
@@ -251,7 +251,7 @@ Gauntlet = function() {
 // easy way to detect non shootables - via help codes
 		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, WTHLP = 80, 
 // help message ranges for tutorial exclusion
-		G1HLP = 49, G2HLP = 72,
+		G1HLP = 48, G2HLP = 72,
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
@@ -1008,7 +1008,6 @@ Gauntlet = function() {
   
   function helpdis(nh, htex, hto, hrep, hannc)		// display text in the tutorial overlay box		passed vars - nh = help # array ref,		htex = override help text,		hto = timeout in millisecs, def to 2000,		hrep - replace str,	hannc - announcer code to play after delay
   {
-			if (!document.getElementById("seltut").checked) return;
 			if (hto == undefined || (hto < 1) || (hto > 120000)) hto = 2000;
 			if (htex == null || htex == "") htex = undefined;
 			if (htex == undefined)
@@ -3454,7 +3453,9 @@ var txsv = ":";
 				 }
 		 }
 
-		 helpdis(treasure.type.nohlp, undefined, 2000, undefined, undefined);
+		 var hrp = undefined;
+		 if (treasure.type.health > 0) hrp = treasure.type.health;
+		 helpdis(treasure.type.nohlp, undefined, 2000, hrp, undefined);
 		 if (treasure.type.blkhlp != undefined) HELPCLEAR[treasure.type.blkhlp] = 0;
 
 		 if (treasure.type.stun)
