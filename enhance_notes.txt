@@ -12,11 +12,13 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 dev:
 
+figure out how to write a color to a 32x32 tile
+find out if all drawImage() can bue hue shifted
 
 imm issues:
 
-x- shorten ffield sound -- done to 4.5 secs, 1/2 sec fade, but needs further testing
-   \ lower vol as well
+what is being recorded in cookies ? (char...)
+
 - some g2 sounds may need vol atten
 - g2 announcer does not match g1
 
@@ -33,7 +35,7 @@ teleport on death needs to remove death (or any other teleported on monster)
 - limited transportability needs to remove just about everything
 
 jsgv maze tiles are not proper update on floor obscuring-ent removal and some direct displays
-
+\_ floor ops may get a revision to settle tile differences of MEXLOW selected tiles1
 
 dead player is only lvl 1 bone pile
 
@@ -88,7 +90,7 @@ g1 gfx tiles
 
 g2:
 -push wall pushing
--shooting poison should play the sound
+
 -shootable "standard" wall - gives goody or baddy > need list of items
 -moving "pattern" wall
 -moving "ranodmly" wall
@@ -268,7 +270,12 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
+x-- shorten ffield sound -- done to 4.5 secs, 1/2 sec fade, but needs further testing
+	| now 3.5 secs, fade last 0.4 sec
+    \ lower vol as well
+
 x-- slowpoison sound on shot, extend 30 secs, attenuate slow fade, lower vol
+	g2 -shooting poison should play the sound
 
 x-- dev: freeze monster / sotp gen
 x--      stop health -1 / sec

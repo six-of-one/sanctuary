@@ -293,7 +293,7 @@ Gauntlet = function() {
         LAVAT:       { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
         LAVAC:       { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
         LAVAR:       { sx: 28, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 74  },
-        FIRESTK:       { sx: 24, sy: 25, frames:1, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
+        FIRESTK:       { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
         BARLFL:       { sx: 25, sy: 25, frames:2, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
@@ -3485,7 +3485,7 @@ var txsv = ":";
 											if (Mastermap.door(px,py) && !this.keys) blokt = true;
 									}
 								}
-								if (isy(tcell.pixel, PIXEL.MONSTER)) alert("need to telefrag a monster");
+								if (isy(tcell.pixel, PIXEL.MONSTER)) alert("need to telefrag a monster - "+tcell.ptr);
 								Mastermap.occupy(px, py, this);
 
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
