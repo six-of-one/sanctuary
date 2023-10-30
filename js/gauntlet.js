@@ -1546,7 +1546,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
     draw: function(ctx, frame) {
       if (this.canDraw) {
-			ctx.filter = "sepia(100%)";
+			ctx.filter = "hue-rotate(200deg)";
         this.render.map(     ctx, frame, this.viewport, this.map);
         this.render.entities(ctx, frame, this.viewport, this.map.entities);
         this.render.player(  ctx, frame, this.viewport, this.player);
