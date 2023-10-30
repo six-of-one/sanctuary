@@ -1181,7 +1181,7 @@ Gauntlet = function() {
     },
 
     onstart: function(event, previous, current, type, nlevel) {
-		scoredex++;
+//		scoredex++;
       this.player.join(type);
       this.load(to.number(nlevel, this.loadLevel()));
 // intro
@@ -1864,22 +1864,25 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
         this.storage[STORAGE.SCORE] = (this.player.score / this.player.droppedcoins);
         this.storage[STORAGE.WHO]   = this.player.type.name;
       }
-		createCookie(scoredex+"char", this.player.type.name,7777);
-		createCookie(scoredex+"score",(this.player.score / this.player.droppedcoins),7777);
-		createCookie(scoredex+"name", "proggy-nif",7777);
-		createCookie("hindex", scoredex,7777);
-		HSCORE[scoredex,0] = (this.player.score / this.player.droppedcoins);
-		HSCORE[scoredex,1] = "proggy-nif";
-		HSCORE[scoredex,2] = this.player.type.name;
-//		HSCORE[scoredex,0] = readCookie(scoredex+"score");
-//		HSCORE[scoredex,1] = readCookie(scoredex+"name");
-//		HSCORE[scoredex,2] = readCookie(scoredex+"char");
+		if (this.player.score > 8000) {
+			scoredex++;
+			createCookie(scoredex+"char", this.player.type.name,7777);
+			createCookie(scoredex+"score",(this.player.score / this.player.droppedcoins),7777);
+			createCookie(scoredex+"name", "proggy-nif",7777);
+			createCookie("hindex", scoredex,7777);
+			HSCORE[scoredex,0] = (this.player.score / this.player.droppedcoins);
+			HSCORE[scoredex,1] = "proggy-nif";
+			HSCORE[scoredex,2] = this.player.type.name;
+//			HSCORE[scoredex,0] = readCookie(scoredex+"score");
+//			HSCORE[scoredex,1] = readCookie(scoredex+"name");
+//			HSCORE[scoredex,2] = readCookie(scoredex+"char");
 //						HSCORE.sort((a,b) => a[0] - b[0]);
+		}
 		if (DEBUGON)
 		{
 						var tstr = scoredex + ":";
-						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + ";; ";
-//						 alert(tstr);
+						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + "\n";
+						 alert(tstr);
 		}
 
     },
