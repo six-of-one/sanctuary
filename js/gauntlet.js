@@ -258,7 +258,7 @@ Gauntlet = function() {
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
-        HEALRND:   { sx: 2, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200,   sound: 'collectfood',  nohlp: 74   },
+        HEALRND:   { sx: 2, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'collectfood',  nohlp: 74   },
         FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
         FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
         FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16   },
@@ -274,7 +274,7 @@ Gauntlet = function() {
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport',  nohlp: 25  },
         TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap', nohlp: 20 },
         STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun', nohlp: 49  },
-        PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, health:270, canbeshot: true, push: true,   sound: 'null', nohlp: 57  },
+        PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, health:270, canbeshot: 2, push: true,   sound: 'null', nohlp: 57  },
 // extra power potions
         XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxspd',  sound: 'collectpotion', nohlp: 1  },
         XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtpwr',   sound: 'collectpotion',  nohlp: 2  },
@@ -1703,7 +1703,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				}
 				else
 /// TEST - remove
-				entity.hurt(dmg + xdmg, weapon);		alert("wep hit: "+(dmg+xdmg)+" hl: "+entity.health);
+				entity.hurt(dmg + xdmg, weapon);
 		 }
 // monster shot player
       else if (weapon.type.monster && entity.player)
@@ -3023,7 +3023,7 @@ var ymir = false, xmir = false;
 
 // not living shootables
 
-    hurt: function(damage, by, nuke) {		alert("shot treasure");
+    hurt: function(damage, by, nuke) {
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 				if (this.type.wall)
 				{
@@ -3041,6 +3041,9 @@ var ymir = false, xmir = false;
 				else
 				if (this.type.health)
 				{
+// pushwalls do not set health on spawn
+						if (this.push && this.health == undefined) this.health = this.type.health;
+
 						if (HELPCLEAR[nohlpdsf])		// pre-test so we can run taunts when the helpannc is done
 								helpdis(nohlpdsf, undefined, 2000, undefined, undefined);
 						else
