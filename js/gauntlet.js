@@ -3409,10 +3409,23 @@ var txsv = ":";
 				}
 				else
 				{
+					var tpx = this.push.x;
+					var tpy = this.push.y;
 					this.push.x = this.push.x + (this.x - pmvx);
 					this.push.y = this.push.y + (this.y - pmvy);
-					pmvx = this.x;
-					pmvy = this.y;
+
+// pushwall move-ish test
+				 var pushcoll = Mastermap.occupied(this.push.x + this.push.cbox.x, this.push.y + this.push.cbox.y, this.push.cbox.w, this.push.cbox.h, this || this.push);
+					if (pushcoll) {
+						this.x = pmvx;
+						this.y = pmvy;
+						this.push.x = tpx;
+						this.push.y = tpy;
+					}
+					else {
+						pmvx = this.x;
+						pmvy = this.y;
+					}
 				}
 			}
 
@@ -3449,7 +3462,6 @@ var txsv = ":";
 					pmvy = this.y;
 					treasure.speed = PWALLSPD;		// slow a pushing player
 					treasure.dir = this.dir;	// stay with player while he pushes towards block
-					alert("push dir: "+treasure.dir);
 				}
 				return; //push wall, go back
 		 }
