@@ -1686,15 +1686,17 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 						if (entity.type.canbeshot) nosup = false;			// super shot hit a monster, gen or treasure that is shotable - keep going
 				}
 /// TEST - update ?
-				if (document.getElementById("sdps").checked && entity.treasure.push)
+				if (document.getElementById("sdps").checked && entity.type.push)
 				{
-					if (dpstim != ffieldpulse) {
+					var dphm  = 0;	// damage per 30 secs
+					if (document.getElementById("sdphm").checked) dphm = 30;
+					if (dpstim < ffieldpulse) {
 						document.getElementById("dpsout").value = dpsacc;
 						var dpst = document.getElementById("dpsout").title;
 						if (dpst.length > 256) dpst = "dps: ";
 						document.getElementById("dpsout").title = dpst + " : "+dpsacc;
 						dpsacc = 0;
-						dpstim = ffieldpulse;
+						dpstim = ffieldpulse + dphm;
 					}
 					else
 					{
@@ -3042,7 +3044,7 @@ var ymir = false, xmir = false;
 				if (this.type.health)
 				{
 // pushwalls do not set health on spawn
-						if (this.push && this.health == undefined) this.health = this.type.health;
+						if (this.type.push && this.health == undefined) this.health = this.type.health;
 
 						if (HELPCLEAR[nohlpdsf])		// pre-test so we can run taunts when the helpannc is done
 								helpdis(nohlpdsf, undefined, 2000, undefined, undefined);
