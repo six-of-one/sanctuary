@@ -274,7 +274,7 @@ Gauntlet = function() {
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport',  nohlp: 25  },
         TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap', nohlp: 20 },
         STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun', nohlp: 49  },
-        PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, health:270, canbeshot: true,  canbehit: true, push: true,   sound: 'null', nohlp: 57  },
+        PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, health:270, canbeshot: true, push: true,   sound: 'null', nohlp: 57  },
 // extra power potions
         XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxspd',  sound: 'collectpotion', nohlp: 1  },
         XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtpwr',   sound: 'collectpotion',  nohlp: 2  },
@@ -1685,7 +1685,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 						dmg = weapon.damage;
 						if (entity.type.canbeshot) nosup = false;			// super shot hit a monster, gen or treasure that is shotable - keep going
 				}
-				entity.hurt(dmg + xdmg, weapon);
+				entity.hurt(dmg + xdmg, weapon);		alert("wep hit: "+(dmg+xdmg)+" hl: "+entity.health);
 		 }
 // monster shot player
       else if (weapon.type.monster && entity.player)
@@ -3005,7 +3005,7 @@ var ymir = false, xmir = false;
 
 // not living shootables
 
-    hurt: function(damage, by, nuke) {
+    hurt: function(damage, by, nuke) {		alert("shot treasure");
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 				if (this.type.wall)
 				{
