@@ -218,7 +218,7 @@ Gauntlet = function() {
 									"Walls may be invisible",
 									"help # 77",
 									"Some invisible walls can be shot",
-									"help # 79",
+									"Pushwalls  can be destroyed",
 
 // expanded - liquids - all help after this makes a nonsolid item that can be walked through, damage still occurs
 									"Water slows you down",																								// 80
@@ -249,7 +249,7 @@ Gauntlet = function() {
 // collect magic before	27
 		helpcleared = 0, // option - tutorial count down 
 // easy way to detect non shootables - via help codes
-		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, WTHLP = 80, 
+		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, PSWDHLP = 79, WTHLP = 80, 
 // help message ranges for tutorial exclusion
 		G1HLP = 48, G2HLP = 72,
 // special help for invisible walls
@@ -1688,11 +1688,11 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 /// TEST - update ?
 				if (document.getElementById("sdps").checked && entity.type.push)
 				{
+					var dpst = document.getElementById("dpsout").title;
 					var dphm  = 0;	// damage per 30 secs
 					if (document.getElementById("sdphm").checked) dphm = 30;
 					if (dpstim < ffieldpulse) {
 						document.getElementById("dpsout").value = dpsacc;
-						var dpst = document.getElementById("dpsout").title;
 						if (dpst.length > 256) dpst = "dps: ";
 						document.getElementById("dpsout").title = dpst + " : "+dpsacc;
 						dpsacc = 0;
@@ -1706,6 +1706,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				else
 /// TEST - remove
 				entity.hurt(dmg + xdmg, weapon);
+				document.getElementById("dpsout").value = entity.health;
 		 }
 // monster shot player
       else if (weapon.type.monster && entity.player)
@@ -3044,8 +3045,14 @@ var ymir = false, xmir = false;
 				if (this.type.health)
 				{
 // pushwalls do not set health on spawn
-						if (this.type.push && this.health == undefined) this.health = this.type.health;
-
+						if (this.type.push)
+						{
+							if (this.health == undefined) this.health = this.type.health;
+							this.health = this.health - damage;
+							if (this.health <= 10) helpdis(PSWDHLP, undefined, 2000, undefined, undefined);
+							if (this.health > 0) return;
+						}
+						else
 						if (HELPCLEAR[nohlpdsf])		// pre-test so we can run taunts when the helpannc is done
 								helpdis(nohlpdsf, undefined, 2000, undefined, undefined);
 						else

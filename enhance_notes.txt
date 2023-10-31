@@ -13,6 +13,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 dev:
 
 push wall collision
+draw pushwalls last, or elevate them above other treasure tiles
 
 imm issues:
 
