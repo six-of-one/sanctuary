@@ -274,7 +274,7 @@ Gauntlet = function() {
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport',  nohlp: 25  },
         TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap', nohlp: 20 },
         STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun', nohlp: 49  },
-        PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, push: true,   sound: 'null', nohlp: 57  },
+        PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, health:270, canbeshot: true,  canbehit: true, push: true,   sound: 'null', nohlp: 57  },
 // extra power potions
         XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxspd',  sound: 'collectpotion', nohlp: 1  },
         XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtpwr',   sound: 'collectpotion',  nohlp: 2  },
@@ -320,7 +320,7 @@ Gauntlet = function() {
         NWASTEC:       { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
         NWASTER:       { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
         FIRESTK:       { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
-        PFLOOR1:       { sx: 0, sy: 28, frames:7, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 80  },
+        PFLOOR1:       { sx: 28, sy: 27, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 999  },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below

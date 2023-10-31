@@ -22,6 +22,7 @@ imm issues:
 g2 ? food research (find in files, or redo)
 check sound for picking poison (is potion pick sound, need g2 ref)
 
+g2 acid blob dbl potion destruct
 
 move across unpin in 1/ 2 unit tunnel fails
 
