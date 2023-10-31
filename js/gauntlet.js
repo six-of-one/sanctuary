@@ -3351,9 +3351,12 @@ var txsv = ":";
       var d, dmax, dir, collision,
           directions = SLIDE_DIRECTIONS[this.moving.dir];
 
+		var pushspeed = 1;
+		if (this.push != undefined) pushspeed = this.push.speed;
+
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
-        collision = map.trymove(this, dir, this.type.speed + (this.xspeed * 30)/FPS);
+        collision = map.trymove(this, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
 
 
 /// TEST - remove
@@ -3396,10 +3399,18 @@ var txsv = ":";
 			if (this.push != undefined)
 			if (pmvx != this.x || pmvy != this.y)
 			{
-				this.push.x = this.push.x + (this.x - pmvx);
-				this.push.y = this.push.y + (this.y - pmvy);
-				pmvx = this.x;
-				pmvy = this.y;
+				var pushd = this.push.dir;
+				if (this.push.dir == 0 pushd == 7) pushd = 1;
+				if (this.push.dir == 7 pushd == 0) pushd = 6;
+				if (Math.abs(this.push.dir - pushd) > 1) 
+					this.push = undefined;
+				else
+				{
+					this.push.x = this.push.x + (this.x - pmvx);
+					this.push.y = this.push.y + (this.y - pmvy);
+					pmvx = this.x;
+					pmvy = this.y;
+				}
 			}
 
         if (collision)
@@ -3429,24 +3440,15 @@ var txsv = ":";
 				helpdis(treasure.type.nohlp, undefined, 2000, undefined, undefined);
 				treasure.cbox = CBOX.EXIT;	// slim box a bit
 
-				if (pushwdeb < (ffieldpulse - 2)) {
+				if (this.push != treasure) {
 					this.push = treasure;
-					alert("tagged push item: "+treasure.pixel);
 					pushwdeb = ffieldpulse;
 					pmvx = this.x;
 					pmvy = this.y;
 					treasure.speed = PWALLSPD;		// slow a pushing player
 					treasure.dir = this.dir;	// stay with player while he pushes towards block
+					alert("push dir: "+treasure.dir);
 				}
-				else
-				if (pushwdeb < ffieldpulse)
-				{
-//					treasure.x += this.x - mvx;
-//					treasure.y += this.y - mvy;
-					pushwdeb = ffieldpulse;
-				}
-
-//				Mastermap.trymove(this, this.dir, this.speed, this);// * PWALLSPD, this);
 				return; //push wall, go back
 		 }
 
