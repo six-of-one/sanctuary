@@ -254,6 +254,7 @@ Gauntlet = function() {
 		G1HLP = 48, G2HLP = 72,
 // special help for invisible walls
 		INVSWALCD = 0x811F, INVWALCD = 0x812F, IVWHLP = 76, IVWSHLP = 78,
+		PUSHWAL = 0x80D0, PWALLSPD = 0.6, pushwdeb = 0, pmvx, pmvy,
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
@@ -3360,6 +3361,8 @@ var txsv = ":";
 //txsv = txsv.substring(0,100);
 //document.title = "-pl  "+txsv;
 ///
+		  if (this.push != undefined)
+		  if (collision == this.push) collision = false;
 
         if (!collision)
 			{
@@ -3389,7 +3392,15 @@ var txsv = ":";
 						Mastermap.occupy(this.x, 3, this);
 					else this.y = map.h - 37;
 			}
-
+// psuhwall mover
+			if (this.push != undefined)
+			if (pmvx != this.x || pmvy != this.y)
+			{
+				this.push.x = this.push.x + (this.x - pmvx);
+				this.push.y = this.push.y + (this.y - pmvy);
+				pmvx = this.x;
+				pmvy = this.y;
+			}
 
         if (collision)
           publish(EVENT.PLAYER_COLLIDE, this, collision); // if we collided with something, publish event and then try next available direction...
@@ -3412,6 +3423,32 @@ var txsv = ":";
       function walltype(tx,ty,map)   { return (iswall(mpixel(tw,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tw,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tw,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tw,tx-1, ty))   ? 8 : 0); };
       function shadowtype(tx,ty,map) { return (iswall(mpixel(tw,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tw,tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tw,tx,   ty+1)) ? 4 : 0); };
       function isfloor(pixel)         { return ((pixel & PIXEL.MASK.TYPE) === PIXEL.FLOOR);   };
+
+      if (treasure.type.push)
+		 {
+				helpdis(treasure.type.nohlp, undefined, 2000, undefined, undefined);
+				treasure.cbox = CBOX.EXIT;	// slim box a bit
+
+				if (pushwdeb < (ffieldpulse - 2)) {
+					this.push = treasure;
+					alert("tagged push item: "+treasure.pixel);
+					pushwdeb = ffieldpulse;
+					pmvx = this.x;
+					pmvy = this.y;
+					treasure.speed = PWALLSPD;		// slow a pushing player
+					treasure.dir = this.dir;	// stay with player while he pushes towards block
+				}
+				else
+				if (pushwdeb < ffieldpulse)
+				{
+//					treasure.x += this.x - mvx;
+//					treasure.y += this.y - mvy;
+					pushwdeb = ffieldpulse;
+				}
+
+//				Mastermap.trymove(this, this.dir, this.speed, this);// * PWALLSPD, this);
+				return; //push wall, go back
+		 }
 
       if (treasure.type.wall)
 		 {
