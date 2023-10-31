@@ -254,7 +254,7 @@ Gauntlet = function() {
 		G1HLP = 48, G2HLP = 72,
 // special help for invisible walls
 		INVSWALCD = 0x811F, INVWALCD = 0x812F, IVWHLP = 76, IVWSHLP = 78,
-		PUSHWAL = 0x80D0, PWALLSPD = 0.6, pushwdeb = 0, pmvx, pmvy,
+		PUSHWAL = 0x80D0, PWALLSPD = 0.6, pmvx, pmvy,
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
@@ -3357,7 +3357,7 @@ var txsv = ":";
 
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
-        collision = map.trymove(this, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS, this.push);
+        collision = map.trymove(this, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
 
 
 /// TEST - remove
@@ -3365,8 +3365,8 @@ var txsv = ":";
 //txsv = txsv.substring(0,100);
 //document.title = "-pl  "+txsv;
 ///
-//		  if (this.push != undefined)
-//		  if (collision == this.push) collision = false;
+		  if (this.push != undefined)
+		  if (collision == this.push) collision = false;
 
         if (!collision)
 			{
@@ -3445,7 +3445,6 @@ var txsv = ":";
 
 				if (this.push != treasure) {
 					this.push = treasure;
-					pushwdeb = ffieldpulse;
 					pmvx = this.x;
 					pmvy = this.y;
 					treasure.speed = PWALLSPD;		// slow a pushing player
