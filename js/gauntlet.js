@@ -1706,7 +1706,6 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				else
 /// TEST - remove
 				entity.hurt(dmg + xdmg, weapon);
-				document.getElementById("dpsout").value = entity.health;
 		 }
 // monster shot player
       else if (weapon.type.monster && entity.player)
