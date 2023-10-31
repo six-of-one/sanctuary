@@ -3188,6 +3188,7 @@ var txsv = ":";
       this.cells  = []; // entities track which cells they currently occupy
 
 // init some control code
+		this.push = null;
 		this.stun = 0;
 		 stalling = 0;
     },
@@ -3356,7 +3357,7 @@ var txsv = ":";
 
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
-        collision = map.trymove(this, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
+        collision = map.trymove(this, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS, this.push);
 
 
 /// TEST - remove
@@ -3364,8 +3365,8 @@ var txsv = ":";
 //txsv = txsv.substring(0,100);
 //document.title = "-pl  "+txsv;
 ///
-		  if (this.push != undefined)
-		  if (collision == this.push) collision = false;
+//		  if (this.push != undefined)
+//		  if (collision == this.push) collision = false;
 
         if (!collision)
 			{
@@ -3396,14 +3397,16 @@ var txsv = ":";
 					else this.y = map.h - 37;
 			}
 // psuhwall mover
-			if (this.push != undefined)
+			if (this.push != null)
 			if (pmvx != this.x || pmvy != this.y)
 			{
-				var pushd = this.push.dir;
-				if (this.push.dir == 0 pushd == 7) pushd = 1;
-				if (this.push.dir == 7 pushd == 0) pushd = 6;
-				if (Math.abs(this.push.dir - pushd) > 1) 
-					this.push = undefined;
+				var pushd = this.dir;
+				if (this.push.dir == 0 && pushd == 7) pushd = 1;
+				if (this.push.dir == 7 && pushd == 0) pushd = 6;
+				if (Math.abs(this.push.dir - pushd) > 1) {
+					Mastermap.occupy(this.push.x, this.push.y, this.push);
+					this.push = null;
+				}
 				else
 				{
 					this.push.x = this.push.x + (this.x - pmvx);
