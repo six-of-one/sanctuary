@@ -46,7 +46,7 @@ Gauntlet = function() {
 		 MEXLOB = 0x00001F,
 
 // highscores
-	scoredex = 0,
+	scoredex = 0, dpstim = 0, dpsacc = 0,
 	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
 // invisible wall & shotable invisible are in FAKES, item 15
@@ -1685,6 +1685,24 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 						dmg = weapon.damage;
 						if (entity.type.canbeshot) nosup = false;			// super shot hit a monster, gen or treasure that is shotable - keep going
 				}
+/// TEST - update ?
+				if (document.getElementById("sdps").checked && entity.treasure.push)
+				{
+					if (dpstim != ffieldpulse) {
+						document.getElementById("dpsout").value = dpsacc;
+						var dpst = document.getElementById("dpsout").title;
+						if (dpst.length > 256) dpst = "dps: ";
+						document.getElementById("dpsout").title = dpst + " : "+dpsacc;
+						dpsacc = 0;
+						dpstim = ffieldpulse;
+					}
+					else
+					{
+						dpsacc += dmg + xdmg;
+					}
+				}
+				else
+/// TEST - remove
 				entity.hurt(dmg + xdmg, weapon);		alert("wep hit: "+(dmg+xdmg)+" hl: "+entity.health);
 		 }
 // monster shot player
