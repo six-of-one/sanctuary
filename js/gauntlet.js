@@ -3409,36 +3409,11 @@ var txsv = ":";
 				}
 				else
 				{
-					var tpx = this.push.x;
-					var tpy = this.push.y;
 					this.push.x = this.push.x + (this.x - pmvx);
 					this.push.y = this.push.y + (this.y - pmvy);
 
-			  var cell = Mastermap.cells[p2t(this.push.x + 5) + (p2t(this.push.y + 5) *  Mastermap.tw)];
-
-					if ((cell.ptr.type.nohlp >= WTHLP) || cell.ptr.type.nohlp == FFHLP || cell.pixel == 0 || (cell.pixel & 0xFFF000) == PIXEL.FLOOR) {
-/*
-// pushwall move-ish test
-				 var pushcoll = Mastermap.occupied(this.push.x + this.push.cbox.x, this.push.y + this.push.cbox.y, this.push.cbox.w, this.push.cbox.h, this || this.push);
-					if (pushcoll) {
-						this.x = pmvx;
-						this.y = pmvy;
-						this.push.x = tpx;
-						this.push.y = tpy;
-					}
-					else {
-*/
-						pmvx = this.x;
-						pmvy = this.y;
-					}
-					else
-					{
-						this.x = pmvx;
-						this.y = pmvy;
-						this.push.x = tpx;
-						this.push.y = tpy;
-						Mastermap.occupy(pmvx, pmvy, this);
-					}
+					pmvx = this.x;
+					pmvy = this.y;
 				}
 			}
 
