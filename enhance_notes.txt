@@ -12,6 +12,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 dev:
 
+push wall collision
 
 imm issues:
 
@@ -200,6 +201,14 @@ difficulty system >> cheat (no HS, no bonus x), trainer, easy, normal, { }, hard
 genesis gIV - quest, ? battle, record
 +music from this is good too
 
+higher difficulty may change:
+- generator speed
+- monster speed, health, item drops
+- wallstall & doorstall 			(the ol' wait for walls->exits to skip hard levels)
+- temporary item use time (longer or shorter)
+- locked chest & shot wall items
+- confusion item (sprite images are mixed up)
+
 4th level+ monters & generators
 - ghosts will get to shoot
 - grunts will throw clubs infreq
@@ -208,7 +217,6 @@ genesis gIV - quest, ? battle, record
 mimics - look like treasure chest/ locked chest - attaks buku dmg, contains special artifact
 
 more powerful enemies may drop items - food, treasure, weapons, etc
-
 
 randomly leave out wall -> exit if more than {X} wall segs
 yellow teleports that can select further away
@@ -234,6 +242,10 @@ basilisk
 
 buy stuff guy, with new stuffs, keys, food, potions. temps
 
+new items:
+ressurection potion / device
+swords (a la saberhagens swords)
+
 difficulty title ideas
 
 walk in the park
@@ -243,6 +255,18 @@ nightmare
 walking on spikes
 running in flaming oil
 valley of the shadow of death
+
+char stats:
+player stats:		(once we have name keeping)
+
+- max time played, max time on level
+\____ may add a further per adventure mode...
+- foods eaten, health accum
+- potions & items collected
+- potions fired, keys used
+- damage taken, tot autohurt
+- each type of monster & gen destroyed
+- total play stats per life & poss per map stats
 
 
 >>>>>>>>>>>>>>>>>>>>>>
@@ -258,7 +282,7 @@ issues when going multiplayer:
 cli / srv model for over net play
 - cli will just be render engine, have to report all controls back
 
-troomtime counted in autohurt
+troomtime counted in autohurt					(along with a bunch of other stuff now)
 all the non player count down items should prob. be on setTimeout() or locked out timer
 
 >>>>>>>>>>>>>>>>>>>>>>

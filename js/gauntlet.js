@@ -320,6 +320,7 @@ Gauntlet = function() {
         NWASTEC:       { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
         NWASTER:       { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
         FIRESTK:       { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
+        PFLOOR1:       { sx: 0, sy: 28, frames:7, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 80  },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -371,12 +372,12 @@ Gauntlet = function() {
       TREASURES = [ TREASURE.HEALTH, TREASURE.HEALRND, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
 											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER, TREASURE.LAVA, TREASURE.NWASTE,
-											TREASURE.FIRESTK,
+											TREASURE.FIRESTK, TREASURE.PFLOOR1,
 // these are selected by MEXLOW case {}, or other code
 											TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
 											TREASURE.POTIONORG, TREASURE.BADBOT, TREASURE.POISON, TREASURE.WATERT, TREASURE.WATERC, TREASURE.WATERR, TREASURE.LAVAT, TREASURE.LAVAC, TREASURE.LAVAR,
-											TREASURE.NWASTET, TREASURE.NWASTEC, TREASURE.NWASTER, 
+											TREASURE.NWASTET, TREASURE.NWASTEC, TREASURE.NWASTER,
 											TREASURE.FFIELDUNITD, TREASURE.FFIELDUNITL, TREASURE.FFIELDUNITR		],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,    h: TILE          },
@@ -1878,6 +1879,10 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
         this.storage[STORAGE.SCORE] = (this.player.score / this.player.droppedcoins);
         this.storage[STORAGE.WHO]   = this.player.type.name;
       }
+// char stats
+		var chtime = readCookie("chartm_"+this.player.type.name);
+		if (ffieldpulse > chtime) createCookie("chartm_"+this.player.type.name,ffieldpulse,7777);
+
 		if (this.player.score > 8000) {
 			scoredex++;
 			createCookie(scoredex+"char", this.player.type.name,7777);
