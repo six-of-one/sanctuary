@@ -3414,6 +3414,10 @@ var txsv = ":";
 					this.push.x = this.push.x + (this.x - pmvx);
 					this.push.y = this.push.y + (this.y - pmvy);
 
+			  var cell = Mastermap.cells[p2t(this.push.x + 5) + (p2t(this.push.y + 5) *  Mastermap.tw)];
+
+					if ((cell.ptr.type.nohlp >= WTHLP) || cell.ptr.type.nohlp == FFHLP || cell.pixel == 0 || (cell.pixel & 0xFFF000) == PIXEL.FLOOR) {
+/*
 // pushwall move-ish test
 				 var pushcoll = Mastermap.occupied(this.push.x + this.push.cbox.x, this.push.y + this.push.cbox.y, this.push.cbox.w, this.push.cbox.h, this || this.push);
 					if (pushcoll) {
@@ -3423,8 +3427,17 @@ var txsv = ":";
 						this.push.y = tpy;
 					}
 					else {
+*/
 						pmvx = this.x;
 						pmvy = this.y;
+					}
+					else
+					{
+						this.x = pmvx;
+						this.y = pmvy;
+						this.push.x = tpx;
+						this.push.y = tpy;
+						Mastermap.occupy(pmvx, pmvy, this);
 					}
 				}
 			}
@@ -3454,7 +3467,7 @@ var txsv = ":";
       if (treasure.type.push)
 		 {
 				helpdis(treasure.type.nohlp, undefined, 2000, undefined, undefined);
-				treasure.cbox = CBOX.EXIT;	// slim box a bit
+				treasure.cbox = CBOX.MONSTER;	// slim box a bit
 
 				if (this.push != treasure) {
 					this.push = treasure;
