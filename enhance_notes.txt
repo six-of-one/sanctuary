@@ -70,6 +70,7 @@ thief op & logic
 
 save system via cooky
 > score tables
+> input name, pick custom color (hue shift selector for this)
 
 finish g1 map population
 finish wall layers
