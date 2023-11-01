@@ -48,7 +48,8 @@ need sounds:
 port list:
 
 g2 phase wall, rnd wall, std wall shotable
-locked treasure needs item load
+locked treasure needs item load (rn just gives 500 pts treasure value, no displ)
+- also need debounce on appearing items - so we can also drop items in enhance inv. mode
 RND food - g2 ops (rn is rnd value 50 - 200)
 
 player dmg: melee
@@ -85,6 +86,7 @@ g1 audio elements swap in	-> ref genesis sound test for note s
 g1 gfx tiles
 - spirtes		-- decide how much of this we want / can use
 - walls & floors
+g1 has some sprites that seem to "oversize" the map cell - ref. box generators, foods, etc
 
 g2:
 -push wall pushing
