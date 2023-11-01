@@ -57,7 +57,9 @@ Gauntlet = function() {
 		Deathmult, Dmmax = 7,
 		Deathscore = [1000, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
 // give notice after potion burst of death pts
-		Deathnote = [0, 2, 1, 3, 0, 4, 0, 1],
+		Deathnote = [0, 2, 1, 3, 0, 4, 0, 1 ],
+// 5 = 100, 6 = 500 for treasure pts & keys
+		tp100 = 5, tp500 = 6, 
 
       FPS      = 60,
       TILE     = 32,
@@ -265,7 +267,7 @@ Gauntlet = function() {
         FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
         FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16   },
         POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' },
-        KEY:     { sx: 21, sy: 10, frames: 1, fpf: FPS/10, score:  20, key:    true,  sound: 'collectkey' , nohlp: 18   },
+        KEY:     { sx: 21, sy: 10, frames: 1, fpf: FPS/10, score:  100, key:    true,  sound: 'collectkey' , nohlp: 18   },
         POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion', nohlp: 19 },
         POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', nohlp: 19  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' },
@@ -3524,6 +3526,14 @@ var txsv = ":";
 		else
 		 {
 				this.addscore(treasure.type.score);
+				if (treasure.type.score == 100 || treasure.type.score == 500)
+				{
+					var tp = tp100;
+					if (treasure.type.score == 500) tp = tp500;
+					Mastermap.addFx(this.x, this.y, FX.NUMER);
+					Mastercell.ptr.sy = Mastercell.ptr.type.sy + tp;
+					Mastercell.ptr.numer = true;
+				}
 // score multiplier
 				if (treasure.type.scmult)
 				 {
