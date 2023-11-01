@@ -258,7 +258,7 @@ Gauntlet = function() {
 
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
-        HEALRND:   { sx: 2, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'collectfood',  nohlp: 74   },
+        HEALRND: { sx: 2, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'collectfood',  nohlp: 74   },
         FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
         FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
         FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16   },
@@ -268,20 +268,20 @@ Gauntlet = function() {
         POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', nohlp: 19  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' },
         GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1, troom: 1,             sound: 'collectgold', nohlp: 14, blkhlp: 15   },
-        LOCKED:    { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'unlkches', nohlp:   56 },
-        BAG:    { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5, troom: 1,                sound: 'collectgold', nohlp: 15, blkhlp: 14   },
+        LOCKED:  { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'unlkches', nohlp:   56 },
+        BAG:     { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5, troom: 1,                sound: 'collectgold', nohlp: 15, blkhlp: 14   },
 // teleport, trap, stun, force field tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport',  nohlp: 25  },
         TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap', nohlp: 20 },
         STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun', nohlp: 49  },
         PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, health:270, canbeshot: 2, push: true,   sound: 'null', nohlp: 57  },
 // extra power potions
-        XSPEED:       { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxspd',  sound: 'collectpotion', nohlp: 1  },
-        XSHOTPWR:       { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtpwr',   sound: 'collectpotion',  nohlp: 2  },
-        XSHOTSPD:       { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtspd',   sound: 'collectpotion', nohlp: 3  },
-        XARMOR:       { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxarm',   sound: 'collectpotion', nohlp: 4  },
-        XFIGHT:       { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxft',   sound: 'collectpotion' , nohlp: 5 },
-        XMAGIC:       { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxmag',   sound: 'collectpotion', nohlp: 6  },
+        XSPEED:     { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxspd',  sound: 'collectpotion', nohlp: 1  },
+        XSHOTPWR:   { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtpwr',   sound: 'collectpotion',  nohlp: 2  },
+        XSHOTSPD:   { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtspd',   sound: 'collectpotion', nohlp: 3  },
+        XARMOR:     { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxarm',   sound: 'collectpotion', nohlp: 4  },
+        XFIGHT:     { sx: 13, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxft',   sound: 'collectpotion' , nohlp: 5 },
+        XMAGIC:     { sx: 14, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxmag',   sound: 'collectpotion', nohlp: 6  },
 // limited (temporary) powers
         LIMINVIS:       { sx: 15, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, annc: 'ancinvis',   sound: 'collectpotion', nohlp: 7  },
         LIMINVUL:       { sx: 16, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 51 },
@@ -305,22 +305,23 @@ Gauntlet = function() {
 // this is the field power that damages, this is toggled on by ffieldpulse ops
         FFIELDPOW:       { sx: 28, sy: 12, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 3, sound: 'ffield',  nohlp: 61  },
 // animated floor items
-        WATER:       { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
+        WATER:      { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
 // series of water boundary blocks code: 0x8140, with a pool wall appearing top, center and right, selected by MEXLOW 1, 2, 3
-        WATERT:       { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
-        WATERC:       { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
-        WATERR:       { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
+        WATERT:     { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
+        WATERC:     { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
+        WATERR:     { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
 // series of lava blocks code: 0x8150. with MEXLOW as water
         LAVA:       { sx: 16, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
-        LAVAT:       { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
-        LAVAC:       { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
-        LAVAR:       { sx: 28, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
-        NWASTE:       { sx: 16, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
-        NWASTET:       { sx: 19, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
-        NWASTEC:       { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
-        NWASTER:       { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
-        FIRESTK:       { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
-        PFLOOR1:       { sx: 28, sy: 27, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 999  },
+        LAVAT:      { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
+        LAVAC:      { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
+        LAVAR:      { sx: 28, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
+        NWASTE:     { sx: 16, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
+        NWASTET:    { sx: 19, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
+        NWASTEC:    { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
+        NWASTER:    { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
+        FIRESTK:    { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
+        PFLOOR1:    { sx: 28, sy: 27, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 999  },
+        NUMER:      { sx: 13, sy: 27, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 999  },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -368,7 +369,8 @@ Gauntlet = function() {
       MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, 
 											MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2, 
 											MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, 
-											MONSTER.THIEF, MONSTER.MUGGER, MONSTER.PICKLE ],
+											MONSTER.THIEF, MONSTER.MUGGER, MONSTER.PICKLE 
+						],
       TREASURES = [ TREASURE.HEALTH, TREASURE.HEALRND, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
 											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER, TREASURE.LAVA, TREASURE.NWASTE,
@@ -378,7 +380,8 @@ Gauntlet = function() {
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
 											TREASURE.POTIONORG, TREASURE.BADBOT, TREASURE.POISON, TREASURE.WATERT, TREASURE.WATERC, TREASURE.WATERR, TREASURE.LAVAT, TREASURE.LAVAC, TREASURE.LAVAR,
 											TREASURE.NWASTET, TREASURE.NWASTEC, TREASURE.NWASTER,
-											TREASURE.FFIELDUNITD, TREASURE.FFIELDUNITL, TREASURE.FFIELDUNITR		],
+											TREASURE.FFIELDUNITD, TREASURE.FFIELDUNITL, TREASURE.FFIELDUNITR, TREASURE.NUMER
+						],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,    h: TILE          },
         PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2,  h: TILE - TILE/4 },
