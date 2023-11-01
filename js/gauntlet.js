@@ -3788,10 +3788,10 @@ var txsv = ":";
     },
 
     fire:      function(on) { this.firing       = on;   },
-    moveUp:    function(on) { this.moving.up    = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.left = this.moving.left ? false : true; else this.moving.right = this.moving.right ? false : true; if (Math.random() < 0.16) this.moving.up    = this.moving.up    ? false : true; }; this.setDir(); },
-    moveDown:  function(on) { this.moving.down  = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.left = this.moving.left ? false : true; else this.moving.right = this.moving.right ? false : true; if (Math.random() < 0.16) this.moving.down  = this.moving.down  ? false : true; }; this.setDir(); },
-    moveLeft:  function(on) { this.moving.left  = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.up   = this.moving.up ? false : true;   else this.moving.down  = this.moving.down  ? false : true; if (Math.random() < 0.16) this.moving.left  = this.moving.left  ? false : true; }; this.setDir(); },
-    moveRight: function(on) { this.moving.right = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.up   = this.moving.up ? false : true;   else this.moving.down  = this.moving.down  ? false : true; if (Math.random() < 0.16) this.moving.right = this.moving.right ? false : true; }; this.setDir(); },
+    moveUp:    function(on) { this.moving.up    = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.left = this.moving.left ? false : (this.poison - 1); else this.moving.right = this.moving.right ? false : (this.poison - 1); if (Math.random() < 0.16) this.moving.up    = this.moving.up    ? false : (this.poison - 1); }; this.setDir(); },
+    moveDown:  function(on) { this.moving.down  = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.left = this.moving.left ? false : (this.poison - 1); else this.moving.right = this.moving.right ? false : (this.poison - 1); if (Math.random() < 0.16) this.moving.down  = this.moving.down  ? false : (this.poison - 1); }; this.setDir(); },
+    moveLeft:  function(on) { this.moving.left  = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.up   = this.moving.up ? false : (this.poison - 1);   else this.moving.down  = this.moving.down  ? false : (this.poison - 1); if (Math.random() < 0.16) this.moving.left  = this.moving.left  ? false : (this.poison - 1); }; this.setDir(); },
+    moveRight: function(on) { this.moving.right = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.up   = this.moving.up ? false : (this.poison - 1);   else this.moving.down  = this.moving.down  ? false : (this.poison - 1); if (Math.random() < 0.16) this.moving.right = this.moving.right ? false : (this.poison - 1); }; this.setDir(); },
     coindrop: function() {
 		 if (this.coins > 0)
 		 {
@@ -3850,7 +3850,14 @@ var txsv = ":";
 // this is game 1 second interval pulse - prob should be on a timer
 			heartbeet = heartbeet+ 1;
 
-			if (this.poison > 0) this.poison--; // count down poison effect
+			if (this.poison > 0) {
+// poison confuses controls by activating them - because it wasnt a button press, we need to turn it back off a second later
+				if (this.moving.left == this.poison) this.moving.left = false;
+				if (this.moving.right == this.poison) this.moving.right = false;
+				if (this.moving.up == this.poison) this.moving.up = false;
+				if (this.moving.down == this.poison) this.moving.down = false;
+				this.poison--; // count down poison effect
+			}
 			var hinv = 0;
 			if (this.linvuln > 0) hinv = 1; // invulnerable takes another health per tick
 // difficulty > 7 (std hard) adds dmg at 1% per diff
