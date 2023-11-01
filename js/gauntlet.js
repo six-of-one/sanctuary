@@ -362,7 +362,7 @@ Gauntlet = function() {
         MONSTER_DEATH:   { sx: 17, sy: 12, frames: 6, fpf: FPS/20 },
         WEAPON_HIT:      { sx: 23, sy: 12, frames: 2, fpf: FPS/20 },
         PLAYER_GLOW:     { frames: FPS/2, border: 5 },
-        NUMER:           { sx: 13, sy: 24, frames:5, fpf: FPS/5  }
+        NUMER:           { sx: 24, sy: 13, frames:5, fpf: FPS/5  }
       },
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
 // the order of these lists follows the numeric code of pixels under the main entry, adding hex 10 each time
