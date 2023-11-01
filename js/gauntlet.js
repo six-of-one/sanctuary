@@ -129,7 +129,7 @@ Gauntlet = function() {
 // help only
 									"Treasure: 100 points",
 									"Treasure: 500 points",																								// 15
-									"Food: health increased by 100",
+									"Food: health increased by #",
 									"Food: health increased by RND",
 // help items & rnd lvl messages
 									"Save keys to open doors",
@@ -249,7 +249,7 @@ Gauntlet = function() {
 // collect magic before	27
 		helpcleared = 0, // option - tutorial count down 
 // easy way to detect non shootables - via help codes
-		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, PSWDHLP = 79, WTHLP = 80, 
+		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, RNDHLP = 74, PSWDHLP = 79, WTHLP = 80,
 // help message ranges for tutorial exclusion
 		G1HLP = 48, G2HLP = 72,
 // special help for invisible walls
@@ -3538,6 +3538,7 @@ var txsv = ":";
 		 }
 
 		 var hrp = undefined;
+		 if (treasure.type.nohlp == RNDHLP) treasure.type.health = 50 + Math.randomInt(50,150);
 		 if (treasure.type.health > 0) hrp = treasure.type.health;
 		 helpdis(treasure.type.nohlp, undefined, 2000, hrp, undefined);
 		 if (treasure.type.blkhlp != undefined) HELPCLEAR[treasure.type.blkhlp] = 0;
@@ -3699,7 +3700,7 @@ var txsv = ":";
 				if (treasure.type == TREASURE.XSHOTSPD && !this.xshotspd) {this.xshotspd++; powerp++;}
 				if (treasure.type == TREASURE.XARMOR && !this.xarmor) {this.xarmor++; powerp++;}
 				if (treasure.type == TREASURE.XFIGHT && !this.xfight) {this.xfight++; powerp++;}
-				if (treasure.type == TREASURE.XMAGIC && !this.xmagic) {this.xmagic++; powerp++;}
+				if (treasure.type == TREASURE.XMAGIC && !this.xmagic) {this.xmagic++; powerp++; if (this.type.name == "wizard") this.potions++;}
 
 // plan: these need either put in type or somehow made code adjustable or both
 				if (treasure.type == TREASURE.LIMINVIS) {this.linvis = this.linvis + 30; limitp++;}

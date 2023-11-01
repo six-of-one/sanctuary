@@ -290,6 +290,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
+x-- wizard gets reg potion when he picks up xmagic (as per g1)
+
 x-- shot a shotable fake item: help/ annc
 
 x-- should locked chest display help/annc on touch w/o key? - yes, done
