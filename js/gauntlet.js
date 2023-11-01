@@ -362,7 +362,7 @@ Gauntlet = function() {
         MONSTER_DEATH:   { sx: 17, sy: 12, frames: 6, fpf: FPS/20 },
         WEAPON_HIT:      { sx: 23, sy: 12, frames: 2, fpf: FPS/20 },
         PLAYER_GLOW:     { frames: FPS/2, border: 5 },
-        NUMER:           { sx: 13, sy: 27, frames:1, fpf: FPS/2  }
+        NUMER:           { sx: 13, sy: 24, frames:5, fpf: FPS/5  }
       },
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
 // the order of these lists follows the numeric code of pixels under the main entry, adding hex 10 each time
@@ -2844,7 +2844,7 @@ var ymir = false, xmir = false;
 		 {
 				this.health = Math.max(0, this.health - damage);
 				if (this.health > 0) return;
-				Mastermap.addFx(this.x, this.y, FX.NUMER, 3);
+				Mastermap.addFx(this.x, this.y, FX.NUMER);
 				this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null, nuke);
 				by.addscore(Math.floor( (Deathscore[Deathmult] - 1) /  (by.scmult > 1 ? 1.33333 : 1) ) );
 				return;
