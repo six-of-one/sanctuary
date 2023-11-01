@@ -1,4 +1,4 @@
-fGauntlet = function() {
+Gauntlet = function() {
 
 //  'use strict';
 
