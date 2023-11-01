@@ -293,6 +293,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
+x-- poison dizzy effect, controls now have some wobble
+
 x-- death point scores on potion splash
    \treasure points scores for 100, 500 pts
 

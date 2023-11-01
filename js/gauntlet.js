@@ -333,7 +333,7 @@ Gauntlet = function() {
 		TROOMCNT = [ ], TROOMSUP = [ ], RNGLOAD = [ ],
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
-		POISONTM = 60,		// 10 secs of poison (muddle controls from dizzy effect)
+		POISONTM = 15,		// 10 secs of poison (muddle controls from dizzy effect)
 		POISONDIZ = 0.2,	// chance dizzy condition will confuse player
 		SUPERSHTFR = 10,	// super shot proj frame
 		TELEPORTILE = 0x0080a0,
@@ -4268,6 +4268,7 @@ var txsv = ":";
 		document.getElementById(player.type.name+"ltele").style.visibility = player.ltele ? "visible" : "hidden";
 		document.getElementById(player.type.name+"lank").style.visibility = player.lank ? "visible" : "hidden";
 
+		 document.getElementById(player.type.name+"poison").style.visibility = (player.poison > 0) ? "visible" : "hidden";
     },
 
     refreshPlayerPotions: function(player) {
