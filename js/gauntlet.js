@@ -333,7 +333,7 @@ Gauntlet = function() {
 		TROOMCNT = [ ], TROOMSUP = [ ], RNGLOAD = [ ],
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
-		POISONTM = 10,		// 10 secs of poison (muddle controls from dizzy effect)
+		POISONTM = 60,		// 10 secs of poison (muddle controls from dizzy effect)
 		POISONDIZ = 0.2,	// chance dizzy condition will confuse player
 		SUPERSHTFR = 10,	// super shot proj frame
 		TELEPORTILE = 0x0080a0,
@@ -3788,10 +3788,10 @@ var txsv = ":";
     },
 
     fire:      function(on) { this.firing       = on;   },
-    moveUp:    function(on) { this.moving.up    = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.left = this.moving.left ? false : (this.poison - 1); else this.moving.right = this.moving.right ? false : (this.poison - 1); if (Math.random() < 0.16) this.moving.up    = this.moving.up    ? false : (this.poison - 1); }; this.setDir(); },
-    moveDown:  function(on) { this.moving.down  = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.left = this.moving.left ? false : (this.poison - 1); else this.moving.right = this.moving.right ? false : (this.poison - 1); if (Math.random() < 0.16) this.moving.down  = this.moving.down  ? false : (this.poison - 1); }; this.setDir(); },
-    moveLeft:  function(on) { this.moving.left  = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.up   = this.moving.up ? false : (this.poison - 1);   else this.moving.down  = this.moving.down  ? false : (this.poison - 1); if (Math.random() < 0.16) this.moving.left  = this.moving.left  ? false : (this.poison - 1); }; this.setDir(); },
-    moveRight: function(on) { this.moving.right = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.up   = this.moving.up ? false : (this.poison - 1);   else this.moving.down  = this.moving.down  ? false : (this.poison - 1); if (Math.random() < 0.16) this.moving.right = this.moving.right ? false : (this.poison - 1); }; this.setDir(); },
+    moveUp:    function(on) { this.moving.up    = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.left = this.moving.left ? false : this.poison; else this.moving.right = this.moving.right ? false : this.poison; if (Math.random() < 0.16) this.moving.up    = this.moving.up    ? false : this.poison; }; this.setDir(); },
+    moveDown:  function(on) { this.moving.down  = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.left = this.moving.left ? false : this.poison; else this.moving.right = this.moving.right ? false : this.poison; if (Math.random() < 0.16) this.moving.down  = this.moving.down  ? false : this.poison; }; this.setDir(); },
+    moveLeft:  function(on) { this.moving.left  = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.up   = this.moving.up ? false : this.poison;   else this.moving.down  = this.moving.down  ? false : this.poison; if (Math.random() < 0.16) this.moving.left  = this.moving.left  ? false : this.poison; }; this.setDir(); },
+    moveRight: function(on) { this.moving.right = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.up   = this.moving.up ? false : this.poison;   else this.moving.down  = this.moving.down  ? false : this.poison; if (Math.random() < 0.16) this.moving.right = this.moving.right ? false : this.poison; }; this.setDir(); },
     coindrop: function() {
 		 if (this.coins > 0)
 		 {
@@ -3856,6 +3856,7 @@ var txsv = ":";
 				if (this.moving.right == this.poison) this.moving.right = false;
 				if (this.moving.up == this.poison) this.moving.up = false;
 				if (this.moving.down == this.poison) this.moving.down = false;
+				this.setDir();
 				this.poison--; // count down poison effect
 			}
 			var hinv = 0;
