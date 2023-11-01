@@ -3772,6 +3772,8 @@ var txsv = ":";
       else if (treasure.type.damage)
 		{
 			if (treasure.type.poison) this.poison = POISONTM;
+			document.getElementById(this.type.name+"poison").src = "images/poison.png";
+			if (treasure.pixel == 0x8011) document.getElementById(this.type.name+"poison").src = "images/poisonf.png";
 			helpdis(treasure.type.nohlp, undefined, 2000, treasure.type.damage, undefined);
 			this.hurt(treasure.type.damage);
 		}
