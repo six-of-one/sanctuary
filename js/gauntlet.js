@@ -1,4 +1,4 @@
-Gauntlet = function() {
+fGauntlet = function() {
 
 //  'use strict';
 
@@ -56,6 +56,8 @@ Gauntlet = function() {
 //				note: NON g1, this is multiplied by score x {n} by current code!
 		Deathmult, Dmmax = 7,
 		Deathscore = [1000, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
+// give notice after potion burst of death pts
+		Deathnote = [FX.NUMER, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
 
       FPS      = 60,
       TILE     = 32,
