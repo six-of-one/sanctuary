@@ -3538,7 +3538,7 @@ var txsv = ":";
 		 }
 
 		 var hrp = undefined;
-		 if (treasure.type.nohlp == RNDHLP) treasure.type.health = 50 + Math.randomInt(50,150);
+		 if (treasure.type.nohlp == RNDHLP) treasure.type.health = 50 + Game.Math.randomInt(50,150);
 		 if (treasure.type.health > 0) hrp = treasure.type.health;
 		 helpdis(treasure.type.nohlp, undefined, 2000, hrp, undefined);
 		 if (treasure.type.blkhlp != undefined) HELPCLEAR[treasure.type.blkhlp] = 0;
