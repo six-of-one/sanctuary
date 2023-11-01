@@ -2636,6 +2636,7 @@ var ymir = false, xmir = false;
 		Mastercell.ptr = entity;
       this.occupy(x, y, entity);
       entity.active = true;
+		entity.numer = false; // these are a reused pool, turn this off
       return entity;
     },
 
