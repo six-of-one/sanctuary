@@ -297,7 +297,7 @@ Gauntlet = function() {
 // shootable wall - see grid 38 of backgrounds
         SHOTWALL:       { sx: 0, sy: 38, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:30, wall:true,   sound: 'collectpotion' ,  nohlp: 26},
 // shotable and non-shot fake items, see grid 39 of backgrounds
-        SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:16, wall:true,   sound: 'collectpotion' , nohlp: 58 },
+        SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, score:  50, canbeshot: 2, health:16, wall:true,   sound: 'collectpotion' , nohlp: 58 },
         PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'collectpotion' , nohlp: 58 },
 // this is the red wall pillar thingy code:0x8130 with [ inward ] facing up, down, left, right by MEXLOW bits 0, 1, 2, 3
         FFIELDUNIT:       { sx: 0, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
