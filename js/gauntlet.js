@@ -223,9 +223,10 @@ Gauntlet = function() {
 									"help # 77",
 									"Some invisible walls can be shot",
 									"Pushwalls  can be destroyed",
+									"Poisoned: you are dizzy<br>Player loses # health",
 
 // expanded - liquids - all help after this makes a nonsolid item that can be walked through, damage still occurs
-									"Water slows you down",																								// 80
+									"Water slows you down",																								// 81
 									"Lava is very dangerous<br>Avoid lava or take # damage",
 									"Toxic ooze is dangerous<br>Avoid slime or take # damage",
 
@@ -253,7 +254,7 @@ Gauntlet = function() {
 // collect magic before	27
 		helpcleared = 0, // option - tutorial count down 
 // easy way to detect non shootables - via help codes
-		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, RNDHLP = 74, PSWDHLP = 79, WTHLP = 80,
+		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, RNDHLP = 74, PSWDHLP = 79, WTHLP = 81,
 // help message ranges for tutorial exclusion
 		G1HLP = 48, G2HLP = 72,
 // special help for invisible walls
@@ -266,11 +267,11 @@ Gauntlet = function() {
         FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
         FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
         FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16   },
-        POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' },
+        POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion',  nohlp: 80 },
         KEY:     { sx: 21, sy: 10, frames: 1, fpf: FPS/10, score:  100, key:    true,  sound: 'collectkey' , nohlp: 18   },
         POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion', nohlp: 19 },
         POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', nohlp: 19  },
-        BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion' },
+        BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion',  nohlp: 80 },
         GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1, troom: 1,             sound: 'collectgold', nohlp: 14, blkhlp: 15   },
         LOCKED:  { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'unlkches', nohlp:   56 },
         BAG:     { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5, troom: 1,                sound: 'collectgold', nohlp: 15, blkhlp: 14   },
@@ -309,20 +310,20 @@ Gauntlet = function() {
 // this is the field power that damages, this is toggled on by ffieldpulse ops
         FFIELDPOW:       { sx: 28, sy: 12, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 3, sound: 'ffield',  nohlp: 61  },
 // animated floor items
-        WATER:      { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
+        WATER:      { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 81  },
 // series of water boundary blocks code: 0x8140, with a pool wall appearing top, center and right, selected by MEXLOW 1, 2, 3
-        WATERT:     { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
-        WATERC:     { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
-        WATERR:     { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 80  },
+        WATERT:     { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 81  },
+        WATERC:     { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 81  },
+        WATERR:     { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 81  },
 // series of lava blocks code: 0x8150. with MEXLOW as water
-        LAVA:       { sx: 16, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
-        LAVAT:      { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
-        LAVAC:      { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
-        LAVAR:      { sx: 28, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 81  },
-        NWASTE:     { sx: 16, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
-        NWASTET:    { sx: 19, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
-        NWASTEC:    { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
-        NWASTER:    { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
+        LAVA:       { sx: 16, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 82  },
+        LAVAT:      { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 82  },
+        LAVAC:      { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 82  },
+        LAVAR:      { sx: 28, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 82  },
+        NWASTE:     { sx: 16, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 83  },
+        NWASTET:    { sx: 19, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 83  },
+        NWASTEC:    { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 83  },
+        NWASTER:    { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 83  },
         FIRESTK:    { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
         PFLOOR1:    { sx: 28, sy: 27, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 999  },
 
@@ -332,7 +333,9 @@ Gauntlet = function() {
 		TROOMCNT = [ ], TROOMSUP = [ ], RNGLOAD = [ ],
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
-		SUPERSHTFR = 10,		// super shot proj frame
+		POISONTM = 10,		// 10 secs of poison (muddle controls from dizzy effect)
+		POISONDIZ = 0.2,	// chance dizzy condition will confuse player
+		SUPERSHTFR = 10,	// super shot proj frame
 		TELEPORTILE = 0x0080a0,
 		FFIELDTILE = 0x008130,
 // until target traps are coded any trap will remove these
@@ -2848,9 +2851,11 @@ var ymir = false, xmir = false;
 		 {
 				this.health = Math.max(0, this.health - damage);
 				if (this.health > 0) return;
-				Mastermap.addFx(this.x, this.y, FX.NUMER);
-				Mastercell.ptr.sy = Mastercell.ptr.type.sy + Deathnote[Deathmult];
-				Mastercell.ptr.numer = true; // special display class because of sprite render using entity.type.sy instead of entity.sy
+				var re = Mastermap.addFx(this.x, this.y, FX.NUMER);
+				if (re != null) {
+					re.sy = re.type.sy + Deathnote[Deathmult];
+					re.numer = true; // special display class because of sprite render using entity.type.sy instead of entity.sy
+				}
 				this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null, nuke);
 				by.addscore(Math.floor( (Deathscore[Deathmult] - 1) /  (by.scmult > 1 ? 1.33333 : 1) ) );
 				return;
@@ -3530,9 +3535,11 @@ var txsv = ":";
 				{
 					var tp = tp100;
 					if (treasure.type.score == 500) tp = tp500;
-					Mastermap.addFx(this.x, this.y, FX.NUMER);
-					Mastercell.ptr.sy = Mastercell.ptr.type.sy + tp;
-					Mastercell.ptr.numer = true;
+					var re = Mastermap.addFx(treasure.x, treasure.y, FX.NUMER);
+					if (re != null) {
+						re.sy = re.type.sy + tp;
+						re.numer = true;
+					}
 				}
 // score multiplier
 				if (treasure.type.scmult)
@@ -3559,8 +3566,10 @@ var txsv = ":";
 		 var hrp = undefined;
 		 if (treasure.type.nohlp == RNDHLP) treasure.type.health = 50 + Game.Math.randomInt(50,150);
 		 if (treasure.type.health > 0) hrp = treasure.type.health;
-		 helpdis(treasure.type.nohlp, undefined, 2000, hrp, undefined);
-		 if (treasure.type.blkhlp != undefined) HELPCLEAR[treasure.type.blkhlp] = 0;
+		 if (!treasure.type.damage) {
+			 helpdis(treasure.type.nohlp, undefined, 2000, hrp, undefined);
+			 if (treasure.type.blkhlp != undefined) HELPCLEAR[treasure.type.blkhlp] = 0;
+		 }
 
 		 if (treasure.type.stun)
 			this.stun = 4;
@@ -3761,7 +3770,11 @@ var txsv = ":";
 			}
 		}
       else if (treasure.type.damage)
-        this.hurt(treasure.type.damage);
+		{
+			if (treasure.type.poison) this.poison = POISONTM;
+			helpdis(treasure.type.nohlp, undefined, 2000, treasure.type.damage, undefined);
+			this.hurt(treasure.type.damage);
+		}
       publish(EVENT.TREASURE_COLLECTED, treasure, this);
     },
 
@@ -3775,10 +3788,10 @@ var txsv = ":";
     },
 
     fire:      function(on) { this.firing       = on;   },
-    moveUp:    function(on) { this.moving.up    = on;  this.setDir(); },
-    moveDown:  function(on) { this.moving.down  = on;  this.setDir(); },
-    moveLeft:  function(on) { this.moving.left  = on;  this.setDir(); },
-    moveRight: function(on) { this.moving.right = on;  this.setDir(); },
+    moveUp:    function(on) { this.moving.up    = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.left = this.moving.left ? false : true; else this.moving.right = this.moving.right ? false : true; if (Math.random() < 0.16) this.moving.up    = this.moving.up    ? false : true; }; this.setDir(); },
+    moveDown:  function(on) { this.moving.down  = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.left = this.moving.left ? false : true; else this.moving.right = this.moving.right ? false : true; if (Math.random() < 0.16) this.moving.down  = this.moving.down  ? false : true; }; this.setDir(); },
+    moveLeft:  function(on) { this.moving.left  = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.up   = this.moving.up ? false : true;   else this.moving.down  = this.moving.down  ? false : true; if (Math.random() < 0.16) this.moving.left  = this.moving.left  ? false : true; }; this.setDir(); },
+    moveRight: function(on) { this.moving.right = on; if (this.poison > 0 && Math.random() < POISONDIZ) { if (Math.random() < 0.66) this.moving.up   = this.moving.up ? false : true;   else this.moving.down  = this.moving.down  ? false : true; if (Math.random() < 0.16) this.moving.right = this.moving.right ? false : true; }; this.setDir(); },
     coindrop: function() {
 		 if (this.coins > 0)
 		 {
@@ -3837,6 +3850,7 @@ var txsv = ":";
 // this is game 1 second interval pulse - prob should be on a timer
 			heartbeet = heartbeet+ 1;
 
+			if (this.poison > 0) this.poison--; // count down poison effect
 			var hinv = 0;
 			if (this.linvuln > 0) hinv = 1; // invulnerable takes another health per tick
 // difficulty > 7 (std hard) adds dmg at 1% per diff
