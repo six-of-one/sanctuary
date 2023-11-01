@@ -49,6 +49,7 @@ port list:
 
 g2 phase wall, rnd wall, std wall shotable
 locked treasure needs item load
+RND food - g2 ops (rn is rnd value 50 - 200)
 
 player dmg: melee
 melee mis gens
