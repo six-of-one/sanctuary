@@ -343,7 +343,8 @@ Gauntlet = function() {
 // after {n} health tics with no player move / fire, all doors open
 		DOORSTALL = 30,
 		stalling,
-		ffieldpulse = 0,
+		ffieldpulse,
+		heartbeet = 0,
 // doors open counter-clockwise and stop opening in a clockwise dir when hitting corners & Ts
 		doorstop = [ 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0 ],
       DOOR = {
@@ -1694,12 +1695,12 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 					var dpst = document.getElementById("dpsout").title;
 					var dphm  = 0;	// damage per 30 secs
 					if (document.getElementById("sdphm").checked) dphm = 30;
-					if (dpstim < ffieldpulse) {
+					if (dpstim < heartbeet) {
 						document.getElementById("dpsout").value = dpsacc;
 						if (dpst.length > 256) dpst = "dps: ";
 						document.getElementById("dpsout").title = dpst + " : "+dpsacc;
 						dpsacc = 0;
-						dpstim = ffieldpulse + dphm;
+						dpstim = heartbeet + dphm;
 					}
 					else
 					{
@@ -1904,7 +1905,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
       }
 // char stats
 		var chtime = readCookie("chartm_"+this.player.type.name);
-		if (ffieldpulse > chtime) createCookie("chartm_"+this.player.type.name,ffieldpulse,7777);
+		if (heartbeet > chtime) createCookie("chartm_"+this.player.type.name,heartbeet,7777);
 
 		if (this.player.score > 8000) {
 			scoredex++;
@@ -3818,6 +3819,9 @@ var txsv = ":";
 
     autohurt: function(frame) {
       if ((frame % (FPS/1)) === 0) {
+// this is game 1 second interval pulse - prob should be on a timer
+			heartbeet = heartbeet+ 1;
+
 			var hinv = 0;
 			if (this.linvuln > 0) hinv = 1; // invulnerable takes another health per tick
 // difficulty > 7 (std hard) adds dmg at 1% per diff
@@ -3965,7 +3969,7 @@ var txsv = ":";
 			}	// end wallstall
 
 // ffield ops
-				ffieldpulse = ffieldpulse + 1;
+				ffieldpulse = heartbeet;
 				var n, k = ffieldpulse & 0xF, max, entity;
 				for(n = 0, max = Mastermap.entities.length ; n < max ; n++) {
 					  entity = Mastermap.entities[n];
