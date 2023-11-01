@@ -17,15 +17,24 @@ draw pushwalls last, or elevate them above other treasure tiles
 
 imm issues:
 
+what happen to pre-level msgs (1st 7 lvl and research) ???
+
+save death magic kill pts val
+
+teleporters, monsters, shots cross the unpin line
+move across unpin in 1/ 2 unit tunnel fails
+
+
 - some g2 sounds may need vol atten
 - g2 announcer does not match g1
 
 g2 ? food research (find in files, or redo)
 check sound for picking poison (is potion pick sound, need g2 ref)
 
-g2 acid blob dbl potion destruct
+g2 acid blob (super sorc) dbl potion destruct
 
-move across unpin in 1/ 2 unit tunnel fails
+super shots possibly destroys more than its coded to now
+(reg food, treasure, etc)
 
 
 - limited transportability needs to remove just about everything
@@ -56,6 +65,9 @@ player dmg: melee
 melee mis gens
 monster dmg: melee - turn off autohurt to test
 
+is it possible to code adjust the "contained" corner
+- also see if shootable tunnel cfgs walls around it, and reajust them after shot open
+- prob need to extra re-wall code from traps & make generic for the several wall adjust items
 
 player shot speed
 
@@ -108,6 +120,8 @@ color match 40400F walls & loadable wall with them | _ section
 :- possible multiple floor tile loader	(bigger tile area - victory road tex)
 trainable map reader (load g2 maps from maze ed, speccy maps)
 2nd player local
+
+limits on g1, g2, sanctuary (items, monsters, modes, extras ...)
 
 >>>>>>>>>>>>>>>>>>>>>>
 WIP: arcade sound & gfx
@@ -218,19 +232,22 @@ higher difficulty may change:
 - ghosts will get to shoot
 - grunts will throw clubs infreq
 - demons will have "fire"
+- lobbers can throw temporary glue
 
 mimics - look like treasure chest/ locked chest - attaks buku dmg, contains special artifact
 
 more powerful enemies may drop items - food, treasure, weapons, etc
 
 randomly leave out wall -> exit if more than {X} wall segs
-yellow teleports that can select further away
+yellow teleports that can (possibly player) select further away
 blue or purple teleports that are unit linked - not to nearest visible
 pushable or shootable walls to temp block a teleport
 respawning generators (none respawn > level 4)
 enhance invisible wall code so - shots, potions, or some limited item makes walls slightly visible
 
 new maps, perhaps with a maphack type system using the "image" set ops
+larger walls, 2nd level, lower levels (composit area and scale down, show past edges
+stairs, elevators, special teleports
 "bonkers" level - see 207 img from bkg set - (in this case, do a "close to player" exit incase level is not playable)
 lvl 1-7 as gauntlet (or alternates)
 level 8-69 from gauntlet set
@@ -250,6 +267,22 @@ buy stuff guy, with new stuffs, keys, food, potions. temps
 new items:
 ressurection potion / device
 swords (a la saberhagens swords)
+red keys for gold doors & gold treasure chest
+blue keys for special treasure rooms (secret rooms)
+black keys for the "pale gate"
+some time of time travel potion or device (require a lot of smart data storage to track all changes)
+"flash" speed device (select path, load potion to specials, hit go button
+land of lost pylon or other seperate dim space rooms that open above maze while maze pauses (or not)
+some type of flying ent, poss player controlled
+pets / helpers (e.g. magic sword companions)
+
+inventory system past keys, potions & specials
+- base hold 6 items
+- swap special potions, temporary items (freeze at count & store that)
+- drop items on floor & not touch 5 secs or so
+\_ also ability to toggle touch own dropped items
+- potion or bag to expand inventory
+
 
 difficulty title ideas
 
