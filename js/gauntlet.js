@@ -57,7 +57,7 @@ Gauntlet = function() {
 		Deathmult, Dmmax = 7,
 		Deathscore = [1000, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
 // give notice after potion burst of death pts
-		Deathnote = [FX.NUMER, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
+		Deathnote = [0, 2, 1, 3, 0, 4, 0, 1],
 
       FPS      = 60,
       TILE     = 32,
@@ -364,7 +364,7 @@ Gauntlet = function() {
         MONSTER_DEATH:   { sx: 17, sy: 12, frames: 6, fpf: FPS/20 },
         WEAPON_HIT:      { sx: 23, sy: 12, frames: 2, fpf: FPS/20 },
         PLAYER_GLOW:     { frames: FPS/2, border: 5 },
-        NUMER:           { sx: 24, sy: 13, frames:5, fpf: FPS/5  }
+        NUMER:           { sx: 24, sy: 13, frames:7, fpf: FPS/2  }
       },
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
 // the order of these lists follows the numeric code of pixels under the main entry, adding hex 10 each time
@@ -2847,6 +2847,8 @@ var ymir = false, xmir = false;
 				this.health = Math.max(0, this.health - damage);
 				if (this.health > 0) return;
 				Mastermap.addFx(this.x, this.y, FX.NUMER);
+				Mastercell.ptr.sy = Mastercell.ptr.type.sy + Deathnote[Deathmult];
+				Mastercell.ptr.numer = true; // special display class because of sprite render using entity.type.sy instead of entity.sy
 				this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null, nuke);
 				by.addscore(Math.floor( (Deathscore[Deathmult] - 1) /  (by.scmult > 1 ? 1.33333 : 1) ) );
 				return;
@@ -4761,6 +4763,8 @@ var txsv = ":";
 						this.sprite(ctx, wallsprites, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else if (entity.door)
 						this.sprite(ctx, sprites, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+				else if (entity.numer)
+						this.sprite(ctx, sprites, viewport, entity.type.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else
 						this.sprite(ctx, sprites, viewport, entity.type.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
         }
