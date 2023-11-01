@@ -321,7 +321,6 @@ Gauntlet = function() {
         NWASTER:    { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 82  },
         FIRESTK:    { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
         PFLOOR1:    { sx: 28, sy: 27, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 999  },
-        NUMER:      { sx: 13, sy: 27, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 999  },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -362,7 +361,8 @@ Gauntlet = function() {
         GENERATOR_DEATH: { sx: 17, sy: 12, frames: 6, fpf: FPS/10 },
         MONSTER_DEATH:   { sx: 17, sy: 12, frames: 6, fpf: FPS/20 },
         WEAPON_HIT:      { sx: 23, sy: 12, frames: 2, fpf: FPS/20 },
-        PLAYER_GLOW:     { frames: FPS/2, border: 5 }
+        PLAYER_GLOW:     { frames: FPS/2, border: 5 },
+        NUMER:           { sx: 13, sy: 27, frames:1, fpf: FPS/2  }
       },
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
 // the order of these lists follows the numeric code of pixels under the main entry, adding hex 10 each time
@@ -381,7 +381,7 @@ Gauntlet = function() {
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
 											TREASURE.POTIONORG, TREASURE.BADBOT, TREASURE.POISON, TREASURE.WATERT, TREASURE.WATERC, TREASURE.WATERR, TREASURE.LAVAT, TREASURE.LAVAC, TREASURE.LAVAR,
 											TREASURE.NWASTET, TREASURE.NWASTEC, TREASURE.NWASTER,
-											TREASURE.FFIELDUNITD, TREASURE.FFIELDUNITL, TREASURE.FFIELDUNITR, TREASURE.NUMER
+											TREASURE.FFIELDUNITD, TREASURE.FFIELDUNITL, TREASURE.FFIELDUNITR
 						],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,    h: TILE          },
@@ -2844,6 +2844,7 @@ var ymir = false, xmir = false;
 		 {
 				this.health = Math.max(0, this.health - damage);
 				if (this.health > 0) return;
+				Mastermap.addFx(this.x, this.y, FX.NUMER, 3);
 				this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null, nuke);
 				by.addscore(Math.floor( (Deathscore[Deathmult] - 1) /  (by.scmult > 1 ? 1.33333 : 1) ) );
 				return;
@@ -3997,7 +3998,7 @@ var txsv = ":";
 // dev cook storage
 //				createCookie("_dev_"+, document.getElementById().checked,7777);
 // the first 5 are (planned) normal ops and should be kept after TEST is removed...
-				if ((ffieldpulse & 15) == 7) {
+				if ((heartbeet & 15) == 7) {
 				createCookie("_ops_"+"seldiff", document.getElementById("seldiff").value,7777);
 				createCookie("_ops_"+"sellvl", document.getElementById("sellvl").value,7777);
 				createCookie("_ops_"+"seltut", document.getElementById("seltut").checked,7777);
