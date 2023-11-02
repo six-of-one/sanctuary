@@ -346,6 +346,10 @@ Gauntlet = function() {
 // until target traps are coded any trap will remove these
 		TRAPWALL = 0x404030,
 		TRAPTRIG = 0x0080b0,
+// special "treasure" walls
+		PXWALSHT = 0x8100
+		PXWALGUD = 0x8190
+		PXWALPASS = 0x81CF
 // tell load a start was found - if not randomly add one to prevent load fail
 		fndstart = 0,
 // after {n} health tics with no player move / fire, all walls are exits
@@ -2264,7 +2268,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
       function type(pixel)     { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 
       function isnothing(pixel)      { return is(pixel, PIXEL.NOTHING);   };
-      function iswall(pixel)         { return is(pixel, PIXEL.WALL);      };
+      function iswall(pixel)         { if is(pixel, PIXEL.WALL) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; (pixel & MEXHIGH) == PXWALSHT ? true : false; };
       function isfloor(pixel)         { return is(pixel, PIXEL.FLOOR);      };
       function isstart(pixel)        { return is(pixel, PIXEL.START);     };
       function isdoor(pixel)         { return is(pixel, PIXEL.DOOR);      }; 
@@ -2472,7 +2476,7 @@ var ymir = false, xmir = false;
       function type(pixel)     { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 
       function isnothing(pixel)      { return is(pixel, PIXEL.NOTHING);   };
-      function iswall(pixel)         { return is(pixel, PIXEL.WALL);      };
+      function iswall(pixel)         { if is(pixel, PIXEL.WALL) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; (pixel & MEXHIGH) == PXWALSHT ? true : false; };
       function isfloor(pixel)         { return is(pixel, PIXEL.FLOOR);      };
       function isstart(pixel)        { return is(pixel, PIXEL.START);     };
       function isdoor(pixel)         { return is(pixel, PIXEL.DOOR);      }; 
