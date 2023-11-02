@@ -90,7 +90,7 @@ if (!Function.prototype.bind) {
         self  = this,
         nop   = function () {},
         bound = function () {
-          return self.apply(this instanceof nop ? this : (obj || {}), args.concat(slice.call(arguments)));  
+          return self.apply(this instanceof nop ? this : (obj || {}), args.concat(slice.call(arguments)));
         };
     nop.prototype   = self.prototype;
     bound.prototype = new nop();

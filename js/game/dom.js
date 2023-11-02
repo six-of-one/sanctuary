@@ -124,7 +124,7 @@ Game.Element = function() {
         this.append(content);
         return this;
       },
-         
+     
       append: function(content) {
         if (is.string(content))
           this.innerHTML += content;

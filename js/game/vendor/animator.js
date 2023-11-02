@@ -1,4 +1,4 @@
-﻿/* 
+﻿/*
 	Animator.js 1.1.11
 
 	This library is released under the BSD license:
@@ -108,7 +108,7 @@ Animator.prototype = {
 		} else {
 			this.state += movement;
 		}
-	
+
 		try {
 			this.propagate();
 		} finally {
@@ -419,7 +419,7 @@ function CSSStyleSubject(els, style1, style2) {
 			if (window.ANIMATOR_DEBUG) alert("No to style provided for '" + prop + '"');
 			continue;
 		}
-	
+
 		if (from = ColorStyleSubject.parseColor(fromProp)) {
 			to = ColorStyleSubject.parseColor(toProp);
 			type = ColorStyleSubject;
@@ -483,7 +483,7 @@ CSSStyleSubject.prototype = {
 			el.className = oldClass;
 		}
 		return rtn;
-	
+
 	},
 	setState: function(state) {
 		for (var i=0; i<this.subjects.length; i++) {

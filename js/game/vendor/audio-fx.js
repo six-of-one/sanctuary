@@ -113,7 +113,7 @@ AudioFX = function() {
       for(var n = 0 ; n < formats.length ; n++) {
         if (hasAudio && hasAudio[formats[n]]) {
           src = src + '.' + formats[n];
-          break; 
+          break;
         }
       }
     }
