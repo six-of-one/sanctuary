@@ -53,14 +53,14 @@ Gauntlet = function() {
 // invisible wall & shotable invisible are in FAKES, item 15
 			G1WALL = [	0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 26	],
 
-// handle death potion bomb rotating score - 
+// handle death potion bomb rotating score -
 //				note: NON g1, this is multiplied by score x {n} by current code!
 		Deathmult, Dmmax = 7,
 		Deathscore = [1000, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
 // give notice after potion burst of death pts
 		Deathnote = [0, 2, 1, 3, 0, 4, 0, 1 ],
 // 5 = 100, 6 = 500 for treasure pts & keys
-		tp100 = 5, tp500 = 6, 
+		tp100 = 5, tp500 = 6,
 
       FPS      = 60,
       TILE     = 32,
@@ -253,7 +253,7 @@ Gauntlet = function() {
 // dont shoot food				25
 // shooting a potion			26
 // collect magic before	27
-		helpcleared = 0, // option - tutorial count down 
+		helpcleared = 0, // option - tutorial count down
 // easy way to detect non shootables - via help codes
 		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, RNDHLP = 74, PSWDHLP = 79, WTHLP = 81,
 // help message ranges for tutorial exclusion
@@ -384,12 +384,12 @@ Gauntlet = function() {
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
 // the order of these lists follows the numeric code of pixels under the main entry, adding hex 10 each time
 // --- excepting items which are set by MEXLOW bit and not MEXHIGH main code
-      MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER, 
-											MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2, 
-											MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1, 
-											MONSTER.THIEF, MONSTER.MUGGER, MONSTER.PICKLE 
+      MONSTERS  = [ MONSTER.GHOST, MONSTER.DEMON, MONSTER.GRUNT, MONSTER.WIZARD, MONSTER.DEATH, MONSTER.LOBBER,
+											MONSTER.GHOST2, MONSTER.DEMON2, MONSTER.GRUNT2, MONSTER.WIZARD2, MONSTER.LOBBER2,
+											MONSTER.GHOST1, MONSTER.DEMON1, MONSTER.GRUNT1, MONSTER.WIZARD1, MONSTER.LOBBER1,
+											MONSTER.THIEF, MONSTER.MUGGER, MONSTER.PICKLE
 						],
-      TREASURES = [ TREASURE.HEALTH, TREASURE.HEALRND, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
+      TREASURES = [ TREASURE.HEALTH, TREASURE.HEALRND, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD,
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
 											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER, TREASURE.LAVA, TREASURE.NWASTE,
 											TREASURE.FIRESTK, TREASURE.PFLOOR1, TREASURE.WALLGUD, TREASURE.WALLGUD2, TREASURE.WALLPASS, TREASURE.WALLPASS2,
@@ -426,20 +426,20 @@ Gauntlet = function() {
       },
 // jvsg floors - 1 tile per map cell - 32 x 32 px per each stored 0th row of backgrounds.png
 // --- g1 floors are handled in a seperate gfx file as they tile (currently) 256 x 256 px (4 x 4 map cells) over the map due to diff design per tile
-      FLOOR = { 	BROWN_BOARDS: 1, LIGHBROWN_BOARDS: 2, GREEN_BOARDS: 3, GREY_BOARDS: 4, WOOD: 5, LIGHT_STONE: 6, DARK_STONE: 7, BROWN_LAMINATE: 8, 
+      FLOOR = { 	BROWN_BOARDS: 1, LIGHBROWN_BOARDS: 2, GREEN_BOARDS: 3, GREY_BOARDS: 4, WOOD: 5, LIGHT_STONE: 6, DARK_STONE: 7, BROWN_LAMINATE: 8,
 									PURPLE_LAMINATE: 9, PURPLEPHASE: 10, MULTIC: 11, BEES: 12, BOOK: 13, MTILE: 14, YELLOWBR: 15, RND: 16,
 									MIN: 1, MAX: 14 },
 // jvsg walls - 32 x 32 px per each wall "unit" - rows 1 - 7 of backgrounds.png
-      WALL  = { 	INVIS: 1, BLUE: 2, BLUE_BRICK: 3, PURPLE_TILE: 4, BLUE_COBBLE: 5, PURPLE_COBBLE: 6, CONCRETE: 7, 
+      WALL  = { 	INVIS: 1, BLUE: 2, BLUE_BRICK: 3, PURPLE_TILE: 4, BLUE_COBBLE: 5, PURPLE_COBBLE: 6, CONCRETE: 7,
 // g1 wall codes - rows 8 - 36 in backgrounds.png
 // --- rows 27 - 36 are overlay patterns with the previous walls all being solid colors
 // --- these consist of 2 versions same pattern x 4 - a "light" and a "dark", not precise opposites but optimized
 // --- and a 5th pattern of rubble topped walls and destroyable (shootable) walls
-								G2DARKSEC: 8, GRAY7: 9, MAUVE20: 10, 
+								G2DARKSEC: 8, GRAY7: 9, MAUVE20: 10,
 								BROWN1: 11, BROWN24: 12, RED5: 13, ORANG9: 14, ORANG31: 15, YELLOW10: 16,
-								PINK34: 17, PURPLE77: 18, PURPLE30: 19,  
-								BLUE8: 20, BLUE25:21, BLUE28: 22, 
-								GREEN3: 23, GREEN16: 24, GREEN50: 25, G2GREEN99: 26, 
+								PINK34: 17, PURPLE77: 18, PURPLE30: 19,
+								BLUE8: 20, BLUE25:21, BLUE28: 22,
+								GREEN3: 23, GREEN16: 24, GREEN50: 25, G2GREEN99: 26,
 									G1BRICKL: 27, G1BRICKD: 28, BRICK2L: 29, BRICK2D: 30, ASYML: 31, ASYMD: 32, XBRIKL: 33, XBRIKD: 34, G5COBRIK: 35, DESTBRIK: 36,
 									MIN: 1, MAX: 36 },
       EVENT = {
@@ -604,7 +604,7 @@ Gauntlet = function() {
 
     images: [
       { id: 'backgrounds', url: "images/backgrounds.png" }, // http://opengameart.org/content/gauntlet-like-tiles
-      { id: 'entities',    url: "images/entities.png"    }  // http://opengameart.org/forumtopic/request-for-tileset-spritesheet-similar-to-gauntlet-ii 
+      { id: 'entities',    url: "images/entities.png"    }  // http://opengameart.org/forumtopic/request-for-tileset-spritesheet-similar-to-gauntlet-ii
     ],
 
     sounds: [
@@ -829,7 +829,7 @@ Gauntlet = function() {
       { id: 'g4sec2',      name: 'sounds/music.g2.4sec',      formats: ['ogg'], volume: 1.0, loop: false             },
 
 // let levels not have music
-      { id: 'nullm',      		  name: 'sounds/null',              formats: ['ogg'], volume: 0.8 } 
+      { id: 'nullm',      		  name: 'sounds/null',              formats: ['ogg'], volume: 0.8 }
     ],
 
 // added gauntlet 1 levels as g1level{n}
@@ -838,7 +838,7 @@ Gauntlet = function() {
 //      { name: 'intro',     url: "levels/7level.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
       { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor012.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
- //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null }, 
+ //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 1',       url: "levels/g2level1.pngu",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 2',       url: "levels/g2level2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
       { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Some food can be destroyed" },
@@ -1031,7 +1031,7 @@ Gauntlet = function() {
   function timestamp() { return new Date().getTime(); }
 
   function shuffle(array) { array.sort(() => Math.random() - 0.5); }
-  
+
   function helpdis(nh, htex, hto, hrep, hannc)		// display text in the tutorial overlay box		passed vars - nh = help # array ref,		htex = override help text,		hto = timeout in millisecs, def to 2000,		hrep - replace str,	hannc - announcer code to play after delay
   {
 			if (hto == undefined || (hto < 1) || (hto > 120000)) hto = 2000;
@@ -1047,7 +1047,7 @@ Gauntlet = function() {
 					if (!document.getElementById("seltutx").checked && nh > G2HLP) return;							// ext tut not enabled
 			}
 
-			if (htex != undefined) 
+			if (htex != undefined)
 			{
 					Musicth.play(Musicth.sounds.infosnd);
 					if (hrep != undefined) htex = htex.replace("#", hrep);
@@ -1158,7 +1158,7 @@ Gauntlet = function() {
       $('booting').hide();
       this.runner.start();
       if (Game.Math.between(DEBUG.LEVEL, 0, cfg.levels.length-1))
-        this.start(PLAYER[DEBUG.PLAYER], DEBUG.LEVEL); 
+        this.start(PLAYER[DEBUG.PLAYER], DEBUG.LEVEL);
     },
 
     onmenu: function(event, previous, current) {
@@ -1265,7 +1265,7 @@ Gauntlet = function() {
 
 		 for (sk = 0;sk < cfg.levels.length;sk++)
 		 {
-				if (cfg.levels[sk].name == 'Treasure') 
+				if (cfg.levels[sk].name == 'Treasure')
 		 {
 			 TREASUREROOM[c] = cfg.levels[sk];
 			 TREASUREROOM[c++].lvl = sk;
@@ -1384,8 +1384,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 			}
 			else
 			{
-					$('tween').update(leveldisp).show(); 
-					setTimeout(game.onleavetween.bind(this), 2000); 
+					$('tween').update(leveldisp).show();
+					setTimeout(game.onleavetween.bind(this), 2000);
 					img.innerHTML = levelhelp;
 			}
     },
@@ -1510,7 +1510,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 							}
 					}
 			}
-// theif escaped with item - 
+// theif escaped with item -
 			if (stolen_load > 0 && stolen_load <= rlloop)
 			{
 					sft = 6000;
@@ -1563,7 +1563,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
     onenterhelp: function(event, previous, current, msg) { $('help').update(msg).show(); setTimeout(this.autoresume.bind(this), 2000); },
     onleavehelp: function(event, previous, current)      { $('help').hide();  announcepause = false;                                                         },
 
-    onexittreasure: function(event, previous, current, msg) { setTimeout(this.onleavetween.bind(this), 2500);  
+    onexittreasure: function(event, previous, current, msg) { setTimeout(this.onleavetween.bind(this), 2500);
 
 					var img = document.getElementById("tween");
 					img.innerHTML = leveldisp;
@@ -1882,22 +1882,22 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
 // dont save for lvl 8 replay - levels 1 - 7 & treasure rooms
     saveLevel: function(nlevel) { if ((nlevel > 7) && (nlevel < 115)) this.storage[STORAGE.NLEVEL] = nlevel;    },
-    loadLevel: function()       
-	 { 
+    loadLevel: function()
+	 {
 // let player select any of 1st 7 levels or last saved level
-			var slvl = to.number(document.getElementById("sellvl").value, 1);		 
+			var slvl = to.number(document.getElementById("sellvl").value, 1);
 			if (slvl == 8) slvl = to.number(this.storage[STORAGE.NLEVEL], 1);
 /// TEST - remove
 // dev - override level load with an internal level number
 	var dlvl = to.number(document.getElementById("nlvl").value, 1);
-		 if (dlvl > 7) slvl = dlvl; 
+		 if (dlvl > 7) slvl = dlvl;
 /// TEST - remove
 
 			return slvl;
 	},
     prevLevel: function()       { var n = this.map.nlevel - 1; this.load(n <= 0  ? cfg.levels.length - 1 : n); },
-    nextLevel: function()       
-	 { 
+    nextLevel: function()
+	 {
 		 var n = this.map.nlevel + 1;
 		 if (rnd_level) n = Game.Math.randomInt(loop_level, cfg.levels.length-1);
 // exit to {4, 8, 6} code - levelplus set when exit type detected on touching exit
@@ -1909,7 +1909,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		 }
 
 		 levelplus = 0;
-		 this.load(n >= cfg.levels.length ? 1                     : n); 
+		 this.load(n >= cfg.levels.length ? 1                     : n);
 		},
 
     loadHighScore: function() { return to.number(this.storage[STORAGE.SCORE], 10000); },
@@ -2021,7 +2021,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 // collect subcollisions for weapon non-hits
 				if (collision.type != undefined) {
 					if (collision.type.key != undefined) subcol = subcol || collision.type.key;
-					if (collision.type.nohlp != undefined) 
+					if (collision.type.nohlp != undefined)
 					{
 						if (collision.type.nohlp == FFHLP) ffcol = true;
 						if (collision.type.nohlp == 999) ffcol = true;	// for no collision items with no help
@@ -2037,7 +2037,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 					if (collision.pixel == 0x812e) subcol = true; // fake pickle; pfi
 				}
 				if (!collision.player && entity.weapon && subcol) collision = undefined;
-				else if (ffcol == true) 
+				else if (ffcol == true)
 				{
 					if (entity.player)
 					{
@@ -2084,7 +2084,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
       var c, max, cell, before = obj.cells, after = this.overlappingCells(x, y, TILE, TILE);
 
       // optimization - if overlapping cells are same as they were before then bail out early
-      if ((before.length === after.length)                  && 
+      if ((before.length === after.length)                  &&
           (                       (before[0] === after[0])) &&
           ((before.length < 2) || (before[1] === after[1])) &&
           ((before.length < 3) || (before[2] === after[2])) &&
@@ -2163,7 +2163,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 // since edje walls can become exits, make sure shots expire at edge
 			if (cell == undefined) return true;
 
-        if (cell.wall !== undefined && cell.wall !== null)				// walls to exits sets null  
+        if (cell.wall !== undefined && cell.wall !== null)				// walls to exits sets null
 			  return true;
 
         for(i = 0, ni = cell.occupied.length ; i < ni ; i++) {
@@ -2272,7 +2272,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
       function iswall(pixel)         { if (is(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; (pixel & MEXHIGH) == PXWALSHT ? true : false; };
       function isfloor(pixel)        { return is(pixel, PIXEL.FLOOR);     };
       function isstart(pixel)        { return is(pixel, PIXEL.START);     };
-      function isdoor(pixel)         { return is(pixel, PIXEL.DOOR);      }; 
+      function isdoor(pixel)         { return is(pixel, PIXEL.DOOR);      };
       function isexit(pixel)         { return is(pixel, PIXEL.EXIT);      };
       function isgenerator(pixel)    { return is(pixel, PIXEL.GENERATOR); };
       function ismonster(pixel)      { return is(pixel, PIXEL.MONSTER);   };
@@ -2489,7 +2489,7 @@ document.title = "unpins: "+Mastermap.level.unpinx+ ":"+Mastermap.level.unpiny;
       function iswall(pixel)         { if (is(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; (pixel & MEXHIGH) == PXWALSHT ? true : false; };
       function isfloor(pixel)         { return is(pixel, PIXEL.FLOOR);      };
       function isstart(pixel)        { return is(pixel, PIXEL.START);     };
-      function isdoor(pixel)         { return is(pixel, PIXEL.DOOR);      }; 
+      function isdoor(pixel)         { return is(pixel, PIXEL.DOOR);      };
       function isexit(pixel)         { return is(pixel, PIXEL.EXIT);      };
       function isgenerator(pixel)    { return is(pixel, PIXEL.GENERATOR); };
       function ismonster(pixel)      { return is(pixel, PIXEL.MONSTER);   };
@@ -2738,7 +2738,7 @@ var ymir = false, xmir = false;
       // am i going towards a live player, or AWAY from a dead one, if away, my speed should be slow (the player is dead, I'm no longer interested in him)
       var away  = !player.active(), speed;
 		 if (player.linvis || player.lrepuls) away = true;		// note: for invisibility monster dir should be set random occasionally
-		 
+
 		speed = away ? 1 : this.type.speed;
 
 /// TEST - remove
@@ -2755,7 +2755,7 @@ var ymir = false, xmir = false;
 		if (this.type.theif && thieftrack > 4 && this.theif != NOSPAWNTHF)
 		{
 			if (thiefexit) return;
-			if (this.thieftrack == undefined) 
+			if (this.thieftrack == undefined)
 			{
 				this.thieftrack = 0;
 				this.stolen = 0;
@@ -2787,7 +2787,7 @@ var ymir = false, xmir = false;
 			Mastermap.occupy(this.x, this.y, this);		// allow spawn theif to collide / be shot
 // theif need collision detect
 			collision = Mastermap.occupied(this.x, this.y, this.w, this.h, this);
-			if (collision.player) 
+			if (collision.player)
 // theif could have "hookshot" method here - increase dist
 			if (distance(this.x,this.y,collision.x,collision.y) < 20)
 					publish(EVENT.MONSTER_COLLIDE, this, collision);
@@ -3237,7 +3237,7 @@ var ymir = false, xmir = false;
     update: function(frame, player, map, viewport) {
       if (this.delay && --this.delay)
         return;
-      this.start = this.start || frame; 
+      this.start = this.start || frame;
       this.frame = animate(frame - this.start, this.type.fpf, this.type.frames + 1);
       if (this.frame === this.type.frames)
         publish(EVENT.FX_FINISHED, this);
@@ -3920,7 +3920,7 @@ var txsv = ":";
 				this.hurt(1 + hinv, this, true);
 
 // count down temps - may want a setTimeout fn for these and stalling
-			if ((frame % (FPS)) === 0) 
+			if ((frame % (FPS)) === 0)
 			{
 					if (this.lank > 0) this.lank--;
 					if (this.lrepuls > 0) this.lrepuls--;
@@ -4581,7 +4581,7 @@ var txsv = ":";
 // draw the map background unpinned !
 
 // the middle single unpin overscans
-		 if ((viewport.x + viewport.w) > map.w) 
+		 if ((viewport.x + viewport.w) > map.w)
 		 {
 			 txo = true;
 			 rx = 0;

@@ -55,7 +55,7 @@ is = {
   'nonEmptyString': function(obj) { return (is.string(obj) && (obj.length > 0));      },
   'emptyArray':     function(obj) { return (is.array(obj) && (obj.length == 0));      },
   'nonEmptyArray':  function(obj) { return (is.array(obj) && (obj.length > 0));       },
-  'document':       function(obj) { return (obj === document);                        }, 
+  'document':       function(obj) { return (obj === document);                        },
   'window':         function(obj) { return (obj === window);                          },
   'element':        function(obj) { return (obj instanceof HTMLElement);              },
   'event':          function(obj) { return (obj instanceof Event);                    },
@@ -90,7 +90,7 @@ if (!Function.prototype.bind) {
         self  = this,
         nop   = function () {},
         bound = function () {
-          return self.apply(this instanceof nop ? this : (obj || {}), args.concat(slice.call(arguments)));   
+          return self.apply(this instanceof nop ? this : (obj || {}), args.concat(slice.call(arguments)));
         };
     nop.prototype   = self.prototype;
     bound.prototype = new nop();
@@ -126,10 +126,10 @@ var Class = {
 }
 
 if (!window.requestAnimationFrame) {// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
-  window.requestAnimationFrame = window.webkitRequestAnimationFrame || 
-                                 window.mozRequestAnimationFrame    || 
-                                 window.oRequestAnimationFrame      || 
-                                 window.msRequestAnimationFrame     || 
+  window.requestAnimationFrame = window.webkitRequestAnimationFrame ||
+                                 window.mozRequestAnimationFrame    ||
+                                 window.oRequestAnimationFrame      ||
+                                 window.msRequestAnimationFrame     ||
                                  function(callback, element) {
                                    window.setTimeout(callback, 1000 / 60);
                                  }
@@ -487,7 +487,7 @@ Game.Element = function() {
   };
 
   return {
- 
+
     all: function(selector, context) {
       return extend(query(selector, context));
     },
@@ -523,7 +523,7 @@ Game.Element = function() {
         while(ele = ele[property])
           if (ele.nodeType == 1)
             result.push(ele);
-        return extend(result); 
+        return extend(result);
       },
 
       parent:            function()            { return extend(this.parentNode); },
@@ -554,7 +554,7 @@ Game.Element = function() {
         this.append(content);
         return this;
       },
-          
+
       append: function(content) {
         if (is.string(content))
           this.innerHTML += content;
@@ -667,11 +667,11 @@ Game.Key = {
 	ZERO:     48, ONE: 49, TWO: 50, THREE: 51, FOUR: 52, FIVE: 53, SIX: 54, SEVEN: 55, EIGHT: 56, NINE: 57,
 	COLON:	 59, EQUAL: 61,
 	A:        65, B: 66, C: 67, D: 68, E: 69, F: 70, G: 71, H: 72, I: 73, J: 74, K: 75, L: 76, M: 77, N: 78, O: 79, P: 80, Q: 81, R: 82, S: 83, T: 84, U: 85, V: 86, W: 87, X: 88, Y: 89, Z: 90,
-	META:     91, MENU: 93, 
+	META:     91, MENU: 93,
 	KP_0:     96, KP_1: 97, KP_2: 98,  KP_3: 99, KP_4: 100, KP_5: 101, KP_6: 102, KP_7: 103, KP_8: 104, KP_9: 105, KP_MUL: 106, KP_ADD: 107, KP_SUB: 109, KP_DEL: 110, KP_DIV: 111,
 	F1:      112, F2: 113,	F3: 114,	F4: 115,	F5: 116,	F6: 117,	F7: 118,	F8: 119,	F9: 120,	F10: 121,	F11: 122, F12: 123,
-	NUMLOCK: 144, SCROLL: 145, 
-	MINUS:   173, COMMA: 188, PERIOD: 190, QUES: 191, TILDA: 192, LBRAK: 219, PIPE: 220, RBRAK: 221, QUOTE: 222, 
+	NUMLOCK: 144, SCROLL: 145,
+	MINUS:   173, COMMA: 188, PERIOD: 190, QUES: 191, TILDA: 192, LBRAK: 219, PIPE: 220, RBRAK: 221, QUOTE: 222,
 
   map: function(map, context, cfg) {
     cfg = cfg || {};
@@ -783,7 +783,7 @@ Game.Math = {
 					if (Math.random() < 0.27) { vid.src = "images/gIV_intro.ogv"; rot = 20650; }
 					if (Math.random() < 0.22) { vid.src = "images/gN_intro.ogv"; rot = 34210; }
 			}
-			vid.play(); 
+			vid.play();
 			vid.style.visibility = "visible";
 		}
 	else
@@ -862,11 +862,11 @@ Game.Math = {
 				document.getElementById('scrmult3').innerHTML = Masterot +":" + Mastermult + "x Score";
 				document.getElementById('scrmult4').innerHTML = Masterot +":" + Mastermult + "x Score";
  };
- 
+
  // distance calc
- 
+
  function distance(px,py,qx,qy)
-{ 
+{
 	var dx   = px - qx;
 	var dy   = py - qy;
 	var dist = Math.sqrt( dx*dx + dy*dy );
@@ -881,7 +881,7 @@ function createCookie(name,value,days)
 var domain = "";
 
 //	if (is_ie) domain = ";domain=.{name}.com";
-	if (days) 
+	if (days)
 		{
 		var date = new Date();
 		date.setTime(date.getTime()+(days*24*60*60*1000));
