@@ -185,7 +185,7 @@ Gauntlet = function() {
 //									"Some treasure requires keys",
 									"Use key to open treasure chest",
 //									"Some walls may be pushed",
-									"Push movable walls",																								// 57	
+									"Push movable walls",																								// 57
 // expanded
 									"Fooled you!  Some items may be fake",
 									"You now have the healing ankh",
@@ -510,7 +510,7 @@ Gauntlet = function() {
 [	0x400020,	10,	0,	22,	0,	0,	0,	8,	0,	0,	0	],
 [	0x400030,	0,	0,	0,	20,	0,	0,	12,	0,	0,	0	],
 [	0x400050,	0,	0,	6,	0,	0,	0,	0,	15,	0,	0	],
-	
+
       ],
 
 		RLOAD = [0, 0, 0, 0, 0, 0],
@@ -2284,7 +2284,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				if (!dr) dr = (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0);
 				return (dr);
 		};
-																											
+
 // mirror Y
       function walltypeYM(tx,ty,map)   {  ty = (th - 1) - ty; return (iswall(map.pixel(tx,   ty+1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
       function shadowtypeYM(tx,ty,map) { ty = (th - 1) - ty; return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty-1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0); };
@@ -2501,7 +2501,7 @@ document.title = "unpins: "+Mastermap.level.unpinx+ ":"+Mastermap.level.unpiny;
 				if (!dr) dr = (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0);
 				return (dr);
 		};
-																											
+
 // mirror Y
       function walltypeYM(tx,ty,map)   {  ty = (th - 1) - ty; return (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0); };
       function shadowtypeYM(tx,ty,map) { ty = (th - 1) - ty; return (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty-1)) ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 4 : 0); };
@@ -2756,7 +2756,7 @@ var ymir = false, xmir = false;
 		{
 			if (thiefexit) return;
 			if (this.thieftrack == undefined) 
-			{	
+			{
 				this.thieftrack = 0;
 				this.stolen = 0;
 			}
@@ -3463,7 +3463,7 @@ var txsv = ":";
 						Mastermap.occupy(3, this.y, this);
 					else this.x = map.w - 2;
 				}
-				else				
+				else
 					if (this.y < 1)
 				{
 					if (!Mastermap.occupied(this.x, map.h - 38, TILE, TILE, this))
@@ -3656,7 +3656,7 @@ var txsv = ":";
 									var py = destcell.y + DIRTY[ddir];
 									var blokt, tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
 									if (tcell == undefined) blokt = true;
-									else	
+									else
 									{
 											blokt = is.valid(tcell.wall);
 											if (Mastermap.door(px,py) && !this.keys) blokt = true;
@@ -3675,7 +3675,7 @@ var txsv = ":";
 									py = destcell.y + DIRTY[ddir];
 									tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
 									if (tcell == undefined) blokt = true;
-									else	
+									else
 									{
 											blokt = is.valid(tcell.wall);
 											if (Mastermap.door(px,py) && !this.keys) blokt = true;
