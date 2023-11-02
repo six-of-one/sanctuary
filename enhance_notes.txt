@@ -15,6 +15,8 @@ dev:
 push wall collision
 draw pushwalls last, or elevate them above other treasure tiles
 
+try render to map.background for animated liquids / floor tiles
+
 imm issues:
 
 teleporters, monsters, shots cross the unpin line

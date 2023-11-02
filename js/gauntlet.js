@@ -2462,9 +2462,8 @@ var ymir = false, xmir = false;
 // for unpins we need source x,y to check across unpin boundaries
 
 	function mpixel(sx,sy, tw,th, tx,ty) {
-alert(Mastermap.level.unpinx+ ":"+Mastermap.level.unpiny);
-document.title = "unpins: "+Mastermap.level.unpinx+ ":"+Mastermap.level.unpiny;
-
+//alert(Mastermap.level.unpinx+ ":"+Mastermap.level.unpiny);
+//return;
 		if (Mastermap.level.unpinx != undefined || Masterunpin) {
 			if (sx == 0 && tx < 0) tx = tw;
 			if (sx == tw && tx > tw) tx = 0;
@@ -2487,7 +2486,7 @@ document.title = "unpins: "+Mastermap.level.unpinx+ ":"+Mastermap.level.unpiny;
 
       function isnothing(pixel)      { return is(pixel, PIXEL.NOTHING);   };
       function iswall(pixel)         { if (is(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; (pixel & MEXHIGH) == PXWALSHT ? true : false; };
-      function isfloor(pixel)         { return is(pixel, PIXEL.FLOOR);      };
+      function isfloor(pixel)        { return is(pixel, PIXEL.FLOOR);     };
       function isstart(pixel)        { return is(pixel, PIXEL.START);     };
       function isdoor(pixel)         { return is(pixel, PIXEL.DOOR);      };
       function isexit(pixel)         { return is(pixel, PIXEL.EXIT);      };
