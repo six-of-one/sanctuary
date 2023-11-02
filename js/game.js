@@ -344,7 +344,6 @@ Game = {
 
     for(ty = 0 ; ty < th ; ty++)
       for(tx = 0 ; tx < tw ; tx++)
-//      for(tx = (tw - 1) ; tx >= 0 ; tx--)		// new mirror x
         callback(tx, ty, helpers.pixel(tx,ty), helpers);
   },
 
