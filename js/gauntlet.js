@@ -2268,8 +2268,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
       function type(pixel)     { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 
       function isnothing(pixel)      { return is(pixel, PIXEL.NOTHING);   };
-      function iswall(pixel)         { if is(pixel, PIXEL.WALL) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; (pixel & MEXHIGH) == PXWALSHT ? true : false; };
-      function isfloor(pixel)         { return is(pixel, PIXEL.FLOOR);      };
+      function iswall(pixel)         { if (is(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; pixel & MEXHIGH == PXWALSHT ? true : false; };
+      function isfloor(pixel)        { return is(pixel, PIXEL.FLOOR);     };
       function isstart(pixel)        { return is(pixel, PIXEL.START);     };
       function isdoor(pixel)         { return is(pixel, PIXEL.DOOR);      }; 
       function isexit(pixel)         { return is(pixel, PIXEL.EXIT);      };
@@ -2476,7 +2476,7 @@ var ymir = false, xmir = false;
       function type(pixel)     { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 
       function isnothing(pixel)      { return is(pixel, PIXEL.NOTHING);   };
-      function iswall(pixel)         { if is(pixel, PIXEL.WALL) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; (pixel & MEXHIGH) == PXWALSHT ? true : false; };
+      function iswall(pixel)         { if (is(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; pixel & MEXHIGH == PXWALSHT ? true : false; };
       function isfloor(pixel)         { return is(pixel, PIXEL.FLOOR);      };
       function isstart(pixel)        { return is(pixel, PIXEL.START);     };
       function isdoor(pixel)         { return is(pixel, PIXEL.DOOR);      }; 
