@@ -4798,6 +4798,9 @@ var txsv = ":";
         if (entity.active && (!entity.onrender || entity.onrender(frame) !== false) && !viewport.outside(entity.x, entity.y, TILE, TILE)) {
 // note: RUNORG
 //if (viewport.x < 0 && entity.x > (viewport.w - viewport.x)) alert("-v.x ent: "+entity+" : "+entity.x);
+				if (entity.hue != undefined)
+					ctx.filter = "hue-rotate("+entity.hue+"deg)";
+
 				if (entity.type.wall)
 						this.sprite(ctx, wallsprites, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else if (entity.door)
@@ -4806,6 +4809,7 @@ var txsv = ":";
 						this.sprite(ctx, sprites, viewport, entity.type.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else
 						this.sprite(ctx, sprites, viewport, entity.type.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+				ctx.filter = "hue-rotate(0deg)";
         }
       }
     }
