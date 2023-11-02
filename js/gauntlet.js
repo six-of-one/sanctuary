@@ -2461,7 +2461,9 @@ var ymir = false, xmir = false;
 // repl the other ref
 // for unpins we need source x,y to check across unpin boundaries
 
-	function mpixel(sx,sy, tw,th, tx,ty) { 
+	function mpixel(sx,sy, tw,th, tx,ty) {
+alert(Mastermap.level.unpinx+ ":"+Mastermap.level.unpiny);
+document.title = "unpins: "+Mastermap.level.unpinx+ ":"+Mastermap.level.unpiny;
 
 		if (Mastermap.level.unpinx != undefined || Masterunpin) {
 			if (sx == 0 && tx < 0) tx = tw;
@@ -3510,7 +3512,19 @@ var txsv = ":";
           source = level.source,
           tw     = source.width,
           th     = source.height;
-		function mpixel(tx,ty,tw,th, tx,ty) { var n = tx + (ty * tw); if (reloaded.cells[n] !== undefined && reloaded.cells[n] !== null) return reloaded.cells[n].pixel; };
+		function mpixel(sx,sy,tw,th, tx,ty) {
+
+			if (Mastermap.level.unpinx != undefined || Masterunpin) {
+				if (sx == 0 && tx < 0) tx = tw;
+				if (sx == tw && tx > tw) tx = 0;
+			}
+			if (Mastermap.level.unpiny != undefined || Masterunpin) {
+				if (sy == 0 && ty < 0) ty = th;
+				if (sy == th && ty > th) ty = 0;
+			}
+			var n = tx + (ty * tw); if (reloaded.cells[n] !== undefined && reloaded.cells[n] !== null) return reloaded.cells[n].pixel;
+		};
+
       function isy(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
       function iswall(pixel)         { return isy(pixel, PIXEL.WALL);      };
       function walltype(tx,ty,map)   { return (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0); };
