@@ -327,8 +327,10 @@ Gauntlet = function() {
         FIRESTK:    { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
         PFLOOR1:    { sx: 28, sy: 27, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 999  },
 // other "wall" ents
-        WALLGUD:       { sx: 0, sy: 2, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:30, wall:true,   sound: 'null' },
-        WALLPASS:       { sx: 0, sy: 2, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:30, wall:true,   sound: 'null' },
+        WALLGUD:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true,   sound: 'null' },
+        WALLGUD2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true,   sound: 'null' },
+        WALLPASS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null' },
+        WALLPASS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null' },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -385,7 +387,7 @@ Gauntlet = function() {
       TREASURES = [ TREASURE.HEALTH, TREASURE.HEALRND, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD, 
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
 											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER, TREASURE.LAVA, TREASURE.NWASTE,
-											TREASURE.FIRESTK, TREASURE.PFLOOR1,
+											TREASURE.FIRESTK, TREASURE.PFLOOR1, TREASURE.WALLGUD, TREASURE.WALLGUD2, TREASURE.WALLPASS, TREASURE.WALLPASS2,
 // these are selected by MEXLOW case {}, or other code
 											TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
@@ -2430,8 +2432,13 @@ var ymir = false, xmir = false;
 				 if (ad == TREASURE.NWASTE && (sb > 0)) switch(sb) { case 1: ad = TREASURE.NWASTET; break; case 2: ad = TREASURE.NWASTEC; break; case 3: ad = TREASURE.NWASTER; break; }
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
 				self.addTreasure(x, y, ad);
+// wall types all work to build wall appearance
 				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
-			 }
+				 if (ad == TREASURE.WALLGUD && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
+				 if (ad == TREASURE.WALLGUD2 && (sb > 0)) { Mastercell.ptr.sy = sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
+				 if (ad == TREASURE.WALLPASS && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
+				 if (ad == TREASURE.WALLPASS2 && (sb > 0)) { Mastercell.ptr.sy = sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
+				 }
 		  else if (ismonster(pixel))
 			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
       });
@@ -2609,6 +2616,10 @@ var ymir = false, xmir = false;
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
 				self.addTreasure(x, y, ad);
 				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
+				 if (ad == TREASURE.WALLGUD && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
+				 if (ad == TREASURE.WALLGUD2 && (sb > 0)) { Mastercell.ptr.sy = sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
+				 if (ad == TREASURE.WALLPASS && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
+				 if (ad == TREASURE.WALLPASS2 && (sb > 0)) { Mastercell.ptr.sy = sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
 			 }
 		  else if (ismonster(pixel))
 			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);

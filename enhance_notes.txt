@@ -17,9 +17,6 @@ draw pushwalls last, or elevate them above other treasure tiles
 
 imm issues:
 
-what happen to pre-level msgs (1st 7 lvl and research) ???
-\_ they still work - the 1st level (when research) has no msg
-
 teleporters, monsters, shots cross the unpin line
 move across unpin in 1/ 2 unit tunnel fails
 
