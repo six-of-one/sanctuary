@@ -2334,7 +2334,8 @@ var ymir = false, xmir = false;
 		}
 
 // make sure mults is not undefed - later load deathmult from cooky
-		if (Deathmult == undefined) Deathmult = 0;
+		Deathmult = readCookie("deathmul");
+		if (Deathmult < 0 || Deathmult == null) Deathmult = 0;
 		if (Masterot == undefined) Masterot = 0;
 		shotpot = 0;
 
@@ -2845,6 +2846,7 @@ var ymir = false, xmir = false;
 				by.owner.addscore(1);
 				Deathmult = Deathmult + 1;
 				if (Deathmult > Dmmax) Deathmult = 0;
+				createCookie("deathmul", Deathmult,7777);
 				document.getElementById('scrmult3').innerHTML = Deathscore[Deathmult]+"- Score";
 				return;
 		 }
