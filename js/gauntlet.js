@@ -839,7 +839,7 @@ Gauntlet = function() {
       { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor012.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
  //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null },
-      { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
+      { name: 'Level 1',       url: "levels/g2level1.pngu",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 2',       url: "levels/g2level2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
       { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Some food can be destroyed" },
       { name: 'Level 4',       url: "levels/glevel4.png",  floor: FLOOR.WOOD,      wall: WALL.GRAY7,    gflr: "gfx/g1floor4.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Fight hand to hand by running into grunts" },
@@ -2269,6 +2269,30 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
       function is(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
       function type(pixel)     { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 
+// repl the other ref
+// for unpins we need source x,y to check across unpin boundaries
+
+		function mpixel(map,sx,sy, tw,th, tx,ty) {
+//alert(Mastermap.level.unpinx+ ":"+Mastermap.level.unpiny);
+//return;
+			if (level.unpinx != undefined || Masterunpin) {
+				if (sx == 0 && tx < 0) tx = tw - 1;
+				if (sx == (tw - 1) && tx >= tw) tx = 0;
+			}
+			if (level.unpiny != undefined || Masterunpin) {
+				if (sy == 0 && ty < 0) ty = th - 1;
+				if (sy == (th - 1) && ty >= th) ty = 0;
+			}
+			/*
+			var n = tx + (ty * tw);
+// bombed out somehow in a thief encounter stuck around max.w-h testing walk across unpin
+			if (self.cells[n] != undefined)
+				return self.cells[n].pixel;
+			else
+				return false;*/
+				return(map.pixel(tx,ty));
+			};
+
       function isnothing(pixel)      { return is(pixel, PIXEL.NOTHING);   };
       function iswall(pixel)         { if (is(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; (pixel & MEXHIGH) == PXWALSHT ? true : false; };
       function isfloor(pixel)        { return is(pixel, PIXEL.FLOOR);     };
@@ -2281,36 +2305,36 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
       function walltype0(tx,ty,map)   { return (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
       function shadowtype0(tx,ty,map) { return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty+1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0); };
       function doortype0(tx,ty,map)   {
-				var dr = (isdoor(map.pixel(tx,   ty-1)) ? 1 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty+1)) ? 4 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 8 : 0);
-				if (!dr) dr = (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0);
+				var dr = (isdoor(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 8 : 0);
 				return (dr);
 		};
 
 // mirror Y
-      function walltypeYM(tx,ty,map)   {  ty = (th - 1) - ty; return (iswall(map.pixel(tx,   ty+1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
-      function shadowtypeYM(tx,ty,map) { ty = (th - 1) - ty; return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty-1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0); };
+      function walltypeYM(tx,ty,map)   {  ty = (th - 1) - ty; return (iswall(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 8 : 0); };
+      function shadowtypeYM(tx,ty,map) { ty = (th - 1) - ty; return (iswall(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx-1, ty-1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 4 : 0); };
 		function doortypeYM(tx,ty,map)   {
 				ty = (th - 1) - ty;
-				var dr = (isdoor(map.pixel(tx,   ty+1)) ? 1 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty-1)) ? 4 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 8 : 0);
-				if (!dr) dr = (iswall(map.pixel(tx,   ty+1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0);
+				var dr = (isdoor(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 8 : 0);
 				return (dr);
 			};
 // mirror X
-      function walltypeXM(tx,ty,map)   { tx = (tw - 1) - tx; return (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx-1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx+1, ty))   ? 8 : 0); };
-      function shadowtypeXM(tx,ty,map) { tx = (tw - 1) - tx; return (iswall(map.pixel(tx+1, ty))   ? 1 : 0) | (iswall(map.pixel(tx+1, ty+1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0); };
+      function walltypeXM(tx,ty,map)   { tx = (tw - 1) - tx; return (iswall(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 8 : 0); };
+      function shadowtypeXM(tx,ty,map) { tx = (tw - 1) - tx; return (iswall(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx+1, ty+1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 4 : 0); };
 		function doortypeXM(tx,ty,map)   {
 				tx = (tw - 1) - tx;
-				var dr = (isdoor(map.pixel(tx,   ty-1)) ? 1 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty+1)) ? 4 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 8 : 0);
-				if (!dr) dr = (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx-1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx+1, ty))   ? 8 : 0);
+				var dr = (isdoor(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 8 : 0);
 				return (dr);
 			};
 // 180
-      function walltype180(tx,ty,map)   { tx = (tw - 1) - tx; ty = (th - 1) - ty; return (iswall(map.pixel(tx,   ty+1)) ? 1 : 0) | (iswall(map.pixel(tx-1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0) | (iswall(map.pixel(tx+1, ty))   ? 8 : 0); };
-      function shadowtype180(tx,ty,map) { tx = (tw - 1) - tx; ty = (th - 1) - ty; return (iswall(map.pixel(tx+1, ty))   ? 1 : 0) | (iswall(map.pixel(tx+1, ty-1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0); };
+      function walltype180(tx,ty,map)   { tx = (tw - 1) - tx; ty = (th - 1) - ty; return (iswall(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 8 : 0); };
+      function shadowtype180(tx,ty,map) { tx = (tw - 1) - tx; ty = (th - 1) - ty; return (iswall(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx+1, ty-1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 4 : 0); };
 		function doortype180(tx,ty,map)   {
 				tx = (tw - 1) - tx; ty = (th - 1) - ty;
-				var dr = (isdoor(map.pixel(tx,   ty+1)) ? 1 : 0) | (isdoor(map.pixel(tx-1, ty))   ? 2 : 0) | (isdoor(map.pixel(tx,   ty-1)) ? 4 : 0) | (isdoor(map.pixel(tx+1, ty))   ? 8 : 0);
-				if (!dr) dr = (iswall(map.pixel(tx,   ty+1)) ? 1 : 0) | (iswall(map.pixel(tx-1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty-1)) ? 4 : 0) | (iswall(map.pixel(tx+1, ty))   ? 8 : 0);
+				var dr = (isdoor(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 8 : 0);
 				return (dr);
 			};
 
@@ -2466,12 +2490,12 @@ var ymir = false, xmir = false;
 //alert(Mastermap.level.unpinx+ ":"+Mastermap.level.unpiny);
 //return;
 		if (Mastermap.level.unpinx != undefined || Masterunpin) {
-			if (sx == 0 && tx < 0) tx = tw;
-			if (sx == tw && tx > tw) tx = 0;
+				if (sx == 0 && tx < 0) tx = tw - 1;
+				if (sx == (tw - 1) && tx >= tw) tx = 0;
 		}
 		if (Mastermap.level.unpiny != undefined || Masterunpin) {
-			if (sy == 0 && ty < 0) ty = th;
-			if (sy == th && ty > th) ty = 0;
+				if (sy == 0 && ty < 0) ty = th - 1;
+				if (sy == (th - 1) && ty >= th) ty = 0;
 		}
 		var n = tx + (ty * tw);
 // bombed out somehow in a thief encounter stuck around max.w-h testing walk across unpin
@@ -3514,13 +3538,13 @@ var txsv = ":";
           th     = source.height;
 		function mpixel(sx,sy,tw,th, tx,ty) {
 
-			if (Mastermap.level.unpinx != undefined || Masterunpin) {
-				if (sx == 0 && tx < 0) tx = tw;
-				if (sx == tw && tx > tw) tx = 0;
-			}
-			if (Mastermap.level.unpiny != undefined || Masterunpin) {
-				if (sy == 0 && ty < 0) ty = th;
-				if (sy == th && ty > th) ty = 0;
+		if (Mastermap.level.unpinx != undefined || Masterunpin) {
+				if (sx == 0 && tx < 0) tx = tw - 1;
+				if (sx == (tw - 1) && tx >= tw) tx = 0;
+		}
+		if (Mastermap.level.unpiny != undefined || Masterunpin) {
+				if (sy == 0 && ty < 0) ty = th - 1;
+				if (sy == (th - 1) && ty >= th) ty = 0;
 			}
 			var n = tx + (ty * tw); if (reloaded.cells[n] !== undefined && reloaded.cells[n] !== null) return reloaded.cells[n].pixel;
 		};
