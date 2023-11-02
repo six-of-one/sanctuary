@@ -2438,10 +2438,11 @@ var ymir = false, xmir = false;
 				self.addTreasure(x, y, ad);
 // wall types all work to build wall appearance
 				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
-				 if (ad == TREASURE.WALLGUD && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
-				 if (ad == TREASURE.WALLGUD2 && (sb > 0)) { Mastercell.ptr.sy = sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
-				 if (ad == TREASURE.WALLPASS && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
-				 if (ad == TREASURE.WALLPASS2 && (sb > 0)) { Mastercell.ptr.sy = sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
+				 if (ad >= TREASURE.WALLGUD && ad <= TREASURE.WALLGUD2 && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
+				 if (ad >= TREASURE.WALLPASS && ad <= TREASURE.WALLPASS2 && (sb > 0)) {  Mastercell.ptr.sy = 0x10 + sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
+//				 if (ad == TREASURE.WALLGUD2 && (sb > 0)) { Mastercell.ptr.sy = sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
+//				 if (ad == TREASURE.WALLPASS && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
+//				 if (ad == TREASURE.WALLPASS2 && (sb > 0)) { Mastercell.ptr.sy = sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
 				 }
 		  else if (ismonster(pixel))
 			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
@@ -2620,10 +2621,11 @@ var ymir = false, xmir = false;
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
 				self.addTreasure(x, y, ad);
 				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
-				 if (ad == TREASURE.WALLGUD && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
-				 if (ad == TREASURE.WALLGUD2 && (sb > 0)) { Mastercell.ptr.sy = sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
-				 if (ad == TREASURE.WALLPASS && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
-				 if (ad == TREASURE.WALLPASS2 && (sb > 0)) { Mastercell.ptr.sy = sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
+				 if (ad >= TREASURE.WALLGUD && ad <= TREASURE.WALLGUD2 && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
+				 if (ad >= TREASURE.WALLPASS && ad <= TREASURE.WALLPASS2 && (sb > 0)) {  Mastercell.ptr.sy = 0x10 + sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
+//				 if (ad == TREASURE.WALLGUD2 && (sb > 0)) { Mastercell.ptr.sy = sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
+//				 if (ad == TREASURE.WALLPASS && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
+//				 if (ad == TREASURE.WALLPASS2 && (sb > 0)) { Mastercell.ptr.sy = sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
 			 }
 		  else if (ismonster(pixel))
 			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
