@@ -55,7 +55,7 @@ is = {
   'nonEmptyString': function(obj) { return (is.string(obj) && (obj.length > 0));      },
   'emptyArray':     function(obj) { return (is.array(obj) && (obj.length == 0));      },
   'nonEmptyArray':  function(obj) { return (is.array(obj) && (obj.length > 0));       },
-  'document':       function(obj) { return (obj === document);                        }, 
+  'document':       function(obj) { return (obj === document);                        },
   'window':         function(obj) { return (obj === window);                          },
   'element':        function(obj) { return (obj instanceof HTMLElement);              },
   'event':          function(obj) { return (obj instanceof Event);                    },
@@ -90,7 +90,7 @@ if (!Function.prototype.bind) {
         self  = this,
         nop   = function () {},
         bound = function () {
-          return self.apply(this instanceof nop ? this : (obj || {}), args.concat(slice.call(arguments)));   
+          return self.apply(this instanceof nop ? this : (obj || {}), args.concat(slice.call(arguments)));  
         };
     nop.prototype   = self.prototype;
     bound.prototype = new nop();
@@ -126,10 +126,10 @@ var Class = {
 }
 
 if (!window.requestAnimationFrame) {// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
-  window.requestAnimationFrame = window.webkitRequestAnimationFrame || 
-                                 window.mozRequestAnimationFrame    || 
-                                 window.oRequestAnimationFrame      || 
-                                 window.msRequestAnimationFrame     || 
+  window.requestAnimationFrame = window.webkitRequestAnimationFrame ||
+                                 window.mozRequestAnimationFrame    ||
+                                 window.oRequestAnimationFrame      ||
+                                 window.msRequestAnimationFrame     ||
                                  function(callback, element) {
                                    window.setTimeout(callback, 1000 / 60);
                                  }

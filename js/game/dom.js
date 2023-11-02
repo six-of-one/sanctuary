@@ -57,7 +57,7 @@ Game.Element = function() {
   };
 
   return {
- 
+
     all: function(selector, context) {
       return extend(query(selector, context));
     },
@@ -93,7 +93,7 @@ Game.Element = function() {
         while(ele = ele[property])
           if (ele.nodeType == 1)
             result.push(ele);
-        return extend(result); 
+        return extend(result);
       },
 
       parent:            function()            { return extend(this.parentNode); },
@@ -124,7 +124,7 @@ Game.Element = function() {
         this.append(content);
         return this;
       },
-          
+         
       append: function(content) {
         if (is.string(content))
           this.innerHTML += content;
