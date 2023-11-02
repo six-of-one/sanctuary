@@ -329,12 +329,6 @@ Game = {
     return canvas;
   },
 
-// positional mirror
-  pmiror: function(pos, max, op) {
-	  var n = max - 1;
-	  return (op ? n - pos : pos)
-  },
-
   parseImage: function(image, callback) {
     var tx, ty, index, pixel,
         tw      = image.width,
@@ -348,16 +342,9 @@ Game = {
           pixel: function(tx,ty) { var i = this.index(tx,ty); return this.valid(tx,ty) ? (data[i]<<16)+(data[i+1]<<8)+(data[i+2]) : null; }
         }
 
-// mirror will now happen here... mr. burton
-	var ymir = false, xmir = false, frot = false;
-/// TEST - convert to actual ops, mirror has to be set before -- Game.parseImage(source, function(tx, ty, pixel, map) {
-	xmir = document.getElementById("xmiror").checked;
-	ymir = document.getElementById("ymiror").checked;
-	frot = document.getElementById("rotat").checked;
-
     for(ty = 0 ; ty < th ; ty++)
       for(tx = 0 ; tx < tw ; tx++)
-        callback(tx, ty, helpers.pixel(Game.pmiror(tx,tw,xmir),Game.pmiror(ty,th,ymir)), helpers);
+        callback(tx, ty, helpers.pixel(tx,ty), helpers);
   },
 
   createImage: function(url, options) {
