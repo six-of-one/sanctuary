@@ -2316,8 +2316,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 var ymir = false, xmir = false;
 
 /// TEST - remove
-			xmir = document.getElementById("xmiror").checked;
-			ymir = document.getElementById("ymiror").checked;
+//			xmir = document.getElementById("xmiror").checked;
+//			ymir = document.getElementById("ymiror").checked;
 			var cb = document.getElementById("xunp").checked;
 			if (cb == true) level.unpinx = cb;
 			cb = document.getElementById("yunp").checked;
