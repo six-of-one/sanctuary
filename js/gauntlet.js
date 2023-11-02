@@ -65,7 +65,7 @@ Gauntlet = function() {
       FPS      = 60,
       TILE     = 32,
       STILE    = 32,
-      VIEWPORT = { TW: 16, TH: 16 },
+      VIEWPORT = { TW: 24, TH: 24 },		// size of viewing map - arcade is closer to 16 x 16, tho setitng smaller sizes seems to have no effect
       DIR      = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7 },
 // teleport adjust by last player dir		- use player dir code (0 - 7) and these on teleport {x,y} to test surrounding cells
 		DIRTX = [ 0, 32, 32, 32, 0, -32, -32, -32],
@@ -839,7 +839,7 @@ Gauntlet = function() {
       { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor012.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
  //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null },
-      { name: 'Level 1',       url: "levels/g2level1.pngu",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
+      { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 2',       url: "levels/g2level2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
       { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Some food can be destroyed" },
       { name: 'Level 4',       url: "levels/glevel4.png",  floor: FLOOR.WOOD,      wall: WALL.GRAY7,    gflr: "gfx/g1floor4.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Fight hand to hand by running into grunts" },
