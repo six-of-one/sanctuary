@@ -1360,6 +1360,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		else
 /// TEST - remove
 			  level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
+
       }
 
 			announcepause = true;
@@ -2316,8 +2317,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 var ymir = false, xmir = false;
 
 /// TEST - remove
-//			xmir = document.getElementById("xmiror").checked;
-//			ymir = document.getElementById("ymiror").checked;
+			xmir = document.getElementById("xmiror").checked;
+			ymir = document.getElementById("ymiror").checked;
 			var cb = document.getElementById("xunp").checked;
 			if (cb == true) level.unpinx = cb;
 			cb = document.getElementById("yunp").checked;
