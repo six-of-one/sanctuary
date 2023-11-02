@@ -19,7 +19,6 @@ imm issues:
 
 what happen to pre-level msgs (1st 7 lvl and research) ???
 
-save death magic kill pts val
 
 teleporters, monsters, shots cross the unpin line
 move across unpin in 1/ 2 unit tunnel fails
@@ -325,6 +324,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- save death magic kill pts val
 
 x-- poison dizzy effect, controls now have some wobble
 

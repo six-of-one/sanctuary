@@ -565,7 +565,7 @@ Gauntlet = function() {
         { name: 'load',   from: ['starting', 'playing'], to: 'loading'  }, // start loading a new level (either to start a new game, or next level while playing)
         { name: 'play',   from: 'loading',               to: 'playing'  }, // play the level after loading it
         { name: 'help',   from: ['loading', 'playing'],  to: 'help'     }, // pause the game to show a help topic
-        { name: 'tween',   from: 'playing',  to: 'tween'     }, // between level screen
+        { name: 'tween',  from: 'playing',               to: 'tween'    }, // between level screen
         { name: 'resume', from: ['help', 'tween' ] ,     to: 'playing'  }, // resume playing after showing a help topic
         { name: 'lose',   from: 'playing',               to: 'lost'     }, // player died
         { name: 'quit',   from: 'playing',               to: 'lost'     }, // player quit
@@ -825,6 +825,7 @@ Gauntlet = function() {
 // added gauntlet 1 levels as g1level{n}
 // gflr is gfx file for floor tiles
     levels: [
+      { name: 'intro',     url: "levels/7level.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
       { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor012.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
  //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null }, 
