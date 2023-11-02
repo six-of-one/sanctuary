@@ -347,9 +347,9 @@ Gauntlet = function() {
 		TRAPWALL = 0x404030,
 		TRAPTRIG = 0x0080b0,
 // special "treasure" walls
-		PXWALSHT = 0x8100
-		PXWALGUD = 0x8190
-		PXWALPASS = 0x81CF
+		PXWALSHT = 0x8100,
+		PXWALGUD = 0x8190,
+		PXWALPASS = 0x81CF,
 // tell load a start was found - if not randomly add one to prevent load fail
 		fndstart = 0,
 // after {n} health tics with no player move / fire, all walls are exits
