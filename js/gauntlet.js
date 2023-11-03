@@ -3550,7 +3550,7 @@ var txsv = ":";
 		};
 
       function isy(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
-      function iswall(pixel)         { return isy(pixel, PIXEL.WALL);      };
+      function iswall(pixel)         { return isy(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; (pixel & MEXHIGH) == PXWALSHT ? true : false; };
       function walltype(tx,ty,map)   { return (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0); };
       function shadowtype(tx,ty,map) { return (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0); };
       function isfloor(pixel)         { return ((pixel & PIXEL.MASK.TYPE) === PIXEL.FLOOR);   };
