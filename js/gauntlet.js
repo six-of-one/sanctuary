@@ -31,7 +31,7 @@ Gauntlet = function() {
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Mirx = false, Miry = false, wallsprites, entsprites,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
 		walltype, shadowtype, doortype, Mapdata,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
@@ -1088,6 +1088,20 @@ var mx = 0, my = 0;
 	 for(ty = 0 ; ty < th ; ty++)
 		for(tx = 0 ; tx < tw ; tx++)
 			Mapdata[helpers.indexc(tx,ty)] = helpers.pixel(Math.abs(mx - tx),Math.abs(my - ty));
+	if (0) {		// (Mrot)
+		var nw = th, nh = tw;
+		image.width = nw;
+		image.height = nh
+		Mtw = nw;
+		Mth = nh;
+		var newdata = [];
+		 for(ty = 0 ; ty < th ; ty++)
+			for(tx = 0 ; tx < tw ; tx++)
+				newdata[helpers.indexc(ty,tx)] = Mapdata[helpers.indexc(tx,ty)]
+// relod
+		 for(ty = 0 ; ty < ((tw * th) - 1)  ; ty++)
+			Mapdata[ty] = newdata[ty];
+		}
 	}
 
 	 for(ty = 0 ; ty < th ; ty++)
@@ -1290,6 +1304,7 @@ var mx = 0, my = 0;
 		document.getElementById("yunp").checked = false;
 		document.getElementById("xmiror").checked = false;
 		document.getElementById("ymiror").checked = false;
+		document.getElementById("rotat").checked = false;
 		document.getElementById("invwal").checked = false;
 		document.getElementById("spedis").checked = false;
 		document.getElementById("blrndlod").checked = false;
@@ -1307,6 +1322,7 @@ var mx = 0, my = 0;
 		if (readCookie("_dev_"+"yunp") == "true") document.getElementById("yunp").checked = true;
 		if (readCookie("_dev_"+"xmiror") == "true") document.getElementById("xmiror").checked = true;
 		if (readCookie("_dev_"+"ymiror") == "true") document.getElementById("ymiror").checked = true;
+		if (readCookie("_dev_"+"rotat") == "true") document.getElementById("rotat").checked = true;
 		if (readCookie("_dev_"+"invwal") == "true") document.getElementById("invwal").checked = true;
 		if (readCookie("_dev_"+"spedis") == "true") document.getElementById("spedis").checked = true;
 		if (readCookie("_dev_"+"blrndlod") == "true") document.getElementById("blrndlod").checked = true;
@@ -2384,6 +2400,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 /// TEST - remove
 		Mirx = document.getElementById("xmiror").checked;
 		Miry = document.getElementById("ymiror").checked;
+		Mrot = document.getElementById("rotat").checked;
 		var cb = document.getElementById("xunp").checked;
 		if (cb == true || level.unpinx) Munpinx = true;
 		cb = document.getElementById("yunp").checked;
@@ -2397,9 +2414,6 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		shotpot = 0;
 
       parseImage(source, function(tx, ty, pixel, map) {
-
-//			if (Mirx) tx = (tw - 1) - tx;
-//			if (Miry) ty = (th - 1) - ty;
 
         var cell, x = t2p(tx),
                   y = t2p(ty),
@@ -2502,11 +2516,6 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
           tw     = source.width,
           th     = source.height,
           self   = this;
-
-
-// parsing here
-//			if (Mirx) tx = (tw - 1) - tx;
-//			if (Miry) ty = (th - 1) - ty;
 
         var cell, x = t2p(tx),
                   y = t2p(ty),
@@ -4036,6 +4045,7 @@ var txsv = ":";
 				createCookie("_dev_"+"yunp", document.getElementById("yunp").checked,7777);
 				createCookie("_dev_"+"xmiror", document.getElementById("xmiror").checked,7777);
 				createCookie("_dev_"+"ymiror", document.getElementById("ymiror").checked,7777);
+				createCookie("_dev_"+"rotat", document.getElementById("rotat").checked,7777);
 				createCookie("_dev_"+"invwal", document.getElementById("invwal").checked,7777);
 				createCookie("_dev_"+"spedis", document.getElementById("spedis").checked,7777);
 				createCookie("_dev_"+"blrndlod", document.getElementById("blrndlod").checked,7777);
