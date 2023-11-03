@@ -1087,10 +1087,25 @@ var mx = 0, my = 0;
 	 for(ty = 0 ; ty < th ; ty++)
 		for(tx = 0 ; tx < tw ; tx++)
 			Mapdata[helpers.indexc(tx,ty)] = helpers.pixel(Math.abs(mx - tx),Math.abs(my - ty));
+
+	if (Mrot) {
+				var nw = th, nh = tw;
+				image.width = nw;
+				image.height = nh
+				Mtw = nw;
+				Mth = nh;
+				var newdata = [];
+				 for(ty = 0 ; ty < th ; ty++)
+						  for(tx = 0 ; tx < tw ; tx++)
+									 newdata[helpers.indexc(ty,tx)] = Mapdata[helpers.indexc(tx,ty)]
+// relod
+				 for(ty = 0 ; ty < ((tw * th) - 1)  ; ty++)
+						  Mapdata[ty] = newdata[ty];
+				}
 	}
 
-	 for(ty = 0 ; ty < th ; ty++)
-		for(tx = 0 ; tx < tw ; tx++)
+	 for(ty = 0 ; ty < Mth ; ty++)
+		for(tx = 0 ; tx < Mtw ; tx++)
 		  callback(tx, ty, Mapdata[helpers.indexc(tx,ty)], helpers);
 	};
 
@@ -1430,18 +1445,14 @@ var mx = 0, my = 0;
       else {
 			  $('booting').show();
 
-			Mrot = document.getElementById("rotat").checked;
-
-			var rotr = "";
-			if (Mrot) rotr = "r";
 /// TEST - remove
 // this works - but it refuses to refresh if flvl is changed
 var lvu = document.getElementById("flvl").value;
-alert(rotr + level.url);
+
 if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION , { onload: onloaded });
 		else
 /// TEST - remove
-			  level.source = Game.createImage(rotr + level.url +"?cachebuster=" + VERSION , { onload: onloaded });
+			  level.source = Game.createImage(level.url +"?cachebuster=" + VERSION , { onload: onloaded });
 
       }
 
@@ -2379,7 +2390,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
         var cell, x = t2p(tx),
                   y = t2p(ty),
-                  n = tx + (ty * tw);
+                  n = tx + (ty * Mtw);
 
         self.cells[n] = cell = { occupied: [] };
 
@@ -2466,6 +2477,9 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		  else if (ismonster(pixel))
 			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
       });
+
+      self.tw       = Mtw;
+      self.th       = Mth;
 
     },
 
