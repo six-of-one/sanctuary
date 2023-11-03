@@ -3441,19 +3441,6 @@ var txsv = ":";
           tw     = source.width,
           th     = source.height;
 
-		function mpixel(sx,sy,tw,th, tx,ty) {
-
-		if (Munpinx) {
-				if (sx == 0 && tx < 0) tx = tw - 1;
-				if (sx == (tw - 1) && tx >= tw) tx = 0;
-		}
-		if (Munpiny) {
-				if (sy == 0 && ty < 0) ty = th - 1;
-				if (sy == (th - 1) && ty >= th) ty = 0;
-			}
-			var n = tx + (ty * tw); if (reloaded.cells[n] !== undefined && reloaded.cells[n] !== null) return reloaded.cells[n].pixel;
-		};
-
       if (treasure.type.push)
 		 {
 				helpdis(treasure.type.nohlp, undefined, 2000, undefined, undefined);
