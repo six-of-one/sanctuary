@@ -2508,91 +2508,13 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
 	load_cell: function(tx, ty, pixel, map) {
 
-      var level  = cfg.levels[Mastermap.nlevel],
-          source = level.source,
-          tw     = source.width,
-          th     = source.height,
-          self   = this;
+//      var level  = cfg.levels[Mastermap.nlevel],
+//          source = level.source,
+//          tw     = source.width,
+//          th     = source.height,
 
-        var cell, x = t2p(tx),
-                  y = t2p(ty),
-                  n = tx + (ty * tw);
+		pMapcell(tx, ty, pixel, map, this)
 
-        self.cells[n] = cell = { occupied: [] };
-
-/// do stuff so we can modify cells later
-//		  pcell = self.cells[n];
-		  reloaded = self;
-		  Mastercell = self.cells[n];
-//		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
-		  self.cells[n].x = x; // used by walls -> exits
-		  self.cells[n].y = y;
-		  self.cells[n].tx = tx; // used by trap: walls -> floor
-		  self.cells[n].ty = ty;
-		  self.cells[n].pixel = pixel;
-		  refpixel = pixel;
-// make some floor tiles appear slightlyt different - a "GPS" out of complex mazes
-// this is built into the map file as color code #a08080
-		  self.cells[n].mapcht = ((pixel & 0xa08080) == 0xa08080);
-//		  alert("cell x,y,n ="+self.cells[n].x+", "+self.cells[n].y+", "+n);
-/// do stuff tier
-
-		  if (isstart(pixel))
-		  {
-				 self.start = { x: x, y: y }
-				 fndstart = true;
-			}
-
-		  if (iswallrw(pixel))
-			 cell.wall = walltype(tx, ty, map);
-		  else if (isnothing(pixel))
-			 cell.nothing = true;
-		  else
-			 cell.shadow = shadowtype(tx, ty, map);
-
-		  if (isexit(pixel))
-			 {
-				 switch(type(pixel)) {
-					case 0: self.addExit(x, y, DOOR.EXIT);
-							break;
-					case 1: self.addExit(x, y, DOOR.EXIT4);
-							break;
-					case 2: self.addExit(x, y, DOOR.EXIT8);
-							break;
-					case 3: self.addExit(x, y, DOOR.EXIT6);
-							break;
-					case 4: self.addExit(x, y, DOOR.EXITMOVE);
-							break;
-				 }
-			 }
-		  else if (isdoor(pixel))
-			{
-					self.addDoor(x, y, DOOR.HORIZONTAL);
-					Mastercell.ptr.sx = doortype(tx,ty,map);
-//				alert(Mastercell.ptr.sx);
-			}
-		  else if (isgenerator(pixel))
-			 self.addGenerator(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
-		  else if (istreasure(pixel))
-			 {
-				 var ad = TREASURES[type(pixel) < TREASURES.length ? type(pixel) : 0];
-// some treasures operate from sub pixels
-				 var sb = MEXLOW & pixel;
-				 if (ad == TREASURE.POTION && (sb > 0)) switch(sb) { case 1: ad = TREASURE.POTIONORG; break; }
-				 if (ad == TREASURE.HEALRND && (sb > 0)) switch(sb) { case 1: ad = TREASURE.POISON; break; case 2: ad = TREASURE.BADPOT; break;}
-				 if (ad == TREASURE.XSPEED && (sb > 0)) switch(sb) { case 1: ad = TREASURE.XSHOTPWR; break; case 2: ad = TREASURE.XSHOTSPD; break; case 3: ad = TREASURE.XARMOR; break; case 4: ad = TREASURE.XFIGHT; break; case 5: ad = TREASURE.XMAGIC; break; }
-				 if (ad == TREASURE.LIMINVIS && (sb > 0)) switch(sb) { case 1: ad = TREASURE.LIMINVUL; break; case 2: ad = TREASURE.LIMREPUL; break; case 3: ad = TREASURE.LIMREFLC; break; case 4: ad = TREASURE.LIMSUPER; break; case 5: ad = TREASURE.LIMTELE; break; case 6: ad = TREASURE.LIMANK; break; }
-				 if (ad == TREASURE.WATER && (sb > 0)) switch(sb) { case 1: ad = TREASURE.WATERT; break; case 2: ad = TREASURE.WATERC; break; case 3: ad = TREASURE.WATERR; break; }
-				 if (ad == TREASURE.LAVA && (sb > 0)) switch(sb) { case 1: ad = TREASURE.LAVAT; break; case 2: ad = TREASURE.LAVAC; break; case 3: ad = TREASURE.LAVAR; break; }
-				 if (ad == TREASURE.NWASTE && (sb > 0)) switch(sb) { case 1: ad = TREASURE.NWASTET; break; case 2: ad = TREASURE.NWASTEC; break; case 3: ad = TREASURE.NWASTER; break; }
-				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
-				self.addTreasure(x, y, ad);
-				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
-				 if (ad == TREASURE.WALLGUD && ad == TREASURE.WALLGUD2 && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
-				 if (ad == TREASURE.WALLPASS && ad == TREASURE.WALLPASS2 && (sb > 0)) {  Mastercell.ptr.sy = 0x10 + sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
-			 }
-		  else if (ismonster(pixel))
-			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
     },
 
     //-------------------------------------------------------------------------
