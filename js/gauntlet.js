@@ -3536,6 +3536,7 @@ var txsv = ":";
           source = level.source,
           tw     = source.width,
           th     = source.height;
+
 		function mpixel(sx,sy,tw,th, tx,ty) {
 
 		if (Mastermap.level.unpinx != undefined || Masterunpin) {
