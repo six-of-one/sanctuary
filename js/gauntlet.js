@@ -2342,8 +2342,10 @@ if (lvu != "") level.source = Game.createImage(lvu + rotr + "?cachebuster=" + VE
 		cb = document.getElementById("yunp").checked;
 		if (cb == true || level.unpiny) Munpiny = true;
 /// TEST - remove
-		if (Munpinx && (level.unpinx != Munpinx)) source.width--; 
-		if (Munpiny && (level.unpiny != Munpiny)) source.height--; 
+		 if (level.mw == null || level.mw == undefined) { level.mw = source.width; level.mh = source.source.height; }
+		 else { source.width = level.mw; source.source.height = level.mh; }
+		if (Munpinx && (level.unpinx != Munpinx)) source.width--;				// while this works - on reloading the level, w x h is wrong
+		if (Munpiny && (level.unpiny != Munpiny)) source.height--;
 
 		var tw     = source.width,
           th     = source.height,
