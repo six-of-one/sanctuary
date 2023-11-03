@@ -1192,7 +1192,10 @@ Gauntlet = function() {
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
 				spref.addTreasure(x, y, ad);
 // wall types all work to build wall appearance
-				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
+				 if (Mastercell.ptr.type.wall) {
+					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
+					 Mastercell.ptr.sy = Mastercell.ptr.type.sy; // color of rubble shotwall
+				 }
 				 if (ad == TREASURE.WALLGUD || ad == TREASURE.WALLGUD2) {
 					 Mastercell.ptr.sy = Mastermap.level.wall;
 					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLGUD2));
@@ -4701,7 +4704,7 @@ var txsv = ":";
 					ctx.filter = "hue-rotate("+entity.hue+"deg)";
 
 				if (entity.type.wall)
-						this.sprite(ctx, wallsprites, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+						this.sprite(ctx, wallsprites, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else if (entity.door)
 						this.sprite(ctx, sprites, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else if (entity.numer)
