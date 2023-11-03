@@ -1063,6 +1063,15 @@ Gauntlet = function() {
 
 	function isp(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
 	function type(pixel)     { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
+	function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
+	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
+	function isfloor(pixel)        { return isp(pixel, PIXEL.FLOOR);     };
+	function isstart(pixel)        { return isp(pixel, PIXEL.START);     };
+	function isdoor(pixel)         { return isp(pixel, PIXEL.DOOR);      };
+	function isexit(pixel)         { return isp(pixel, PIXEL.EXIT);      };
+	function isgenerator(pixel)    { return isp(pixel, PIXEL.GENERATOR); };
+	function ismonster(pixel)      { return isp(pixel, PIXEL.MONSTER);   };
+	function istreasure(pixel)     { return isp(pixel, PIXEL.TREASURE);  };
 
   //=========================================================================
   // PERFORMANCE - using arrays for (small) sets
@@ -1082,7 +1091,6 @@ Gauntlet = function() {
 // currently spawns theif for std g1 ops
   function spawn()
   {
-	  function isfloor(pixel)         { return ((pixel & PIXEL.MASK.TYPE) === PIXEL.FLOOR);   };
 		var thcell,cell, cells  = reloaded.cells;
 		var c, nc = cells.length, fnd = 0, sft = 6000;
 
@@ -1412,7 +1420,6 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		spl.style.visibility = "hidden";
 
 // load special potion
-      function isfloor(pixel)         { return ((pixel & PIXEL.MASK.TYPE) === PIXEL.FLOOR);   };
 		var cell, cells  = reloaded.cells;
 		var c, nc = cells.length, fnd = 0, sft = 6000;
 
@@ -2298,15 +2305,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				return(map.pixel(tx,ty));
 			};
 
-      function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
-      function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; (pixel & MEXHIGH) == PXWALSHT ? true : false; };
-      function isfloor(pixel)        { return isp(pixel, PIXEL.FLOOR);     };
-      function isstart(pixel)        { return isp(pixel, PIXEL.START);     };
-      function isdoor(pixel)         { return isp(pixel, PIXEL.DOOR);      };
-      function isexit(pixel)         { return isp(pixel, PIXEL.EXIT);      };
-      function isgenerator(pixel)    { return isp(pixel, PIXEL.GENERATOR); };
-      function ismonster(pixel)      { return isp(pixel, PIXEL.MONSTER);   };
-      function istreasure(pixel)     { return isp(pixel, PIXEL.TREASURE);  };
+
       function walltype0(tx,ty,map)   { return (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
       function shadowtype0(tx,ty,map) { return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty+1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0); };
       function doortype0(tx,ty,map)   {
@@ -2512,15 +2511,6 @@ var ymir = false, xmir = false;
 
 // parseimg setup dups
 
-      function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
-      function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; (pixel & MEXHIGH) == PXWALSHT ? true : false; };
-      function isfloor(pixel)        { return isp(pixel, PIXEL.FLOOR);     };
-      function isstart(pixel)        { return isp(pixel, PIXEL.START);     };
-      function isdoor(pixel)         { return isp(pixel, PIXEL.DOOR);      };
-      function isexit(pixel)         { return isp(pixel, PIXEL.EXIT);      };
-      function isgenerator(pixel)    { return isp(pixel, PIXEL.GENERATOR); };
-      function ismonster(pixel)      { return isp(pixel, PIXEL.MONSTER);   };
-      function istreasure(pixel)     { return isp(pixel, PIXEL.TREASURE);  };
       function walltype0(tx,ty,map)   { return (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0); };
       function shadowtype0(tx,ty,map) { return (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0); };
       function doortype0(tx,ty,map)   {
@@ -3384,7 +3374,6 @@ var txsv = ":";
     },
 
     onStartLevel: function(map) {
-			function isfloor(pixel)         { return ((pixel & PIXEL.MASK.TYPE) === PIXEL.FLOOR);   };
 			if (!fndstart)		// the map has no start - may be a "random" rogue style map - add random start
 			{
 						var cell, cells  = reloaded.cells;
@@ -3553,10 +3542,8 @@ var txsv = ":";
 			var n = tx + (ty * tw); if (reloaded.cells[n] !== undefined && reloaded.cells[n] !== null) return reloaded.cells[n].pixel;
 		};
 
-      function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
       function walltype(tx,ty,map)   { return (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0); };
       function shadowtype(tx,ty,map) { return (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0); };
-      function isfloor(pixel)         { return ((pixel & PIXEL.MASK.TYPE) === PIXEL.FLOOR);   };
 
       if (treasure.type.push)
 		 {
