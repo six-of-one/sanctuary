@@ -1062,53 +1062,6 @@ Gauntlet = function() {
   // MAPPING
   //=========================================================================
 
-	function parseImage(image, callback) {
-	 var tx, ty, index, pixel,
-		  tw      = image.width,
-		  th      = image.height,
-		  canvas  = Game.renderToCanvas(tw, th, function(ctx) { ctx.drawImage(image, 0, 0); }),
-		  ctx     = canvas.getContext('2d'),
-		  data    = ctx.getImageData(0, 0, tw, th).data,
-		  helpers = {
-			 valid: function(tx,ty) { return (tx >= 0) && (tx < tw) && (ty >= 0) && (ty < th); },
-			 index: function(tx,ty) { return (tx + (ty*tw)) * 4; },
-			 indexc: function(tx,ty) { return (tx + (ty*tw)); },
-			 pixel: function(tx,ty) { var i = this.index(tx,ty); return this.valid(tx,ty) ? (data[i]<<16)+(data[i+1]<<8)+(data[i+2]) : null; }
-		  }
-
-	if (Mapdata == null) {
-
-// mirror here, mr burton...
-var mx = 0, my = 0;
-	if (Mirx) mx = tw - 1;
-	if (Miry) my = th - 1;
-
-	 Mapdata = [];
-	 for(ty = 0 ; ty < th ; ty++)
-		for(tx = 0 ; tx < tw ; tx++)
-			Mapdata[helpers.indexc(tx,ty)] = helpers.pixel(Math.abs(mx - tx),Math.abs(my - ty));
-
-	if (Mrot) {
-				var nw = th, nh = tw;
-				image.width = nw;
-				image.height = nh
-				Mtw = nw;
-				Mth = nh;
-				var newdata = [];
-				 for(ty = 0 ; ty < th ; ty++)
-						  for(tx = 0 ; tx < tw ; tx++)
-									 newdata[helpers.indexc(ty,tx)] = Mapdata[helpers.indexc(tx,ty)]
-// relod
-				 for(ty = 0 ; ty < (Mtw * Mth)  ; ty++)
-						  Mapdata[ty] = newdata[ty];
-				}
-	}
-
-	 for(ty = 0 ; ty < Mth ; ty++)
-		for(tx = 0 ; tx < Mtw ; tx++)
-		  callback(tx, ty, Mapdata[helpers.indexc(tx,ty)], helpers);
-	};
-
 	function isp(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
 	function type(pixel)     { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 	function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
@@ -1125,7 +1078,7 @@ var mx = 0, my = 0;
 // repl the other ref - map.pixel(x,y)
 // for unpins we need source x,y to check across unpin boundaries
 
-		function mpixel(sx,sy, tx,ty) {
+	function mpixel(sx,sy, tx,ty) {
 
 			if (Munpinx) {
 				if (sx == 0 && tx < 0) tx = Mtw - 1;
@@ -1139,7 +1092,7 @@ var mx = 0, my = 0;
 				return(Mapdata[n]);
 			};
 
-      function walltype(tx,ty,map)   {
+     function walltype(tx,ty,map)   {
 			var wally = (iswall(mpixel(tx,ty, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty, tx-1, ty))   ? 8 : 0);
 			if (wally > 13) {
 				if (iswall(mpixel(tx,ty, tx-1, ty+1)))  { wally += 6; if (iswall(mpixel(tx,ty, tx+1, ty+1))) wally += 4; }
@@ -1156,34 +1109,34 @@ var mx = 0, my = 0;
 				return (dr);
 		};
 
-		function pMapcell(tx, ty, pixel, map) {
+	function pMapcell(tx, ty, pixel, map, spref) {
 
         var cell, x = t2p(tx),
                   y = t2p(ty),
                   n = tx + (ty * Mtw);
 
-        self.cells[n] = cell = { occupied: [] };
+        spref.cells[n] = cell = { occupied: [] };
 
 /// do stuff so we can modify cells later
-//		  pcell = self.cells[n];
-		  reloaded = self;
-		  Mastercell = self.cells[n];
-//		  alert("cell x,y,n ="+tx+", "+ty+", "+self.cells[n]);
-		  self.cells[n].x = x; // used by walls -> exits
-		  self.cells[n].y = y;
-		  self.cells[n].tx = tx; // used by trap: walls -> floor
-		  self.cells[n].ty = ty;
-		  self.cells[n].pixel = pixel;
+//		  pcell = spref.cells[n];
+		  reloaded = spref;
+		  Mastercell = spref.cells[n];
+//		  alert("cell x,y,n ="+tx+", "+ty+", "+spref.cells[n]);
+		  spref.cells[n].x = x; // used by walls -> exits
+		  spref.cells[n].y = y;
+		  spref.cells[n].tx = tx; // used by trap: walls -> floor
+		  spref.cells[n].ty = ty;
+		  spref.cells[n].pixel = pixel;
 		  refpixel = pixel;
 // make some floor tiles appear slightlyt different - a "GPS" out of complex mazes
 // this is built into the map file as color code #a08080
-		  self.cells[n].mapcht = ((pixel & 0xa08080) == 0xa08080);
-//		  alert("cell x,y,n ="+self.cells[n].x+", "+self.cells[n].y+", "+n);
+		  spref.cells[n].mapcht = ((pixel & 0xa08080) == 0xa08080);
+//		  alert("cell x,y,n ="+spref.cells[n].x+", "+spref.cells[n].y+", "+n);
 /// do stuff tier
 
 		  if (isstart(pixel))
 		  {
-				 self.start = { x: x, y: y }
+				 spref.start = { x: x, y: y }
 				 fndstart = true;
 // save player start for theif entry
 				if (thieftrack === 0)
@@ -1204,26 +1157,26 @@ var mx = 0, my = 0;
 		  if (isexit(pixel))
 			 {
 				 switch(type(pixel)) {
-					case 0: self.addExit(x, y, DOOR.EXIT);
+					case 0: spref.addExit(x, y, DOOR.EXIT);
 							break;
-					case 1: self.addExit(x, y, DOOR.EXIT4);
+					case 1: spref.addExit(x, y, DOOR.EXIT4);
 							break;
-					case 2: self.addExit(x, y, DOOR.EXIT8);
+					case 2: spref.addExit(x, y, DOOR.EXIT8);
 							break;
-					case 3: self.addExit(x, y, DOOR.EXIT6);
+					case 3: spref.addExit(x, y, DOOR.EXIT6);
 							break;
-					case 4: self.addExit(x, y, DOOR.EXITMOVE);
+					case 4: spref.addExit(x, y, DOOR.EXITMOVE);
 							break;
 				 }
 			 }
 		  else if (isdoor(pixel))
 			{
-					self.addDoor(x, y, DOOR.HORIZONTAL);
+					spref.addDoor(x, y, DOOR.HORIZONTAL);
 					Mastercell.ptr.sx = doortype(tx,ty,map);
 //				alert(Mastercell.ptr.sx);
 			}
 		  else if (isgenerator(pixel)) {
-			 self.addGenerator(x, y, MONSTERS[(type(pixel) < MONSTERS.length) ? type(pixel) : 0]);
+			 spref.addGenerator(x, y, MONSTERS[(type(pixel) < MONSTERS.length) ? type(pixel) : 0]);
 			}
 		  else if (istreasure(pixel))
 			 {
@@ -1238,7 +1191,7 @@ var mx = 0, my = 0;
 				 if (ad == TREASURE.LAVA && (sb > 0)) switch(sb) { case 1: ad = TREASURE.LAVAT; break; case 2: ad = TREASURE.LAVAC; break; case 3: ad = TREASURE.LAVAR; break; }
 				 if (ad == TREASURE.NWASTE && (sb > 0)) switch(sb) { case 1: ad = TREASURE.NWASTET; break; case 2: ad = TREASURE.NWASTEC; break; case 3: ad = TREASURE.NWASTER; break; }
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
-				self.addTreasure(x, y, ad);
+				spref.addTreasure(x, y, ad);
 // wall types all work to build wall appearance
 				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
 				 if (ad == TREASURE.WALLGUD && ad == TREASURE.WALLGUD2) {
@@ -1253,8 +1206,56 @@ var mx = 0, my = 0;
 					 }
 				 }
 		  else if (ismonster(pixel))
-			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
+			 spref.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
       };
+
+// sref - the self from map load
+	function parseImage(image, callback, sref) {
+		 var tx, ty, index, pixel,
+			  tw      = image.width,
+			  th      = image.height,
+			  canvas  = Game.renderToCanvas(tw, th, function(ctx) { ctx.drawImage(image, 0, 0); }),
+			  ctx     = canvas.getContext('2d'),
+			  data    = ctx.getImageData(0, 0, tw, th).data,
+			  helpers = {
+				 valid: function(tx,ty) { return (tx >= 0) && (tx < tw) && (ty >= 0) && (ty < th); },
+				 index: function(tx,ty) { return (tx + (ty*tw)) * 4; },
+				 indexc: function(tx,ty) { return (tx + (ty*tw)); },
+				 pixel: function(tx,ty) { var i = this.index(tx,ty); return this.valid(tx,ty) ? (data[i]<<16)+(data[i+1]<<8)+(data[i+2]) : null; }
+			  }
+
+		if (Mapdata == null) {
+
+// mirror here, mr burton...
+	var mx = 0, my = 0;
+		if (Mirx) mx = tw - 1;
+		if (Miry) my = th - 1;
+
+		 Mapdata = [];
+		 for(ty = 0 ; ty < th ; ty++)
+			for(tx = 0 ; tx < tw ; tx++)
+				Mapdata[helpers.indexc(tx,ty)] = helpers.pixel(Math.abs(mx - tx),Math.abs(my - ty));
+
+		if (Mrot) {
+					var nw = th, nh = tw;
+					image.width = nw;
+					image.height = nh
+					Mtw = nw;
+					Mth = nh;
+					var newdata = [];
+					 for(ty = 0 ; ty < th ; ty++)
+							  for(tx = 0 ; tx < tw ; tx++)
+										 newdata[helpers.indexc(ty,tx)] = Mapdata[helpers.indexc(tx,ty)]
+// relod
+					 for(ty = 0 ; ty < (Mtw * Mth)  ; ty++)
+							  Mapdata[ty] = newdata[ty];
+					}
+		}
+
+		 for(ty = 0 ; ty < Mth ; ty++)
+			for(tx = 0 ; tx < Mtw ; tx++)
+			  callback(tx, ty, Mapdata[helpers.indexc(tx,ty)], helpers, sref);
+		};
 
   //=========================================================================
   // PERFORMANCE - using arrays for (small) sets
@@ -2496,7 +2497,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		if (Masterot == undefined) Masterot = 0;
 		shotpot = 0;
 
-      parseImage(source, pMapcell);
+      parseImage(source, pMapcell, self);
 
       self.tw       = Mtw;
       self.th       = Mth;
