@@ -837,10 +837,10 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',     url: "levels/7level.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor012.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor012.jpg",         music: 'nullm',	unpinx: 1,	unpiny: 1,   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
  //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null },
-      { name: 'Level 1',       url: "levels/g2level1.pngu",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
+      { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 2',       url: "levels/g2level2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
       { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Some food can be destroyed" },
       { name: 'Level 4',       url: "levels/glevel4.png",  floor: FLOOR.WOOD,      wall: WALL.GRAY7,    gflr: "gfx/g1floor4.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Fight hand to hand by running into grunts" },
@@ -1429,18 +1429,18 @@ var mx = 0, my = 0;
       }
       else {
 			  $('booting').show();
+
+			Mrot = document.getElementById("rotat").checked;
+			var rotr = "";
+			if (Mrot) rotr = "r";
 /// TEST - remove
 // this works - but it refuses to refresh if flvl is changed
 var lvu = document.getElementById("flvl").value;
-if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION , { onload: onloaded });
+	
+if (lvu != "") level.source = Game.createImage(lvu + rotr + "?cachebuster=" + VERSION , { onload: onloaded });
 		else
 /// TEST - remove
-			  level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
-
-// set these here
-			Mtw = level.source.width;
-			Mth = level.source.height;
-createCookie("wh3", level.source.width+":"+level.source.height+" -- "+Mtw+":"+Mth,0);
+			  level.source = Game.createImage(level.url + rotr + "?cachebuster=" + VERSION , { onload: onloaded });
 
       }
 
@@ -2329,8 +2329,21 @@ createCookie("wh3", level.source.width+":"+level.source.height+" -- "+Mtw+":"+Mt
     setupLevel: function(nlevel) {
 
       var level  = cfg.levels[nlevel],
-          source = level.source,
-          tw     = source.width,
+          source = level.source;
+
+/// TEST - remove
+		Mirx = document.getElementById("xmiror").checked;
+		Miry = document.getElementById("ymiror").checked;
+		Mrot = document.getElementById("rotat").checked;
+		var cb = document.getElementById("xunp").checked;
+		if (cb == true || level.unpinx) Munpinx = true;
+		cb = document.getElementById("yunp").checked;
+		if (cb == true || level.unpiny) Munpiny = true;
+/// TEST - remove
+		if (Munpinx && (level.unpinx != Munpinx)) source.width--; 
+		if (Munpiny && (level.unpiny != Munpiny)) source.height--; 
+
+		var tw     = source.width,
           th     = source.height,
           self   = this;
 
@@ -2350,16 +2363,6 @@ createCookie("wh3", level.source.width+":"+level.source.height+" -- "+Mtw+":"+Mt
 		Mapdata = null;
 		Mtw = tw;
 		Mth = th;
-
-/// TEST - remove
-		Mirx = document.getElementById("xmiror").checked;
-		Miry = document.getElementById("ymiror").checked;
-		Mrot = document.getElementById("rotat").checked;
-		var cb = document.getElementById("xunp").checked;
-		if (cb == true || level.unpinx) Munpinx = true;
-		cb = document.getElementById("yunp").checked;
-		if (cb == true || level.unpiny) Munpiny = true;
-/// TEST - remove
 
 // make sure mults is not undefed - later load deathmult from cooky
 		Deathmult = readCookie("deathmul");
