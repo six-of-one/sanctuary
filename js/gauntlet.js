@@ -2481,8 +2481,16 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				self.addTreasure(x, y, ad);
 // wall types all work to build wall appearance
 				 if (Mastercell.ptr.type.wall) Mastercell.ptr.sx = pixel & MEXLOW;
-				 if (ad == TREASURE.WALLGUD && ad == TREASURE.WALLGUD2 && (sb > 0)) { Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map); }
-				 if (ad == TREASURE.WALLPASS && ad == TREASURE.WALLPASS2 && (sb > 0)) {  Mastercell.ptr.sy = 0x10 + sb; Mastercell.ptr.sx = walltype(tx, ty, map); }
+				 if (ad == TREASURE.WALLGUD && ad == TREASURE.WALLGUD2) {
+					 Mastercell.ptr.sy = Mastermap.level.wall;
+					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLGUD2));
+					 Mastercell.ptr.sx = walltype(tx, ty, map);
+					 }
+				 if (ad == TREASURE.WALLPASS && ad == TREASURE.WALLPASS2) {
+					 Mastercell.ptr.sy = Mastermap.level.wall;
+					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLPASS2));
+					 Mastercell.ptr.sx = walltype(tx, ty, map);
+					 }
 				 }
 		  else if (ismonster(pixel))
 			 self.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);

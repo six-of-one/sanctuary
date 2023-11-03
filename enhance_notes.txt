@@ -324,6 +324,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
+x-- interior corners removed from big wall blocks, map creation coded cleaned up
+
 x-- save death magic kill pts val
 
 x-- poison dizzy effect, controls now have some wobble
