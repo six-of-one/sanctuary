@@ -2306,8 +2306,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 			};
 
 
-      function walltype0(tx,ty,map)   { return (iswall(map.pixel(tx,   ty-1)) ? 1 : 0) | (iswall(map.pixel(tx+1, ty))   ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0) | (iswall(map.pixel(tx-1, ty))   ? 8 : 0); };
-      function shadowtype0(tx,ty,map) { return (iswall(map.pixel(tx-1, ty))   ? 1 : 0) | (iswall(map.pixel(tx-1, ty+1)) ? 2 : 0) | (iswall(map.pixel(tx,   ty+1)) ? 4 : 0); };
+      function walltype0(tx,ty,map)   { return (iswall(mpixel(map,tx,ty, tw,th,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty, tw,th,tx-1, ty))   ? 8 : 0); };
+      function shadowtype0(tx,ty,map) { return (iswall(mpixel(map,tx,ty, tw,th,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th,tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th,tx,   ty+1)) ? 4 : 0); };
       function doortype0(tx,ty,map)   {
 				var dr = (isdoor(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 8 : 0);
 				if (!dr) dr = (iswall(mpixel(map,tx,ty, tw,th, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty, tw,th, tx-1, ty))   ? 8 : 0);
