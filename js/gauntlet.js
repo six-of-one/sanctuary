@@ -32,6 +32,7 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Mirx = false, Miry = false, wallsprites, entsprites,
+		walltype, shadowtype, doortype, Mapdata,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
@@ -1061,6 +1062,34 @@ Gauntlet = function() {
   // MAPPING
   //=========================================================================
 
+
+	function parseImage(image, callback) {
+	 var tx, ty, index, pixel,
+		  tw      = image.width,
+		  th      = image.height,
+		  canvas  = Game.renderToCanvas(tw, th, function(ctx) { ctx.drawImage(image, 0, 0); }),
+		  ctx     = canvas.getContext('2d'),
+		  data    = ctx.getImageData(0, 0, tw, th).data,
+		  helpers = {
+			 valid: function(tx,ty) { return (tx >= 0) && (tx < tw) && (ty >= 0) && (ty < th); },
+			 index: function(tx,ty) { return (tx + (ty*tw)) * 4; },
+			 indexc: function(tx,ty) { return (tx + (ty*tw)); },
+			 pixel: function(tx,ty) { var i = this.index(tx,ty); return this.valid(tx,ty) ? (data[i]<<16)+(data[i+1]<<8)+(data[i+2]) : null; }
+		  }
+
+	if (Mapdata == null) {
+
+	 Mapdata = [];
+	 for(ty = 0 ; ty < th ; ty++)
+		for(tx = 0 ; tx < tw ; tx++)
+			Mapdata[helpers.indexc(tx,ty)] = helpers.pixel(tx,ty);
+	}
+
+	 for(ty = 0 ; ty < th ; ty++)
+		for(tx = 0 ; tx < tw ; tx++)
+		  callback(tx, ty, Mapdata[helpers.indexc(tx,ty)], helpers);
+	};
+
 	function isp(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
 	function type(pixel)     { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 	function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
@@ -1086,14 +1115,8 @@ Gauntlet = function() {
 				if (sy == 0 && ty < 0) ty = Mth - 1;
 				if (sy == (Mth - 1) && ty >= Mth) ty = 0;
 			}
-			/* this is the cell detect code, which if we always have map.pixel, we dont need
 			var n = tx + (ty * Mtw);
-
-			if (self.cells[n] != undefined)
-				return self.cells[n].pixel;
-			else
-				return false;*/
-				return(Mastermap.pixel(tx,ty));
+				return(Mapdata[n]);
 			};
 
       function walltype0(tx,ty,map)   { return (iswall(mpixel(tx,ty, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty, tx-1, ty))   ? 8 : 0); };
@@ -2353,12 +2376,14 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
       self.entities = [];
       self.pool     = { weapons: [], monsters: [], fx: [] }
 
+		Mastermap = self;
+		Mapdata = null;
 		Mtw = tw;
 		Mth = th;
 
-		var walltype = walltype0;
-		var shadowtype = shadowtype0;
-		var doortype = doortype0;
+		walltype = walltype0;
+		shadowtype = shadowtype0;
+		doortype = doortype0;
 
 		if (Mirx) {
 				walltype = walltypeXM;
@@ -2382,9 +2407,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		if (Masterot == undefined) Masterot = 0;
 		shotpot = 0;
 
-      Game.parseImage(source, function(tx, ty, pixel, map) {
-
-			Mastermap = map;
+      parseImage(source, function(tx, ty, pixel, map) {
 
 			if (Mirx) tx = (tw - 1) - tx;
 			if (Miry) ty = (th - 1) - ty;
@@ -2491,25 +2514,6 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
           th     = source.height,
           self   = this;
 
-		var walltype = walltype0;
-		var shadowtype = shadowtype0;
-		var doortype = doortype0;
-
-		if (Mirx) {
-				walltype = walltypeXM;
-				shadowtype = shadowtypeXM;
-				doortype = doortypeXM;
-		}
-		if (Miry) {
-				walltype = walltypeYM;
-				shadowtype = shadowtypeYM;
-				doortype = doortypeYM;
-		}
-		if (Mirx && Miry) {
-				walltype = walltype180;
-				shadowtype = shadowtype180;
-				doortype = doortype180;
-		}
 
 // parsing here
 			if (Mirx) tx = (tw - 1) - tx;
@@ -3346,7 +3350,7 @@ var txsv = ":";
 //      this.keys    = DEBUG.KEYS || 0;
       this.dead    = false;
       this.exiting = false;
-		Mastermap = map; // for teleport reposition
+
 
 // turn off these limited items
 		this.lreflect = 0;
@@ -3483,9 +3487,6 @@ var txsv = ":";
 			}
 			var n = tx + (ty * tw); if (reloaded.cells[n] !== undefined && reloaded.cells[n] !== null) return reloaded.cells[n].pixel;
 		};
-
-      function walltype(tx,ty,map)   { return (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0); };
-      function shadowtype(tx,ty,map) { return (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0); };
 
       if (treasure.type.push)
 		 {

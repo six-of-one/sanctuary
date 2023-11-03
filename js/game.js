@@ -329,24 +329,6 @@ Game = {
     return canvas;
   },
 
-  parseImage: function(image, callback) {
-    var tx, ty, index, pixel,
-        tw      = image.width,
-        th      = image.height,
-        canvas  = Game.renderToCanvas(tw, th, function(ctx) { ctx.drawImage(image, 0, 0); }),
-        ctx     = canvas.getContext('2d'),
-        data    = ctx.getImageData(0, 0, tw, th).data,
-        helpers = {
-          valid: function(tx,ty) { return (tx >= 0) && (tx < tw) && (ty >= 0) && (ty < th); },
-          index: function(tx,ty) { return (tx + (ty*tw)) * 4; },
-          pixel: function(tx,ty) { var i = this.index(tx,ty); return this.valid(tx,ty) ? (data[i]<<16)+(data[i+1]<<8)+(data[i+2]) : null; }
-        }
-
-    for(ty = 0 ; ty < th ; ty++)
-      for(tx = 0 ; tx < tw ; tx++)
-        callback(tx, ty, helpers.pixel(tx,ty), helpers);
-  },
-
   createImage: function(url, options) {
     options = options || {};
     var image = $({tag: 'img'});
