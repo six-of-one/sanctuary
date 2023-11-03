@@ -1076,7 +1076,7 @@ Gauntlet = function() {
 // repl the other ref - map.pixel(x,y)
 // for unpins we need source x,y to check across unpin boundaries
 
-		function mpixel(map,sx,sy, tx,ty) {
+		function mpixel(sx,sy, tx,ty) {
 
 			if (Munpinx) {
 				if (sx == 0 && tx < 0) tx = Mtw - 1;
@@ -1096,39 +1096,39 @@ Gauntlet = function() {
 				return(Mastermap.pixel(tx,ty));
 			};
 
-      function walltype0(tx,ty,map)   { return (iswall(mpixel(map,tx,ty, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty, tx-1, ty))   ? 8 : 0); };
-      function shadowtype0(tx,ty,map) { return (iswall(mpixel(map,tx,ty, tx-1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty, tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty, tx,   ty+1)) ? 4 : 0); };
+      function walltype0(tx,ty,map)   { return (iswall(mpixel(tx,ty, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty, tx-1, ty))   ? 8 : 0); };
+      function shadowtype0(tx,ty,map) { return (iswall(mpixel(tx,ty, tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty, tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0); };
       function doortype0(tx,ty,map)   {
-				var dr = (isdoor(mpixel(map,tx,ty,  tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty,  tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty,  tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty,  tx-1, ty))   ? 8 : 0);
-				if (!dr) dr = (iswall(mpixel(map,tx,ty,  tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,  tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,  tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,  tx-1, ty))   ? 8 : 0);
+				var dr = (isdoor(mpixel(tx,ty,  tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(tx,ty,  tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(tx,ty,  tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(tx,ty,  tx-1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(mpixel(tx,ty,  tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,  tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,  tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,  tx-1, ty))   ? 8 : 0);
 				return (dr);
 		};
 
 // mirror Y
-      function walltypeYM(tx,ty,map)   {  ty = (Mth - 1) - ty; return (iswall(mpixel(map,tx,ty,  tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,  tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,  tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,  tx-1, ty))   ? 8 : 0); };
-      function shadowtypeYM(tx,ty,map) { ty = (Mth - 1) - ty; return (iswall(mpixel(map,tx,ty,  tx-1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty,  tx-1, ty-1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty,  tx,   ty-1)) ? 4 : 0); };
+      function walltypeYM(tx,ty,map)   {  ty = (Mth - 1) - ty; return (iswall(mpixel(tx,ty,  tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(tx,ty,  tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,  tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(tx,ty,  tx-1, ty))   ? 8 : 0); };
+      function shadowtypeYM(tx,ty,map) { ty = (Mth - 1) - ty; return (iswall(mpixel(tx,ty,  tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty,  tx-1, ty-1)) ? 2 : 0) | (iswall(mpixel(tx,ty,  tx,   ty-1)) ? 4 : 0); };
 		function doortypeYM(tx,ty,map)   {
 				ty = (Mth - 1) - ty;
-				var dr = (isdoor(mpixel(map,tx,ty,  tx,   ty+1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty,  tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty,  tx,   ty-1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty,  tx-1, ty))   ? 8 : 0);
-				if (!dr) dr = (iswall(mpixel(map,tx,ty,  tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,  tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,  tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,  tx-1, ty))   ? 8 : 0);
+				var dr = (isdoor(mpixel(tx,ty,  tx,   ty+1)) ? 1 : 0) | (isdoor(mpixel(tx,ty,  tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(tx,ty,  tx,   ty-1)) ? 4 : 0) | (isdoor(mpixel(tx,ty,  tx-1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(mpixel(tx,ty,  tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(tx,ty,  tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,  tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(tx,ty,  tx-1, ty))   ? 8 : 0);
 				return (dr);
 			};
 // mirror X
-      function walltypeXM(tx,ty,map)   { tx = (Mtw - 1) - tx; return (iswall(mpixel(map,tx,ty,  tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,  tx-1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,  tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,  tx+1, ty))   ? 8 : 0); };
-      function shadowtypeXM(tx,ty,map) { tx = (Mtw - 1) - tx; return (iswall(mpixel(map,tx,ty,  tx+1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty,  tx+1, ty+1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty,  tx,   ty+1)) ? 4 : 0); };
+      function walltypeXM(tx,ty,map)   { tx = (Mtw - 1) - tx; return (iswall(mpixel(tx,ty,  tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,  tx-1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,  tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,  tx+1, ty))   ? 8 : 0); };
+      function shadowtypeXM(tx,ty,map) { tx = (Mtw - 1) - tx; return (iswall(mpixel(tx,ty,  tx+1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty,  tx+1, ty+1)) ? 2 : 0) | (iswall(mpixel(tx,ty,  tx,   ty+1)) ? 4 : 0); };
 		function doortypeXM(tx,ty,map)   {
 				tx = (Mtw - 1) - tx;
-				var dr = (isdoor(mpixel(map,tx,ty,  tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty,  tx-1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty,  tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty,  tx+1, ty))   ? 8 : 0);
-				if (!dr) dr = (iswall(mpixel(map,tx,ty,  tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,  tx-1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,  tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,  tx+1, ty))   ? 8 : 0);
+				var dr = (isdoor(mpixel(tx,ty,  tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(tx,ty,  tx-1, ty))   ? 2 : 0) | (isdoor(mpixel(tx,ty,  tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(tx,ty,  tx+1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(mpixel(tx,ty,  tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,  tx-1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,  tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,  tx+1, ty))   ? 8 : 0);
 				return (dr);
 			};
 // 180
-      function walltype180(tx,ty,map)   { tx = (Mtw - 1) - tx; ty = (Mth - 1) - ty; return (iswall(mpixel(map,tx,ty,  tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,  tx-1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,  tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,  tx+1, ty))   ? 8 : 0); };
-      function shadowtype180(tx,ty,map) { tx = (Mtw - 1) - tx; ty = (Mth - 1) - ty; return (iswall(mpixel(map,tx,ty,  tx+1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty,  tx+1, ty-1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty,  tx,   ty-1)) ? 4 : 0); };
+      function walltype180(tx,ty,map)   { tx = (Mtw - 1) - tx; ty = (Mth - 1) - ty; return (iswall(mpixel(tx,ty,  tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(tx,ty,  tx-1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,  tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(tx,ty,  tx+1, ty))   ? 8 : 0); };
+      function shadowtype180(tx,ty,map) { tx = (Mtw - 1) - tx; ty = (Mth - 1) - ty; return (iswall(mpixel(tx,ty,  tx+1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty,  tx+1, ty-1)) ? 2 : 0) | (iswall(mpixel(tx,ty,  tx,   ty-1)) ? 4 : 0); };
 		function doortype180(tx,ty,map)   {
 				tx = (Mtw - 1) - tx; ty = (Mth - 1) - ty;
-				var dr = (isdoor(mpixel(map,tx,ty,  tx,   ty+1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty,  tx-1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty,  tx,   ty-1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty,  tx+1, ty))   ? 8 : 0);
-				if (!dr) dr = (iswall(mpixel(map,tx,ty,  tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,  tx-1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,  tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,  tx+1, ty))   ? 8 : 0);
+				var dr = (isdoor(mpixel(tx,ty,  tx,   ty+1)) ? 1 : 0) | (isdoor(mpixel(tx,ty,  tx-1, ty))   ? 2 : 0) | (isdoor(mpixel(tx,ty,  tx,   ty-1)) ? 4 : 0) | (isdoor(mpixel(tx,ty,  tx+1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(mpixel(tx,ty,  tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(tx,ty,  tx-1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,  tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(tx,ty,  tx+1, ty))   ? 8 : 0);
 				return (dr);
 			};
 
