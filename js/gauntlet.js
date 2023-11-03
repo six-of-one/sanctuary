@@ -1431,16 +1431,17 @@ var mx = 0, my = 0;
 			  $('booting').show();
 
 			Mrot = document.getElementById("rotat").checked;
+
 			var rotr = "";
 			if (Mrot) rotr = "r";
 /// TEST - remove
 // this works - but it refuses to refresh if flvl is changed
 var lvu = document.getElementById("flvl").value;
-alert(level.url + rotr);
-if (lvu != "") level.source = Game.createImage(lvu + rotr + "?cachebuster=" + VERSION , { onload: onloaded });
+alert(rotr + level.url);
+if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION , { onload: onloaded });
 		else
 /// TEST - remove
-			  level.source = Game.createImage(level.url + rotr + "?cachebuster=" + VERSION , { onload: onloaded });
+			  level.source = Game.createImage(rotr + level.url +"?cachebuster=" + VERSION , { onload: onloaded });
 
       }
 
@@ -2342,8 +2343,8 @@ if (lvu != "") level.source = Game.createImage(lvu + rotr + "?cachebuster=" + VE
 		cb = document.getElementById("yunp").checked;
 		if (cb == true || level.unpiny) Munpiny = true;
 /// TEST - remove
-		 if (level.mw == null || level.mw == undefined) { level.mw = source.width; level.mh = source.source.height; }
-		 else { source.width = level.mw; source.source.height = level.mh; }
+		 if (level.mw == null || level.mw == undefined) { level.mw = source.width; level.mh = source.height; }
+		 else { source.width = level.mw; source.height = level.mh; }
 		if (Munpinx && (level.unpinx != Munpinx)) source.width--;				// while this works - on reloading the level, w x h is wrong
 		if (Munpiny && (level.unpiny != Munpiny)) source.height--;
 
