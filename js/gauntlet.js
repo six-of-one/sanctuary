@@ -1062,7 +1062,6 @@ Gauntlet = function() {
   // MAPPING
   //=========================================================================
 
-
 	function parseImage(image, callback) {
 	 var tx, ty, index, pixel,
 		  tw      = image.width,
@@ -1079,7 +1078,7 @@ Gauntlet = function() {
 
 	if (Mapdata == null) {
 
-// mirror, rotate here, mr burton...
+// mirror here, mr burton...
 var mx = 0, my = 0;
 	if (Mirx) mx = tw - 1;
 	if (Miry) my = th - 1;
@@ -1088,20 +1087,6 @@ var mx = 0, my = 0;
 	 for(ty = 0 ; ty < th ; ty++)
 		for(tx = 0 ; tx < tw ; tx++)
 			Mapdata[helpers.indexc(tx,ty)] = helpers.pixel(Math.abs(mx - tx),Math.abs(my - ty));
-	if (0) {		// (Mrot)
-		var nw = th, nh = tw;
-		image.width = nw;
-		image.height = nh
-		Mtw = nw;
-		Mth = nh;
-		var newdata = [];
-		 for(ty = 0 ; ty < th ; ty++)
-			for(tx = 0 ; tx < tw ; tx++)
-				newdata[helpers.indexc(ty,tx)] = Mapdata[helpers.indexc(tx,ty)]
-// relod
-		 for(ty = 0 ; ty < ((tw * th) - 1)  ; ty++)
-			Mapdata[ty] = newdata[ty];
-		}
 	}
 
 	 for(ty = 0 ; ty < th ; ty++)
@@ -1455,6 +1440,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 // set these here
 			Mtw = level.source.width;
 			Mth = level.source.height;
+createCookie("wh3", level.source.width+":"+level.source.height+" -- "+Mtw+":"+Mth,0);
 
       }
 
