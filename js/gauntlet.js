@@ -29,7 +29,7 @@ Gauntlet = function() {
 // for some reason beyond me, setTimeout() calls only work in game.js - which has none of the game instances
 // also doors / walls are stalled open from player health rot - which has none of these pointers loaded
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
-// above a specified level all levels will have unpinned corners, unless blocked - Masterunpin indicates this
+// above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Mirx = false, Miry = false, wallsprites, entsprites,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
@@ -1082,7 +1082,7 @@ Gauntlet = function() {
 				if (sx == 0 && tx < 0) tx = Mtw - 1;
 				if (sx == (Mtw - 1) && tx >= Mtw) tx = 0;
 			}
-			if (Munpinx) {
+			if (Munpiny) {
 				if (sy == 0 && ty < 0) ty = Mth - 1;
 				if (sy == (Mth - 1) && ty >= Mth) ty = 0;
 			}
@@ -1095,7 +1095,6 @@ Gauntlet = function() {
 				return false;*/
 				return(map.pixel(tx,ty));
 			};
-
 
       function walltype0(tx,ty,map)   { return (iswall(mpixel(map,tx,ty, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty, tx-1, ty))   ? 8 : 0); };
       function shadowtype0(tx,ty,map) { return (iswall(mpixel(map,tx,ty, tx-1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty, tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty, tx,   ty+1)) ? 4 : 0); };
@@ -1449,6 +1448,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 			cb = document.getElementById("yunp").checked;
 			if (cb == true || level.unpiny) Munpiny = true;
 /// TEST - remove
+
       }
 
 			announcepause = true;
@@ -2353,6 +2353,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
       self.entities = [];
       self.pool     = { weapons: [], monsters: [], fx: [] }
 
+		Mtw = tw;
+		Mth = th;
 
 		var walltype = walltype0;
 		var shadowtype = shadowtype0;
@@ -2487,6 +2489,45 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
           tw     = source.width,
           th     = source.height,
           self   = this;
+
+
+// parseimg setup dups
+
+      function walltype0(tx,ty,map)   { return (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0); };
+      function shadowtype0(tx,ty,map) { return (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0); };
+      function doortype0(tx,ty,map)   {
+				var dr = (isdoor(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0);
+				return (dr);
+		};
+
+// mirror Y
+      function walltypeYM(tx,ty,map)   {  ty = (th - 1) - ty; return (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0); };
+      function shadowtypeYM(tx,ty,map) { ty = (th - 1) - ty; return (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty-1)) ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 4 : 0); };
+		function doortypeYM(tx,ty,map)   {
+				ty = (th - 1) - ty;
+				var dr = (isdoor(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 1 : 0) | (isdoor(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 4 : 0) | (isdoor(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 8 : 0);
+				return (dr);
+			};
+// mirror X
+      function walltypeXM(tx,ty,map)   { tx = (tw - 1) - tx; return (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 8 : 0); };
+      function shadowtypeXM(tx,ty,map) { tx = (tw - 1) - tx; return (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty+1)) ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0); };
+		function doortypeXM(tx,ty,map)   {
+				tx = (tw - 1) - tx;
+				var dr = (isdoor(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(tx,ty,tw,th,tx-1, ty))   ? 2 : 0) | (isdoor(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(tx,ty,tw,th,tx+1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 8 : 0);
+				return (dr);
+			};
+// 180
+      function walltype180(tx,ty,map)   { tx = (tw - 1) - tx; ty = (th - 1) - ty; return (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 8 : 0); };
+      function shadowtype180(tx,ty,map) { tx = (tw - 1) - tx; ty = (th - 1) - ty; return (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty-1)) ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 4 : 0); };
+		function doortype180(tx,ty,map)   {
+				tx = (tw - 1) - tx; ty = (th - 1) - ty;
+				var dr = (isdoor(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 1 : 0) | (isdoor(mpixel(tx,ty,tw,th,tx-1, ty))   ? 2 : 0) | (isdoor(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 4 : 0) | (isdoor(mpixel(tx,ty,tw,th,tx+1, ty))   ? 8 : 0);
+				if (!dr) dr = (iswall(mpixel(tx,ty,tw,th,tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(tx,ty,tw,th,tx-1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,tw,th,tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(tx,ty,tw,th,tx+1, ty))   ? 8 : 0);
+				return (dr);
+			};
 
 		var walltype = walltype0;
 		var shadowtype = shadowtype0;
