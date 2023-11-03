@@ -40,7 +40,7 @@ Gauntlet = function() {
 
 		 MEXHIGH = 0xFFFFF0,
 		 MEXLOW = 0x00000F,
-// special because some colors are not properly discerned by parseImage
+// special because some colors are not properly discerned by parseImag
 // bit 16 is shifted to exlow
 // this should be stable as most codes using 0x10 also use more bits masked with 0xE0
 // having said, this has a bug watch and a reminder to look for odd behavior for all ops with low bits of MEXHIGH
@@ -1079,10 +1079,15 @@ Gauntlet = function() {
 
 	if (Mapdata == null) {
 
+// mirror, rotate here, mr burton...
+var mx = 0, my = 0;
+	if (Mirx) mx = tw - 1;
+	if (Miry) my = th - 1;
+
 	 Mapdata = [];
 	 for(ty = 0 ; ty < th ; ty++)
 		for(tx = 0 ; tx < tw ; tx++)
-			Mapdata[helpers.indexc(tx,ty)] = helpers.pixel(tx,ty);
+			Mapdata[helpers.indexc(tx,ty)] = helpers.pixel(Math.abs(mx - tx),Math.abs(my - ty));
 	}
 
 	 for(ty = 0 ; ty < th ; ty++)
@@ -2384,7 +2389,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		walltype = walltype0;
 		shadowtype = shadowtype0;
 		doortype = doortype0;
-
+/*
 		if (Mirx) {
 				walltype = walltypeXM;
 				shadowtype = shadowtypeXM;
@@ -2400,7 +2405,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				shadowtype = shadowtype180;
 				doortype = doortype180;
 		}
-
+*/
 // make sure mults is not undefed - later load deathmult from cooky
 		Deathmult = readCookie("deathmul");
 		if (Deathmult < 0 || Deathmult == null) Deathmult = 0;
@@ -2409,8 +2414,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
       parseImage(source, function(tx, ty, pixel, map) {
 
-			if (Mirx) tx = (tw - 1) - tx;
-			if (Miry) ty = (th - 1) - ty;
+//			if (Mirx) tx = (tw - 1) - tx;
+//			if (Miry) ty = (th - 1) - ty;
 
         var cell, x = t2p(tx),
                   y = t2p(ty),
@@ -2516,8 +2521,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
 
 // parsing here
-			if (Mirx) tx = (tw - 1) - tx;
-			if (Miry) ty = (th - 1) - ty;
+//			if (Mirx) tx = (tw - 1) - tx;
+//			if (Miry) ty = (th - 1) - ty;
 
         var cell, x = t2p(tx),
                   y = t2p(ty),
