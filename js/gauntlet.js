@@ -1468,15 +1468,6 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 			Mtw = level.source.width;
 			Mth = level.source.height;
 
-/// TEST - remove
-			Mirx = document.getElementById("xmiror").checked;
-			Miry = document.getElementById("ymiror").checked;
-			var cb = document.getElementById("xunp").checked;
-			if (cb == true || level.unpinx) Munpinx = true;
-			cb = document.getElementById("yunp").checked;
-			if (cb == true || level.unpiny) Munpiny = true;
-/// TEST - remove
-
       }
 
 			announcepause = true;
@@ -2389,23 +2380,16 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		walltype = walltype0;
 		shadowtype = shadowtype0;
 		doortype = doortype0;
-/*
-		if (Mirx) {
-				walltype = walltypeXM;
-				shadowtype = shadowtypeXM;
-				doortype = doortypeXM;
-		}
-		if (Miry) {
-				walltype = walltypeYM;
-				shadowtype = shadowtypeYM;
-				doortype = doortypeYM;
-		}
-		if (Mirx && Miry) {
-				walltype = walltype180;
-				shadowtype = shadowtype180;
-				doortype = doortype180;
-		}
-*/
+
+/// TEST - remove
+		Mirx = document.getElementById("xmiror").checked;
+		Miry = document.getElementById("ymiror").checked;
+		var cb = document.getElementById("xunp").checked;
+		if (cb == true || level.unpinx) Munpinx = true;
+		cb = document.getElementById("yunp").checked;
+		if (cb == true || level.unpiny) Munpiny = true;
+/// TEST - remove
+
 // make sure mults is not undefed - later load deathmult from cooky
 		Deathmult = readCookie("deathmul");
 		if (Deathmult < 0 || Deathmult == null) Deathmult = 0;
