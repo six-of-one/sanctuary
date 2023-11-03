@@ -1436,12 +1436,14 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		else
 /// TEST - remove
 			  level.source = Game.createImage(level.url + "?cachebuster=" + VERSION , { onload: onloaded });
-				Mtw = level.source.width;
-				Mth = level.source.height;
+
+// set these here
+			Mtw = level.source.width;
+			Mth = level.source.height;
 
 /// TEST - remove
-			xmir = document.getElementById("xmiror").checked;
-			ymir = document.getElementById("ymiror").checked;
+			Mirx = document.getElementById("xmiror").checked;
+			Miry = document.getElementById("ymiror").checked;
 			var cb = document.getElementById("xunp").checked;
 			if (cb == true || level.unpinx) Munpinx = true;
 			cb = document.getElementById("yunp").checked;
@@ -2356,17 +2358,17 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		var shadowtype = shadowtype0;
 		var doortype = doortype0;
 
-		if (xmir) {
+		if (Mirx) {
 				walltype = walltypeXM;
 				shadowtype = shadowtypeXM;
 				doortype = doortypeXM;
 		}
-		if (ymir) {
+		if (Miry) {
 				walltype = walltypeYM;
 				shadowtype = shadowtypeYM;
 				doortype = doortypeYM;
 		}
-		if (xmir && ymir) {
+		if (Mirx && Miry) {
 				walltype = walltype180;
 				shadowtype = shadowtype180;
 				doortype = doortype180;
@@ -2381,8 +2383,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
       Game.parseImage(source, function(tx, ty, pixel, map) {
 
 
-			if (xmir) tx = (tw - 1) - tx;
-			if (ymir) ty = (th - 1) - ty;
+			if (Mirx) tx = (tw - 1) - tx;
+			if (Miry) ty = (th - 1) - ty;
 
         var cell, x = t2p(tx),
                   y = t2p(ty),
@@ -2486,69 +2488,29 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
           th     = source.height,
           self   = this;
 
-// parseimg setup dups
-
-      function walltype0(tx,ty,map)   { return (iswall(mpixel(map,tx,ty,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,tx-1, ty))   ? 8 : 0); };
-      function shadowtype0(tx,ty,map) { return (iswall(mpixel(map,tx,ty,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty,tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty,tx,   ty+1)) ? 4 : 0); };
-      function doortype0(tx,ty,map)   {
-				var dr = (isdoor(mpixel(map,tx,ty,tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty,tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty,tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty,tx-1, ty))   ? 8 : 0);
-				if (!dr) dr = (iswall(mpixel(map,tx,ty,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,tx-1, ty))   ? 8 : 0);
-				return (dr);
-		};
-
-// mirror Y
-      function walltypeYM(tx,ty,map)   {  ty = (th - 1) - ty; return (iswall(mpixel(map,tx,ty,tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,tx-1, ty))   ? 8 : 0); };
-      function shadowtypeYM(tx,ty,map) { ty = (th - 1) - ty; return (iswall(mpixel(map,tx,ty,tx-1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty,tx-1, ty-1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty,tx,   ty-1)) ? 4 : 0); };
-		function doortypeYM(tx,ty,map)   {
-				ty = (th - 1) - ty;
-				var dr = (isdoor(mpixel(map,tx,ty,tx,   ty+1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty,tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty,tx,   ty-1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty,tx-1, ty))   ? 8 : 0);
-				if (!dr) dr = (iswall(mpixel(map,tx,ty,tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,tx+1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,tx-1, ty))   ? 8 : 0);
-				return (dr);
-			};
-// mirror X
-      function walltypeXM(tx,ty,map)   { tx = (tw - 1) - tx; return (iswall(mpixel(map,tx,ty,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,tx-1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,tx+1, ty))   ? 8 : 0); };
-      function shadowtypeXM(tx,ty,map) { tx = (tw - 1) - tx; return (iswall(mpixel(map,tx,ty,tx+1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty,tx+1, ty+1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty,tx,   ty+1)) ? 4 : 0); };
-		function doortypeXM(tx,ty,map)   {
-				tx = (tw - 1) - tx;
-				var dr = (isdoor(mpixel(map,tx,ty,tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty,tx-1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty,tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty,tx+1, ty))   ? 8 : 0);
-				if (!dr) dr = (iswall(mpixel(map,tx,ty,tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,tx-1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,tx+1, ty))   ? 8 : 0);
-				return (dr);
-			};
-// 180
-      function walltype180(tx,ty,map)   { tx = (tw - 1) - tx; ty = (th - 1) - ty; return (iswall(mpixel(map,tx,ty,tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,tx-1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,tx+1, ty))   ? 8 : 0); };
-      function shadowtype180(tx,ty,map) { tx = (tw - 1) - tx; ty = (th - 1) - ty; return (iswall(mpixel(map,tx,ty,tx+1, ty))   ? 1 : 0) | (iswall(mpixel(map,tx,ty,tx+1, ty-1)) ? 2 : 0) | (iswall(mpixel(map,tx,ty,tx,   ty-1)) ? 4 : 0); };
-		function doortype180(tx,ty,map)   {
-				tx = (tw - 1) - tx; ty = (th - 1) - ty;
-				var dr = (isdoor(mpixel(map,tx,ty,tx,   ty+1)) ? 1 : 0) | (isdoor(mpixel(map,tx,ty,tx-1, ty))   ? 2 : 0) | (isdoor(mpixel(map,tx,ty,tx,   ty-1)) ? 4 : 0) | (isdoor(mpixel(map,tx,ty,tx+1, ty))   ? 8 : 0);
-				if (!dr) dr = (iswall(mpixel(map,tx,ty,tx,   ty+1)) ? 1 : 0) | (iswall(mpixel(map,tx,ty,tx-1, ty))   ? 2 : 0) | (iswall(mpixel(map,tx,ty,tx,   ty-1)) ? 4 : 0) | (iswall(mpixel(map,tx,ty,tx+1, ty))   ? 8 : 0);
-				return (dr);
-			};
-
-var ymir = false, xmir = false;
-
 		var walltype = walltype0;
 		var shadowtype = shadowtype0;
 		var doortype = doortype0;
 
-		if (xmir) {
+		if (Mirx) {
 				walltype = walltypeXM;
 				shadowtype = shadowtypeXM;
 				doortype = doortypeXM;
 		}
-		if (ymir) {
+		if (Miry) {
 				walltype = walltypeYM;
 				shadowtype = shadowtypeYM;
 				doortype = doortypeYM;
 		}
-		if (xmir && ymir) {
+		if (Mirx && Miry) {
 				walltype = walltype180;
 				shadowtype = shadowtype180;
 				doortype = doortype180;
 		}
 
 // parsing here
-			if (xmir) tx = (tw - 1) - tx;
-			if (ymir) ty = (th - 1) - ty;
+			if (Mirx) tx = (tw - 1) - tx;
+			if (Miry) ty = (th - 1) - ty;
 
         var cell, x = t2p(tx),
                   y = t2p(ty),
