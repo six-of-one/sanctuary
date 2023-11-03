@@ -1436,7 +1436,7 @@ var mx = 0, my = 0;
 /// TEST - remove
 // this works - but it refuses to refresh if flvl is changed
 var lvu = document.getElementById("flvl").value;
-	
+alert(level.url + rotr);
 if (lvu != "") level.source = Game.createImage(lvu + rotr + "?cachebuster=" + VERSION , { onload: onloaded });
 		else
 /// TEST - remove
@@ -2335,6 +2335,8 @@ if (lvu != "") level.source = Game.createImage(lvu + rotr + "?cachebuster=" + VE
 		Mirx = document.getElementById("xmiror").checked;
 		Miry = document.getElementById("ymiror").checked;
 		Mrot = document.getElementById("rotat").checked;
+		Munpinx = false;
+		Munpiny = false;
 		var cb = document.getElementById("xunp").checked;
 		if (cb == true || level.unpinx) Munpinx = true;
 		cb = document.getElementById("yunp").checked;
