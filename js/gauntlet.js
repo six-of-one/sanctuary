@@ -1140,9 +1140,9 @@ var mx = 0, my = 0;
 
       function walltype(tx,ty,map)   {
 			var wally = (iswall(mpixel(tx,ty, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty, tx-1, ty))   ? 8 : 0);
-			if (wally > 13) if (iswall(mpixel(tx,ty, tx+1, ty+1))) {
-				if (iswall(mpixel(tx,ty, tx-1, ty+1))) { wally += 6; if (iswall(mpixel(tx,ty, tx+1, ty+1))) wally += 4; }
-				else if (iswall(mpixel(tx,ty, tx+1, ty+1))) wally += 7;
+			if (wally > 13) {
+				if (iswall(mpixel(tx,ty, tx-1, ty+1)))  { wally += 6; if (iswall(mpixel(tx,ty, tx+1, ty+1))) wally += 4; }
+				else if (iswall(mpixel(tx,ty, tx+1, ty+1))) wally += 8;
 			}
 			if (wally == 6 || wally == 7) if (iswall(mpixel(tx,ty, tx+1, ty+1))) wally += 10;
 			if (wally == 12 || wally == 13) if (iswall(mpixel(tx,ty, tx-1, ty+1))) wally += 6;
