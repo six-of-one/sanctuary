@@ -331,8 +331,8 @@ Gauntlet = function() {
 // other "wall" ents
         WALLGUD:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true,   sound: 'null' },
         WALLGUD2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true,   sound: 'null' },
-        WALLPASS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null' },
-        WALLPASS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null' },
+        WALLPASS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
+        WALLPASS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -1113,6 +1113,7 @@ var mx = 0, my = 0;
 	function type(pixel)     { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 	function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
 	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
+	function iswallrw(pixel)         { return (isp(pixel, PIXEL.WALL)) };
 	function isfloor(pixel)        { return isp(pixel, PIXEL.FLOOR);     };
 	function isstart(pixel)        { return isp(pixel, PIXEL.START);     };
 	function isdoor(pixel)         { return isp(pixel, PIXEL.DOOR);      };
@@ -2433,7 +2434,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				}
 		  }
 
-		  if (iswall(pixel))
+		  if (iswallrw(pixel))
 			 cell.wall = walltype(tx, ty, map);
 		  else if (isnothing(pixel))
 			 cell.nothing = true;
@@ -2531,7 +2532,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				 fndstart = true;
 			}
 
-		  if (iswall(pixel))
+		  if (iswallrw(pixel))
 			 cell.wall = walltype(tx, ty, map);
 		  else if (isnothing(pixel))
 			 cell.nothing = true;
