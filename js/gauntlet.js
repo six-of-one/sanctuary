@@ -1099,7 +1099,7 @@ var mx = 0, my = 0;
 						  for(tx = 0 ; tx < tw ; tx++)
 									 newdata[helpers.indexc(ty,tx)] = Mapdata[helpers.indexc(tx,ty)]
 // relod
-				 for(ty = 0 ; ty < ((tw * th) - 1)  ; ty++)
+				 for(ty = 0 ; ty < (Mtw * Mth)  ; ty++)
 						  Mapdata[ty] = newdata[ty];
 				}
 	}
@@ -1138,7 +1138,16 @@ var mx = 0, my = 0;
 				return(Mapdata[n]);
 			};
 
-      function walltype(tx,ty,map)   { return (iswall(mpixel(tx,ty, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty, tx-1, ty))   ? 8 : 0); };
+      function walltype(tx,ty,map)   {
+			var wally = (iswall(mpixel(tx,ty, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty, tx-1, ty))   ? 8 : 0);
+			if (wally > 13) if (iswall(mpixel(tx,ty, tx+1, ty+1))) {
+				if (iswall(mpixel(tx,ty, tx-1, ty+1))) { wally += 6; if (iswall(mpixel(tx,ty, tx+1, ty+1))) wally += 4; }
+				else if (iswall(mpixel(tx,ty, tx+1, ty+1))) wally += 7;
+			}
+			if (wally == 6 || wally == 7) if (iswall(mpixel(tx,ty, tx+1, ty+1))) wally += 10;
+			if (wally == 12 || wally == 13) if (iswall(mpixel(tx,ty, tx-1, ty+1))) wally += 6;
+			return wally;
+			};
       function shadowtype(tx,ty,map) { return (iswall(mpixel(tx,ty, tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty, tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0); };
       function doortype(tx,ty,map)   {
 				var dr = (isdoor(mpixel(tx,ty,  tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(tx,ty,  tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(tx,ty,  tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(tx,ty,  tx-1, ty))   ? 8 : 0);
