@@ -545,6 +545,16 @@ Gauntlet = function() {
   PREFERRED_DIRECTIONS[DIR.DOWN]      = [ DIR.DOWN,      DIR.DOWNLEFT, DIR.DOWNRIGHT, DIR.LEFT,     DIR.RIGHT     ];
   PREFERRED_DIRECTIONS[DIR.LEFT]      = [ DIR.LEFT,      DIR.UPLEFT,   DIR.DOWNLEFT,  DIR.UP,       DIR.DOWN      ];
   PREFERRED_DIRECTIONS[DIR.RIGHT]     = [ DIR.RIGHT,     DIR.UPRIGHT,  DIR.DOWNRIGHT, DIR.UP,       DIR.DOWN      ];
+// monster across an unpinned wall/ edge
+  var RV_PREFERRED_DIRECTIONS = {};
+  RV_PREFERRED_DIRECTIONS[DIR.DOWNRIGHT]  = [ DIR.UPLEFT,    DIR.LEFT,     DIR.UP,        DIR.UPRIGHT,  DIR.DOWNLEFT  ];
+  RV_PREFERRED_DIRECTIONS[DIR.DOWNLEFT]   = [ DIR.UPRIGHT,   DIR.RIGHT,    DIR.UP,        DIR.UPLEFT,   DIR.DOWNRIGHT ];
+  RV_PREFERRED_DIRECTIONS[DIR.UPRIGHT]    = [ DIR.DOWNLEFT,  DIR.LEFT,     DIR.DOWN,      DIR.UPLEFT,   DIR.DOWNRIGHT ];
+  RV_PREFERRED_DIRECTIONS[DIR.UPLEFT]     = [ DIR.DOWNRIGHT, DIR.RIGHT,    DIR.DOWN,      DIR.DOWNLEFT, DIR.UPRIGHT   ];
+  RV_PREFERRED_DIRECTIONS[DIR.DOWN]       = [ DIR.UP,        DIR.UPLEFT,   DIR.UPRIGHT,   DIR.LEFT,     DIR.RIGHT     ];
+  RV_PREFERRED_DIRECTIONS[DIR.UP]         = [ DIR.DOWN,      DIR.DOWNLEFT, DIR.DOWNRIGHT, DIR.LEFT,     DIR.RIGHT     ];
+  RV_PREFERRED_DIRECTIONS[DIR.RIGHT]      = [ DIR.LEFT,      DIR.UPLEFT,   DIR.DOWNLEFT,  DIR.UP,       DIR.DOWN      ];
+  RV_PREFERRED_DIRECTIONS[DIR.LEFT]       = [ DIR.RIGHT,     DIR.UPRIGHT,  DIR.DOWNRIGHT, DIR.UP,       DIR.DOWN      ];
 
   var SLIDE_DIRECTIONS = {};
   SLIDE_DIRECTIONS[DIR.UPLEFT]    = [ DIR.UPLEFT,    DIR.UP,   DIR.LEFT  ];
@@ -2698,7 +2708,23 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		}
 		else
 		{
-			dirs = PREFERRED_DIRECTIONS[this.directionTo(player, away)];
+			var vec = this.directionTo(player, away);
+			dirs = PREFERRED_DIRECTIONS[vec];
+			if (this.vx && !this.vy) {
+				if (vec == DIR.LEFT || vec == DIR.RIGHT) dirs = RV_PREFERRED_DIRECTIONS[vec];
+				if (vec == DIR.UPLEFT) dirs = PREFERRED_DIRECTIONS[DIR.UPRIGHT];
+				if (vec == DIR.UPRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.UPLEFT];
+				if (vec == DIR.DOWNLEFT) dirs = PREFERRED_DIRECTIONS[DIR.DOWNRIGHT];
+				if (vec == DIR.DOWNRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.DOWNLEFT];
+				}
+			if (!this.vx && this.vy) {
+				if (vec == DIR.UP || vec == DIR.DOWN) dirs = RV_PREFERRED_DIRECTIONS[vec];
+				if (vec == DIR.UPLEFT) dirs = PREFERRED_DIRECTIONS[DIR.DOWNLEFT];
+				if (vec == DIR.UPRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.DOWNRIGHT];
+				if (vec == DIR.DOWNLEFT) dirs = PREFERRED_DIRECTIONS[DIR.UPLEFT];
+				if (vec == DIR.DOWNRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.UPRIGHT];
+				}
+			if (this.vx && this.vy) dirs = RV_PREFERRED_DIRECTIONS[vec];
 
 			for(n = 0, max = dirs.length ; n < max ; n++) {
 			  if (this.step(map, player, dirs[n], speed, n < 2 ? 0 : this.type.travelling * (n-2), !away))
@@ -2815,18 +2841,6 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
           down  = target.y > this.y + this.type.speed,
           left  = target.x < this.x - this.type.speed,
           right = target.x > this.x + this.type.speed;
-
-// monster across unpin from player
-		 if (this.vy) {
-				rv = left;
-				left = right;
-				right = rv;
-			}
-		 if (this.vx) {
-				var rv = up;
-				up = down;
-				down = rv;
-			}
 
       if (up && left)
         return away ? DIR.DOWNRIGHT : DIR.UPLEFT;
@@ -3364,34 +3378,34 @@ var txsv = ":";
 		  if (this.pushwal != undefined)
 		  if (collision == this.pushwal) collision = false;
 
-        if (!collision)
-			{
-					if (this.x < 2)
+//        if (!collision)
+//			{
+					if (this.x < 2 && (this.moving.dir == DIR.LEFT || this.moving.dir == DIR.UPLEFT || this.moving.dir == DIR.DOWNLEFT))
 				{
 					if (!Mastermap.occupied(map.w - 2, this.y, TILE, TILE, this))
 						Mastermap.occupy(map.w - 2, this.y, this);
 					else this.x = 2;
 				}
 				else
-					if (this.x > (map.w - 2))
+					if (this.x > (map.w - 2) && (this.moving.dir == DIR.RIGHT || this.moving.dir == DIR.UPRIGHT || this.moving.dir == DIR.DOWNRIGHT))
 				{
 					if (!Mastermap.occupied(5, this.y, TILE, TILE, this))
 						Mastermap.occupy(3, this.y, this);
 					else this.x = map.w - 2;
 				}
 				else
-					if (this.y < 1)
+					if (this.y < 1 && (this.moving.dir == DIR.UP || this.moving.dir == DIR.UPRIGHT || this.moving.dir == DIR.UPLEFT))
 				{
 					if (!Mastermap.occupied(this.x, map.h - 38, TILE, TILE, this))
 						Mastermap.occupy(this.x, map.h - 36, this);
 					else this.y = 1;
 				}
 				else
-					if (this.y > (map.h - 37))
+					if (this.y > (map.h - 37) && (this.moving.dir == DIR.DOWN || this.moving.dir == DIR.DOWNRIGHT || this.moving.dir == DIR.DOWNLEFT))
 					if (!Mastermap.occupied(this.x, 4, TILE, TILE, this))
 						Mastermap.occupy(this.x, 3, this);
 					else this.y = map.h - 37;
-			}
+//			}
 // psuhwall mover
 			if (this.pushwal != null)
 			if (pmvx != this.x || pmvy != this.y)
@@ -4338,6 +4352,8 @@ var txsv = ":";
 			 ry = viewport.y,
 			 nx = 0, ny = 0;
 		 var txu = tyu = txo = tyo = false;
+			Vx = 0;
+			Vy = 0;
 // draw the spriotes unpinned !
 // the early returns had  to be removed - they blocked the corner tests
 // -- this likely means sprites are being called outside display area
@@ -4440,8 +4456,6 @@ var txsv = ":";
 
 // normal viewport sprites
       ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - viewport.x, y - viewport.y, w || TILE, h || TILE);
-			Vx = 0;
-			Vy = 0;
     },
 
     tile: function(ctx, sprites, sx, sy, tx, ty) {

@@ -13,13 +13,13 @@ gJ - gauntlet javascript		(gJ.0 - original)
 dev:
 
 push wall collision
- or elevate them above other treasure tiles
+ \ elevate them above other treasure tiles
 
-try render to map.background for animated liquids / floor tiles
+(maybe) try render to map.background for animated liquids / floor tiles
 
 imm issues:
 
-teleporters, monsters, shots cross the unpin line
+teleporters, shots cross the unpin line
 move across unpin in 1/ 2 unit tunnel fails
 
 
@@ -323,6 +323,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- monsters target across the unpin line
 
 x-- draw pushwalls last,
 
