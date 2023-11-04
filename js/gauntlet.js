@@ -1259,6 +1259,25 @@ Gauntlet = function() {
 			  callback(tx, ty, Mapdata[helpers.indexc(tx,ty)], helpers, sref);
 		};
 
+	function rewall(map) {
+
+		var n, nc = cells.length;
+
+		for (n = 0;n < nc;n++) {
+
+        cell = reloaded.cells[n];
+
+		  if (iswallrw(cell.pixel))
+			 cell.wall = walltype(cell.tx, cell.ty, map);
+		  else if (isnothing(cell.pixel))
+			 cell.nothing = true;
+		  else
+			 cell.shadow = shadowtype(cell.tx, cell.ty, map);
+
+			}
+
+		};
+
   //=========================================================================
   // PERFORMANCE - using arrays for (small) sets
   //=========================================================================
@@ -3623,7 +3642,8 @@ var txsv = ":";
 							Mastermap.remove(cell.ptr);
 					 }
 				}
-				tilerend.maptiles(Mastermap, ctx);
+				rewall(Mastermap);
+				tilerend.maptiles(Mastermap, ctx);		// this redraws the background
 		 }
 
 		var powerp = 0, limitp = 0;
