@@ -1224,15 +1224,15 @@ Gauntlet = function() {
 // sref - the self from map load
 	function parseImage(image, callback, sref) {
 		 var tx, ty, index, pixel,
-			  tw      = image.width,
-			  th      = image.height,
+			  tw      = Mtw,
+			  th      = Mth,
 			  canvas  = Game.renderToCanvas(tw, th, function(ctx) { ctx.drawImage(image, 0, 0); }),
 			  ctx     = canvas.getContext('2d'),
 			  data    = ctx.getImageData(0, 0, tw, th).data,
 			  helpers = {
 				 valid: function(tx,ty) { return (tx >= 0) && (tx < tw) && (ty >= 0) && (ty < th); },
 				 index: function(tx,ty) { return (tx + (ty*tw)) * 4; },
-				 indexc: function(tx,ty) { return (tx + (ty*tw)); },
+				 indexc: function(tx,ty) { return (tx + (ty*Mtw)); },
 				 pixel: function(tx,ty) { var i = this.index(tx,ty); return this.valid(tx,ty) ? (data[i]<<16)+(data[i+1]<<8)+(data[i+2]) : null; }
 			  }
 
@@ -1249,18 +1249,20 @@ Gauntlet = function() {
 				Mapdata[helpers.indexc(tx,ty)] = helpers.pixel(Math.abs(mx - tx),Math.abs(my - ty));
 
 		if (Mrot) {
-					var nw = th, nh = tw;
+					var nw = th, nh = tw, nv = 0;
 					image.width = nw;
 					image.height = nh
 					Mtw = nw;
 					Mth = nh;
 					var newdata = [];
-					 for(ty = 0 ; ty < th ; ty++)
-							  for(tx = 0 ; tx < tw ; tx++)
-										 newdata[helpers.indexc(ty,tx)] = Mapdata[helpers.indexc(tx,ty)]
+					for(ty = 0 ; ty < (Mtw * Mth)  ; ty++) {
+							newdata[ty] = Mapdata[ty];
+							Mapdata[ty] = 0;
+						}
+					for(tx = (tw - 1) ; tx >= 0 ; tx--) {
+						for(ty = 0 ; ty < th ; ty++)
+							Mapdata[nv++] = newdata[helpers.indexc(tx,ty)] }
 // relod
-					 for(ty = 0 ; ty < (Mtw * Mth)  ; ty++)
-							  Mapdata[ty] = newdata[ty];
 					}
 		}
 
@@ -2399,8 +2401,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 			if (cell == undefined) return true;
 
 			if (cell.wall !== undefined && cell.wall !== null)		{		// walls to exits sets null
-				if (mtm != "bw: "+cell.tx+":"+cell.ty) { mtm = "bw: "+cell.tx+":"+cell.ty;
-				alert("bw: "+cell.tx+":"+cell.ty);}
+//				if (mtm != "bw: "+cell.tx+":"+cell.ty) { mtm = "bw: "+cell.tx+":"+cell.ty; alert("bw: "+cell.tx+":"+cell.ty);}
 				return true;
 }
         for(i = 0, ni = cell.occupied.length ; i < ni ; i++) {
@@ -2534,6 +2535,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
       self.tw       = Mtw;
       self.th       = Mth;
+      self.w        = Mtw * TILE;
+      self.h        = Mth * TILE;
 
     },
 
@@ -3442,8 +3445,8 @@ var txsv = ":";
 // wall adjust
       var level  = cfg.levels[Mastermap.nlevel],
           source = level.source,
-          tw     = source.width,
-          th     = source.height;
+          tw     = Mtw; //source.width,
+          th     = Mth; //source.height;
 
       if (treasure.type.pushwal)
 		 {
