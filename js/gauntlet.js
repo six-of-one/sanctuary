@@ -1102,7 +1102,7 @@ Gauntlet = function() {
 			if (wally == 12 || wally == 13) if (iswall(mpixel(tx,ty, tx-1, ty+1))) wally += 6;
 			return wally;
 			};
-      function shadowtype(tx,ty,map) { return (iswall(mpixel(tx,ty, tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty, tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0); };
+      function shadowtype(tx,ty,map) { if (!iswall(mpixel(tx,ty,tx,ty))) return (iswall(mpixel(tx,ty, tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty, tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0); };
       function doortype(tx,ty,map)   {
 				var dr = (isdoor(mpixel(tx,ty,  tx,   ty-1)) ? 1 : 0) | (isdoor(mpixel(tx,ty,  tx+1, ty))   ? 2 : 0) | (isdoor(mpixel(tx,ty,  tx,   ty+1)) ? 4 : 0) | (isdoor(mpixel(tx,ty,  tx-1, ty))   ? 8 : 0);
 				if (!dr) dr = (iswall(mpixel(tx,ty,  tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,  tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,  tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,  tx-1, ty))   ? 8 : 0);
@@ -1261,7 +1261,7 @@ Gauntlet = function() {
 
 	function rewall(map) {
 
-		var n, nc = cells.length;
+		var n, nc = reloaded.cells.length;
 
 		for (n = 0;n < nc;n++) {
 
@@ -1271,8 +1271,8 @@ Gauntlet = function() {
 			 cell.wall = walltype(cell.tx, cell.ty, map);
 		  else if (isnothing(cell.pixel))
 			 cell.nothing = true;
-		  else
-			 cell.shadow = shadowtype(cell.tx, cell.ty, map);
+//		  else
+		 cell.shadow = shadowtype(cell.tx, cell.ty, map);
 
 			}
 
@@ -3595,45 +3595,10 @@ var txsv = ":";
 								{
 										var gimg = document.getElementById("gfloor");
 										if (!walled) Musicth.play(Musicth.sounds.wallexit);
-							/*			if (Mastermap.level.gflr)
-										{
-												cell.ctx.drawImage(gimg, 0, 0, STILE, STILE, cell.tx * TILE, cell.ty * TILE, TILE, TILE);
-										}
-										else
-											cell.tileptr.tile(cell.ctx, cell.sprites, Mastermap.level.floor, 0, cell.tx, cell.ty); */
-//								cell.wall = 17;//walltype(cell.tx, cell.ty, map);
-//								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
+
 										cell.wall = null;	// so we dont fire these wall segs again
 										cell.pixel = 0xa08060;	// need to be floor value correct?
 										walled = true;
-// reshape surround walls
-							/*			for(wdir = 0 ; wdir <= mxdir ; wdir++) {
-												px = cell.x + DIRTX[wdir];
-												py = cell.y + DIRTY[wdir];
-												tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
-												if (tcell.wall)
-												{
-														tcell.wall = walltype(tcell.tx, tcell.ty, Mastermap);
-													  if (Mastermap.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls
-														  if ((tcell.pixel & MEXLOW) && (tcell.pixel & MEXHIGH) == 0x404000)  // diff walls by low nibble
-															tcell.tileptr.tile(tcell.ctx, tcell.sprites, tcell.wall, G1WALL[tcell.pixel & MEXLOW], tcell.tx, tcell.ty);
-														  else
-															tcell.tileptr.tile(tcell.ctx, tcell.sprites, tcell.wall, DEBUG.WALL || Mastermap.level.wall, tcell.tx, tcell.ty);
-															if (Mastermap.level.brikovr) this.tile(tcell.ctx, tcell.sprites, tcell.wall, Mastermap.level.brikovr, tcell.tx, tcell.ty);
-													  }
-												}
-// remove shadows from removed walls
-												if (tcell.shadow && (wdir < 3))
-												{
-														tcell.shadow = 0;
-														if (Mastermap.level.gflr)
-														{
-																tcell.ctx.drawImage(gimg, 0, 0, STILE, STILE, tcell.tx * TILE, tcell.ty * TILE, TILE, TILE);
-														}
-														else
-															tcell.tileptr.tile(tcell.ctx, tcell.sprites, Mastermap.level.floor, 0, tcell.tx, tcell.ty);
-												}
-										}  */
 								}
 					 }
 					  if (cell.pixel == treasure.pixel)		// remove matching trap
