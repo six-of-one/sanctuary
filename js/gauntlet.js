@@ -281,7 +281,7 @@ Gauntlet = function() {
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport',  nohlp: 25  },
         TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap', nohlp: 20 },
         STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun', nohlp: 49  },
-        PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, health:270, canbeshot: 2, push: true,   sound: 'null', nohlp: 57  },
+        PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, health:270, canbeshot: 2, pushwal: 6,   sound: 'null', nohlp: 57  },
 // extra power potions
         XSPEED:     { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxspd',  sound: 'collectpotion', nohlp: 1  },
         XSHOTPWR:   { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtpwr',   sound: 'collectpotion',  nohlp: 2  },
@@ -2972,7 +2972,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				if (this.type.health)
 				{
 // pushwalls do not set health on spawn
-						if (this.type.push)
+						if (this.type.pushwal)
 						{
 							if (this.health == undefined) this.health = this.type.health;
 							this.health = this.health - damage;
@@ -3150,7 +3150,7 @@ var txsv = ":";
       this.cells  = []; // entities track which cells they currently occupy
 
 // init some control code
-		this.push = null;
+		this.pushwal = null;
 		this.stun = 0;
 		 stalling = 0;
     },
@@ -3314,7 +3314,7 @@ var txsv = ":";
           directions = SLIDE_DIRECTIONS[this.moving.dir];
 
 		var pushspeed = 1;
-		if (this.push != undefined) pushspeed = this.push.speed;
+		if (this.pushwal != undefined) pushspeed = this.pushwal.speed;
 
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
@@ -3326,8 +3326,8 @@ var txsv = ":";
 //txsv = txsv.substring(0,100);
 //document.title = "-pl  "+txsv;
 ///
-		  if (this.push != undefined)
-		  if (collision == this.push) collision = false;
+		  if (this.pushwal != undefined)
+		  if (collision == this.pushwal) collision = false;
 
         if (!collision)
 			{
@@ -3358,20 +3358,20 @@ var txsv = ":";
 					else this.y = map.h - 37;
 			}
 // psuhwall mover
-			if (this.push != null)
+			if (this.pushwal != null)
 			if (pmvx != this.x || pmvy != this.y)
 			{
 				var pushd = this.dir;
-				if (this.push.dir == 0 && pushd == 7) pushd = 1;
-				if (this.push.dir == 7 && pushd == 0) pushd = 6;
-				if (Math.abs(this.push.dir - pushd) > 1) {
-					Mastermap.occupy(this.push.x, this.push.y, this.push);
-					this.push = null;
+				if (this.pushwal.dir == 0 && pushd == 7) pushd = 1;
+				if (this.pushwal.dir == 7 && pushd == 0) pushd = 6;
+				if (Math.abs(this.pushwal.dir - pushd) > 1) {
+					Mastermap.occupy(this.pushwal.x, this.pushwal.y, this.pushwal);
+					this.pushwal = null;
 				}
 				else
 				{
-					this.push.x = this.push.x + (this.x - pmvx);
-					this.push.y = this.push.y + (this.y - pmvy);
+					this.pushwal.x = this.pushwal.x + (this.x - pmvx);
+					this.pushwal.y = this.pushwal.y + (this.y - pmvy);
 
 					pmvx = this.x;
 					pmvy = this.y;
@@ -3394,13 +3394,13 @@ var txsv = ":";
           tw     = source.width,
           th     = source.height;
 
-      if (treasure.type.push)
+      if (treasure.type.pushwal)
 		 {
 				helpdis(treasure.type.nohlp, undefined, 2000, undefined, undefined);
 				treasure.cbox = CBOX.MONSTER;	// slim box a bit
 
-				if (this.push != treasure) {
-					this.push = treasure;
+				if (this.pushwal != treasure) {
+					this.pushwal = treasure;
 					pmvx = this.x;
 					pmvy = this.y;
 					treasure.speed = PWALLSPD;		// slow a pushing player
@@ -4694,7 +4694,8 @@ var txsv = ":";
     },
 
     entities: function(ctx, frame, viewport, entities) {
-      var n, max, entity, sf, sprites = this.sprites.entities;
+      var n, max, entity, sf, sprites = this.sprites.entities, hold = [], held = 0;
+		 hold[held] = null;
       for(n = 0, max = entities.length ; n < max ; n++) {
         entity = entities[n];
         if (entity.active && (!entity.onrender || entity.onrender(frame) !== false) && !viewport.outside(entity.x, entity.y, TILE, TILE)) {
