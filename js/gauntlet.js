@@ -3518,7 +3518,7 @@ var txsv = ":";
 						if (Math.abs(treasure.x - cell.x) > 33 ||  Math.abs(treasure.y - cell.y) > 33)		// find closest teleport not origin
 //					  if (cell.x != 0 &&  cell.y != 0)
 						{
-							cdist = distance(cell.ptr.vx,cell.ptr.vy,treasure.vx,treasure.vy);
+							cdist = distance(cell.x,cell.y,treasure.x,treasure.y);
 // need to handle unpinned here
 							if (cdist < tdist)
 							{
@@ -3579,7 +3579,7 @@ var txsv = ":";
 								Mastermap.occupy(px, py, this);
 
 /// TEST - remove
-createCookie("_t_"+Math.round(destcell.ptr.vx)+"_"+Math.round(destcell.ptr.vy), "telepad",0);
+//createCookie("_t_"+Math.round(destcell.ptr.vx)+"_"+Math.round(destcell.ptr.vy), "telepad",0);
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
 								walled = true;
 						}
