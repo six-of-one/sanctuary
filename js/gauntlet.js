@@ -3378,34 +3378,34 @@ var txsv = ":";
 		  if (this.pushwal != undefined)
 		  if (collision == this.pushwal) collision = false;
 
-//        if (!collision)
-//			{
-					if (this.x < 2 && (this.moving.dir == DIR.LEFT || this.moving.dir == DIR.UPLEFT || this.moving.dir == DIR.DOWNLEFT))
+        if (!collision)
+			{
+					if (this.x < 2)
 				{
 					if (!Mastermap.occupied(map.w - 2, this.y, TILE, TILE, this))
 						Mastermap.occupy(map.w - 2, this.y, this);
 					else this.x = 2;
 				}
 				else
-					if (this.x > (map.w - 2) && (this.moving.dir == DIR.RIGHT || this.moving.dir == DIR.UPRIGHT || this.moving.dir == DIR.DOWNRIGHT))
+					if (this.x > (map.w - 2))
 				{
 					if (!Mastermap.occupied(5, this.y, TILE, TILE, this))
 						Mastermap.occupy(3, this.y, this);
 					else this.x = map.w - 2;
 				}
 				else
-					if (this.y < 1 && (this.moving.dir == DIR.UP || this.moving.dir == DIR.UPRIGHT || this.moving.dir == DIR.UPLEFT))
+					if (this.y < 1)
 				{
 					if (!Mastermap.occupied(this.x, map.h - 38, TILE, TILE, this))
 						Mastermap.occupy(this.x, map.h - 36, this);
 					else this.y = 1;
 				}
 				else
-					if (this.y > (map.h - 37) && (this.moving.dir == DIR.DOWN || this.moving.dir == DIR.DOWNRIGHT || this.moving.dir == DIR.DOWNLEFT))
+					if (this.y > (map.h - 37))
 					if (!Mastermap.occupied(this.x, 4, TILE, TILE, this))
 						Mastermap.occupy(this.x, 3, this);
 					else this.y = map.h - 37;
-//			}
+			}
 // psuhwall mover
 			if (this.pushwal != null)
 			if (pmvx != this.x || pmvy != this.y)
