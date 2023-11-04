@@ -1422,6 +1422,7 @@ Gauntlet = function() {
 		document.getElementById("ymiror").checked = false;
 		document.getElementById("rotat").checked = false;
 		document.getElementById("invwal").checked = false;
+		document.getElementById("invhint").checked = false;
 		document.getElementById("spedis").checked = false;
 		document.getElementById("blrndlod").checked = false;
 		document.getElementById("forndlod").checked = false;
@@ -1440,6 +1441,7 @@ Gauntlet = function() {
 		if (readCookie("_dev_"+"ymiror") == "true") document.getElementById("ymiror").checked = true;
 		if (readCookie("_dev_"+"rotat") == "true") document.getElementById("rotat").checked = true;
 		if (readCookie("_dev_"+"invwal") == "true") document.getElementById("invwal").checked = true;
+		if (readCookie("_dev_"+"invhint") == "true") document.getElementById("invhint").checked = true;
 		if (readCookie("_dev_"+"spedis") == "true") document.getElementById("spedis").checked = true;
 		if (readCookie("_dev_"+"blrndlod") == "true") document.getElementById("blrndlod").checked = true;
 		if (readCookie("_dev_"+"forndlod") == "true") document.getElementById("forndlod").checked = true;
@@ -3972,6 +3974,7 @@ var txsv = ":";
 				createCookie("_dev_"+"ymiror", document.getElementById("ymiror").checked,7777);
 				createCookie("_dev_"+"rotat", document.getElementById("rotat").checked,7777);
 				createCookie("_dev_"+"invwal", document.getElementById("invwal").checked,7777);
+				createCookie("_dev_"+"invhint", document.getElementById("invhint").checked,7777);
 				createCookie("_dev_"+"spedis", document.getElementById("spedis").checked,7777);
 				createCookie("_dev_"+"blrndlod", document.getElementById("blrndlod").checked,7777);
 				createCookie("_dev_"+"forndlod", document.getElementById("forndlod").checked,7777);
@@ -4579,6 +4582,7 @@ var txsv = ":";
 		 fcellstr = map.cell(0, 0); // preload so no undefine
 		 ftilestr = 0;
 /// TEST - remove
+		 var hintinv = document.getElementById("invhint").checked;
 		 if (document.getElementById("invwal").checked) map.level.wall = WALL.INVIS;
 /// TEST - remove
       for(ty = 0, th = map.th ; ty < th ; ty++) {
