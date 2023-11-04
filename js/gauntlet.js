@@ -1131,7 +1131,6 @@ Gauntlet = function() {
 //		  pcell = spref.cells[n];
 		  reloaded = spref;
 		  Mastercell = spref.cells[n];
-//		  alert("cell x,y,n ="+tx+", "+ty+", "+spref.cells[n]);
 		  spref.cells[n].x = x; // used by walls -> exits
 		  spref.cells[n].y = y;
 		  spref.cells[n].tx = tx; // used by trap: walls -> floor
@@ -1141,7 +1140,6 @@ Gauntlet = function() {
 // make some floor tiles appear slightlyt different - a "GPS" out of complex mazes
 // this is built into the map file as color code #a08080
 		  spref.cells[n].mapcht = ((pixel & 0xa08080) == 0xa08080);
-//		  alert("cell x,y,n ="+spref.cells[n].x+", "+spref.cells[n].y+", "+n);
 /// do stuff tier
 
 		  if (isstart(pixel))
@@ -1716,7 +1714,6 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 					var f, rprof, ldiff;
 
 					diff_level = document.getElementById("seldiff").value;
-//				alert("difficulty: "+ diff_level);
 					ldiff = diff_level / def_diff;
 // treasure will come thru here unless blocked
 					rprof = Game.Math.randomInt(1,rlline);			// for now pick a random profile
@@ -3540,8 +3537,6 @@ var txsv = ":";
 					 walled, cell, c, nc = cells.length, tdist = 100000, cdist, destcell, ldestcell, swapcell,
 					mxdir = 7, tdir, ddir = this.moving.dir;
 
-//alert("x: "+this.x+" y:"+this.y);
-//alert("x: "+treasure.x+" y:"+treasure.y);
 				if (ddir < 0 || ddir > 7) ddir = 0;
 
 				// now loop checking for all teleporters
@@ -3549,7 +3544,6 @@ var txsv = ":";
 						cell = cells[c];
 						if (cell.pixel == TELEPORTILE)
 						if (Math.abs(treasure.x - cell.x) > 33 ||  Math.abs(treasure.y - cell.y) > 33)		// find closest teleport not origin
-//					  if (cell.x != 0 &&  cell.y != 0)
 						{
 							cdist = distance(cell.x,cell.y,treasure.x,treasure.y);
 // need to handle unpinned here
@@ -3600,7 +3594,6 @@ var txsv = ":";
 											if (Mastermap.door(px,py) && !this.keys) blokt = true;
 									}
 								}
-//								if (isp(tcell.pixel, PIXEL.MONSTER)) alert("need to telefrag a monster - "+tcell.ptr.type);
 // - telefrag monsters / death
 								if (isp(tcell.pixel, PIXEL.MONSTER))
 									if (tcell.ptr != undefined)
@@ -3903,7 +3896,6 @@ var txsv = ":";
 						if (cell.ptr)
 						if (cell.ptr.door)
 						{
-//								alert("door cell: x, y "+c+": "+cell.x+", "+cell.y);
 								if (!opendr) Musicth.play(Musicth.sounds.opendoor);
 								cell.ptr.door = null;
 								Masterthmp.map.remove(cell.ptr);
@@ -3927,8 +3919,6 @@ var txsv = ":";
 					  if (cell.wall !== undefined && cell.wall !== null)
 //					  if (cell.x != 0 &&  cell.y != 0) 			/// restore for std G1 ops - the top wall & left wall did not exitify
 						{
-//							if (cell.y == 1 || cell.y == 2)
-//								alert("cell: x, y "+cell.wall+": "+cell.x+", "+cell.y);
 								if (!walled) Musicth.play(Musicth.sounds.wallexit);
 								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
 								cell.wall = null;	// so we dont fire these wall segs again
@@ -4567,8 +4557,7 @@ var txsv = ":";
     maptiles: function(map, ctx) {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
 		 if (wallsprites == undefined) wallsprites = sprites;
-/// TEST - remove
-//alert("mvp: "+game.viewport.x);
+
 		if (map.level.gflr)
 		 {
 			var gbas = document.getElementById("gfloorbas");
@@ -4737,7 +4726,7 @@ var txsv = ":";
         entity = entities[n];
         if (entity.active && (!entity.onrender || entity.onrender(frame) !== false) && !viewport.outside(entity.x, entity.y, TILE, TILE)) {
 // note: RUNORG
-//if (viewport.x < 0 && entity.x > (viewport.w - viewport.x)) alert("-v.x ent: "+entity+" : "+entity.x);
+
 				if (entity.hue != undefined)
 					ctx.filter = "hue-rotate("+entity.hue+"deg)";
 
