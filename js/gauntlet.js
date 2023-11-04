@@ -32,7 +32,7 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
-		walltype, shadowtype, doortype, Mapdata, tilerend,
+		walltype, shadowtype, doortype, Mapdata, tilerend, remap = null, remaptim,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
@@ -1062,11 +1062,11 @@ Gauntlet = function() {
   // MAPPING
   //=========================================================================
 
-	function isp(pixel, type) { return ((pixel & PIXEL.MASK.TYPE) === type); };
-	function type(pixel)     { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
+	function isp(pixel, type)      { return ((pixel & PIXEL.MASK.TYPE) === type); };
+	function type(pixel)           { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 	function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
 	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
-	function iswallrw(pixel)         { return (isp(pixel, PIXEL.WALL)) };
+	function iswallrw(pixel)       { return (isp(pixel, PIXEL.WALL))     };
 	function isfloor(pixel)        { return isp(pixel, PIXEL.FLOOR);     };
 	function isstart(pixel)        { return isp(pixel, PIXEL.START);     };
 	function isdoor(pixel)         { return isp(pixel, PIXEL.DOOR);      };
@@ -1268,7 +1268,7 @@ Gauntlet = function() {
         cell = reloaded.cells[n];
 
 		  if (iswallrw(cell.pixel))
-			 cell.wall = walltype(cell.tx, cell.ty, map);
+			 cell.wall = walltype(cell.tx, cell.ty, map);		if (cell.tx == 24 && cell.ty == 5) alert("wall at "+cell.tx+":"+cell.ty);
 		  else if (isnothing(cell.pixel))
 			 cell.nothing = true;
 //		  else
@@ -3582,33 +3582,32 @@ var txsv = ":";
 
 		 if (treasure.type.trap) {
 				var cells   = reloaded.cells,
-					 cell, bcell, c, nc = cells.length, px, py, mxdir = 7, wdir, walled, ctx = null;
+					 cell, c, nc = cells.length, walled, ctx = null;
 
 				// now loop again checking for all trap walls
 				for(c = 0 ; c < nc ; c++) {
-					  cell = cells[c];
-					  if (cell.ctx && ctx == null) ctx = cell.ctx;
-					  if (cell.wall !== undefined && cell.wall !== null)
+					cell = cells[c];
+					if (cell.ctx && ctx == null) ctx = cell.ctx;
+					if (cell.wall !== undefined && cell.wall !== null)
 					 {
-							  if ((cell.pixel & MEXHIGH) == TRAPWALL && ((cell.pixel & MEXLOW) == (treasure.pixel & MEXLOW))) // || cell.pixel == TRAPTRIG)
-//					  if (cell.x != 0 &&  cell.y != 0)
+							  if ((cell.pixel & MEXHIGH) == TRAPWALL && ((cell.pixel & MEXLOW) == (treasure.pixel & MEXLOW)))
 								{
 										var gimg = document.getElementById("gfloor");
 										if (!walled) Musicth.play(Musicth.sounds.wallexit);
 
-										cell.wall = null;	// so we dont fire these wall segs again
+										cell.wall = undefined;	// so we dont fire these wall segs again
 										cell.pixel = 0xa08060;	// need to be floor value correct?
 										walled = true;
 								}
 					 }
-					  if (cell.pixel == treasure.pixel)		// remove matching trap
+					if (cell.pixel == treasure.pixel)		// remove matching trap
 					 {
 						 if (cell.ptr);
 							Mastermap.remove(cell.ptr);
 					 }
 				}
-				rewall(Mastermap);
-				tilerend.maptiles(Mastermap, ctx);		// this redraws the background
+				remap = ctx;
+				remaptim = heartbeet + 2;
 		 }
 
 		var powerp = 0, limitp = 0;
@@ -3744,6 +3743,11 @@ var txsv = ":";
 // this is game 1 second interval pulse - prob should be on a timer
 			heartbeet = heartbeet+ 1;
 
+			if (remap != null && remaptim < heartbeet) {
+				rewall(Mastermap);
+				tilerend.maptiles(Mastermap, remap);		// this redraws the background
+				remap = null;
+			}
 			if (this.poison > 0) {
 // poison confuses controls by activating them - because it wasnt a button press, we need to turn it back off a second later
 				if (this.moving.left == this.poison) this.moving.left = false;
