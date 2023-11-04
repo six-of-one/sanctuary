@@ -32,7 +32,7 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
-		walltype, shadowtype, doortype, Mapdata, tilerend,
+		walltype, shadowtype, doortype, Mapdata, tilerend, Vx, Vy,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
@@ -3518,7 +3518,7 @@ var txsv = ":";
 						if (Math.abs(treasure.x - cell.x) > 33 ||  Math.abs(treasure.y - cell.y) > 33)		// find closest teleport not origin
 //					  if (cell.x != 0 &&  cell.y != 0)
 						{
-							cdist = distance(cell.x,cell.y,treasure.x,treasure.y);
+							cdist = distance(cell.ptr.vx,cell.ptr.vy,treasure.vx,treasure.vy);
 // need to handle unpinned here
 							if (cdist < tdist)
 							{
@@ -3578,6 +3578,8 @@ var txsv = ":";
 									}
 								Mastermap.occupy(px, py, this);
 
+/// TEST - remove
+createCookie("_t_"+Math.round(destcell.ptr.vx)+"_"+Math.round(destcell.ptr.vy), "telepad",0);
 								if (!walled) Musicth.play(Musicth.sounds.teleport);
 								walled = true;
 						}
@@ -4336,6 +4338,8 @@ var txsv = ":";
 			 nx = viewport.w - (rx - x);
 			 if (x < rx && nx >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
+				Vx = nx;
+				Vy = y - ry;
 			 }
 		 }
 		 else
@@ -4345,6 +4349,8 @@ var txsv = ":";
 			 nx = (0 - viewport.x) - (Mastermap.w - x);
 			 if (x > rx && nx >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
+				Vx = nx;
+				Vy = y - ry;
 			 }
 		 }
 
@@ -4355,6 +4361,8 @@ var txsv = ":";
 			 ny = viewport.h - (ry - y);
 			 if (y < ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - nvx, ny, w || TILE, h || TILE);
+				Vx = x - nvx;
+				Vy = ny;
 			 }
 		 }
 		 else
@@ -4364,6 +4372,8 @@ var txsv = ":";
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
 			 if (y > ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - nvx, ny, w || TILE, h || TILE);
+				Vx = x - nvx;
+				Vy = ny;
 			 }
 		 }
 // corner unpin overscan sprites
@@ -4374,6 +4384,8 @@ var txsv = ":";
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
 			 if (x > rx && nx >= 0 && y > ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
+				Vx = nx;
+				Vy = ny;
 				return;
 			 }
 		 }
@@ -4384,6 +4396,8 @@ var txsv = ":";
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
 			 if (x < rx && nx >= 0 && y > ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
+				Vx = nx;
+				Vy = ny;
 				return;
 			 }
 		 }
@@ -4394,6 +4408,8 @@ var txsv = ":";
 			 ny = viewport.h - (ry - y);
 			 if (x > rx && nx >= 0 && y < ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
+				Vx = nx;
+				Vy = ny;
 				return;
 			 }
 		 }
@@ -4404,12 +4420,16 @@ var txsv = ":";
 			 ny = viewport.h - (ry - y);
 			 if (x < rx && nx >= 0 && y < ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
+				Vx = nx;
+				Vy = ny;
 				return;
 			 }
 		 }
 
 // normal viewport sprites
       ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - viewport.x, y - viewport.y, w || TILE, h || TILE);
+			Vx = x - viewport.x;
+			Vy = y - viewport.y;
     },
 
     tile: function(ctx, sprites, sx, sy, tx, ty) {
@@ -4700,6 +4720,8 @@ var txsv = ":";
 						else
 							this.sprite(ctx, sprites, viewport, entity.type.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 						}
+						entity.vx = Vx;
+						entity.vy = Vy;
 				ctx.filter = "hue-rotate(0deg)";
         }
       }
@@ -4707,6 +4729,8 @@ var txsv = ":";
 		while (hold[held] != null) {
 			entity = hold[held++];
 				this.sprite(ctx, sprites, viewport, entity.type.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+						entity.vx = Vx;
+						entity.vy = Vy;
 			}
     }
 
