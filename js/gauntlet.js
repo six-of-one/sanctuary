@@ -32,7 +32,7 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
-		walltype, shadowtype, doortype, Mapdata, tilerend, remap = null, remaptim,
+		walltype, shadowtype, doortype, Mapdata, tilerend,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
@@ -1267,8 +1267,8 @@ Gauntlet = function() {
 
         cell = reloaded.cells[n];
 
-		  if (iswallrw(cell.pixel))
-			 cell.wall = walltype(cell.tx, cell.ty, map);		if (cell.tx == 24 && cell.ty == 5) alert("wall at "+cell.tx+":"+cell.ty);
+		  if (iswallrw(cell.pixel)) {
+			 cell.wall = walltype(cell.tx, cell.ty, map);		if (cell.tx == 24 && cell.ty == 5) alert("wall at "+cell.tx+":"+cell.ty); }
 		  else if (isnothing(cell.pixel))
 			 cell.nothing = true;
 //		  else
@@ -3597,6 +3597,7 @@ var txsv = ":";
 
 										cell.wall = undefined;	// so we dont fire these wall segs again
 										cell.pixel = 0xa08060;	// need to be floor value correct?
+										Mapdata[c] = cell.pixel;
 										walled = true;
 								}
 					 }
@@ -3606,8 +3607,8 @@ var txsv = ":";
 							Mastermap.remove(cell.ptr);
 					 }
 				}
-				remap = ctx;
-				remaptim = heartbeet + 2;
+				rewall(Mastermap);
+				tilerend.maptiles(Mastermap, ctx);		// this redraws the background
 		 }
 
 		var powerp = 0, limitp = 0;
@@ -3743,11 +3744,6 @@ var txsv = ":";
 // this is game 1 second interval pulse - prob should be on a timer
 			heartbeet = heartbeet+ 1;
 
-			if (remap != null && remaptim < heartbeet) {
-				rewall(Mastermap);
-				tilerend.maptiles(Mastermap, remap);		// this redraws the background
-				remap = null;
-			}
 			if (this.poison > 0) {
 // poison confuses controls by activating them - because it wasnt a button press, we need to turn it back off a second later
 				if (this.moving.left == this.poison) this.moving.left = false;
