@@ -3781,8 +3781,8 @@ var txsv = ":";
 
 // invisible wall hint pulse
 			hintivs++; hintive++;
-			hintivs++; hintive++;
-			if (hintive >= Mth) { hintivs = -17; hintive = -10; }
+			hintivs++; hintive++;  //tilerend.maptiles(Mastermap, reloaded.cells[1].ctx);
+			if (hintive >= Mth) { hintivs = -10; hintive = -3; }
 			if (this.poison > 0) {
 // poison confuses controls by activating them - because it wasnt a button press, we need to turn it back off a second later
 				if (this.moving.left == this.poison) this.moving.left = false;
