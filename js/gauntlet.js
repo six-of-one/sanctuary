@@ -1267,8 +1267,8 @@ Gauntlet = function() {
 
         cell = reloaded.cells[n];
 
-		  if (iswallrw(cell.pixel)) {
-			 cell.wall = walltype(cell.tx, cell.ty, map);		if (cell.tx == 24 && cell.ty == 5) alert("wall at "+cell.tx+":"+cell.ty); }
+		  if (iswallrw(cell.pixel))
+			 cell.wall = walltype(cell.tx, cell.ty, map);
 		  else if (isnothing(cell.pixel))
 			 cell.nothing = true;
 //		  else
@@ -3046,7 +3046,11 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 						helpdis(nohlppois, undefined, 2000, undefined, undefined);
 				}
 				shotpot = 0;
+				var n = p2t(this.x) + (p2t(this.y) * Mtw), ctx = reloaded.cells[n].ctx;
+				Mapdata[n] = 0xa08060;
 				Mastermap.remove(this);
+				rewall(Mastermap);
+				tilerend.maptiles(Mastermap, ctx);		// this redraws the background
 				return;
 		 }
     },
