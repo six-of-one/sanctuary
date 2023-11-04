@@ -2500,8 +2500,9 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 /// TEST - remove
 		 if (level.mw == null || level.mw == undefined) { level.mw = source.width; level.mh = source.height; }
 		 else { source.width = level.mw; source.height = level.mh; }
-		if (Munpinx && (level.unpinx != Munpinx)) source.width--;				// while this works - on reloading the level, w x h is wrong
-		if (Munpiny && (level.unpiny != Munpiny)) source.height--;
+// while looking nice, this breaks g1 lvl 3 doors
+//		if (Munpinx && (level.unpinx != Munpinx)) source.width--;				// while this works - on reloading the level, w x h is wrong
+//		if (Munpiny && (level.unpiny != Munpiny)) source.height--;
 
 		var tw     = source.width,
           th     = source.height,
