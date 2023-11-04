@@ -13,7 +13,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 dev:
 
 push wall collision
-draw pushwalls last, or elevate them above other treasure tiles
+ or elevate them above other treasure tiles
 
 try render to map.background for animated liquids / floor tiles
 
@@ -323,6 +323,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- draw pushwalls last,
 
 x-- interior corners removed from big wall blocks, map creation coded cleaned up
 

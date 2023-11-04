@@ -32,7 +32,7 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
-		walltype, shadowtype, doortype, Mapdata,
+		walltype, shadowtype, doortype, Mapdata, tilerend,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
@@ -3563,11 +3563,12 @@ var txsv = ":";
 
 		 if (treasure.type.trap) {
 				var cells   = reloaded.cells,
-					 cell, bcell, c, nc = cells.length, px, py, mxdir = 7, wdir, walled;
+					 cell, bcell, c, nc = cells.length, px, py, mxdir = 7, wdir, walled, ctx = null;
 
 				// now loop again checking for all trap walls
 				for(c = 0 ; c < nc ; c++) {
 					  cell = cells[c];
+					  if (cell.ctx && ctx == null) ctx = cell.ctx;
 					  if (cell.wall !== undefined && cell.wall !== null)
 					 {
 							  if ((cell.pixel & MEXHIGH) == TRAPWALL && ((cell.pixel & MEXLOW) == (treasure.pixel & MEXLOW))) // || cell.pixel == TRAPTRIG)
@@ -3575,19 +3576,19 @@ var txsv = ":";
 								{
 										var gimg = document.getElementById("gfloor");
 										if (!walled) Musicth.play(Musicth.sounds.wallexit);
-										if (Mastermap.level.gflr)
+							/*			if (Mastermap.level.gflr)
 										{
 												cell.ctx.drawImage(gimg, 0, 0, STILE, STILE, cell.tx * TILE, cell.ty * TILE, TILE, TILE);
 										}
 										else
-											cell.tileptr.tile(cell.ctx, cell.sprites, Mastermap.level.floor, 0, cell.tx, cell.ty);
+											cell.tileptr.tile(cell.ctx, cell.sprites, Mastermap.level.floor, 0, cell.tx, cell.ty); */
 //								cell.wall = 17;//walltype(cell.tx, cell.ty, map);
 //								reloaded.addExit(cell.x, cell.y, DOOR.EXIT);
 										cell.wall = null;	// so we dont fire these wall segs again
 										cell.pixel = 0xa08060;	// need to be floor value correct?
 										walled = true;
 // reshape surround walls
-										for(wdir = 0 ; wdir <= mxdir ; wdir++) {
+							/*			for(wdir = 0 ; wdir <= mxdir ; wdir++) {
 												px = cell.x + DIRTX[wdir];
 												py = cell.y + DIRTY[wdir];
 												tcell = cells[p2t(px) + p2t(py) *  Mastermap.tw];
@@ -3613,7 +3614,7 @@ var txsv = ":";
 														else
 															tcell.tileptr.tile(tcell.ctx, tcell.sprites, Mastermap.level.floor, 0, tcell.tx, tcell.ty);
 												}
-										}
+										}  */
 								}
 					 }
 					  if (cell.pixel == treasure.pixel)		// remove matching trap
@@ -3622,6 +3623,7 @@ var txsv = ":";
 							Mastermap.remove(cell.ptr);
 					 }
 				}
+				tilerend.maptiles(Mastermap, ctx);
 		 }
 
 		var powerp = 0, limitp = 0;
@@ -4441,6 +4443,7 @@ var txsv = ":";
 		var rw = w, rh = h, xz = 0, yz = 0, nw, nh;
 		var txu = tyu = txo = tyo = false;
       map.background = map.background || Game.renderToCanvas(map.w, map.h, this.maptiles.bind(this, map));
+		 tilerend = this; // save tile renderer to use later
 
 // draw the map background unpinned !
 
