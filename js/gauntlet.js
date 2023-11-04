@@ -1232,6 +1232,7 @@ Gauntlet = function() {
 			  helpers = {
 				 valid: function(tx,ty) { return (tx >= 0) && (tx < tw) && (ty >= 0) && (ty < th); },
 				 index: function(tx,ty) { return (tx + (ty*tw)) * 4; },
+				 indexb: function(tx,ty) { return (tx + (ty*tw)); },
 				 indexc: function(tx,ty) { return (tx + (ty*Mtw)); },
 				 pixel: function(tx,ty) { var i = this.index(tx,ty); return this.valid(tx,ty) ? (data[i]<<16)+(data[i+1]<<8)+(data[i+2]) : null; }
 			  }
@@ -1253,6 +1254,7 @@ Gauntlet = function() {
 					image.width = nw;
 					image.height = nh
 					Mtw = nw;
+					Mastermap.tw = Mtw;		// or nothing placed on initial load will be touchable
 					Mth = nh;
 					var newdata = [];
 					for(ty = 0 ; ty < (Mtw * Mth)  ; ty++) {
@@ -1261,7 +1263,7 @@ Gauntlet = function() {
 						}
 					for(tx = (tw - 1) ; tx >= 0 ; tx--) {
 						for(ty = 0 ; ty < th ; ty++)
-							Mapdata[nv++] = newdata[helpers.indexc(tx,ty)] }
+							Mapdata[nv++] = newdata[helpers.indexb(tx,ty)] }
 // relod
 					}
 		}
