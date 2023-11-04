@@ -4336,9 +4336,7 @@ var txsv = ":";
 			 nx = viewport.w - (rx - x);
 			 if (x < rx && nx >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
-//				return;
 			 }
-//			 nvx = Mastermap.w - viewport.x;
 		 }
 		 else
 		 if (viewport.x < 0) {
@@ -4347,9 +4345,7 @@ var txsv = ":";
 			 nx = (0 - viewport.x) - (Mastermap.w - x);
 			 if (x > rx && nx >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
-//				return;
 			 }
-//			 nvx = viewport.x;
 		 }
 
 		 if ((viewport.y + viewport.h) > Mastermap.h)
@@ -4359,7 +4355,6 @@ var txsv = ":";
 			 ny = viewport.h - (ry - y);
 			 if (y < ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - nvx, ny, w || TILE, h || TILE);
-//				return;
 			 }
 		 }
 		 else
@@ -4369,7 +4364,6 @@ var txsv = ":";
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
 			 if (y > ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - nvx, ny, w || TILE, h || TILE);
-//				return;
 			 }
 		 }
 // corner unpin overscan sprites
@@ -4378,8 +4372,6 @@ var txsv = ":";
 			 nx = (0 - viewport.x) - (Mastermap.w - x);
 			 ry = (Mastermap.h + viewport.y);
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
-/// TEST - remove
-//document.title = "spr x<0 y<0:"+sx+":"+sy+" (sx/sy) "+nx+" nx "+ny+" ny "+rx+" rx "+ry+" ry "+x+":"+y+" (x:y) "+viewport.x+":"+viewport.y+" v.x:y "+Mastermap.w+":"+Mastermap.h+" Mm.w:h";
 			 if (x > rx && nx >= 0 && y > ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
 				return;
