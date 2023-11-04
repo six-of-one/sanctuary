@@ -2816,6 +2816,18 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
           left  = target.x < this.x - this.type.speed,
           right = target.x > this.x + this.type.speed;
 
+// monster across unpin from player
+		 if (this.vy) {
+				rv = left;
+				left = right;
+				right = rv;
+			}
+		 if (this.vx) {
+				var rv = up;
+				up = down;
+				down = rv;
+			}
+
       if (up && left)
         return away ? DIR.DOWNRIGHT : DIR.UPLEFT;
       else if (up && right)
@@ -4338,8 +4350,8 @@ var txsv = ":";
 			 nx = viewport.w - (rx - x);
 			 if (x < rx && nx >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
-				Vx = nx;
-				Vy = y - ry;
+				Vx = 1;
+				Vy = 0;
 			 }
 		 }
 		 else
@@ -4349,8 +4361,8 @@ var txsv = ":";
 			 nx = (0 - viewport.x) - (Mastermap.w - x);
 			 if (x > rx && nx >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
-				Vx = nx;
-				Vy = y - ry;
+				Vx = -1;
+				Vy = 0;
 			 }
 		 }
 
@@ -4361,8 +4373,8 @@ var txsv = ":";
 			 ny = viewport.h - (ry - y);
 			 if (y < ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - nvx, ny, w || TILE, h || TILE);
-				Vx = x - nvx;
-				Vy = ny;
+				Vx = 0;
+				Vy = 1;
 			 }
 		 }
 		 else
@@ -4372,8 +4384,8 @@ var txsv = ":";
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
 			 if (y > ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - nvx, ny, w || TILE, h || TILE);
-				Vx = x - nvx;
-				Vy = ny;
+				Vx = 0;
+				Vy = -1;
 			 }
 		 }
 // corner unpin overscan sprites
@@ -4384,8 +4396,8 @@ var txsv = ":";
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
 			 if (x > rx && nx >= 0 && y > ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
-				Vx = nx;
-				Vy = ny;
+				Vx = -1;
+				Vy = -1;
 				return;
 			 }
 		 }
@@ -4396,8 +4408,8 @@ var txsv = ":";
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
 			 if (x < rx && nx >= 0 && y > ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
-				Vx = nx;
-				Vy = ny;
+				Vx = 1;
+				Vy = -1;
 				return;
 			 }
 		 }
@@ -4408,8 +4420,8 @@ var txsv = ":";
 			 ny = viewport.h - (ry - y);
 			 if (x > rx && nx >= 0 && y < ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
-				Vx = nx;
-				Vy = ny;
+				Vx = -1;
+				Vy = 1;
 				return;
 			 }
 		 }
@@ -4420,16 +4432,16 @@ var txsv = ":";
 			 ny = viewport.h - (ry - y);
 			 if (x < rx && nx >= 0 && y < ry && ny >= 0) {
 				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
-				Vx = nx;
-				Vy = ny;
+				Vx = 1;
+				Vy = 1;
 				return;
 			 }
 		 }
 
 // normal viewport sprites
       ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - viewport.x, y - viewport.y, w || TILE, h || TILE);
-			Vx = x - viewport.x;
-			Vy = y - viewport.y;
+			Vx = 0;
+			Vy = 0;
     },
 
     tile: function(ctx, sprites, sx, sy, tx, ty) {
