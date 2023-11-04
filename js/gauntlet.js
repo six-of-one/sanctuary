@@ -36,7 +36,7 @@ Gauntlet = function() {
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
-		ftilestr, fcellstr, FCUSTILE = 37, FDESTWALL = 38, FAKES = 39, HINTIV = 40, hintivs = 0, hintive = 7
+		ftilestr, fcellstr, FCUSTILE = 37, FDESTWALL = 38, FAKES = 39, HINTIV = 40, hintivs = 0, hintive = 7,
 
 		 MEXHIGH = 0xFFFFF0,
 		 MEXLOW = 0x00000F,
@@ -4613,7 +4613,7 @@ var txsv = ":";
 							if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
 						}
 						else
-						if (hintinv) this.tile(ctx, sprites, cell.wall, HINTIV, tx, ty);
+						if (hintinv && ty >= hintivs && ty < hintive) this.tile(ctx, sprites, cell.wall, HINTIV, tx, ty);
 			  }
           else if (cell.nothing)
             this.tile(ctx, sprites, 0, 0, tx, ty);
