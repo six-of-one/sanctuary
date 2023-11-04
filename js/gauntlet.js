@@ -32,7 +32,7 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
-		walltype, shadowtype, doortype, Mapdata, tilerend, Vx, Vy,
+		walltype, shadowtype, doortype, Mapdata, tilerend, Vx, Vy, mtm,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
@@ -404,7 +404,7 @@ Gauntlet = function() {
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,    h: TILE          },
         PLAYER:  { x: TILE/4, y: TILE/4, w: TILE/2,  h: TILE - TILE/4 },
-        WEAPON:  { x: TILE/3, y: TILE/3, w: TILE-30, h: TILE-30       },		// w,h tile-30 mostly gives shot thru diagonal gap
+        WEAPON:  { x: TILE/2.285, y: TILE/2.285, w: TILE-30, h: TILE-30       },		// w,h tile-30 mostly gives shot thru diagonal gap
         MONSTER: { x: 1,      y: 1,      w: TILE-2,  h: TILE-2        }, // give monsters 1px wiggle room to get through tight corridors
         EXIT:    { x: 4,      y: 12,     w: TILE-12, h: TILE-6        }			 // exit touch is too easy on exit maze wall level
       },
@@ -2398,9 +2398,11 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 // since edje walls can become exits, make sure shots expire at edge
 			if (cell == undefined) return true;
 
-        if (cell.wall !== undefined && cell.wall !== null)				// walls to exits sets null
-			  return true;
-
+			if (cell.wall !== undefined && cell.wall !== null)		{		// walls to exits sets null
+				if (mtm != "bw: "+cell.tx+":"+cell.ty) { mtm = "bw: "+cell.tx+":"+cell.ty;
+				alert("bw: "+cell.tx+":"+cell.ty);}
+				return true;
+}
         for(i = 0, ni = cell.occupied.length ; i < ni ; i++) {
           item = cell.occupied[i];
           if ((item != ignore) && !set_contains(checked, item)) {
