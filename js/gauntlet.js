@@ -36,7 +36,7 @@ Gauntlet = function() {
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
-		ftilestr, fcellstr, FCUSTILE = 37, FDESTWALL = 38, FAKES = 39,
+		ftilestr, fcellstr, FCUSTILE = 37, FDESTWALL = 38, FAKES = 39, HINTIV = 40, hintivs = 0, hintive = 7
 
 		 MEXHIGH = 0xFFFFF0,
 		 MEXLOW = 0x00000F,
@@ -3779,6 +3779,10 @@ var txsv = ":";
 // this is game 1 second interval pulse - prob should be on a timer
 			heartbeet = heartbeet+ 1;
 
+// invisible wall hint pulse
+			hintivs++; hintive++;
+			hintivs++; hintive++;
+			if (hintive >= Mth) { hintivs = -17; hintive = -10; }
 			if (this.poison > 0) {
 // poison confuses controls by activating them - because it wasnt a button press, we need to turn it back off a second later
 				if (this.moving.left == this.poison) this.moving.left = false;
@@ -4608,6 +4612,8 @@ var txsv = ":";
 							ctx.filter = "hue-rotate(0deg)";
 							if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
 						}
+						else
+						if (hintinv) this.tile(ctx, sprites, cell.wall, HINTIV, tx, ty);
 			  }
           else if (cell.nothing)
             this.tile(ctx, sprites, 0, 0, tx, ty);
