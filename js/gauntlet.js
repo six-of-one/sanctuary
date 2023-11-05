@@ -1303,8 +1303,8 @@ Gauntlet = function() {
 			{
 				if (RLPROF[f][col] > 0)
 				if (Math.random() < chn) {
+					if (cell != undefined)
 					Mastermap.load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
-					cell.loaded = true;
 				}
 			}
 		};
@@ -3056,7 +3056,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 						 if (this.health > 0) return;
 						Musicth.play(Musicth.sounds[this.type.sound]);
 						if (this.type.gud > 0) {		// shoot wall get item
-							var cell = reloaded.cells[p2t(this.x+5) + p2t(this.y+5) *  Mastermap.tw];
+							var cell = reloaded.cells[p2t(this.x) + (p2t(this.y) * Mtw)];
 							rlitem(rlswall, 0.25, cell)
 							}
 				}
