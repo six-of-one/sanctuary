@@ -2443,7 +2443,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		rg = r2 - Math.floor(r2);
 
 		helpdis(nohlpmagaff, undefined, 2000, undefined, undefined);
-
+// potion boom
 		for(n = 0, max = this.entities.length ; n < max ; n++) {
         entity = this.entities[n];
         if (entity.monster && entity.active) {
@@ -2663,6 +2663,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 // dev: no move
 			if (document.getElementById("nommv").checked) return;
 /// TEST - remove
+		if (this.stun > heartbeet) return;		// make supsoc visible too
+
       // let travelling monsters travel
       if (this.travelling > 0)
         return this.step(map, player, this.dir, speed, countdown(this.travelling), !away);
@@ -2827,7 +2829,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		 }
       if (nuke && this.type.nohlp == PCKLHLP) // angry pickle (acid blob) nuked
 		 {
-				if (this.stun < heartbeet || this.stun == undefined) { this.stun == heartbeet + 10; return; }
+				if (this.stun < heartbeet || this.stun == undefined) { this.stun = heartbeet + 10; return; }
 
 				var re = Mastermap.addFx(this.x, this.y, FX.NUMER);
 				if (re != null) {
