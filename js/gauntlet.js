@@ -1305,6 +1305,7 @@ Gauntlet = function() {
 				if (Math.random() < chn) {
 					if (cell != undefined)
 					Mastermap.load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
+					return;
 				}
 			}
 		};
