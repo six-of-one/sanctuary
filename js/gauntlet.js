@@ -1964,7 +1964,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 						if (entity.type.canbeshot) nosup = false;			// super shot hit a monster, gen or treasure that is shotable - keep going
 				}
 /// TEST - update ?
-				if (document.getElementById("sdps").checked && entity.type.push)
+				if (document.getElementById("sdps").checked && entity.type.pushwal)
 				{ alert("dps");
 					var dpst = document.getElementById("dpsout").title;
 					var dphm  = 0;	// damage per 30 secs
