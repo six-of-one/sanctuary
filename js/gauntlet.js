@@ -2245,8 +2245,9 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
     },
 
     door: function(x, y) {
-      var obj = this.cell(x,y).occupied[0];  // optimization - we know doors will always be first (and only) entity in a cell
-      return obj && obj.door ? obj : null;
+			if (this.cell == undefined || this.cell(x,y).occupied == undefined) return null;
+	  var obj = this.cell(x,y).occupied[0];  // optimization - we know doors will always be first (and only) entity in a cell
+			return obj && obj.door ? obj : null;
     },
 
     tpos: { }, // a persistent intermediate object to avoid GC allocations (caller is responsible for using result immediately and not hanging on to a reference)
@@ -2521,8 +2522,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 		 if (level.mw == null || level.mw == undefined) { level.mw = source.width; level.mh = source.height; }
 		 else { source.width = level.mw; source.height = level.mh; }
 // while looking nice, this breaks g1 lvl 3 doors
-//		if (Munpinx && (level.unpinx != Munpinx)) source.width--;				// while this works - on reloading the level, w x h is wrong
-//		if (Munpiny && (level.unpiny != Munpiny)) source.height--;
+		if (Munpinx && (level.unpinx != Munpinx)) source.width--;				// while this works - on reloading the level, w x h is wrong
+		if (Munpiny && (level.unpiny != Munpiny)) source.height--;
 
 		var tw     = source.width,
           th     = source.height,
