@@ -761,16 +761,12 @@ Game.Math = {
 			{
 					vid.src = "images/g2samply_q.ogv";
 					rot = 119700;
-					if (AudioFX.mute) {
-						if (Math.random() < 0.4) { vid.src = "images/gII_intro_na.ogv"; rot = 25200; }
-						if (Math.random() < 0.27) { vid.src = "images/gIV_intro_na.ogv"; rot = 20650; }
-						if (Math.random() < 0.22) { vid.src = "images/gN_intro_na.ogv"; rot = 34210; }
-					} else {
-						if (Math.random() < 0.4) { vid.src = "images/gII_intro.ogv"; rot = 25200; }
-						if (Math.random() < 0.27) { vid.src = "images/gIV_intro.ogv"; rot = 20650; }
-						if (Math.random() < 0.22) { vid.src = "images/gN_intro.ogv"; rot = 34210; }
-					}
+					if (Math.random() < 0.4) { vid.src = "images/gII_intro.ogv"; rot = 25200; }
+					if (Math.random() < 0.27) { vid.src = "images/gIV_intro.ogv"; rot = 20650; }
+					if (Math.random() < 0.22) { vid.src = "images/gN_intro.ogv"; rot = 34210; }
 			}
+			if (AudioFX.mute) vid.volume(0);
+			else vid.volume(100);
 			vid.play();
 			vid.style.visibility = "visible";
 		}
