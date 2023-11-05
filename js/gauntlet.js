@@ -109,7 +109,7 @@ Gauntlet = function() {
         THIEF:   { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 220/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               },
         MUGGER:  { sx: 0, sy: 24, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 233/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 17, 17, 17, 17 ], generator: { glvl: [ 17, 17, 17, 17 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger", weapon: null  ,     nohlp: 62               },
 // g2 calls this the acid blob - it looks like an angry pickle...
-        PICKLE:  { sx: 0, sy:  25, frames: 3, fpf: FPS/10, score:  200, health:  60, speed: 40/FPS, damage:  60, selfharm: 300,      canbeshot: false,  canbehit: false, notfot: true, invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 18, 18, 18, 18 ], generator: { glvl: [ 18, 18, 18, 18 ], health: 10, speed: 1.5*FPS, max: 20, score: 500, sx: 32, sy: 8 }, name: "Acid blob", weapon: null  ,  hits: 'hitpickle',   nohlp: 63               }
+        PICKLE:  { sx: 0, sy:  25, frames: 3, fpf: FPS/10, score:  1000, health:  60, speed: 40/FPS, damage:  60, selfharm: 300,      canbeshot: false,  canbehit: false, notfot: true, invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 18, 18, 18, 18 ], generator: { glvl: [ 18, 18, 18, 18 ], health: 10, speed: 1.5*FPS, max: 20, score: 500, sx: 32, sy: 8 }, name: "Acid blob", weapon: null  ,  hits: 'hitpickle',   nohlp: 63               }
       },
 // track a potential "richest" player path - (really have to track them all...)
 		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25, thiefexit = false,
@@ -2769,6 +2769,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 // dev: no move
 			if (document.getElementById("nommv").checked) return;
 /// TEST - remove
+		if (this.stun > heartbeet) return;		// make supsoc visible too
       // if we couldn't move in that direction at full speed, try a baby step before giving up
       if (speed > 1)
         return this.step(map, player, dir, 1, travelling, allowfire);
@@ -2824,6 +2825,20 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				by.addscore(Math.floor( (Deathscore[Deathmult] - 1) /  (by.scmult > 1 ? 1.33333 : 1) ) );
 				return;
 		 }
+      if (nuke && this.type.nohlp == PCKLHLP) // angry pickle (acid blob) nuked
+		 {
+				if (this.stun < heartbeet || this.stun == undefined) { this.stun == heartbeet + 10; return; }
+
+				var re = Mastermap.addFx(this.x, this.y, FX.NUMER);
+				if (re != null) {
+					re.sy = re.type.sy + Deathnote[0];
+					re.numer = true; // special display class because of sprite render using entity.type.sy instead of entity.sy
+				}
+				this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null, nuke);
+				by.addscore(Math.floor( (Deathscore[0] - 1) /  (by.scmult > 1 ? 1.33333 : 1) ) );
+				return;
+		 }
+
       if ((by.weapon && this.type.canbeshot) || (by.player && this.type.canbehit) || (by == this) || nuke) {
         this.health = Math.max(0, this.health - damage);
 

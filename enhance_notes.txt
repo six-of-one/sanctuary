@@ -106,6 +106,7 @@ g2:
 -moving "ranodmly" wall
 -- trap walls done
 -invisible "become temp visible" walls -- likely a code deal with some overlay mask
+\_ x-- hint walls, but always on
 sngl potion stuns, dbl potion kills pickles (sup sorc too)
 
 new-ish:
