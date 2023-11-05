@@ -60,7 +60,6 @@ monster dmg: melee - turn off autohurt to test
 
 is it possible to code adjust the "contained" corner
 - also see if shootable tunnel cfgs walls around it, and reajust them after shot open
-- prob need to extra re-wall code from traps & make generic for the several wall adjust items
 
 player shot speed
 
@@ -346,6 +345,9 @@ o-- this will not work on a frame by frame due to the time required to render th
 x-- locked treasure needs item load (rn just gives 500 pts treasure value, no displ)
   - also need debounce on appearing items - so we can also drop items in enhance inv. mode
    \_ these two are not the actual g2 RNG, which is not known, so just approximations
+
+x-- prob need to extra re-wall code from traps & make generic for the several wall adjust items
+   \_done but remaps entire map background - ok for traps, but needs tightened for rnd & shot walls
 
 x-- g2 std wall shotable, item load initial
 
