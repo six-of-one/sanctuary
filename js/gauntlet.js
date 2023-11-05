@@ -622,7 +622,8 @@ Gauntlet = function() {
 
     images: [
       { id: 'backgrounds', url: "images/backgrounds.png" }, // http://opengameart.org/content/gauntlet-like-tiles
-      { id: 'entities',    url: "images/entities.png"    }  // http://opengameart.org/forumtopic/request-for-tileset-spritesheet-similar-to-gauntlet-ii
+      { id: 'entities',    url: "images/entities.png"    },  // http://opengameart.org/forumtopic/request-for-tileset-spritesheet-similar-to-gauntlet-ii
+      { id: 'wallsets',    url: "images/walls.png"    }
     ],
 
     sounds: [
@@ -4817,6 +4818,7 @@ var txsv = ":";
 		 hold[held] = null;
       for(n = 0, max = entities.length ; n < max ; n++) {
         entity = entities[n];
+			if (entity.spriteset == undefined) entity.spriteset = sprites;
         if (entity.active && (!entity.onrender || entity.onrender(frame) !== false) && !viewport.outside(entity.x, entity.y, TILE, TILE)) {
 // note: RUNORG
 
@@ -4826,14 +4828,14 @@ var txsv = ":";
 				if (entity.type.wall)
 						this.sprite(ctx, wallsprites, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else if (entity.door)
-						this.sprite(ctx, sprites, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+						this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else if (entity.numer)
-						this.sprite(ctx, sprites, viewport, entity.type.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+						this.sprite(ctx, entity.spriteset, viewport, entity.type.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else {
 						if (entity.type.pushwal)
 						{ hold[held++] = entity; hold[held] = null; }
 						else
-							this.sprite(ctx, sprites, viewport, entity.type.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+							this.sprite(ctx, entity.spriteset, viewport, entity.type.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 						}
 						entity.vx = Vx;
 						entity.vy = Vy;
@@ -4843,7 +4845,7 @@ var txsv = ":";
 		held = 0;		// save and do pushwalls last
 		while (hold[held] != null) {
 			entity = hold[held++];
-				this.sprite(ctx, sprites, viewport, entity.type.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+				this.sprite(ctx, entity.spriteset, viewport, entity.type.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 						entity.vx = Vx;
 						entity.vy = Vy;
 			}
