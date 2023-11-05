@@ -3496,6 +3496,8 @@ var txsv = ":";
 				if (treasure.type.sy == FAKES) helpdis(treasure.type.nohlp, undefined, 2000, undefined, undefined);
 				return; //shot wall, go back
 		 }
+// shotwall gud & locked chest need wait on touch or activation of item
+		 if (treasure.stun > heartbeet) return;
 
 		 if ((treasure.pixel & MEXHIGH) == FFIELDTILE)
 		 {
