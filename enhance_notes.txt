@@ -23,13 +23,12 @@ teleporters, shots cross the unpin line
 move across unpin in 1/ 2 unit tunnel fails
 
 
-- some g2 sounds may need vol atten
+- some g2 sounds may need vol atten -- in progress
 - g2 announcer does not match g1
 
 g2 ? food research (find in files, or redo)
 check sound for picking poison (is potion pick sound, need g2 ref)
 
-g2 acid blob (super sorc) dbl potion destruct
 
 super shots possibly destroys more than its coded to now
 (reg food, treasure, etc)
@@ -54,9 +53,6 @@ need sounds:
 port list:
 
 g2 phase wall, rnd wall
-locked treasure needs item load (rn just gives 500 pts treasure value, no displ)
-- also need debounce on appearing items - so we can also drop items in enhance inv. mode
-RND food - g2 ops (rn is rnd value 50 - 200)
 
 player dmg: melee
 melee mis gens
@@ -338,14 +334,22 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
-x-- mute button & NOBKGMUSIC do not work with ogv that has audio (fix at cost of more large vid files)
+x-- RND food - g2 ops (rn is rnd value 50 - 200 in 50pt increments)
 
+x-- redone with '.muted' option on <video> and no extra files
+x-- mute button & NOBKGMUSIC do not work with ogv that has audio (fix at cost of more large vid files)
 
 xxx (maybe) try render to map.background for animated liquids / floor tiles
 o-- this will not work on a frame by frame due to the time required to render the entire map bkg
    \_it might be possible to only write the liquid tiles in if they are in viewport, but that is not much diff from current ops
 
+x-- locked treasure needs item load (rn just gives 500 pts treasure value, no displ)
+  - also need debounce on appearing items - so we can also drop items in enhance inv. mode
+   \_ these two are not the actual g2 RNG, which is not known, so just approximations
+
 x-- g2 std wall shotable, item load initial
+
+x-- g2 acid blob (rem. to add super sorc) dbl potion destruct
 
 x-- monsters target across the unpin line
 
