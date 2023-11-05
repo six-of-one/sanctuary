@@ -15,7 +15,7 @@ dev:
 push wall collision
  \ elevate them above other treasure tiles
 
-(maybe) try render to map.background for animated liquids / floor tiles
+
 
 imm issues:
 
@@ -42,7 +42,6 @@ jsgv maze tiles are not proper update on floor obscuring-ent removal and some di
 
 dead player is only lvl 1 bone pile
 
-mute button & NOBKGMUSIC do not work with ogv that has audio
 
 
 
@@ -338,6 +337,13 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- mute button & NOBKGMUSIC do not work with ogv that has audio (fix at cost of more large vid files)
+
+
+xxx (maybe) try render to map.background for animated liquids / floor tiles
+o-- this will not work on a frame by frame due to the time required to render the entire map bkg
+   \_it might be possible to only write the liquid tiles in if they are in viewport, but that is not much diff from current ops
 
 x-- g2 std wall shotable, item load initial
 
