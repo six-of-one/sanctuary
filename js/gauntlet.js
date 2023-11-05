@@ -36,7 +36,7 @@ Gauntlet = function() {
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
-		ftilestr, fcellstr, FCUSTILE = 37, FDESTWALL = 38, FAKES = 39, HINTIV = 40,
+		ftilestr, fcellstr, FCUSTILE = 37, FCUSTIL2 = 0, FDESTWALL = 38, FAKES = 39, HINTIV = 40,
 
 		 MEXHIGH = 0xFFFFF0,
 		 MEXLOW = 0x00000F,
@@ -4679,14 +4679,14 @@ var txsv = ":";
           else if (cell.nothing)
             this.tile(ctx, sprites, 0, 0, tx, ty);
           else
-			  if (cell.pixel & MEXLOW)		// special diff floor tiles - up to 15 as of now
+			  if (cell.pixel & MEXLOB)		// special diff floor tiles - up to 15 as of now
 			  {
-				  var nfl = cell.pixel & MEXLOW;
-				  if ((cell.pixel & MEXHIGH) == 0xA08060)
-						this.tile(ctx, sprites, nfl, FCUSTILE, tx, ty);
+				  var nfl = cell.pixel & MEXLOW, nft = FCUSTILE * (cell.pixel & 0x10 == 0x10);
+				  if ((cell.pixel & MEXHIGB) == 0xA08060)
+						this.tile(ctx, sprites, nfl, nft, tx, ty);
 // if cust tile in an area and a cell is occupied by ent or removable - this sets it to prev tiles cust state
-				  else if (((fcellstr.pixel & MEXHIGH) == 0xA08060) && (fcellstr.pixel & MEXLOW))
-						this.tile(ctx, sprites, ftilestr, FCUSTILE, tx, ty);
+				  else if (((fcellstr.pixel & MEXHIGB) == 0xA08060) && (fcellstr.pixel & MEXLOB))
+						this.tile(ctx, sprites, ftilestr, nft, tx, ty);
 				  ftilestr = nfl; // store for non floor content tests
 			  }
 			  else
