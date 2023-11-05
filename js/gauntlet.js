@@ -3043,7 +3043,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
     hurt: function(damage, by, nuke) {
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
-			 var regud = false;
+			 var regud = false, rx, ry;
 				if (this.type.wall)
 				{
 						if (this.pixel == INVSWALCD)
@@ -3057,7 +3057,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 						 this.health = Math.max(0, this.health - damage);
 						 if (this.health > 0) return;
 						Musicth.play(Musicth.sounds[this.type.sound]);
-						if (this.type.gud > 0) regud = true;
+						if (this.type.gud > 0) {regud = true; rx = this.x; ry = this.y; }
 				}
 				else
 				if (this.type.health)
@@ -3124,7 +3124,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				rewall(Mastermap);
 				tilerend.maptiles(Mastermap, ctx);		// this redraws the background
 				if (regud) {		// shoot wall get item
-					var cell = reloaded.cells[p2t(this.x) + (p2t(this.y) * Mtw)];
+					var cell = reloaded.cells[p2t(rx) + (p2t(ry) * Mtw)];
 					rlitem(rlswall, 0.25, cell);
 					cell.ctx = ctx;
 					}
