@@ -1301,7 +1301,7 @@ Gauntlet = function() {
 
 		for (f = 0;f <= swloop;f++)
 			{
-				if (RLOAD[f][col] > 0)
+				if (RLPROF[f][col] > 0)
 				if (Math.random() < chn) {
 					Mastermap.load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
 					cell.loaded = true;
@@ -3057,7 +3057,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 						Musicth.play(Musicth.sounds[this.type.sound]);
 						if (this.type.gud > 0) {		// shoot wall get item
 							var cell = reloaded.cells[p2t(this.x+5) + p2t(this.y+5) *  Mastermap.tw];
-							rlitem(rlswall, 0.1, cell)
+							rlitem(rlswall, 0.25, cell)
 							}
 				}
 				else
