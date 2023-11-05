@@ -1306,7 +1306,7 @@ Gauntlet = function() {
 				if (Math.random() < chn) {
 					if (cell != undefined)
 					Mastermap.load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
-					return;
+					return RLPROF[f][0];
 				}
 			}
 			return -1;	// no item deployed
@@ -3046,15 +3046,19 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
     hurt: function(damage, by, nuke) {
 		 if (this.stun > heartbeet) return;
+		 var reret = true; // early return
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 			 var regud = false, rx, ry;
 				if (this.type.wall)
 				{
+						reret = false;
 						if (this.pixel == INVSWALCD)
 							helpdis(IVWSHLP, undefined, 2000, undefined, undefined);
 						else
-						if (this.type.nohlp == FITCH) 	// diff msg when shooting fake items
+						if (this.type.nohlp == FITCH) {	// diff msg when shooting fake items
 							helpdis(FICBS, undefined, 2000, undefined, undefined);
+							reret = true;
+							}
 						else
 							helpdis(this.type.nohlp, undefined, 2000, undefined, undefined);
 						 if (this.health == undefined) this.health = this.type.health;
@@ -3125,6 +3129,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				var n = p2t(this.x) + (p2t(this.y) * Mtw), ctx = reloaded.cells[n].ctx;
 				Mapdata[n] = 0xa08060;
 				Mastermap.remove(this);
+				if (reret) return; // dont remap anything but shotwalls
 				rewall(Mastermap);
 				tilerend.maptiles(Mastermap, ctx);		// this redraws the background
 				if (regud) {		// shoot wall get item
@@ -3133,7 +3138,6 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 					Mastercell.ptr.stun = heartbeet + 2;
 					cell.ctx = ctx;
 					}
-				return;
 		 }
     },
 
@@ -3547,7 +3551,7 @@ var txsv = ":";
 				{
 					var cell = reloaded.cells[p2t(treasure.x) + (p2t(treasure.y) * Mtw)];
 					var ctx = cell.ctx;
-					rlitem(rllock, 0.21, cell);
+					rlk = rlitem(rllock, 0.21, cell);
 					Mastercell.ptr.stun = heartbeet + 2;
 					cell.ctx = ctx;
 				}
