@@ -4660,34 +4660,15 @@ var txsv = ":";
 			  cell.sprites = sprites;		//		shootable walls, g2 shot walls, g2 random walls, and so
 			  cell.tileptr = this;
 			  cell.map = map;
-          if (is.valid(cell.wall))
-			  {
-					  if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000)  {// diff walls by low nibble
-						this.tile(ctx, sprites, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
-					  }
-					  else
-						if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls -- only applies to std level walls
-/// TEST - update
-							var wallhue = document.getElementById("whue").value;
-							if (wallhue <0 || wallhue > 360) wallhue = 0;
-							ctx.filter = "hue-rotate("+wallhue+"deg)";
-/// TEST - update
-							this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
-							ctx.filter = "hue-rotate(0deg)";
-							if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
-						}
-						else
-						if (hintinv) this.tile(ctx, sprites, cell.wall, HINTIV, tx, ty);
-			  }
-          else if (cell.nothing) {
+
+		  if (cell.nothing) {
 				this.tile(ctx, sprites, 0, 0, tx, ty);
 				fcellstr = cell;
 				nfl = nft = 0;
 			 }
-
-          else if (isp(cell.pixel,0xA08000))	// all floors except 0x000000
+			else if (isp(cell.pixel,0xA08000))	// all floors except 0x000000
 			  {
-				var nfl = cell.pixel & MEXLOW, nft = FCUSTILE;
+			var nfl = cell.pixel & MEXLOW, nft = FCUSTILE;
 				  if (cell.pixel & 0x10) nft = 0;
 
 				  if (cell.pixel & MEXLOB)		// special diff floor tiles - up to 15 as of now
@@ -4705,21 +4686,45 @@ var txsv = ":";
 					ftilestr = nfl; // store for non floor content tests
 					fcellstr = cell;
 			  }
-			  else		// this is some ent - copy floor tile under it from imm. previous
-			  if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
+			else if (is.valid(cell.wall))
+			  {
+//					cell.ptile = fcellstr;
+					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000)  {// diff walls by low nibble
+						this.tile(ctx, sprites, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
+					  }
+					else
+					if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls -- only applies to std level walls
+/// TEST - update
+						var wallhue = document.getElementById("whue").value;
+						if (wallhue <0 || wallhue > 360) wallhue = 0;
+						ctx.filter = "hue-rotate("+wallhue+"deg)";
+/// TEST - update
+						this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
+						ctx.filter = "hue-rotate(0deg)";
+						if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
+					}
+					else {
+						if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
+								this.tile(ctx, sprites, nfl, nft, tx, ty);
+
+						if (hintinv) this.tile(ctx, sprites, cell.wall, HINTIV, tx, ty);
+					}
+			  }
+			else		// this is some ent - copy floor tile under it from imm. previous
+			if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
 					this.tile(ctx, sprites, nfl, nft, tx, ty);
 
 // map gps
-			  if (document.getElementById("mazsolv").checked)
-			  if (cell.mapcht) this.tile(ctx, sprites,  15, 0, tx, ty);			// currently unit 15 of row 0 backgrounds.png is the yellow brick overlay
+		  if (document.getElementById("mazsolv").checked)
+		  if (cell.mapcht) this.tile(ctx, sprites,  15, 0, tx, ty);			// currently unit 15 of row 0 backgrounds.png is the yellow brick overlay
 
-				if (map.level.wall == WALL.INVIS)				// do floor tile for invis walls
-				{
-					if (!map.level.gflr)
-							this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
-				}
-				else
-				if (cell.shadow)		// dont shadow for invis walls
+			if (map.level.wall == WALL.INVIS)				// do floor tile for invis walls
+			{
+				if (!map.level.gflr)
+						this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
+			}
+			else
+			if (cell.shadow)		// dont shadow for invis walls
 					this.tile(ctx, sprites, cell.shadow, WALL.INVIS, tx, ty);
 // when a following tile is covered and being revealed, this sets it to the prev. tile if area is cust tile (differ from spec tile on map)
         }
