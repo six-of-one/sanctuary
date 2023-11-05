@@ -1309,6 +1309,7 @@ Gauntlet = function() {
 					return;
 				}
 			}
+			return -1;	// no item deployed
 		};
   //=========================================================================
   // PERFORMANCE - using arrays for (small) sets
@@ -3541,6 +3542,16 @@ var txsv = ":";
 			this.ctr = this.ctr + (treasure.type.score / 100);
 		else
 		 {
+				var rlk = -1;
+				if (treasure.type.lock)
+				{
+					var cell = reloaded.cells[p2t(treasure.x) + (p2t(treasure.y) * Mtw)];
+					var ctx = cell.ctx;
+					rlitem(rllock, 0.21, cell);
+					Mastercell.ptr.stun = heartbeet + 2;
+					cell.ctx = ctx;
+				}
+				if (rlk < 0)	// if lock chest empty, get 500 pts
 				this.addscore(treasure.type.score);
 				if (treasure.type.score == 100 || treasure.type.score == 500)
 				{
