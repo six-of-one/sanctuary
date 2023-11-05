@@ -1965,7 +1965,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				}
 /// TEST - update ?
 				if (document.getElementById("sdps").checked && entity.type.pushwal)
-				{ alert("dps");
+				{
 					var dpst = document.getElementById("dpsout").title;
 					var dphm  = 0;	// damage per 30 secs
 					if (document.getElementById("sdphm").checked) dphm = 30;
@@ -2245,7 +2245,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
     },
 
     door: function(x, y) {
-			if (this.cell == undefined || this.cell(x,y).occupied == undefined) return null;
+			if (this.cell(x,y) == undefined) return null;
 	  var obj = this.cell(x,y).occupied[0];  // optimization - we know doors will always be first (and only) entity in a cell
 			return obj && obj.door ? obj : null;
     },
