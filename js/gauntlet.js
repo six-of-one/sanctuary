@@ -474,7 +474,7 @@ Gauntlet = function() {
         COINS:   "gauntlet.coins"
       },
 // chest & wall goody/bady profiles
-		rllock = 10, rlswall = 11, swloop = 37,
+		rllock = 11, rlswall = 12, swloop = 38,
 // rnd load profiles
 		rlloop = 33,
 		rlline = 9,
@@ -514,6 +514,7 @@ Gauntlet = function() {
 [	0x400030,  0,  0,  0, 20,  0,  0, 12,  0,  0,  0,  0,  0	],
 [	0x400050,  0,  0,  6,  0,  0,  0,  0, 15,  0,  0,  0,  0	],
 // line 10, 11 extras
+[	0x400120,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1	],
 [	0x0080F4,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1	],
 [	0x0080E3,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1	],
 [	0x008150,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1	],
@@ -3043,6 +3044,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 // not living shootables
 
     hurt: function(damage, by, nuke) {
+		 if (this.stun > heartbeet) return;
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
 			 var regud = false, rx, ry;
 				if (this.type.wall)
@@ -3126,7 +3128,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				tilerend.maptiles(Mastermap, ctx);		// this redraws the background
 				if (regud) {		// shoot wall get item
 					var cell = reloaded.cells[p2t(rx) + (p2t(ry) * Mtw)];
-					rlitem(rlswall, 0.25, cell);
+					rlitem(rlswall, 0.15, cell);
+					Mastercell.ptr.stun = heartbeet + 2;
 					cell.ctx = ctx;
 					}
 				return;
@@ -3572,7 +3575,7 @@ var txsv = ":";
 		 }
 
 		 var hrp = undefined;
-		 if (treasure.type.nohlp == RNDHLP) treasure.type.health = 50 + Game.Math.randomInt(50,150);
+		 if (treasure.type.nohlp == RNDHLP) treasure.type.health = 50 + Game.Math.randomInt(1,3) * 50;
 		 if (treasure.type.health > 0) hrp = treasure.type.health;
 		 if (!treasure.type.damage) {
 			 helpdis(treasure.type.nohlp, undefined, 2000, hrp, undefined);
