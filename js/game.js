@@ -765,8 +765,7 @@ Game.Math = {
 					if (Math.random() < 0.27) { vid.src = "images/gIV_intro.ogv"; rot = 20650; }
 					if (Math.random() < 0.22) { vid.src = "images/gN_intro.ogv"; rot = 34210; }
 			}
-			if (AudioFX.mute) vid.volume(0);
-			else vid.volume(100);
+			vid.muted = AudioFX.mute;
 			vid.play();
 			vid.style.visibility = "visible";
 		}
