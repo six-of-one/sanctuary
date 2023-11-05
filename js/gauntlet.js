@@ -275,7 +275,7 @@ Gauntlet = function() {
         POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', nohlp: 19  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion',  nohlp: 80 },
         GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1, troom: 1,             sound: 'collectgold', nohlp: 14, blkhlp: 15   },
-        LOCKED:  { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true,              sound: 'unlkches', nohlp:   56 },
+        LOCKED:  { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true, gud: 1, sound: 'unlkches', nohlp:   56 },
         BAG:     { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5, troom: 1,                sound: 'collectgold', nohlp: 15, blkhlp: 14   },
 // teleport, trap, stun, force field tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport',  nohlp: 25  },
@@ -326,11 +326,11 @@ Gauntlet = function() {
         NWASTET:    { sx: 19, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 83  },
         NWASTEC:    { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 83  },
         NWASTER:    { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 83  },
-        FIRESTK:    { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 999  },
+        FIRESTK:    { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 999  },
         PFLOOR1:    { sx: 28, sy: 27, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 999  },
 // other "wall" ents
-        WALLGUD:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true,   sound: 'null' },
-        WALLGUD2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true,   sound: 'null' },
+        WALLGUD:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true, gud: 3,   sound: 'shotwall',  nohlp: 65 },
+        WALLGUD2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true, gud: 3,   sound: 'shotwall',  nohlp: 65 },
         WALLPASS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
         WALLPASS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
 
@@ -473,6 +473,8 @@ Gauntlet = function() {
         WHO:     "gauntlet.who",
         COINS:   "gauntlet.coins"
       },
+// chest & wall goody/bady profiles
+
 // rnd load profiles
 		rlloop = 33,
 		rlline = 9,
@@ -3036,6 +3038,10 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 						 if (this.health == undefined) this.health = this.type.health;
 						 this.health = Math.max(0, this.health - damage);
 						 if (this.health > 0) return;
+						Musicth.play(Musicth.sounds[this.type.sound]);
+						if (this.type.gud > 0) {		// shoot wall get item
+							
+							}
 				}
 				else
 				if (this.type.health)

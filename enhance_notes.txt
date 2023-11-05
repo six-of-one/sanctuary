@@ -120,6 +120,20 @@ color match 40400F walls & loadable wall with them | _ section
 trainable map reader (load g2 maps from maze ed, speccy maps)
 2nd player local
 
+companion potion: cat face on blue potion
+- next creature you touch becomes follower companion
+- will stay with you until you die, then they are released
+-
+- ghosts kill accd to level on touch - 1st level ghost kills 1 level of enemy
+- grunts beat on enemies and loot treasure, transfer to you on touch
+- demons shoot things and collect food
+- sorcerors pick up potions and they can detonate as elf (good for war, val)
+- lobbers shoot over walls
+- death - does buku touch damage to all enemies except other death
+- acid blob - does large damage as well and wobbles around
+- super sorceror also have shot, wizard lvl potion skill, teleport behind walls to attack
+
+
 limits on g1, g2, sanctuary (items, monsters, modes, extras ...)
 
 >>>>>>>>>>>>>>>>>>>>>>
