@@ -429,7 +429,7 @@ Gauntlet = function() {
 // --- g1 floors are handled in a seperate gfx file as they tile (currently) 256 x 256 px (4 x 4 map cells) over the map due to diff design per tile
       FLOOR = { 	BROWN_BOARDS: 1, LIGHBROWN_BOARDS: 2, GREEN_BOARDS: 3, GREY_BOARDS: 4, WOOD: 5, LIGHT_STONE: 6, DARK_STONE: 7, BROWN_LAMINATE: 8,
 									PURPLE_LAMINATE: 9, PURPLEPHASE: 10, MULTIC: 11, BEES: 12, BOOK: 13, MTILE: 14, YELLOWBR: 15, RND: 16,
-									MIN: 1, MAX: 14 },
+									MIN: 1, MAX: 14 }, FLVLRND = null,
 // jvsg walls - 32 x 32 px per each wall "unit" - rows 1 - 7 of backgrounds.png
       WALL  = { 	INVIS: 1, BLUE: 2, BLUE_BRICK: 3, PURPLE_TILE: 4, BLUE_COBBLE: 5, PURPLE_COBBLE: 6, CONCRETE: 7,
 // g1 wall codes - rows 8 - 36 in backgrounds.png
@@ -1501,6 +1501,7 @@ Gauntlet = function() {
 // autoload
 			RNGLOAD[1] = TREASURE.GOLD;
 //			stolen_load = 0;
+			FLVLRND = Game.Math.randomInt(FLOOR.MIN, FLOOR.MAX);
     },
 
     onload: function(event, previous, current, nlevel) {
@@ -4627,7 +4628,8 @@ var txsv = ":";
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
 		 if (wallsprites == undefined) wallsprites = sprites;
 
-		if (map.level.gflr)
+// first cycle - map entire map bkg with a larger floor tile if specced
+		if (map.level.gflr)	// this is set before map load
 		 {
 			var gbas = document.getElementById("gfloorbas");
 			var gimg = document.getElementById("gfloor");
@@ -4650,6 +4652,7 @@ var txsv = ":";
 		 var hintinv = document.getElementById("invhint").checked;
 		 if (document.getElementById("invwal").checked) map.level.wall = WALL.INVIS;
 /// TEST - remove
+// second cycle - everything else
       for(ty = 0, th = map.th ; ty < th ; ty++) {
         for(tx = 0, tw = map.tw ; tx < tw ; tx++) {
           cell = map.cell(tx * TILE, ty * TILE);
@@ -4676,36 +4679,49 @@ var txsv = ":";
 						else
 						if (hintinv) this.tile(ctx, sprites, cell.wall, HINTIV, tx, ty);
 			  }
-          else if (cell.nothing)
-            this.tile(ctx, sprites, 0, 0, tx, ty);
-          else
-			  if (cell.pixel & MEXLOB)		// special diff floor tiles - up to 15 as of now
+          else if (cell.nothing) {
+				this.tile(ctx, sprites, 0, 0, tx, ty);
+				fcellstr = cell;
+				nfl = nft = 0;
+			 }
+
+          else if (isp(cell.pixel,0xA08000))	// all floors except 0x000000
 			  {
-				  var nfl = cell.pixel & MEXLOW, nft = FCUSTILE * (cell.pixel & 0x10 == 0x10);
-				  if ((cell.pixel & MEXHIGB) == 0xA08060)
+				var nfl = cell.pixel & MEXLOW, nft = FCUSTILE;
+				  if (cell.pixel & 0x10) nft = 0;
+
+				  if (cell.pixel & MEXLOB)		// special diff floor tiles - up to 15 as of now
+				  {
 						this.tile(ctx, sprites, nfl, nft, tx, ty);
 // if cust tile in an area and a cell is occupied by ent or removable - this sets it to prev tiles cust state
-				  else if (((fcellstr.pixel & MEXHIGB) == 0xA08060) && (fcellstr.pixel & MEXLOB))
-						this.tile(ctx, sprites, ftilestr, nft, tx, ty);
-				  ftilestr = nfl; // store for non floor content tests
+				  }
+// no g floor tile & nothing else spec
+				  else if (!map.level.gflr)
+						{
+							nfl = map.level.floor; nft = 0;
+							if (nfl == undefined || nfl == FLOOR.RND) nfl = FLVLRND;
+							this.tile(ctx, sprites, DEBUG.FLOOR || nfl, 0, tx, ty);
+						}
+					ftilestr = nfl; // store for non floor content tests
+					fcellstr = cell;
 			  }
-			  else
-			  if (!map.level.gflr)
-            this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
+			  else		// this is some ent - copy floor tile under it from imm. previous
+			  if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
+					this.tile(ctx, sprites, nfl, nft, tx, ty);
+
 // map gps
 			  if (document.getElementById("mazsolv").checked)
 			  if (cell.mapcht) this.tile(ctx, sprites,  15, 0, tx, ty);			// currently unit 15 of row 0 backgrounds.png is the yellow brick overlay
 
-			if (map.level.wall == WALL.INVIS)				// do floor tile for invis walls
-			{
-				if (!map.level.gflr)
-						this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
-			}
-			else
-			if (cell.shadow)		// dont shadow for invis walls
-            this.tile(ctx, sprites, cell.shadow, WALL.INVIS, tx, ty);
+				if (map.level.wall == WALL.INVIS)				// do floor tile for invis walls
+				{
+					if (!map.level.gflr)
+							this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
+				}
+				else
+				if (cell.shadow)		// dont shadow for invis walls
+					this.tile(ctx, sprites, cell.shadow, WALL.INVIS, tx, ty);
 // when a following tile is covered and being revealed, this sets it to the prev. tile if area is cust tile (differ from spec tile on map)
-				fcellstr = cell;
         }
       }
       if (DEBUG.GRID)
