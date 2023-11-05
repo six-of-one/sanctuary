@@ -1965,7 +1965,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				}
 /// TEST - update ?
 				if (document.getElementById("sdps").checked && entity.type.push)
-				{
+				{ alert("dps");
 					var dpst = document.getElementById("dpsout").title;
 					var dphm  = 0;	// damage per 30 secs
 					if (document.getElementById("sdphm").checked) dphm = 30;
@@ -3042,6 +3042,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
     hurt: function(damage, by, nuke) {
 		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
+			 var regud = false;
 				if (this.type.wall)
 				{
 						if (this.pixel == INVSWALCD)
@@ -3055,10 +3056,7 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 						 this.health = Math.max(0, this.health - damage);
 						 if (this.health > 0) return;
 						Musicth.play(Musicth.sounds[this.type.sound]);
-						if (this.type.gud > 0) {		// shoot wall get item
-							var cell = reloaded.cells[p2t(this.x) + (p2t(this.y) * Mtw)];
-							rlitem(rlswall, 0.25, cell)
-							}
+						if (this.type.gud > 0) regud = true;
 				}
 				else
 				if (this.type.health)
@@ -3124,6 +3122,11 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 				Mastermap.remove(this);
 				rewall(Mastermap);
 				tilerend.maptiles(Mastermap, ctx);		// this redraws the background
+				if (regud) {		// shoot wall get item
+					var cell = reloaded.cells[p2t(this.x) + (p2t(this.y) * Mtw)];
+					rlitem(rlswall, 0.25, cell);
+					cell.ctx = ctx;
+					}
 				return;
 		 }
     },
