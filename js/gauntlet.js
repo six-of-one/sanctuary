@@ -11,7 +11,7 @@ Gauntlet = function() {
 											DEBUGON = 0,
 // debug - provide a one time start level
 											initlevel = 0,
-	vardbg = 0,
+	vardbg = 0, dent,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -31,7 +31,7 @@ Gauntlet = function() {
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Munhx, Munlx = 16, Munhy, Munly = 16, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
 		walltype, shadowtype, doortype, Mapdata, Huedata, tilerend, Vx, Vy, mtm,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
@@ -2369,14 +2369,12 @@ var lvu = document.getElementById("flvl").value;
 		 }
       if (!collision && !dryrun) {
 			var nx = this.tpos.x, ny = this.tpos.y;
-			if (Mastermap.level.unpinx) {
-				if (nx <= Munlx) { if (nx < 0) nx = 0; this.tpos.x = Munhx - ( Munlx - nx); }
-				else if (nx >= Munhx) { if (nx > ((Mtw - 1) * TILE)) nx = (Mtw - 1) * TILE; this.tpos.x = Munlx - ( nx - Munhx ); }
-			}
-			if (Mastermap.level.unpiny) {
-				if (ny <= Munly) { if (ny < 0) ny = 0; this.tpos.y = Munhy - ( Munly - ny); }
-				else if (ny >= Munhy) { if (ny > ((Mth - 1) * TILE)) ny = (Mth - 1) * TILE; this.tpos.y = Munly - ( ny - Munhy ); }
-			}
+
+			if (nx <= Munlx) { this.tpos.x = Munhx - ( Munlx - nx); }
+			else if (nx >= Munhx) { this.tpos.x = Munlx + ( nx - Munhx ); }
+
+			if (ny <= Munly) { this.tpos.y = Munhy - ( Munly - ny); }
+			else if (ny >= Munhy) { this.tpos.y = Munly + ( ny - Munhy ); }
 
         this.occupy(this.tpos.x, this.tpos.y, entity);
       }
@@ -2471,7 +2469,7 @@ var lvu = document.getElementById("flvl").value;
           cell, item,
           c, nc = cells.length,
           i, ni;
-
+//if (!document.getElementById("noclip").checked) alert(cells.length);
       // have to check for any player FIRST, so even if player is near a wall or other monster he will still get hit (otherwise its possible to use monsters as semi-shields against other monsters)
       if ((game.player != ignore) && overlapEntity(x, y, w, h, game.player))
         return game.player;
@@ -2479,6 +2477,9 @@ var lvu = document.getElementById("flvl").value;
       // now loop again checking for walls and other entities
       for(c = 0 ; c < nc ; c++) {
         cell = cells[c];
+
+document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y)+" wh: "+w+":"+h;
+
 // since edje walls can become exits, make sure shots expire at edge
 			if (cell == undefined) return true;
 
@@ -2657,9 +2658,8 @@ if (document.getElementById("noclip").checked) return false;
       self.w        = Mtw * TILE;
       self.h        = Mth * TILE;
 
-		self.pw = self.w; self.ph = self.h; self.pzx = 0; self.pzy = 0;	// pretend map is smaller when display unpins in viewport
-		if (level.unpinx) { self.pw = self.w - 1; self.pzx = 1; Munhx = ((Mtw - 2) + 0.375) * TILE; }	// cross the _hidden_ test line occupied uses to allow crossing unpin lines
-		if (level.unpiny) { self.ph = self.h - 1; self.pzy = 1; Munhy = ((Mth - 2) + 0.375) * TILE; }
+		if (level.unpinx) { Munhx = Mtw * TILE - 1; }
+		if (level.unpiny) { Munhy = Mth * TILE - 16; }
 
     },
 
@@ -3527,7 +3527,8 @@ var txsv = ":";
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
 // player trying to cross unpinned edge
-document.title = "-pl xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t(this.x)+":"+p2t(this.y);
+dent = this;
+//document.title = "-pl xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t(this.x)+":"+p2t(this.y);
 /*
 			if (0 && (this.x < 3 || (this.x > (map.w - 11)) || this.y < 3 || (this.y > (map.h - 19))))
 			{
