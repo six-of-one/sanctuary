@@ -3522,11 +3522,12 @@ var txsv = ":";
 						var np = (ntx + (tx - dx)) + (nty + (ty - dy)) * Mtw;
 						cells[np] = cells[cp];
 					}
-					var newp = this;
-					newp.x = cx + 50 * TILE;
-					newp.y = cy + 50 * TILE;
+					var newp;
+//					newp.x = cx + 50 * TILE;
+//					newp.y = cy + 50 * TILE;
 					newp.cbox = this.cbox;
 					newp.timeout = this.timeout;
+					Mastermap.occupy(cx + 50 * TILE, cy + 50 * TILE, newp);
 
 					var npx = newp.x, npy = newp.y;
 					collision = map.trymove(newp, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
