@@ -1299,7 +1299,7 @@ Gauntlet = function() {
 
 // hues & colors
 // process level colors, hue overrides, special color instructions, tile overrides
-// first byte codes: xFE, xFC, xFA, xF8, xF6, xF4, xF2
+// first byte - codes: xFE, xFC, xFA, xF8, xF6, xF4, xF2
 // xFE - hues override: xFFFF: 0 - 255 interpolate to 0 - 359, byte 1 = floor/wall, byte 0 = items
 // XFC - tile override: 0xF000 - extra tiles set #, x0F00 - trap code, 0xFF - lower byte floors ref, 0 is level floor
 // XFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
@@ -1311,7 +1311,7 @@ Gauntlet = function() {
 // XF -
 // any other codes: color triple 0xFFFFFF that will load between gbas layer and gflr
 
-var Lhue_bkg, Lhue_item, Lcolor, Lxtr, Ltile, Ltrap;
+var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap;
 
 	function parseHue(px, py, ctx) {
 		Lhue_bkg = 0;
@@ -1338,6 +1338,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lxtr, Ltile, Ltrap;
 			return 0;
 		}
 		Lcolor = d;
+		Lrgb = "rgb("+((d & 0xFF0000) / 0x10000)+", "+((d & 0xFF00) / 0x100)+", "+(d & 0xFF)+")";
 		return d;
 	};
 
@@ -4743,9 +4744,12 @@ var txsv = ":";
 				fcellstr = cell;
 				var hu = parseHue(tx, ty);
 			  if (hu > 0) {
+               ctx.beginPath();
 					ctx.rect(tx * TILE, ty * TILE, TILE, TILE);
-					ctx.fillStyle = hu;
+					ctx.fillStyle = Lrgb;
 					ctx.fill();
+					ctx.closePath();
+
 					fcellstr = null;	// the only way to pass this is in huedata
 					}
 				else
