@@ -2472,6 +2472,9 @@ var lvu = document.getElementById("flvl").value;
 // since edje walls can become exits, make sure shots expire at edge
 			if (cell == undefined) return true;
 
+/// TEST - remove
+if (document.getElementById("noclip").checked) return false;
+/// TEST - remove
 			if (cell.wall !== undefined && cell.wall !== null)		{		// walls to exits sets null
 //				if (mtm != "bw: "+cell.tx+":"+cell.ty) { mtm = "bw: "+cell.tx+":"+cell.ty; alert("bw: "+cell.tx+":"+cell.ty);}
 				return true;
