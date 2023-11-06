@@ -4693,7 +4693,7 @@ var txsv = ":";
 						this.tile(ctx, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
 					  }
 					else
-					if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls -- only applies to std level walls
+					if (map.level.wall != WALL.INVIS) { 		// dont load wall tile for invis walls -- only applies to std level walls
 /// TEST - update
 						var wallhue = document.getElementById("whue").value;
 						if (wallhue <0 || wallhue > 360) wallhue = 0;
@@ -4704,7 +4704,7 @@ var txsv = ":";
 						if (map.level.brikovr) this.tile(ctx, cell.spriteset, cell.wall, map.level.brikovr, tx, ty);
 					}
 					else {
-						if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
+						if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr)) // underneath an invisible wall - load as under an ent
 								this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 
 						if (hintinv) this.tile(ctx, cell.spriteset, cell.wall, HINTIV, tx, ty);
@@ -4723,8 +4723,8 @@ var txsv = ":";
 				if (!map.level.gflr)
 						this.tile(ctx, cell.spriteset, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
 			}
-			else
-			if (cell.shadow)		// dont shadow for invis walls
+			if (map.level.wall != WALL.INVIS || hintinv)
+				if (cell.shadow)		// dont shadow for invis walls
 					this.tile(ctx, cell.spriteset, cell.shadow, WALL.INVIS, tx, ty);
 // when a following tile is covered and being revealed, this sets it to the prev. tile if area is cust tile (differ from spec tile on map)
         }
