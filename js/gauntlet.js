@@ -2368,14 +2368,14 @@ var lvu = document.getElementById("flvl").value;
 				}
 		 }
       if (!collision && !dryrun) {
-			var nx, ny;
+			var nx = this.tpos.x, ny = this.tpos.y;
 			if (Mastermap.level.unpinx) {
-				if (tpos.x <= Munlx) { if (tpos.x < 0) tpos.x = 0; tpos.x = Munhx - ( Munlx - tpos.x); }
-				else if (tpos.x >= Munhx) { if (tpos.x > ((Mtw - 1) * TILE)) tpos.x = (Mtw - 1) * TILE; tpos.x = Munlx - ( tpos.x - Munhx ); }
+				if (nx <= Munlx) { if (nx < 0) nx = 0; this.tpos.x = Munhx - ( Munlx - nx); }
+				else if (nx >= Munhx) { if (nx > ((Mtw - 1) * TILE)) nx = (Mtw - 1) * TILE; this.tpos.x = Munlx - ( nx - Munhx ); }
 			}
 			if (Mastermap.level.unpiny) {
-				if (tpos.y <= Munly) { if (tpos.y < 0) tpos.y = 0; tpos.y = Munhy - ( Munly - tpos.y); }
-				else if (tpos.y >= Munhy) { if (tpos.y > ((Mth - 1) * TILE)) tpos.y = (Mth - 1) * TILE; tpos.y = Munly - ( tpos.y - Munhy ); }
+				if (ny <= Munly) { if (ny < 0) ny = 0; this.tpos.y = Munhy - ( Munly - ny); }
+				else if (ny >= Munhy) { if (ny > ((Mth - 1) * TILE)) ny = (Mth - 1) * TILE; this.tpos.y = Munly - ( ny - Munhy ); }
 			}
 
         this.occupy(this.tpos.x, this.tpos.y, entity);
@@ -2657,8 +2657,9 @@ if (document.getElementById("noclip").checked) return false;
       self.w        = Mtw * TILE;
       self.h        = Mth * TILE;
 
-		if (level.unpinx) Munhx = ((Mtw - 2) + 0.375) * TILE;	// cross the _hidden_ test line occupied uses to allow crossing unpin lines
-		if (level.unpiny) Munhy = ((Mth - 2) + 0.375) * TILE;
+		self.pw = self.w; self.ph = self.h; self.pzx = 0; self.pzy = 0;	// pretend map is smaller when display unpins in viewport
+		if (level.unpinx) { self.pw = self.w - 1; self.pzx = 1; Munhx = ((Mtw - 2) + 0.375) * TILE; }	// cross the _hidden_ test line occupied uses to allow crossing unpin lines
+		if (level.unpiny) { self.ph = self.h - 1; self.pzy = 1; Munhy = ((Mth - 2) + 0.375) * TILE; }
 
     },
 
