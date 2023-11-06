@@ -1306,8 +1306,9 @@ Gauntlet = function() {
 // XF -
 // any other codes: color triple 0xFFFFFF that will load between gbas layer and gflr
 
-var Lhue_bkg, Lhue_item, Lcolor, Lxtr, Ltile, Ltrap,
-	function parseImage(px, py) {
+var Lhue_bkg, Lhue_item, Lcolor, Lxtr, Ltile, Ltrap;
+
+	function parseHue(px, py) {
 		Lhue_bkg = 0;
 		Lhue_item = 0;
 		Lcolor = 0;
@@ -1323,14 +1324,16 @@ var Lhue_bkg, Lhue_item, Lcolor, Lxtr, Ltile, Ltrap,
 		if ((d & mask) == 0xFE0000) {
 			Lhue_bkg = (d & 0xFF00) / 0x100;
 			Lhue_item = (d & 0xFF);
-			return;
+			return 0;
 		}
 		if ((d & mask) == 0xFC0000) {
 			Lxtr = (d & 0xF000) / 0x1000;
 			Ltrap = (d & 0xF00) / 0x100;
 			Ltile = (d & 0xFF);
-			return;
+			return 0;
 		}
+		Lcolor = d;
+		return d;
 	};
 
 // random load item from chest or shotwall - col (10, 11), chn 0.0 - 1.0, cell to plug
@@ -4735,8 +4738,16 @@ var txsv = ":";
 			  cell.map = map;
 
 		  if (cell.nothing) {
-				this.tile(ctx, cell.spriteset, 0, 0, tx, ty);
 				fcellstr = cell;
+				var hu = parseHue(tx, ty);
+			  if (hu > 0) {
+					ctx.rect(tx, ty, TILE, TILE);
+					ctx.fillStyle = hu;
+					ctx.fill();
+					fcellstr = null;	// the only way to pass this is in huedata
+					}
+				else
+				this.tile(ctx, cell.spriteset, 0, 0, tx, ty);
 				nfl = nft = 0;
 			 }
 			else if (isp(cell.pixel,0xA08000))	// all floors except 0x000000
@@ -4777,6 +4788,7 @@ var txsv = ":";
 						if (map.level.brikovr) this.tile(ctx, cell.spriteset, cell.wall, map.level.brikovr, tx, ty);
 					}
 					else {
+						if (fcellstr != null)
 						if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr)) // underneath an invisible wall - load as under an ent
 								this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 
@@ -4784,6 +4796,7 @@ var txsv = ":";
 					}
 			  }
 			else		// this is some ent - copy floor tile under it from imm. previous
+			if (fcellstr != null)
 			if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
 					this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 
