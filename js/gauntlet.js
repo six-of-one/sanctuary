@@ -622,8 +622,7 @@ Gauntlet = function() {
 
     images: [
       { id: 'backgrounds', url: "images/backgrounds.png" }, // http://opengameart.org/content/gauntlet-like-tiles
-      { id: 'entities',    url: "images/entities.png"    },  // http://opengameart.org/forumtopic/request-for-tileset-spritesheet-similar-to-gauntlet-ii
-      { id: 'wallsets',    url: "images/walls.png"    }
+      { id: 'entities',    url: "images/entities.png"    }  // http://opengameart.org/forumtopic/request-for-tileset-spritesheet-similar-to-gauntlet-ii
     ],
 
     sounds: [
@@ -4658,12 +4657,12 @@ var txsv = ":";
         for(tx = 0, tw = map.tw ; tx < tw ; tx++) {
           cell = map.cell(tx * TILE, ty * TILE);
 			  cell.ctx = ctx;						// for traps turning walls to floor, stalling walls to exits
-			  cell.sprites = sprites;		//		shootable walls, g2 shot walls, g2 random walls, and so
+			  if (cell.spriteset == undefined) cell.spriteset = sprites;		//		shootable walls, g2 shot walls, g2 random walls, and so
 			  cell.tileptr = this;
 			  cell.map = map;
 
 		  if (cell.nothing) {
-				this.tile(ctx, sprites, 0, 0, tx, ty);
+				this.tile(ctx, cell.spriteset, 0, 0, tx, ty);
 				fcellstr = cell;
 				nfl = nft = 0;
 			 }
@@ -4674,7 +4673,7 @@ var txsv = ":";
 
 				  if (cell.pixel & MEXLOB)		// special diff floor tiles - up to 15 as of now
 				  {
-						this.tile(ctx, sprites, nfl, nft, tx, ty);
+						this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 // if cust tile in an area and a cell is occupied by ent or removable - this sets it to prev tiles cust state
 				  }
 // no g floor tile & nothing else spec
@@ -4682,7 +4681,7 @@ var txsv = ":";
 						{
 							nfl = map.level.floor; nft = 0;
 							if (nfl == undefined || nfl == FLOOR.RND) nfl = FLVLRND;
-							this.tile(ctx, sprites, DEBUG.FLOOR || nfl, 0, tx, ty);
+							this.tile(ctx, cell.spriteset, DEBUG.FLOOR || nfl, 0, tx, ty);
 						}
 					ftilestr = nfl; // store for non floor content tests
 					fcellstr = cell;
@@ -4691,7 +4690,7 @@ var txsv = ":";
 			  {
 //					cell.ptile = fcellstr;
 					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000)  {// diff walls by low nibble
-						this.tile(ctx, sprites, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
+						this.tile(ctx, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
 					  }
 					else
 					if (map.level.wall != WALL.INVIS){ 		// dont load wall tile for invis walls -- only applies to std level walls
@@ -4700,33 +4699,33 @@ var txsv = ":";
 						if (wallhue <0 || wallhue > 360) wallhue = 0;
 						ctx.filter = "hue-rotate("+wallhue+"deg)";
 /// TEST - update
-						this.tile(ctx, sprites, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
+						this.tile(ctx, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
 						ctx.filter = "hue-rotate(0deg)";
-						if (map.level.brikovr) this.tile(ctx, sprites, cell.wall, map.level.brikovr, tx, ty);
+						if (map.level.brikovr) this.tile(ctx, cell.spriteset, cell.wall, map.level.brikovr, tx, ty);
 					}
 					else {
 						if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
-								this.tile(ctx, sprites, nfl, nft, tx, ty);
+								this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 
-						if (hintinv) this.tile(ctx, sprites, cell.wall, HINTIV, tx, ty);
+						if (hintinv) this.tile(ctx, cell.spriteset, cell.wall, HINTIV, tx, ty);
 					}
 			  }
 			else		// this is some ent - copy floor tile under it from imm. previous
 			if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
-					this.tile(ctx, sprites, nfl, nft, tx, ty);
+					this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 
 // map gps
 		  if (document.getElementById("mazsolv").checked)
-		  if (cell.mapcht) this.tile(ctx, sprites,  15, 0, tx, ty);			// currently unit 15 of row 0 backgrounds.png is the yellow brick overlay
+		  if (cell.mapcht) this.tile(ctx, cell.spriteset,  15, 0, tx, ty);			// currently unit 15 of row 0 backgrounds.png is the yellow brick overlay
 
 			if (map.level.wall == WALL.INVIS)				// do floor tile for invis walls
 			{
 				if (!map.level.gflr)
-						this.tile(ctx, sprites, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
+						this.tile(ctx, cell.spriteset, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
 			}
 			else
 			if (cell.shadow)		// dont shadow for invis walls
-					this.tile(ctx, sprites, cell.shadow, WALL.INVIS, tx, ty);
+					this.tile(ctx, cell.spriteset, cell.shadow, WALL.INVIS, tx, ty);
 // when a following tile is covered and being revealed, this sets it to the prev. tile if area is cust tile (differ from spec tile on map)
         }
       }
@@ -4818,6 +4817,8 @@ var txsv = ":";
 		 hold[held] = null;
       for(n = 0, max = entities.length ; n < max ; n++) {
         entity = entities[n];
+			if (entity.type.wall && entity.spriteset == undefined) entity.spriteset = wallsprites;
+			else
 			if (entity.spriteset == undefined) entity.spriteset = sprites;
         if (entity.active && (!entity.onrender || entity.onrender(frame) !== false) && !viewport.outside(entity.x, entity.y, TILE, TILE)) {
 // note: RUNORG
@@ -4825,8 +4826,9 @@ var txsv = ":";
 				if (entity.hue != undefined)
 					ctx.filter = "hue-rotate("+entity.hue+"deg)";
 
-				if (entity.type.wall)
-						this.sprite(ctx, wallsprites, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+				if (entity.type.wall) {
+						this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+					}
 				else if (entity.door)
 						this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else if (entity.numer)
