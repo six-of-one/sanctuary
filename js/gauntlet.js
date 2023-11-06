@@ -3509,12 +3509,13 @@ var txsv = ":";
 
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
-// test
+// player trying to cross unpinned edge
 			if (this.x < 3 || (this.x > (map.w - 11)) || this.y < 3 || (this.y > (map.h - 19)))
 			{
 			var cells = reloaded.cells;
 			var dx = p2t(this.x) - 1, dy = p2t(this.y) - 1, ntx = Mtw + 50, nty = Mth + 50, cx = this.x, cy = this.y;
 			var pln = cells.length;
+// copy cells around player factoring across unpin with mpixel test logic
 				 for (var tx = dx; tx < (dx + 3); tx++)
 					for (var ty = dy; ty < (dy + 3); ty++) {
 //						var cp = tx + ty * Mtw;
@@ -3522,19 +3523,23 @@ var txsv = ":";
 						var np = (ntx + (tx - dx)) + (nty + (ty - dy)) * Mtw;
 						cells[np] = cells[cp];
 					}
-					var newp;
-//					newp.x = cx + 50 * TILE;
-//					newp.y = cy + 50 * TILE;
+// create a fake monster body to mimic players movement on copied cells
+					var newp = Mastermap.addMonster(cx + 50 * TILE, cy + 50 * TILE, MONSTER.THIEF);
 					newp.cbox = this.cbox;
 					newp.timeout = this.timeout;
-					Mastermap.occupy(cx + 50 * TILE, cy + 50 * TILE, newp);
-
+// move monster, get position based on player speed and dir, then remove monster
 					var npx = newp.x, npy = newp.y;
 					collision = map.trymove(newp, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
 					var mpx = newp.x - npx, mpy = newp.y - npy;
 					Mastermap.remove(newp);
-					this.x = cx + mpx;
-					this.y = cy + mpy;
+// new player pos
+					npx = cx + mpx;
+					npy = cy + mpy;
+					if (npx < 0) npx = t2p(Mtw) - npx - 1;
+					else if (npx > t2p(Mtw)) npx = npx - t2p(Mtw);
+					if (npy < 0) npy = t2p(Mth) - npy - 1;
+					else if (npy > t2p(Mth)) npy = npy - t2p(Mth);
+					Mastermap.occupy(npx, npy, this);
 
 				 for (var tx = ntx; tx < (ntx + 3); tx++)
 					for (var ty = nty; ty < (nty + 3); ty++) { np = tx + ty * Mtw; reloaded.cells[np] = null; }
