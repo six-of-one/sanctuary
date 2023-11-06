@@ -32,7 +32,7 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
-		walltype, shadowtype, doortype, Mapdata, tilerend, Vx, Vy, mtm,
+		walltype, shadowtype, doortype, Mapdata, Huedata, tilerend, Vx, Vy, mtm,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
@@ -1613,14 +1613,15 @@ Gauntlet = function() {
       else {
 			  $('booting').show();
 
+					lvs = level.url;
 /// TEST - remove
 // this works - but it refuses to refresh if flvl is changed
-var lvu = document.getElementById("flvl").value;
+var lvu = document.getElementById("flvl").value,
 
-if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION , { onload: onloaded });
-		else
+if (lvu != "") lvs = lvu;
 /// TEST - remove
-			  level.source = Game.createImage(level.url +"?cachebuster=" + VERSION , { onload: onloaded });
+					level.hued = Game.createImage("h"+lvs +"?cachebuster=" + VERSION);		// special color and hues map for a level
+					level.source = Game.createImage(lvs +"?cachebuster=" + VERSION , { onload: onloaded });
 
       }
 
@@ -2510,7 +2511,8 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
     setupLevel: function(nlevel) {
 
       var level  = cfg.levels[nlevel],
-          source = level.source;
+          source = level.source,
+          hues = level.hued;
 
 /// TEST - remove
 		Mirx = document.getElementById("xmiror").checked;
@@ -2525,8 +2527,18 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 /// TEST - remove
 		 if (level.mw == null || level.mw == undefined) { level.mw = source.width; level.mh = source.height; }
 		 else { source.width = level.mw; source.height = level.mh; }
-// while looking nice, this breaks g1 lvl 3 doors
-		if (Munpinx && (level.unpinx != Munpinx)) source.width--;				// while this works - on reloading the level, w x h is wrong
+// process level colors, hue overrides, special color instructions, tile overrides
+// first byte codes: xFE, xFC, xFA, xF8, xF6, xF4, xF2
+// xFE - hues override: xFFFF: 0 - 255 interpolate to 0 - 359, byte 1 = floor/wall, byte 0 = items
+// XFC - tile override: 0xF000 - extra tiles set #, x0F00 - trap code, 0xFF - lower byte floors ref, 0 is level floor
+// XFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
+// XF -
+// any other codes: color triple 0xFFFFFF that will load between gbas layer and gflr (if used), if nothing, black will not overwrite the color
+		 var dohu = false;
+		if (hues.width == source.width && hues.height == source.height) dohu = true;
+
+// while looking nice, this breaks g1 lvl 3 doors (a fix is in place, but the former broken doors, may not sound off
+		if (Munpinx && (level.unpinx != Munpinx)) source.width--;
 		if (Munpiny && (level.unpiny != Munpiny)) source.height--;
 
 		var tw     = source.width,
@@ -2547,8 +2559,23 @@ if (lvu != "") level.source = Game.createImage(lvu + "?cachebuster=" + VERSION ,
 
 		Mastermap = self;
 		Mapdata = null;
+		Huedata = null;
 		Mtw = tw;
 		Mth = th;
+
+		if (dohu)
+		{ alert("loading hues");
+			parseImage(hues, function(tx, ty, pixel, map) { return; }, self);
+			Huedata = [];
+			for(var n = 0 ; n < (Mtw * Mth) ; n++) Huedata[n] = Mapdata[n];
+// put back for level load
+			Mtw = self.tw;
+			Mth = self.th ;
+			self.w = Mtw * TILE;
+			self.h = Mth * TILE;
+
+			Mapdata = null;
+		}
 
 // make sure mults is not undefed - later load deathmult from cooky
 		Deathmult = readCookie("deathmul");
