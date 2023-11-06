@@ -3514,6 +3514,7 @@ var txsv = ":";
         dir = directions[d];
 // player trying to cross unpinned edge
 document.title = "-pl xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t(this.x)+":"+p2t(this.y);
+/*
 			if (0 && (this.x < 3 || (this.x > (map.w - 11)) || this.y < 3 || (this.y > (map.h - 19))))
 			{
 			var cells = reloaded.cells;
@@ -3549,7 +3550,7 @@ document.title = "-pl xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t
 					for (var ty = nty; ty < (nty + 3); ty++) { np = tx + ty * Mtw; reloaded.cells[np] = null; }
 				cells.length = pln;
 			}
-			else
+			else */
         collision = map.trymove(this, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
 
 
