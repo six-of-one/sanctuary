@@ -4794,8 +4794,12 @@ var txsv = ":";
 						ctx.filter = "hue-rotate(0deg)";
 						if (map.level.brikovr) this.tile(ctx, cell.spriteset, cell.wall, map.level.brikovr, tx, ty);
 					}
-					else {
-						if (fcellstr != null)
+					else if (fcellstr != null) {
+						if (hu == 0 && Ltile > 0) {
+							nfl = Ltile & MEXLOW, nft = FCUSTILE;
+							if (Ltile & 0x10) nft = 0;
+						}
+						if (Ltile != 96 || !map.level.gflr)	// normal floor tile, already written
 						if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr)) // underneath an invisible wall - load as under an ent
 								this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 
@@ -4806,6 +4810,7 @@ var txsv = ":";
 					if (hu == 0 && Ltile > 0) {
 						nfl = Ltile & MEXLOW, nft = FCUSTILE;
 						if (Ltile & 0x10) nft = 0;
+						if (Ltile == 96 && map.level.gflr) continue;	// normal floor tile, already written
 					}
 					if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
 							this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
