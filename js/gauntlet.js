@@ -3522,11 +3522,16 @@ var txsv = ":";
 						var np = (ntx + (tx - dx)) + (nty + (ty - dy)) * Mtw;
 						cells[np] = cells[cp];
 					}
-					this.x = cx + 50 * TILE;
-					this.y = cy + 50 * TILE;
-					var npx = this.x, npy = this.y;
-					collision = map.trymove(this, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
-					var mpx = this.x - npx, mpy = this.y - npy;
+					var newp = this;
+					newp.x = cx + 50 * TILE;
+					newp.y = cy + 50 * TILE;
+					newp.cbox = this.cbox;
+					newp.timeout = this.timeout;
+
+					var npx = newp.x, npy = newp.y;
+					collision = map.trymove(newp, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
+					var mpx = newp.x - npx, mpy = newp.y - npy;
+					Mastermap.remove(newp);
 					this.x = cx + mpx;
 					this.y = cy + mpy;
 
