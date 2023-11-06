@@ -1095,7 +1095,7 @@ Gauntlet = function() {
 // repl the other ref - map.pixel(x,y)
 // for unpins we need source x,y to check across unpin boundaries
 
-	function mpixel(sx,sy, tx,ty) {
+	function mpixel(sx,sy, tx,ty , sf) {
 
 			if (Munpinx) {
 				if (sx == 0 && tx < 0) tx = Mtw - 1;
@@ -1105,7 +1105,9 @@ Gauntlet = function() {
 				if (sy == 0 && ty < 0) ty = Mth - 1;
 				if (sy == (Mth - 1) && ty >= Mth) ty = 0;
 			}
-			var n = tx + (ty * Mtw);
+				var n = tx + (ty * Mtw);
+				if (sf == true) return (n);		// second fn, calculate n
+
 				return(Mapdata[n]);
 			};
 
@@ -3507,6 +3509,31 @@ var txsv = ":";
 
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
+// test
+			if (this.x < 3 || (this.x > (map.w - 11)) || this.y < 3 || (this.y > (map.h - 19)))
+			{
+			var dx = p2t(this.x) - 1, dy = p2t(this.y) - 1, ntx = Mtw + 50, nty = Mth + 50, cx = this.x, cy = this.y;
+			var pln = cells.length;
+				 for (var tx = dx; tx < (dx + 3); tx++)
+					for (var ty = dy; ty < (dy + 3); ty++) {
+//						var cp = tx + ty * Mtw;
+						var cp = mpixel(cx,cy, tx,ty, true);
+						var np = (ntx + (tx - dx)) + (nty + (ty - dy)) * Mtw;
+						reloaded.cells[np] = reloaded.cells[cp];
+					}
+					this.x = cx + 50 * TILE;
+					this.y = cy + 50 * TILE;
+					var npx = this.x, npy = this.y;
+					collision = map.trymove(this, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
+					var mpx = this.x - npx, mpy = this.y - npy;
+					this.x = cx + mpx;
+					this.y = cy + mpy;
+
+				 for (var tx = ntx; tx < (ntx + 3); tx++)
+					for (var ty = nty; ty < (nty + 3); ty++) { np = tx + ty * Mtw; reloaded.cells[np] = null; }
+				cells.length = pln;
+			}
+			else
         collision = map.trymove(this, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
 
 
@@ -3517,7 +3544,7 @@ var txsv = ":";
 ///
 		  if (this.pushwal != undefined)
 		  if (collision == this.pushwal) collision = false;
-
+/*
         if (!collision)
 			{
 					if (this.x < 2)
@@ -3545,7 +3572,7 @@ var txsv = ":";
 					if (!Mastermap.occupied(this.x, 4, TILE, TILE, this))
 						Mastermap.occupy(this.x, 3, this);
 					else this.y = map.h - 37;
-			}
+			} */
 // psuhwall mover
 			if (this.pushwal != null)
 			if (pmvx != this.x || pmvy != this.y)
