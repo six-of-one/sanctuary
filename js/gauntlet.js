@@ -4739,10 +4739,10 @@ var txsv = ":";
 			  if (cell.spriteset == undefined) cell.spriteset = sprites;		//		shootable walls, g2 shot walls, g2 random walls, and so
 //			  cell.tileptr = this;
 			  cell.map = map;
+			  var hu = parseHue(tx, ty);
 
 		  if (cell.nothing) {
 				fcellstr = cell;
-				var hu = parseHue(tx, ty);
 			  if (hu > 0) {
                ctx.beginPath();
 					ctx.rect(tx * TILE, ty * TILE, TILE, TILE);
@@ -4758,6 +4758,7 @@ var txsv = ":";
 			 }
 			else if (isp(cell.pixel,0xA08000))	// all floors except 0x000000
 			  {
+				  if (hu == 0 && Ltile > 0) cell.pixel = 0xA08000 | Ltile;
 			var nfl = cell.pixel & MEXLOW, nft = FCUSTILE;
 				  if (cell.pixel & 0x10) nft = 0;
 
@@ -4801,10 +4802,13 @@ var txsv = ":";
 						if (hintinv) this.tile(ctx, cell.spriteset, cell.wall, HINTIV, tx, ty);
 					}
 			  }
-			else {		// this is some ent - copy floor tile under it from imm. previous
-				if (fcellstr != null)
-				if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
-						this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
+			else if (fcellstr != null) {		// this is some ent - copy floor tile under it from imm. previous
+					if (hu == 0 && Ltile > 0) {
+						nfl = Ltile & MEXLOW, nft = FCUSTILE;
+						if (Ltile & 0x10) nft = 0;
+					}
+					if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
+							this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 				}
 
 // map gps
