@@ -3510,7 +3510,8 @@ var txsv = ":";
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
 // player trying to cross unpinned edge
-			if (this.x < 3 || (this.x > (map.w - 11)) || this.y < 3 || (this.y > (map.h - 19)))
+document.title = "-pl xy "+this.x+":"+this.y;
+			if (0 && (this.x < 3 || (this.x > (map.w - 11)) || this.y < 3 || (this.y > (map.h - 19))))
 			{
 			var cells = reloaded.cells;
 			var dx = p2t(this.x) - 1, dy = p2t(this.y) - 1, ntx = Mtw + 50, nty = Mth + 50, cx = this.x, cy = this.y;
@@ -3535,10 +3536,10 @@ var txsv = ":";
 // new player pos
 					npx = cx + mpx;
 					npy = cy + mpy;
-					if (npx < 0) npx = t2p(Mtw) - npx - 1;
-					else if (npx > t2p(Mtw)) npx = npx - t2p(Mtw);
-					if (npy < 0) npy = t2p(Mth) - npy - 1;
-					else if (npy > t2p(Mth)) npy = npy - t2p(Mth);
+					if (npx < 0) npx = t2p(Mtw) - npx - 7;
+					else if (npx > t2p(Mtw)) npx = npx - t2p(Mtw) + 7;
+					if (npy < 0) npy = t2p(Mth) - npy - 7;
+					else if (npy > t2p(Mth)) npy = npy - t2p(Mth) + 7;
 					Mastermap.occupy(npx, npy, this);
 
 				 for (var tx = ntx; tx < (ntx + 3); tx++)
