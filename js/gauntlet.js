@@ -6,7 +6,7 @@ Gauntlet = function() {
   // CONFIGURATION CONSTANTS and ENUM's
   //===========================================================================
 
-  var VERSION  = "1.0.2",
+  var VERSION  = "1.0.2b",
 /// allow debug mode testing - code should be removed pre-release
 											DEBUGON = 0,
 // debug - provide a one time start level
@@ -2610,11 +2610,10 @@ var lvu = document.getElementById("flvl").value;
 
 		if (dohu)
 		{
-alert("lh w:"+Mtw+": h:"+Mth);
 			parseImage(hues, function(tx, ty, pixel, map) { return; }, self);
 			Huedata = [];
 			for(var n = 0 ; n < (Mtw * Mth) ; n++) Huedata[n] = Mapdata[n];
-alert("lhd w:"+Mtw+": h:"+Mth);
+
 // put back for level load
 			Mtw = tw;
 			Mth = th ;
@@ -2630,9 +2629,7 @@ alert("lhd w:"+Mtw+": h:"+Mth);
 		if (Masterot == undefined) Masterot = 0;
 		shotpot = 0;
 
-alert("llv w:"+Mtw+": h:"+Mth);
       parseImage(source, pMapcell, self);
-document.title = "w:"+Mtw+": h:"+Mth;
 
       self.tw       = Mtw;
       self.th       = Mth;
@@ -4742,7 +4739,12 @@ var txsv = ":";
 				var hu = parseHue(tx, ty);
 			  if (hu > 0) {
 					ctx.rect(tx, ty, TILE, TILE);
-					ctx.fillStyle = hu;
+//					ctx.fillStyle = "#0000FF";
+				  var mgrad = ctx.createLinearGradient(0, 0, 0, 170);
+					mgrad.addColorStop(0, "red");
+					mgrad.addColorStop(1, "yellow");
+// Fill Rectangle
+					ctx.fillStyle = mgrad;
 					ctx.fill();
 					fcellstr = null;	// the only way to pass this is in huedata
 					}
