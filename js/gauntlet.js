@@ -1297,6 +1297,42 @@ Gauntlet = function() {
 
 		};
 
+// hues & colors
+// process level colors, hue overrides, special color instructions, tile overrides
+// first byte codes: xFE, xFC, xFA, xF8, xF6, xF4, xF2
+// xFE - hues override: xFFFF: 0 - 255 interpolate to 0 - 359, byte 1 = floor/wall, byte 0 = items
+// XFC - tile override: 0xF000 - extra tiles set #, x0F00 - trap code, 0xFF - lower byte floors ref, 0 is level floor
+// XFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
+// XF -
+// any other codes: color triple 0xFFFFFF that will load between gbas layer and gflr
+
+var Lhue_bkg, Lhue_item, Lcolor, Lxtr, Ltile, Ltrap,
+	function parseImage(px, py) {
+		Lhue_bkg = 0;
+		Lhue_item = 0;
+		Lcolor = 0;
+		Lxtr = 0;
+		Ltile = 0;
+		Ltrap = 0;
+// no data loaded
+		if (Huedata == null) return -1;
+		var n = px + (py * Mtw), mask = 0xFF0000;
+
+		var d = Huedata[n];
+
+		if ((d & mask) == 0xFE0000) {
+			Lhue_bkg = (d & 0xFF00) / 0x100;
+			Lhue_item = (d & 0xFF);
+			return;
+		}
+		if ((d & mask) == 0xFC0000) {
+			Lxtr = (d & 0xF000) / 0x1000;
+			Ltrap = (d & 0xF00) / 0x100;
+			Ltile = (d & 0xFF);
+			return;
+		}
+	};
+
 // random load item from chest or shotwall - col (10, 11), chn 0.0 - 1.0, cell to plug
 	function rlitem(col, chn, cell) {
 
@@ -1613,12 +1649,12 @@ Gauntlet = function() {
       else {
 			  $('booting').show();
 
-					lvs = level.url;
+					var lvs = level.url;
 /// TEST - remove
 // this works - but it refuses to refresh if flvl is changed
-var lvu = document.getElementById("flvl").value,
+var lvu = document.getElementById("flvl").value;
 
-if (lvu != "") lvs = lvu;
+	 if (lvu != "") lvs = lvu;
 /// TEST - remove
 					level.hued = Game.createImage("h"+lvs +"?cachebuster=" + VERSION);		// special color and hues map for a level
 					level.source = Game.createImage(lvs +"?cachebuster=" + VERSION , { onload: onloaded });
@@ -2533,6 +2569,12 @@ if (lvu != "") lvs = lvu;
 // XFC - tile override: 0xF000 - extra tiles set #, x0F00 - trap code, 0xFF - lower byte floors ref, 0 is level floor
 // XFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
 // XF -
+// any other codes: color triple 0xFFFFFF that will load between gbas layer and gflr// process level colors, hue overrides, special color instructions, tile overrides
+// first byte codes: xFE, xFC, xFA, xF8, xF6, xF4, xF2
+// xFE - hues override: xFFFF: 0 - 255 interpolate to 0 - 359, byte 1 = floor/wall, byte 0 = items
+// XFC - tile override: 0xF000 - extra tiles set #, x0F00 - trap code, 0xFF - lower byte floors ref, 0 is level floor
+// XFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
+// XF -
 // any other codes: color triple 0xFFFFFF that will load between gbas layer and gflr (if used), if nothing, black will not overwrite the color
 		 var dohu = false;
 		if (hues.width == source.width && hues.height == source.height) dohu = true;
@@ -2564,13 +2606,15 @@ if (lvu != "") lvs = lvu;
 		Mth = th;
 
 		if (dohu)
-		{ alert("loading hues");
+		{
+alert("lh w:"+Mtw+": h:"+Mth);
 			parseImage(hues, function(tx, ty, pixel, map) { return; }, self);
 			Huedata = [];
 			for(var n = 0 ; n < (Mtw * Mth) ; n++) Huedata[n] = Mapdata[n];
+alert("lhd w:"+Mtw+": h:"+Mth);
 // put back for level load
-			Mtw = self.tw;
-			Mth = self.th ;
+			Mtw = tw;
+			Mth = th ;
 			self.w = Mtw * TILE;
 			self.h = Mth * TILE;
 
@@ -2583,7 +2627,9 @@ if (lvu != "") lvs = lvu;
 		if (Masterot == undefined) Masterot = 0;
 		shotpot = 0;
 
+alert("llv w:"+Mtw+": h:"+Mth);
       parseImage(source, pMapcell, self);
+document.title = "w:"+Mtw+": h:"+Mth;
 
       self.tw       = Mtw;
       self.th       = Mth;
