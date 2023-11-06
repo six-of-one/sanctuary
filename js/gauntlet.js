@@ -31,7 +31,7 @@ Gauntlet = function() {
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Munhx, Munlx = 16, Munhy, Munly = 16, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
 		walltype, shadowtype, doortype, Mapdata, Huedata, tilerend, Vx, Vy, mtm,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
@@ -2368,6 +2368,16 @@ var lvu = document.getElementById("flvl").value;
 				}
 		 }
       if (!collision && !dryrun) {
+			var nx, ny;
+			if (Mastermap.level.unpinx) {
+				if (tpos.x <= Munlx) { if (tpos.x < 0) tpos.x = 0; tpos.x = Munhx - ( Munlx - tpos.x); }
+				else if (tpos.x >= Munhx) { if (tpos.x > ((Mtw - 1) * TILE)) tpos.x = (Mtw - 1) * TILE; tpos.x = Munlx - ( tpos.x - Munhx ); }
+			}
+			if (Mastermap.level.unpiny) {
+				if (tpos.y <= Munly) { if (tpos.y < 0) tpos.y = 0; tpos.y = Munhy - ( Munly - tpos.y); }
+				else if (tpos.y >= Munhy) { if (tpos.y > ((Mth - 1) * TILE)) tpos.y = (Mth - 1) * TILE; tpos.y = Munly - ( tpos.y - Munhy ); }
+			}
+
         this.occupy(this.tpos.x, this.tpos.y, entity);
       }
       return collision;
@@ -2646,6 +2656,9 @@ if (document.getElementById("noclip").checked) return false;
       self.th       = Mth;
       self.w        = Mtw * TILE;
       self.h        = Mth * TILE;
+
+		if (level.unpinx) Munhx = ((Mtw - 2) + 0.375) * TILE;	// cross the _hidden_ test line occupied uses to allow crossing unpin lines
+		if (level.unpiny) Munhy = ((Mth - 2) + 0.375) * TILE;
 
     },
 
@@ -3552,7 +3565,6 @@ document.title = "-pl xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t
 			}
 			else */
         collision = map.trymove(this, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
-
 
 /// TEST - remove
 //txsv = Math.floor(this.x) +"," + Math.floor(this.y) + " map: " + Math.floor(map.w) +"," + Math.floor(map.h);
