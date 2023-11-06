@@ -3510,7 +3510,7 @@ var txsv = ":";
       for(d = 0, dmax = directions.length ; d < dmax ; d++) {
         dir = directions[d];
 // player trying to cross unpinned edge
-document.title = "-pl xy "+this.x+":"+this.y;
+document.title = "-pl xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t(this.x)+":"+p2t(this.y);
 			if (0 && (this.x < 3 || (this.x > (map.w - 11)) || this.y < 3 || (this.y > (map.h - 19))))
 			{
 			var cells = reloaded.cells;
