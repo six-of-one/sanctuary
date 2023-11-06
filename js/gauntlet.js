@@ -3512,6 +3512,7 @@ var txsv = ":";
 // test
 			if (this.x < 3 || (this.x > (map.w - 11)) || this.y < 3 || (this.y > (map.h - 19)))
 			{
+			var cells = reloaded.cells;
 			var dx = p2t(this.x) - 1, dy = p2t(this.y) - 1, ntx = Mtw + 50, nty = Mth + 50, cx = this.x, cy = this.y;
 			var pln = cells.length;
 				 for (var tx = dx; tx < (dx + 3); tx++)
@@ -3519,7 +3520,7 @@ var txsv = ":";
 //						var cp = tx + ty * Mtw;
 						var cp = mpixel(cx,cy, tx,ty, true);
 						var np = (ntx + (tx - dx)) + (nty + (ty - dy)) * Mtw;
-						reloaded.cells[np] = reloaded.cells[cp];
+						cells[np] = cells[cp];
 					}
 					this.x = cx + 50 * TILE;
 					this.y = cy + 50 * TILE;
