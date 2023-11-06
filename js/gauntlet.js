@@ -1303,12 +1303,17 @@ Gauntlet = function() {
 // xFE - hues override: xFFFF: 0 - 255 interpolate to 0 - 359, byte 1 = floor/wall, byte 0 = items
 // XFC - tile override: 0xF000 - extra tiles set #, x0F00 - trap code, 0xFF - lower byte floors ref, 0 is level floor
 // XFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
+/*
+	var mgrad = ctx.createLinearGradient(0, 0, 0, 170);
+	mgrad.addColorStop(0, "red");
+	mgrad.addColorStop(1, "yellow");
+*/
 // XF -
 // any other codes: color triple 0xFFFFFF that will load between gbas layer and gflr
 
 var Lhue_bkg, Lhue_item, Lcolor, Lxtr, Ltile, Ltrap;
 
-	function parseHue(px, py) {
+	function parseHue(px, py, ctx) {
 		Lhue_bkg = 0;
 		Lhue_item = 0;
 		Lcolor = 0;
@@ -4731,20 +4736,15 @@ var txsv = ":";
           cell = map.cell(tx * TILE, ty * TILE);
 			  cell.ctx = ctx;						// for traps turning walls to floor, stalling walls to exits
 			  if (cell.spriteset == undefined) cell.spriteset = sprites;		//		shootable walls, g2 shot walls, g2 random walls, and so
-			  cell.tileptr = this;
+//			  cell.tileptr = this;
 			  cell.map = map;
 
 		  if (cell.nothing) {
 				fcellstr = cell;
 				var hu = parseHue(tx, ty);
 			  if (hu > 0) {
-					ctx.rect(tx, ty, TILE, TILE);
-//					ctx.fillStyle = "#0000FF";
-				  var mgrad = ctx.createLinearGradient(0, 0, 0, 170);
-					mgrad.addColorStop(0, "red");
-					mgrad.addColorStop(1, "yellow");
-// Fill Rectangle
-					ctx.fillStyle = mgrad;
+					ctx.rect(tx * TILE, ty * TILE, TILE, TILE);
+					ctx.fillStyle = hu;
 					ctx.fill();
 					fcellstr = null;	// the only way to pass this is in huedata
 					}
@@ -4797,10 +4797,11 @@ var txsv = ":";
 						if (hintinv) this.tile(ctx, cell.spriteset, cell.wall, HINTIV, tx, ty);
 					}
 			  }
-			else		// this is some ent - copy floor tile under it from imm. previous
-			if (fcellstr != null)
-			if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
-					this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
+			else {		// this is some ent - copy floor tile under it from imm. previous
+				if (fcellstr != null)
+				if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
+						this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
+				}
 
 // map gps
 		  if (document.getElementById("mazsolv").checked)
