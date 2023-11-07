@@ -3733,7 +3733,6 @@ dent = this;
 								if (cell.ptr.vy < 0) { tpy = Mth * TILE; cty = 0; }
 								if (cell.ptr.vy > 0) { tpy = 0; cty = Mth * TILE; }
 								bdist1 = distance(cpx,cpy,tpx,tpy); bdist2 = distance(ctx,cty,ttx,tty);
-alert( "tsrc "+Math.round(treasure.x)+":"+Math.round(treasure.y)+" td: "+Math.round(cell.x)+":"+Math.round(cell.y)+" cd: "+ cdist+" bd: "+ (bdist1+ bdist2));
 								if ((bdist1 + bdist2) < cdist) cdist = bdist1 + bdist2;
 								}
 // need to handle unpinned here
