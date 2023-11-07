@@ -3131,7 +3131,7 @@ if (document.getElementById("noclip").checked) return false;
     update: function(frame, player, map, viewport) {
 
 		var xspd = 0;
-		if (this.xshotspd) xspd = 30;
+		if (this.xshotspd) xspd = 10;
 
       var collision = map.trymove(this, this.dir, this.type.speed + xspd, this.owner);
       if (collision) {
