@@ -1097,6 +1097,7 @@ Gauntlet = function() {
 
 	function mpixel(sx,sy, tx,ty , sf) {
 
+			if (sf == 2) { sx = p2t(sx); sy = p2t(sy); tx = p2t(tx); ty = p2t(ty); }
 			if (Munpinx) {
 				if (sx == 0 && tx < 0) tx = Mtw - 1;
 				if (sx == (Mtw - 1) && tx >= Mtw) tx = 0;
@@ -1106,7 +1107,7 @@ Gauntlet = function() {
 				if (sy == (Mth - 1) && ty >= Mth) ty = 0;
 			}
 				var n = tx + (ty * Mtw);
-				if (sf == true) return (n);		// second fn, calculate n
+				if (sf > 0) return (n);		// second fn, calculate n
 
 				return(Mapdata[n]);
 			};
@@ -2453,17 +2454,29 @@ var lvu = document.getElementById("flvl").value;
           ny = ((y%TILE) + h) > TILE ? 1 : 0;
 
       set_add(cells,   this.cell(x,        y));
-// dir (for now) is from player ent, so unpin cross test doesnt fail
-		if (dir == null || dir >= DIR.RIGHT && dir <= DIR.DOWNLEFT) {
+// change test for across unpin
+		if (x < 7 || y < 7 || x > TILE * (Mtw - 1) || y > TILE * (Mth - 1)) {
 
-				if (nx > 0)
-				  set_add(cells, this.cell(x + TILE, y));
-				if (ny > 0)
-				  set_add(cells, this.cell(x,        y + TILE));
-				if ((nx > 0) && (ny > 0))
-				  set_add(cells, this.cell(x + TILE, y + TILE));
-			}
-      return cells;
+		var n = mpixel(x,y, x + TILE, y, 2);
+			if (nx > 0)
+			  set_add(cells, this.cells[n]);
+			n = mpixel(x,y, x, y + TILE, 2);
+			if (ny > 0)
+			  set_add(cells, this.cells[n]);
+			n = mpixel(x,y, x + TILE, y + TILE, 2);
+			if ((nx > 0) && (ny > 0))
+			  set_add(cells, this.cells[n]);
+
+e		} else {
+
+			if (nx > 0)
+			  set_add(cells, this.cell(x + TILE, y));
+			if (ny > 0)
+			  set_add(cells, this.cell(x,        y + TILE));
+			if ((nx > 0) && (ny > 0))
+			  set_add(cells, this.cell(x + TILE, y + TILE));
+		}
+		return cells;
 
     },
 
@@ -2488,12 +2501,12 @@ else { celpr += c+" xy: "+ cell.x+":"+cell.y;
 celpr += ", ";
 document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y)+celpr;
 
-// since edje walls can become exits, make sure shots expire at edge
-			if (cell == undefined) return true;
-
 /// TEST - remove
 if (document.getElementById("noclip").checked) return false;
 /// TEST - remove
+// since edje walls can become exits, make sure shots expire at edge
+			if (cell == undefined) return true;
+
 			if (cell.wall !== undefined && cell.wall !== null)		{		// walls to exits sets null
 //				if (mtm != "bw: "+cell.tx+":"+cell.ty) { mtm = "bw: "+cell.tx+":"+cell.ty; alert("bw: "+cell.tx+":"+cell.ty);}
 				return true;
