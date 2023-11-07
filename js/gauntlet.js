@@ -2324,7 +2324,9 @@ var lvu = document.getElementById("flvl").value;
 		if (nocoll)		// no coll escapes collision check for lobbers
 // end lobber shot
 		 {
-				collision = this.occupied(this.tpos.x + entity.cbox.x, this.tpos.y + entity.cbox.y, entity.cbox.w, entity.cbox.h, ignore || entity);
+				var sendir = null;
+				if (entity.player) sendir = entity.dir;
+				collision = this.occupied(this.tpos.x + entity.cbox.x, this.tpos.y + entity.cbox.y, entity.cbox.w, entity.cbox.h, ignore || entity, sendir);
 				var subcol = collision.exit;
 				var ffcol = false;
 // collect subcollisions for weapon non-hits
@@ -2437,7 +2439,7 @@ var lvu = document.getElementById("flvl").value;
       return obj;
     },
 
-    overlappingCells: function(x, y, w, h) {
+    overlappingCells: function(x, y, w, h, dir) {
 
       var cells = _overlappingCells.getcells();
 
@@ -2451,20 +2453,23 @@ var lvu = document.getElementById("flvl").value;
           ny = ((y%TILE) + h) > TILE ? 1 : 0;
 
       set_add(cells,   this.cell(x,        y));
- /*     if (nx > 0)
-        set_add(cells, this.cell(x + TILE, y));
-      if (ny > 0)
-        set_add(cells, this.cell(x,        y + TILE));
-      if ((nx > 0) && (ny > 0))
-        set_add(cells, this.cell(x + TILE, y + TILE));
-*/
+// dir (for now) is from player ent, so unpin cross test doesnt fail
+		if (dir == null || dir >= DIR.RIGHT && dir <= DIR.DOWNLEFT) {
+
+				if (nx > 0)
+				  set_add(cells, this.cell(x + TILE, y));
+				if (ny > 0)
+				  set_add(cells, this.cell(x,        y + TILE));
+				if ((nx > 0) && (ny > 0))
+				  set_add(cells, this.cell(x + TILE, y + TILE));
+			}
       return cells;
 
     },
 
-    occupied: function(x, y, w, h, ignore) {
+    occupied: function(x, y, w, h, ignore, dir) {
 
-      var cells   = this.overlappingCells(x, y, w, h),
+      var cells   = this.overlappingCells(x, y, w, h,dir),
           checked = _occupied.getchecked(), // avoid checking against the same item multiple times (if that item spans multiple cells)
           cell, item,
           c, nc = cells.length,
