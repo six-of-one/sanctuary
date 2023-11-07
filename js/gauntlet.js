@@ -3532,43 +3532,7 @@ var txsv = ":";
 // player trying to cross unpinned edge
 dent = this;
 //document.title = "-pl xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t(this.x)+":"+p2t(this.y);
-/*
-			if (0 && (this.x < 3 || (this.x > (map.w - 11)) || this.y < 3 || (this.y > (map.h - 19))))
-			{
-			var cells = reloaded.cells;
-			var dx = p2t(this.x) - 1, dy = p2t(this.y) - 1, ntx = Mtw + 50, nty = Mth + 50, cx = this.x, cy = this.y;
-			var pln = cells.length;
-// copy cells around player factoring across unpin with mpixel test logic
-				 for (var tx = dx; tx < (dx + 3); tx++)
-					for (var ty = dy; ty < (dy + 3); ty++) {
-//						var cp = tx + ty * Mtw;
-						var cp = mpixel(cx,cy, tx,ty, true);
-						var np = (ntx + (tx - dx)) + (nty + (ty - dy)) * Mtw;
-						cells[np] = cells[cp];
-					}
-// create a fake monster body to mimic players movement on copied cells
-					var newp = Mastermap.addMonster(cx + 50 * TILE, cy + 50 * TILE, MONSTER.THIEF);
-					newp.cbox = this.cbox;
-					newp.timeout = this.timeout;
-// move monster, get position based on player speed and dir, then remove monster
-					var npx = newp.x, npy = newp.y;
-					collision = map.trymove(newp, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
-					var mpx = newp.x - npx, mpy = newp.y - npy;
-					Mastermap.remove(newp);
-// new player pos
-					npx = cx + mpx;
-					npy = cy + mpy;
-					if (npx < 0) npx = t2p(Mtw) - npx - 7;
-					else if (npx > t2p(Mtw)) npx = npx - t2p(Mtw) + 7;
-					if (npy < 0) npy = t2p(Mth) - npy - 7;
-					else if (npy > t2p(Mth)) npy = npy - t2p(Mth) + 7;
-					Mastermap.occupy(npx, npy, this);
 
-				 for (var tx = ntx; tx < (ntx + 3); tx++)
-					for (var ty = nty; ty < (nty + 3); ty++) { np = tx + ty * Mtw; reloaded.cells[np] = null; }
-				cells.length = pln;
-			}
-			else */
         collision = map.trymove(this, dir, (this.type.speed * pushspeed) + (this.xspeed * 30)/FPS);
 
 /// TEST - remove
@@ -3578,35 +3542,7 @@ dent = this;
 ///
 		  if (this.pushwal != undefined)
 		  if (collision == this.pushwal) collision = false;
-/*
-        if (!collision)
-			{
-					if (this.x < 2)
-				{
-					if (!Mastermap.occupied(map.w - 2, this.y, TILE, TILE, this))
-						Mastermap.occupy(map.w - 2, this.y, this);
-					else this.x = 2;
-				}
-				else
-					if (this.x > (map.w - 2))
-				{
-					if (!Mastermap.occupied(5, this.y, TILE, TILE, this))
-						Mastermap.occupy(3, this.y, this);
-					else this.x = map.w - 2;
-				}
-				else
-					if (this.y < 1)
-				{
-					if (!Mastermap.occupied(this.x, map.h - 38, TILE, TILE, this))
-						Mastermap.occupy(this.x, map.h - 36, this);
-					else this.y = 1;
-				}
-				else
-					if (this.y > (map.h - 37))
-					if (!Mastermap.occupied(this.x, 4, TILE, TILE, this))
-						Mastermap.occupy(this.x, 3, this);
-					else this.y = map.h - 37;
-			} */
+
 // psuhwall mover
 			if (this.pushwal != null)
 			if (pmvx != this.x || pmvy != this.y)
