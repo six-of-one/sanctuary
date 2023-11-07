@@ -2451,13 +2451,13 @@ var lvu = document.getElementById("flvl").value;
           ny = ((y%TILE) + h) > TILE ? 1 : 0;
 
       set_add(cells,   this.cell(x,        y));
-      if (nx > 0)
+ /*     if (nx > 0)
         set_add(cells, this.cell(x + TILE, y));
       if (ny > 0)
         set_add(cells, this.cell(x,        y + TILE));
       if ((nx > 0) && (ny > 0))
         set_add(cells, this.cell(x + TILE, y + TILE));
-
+*/
       return cells;
 
     },
@@ -2473,12 +2473,15 @@ var lvu = document.getElementById("flvl").value;
       // have to check for any player FIRST, so even if player is near a wall or other monster he will still get hit (otherwise its possible to use monsters as semi-shields against other monsters)
       if ((game.player != ignore) && overlapEntity(x, y, w, h, game.player))
         return game.player;
-
+var celpr = " c:";
       // now loop again checking for walls and other entities
       for(c = 0 ; c < nc ; c++) {
         cell = cells[c];
-
-document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y)+" wh: "+w+":"+h;
+if (cell == undefined) celpr += "u:"+c;
+else { celpr += c+" xy: "+ cell.x+":"+cell.y;
+	if (cell.wall !== undefined && cell.wall !== null) celpr += "-bangwall" }
+celpr += ", ";
+document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y)+celpr;
 
 // since edje walls can become exits, make sure shots expire at edge
 			if (cell == undefined) return true;
