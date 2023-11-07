@@ -3719,6 +3719,22 @@ dent = this;
 						if (Math.abs(treasure.x - cell.x) > 33 ||  Math.abs(treasure.y - cell.y) > 33)		// find closest teleport not origin
 						{
 							cdist = distance(cell.x,cell.y,treasure.x,treasure.y);
+// cross the unpin lines...
+							var bdist1, tpx = treasure.x, tpy = treasure.x, cpx = cell.x, cpy = cell.y;		// measure dest tele to line
+							var bdist2, ttx = treasure.x, tty = treasure.x, ctx = cell.x, cty = cell.y;		// measure src  tele to line
+/* this is the logic set...
+								if (cell.ptr.vx < 0 && !cell.ptr.vy) { bdist1 = distance(cell.x,cell.y,Mtw * TILE,treasure.y); bdist2 = distance(0,cell.y,treasure.x,treasure.y); }
+								if (cell.ptr.vx > 0 && !cell.ptr.vy) { bdist1 = distance(cell.x,cell.y,0,treasure.y); bdist2 = distance(Mtw * TILE,cell.y,treasure.x,treasure.y); }
+								if (cell.ptr.vy < 0 && !cell.ptr.vx) { bdist1 = distance(cell.x,cell.y,treasure.x,Mtw * TILE); bdist2 = distance(cell.x,0,treasure.x,treasure.y); }
+								if (cell.ptr.vy > 0 && !cell.ptr.vx) { bdist1 = distance(cell.x,cell.y,treasure.x,0); bdist2 = distance(cell.x,Mtw * TILE,treasure.x,treasure.y); }	*/
+							if (cell.ptr.vx || cell.ptr.vy) {
+								if (cell.ptr.vx < 0) { tpx = Mtw * TILE; ctx = 0; }
+								if (cell.ptr.vx > 0) { tpx = 0; ctx = Mtw * TILE; }
+								if (cell.ptr.vy < 0) { tpy = Mth * TILE; cty = 0; }
+								if (cell.ptr.vy > 0) { tpy = 0; c  ty = Mth * TILE; }
+								bdist1 = distance(cpx,cpy,tpx,tpy); bdist2 = distance(ctx,cty,ttx,tty);
+								if ((bdist1 + bdist2) < cdist) cdist = bdist1 + bdist2;
+								}
 // need to handle unpinned here
 							if (cdist < tdist)
 							{
