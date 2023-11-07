@@ -3720,8 +3720,8 @@ dent = this;
 						{
 							cdist = distance(cell.x,cell.y,treasure.x,treasure.y);
 // cross the unpin lines...
-							var bdist1, tpx = treasure.x, tpy = treasure.x, cpx = cell.x, cpy = cell.y;		// measure dest tele to line
-							var bdist2, ttx = treasure.x, tty = treasure.x, ctx = cell.x, cty = cell.y;		// measure src  tele to line
+							var bdist1, tpx = treasure.x, tpy = treasure.y, cpx = cell.x, cpy = cell.y;		// measure dest tele to line
+							var bdist2, ttx = treasure.x, tty = treasure.y, ctx = cell.x, cty = cell.y;		// measure src  tele to line
 /* this is the logic set...
 								if (cell.ptr.vx < 0 && !cell.ptr.vy) { bdist1 = distance(cell.x,cell.y,Mtw * TILE,treasure.y); bdist2 = distance(0,cell.y,treasure.x,treasure.y); }
 								if (cell.ptr.vx > 0 && !cell.ptr.vy) { bdist1 = distance(cell.x,cell.y,0,treasure.y); bdist2 = distance(Mtw * TILE,cell.y,treasure.x,treasure.y); }
@@ -3733,7 +3733,7 @@ dent = this;
 								if (cell.ptr.vy < 0) { tpy = Mth * TILE; cty = 0; }
 								if (cell.ptr.vy > 0) { tpy = 0; cty = Mth * TILE; }
 								bdist1 = distance(cpx,cpy,tpx,tpy); bdist2 = distance(ctx,cty,ttx,tty);
-alert( "tsrc "+Math.round(treasure.x)+":"+Math.round(treasure.y)+" td: "+Math.round(cell.x)+":"+Math.round(cell.x)+" cd: "+ cdist+" bd: "+ (bdist1+ bdist2));
+alert( "tsrc "+Math.round(treasure.x)+":"+Math.round(treasure.y)+" td: "+Math.round(cell.x)+":"+Math.round(cell.y)+" cd: "+ cdist+" bd: "+ (bdist1+ bdist2));
 								if ((bdist1 + bdist2) < cdist) cdist = bdist1 + bdist2;
 								}
 // need to handle unpinned here
