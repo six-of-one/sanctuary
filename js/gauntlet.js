@@ -3727,12 +3727,13 @@ dent = this;
 								if (cell.ptr.vx > 0 && !cell.ptr.vy) { bdist1 = distance(cell.x,cell.y,0,treasure.y); bdist2 = distance(Mtw * TILE,cell.y,treasure.x,treasure.y); }
 								if (cell.ptr.vy < 0 && !cell.ptr.vx) { bdist1 = distance(cell.x,cell.y,treasure.x,Mtw * TILE); bdist2 = distance(cell.x,0,treasure.x,treasure.y); }
 								if (cell.ptr.vy > 0 && !cell.ptr.vx) { bdist1 = distance(cell.x,cell.y,treasure.x,0); bdist2 = distance(cell.x,Mtw * TILE,treasure.x,treasure.y); }	*/
-							if (cell.ptr.vx || cell.ptr.vy) {
+							if (cell.ptr.vx || cell.ptr.vy && !game.viewport.outside(cell.x, cell.y, TILE, TILE)) {
 								if (cell.ptr.vx < 0) { tpx = Mtw * TILE; ctx = 0; }
 								if (cell.ptr.vx > 0) { tpx = 0; ctx = Mtw * TILE; }
 								if (cell.ptr.vy < 0) { tpy = Mth * TILE; cty = 0; }
-								if (cell.ptr.vy > 0) { tpy = 0; c  ty = Mth * TILE; }
+								if (cell.ptr.vy > 0) { tpy = 0; cty = Mth * TILE; }
 								bdist1 = distance(cpx,cpy,tpx,tpy); bdist2 = distance(ctx,cty,ttx,tty);
+alert( "tsrc "+Math.round(treasure.x)+":"+Math.round(treasure.y)+" td: "+Math.round(cell.x)+":"+Math.round(cell.x)+" cd: "+ cdist+" bd: "+ (bdist1+ bdist2));
 								if ((bdist1 + bdist2) < cdist) cdist = bdist1 + bdist2;
 								}
 // need to handle unpinned here
@@ -4963,6 +4964,7 @@ dent = this;
 			if (entity.type.wall && entity.spriteset == undefined) entity.spriteset = wallsprites;
 			else
 			if (entity.spriteset == undefined) entity.spriteset = sprites;
+			entity.vx = 0; entity.vy = 0;
         if (entity.active && (!entity.onrender || entity.onrender(frame) !== false) && !viewport.outside(entity.x, entity.y, TILE, TILE)) {
 // note: RUNORG
 
