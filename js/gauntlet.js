@@ -2364,7 +2364,7 @@ var lvu = document.getElementById("flvl").value;
 					if (entity.player)
 					{
 // slow down in glue, water, etc
-						if (collision.rwall && collision.nohlp = 999) collision.rwall = 0;	// when players step on vacant random wall spot, RW ends
+						if (collision.rwall && collision.nohlp == 999) collision.rwall = 0;	// when players step on vacant random wall spot, RW ends
 						if (collision.type.nohlp >= WTHLP) entity.gluesp = collision.type.gluesp;
 // handle tiles that do dmg - forcefield, liquids, etc
 						if (collision.type.damage > 0) // dmg players in active FF
@@ -3992,8 +3992,9 @@ dent = this;
 					  entity = Mastermap.entities[n];
 					if (entity.rwall)
 					if (Math.random() < 0.45) {
-						if (entity.nohlp == 999) { entity.nohlp = 0; entity.sy = entity.svsy; entity.sx = walltype(p2t(entity.x), p2t(entity.y), map); }
-						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; }
+						var r = mpixel(entity.x,entity.y, entity.x,entity.y , 2);
+						if (entity.nohlp == 999) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap); }
+						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; Mapdata[r] = Mastermap.cells[r].ihpixel }
 						}
 				}
 			var hinv = 0;
@@ -4870,13 +4871,17 @@ dent = this;
 					}
 			  }
 			else if (fcellstr != null) {		// this is some ent - copy floor tile under it from imm. previous
+					cell.ihpixel = 0;
 					if (hu == 0 && Ltile > 0) {
 						if (map.level.gflr || Ltile & MEXLOW) { nfl = Ltile & MEXLOW, nft = FCUSTILE; }
 						if (Ltile & 0x10) nft = 0;
 						if (Ltile == 96 && map.level.gflr) continue;	// normal floor tile, already written
+						cell.ihpixel = 0xA08000 | Ltile & 0x1F;
 					}
-					if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr))
+					if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr)) {
 							this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
+							if (cell.ihpixel == 0) cell.ihpixel = fcellstr.pixel;
+					}
 				}
 
 // map gps
