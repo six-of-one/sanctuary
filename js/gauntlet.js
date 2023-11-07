@@ -77,6 +77,7 @@ Gauntlet = function() {
 					[ 6, 4, 2 ],
 					[ 5, 4, 3 ],
 							],
+		wto = 3,		// shots timeout in 3 secs
 // abiility & power potion enhance
 		ppotmax = 2,
 		abshotpot = -3,
@@ -2326,7 +2327,7 @@ var lvu = document.getElementById("flvl").value;
 // end lobber shot
 		 {
 				var sendir = null;
-				if (entity.player) sendir = entity.dir;
+				if (entity.player || entity.monster) sendir = entity.dir;
 				collision = this.occupied(this.tpos.x + entity.cbox.x, this.tpos.y + entity.cbox.y, entity.cbox.w, entity.cbox.h, ignore || entity, sendir);
 				var subcol = collision.exit;
 				var ffcol = false;
@@ -2487,15 +2488,18 @@ var celpr = " c:";
       // now loop again checking for walls and other entities
       for(c = 0 ; c < nc ; c++) {
         cell = cells[c];
+
+/// TEST - remove
 if (cell == undefined) celpr += "u:"+c;
 else { celpr += c+" xy: "+ cell.x+":"+cell.y;
 	if (cell.wall !== undefined && cell.wall !== null) celpr += "-bangwall:" + cell.tx+":"+cell.ty }
 celpr += ", ";
 document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y)+celpr+"  e:"+(Mtw - 1)+":"+(Mth - 1);
+/// TEST - remove
 
 	var n, ptw = false;
 		     if (x < 7 || x > (TILE * (Mtw - 1) - 7) && dir == DIR.LEFT) { n = mpixel(x,y, x - TILE, y, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
-		else if (x < 7 || x > (TILE * (Mtw - 1) - 7) && dir == DIR.RIGHT) { ptw = false;; n = mpixel(x,y, x + TILE, y, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; document.title += " t: "+d1+":"+d2}}
+		else if (x < 7 || x > (TILE * (Mtw - 1) - 7) && dir == DIR.RIGHT) { ptw = false;; n = mpixel(x,y, x + TILE, y, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
 		else if (y < 7 || y > (TILE * (Mth - 1) - 9) && dir == DIR.UP) { ptw = false; n = mpixel(x,y, x, y - TILE, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
 		else if (y < 7 || y > (TILE * (Mth - 1) - 9) && dir == DIR.DOWN) { ptw = false; n = mpixel(x,y, x, y + TILE, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
 
@@ -2727,6 +2731,7 @@ if (document.getElementById("noclip").checked) return false;
 		Mastercell.ptr = entity;
       this.occupy(x, y, entity);
       entity.active = true;
+		entity.to = heartbeet + wto;
 		entity.numer = false; // these are a reused pool, turn this off
       return entity;
     },
@@ -3126,7 +3131,7 @@ if (document.getElementById("noclip").checked) return false;
     update: function(frame, player, map, viewport) {
 
 		var xspd = 0;
-		if (this.xshotspd) xspd = 3;
+		if (this.xshotspd) xspd = 30;
 
       var collision = map.trymove(this, this.dir, this.type.speed + xspd, this.owner);
       if (collision) {
@@ -3148,6 +3153,7 @@ if (document.getElementById("noclip").checked) return false;
 		 else
       this.frame = this.type.rotate ? animate(frame, this.type.fpf, 8) : this.dir;
 		if (this.lsuper) this.frame = SUPERSHTFR;
+		 if (this.to < heartbeet) Mastermap.remove(this);
     }
 
   });
@@ -3255,6 +3261,7 @@ if (document.getElementById("noclip").checked) return false;
 				if (reret) return; // dont remap anything but shotwalls
 				rewall(Mastermap);
 				tilerend.maptiles(Mastermap, ctx);		// this redraws the background
+				reloaded.cells[n].ptr = null;
 				if (regud) {		// shoot wall get item
 					var cell = reloaded.cells[p2t(rx) + (p2t(ry) * Mtw)];
 					rlitem(rlswall, 0.15, cell);
