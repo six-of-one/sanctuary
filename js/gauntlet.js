@@ -17,7 +17,7 @@ Gauntlet = function() {
 // this turns off the ver 1.0.0 background music when true
 /// before restoring music load must be cleaned up !
 		NOBKGMUSIC = 0,
-// set to 1 to run original code
+// set to 1 to run original code - this needs to be removed, as this will never function as intended now
 		RUNORG = 0,
 // when hitting last seq level, pick a random # between loop start and last level
 // set rnd_level true to indicate running rnd levels from here on out
@@ -855,7 +855,7 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',     url: "levels/7level.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor012.jpg",         music: 'nullm',	unpinx: 1,	unpiny: 1,   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.BEES,      wall: WALL.GREEN3,            music: 'nullm',	unpinx: 1,	unpiny: 1,   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
  //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
@@ -4833,7 +4833,7 @@ dent = this;
 			  }
 			else if (fcellstr != null) {		// this is some ent - copy floor tile under it from imm. previous
 					if (hu == 0 && Ltile > 0) {
-						nfl = Ltile & MEXLOW, nft = FCUSTILE;
+						if (map.level.gflr || Ltile & MEXLOW) { nfl = Ltile & MEXLOW, nft = FCUSTILE; }
 						if (Ltile & 0x10) nft = 0;
 						if (Ltile == 96 && map.level.gflr) continue;	// normal floor tile, already written
 					}

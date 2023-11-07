@@ -35,8 +35,6 @@ super shots possibly destroys more than its coded to now
 
 - limited transportability needs to remove just about everything
 
-jsgv maze tiles are not proper update on floor obscuring-ent removal and some direct displays
-\_ floor ops may get a revision to settle tile differences of MEXLOW selected tiles1
 
 dead player is only lvl 1 bone pile
 
@@ -330,6 +328,10 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- jsgv maze tiles are not proper update on floor obscuring-ent removal and some direct displays
+	\_ floor ops may get a revision to settle tile differences of MEXLOW selected tiles1
+	 | this update is partially complete, short of re-org on backgrounds.png
 
 x-- move across unpin in 1/ 2 unit tunnel fails
    \_this fix is not the ideal, but it stumps along
