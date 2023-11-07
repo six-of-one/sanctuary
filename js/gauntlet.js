@@ -334,6 +334,8 @@ Gauntlet = function() {
         WALLGUD2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true, gud: 3,   sound: 'shotwall',  nohlp: 65 },
         WALLPASS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
         WALLPASS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
+        WALLRND:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
+        WALLRND2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -352,7 +354,7 @@ Gauntlet = function() {
 // special "treasure" walls
 		PXWALSHT = 0x8100,
 		PXWALGUD = 0x8190,
-		PXWALPASS = 0x81CF,
+		PXWALPHAS = 0x820F,
 // tell load a start was found - if not randomly add one to prevent load fail
 		fndstart = 0,
 // after {n} health tics with no player move / fire, all walls are exits
@@ -394,7 +396,7 @@ Gauntlet = function() {
       TREASURES = [ TREASURE.HEALTH, TREASURE.HEALRND, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD,
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
 											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER, TREASURE.LAVA, TREASURE.NWASTE,
-											TREASURE.FIRESTK, TREASURE.PFLOOR1, TREASURE.WALLGUD, TREASURE.WALLGUD2, TREASURE.WALLPASS, TREASURE.WALLPASS2,
+											TREASURE.FIRESTK, TREASURE.PFLOOR1, TREASURE.WALLGUD, TREASURE.WALLGUD2, TREASURE.WALLPASS, TREASURE.WALLPASS2, TREASURE.WALLRND, TREASURE.WALLRND2,
 // these are selected by MEXLOW case {}, or other code
 											TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
@@ -1083,7 +1085,7 @@ Gauntlet = function() {
 	function isp(pixel, type)      { return ((pixel & PIXEL.MASK.TYPE) === type); };
 	function type(pixel)           { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 	function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
-	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
+	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPHAS) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
 	function iswallrw(pixel)       { return (isp(pixel, PIXEL.WALL))     };
 	function isfloor(pixel)        { return isp(pixel, PIXEL.FLOOR);     };
 	function isstart(pixel)        { return isp(pixel, PIXEL.START);     };
@@ -1213,8 +1215,15 @@ Gauntlet = function() {
 // wall types all work to build wall appearance
 				 if (Mastercell.ptr.type.wall) {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
-					 Mastercell.ptr.sy = Mastercell.ptr.type.sy; // color of rubble shotwall
+					 Mastercell.ptr.sy = Mastercell.ptr.type.sy; // backgrounds.png line of rubble shotwall
 				 }
+				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2) {
+					 Mastercell.ptr.rwall = true;
+					 Mastercell.ptr.sy = Mastermap.level.wall;
+					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLRND2));
+					 Mastercell.ptr.sx = walltype(tx, ty, map);
+					 Mastercell.ptr.svsy = Mastercell.ptr.sy;
+					 }
 				 if (ad == TREASURE.WALLGUD || ad == TREASURE.WALLGUD2) {
 					 Mastercell.ptr.sy = Mastermap.level.wall;
 					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLGUD2));
@@ -2337,7 +2346,7 @@ var lvu = document.getElementById("flvl").value;
 					if (collision.type.nohlp != undefined)
 					{
 						if (collision.type.nohlp == FFHLP) ffcol = true;
-						if (collision.type.nohlp == 999) ffcol = true;	// for no collision items with no help
+						if (collision.type.nohlp == 999 || collision.nohlp == 999) ffcol = true;	// for no collision items with no help
 						if (collision.type.nohlp >= WTHLP) ffcol = true;
 						if (collision.type.nohlp == STNHLP) subcol = true;
 						if (collision.type.nohlp == TRPHLP) subcol = true;
@@ -2355,6 +2364,7 @@ var lvu = document.getElementById("flvl").value;
 					if (entity.player)
 					{
 // slow down in glue, water, etc
+						if (collision.rwall && collision.nohlp = 999) collision.rwall = 0;	// when players step on vacant random wall spot, RW ends
 						if (collision.type.nohlp >= WTHLP) entity.gluesp = collision.type.gluesp;
 // handle tiles that do dmg - forcefield, liquids, etc
 						if (collision.type.damage > 0) // dmg players in active FF
@@ -2620,16 +2630,15 @@ if (document.getElementById("noclip").checked) return false;
 		 else { source.width = level.mw; source.height = level.mh; }
 // process level colors, hue overrides, special color instructions, tile overrides
 // first byte codes: xFE, xFC, xFA, xF8, xF6, xF4, xF2
-// xFE - hues override: xFFFF: 0 - 255 interpolate to 0 - 359, byte 1 = floor/wall, byte 0 = items
-// XFC - tile override: 0xF000 - extra tiles set #, x0F00 - trap code, 0xFF - lower byte floors ref, 0 is level floor
-// XFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
-// XF -
+
 // any other codes: color triple 0xFFFFFF that will load between gbas layer and gflr// process level colors, hue overrides, special color instructions, tile overrides
 // first byte codes: xFE, xFC, xFA, xF8, xF6, xF4, xF2
 // xFE - hues override: xFFFF: 0 - 255 interpolate to 0 - 359, byte 1 = floor/wall, byte 0 = items
-// XFC - tile override: 0xF000 - extra tiles set #, x0F00 - trap code, 0xFF - lower byte floors ref, 0 is level floor
-// XFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
-// XF -
+// xFC - tile override: 0xF000 - extra tiles set #, x0F00 - trap code, 0xFF - lower byte floors ref, 0 is level floor
+// xFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
+// xF8 - phase wall code #, sequential - 1st phase set, {1,2,3,4}, break (no 5) 2nd phase set, {6,7,8,9,10,11}, and on
+// xF4 - trap code - trap # match 80B#, this wall or item will be removed by indicated trap
+// xF - 
 // any other codes: color triple 0xFFFFFF that will load between gbas layer and gflr (if used), if nothing, black will not overwrite the color
 		 var dohu = false;
 		if (hues.width == source.width && hues.height == source.height) dohu = true;
@@ -3978,6 +3987,15 @@ dent = this;
 				this.setDir();
 				this.poison--; // count down poison effect
 			}
+// random walls
+			for(n = 0, nc = Mastermap.entities.length ; n < nc ; n++) {
+					  entity = Mastermap.entities[n];
+					if (entity.rwall)
+					if (Math.random() < 0.45) {
+						if (entity.nohlp == 999) { entity.nohlp = 0; entity.sy = entity.svsy; entity.sx = walltype(p2t(entity.x), p2t(entity.y), map); }
+						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; }
+						}
+				}
 			var hinv = 0;
 			if (this.linvuln > 0) hinv = 1; // invulnerable takes another health per tick
 // difficulty > 7 (std hard) adds dmg at 1% per diff
