@@ -84,10 +84,10 @@ Gauntlet = function() {
 		ABILIND = [ 10, 0, 10, 10, 0, 10, 10, 10, 30, 30, 20, 30, 30, 30, 30, 30, 30, 30, 30, 10, 20, 20, 10, 20, 20, 20, 30, 30, 10, 20, 20, 20, 30, 30, 0.15, 0, 0, 0.3, 0, 0, 1, 0.8, 0.65, 1, 1, 0.85 ],
 		ABILRNG = [ 0, 0, 0, 10.25, 0, 0, 10.25, 0, 0, 0, 0, 0, 0, 0, 0, 5.25, 0, 0, 5.25, 0, 0, 10.25, 0, 0, 5.2, 0, 0, 5.2, 10.5, 10.5, 10.85, 10.4, 0, 5.2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       PLAYER = {
-        WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 180/FPS, damage: 50/FPS, armor: 2, magic: 10, mind:10, mindg:4, weapon: { speed: 600/FPS, reload: 1.15*FPS, damage: 20, wind:10, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior", helo: 'hlowar1', annc: 'ancwar1', blip: 'blipwarrior', fcol: "<font color=red>" }, // Thor
-        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 215/FPS, damage: 40/FPS, armor: 3, magic: 10, mind:10, mindg:4, weapon: { speed: 620/FPS, reload: 1*FPS, damage: 10, wind:19, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", helo: 'hloval1', annc: 'ancval1', blip: 'blipvalkyrie', fcol: "<font color=blue>" }, // Thyra
-        WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 190/FPS, damage: 30/FPS, armor: 1, magic: 30, mind:16, mindg:13, weapon: { speed: 640/FPS, reload: 1.1*FPS, damage: 10,  wind:28, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard", helo: 'hlowiz1', annc: 'ancwiz1', blip: 'blipwizard', fcol: "<font color=yellow>"   }, // Merlin
-        ELF:      { sx: 0, sy: 3, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 245/FPS, damage: 20/FPS, armor: 1, magic: 30, mind:16, mindg:25, weapon: { speed: 660/FPS, reload: 1*FPS, damage: 10, wind:22, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf", helo: 'hloelf1', annc: 'ancelf1', blip: 'blipelf', fcol: "<font color=green>"      }  // Questor
+        WARRIOR:  { sx: 0, sy: 0, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 180/FPS, gluesp = 1, damage: 50/FPS, armor: 2, magic: 10, mind:10, mindg:4, weapon: { speed: 600/FPS, reload: 1.15*FPS, damage: 20, wind:10, rotate: true,  sx: 24, sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior", helo: 'hlowar1', annc: 'ancwar1', blip: 'blipwarrior', fcol: "<font color=red>" }, // Thor
+        VALKYRIE: { sx: 0, sy: 1, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 215/FPS, gluesp = 1, damage: 40/FPS, armor: 3, magic: 10, mind:10, mindg:4, weapon: { speed: 620/FPS, reload: 1*FPS, damage: 10, wind:19, rotate: false, sx: 24, sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", helo: 'hloval1', annc: 'ancval1', blip: 'blipvalkyrie', fcol: "<font color=blue>" }, // Thyra
+        WIZARD:   { sx: 0, sy: 2, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 190/FPS, gluesp = 1, damage: 30/FPS, armor: 1, magic: 30, mind:16, mindg:13, weapon: { speed: 640/FPS, reload: 1.1*FPS, damage: 10,  wind:28, rotate: false, sx: 24, sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard", helo: 'hlowiz1', annc: 'ancwiz1', blip: 'blipwizard', fcol: "<font color=yellow>"   }, // Merlin
+        ELF:      { sx: 0, sy: 3, frames: 3, fpf: FPS/10, coins: 3, health: 2000, speed: 245/FPS, gluesp = 1, damage: 20/FPS, armor: 1, magic: 30, mind:16, mindg:25, weapon: { speed: 660/FPS, reload: 1*FPS, damage: 10, wind:22, rotate: false, sx: 24, sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf", helo: 'hloelf1', annc: 'ancelf1', blip: 'blipelf', fcol: "<font color=green>"      }  // Questor
       },
       MONSTER = {
         GHOST:  { sx: 0, sy: 4, frames: 3, fpf: FPS/10, score:  10, health:  30, speed: 120/FPS, damage: 30, selfharm: 300, canbeshot: true,  canbehit: false, notfot: true, invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 11, 11, 6, 0 ], generator: { glvl: [ 11, 11, 6, 0 ], health:  30, speed: 3.5*FPS, max: 40, score: 100, sx: 32, sy: 4 }, name: "ghost",  weapon: null ,  hits: 'hitghost',     nohlp: 41   },
@@ -313,21 +313,21 @@ Gauntlet = function() {
 // this is the field power that damages, this is toggled on by ffieldpulse ops
         FFIELDPOW:       { sx: 28, sy: 12, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 3, sound: 'ffield',  nohlp: 61  },
 // animated floor items
-        WATER:      { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 81  },
+        WATER:      { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp = 0.5, damage: 0, sound: 'null', nohlp: 81  },
 // series of water boundary blocks code: 0x8140, with a pool wall appearing top, center and right, selected by MEXLOW 1, 2, 3
-        WATERT:     { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 81  },
-        WATERC:     { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 81  },
-        WATERR:     { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 81  },
+        WATERT:     { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp = 0.5, damage: 0, sound: 'null', nohlp: 81  },
+        WATERC:     { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp = 0.5, damage: 0, sound: 'null', nohlp: 81  },
+        WATERR:     { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5 gluesp = 0.5, damage: 0, sound: 'null', nohlp: 81  },
 // series of lava blocks code: 0x8150. with MEXLOW as water
-        LAVA:       { sx: 16, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 82  },
-        LAVAT:      { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 82  },
-        LAVAC:      { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 82  },
-        LAVAR:      { sx: 28, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 10, sound: 'null', nohlp: 82  },
-        NWASTE:     { sx: 16, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 83  },
-        NWASTET:    { sx: 19, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 83  },
-        NWASTEC:    { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 83  },
-        NWASTER:    { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, damage: 1, sound: 'null', nohlp: 83  },
-        FIRESTK:    { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null', nohlp: 999  },
+        LAVA:       { sx: 16, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp = 0.8, damage: 10, sound: 'null', nohlp: 82  },
+        LAVAT:      { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp = 0.8, damage: 10, sound: 'null', nohlp: 82  },
+        LAVAC:      { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp = 0.8, damage: 10, sound: 'null', nohlp: 82  },
+        LAVAR:      { sx: 28, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp = 0.8, damage: 10, sound: 'null', nohlp: 82  },
+        NWASTE:     { sx: 16, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, gluesp = 0.7, damage: 1, sound: 'null', nohlp: 83  },
+        NWASTET:    { sx: 19, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, gluesp = 0.7, damage: 1, sound: 'null', nohlp: 83  },
+        NWASTEC:    { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, gluesp = 0.7, damage: 1, sound: 'null', nohlp: 83  },
+        NWASTER:    { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, gluesp = 0.7, damage: 1, sound: 'null', nohlp: 83  },
+        FIRESTK:    { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp = 0.7, damage: 0, sound: 'null', nohlp: 999  },
         PFLOOR1:    { sx: 28, sy: 27, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 999  },
 // other "wall" ents
         WALLGUD:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true, gud: 3,   sound: 'shotwall',  nohlp: 65 },
