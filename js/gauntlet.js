@@ -11,7 +11,7 @@ Gauntlet = function() {
 											DEBUGON = 0,
 // debug - provide a one time start level
 											initlevel = 0,
-	vardbg = 0, dent,
+	vardbg = 0, dent, d1, d2,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -1100,13 +1100,13 @@ Gauntlet = function() {
 			if (sf == 2) { sx = p2t(sx); sy = p2t(sy); tx = p2t(tx); ty = p2t(ty); }
 			if (Munpinx) {
 				if (sx == 0 && tx < 0) tx = Mtw - 1;
-				if (sx == (Mtw - 1) && tx >= Mtw) tx = 0;
+				if (sx >= (Mtw - 1) && tx >= Mtw) tx = 0;
 			}
 			if (Munpiny) {
 				if (sy == 0 && ty < 0) ty = Mth - 1;
-				if (sy == (Mth - 1) && ty >= Mth) ty = 0;
+				if (sy >= (Mth - 1) && ty >= Mth) ty = 0;
 			}
-				var n = tx + (ty * Mtw);
+				var n = tx + (ty * Mtw); d1 = tx; d2 = ty;
 				if (sf > 0) return (n);		// second fn, calculate n
 
 				return(Mapdata[n]);
@@ -2453,34 +2453,21 @@ var lvu = document.getElementById("flvl").value;
       var nx = ((x%TILE) + w) > TILE ? 1 : 0,
           ny = ((y%TILE) + h) > TILE ? 1 : 0;
 
-      set_add(cells,   this.cell(x,        y));
 // change test for across unpin
-		var sproc = false;
-		if (x < 3 && dir == DIR.LEFT) sproc = true;
-		if (y < 3 && dir == DIR.UP) sproc = true;
-		if (x > (TILE * (Mtw - 1) - 2) && dir == DIR.RIGHT) sproc = true;
-		if (y > (TILE * (Mth - 1) - 2) && dir == DIR.DOWN) sproc = true;
-
-		if (sproc) {
-		var n = mpixel(x,y, x + TILE, y, 2);
-			if (nx > 0)
-			  set_add(cells, this.cells[n]);
-			n = mpixel(x,y, x, y + TILE, 2);
-			if (ny > 0)
-			  set_add(cells, this.cells[n]);
-			n = mpixel(x,y, x + TILE, y + TILE, 2);
-			if ((nx > 0) && (ny > 0))
-			  set_add(cells, this.cells[n]);
-
-		} else {
-
+/*		var n;
+		if (x < 5 && dir == DIR.LEFT) { n = mpixel(x,y, x - TILE, y, 2); if (this.cells[n] != undefined) set_add(cells, this.cells[n]); }
+		else if (x > (TILE * (Mtw - 1) - 5) && dir == DIR.RIGHT) { n = mpixel(x,y, x + TILE, y, 2); if (this.cells[n] != undefined) set_add(cells, this.cells[n]); }
+		else if (y < 5 && dir == DIR.UP) { n = mpixel(x,y, x, y - TILE, 2); if (this.cells[n] != undefined) set_add(cells, this.cells[n]); }
+		else if (y > (TILE * (Mth - 1) - 5) && dir == DIR.DOWN) { n = mpixel(x,y, x, y + TILE, 2); if (this.cells[n] != undefined) set_add(cells, this.cells[n]); }
+		else { */
+			set_add(cells, this.cell(x, y));
 			if (nx > 0)
 			  set_add(cells, this.cell(x + TILE, y));
 			if (ny > 0)
 			  set_add(cells, this.cell(x,        y + TILE));
 			if ((nx > 0) && (ny > 0))
 			  set_add(cells, this.cell(x + TILE, y + TILE));
-		}
+//		}
 		return cells;
 
     },
@@ -2504,13 +2491,24 @@ if (cell == undefined) celpr += "u:"+c;
 else { celpr += c+" xy: "+ cell.x+":"+cell.y;
 	if (cell.wall !== undefined && cell.wall !== null) celpr += "-bangwall:" + cell.tx+":"+cell.ty }
 celpr += ", ";
-document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y)+celpr;
+document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y)+celpr+"  e:"+(Mtw - 1)+":"+(Mth - 1);
+
+	var n, ptw = false;
+		     if (x < 7 || x > (TILE * (Mtw - 1) - 7) && dir == DIR.LEFT) { n = mpixel(x,y, x - TILE, y, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
+		else if (x < 7 || x > (TILE * (Mtw - 1) - 7) && dir == DIR.RIGHT) { ptw = false;; n = mpixel(x,y, x + TILE, y, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; document.title += " t: "+d1+":"+d2}}
+		else if (y < 7 || y > (TILE * (Mth - 1) - 9) && dir == DIR.UP) { ptw = false; n = mpixel(x,y, x, y - TILE, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
+		else if (y < 7 || y > (TILE * (Mth - 1) - 9) && dir == DIR.DOWN) { ptw = false; n = mpixel(x,y, x, y + TILE, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
 
 /// TEST - remove
 if (document.getElementById("noclip").checked) return false;
 /// TEST - remove
+
 // since edje walls can become exits, make sure shots expire at edge
-			if (cell == undefined) return true;
+			if (cell == undefined) {
+// getting stuck with detect x = Mtw - 1, y = Mth - 2, attempt fix
+				if (p2t(x) == (Mtw - 1) && p2t(y) >= (Mth - 2) && (dir == DIR.UP || dir == DIR.UPLEFT || dir == DIR.UPRIGHT)) return false;
+				return true;
+				}
 
 			if (cell.wall !== undefined && cell.wall !== null)		{		// walls to exits sets null
 //				if (mtm != "bw: "+cell.tx+":"+cell.ty) { mtm = "bw: "+cell.tx+":"+cell.ty; alert("bw: "+cell.tx+":"+cell.ty);}
