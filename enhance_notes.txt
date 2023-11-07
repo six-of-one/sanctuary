@@ -19,9 +19,6 @@ push wall collision
 
 imm issues:
 
-teleporters, shots cross the unpin line
-
-
 - some g2 sounds may need vol atten -- in progress
 - g2 announcer does not match g1
 
@@ -55,7 +52,7 @@ player dmg: melee
 melee mis gens
 monster dmg: melee - turn off autohurt to test
 
-is it possible to code adjust the "contained" corner
+is it possible to code adjust the "contained" corner	(re wall changes)
 
 player shot speed
 
@@ -328,6 +325,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- teleporters, shots cross the unpin line
 
 x-- jsgv maze tiles are not proper update on floor obscuring-ent removal and some direct displays
 	\_ floor ops may get a revision to settle tile differences of MEXLOW selected tiles1
