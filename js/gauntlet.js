@@ -2455,8 +2455,13 @@ var lvu = document.getElementById("flvl").value;
 
       set_add(cells,   this.cell(x,        y));
 // change test for across unpin
-		if (x < 7 || y < 7 || x > TILE * (Mtw - 1) || y > TILE * (Mth - 1)) {
+		var sproc = false;
+		if (x < 3 && dir == DIR.LEFT) sproc = true;
+		if (y < 3 && dir == DIR.UP) sproc = true;
+		if (x > (TILE * (Mtw - 1) - 2) && dir == DIR.RIGHT) sproc = true;
+		if (y > (TILE * (Mth - 1) - 2) && dir == DIR.DOWN) sproc = true;
 
+		if (sproc) {
 		var n = mpixel(x,y, x + TILE, y, 2);
 			if (nx > 0)
 			  set_add(cells, this.cells[n]);
@@ -2467,7 +2472,7 @@ var lvu = document.getElementById("flvl").value;
 			if ((nx > 0) && (ny > 0))
 			  set_add(cells, this.cells[n]);
 
-e		} else {
+		} else {
 
 			if (nx > 0)
 			  set_add(cells, this.cell(x + TILE, y));
@@ -2497,7 +2502,7 @@ var celpr = " c:";
         cell = cells[c];
 if (cell == undefined) celpr += "u:"+c;
 else { celpr += c+" xy: "+ cell.x+":"+cell.y;
-	if (cell.wall !== undefined && cell.wall !== null) celpr += "-bangwall" }
+	if (cell.wall !== undefined && cell.wall !== null) celpr += "-bangwall:" + cell.tx+":"+cell.ty }
 celpr += ", ";
 document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y)+celpr;
 
@@ -2680,7 +2685,7 @@ if (document.getElementById("noclip").checked) return false;
       self.h        = Mth * TILE;
 
 		if (level.unpinx) { Munhx = Mtw * TILE - 1; }
-		if (level.unpiny) { Munhy = Mth * TILE - 16; }
+		if (level.unpiny) { Munhy = Mth * TILE - 12; }
 
     },
 
