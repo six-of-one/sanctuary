@@ -23,6 +23,8 @@ imm issues:
 - g2 announcer does not match g1
 
 g2 ? food research (find in files, or redo)
+g1/g2 wall & door stall times
+
 check sound for picking poison (is potion pick sound, need g2 ref)
 
 
@@ -45,6 +47,12 @@ need sounds:
 
 
 port list:
+
+theif / mugger should fight monsters in path - get blocked by object on start, pushwall across path
+stalling with keys takes 2 * stall for doors
+(also might be affected by skill)
+\_ takes about 18 health (without keys) and 36 health (with keys) to stall the doors and about 325 health to stall the walls
+ \_ about twice as long in Gauntlet 2 than in Gauntlet
 
 g2 phase wall, rnd wall
 
@@ -97,8 +105,6 @@ g2:
 sngl potion stuns, dbl potion kills pickles (sup sorc too)
 
 new-ish:
-
-water, lava, toxic sludge, glue - need slow effect
 
 hue shift floors & loadable wall segment
 loadable wall seg, other modes (a la druid)
@@ -325,6 +331,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- water, lava, toxic sludge, glue - need slow effect
 
 x-- teleporters, shots cross the unpin line
 
