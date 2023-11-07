@@ -3988,13 +3988,15 @@ dent = this;
 				this.poison--; // count down poison effect
 			}
 // random walls
+			var bb = 0;
 			for(n = 0, nc = Mastermap.entities.length ; n < nc ; n++) {
 					  entity = Mastermap.entities[n];
+					if (!document.getElementById("nommv").checked)
 					if (entity.rwall)
 					if (Math.random() < 0.45) {
-						var r = mpixel(entity.x,entity.y, entity.x,entity.y , 2);
+						var r = mpixel(entity.x,entity.y, entity.x,entity.y , 2); if (bb = 0) alert(entity.pixel+":"+Mastermap.cells[r].ihpixel); bb = 1;
 						if (entity.nohlp == 999) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap); }
-						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; Mapdata[r] = Mastermap.cells[r].ihpixel }
+						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; Mapdata[r] = Mastermap.cells[r].ihpixel; }
 						}
 				}
 			var hinv = 0;
