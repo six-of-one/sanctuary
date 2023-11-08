@@ -11,7 +11,7 @@ Gauntlet = function() {
 											DEBUGON = 0,
 // debug - provide a one time start level
 											initlevel = 0,
-	vardbg = 0, dent, d1, d2,
+	vardbg = 0, dent, d1, d2, bb = 0,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -3992,16 +3992,21 @@ var txsv = ":";
 				this.poison--; // count down poison effect
 			}
 // random walls
-			var bb = 0;
 			for(n = 0, nc = Mastermap.entities.length ; n < nc ; n++) {
 					  entity = Mastermap.entities[n];
 					if (!document.getElementById("nommv").checked)
 					if (entity.rwall)
 					if (Math.random() < 0.45) {
 						var r = mpixel(entity.x,entity.y, entity.x,entity.y , 2); if (bb = 0) alert(entity.pixel+":"+Mastermap.cells[r].ihpixel); bb = 1;
-						if (entity.nohlp == 999) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap); }
+						if (entity.nohlp == 999) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }
 						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; Mapdata[r] = Mastermap.cells[r].ihpixel; }
 						}
+				}
+			for(n = 0, nc = Mastermap.entities.length ; n < nc ; n++) {
+					entity = Mastermap.entities[n];
+// if you leave out this if, it does real weird stuff
+					if (entity.rwall)
+					entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap);
 				}
 			var hinv = 0;
 			if (this.linvuln > 0) hinv = 1; // invulnerable takes another health per tick
