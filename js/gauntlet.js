@@ -1220,9 +1220,11 @@ Gauntlet = function() {
 					 Mastercell.ptr.sy = Mastercell.ptr.type.sy; // backgrounds.png line of rubble shotwall
 				 }
 				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2 || ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) {
-					 Mastercell.ptr.rwall = true;
+					 Mastercell.ptr.rwall = (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2);
+					 if (ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) Mastercell.ptr.pwall = 1;
+					 Mastercell.ptr.hb = 0;
 					 Mastercell.ptr.sy = Mastermap.level.wall;
-					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLRND2) + (0x10 * (ad == TREASURE.WALLPHS2));
+					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLRND2) + (0x10 * (ad == TREASURE.WALLPHS2)));
 					 Mastercell.ptr.sx = walltype(tx, ty, map);
 					 Mastercell.ptr.svsy = Mastercell.ptr.sy;
 					 }
@@ -2377,6 +2379,7 @@ var lvu = document.getElementById("flvl").value;
 				if (!collision.player && entity.weapon && subcol) collision = undefined;
 				else if (ffcol == true)
 				{
+					if (collision.pwall && collision.nohlp == 999) collision.pwall = -1;	// when ent on vacant phase wall spot, PW is temp blocked
 					if (entity.player)
 					{
 // slow down in glue, water, etc
@@ -2706,7 +2709,7 @@ if (document.getElementById("noclip").checked) return false;
 				if (Lphase > 0)
 					Phasewal[Lphase] = Lsecs;
 				if (Lphase > lastphas) lastphas = Lphase;
-				}
+				} alert(Phasewal);
 		}
 
 // make sure mults is not undefed - later load deathmult from cooky
@@ -4028,6 +4031,19 @@ var txsv = ":";
 						if (entity.nohlp == 999) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }
 						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; Mapdata[r] = Mastermap.cells[r].ihpixel; }
 						}
+					if (entity.pwall && entity.hb < heartbeet) {
+						entity.pwall++;
+						if (Phasewal[entity.pwall] == undefined) entity.pwall = 1;
+//						var pw = entity.pwall;
+						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
+						parseHue(0, 0, n2);
+						if (Lphase == entity.pwall) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }
+						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; Mapdata[r] = Mastermap.cells[r].ihpixel; }
+
+// next phase, this wall
+						if (Lsecs < 2) Lsecs = 2;
+						entity.hb = heartbeet + Lsecs;
+					}
 				}
 // pass 2 - set wall shapes --not shadows
 			for(n = 0, nc = Mastermap.entities.length ; n < nc ; n++) {
@@ -4036,9 +4052,12 @@ var txsv = ":";
 					if (entity.rwall) {
 // likewise if you want an interesting "empty" tile, leave out the 999 test
 						if (entity.nohlp != 999) entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap);
-						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
+//						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
 //						var cell = reloaded.cells[n2];
 //						if (cell != undefined) cell.shadow = shadowtype(cell.tx, cell.ty, Mastermap);
+					}
+					if (entity.pwall) {
+						if (entity.nohlp != 999) entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap);
 					}
 				}
 /*				if (wallupd) {			// this is too costly on refresh
