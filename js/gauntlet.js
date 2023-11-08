@@ -336,6 +336,8 @@ Gauntlet = function() {
         WALLPASS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
         WALLRND:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
         WALLRND2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
+        WALLPHS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  sound: 'wallphase' },
+        WALLPHS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  sound: 'wallphase' },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -396,7 +398,7 @@ Gauntlet = function() {
       TREASURES = [ TREASURE.HEALTH, TREASURE.HEALRND, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD,
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
 											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.SHOTWALL, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER, TREASURE.LAVA, TREASURE.NWASTE,
-											TREASURE.FIRESTK, TREASURE.PFLOOR1, TREASURE.WALLGUD, TREASURE.WALLGUD2, TREASURE.WALLPASS, TREASURE.WALLPASS2, TREASURE.WALLRND, TREASURE.WALLRND2,
+											TREASURE.FIRESTK, TREASURE.PFLOOR1, TREASURE.WALLGUD, TREASURE.WALLGUD2, TREASURE.WALLPASS, TREASURE.WALLPASS2, TREASURE.WALLRND, TREASURE.WALLRND2, TREASURE.WALLPHS, TREASURE.WALLPHS2,
 // these are selected by MEXLOW case {}, or other code
 											TREASURE.XSHOTPWR, TREASURE.XSHOTSPD, TREASURE.XARMOR, TREASURE.XFIGHT, TREASURE.XMAGIC,
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
@@ -1217,10 +1219,10 @@ Gauntlet = function() {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
 					 Mastercell.ptr.sy = Mastercell.ptr.type.sy; // backgrounds.png line of rubble shotwall
 				 }
-				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2) {
+				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2 || ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) {
 					 Mastercell.ptr.rwall = true;
 					 Mastercell.ptr.sy = Mastermap.level.wall;
-					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLRND2));
+					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLRND2) + (0x10 * (ad == TREASURE.WALLPHS2));
 					 Mastercell.ptr.sx = walltype(tx, ty, map);
 					 Mastercell.ptr.svsy = Mastercell.ptr.sy;
 					 }
@@ -2703,6 +2705,7 @@ if (document.getElementById("noclip").checked) return false;
 				parseHue(0, 0, n);
 				if (Lphase > 0)
 					Phasewal[Lphase] = Lsecs;
+				if (Lphase > lastphas) lastphas = Lphase;
 				}
 		}
 
