@@ -4051,26 +4051,17 @@ var txsv = ":";
 			for(n = 0, nc = Mastermap.entities.length ; n < nc ; n++) {
 					entity = Mastermap.entities[n];
 // if you leave out this if, it does real weird stuff
-				var ppx = p2t(entity.x), ppy = p2t(entity.y), wol;
-					wol = false;
+				var ppx = p2t(entity.x), ppy = p2t(entity.y);
 					if (entity.rwall) {
 // likewise if you want an interesting "empty" tile, leave out the 999 test
 						if (entity.nohlp != 999) entity.sx = walltype(ppx, ppy, Mastermap);
-						wol = true;
 //						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
 //						var cell = reloaded.cells[n2];
 //						if (cell != undefined) cell.shadow = shadowtype(cell.tx, cell.ty, Mastermap);
 					}
 					if (entity.pwall) {
 						if (entity.nohlp != 999) entity.sx = walltype(ppx, ppy, Mastermap);
-						wol = true;
 					}
-					if (wol)
-					for (var i = ppy - 1; i <  ppy +2; i++)
-						for (var j = ppx - 1; j <  ppx +2; j++) {
-							var n2 = j + i * Mtw; var cell = reloaded.cells[n2];
-							if (iswallrw(cell.pixel)) cell.wall = walltype(j, i, Mastermap);
-							}
 				}
 /*				if (wallupd) {			// this is too costly on refresh
 					var ctx = reloaded.cells[0].ctx;
