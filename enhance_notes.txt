@@ -54,7 +54,6 @@ stalling with keys takes 2 * stall for doors
 \_ takes about 18 health (without keys) and 36 health (with keys) to stall the doors and about 325 health to stall the walls
  \_ about twice as long in Gauntlet 2 than in Gauntlet
 
-g2 phase wall, rnd wall
 
 player dmg: melee
 melee mis gens
@@ -331,6 +330,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- g2 phase wall, rnd wall
 
 x-- water, lava, toxic sludge, glue - need slow effect
 

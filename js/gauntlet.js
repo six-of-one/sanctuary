@@ -337,8 +337,8 @@ Gauntlet = function() {
         WALLPASS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
         WALLRND:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
         WALLRND2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
-        WALLPHS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  sound: 'wallphase',  nohlp: 81 },
-        WALLPHS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  sound: 'wallphase',  nohlp: 81 },
+        WALLPHS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  bsound: 'wallphase',  nohlp: 81 },
+        WALLPHS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  bsound: 'wallphase',  nohlp: 81 },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -2689,6 +2689,7 @@ if (document.getElementById("noclip").checked) return false;
 		Huedata = null;
 		Mtw = tw;
 		Mth = th;
+		Phasewal = [];
 
 		if (dohu)
 		{
@@ -2703,7 +2704,6 @@ if (document.getElementById("noclip").checked) return false;
 			self.h = Mth * TILE;
 
 			Mapdata = null;
-			Phasewal = [];
 			for(var n = 0 ; n < (Mtw * Mth) ; n++) {
 				parseHue(0, 0, n);
 				if (Lphase > 0)
@@ -4033,18 +4033,19 @@ var txsv = ":";
 						}
 					if (entity.pwall && entity.hb < heartbeet) {
 						entity.pwall++;
-						if (Phasewal[entity.pwall] == undefined) { if (entity.pwall == 2) altphas = Math.abs(1 - altphas); entity.pwall = 1; }
+						if (Phasewal[entity.pwall] == undefined) { if (entity.pwall == 2) altphas = true; entity.pwall = 1; }
 //						if (Phasewal[entity.pwall] == undefined) continue;
 //						var pw = entity.pwall;
 						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
 						parseHue(0, 0, n2);
-						if (Lphase == entity.pwall && !altphas) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }
+						if (Lphase == entity.pwall || (altphas && entity.nohlp == 999)) { if (!Mastermap.occupied(entity.x, entity.y, entity.w, entity.h, entity))
+							{Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }}
 						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
 
 // next phase, this wall
 						if (Lsecs < 2) Lsecs = 2;
 						entity.hb = heartbeet + Lsecs;
-						if (pwalled < heartbeet) Musicth.play(Musicth.sounds[entity.type.sound]);
+						if (pwalled < heartbeet) Musicth.play(Musicth.sounds[entity.type.bsound]);
 						pwalled = entity.hb;
 					}
 				}
