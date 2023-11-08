@@ -32,7 +32,7 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
-		walltype, shadowtype, doortype, Mapdata, Huedata, Phasewal, lastphas = 0, tilerend, Vx, Vy, mtm,
+		walltype, shadowtype, doortype, Mapdata, Huedata, Phasewal, lastphas = 0, pwalled, tilerend, Vx, Vy, mtm,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
@@ -2702,14 +2702,14 @@ if (document.getElementById("noclip").checked) return false;
 			self.w = Mtw * TILE;
 			self.h = Mth * TILE;
 
-			Mapdata = null;
+			Mapdata = null;			var ppw = "pw: ";
 			Phasewal = [];
 			for(var n = 0 ; n < (Mtw * Mth) ; n++) {
 				parseHue(0, 0, n);
-				if (Lphase > 0)
-					Phasewal[Lphase] = Lsecs;
+				if (Lphase > 0) {
+					Phasewal[Lphase] = Lsecs; ppw += Phasewal[Lphase] + ": ";}
 				if (Lphase > lastphas) lastphas = Lphase;
-				} alert(Phasewal);
+				} alert(ppw+" lp:"+lastphas);
 		}
 
 // make sure mults is not undefed - later load deathmult from cooky
@@ -4043,22 +4043,34 @@ var txsv = ":";
 // next phase, this wall
 						if (Lsecs < 2) Lsecs = 2;
 						entity.hb = heartbeet + Lsecs;
+						if (pwalled < heartbeet) Musicth.play(Musicth.sounds[collision.type.sound]);
+						pwalled = heartbeet + Lsecs;
 					}
 				}
 // pass 2 - set wall shapes --not shadows
 			for(n = 0, nc = Mastermap.entities.length ; n < nc ; n++) {
 					entity = Mastermap.entities[n];
 // if you leave out this if, it does real weird stuff
+				var ppx = p2t(entity.x), ppy = p2t(entity.y), wol;
+					wol = false;
 					if (entity.rwall) {
 // likewise if you want an interesting "empty" tile, leave out the 999 test
-						if (entity.nohlp != 999) entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap);
+						if (entity.nohlp != 999) entity.sx = walltype(ppx, ppy, Mastermap);
+						wol = true;
 //						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
 //						var cell = reloaded.cells[n2];
 //						if (cell != undefined) cell.shadow = shadowtype(cell.tx, cell.ty, Mastermap);
 					}
 					if (entity.pwall) {
-						if (entity.nohlp != 999) entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap);
+						if (entity.nohlp != 999) entity.sx = walltype(ppx, ppy, Mastermap);
+						wol = true;
 					}
+					if (wol)
+					for (var i = ppy - 1; i <  ppy +2; i++)
+						for (var j = ppx - 1; j <  ppx +2; j++) {
+							var n2 = j + i * Mtw; var cell = reloaded.cells[n2];
+							if (iswallrw(cell.pixel)) cell.wall = walltype(j, i, Mastermap);
+							}
 				}
 /*				if (wallupd) {			// this is too costly on refresh
 					var ctx = reloaded.cells[0].ctx;
