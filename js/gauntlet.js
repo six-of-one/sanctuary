@@ -3992,9 +3992,11 @@ var txsv = ":";
 				this.poison--; // count down poison effect
 			}
 // random walls
+			if (!document.getElementById("nommv").checked)
+			{
+// pass 1 - change walls
 			for(n = 0, nc = Mastermap.entities.length ; n < nc ; n++) {
 					  entity = Mastermap.entities[n];
-					if (!document.getElementById("nommv").checked)
 					if (entity.rwall)
 					if (Math.random() < 0.45) {
 						var r = mpixel(entity.x,entity.y, entity.x,entity.y , 2);
@@ -4002,12 +4004,21 @@ var txsv = ":";
 						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; Mapdata[r] = Mastermap.cells[r].ihpixel; }
 						}
 				}
+// pass 2 - set wall shapes & shadows
 			for(n = 0, nc = Mastermap.entities.length ; n < nc ; n++) {
 					entity = Mastermap.entities[n];
 // if you leave out this if, it does real weird stuff
-					if (entity.rwall && entity.nohlp != 999)
-					entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap);
+					if (entity.rwall) {
+// likewise if you want an interesting "empty" tile, leave out the 999 test
+						if (entity.nohlp != 999) entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap);
+						var n = p2t(entity.x) + p2t(entity.y) * Mtw;
+						var cell = reloaded.cells[n];
+						if (cell != undefined) cell.shadow = shadowtype(cell.tx, cell.ty, map);
+					}
 				}
+				tilerend.maptiles(Mastermap, ctx, true);
+			}
+
 			var hinv = 0;
 			if (this.linvuln > 0) hinv = 1; // invulnerable takes another health per tick
 // difficulty > 7 (std hard) adds dmg at 1% per diff
