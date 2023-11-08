@@ -382,7 +382,7 @@ Gauntlet = function() {
         EXIT4:       { sx: 14, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 4  },
         EXIT8:       { sx: 15, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 8  },
         EXIT6:       { sx: 16, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 6  },
-        EXITMOVE:    { sx: 9,  sy: 12, speed: 3*FPS, fpf: FPS/5, hbtim: 3, sound: 'movexit' },
+        EXITMOVE:    { sx: 9,  sy: 12, speed: 3*FPS, fpf: FPS/5, hbtim: 3, bsound: 'movexit' },
 //        EXITCLOS:    { sx: 23, sy: 11, speed: 3*FPS, fpf: FPS/2, frames: 6 },
         EXITNONE:    { sx: 13, sy: 12, speed: 1*FPS, fpf: FPS/30 }
       },
@@ -2120,9 +2120,7 @@ var lvu = document.getElementById("flvl").value;
 		 }
       else if (entity.exit)
 		 {
-				if (entity.type.sx == 9)
-					entity.nohlp = 999;
-				else
+				if (entity.type.sx != 9 || entity.frame == 4)
 /// TEST - remove
 //			document.title = player.x+"."+player.y+":x.y - dx: "+distance(player.x,player.y,entity.x,player.y)+" -- dy: "+distance(player.x,player.y,player.x,entity.y)+" -- delt:"+distance(player.x,player.y,entity.x,entity.y);
 					player.exit(entity);
@@ -2380,6 +2378,8 @@ var lvu = document.getElementById("flvl").value;
 						if (collision.type.nohlp == TRPHLP) subcol = true;
 						if (collision.type.nohlp == PCKLHLP) subcol = true;
 					}
+					if (collision.nohlp != undefined)
+					if (collision.nohlp == 999) ffcol = true;	// for no collision items with no help
 				}
 				if (collision.pixel != undefined) {
 					if (collision.pixel == 0x8125) subcol = true;	// fake key, pfi
@@ -4086,7 +4086,7 @@ var txsv = ":";
 					var newex = Game.Math.randomInt(0, (lastmex - 1));
 					for(n = 0; n < lastmex ; n++) {
 // exit is open and ready to move
-						if (Movexit[n].frame == 4 && Movexit[n].hb < heartbeet) { Movit = Movexit[n]; Movit.nohlp = 999; Movit.movit = -1; Musicth.play(Musicth.sounds[Movit.type.sound]); break; }
+						if (Movexit[n].frame == 4 && Movexit[n].hb < heartbeet) { Movit = Movexit[n]; Movit.nohlp = 999; Movit.movit = -1; Musicth.play(Musicth.sounds[Movit.type.bsound]); break; }
 						else if (Movexit[n].frame > 0) break;
 						}
 // exits are all closed, open a random selection
@@ -4300,8 +4300,8 @@ var txsv = ":";
 		if (Movit != null)
 		if ((frame % (Movit.type.fpf)) === 0) {
 			Movit.frame += Movit.movit;
-			if (Movit.frame =< 0) { Movit.movit = 0; Movit.frame = 0; Movit = null;}
-			else if (Movit.frame >= 4) { Movit.nohlp = 0; Movit.movit = 0; Movit.frame 4; Movit = null; }
+			if (Movit.frame < 1) { Movit.movit = 0; Movit.frame = 0; Movit = null;}
+			else if (Movit.frame >= 4) { Movit.nohlp = 0; Movit.movit = 0; Movit.frame = 4; Movit = null; }
 		}
     },
 
