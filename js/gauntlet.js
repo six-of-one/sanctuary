@@ -32,7 +32,7 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
-		walltype, shadowtype, doortype, Mapdata, Huedata, Phasewal, lastphas = 0, pwalled, tilerend, Vx, Vy, mtm,
+		Mapdata, Huedata, Phasewal, lastphas = 0, pwalled, tilerend, Vx, Vy, mtm,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
@@ -1117,14 +1117,15 @@ Gauntlet = function() {
 				return(Mapdata[n]);
 			};
 
-     function walltype(tx,ty,map)   {
-			var wally = (iswall(mpixel(tx,ty, tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty, tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty, tx-1, ty))   ? 8 : 0);
+     function walltype(tx,ty,map,findwall)   {
+		  if (findwall == undefined) findwall = iswall;
+			var wally = (findwall(mpixel(tx,ty, tx,   ty-1)) ? 1 : 0) | (findwall(mpixel(tx,ty, tx+1, ty))   ? 2 : 0) | (findwall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0) | (findwall(mpixel(tx,ty, tx-1, ty))   ? 8 : 0);
 			if (wally > 13) {
-				if (iswall(mpixel(tx,ty, tx-1, ty+1)))  { wally += 6; if (iswall(mpixel(tx,ty, tx+1, ty+1))) wally += 4; }
-				else if (iswall(mpixel(tx,ty, tx+1, ty+1))) wally += 8;
+				if (findwall(mpixel(tx,ty, tx-1, ty+1)))  { wally += 6; if (findwall(mpixel(tx,ty, tx+1, ty+1))) wally += 4; }
+				else if (findwall(mpixel(tx,ty, tx+1, ty+1))) wally += 8;
 			}
-			if (wally == 6 || wally == 7) if (iswall(mpixel(tx,ty, tx+1, ty+1))) wally += 10;
-			if (wally == 12 || wally == 13) if (iswall(mpixel(tx,ty, tx-1, ty+1))) wally += 6;
+			if (wally == 6 || wally == 7) if (findwall(mpixel(tx,ty, tx+1, ty+1))) wally += 10;
+			if (wally == 12 || wally == 13) if (findwall(mpixel(tx,ty, tx-1, ty+1))) wally += 6;
 			return wally;
 			};
       function shadowtype(tx,ty,map) { if (!iswall(mpixel(tx,ty,tx,ty))) return (iswall(mpixel(tx,ty, tx-1, ty))   ? 1 : 0) | (iswall(mpixel(tx,ty, tx-1, ty+1)) ? 2 : 0) | (iswall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0); };
@@ -4043,7 +4044,7 @@ var txsv = ":";
 // next phase, this wall
 						if (Lsecs < 2) Lsecs = 2;
 						entity.hb = heartbeet + Lsecs;
-						if (pwalled < heartbeet) Musicth.play(Musicth.sounds[collision.type.sound]);
+						if (pwalled < heartbeet) Musicth.play(Musicth.sounds[entity.type.sound]);
 						pwalled = heartbeet + Lsecs;
 					}
 				}
