@@ -4024,28 +4024,28 @@ var txsv = ":";
 // pass 1 - change walls
 			for(n = 0, nc = Mastermap.entities.length ; n < nc ; n++) {
 					  entity = Mastermap.entities[n];
+					var r = mpixel(entity.x,entity.y, entity.x,entity.y , 2);
 					if (entity.rwall)
 					if (Math.random() < 0.45) {
 //						wallupd = true;
-						var r = mpixel(entity.x,entity.y, entity.x,entity.y , 2);
 						if (entity.nohlp == 999) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }
-						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; Mapdata[r] = Mastermap.cells[r].ihpixel; }
+						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
 						}
 					if (entity.pwall && entity.hb < heartbeet) {
 						entity.pwall++;
 						if (Phasewal[entity.pwall] == undefined) { if (entity.pwall == 2) altphas = Math.abs(1 - altphas); entity.pwall = 1; }
-						if (Phasewal[entity.pwall] == undefined) continue;
+//						if (Phasewal[entity.pwall] == undefined) continue;
 //						var pw = entity.pwall;
 						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
 						parseHue(0, 0, n2);
 						if (Lphase == entity.pwall && !altphas) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }
-						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; Mapdata[r] = Mastermap.cells[r].ihpixel; }
+						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
 
 // next phase, this wall
 						if (Lsecs < 2) Lsecs = 2;
 						entity.hb = heartbeet + Lsecs;
-						if (pwalled != entity.pwall) Musicth.play(Musicth.sounds[entity.type.sound]);
-						pwalled = entity.pwall;
+						if (pwalled < heartbeet) Musicth.play(Musicth.sounds[entity.type.sound]);
+						pwalled = entity.hb;
 					}
 				}
 // pass 2 - set wall shapes --not shadows
