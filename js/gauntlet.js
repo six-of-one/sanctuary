@@ -2117,7 +2117,9 @@ var lvu = document.getElementById("flvl").value;
 		 }
       else if (entity.exit)
 		 {
-
+				if (entity.type.sx == 9)
+					entity.nohlp = 999;
+				else
 /// TEST - remove
 //			document.title = player.x+"."+player.y+":x.y - dx: "+distance(player.x,player.y,entity.x,player.y)+" -- dy: "+distance(player.x,player.y,player.x,entity.y)+" -- delt:"+distance(player.x,player.y,entity.x,entity.y);
 					player.exit(entity);
