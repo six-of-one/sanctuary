@@ -2364,7 +2364,7 @@ var lvu = document.getElementById("flvl").value;
 					if (entity.player)
 					{
 // slow down in glue, water, etc
-						if (collision.rwall && collision.nohlp == 999) collision.rwall = 0;	// when players step on vacant random wall spot, RW ends
+						if (collision.rwall && collision.nohlp == 999) collision.rwall = 6;	// when players step on vacant random wall spot, RW ends
 						if (collision.type.nohlp >= WTHLP) entity.gluesp = collision.type.gluesp;
 // handle tiles that do dmg - forcefield, liquids, etc
 						if (collision.type.damage > 0) // dmg players in active FF
@@ -3992,6 +3992,7 @@ var txsv = ":";
 				this.poison--; // count down poison effect
 			}
 // random walls
+			var wallupd = false;
 			if (!document.getElementById("nommv").checked)
 			{
 // pass 1 - change walls
@@ -3999,7 +4000,9 @@ var txsv = ":";
 					  entity = Mastermap.entities[n];
 					if (entity.rwall)
 					if (Math.random() < 0.45) {
+						wallupd = true;
 						var r = mpixel(entity.x,entity.y, entity.x,entity.y , 2);
+						if (entity.rwall != 6)
 						if (entity.nohlp == 999) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }
 						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; Mapdata[r] = Mastermap.cells[r].ihpixel; }
 						}
@@ -4010,14 +4013,18 @@ var txsv = ":";
 // if you leave out this if, it does real weird stuff
 					if (entity.rwall) {
 // likewise if you want an interesting "empty" tile, leave out the 999 test
+						if (entity.rwall != 6)
 						if (entity.nohlp != 999) entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap);
 						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
+						if (entity.rwall == 6) entity.rwall = 0; // player stepped on, but we need to re-shaw
 						var cell = reloaded.cells[n2];
 						if (cell != undefined) cell.shadow = shadowtype(cell.tx, cell.ty, Mastermap);
 					}
 				}
-				var ctx = reloaded.cells[0].ctx;
-				tilerend.maptiles(Mastermap, ctx);
+				if (wallupd) {
+					var ctx = reloaded.cells[0].ctx;
+					tilerend.maptiles(Mastermap, ctx);
+					}
 			}
 
 			var hinv = 0;
