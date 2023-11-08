@@ -356,6 +356,8 @@ Gauntlet = function() {
 // special "treasure" walls
 		PXWALSHT = 0x8100,
 		PXWALGUD = 0x8190,
+		PXWALPASS = 0x81CF,
+		PXWALRND = 0x81D0,
 		PXWALPHAS = 0x820F,
 // tell load a start was found - if not randomly add one to prevent load fail
 		fndstart = 0,
@@ -1087,7 +1089,8 @@ Gauntlet = function() {
 	function isp(pixel, type)      { return ((pixel & PIXEL.MASK.TYPE) === type); };
 	function type(pixel)           { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 	function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
-	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPHAS) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
+	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
+	function iswallpr(pixel)       { if (isp(pixel, PIXEL.WALL)) return false; if (pixel >= PXWALRND && pixel <= PXWALPHAS) return true; return (pixel & MEXHIGH) == PXWALSHT ? false : true; };
 	function iswallrw(pixel)       { return (isp(pixel, PIXEL.WALL))     };
 	function isfloor(pixel)        { return isp(pixel, PIXEL.FLOOR);     };
 	function isstart(pixel)        { return isp(pixel, PIXEL.START);     };
@@ -1226,17 +1229,12 @@ Gauntlet = function() {
 					 Mastercell.ptr.hb = 0;
 					 Mastercell.ptr.sy = Mastermap.level.wall;
 					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLRND2) + (0x10 * (ad == TREASURE.WALLPHS2)));
-					 Mastercell.ptr.sx = walltype(tx, ty, map);
+					 Mastercell.ptr.sx = walltype(tx, ty, map, iswallpr);
 					 Mastercell.ptr.svsy = Mastercell.ptr.sy;
 					 }
-				 if (ad == TREASURE.WALLGUD || ad == TREASURE.WALLGUD2) {
+				 if (ad == TREASURE.WALLGUD || ad == TREASURE.WALLGUD2 || ad == TREASURE.WALLPASS || ad == TREASURE.WALLPASS2) {
 					 Mastercell.ptr.sy = Mastermap.level.wall;
-					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLGUD2));
-					 Mastercell.ptr.sx = walltype(tx, ty, map);
-					 }
-				 if (ad == TREASURE.WALLPASS || ad == TREASURE.WALLPASS2) {
-					 Mastercell.ptr.sy = Mastermap.level.wall;
-					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLPASS2));
+					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLGUD2)) + (0x10 * (ad == TREASURE.WALLPASS2));
 					 Mastercell.ptr.sx = walltype(tx, ty, map);
 					 }
 				 }
