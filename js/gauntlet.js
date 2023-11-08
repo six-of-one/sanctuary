@@ -373,15 +373,16 @@ Gauntlet = function() {
 // doors open counter-clockwise and stop opening in a clockwise dir when hitting corners & Ts
 		doorstop = [ 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0 ],
       DOOR = {
-        HORIZONTAL: { sx: 10, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
-        VERTICAL:   { sx: 5, sy: 10, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
-        EXIT:       { sx: 9, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+        HORIZONTAL:  { sx: 10, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
+        VERTICAL:    { sx: 5, sy: 10, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
+        EXIT:        { sx: 13, sy: 12, speed: 3*FPS, fpf: FPS/30 },
 // added "exit to {n}", moving and fake exits
-        EXIT4:       { sx: 10, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 4 },
-        EXIT8:       { sx: 11, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 8 },
-        EXIT6:       { sx: 12, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 6 },
-        EXITMOVE:       { sx: 13, sy: 12, speed: 3*FPS, fpf: FPS/30 },
-        EXITNONE:       { sx: 9, sy: 12, speed: 1*FPS, fpf: FPS/30 }
+        EXIT4:       { sx: 14, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 4 },
+        EXIT8:       { sx: 15, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 8 },
+        EXIT6:       { sx: 16, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 6 },
+        EXITMOVE:    { sx: 9, sy:  12, frames: 5, speed: 3*FPS, fpf: FPS/2 },
+        EXITCLOS:    { sx: 23, sy: 11, frames: 6, speed: 3*FPS, fpf: FPS/2 },
+        EXITNONE:    { sx: 13, sy: 12, speed: 1*FPS, fpf: FPS/30 }
       },
       FX = {
         GENERATOR_DEATH: { sx: 17, sy: 12, frames: 6, fpf: FPS/10 },
@@ -4910,7 +4911,6 @@ var txsv = ":";
 				  if (cell.pixel & MEXLOB)		// special diff floor tiles - up to 15 as of now
 				  {
 						this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
-// if cust tile in an area and a cell is occupied by ent or removable - this sets it to prev tiles cust state
 				  }
 // no g floor tile & nothing else spec
 				  else if (!map.level.gflr)
@@ -4920,6 +4920,7 @@ var txsv = ":";
 							this.tile(ctx, cell.spriteset, DEBUG.FLOOR || nfl, 0, tx, ty);
 						}
 					ftilestr = nfl; // store for non floor content tests
+// if cust tile in an area and a cell is occupied by ent or removable - this sets it to prev tiles cust state
 					fcellstr = cell;
 			  }
 			else if (is.valid(cell.wall))
