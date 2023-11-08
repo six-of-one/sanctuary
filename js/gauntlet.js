@@ -374,14 +374,14 @@ Gauntlet = function() {
 		doorstop = [ 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0 ],
       DOOR = {
         HORIZONTAL:  { sx: 10, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
-        VERTICAL:    { sx: 5, sy: 10, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
+        VERTICAL:    { sx: 5,  sy: 10, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
         EXIT:        { sx: 13, sy: 12, speed: 3*FPS, fpf: FPS/30 },
 // added "exit to {n}", moving and fake exits
-        EXIT4:       { sx: 14, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 4 },
-        EXIT8:       { sx: 15, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 8 },
-        EXIT6:       { sx: 16, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 6 },
-        EXITMOVE:    { sx: 9, sy:  12, frames: 5, speed: 3*FPS, fpf: FPS/2 },
-        EXITCLOS:    { sx: 23, sy: 11, frames: 6, speed: 3*FPS, fpf: FPS/2 },
+        EXIT4:       { sx: 14, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 4  },
+        EXIT8:       { sx: 15, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 8  },
+        EXIT6:       { sx: 16, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 6  },
+        EXITMOVE:    { sx: 9,  sy: 12, speed: 3*FPS, fpf: FPS/2, frames: 5 },
+        EXITCLOS:    { sx: 23, sy: 11, speed: 3*FPS, fpf: FPS/2, frames: 6 },
         EXITNONE:    { sx: 13, sy: 12, speed: 1*FPS, fpf: FPS/30 }
       },
       FX = {
@@ -863,9 +863,8 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',     url: "levels/7level.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.BEES,      wall: WALL.GREEN3,            music: 'nullm',	unpinx: 1,	unpiny: 1,   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
-//      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/g1floor0.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
- //     { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null },
+      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/floor012.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
+      { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 2',       url: "levels/g2level2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
       { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Some food can be destroyed" },
