@@ -4011,7 +4011,8 @@ var txsv = ":";
 					if (entity.rwall) {
 // likewise if you want an interesting "empty" tile, leave out the 999 test
 						if (entity.nohlp != 999) entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap);
-						var n = p2t(entity.x) + p2t(entity.y) * Mtw;
+						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
+						var cell = reloaded.cells[n2];
 						if (cell != undefined) cell.shadow = shadowtype(cell.tx, cell.ty, Mastermap);
 					}
 				}
@@ -4795,10 +4796,10 @@ var txsv = ":";
 // option vo, to only redraw viewport tiles
 		 var vxz = 0, vyz = 0, vtw = map.tw, vth = map.th;
 		 if (vo) {
-			 vxz = game.viewport.x;
-			 vyz = game.viewport.y;
-			 vtw = game.viewport.w;
-			 vth = game.viewport.h;
+			 vxz = p2t(game.viewport.x);
+			 vyz = p2t(game.viewport.y);
+			 vtw = p2t(game.viewport.w);
+			 vth = p2t(game.viewport.h);
 			}
 
 // first cycle - map entire map bkg with a larger floor tile if specced
