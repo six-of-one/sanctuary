@@ -1196,7 +1196,7 @@ Gauntlet = function() {
 					case 3: spref.addExit(x, y, DOOR.EXIT6);
 							break;
 					case 4: spref.addExit(x, y, DOOR.EXITMOVE);
-								Movexit[lastmex++] = Mastercell.ptr;
+								Movexit[lastmex++] = Mastercell.ptr; Mastercell.ptr.frame = 0;
 							break;
 				 }
 			 }
@@ -4086,8 +4086,8 @@ var txsv = ":";
 					var newex = Game.Math.randomInt(0, (lastmex - 1));
 					for(n = 0; n < lastmex ; n++) {
 // exit is open and ready to move
-						if (Movexit[n].sx == 13 && Movexit[n].hb < heartbeet) { Movit = Movexit[n]; Movit.nohlp = 999; Movit.movit = -1; Musicth.play(Musicth.sounds[entity.type.sound]); break; }
-						else if (Movexit[n].sx > 9) break;
+						if (Movexit[n].frame == 4 && Movexit[n].hb < heartbeet) { Movit = Movexit[n]; Movit.nohlp = 999; Movit.movit = -1; Musicth.play(Musicth.sounds[Movit.type.sound]); break; }
+						else if (Movexit[n].sx > 0) break;
 						}
 // exits are all closed, open a random selection
 					if (n >= lastmex) {
@@ -4299,9 +4299,9 @@ var txsv = ":";
 		}
 		if (Movit != null)
 		if ((frame % (Movit.type.fpf)) === 0) {
-			Movit.sx += Movit.movit;
-			if (Movit.sx == 9) { Movit.movit = 0; Movit = null;}
-			else if (Movit.sx == 13) { Movit.nohlp = 0; Movit.movit = 0; Movit = null; }
+			Movit.frame += Movit.movit;
+			if (Movit.frame == 0) { Movit.movit = 0; Movit = null;}
+			else if (Movit.frame == 4) { Movit.nohlp = 0; Movit.movit = 0; Movit = null; }
 		}
     },
 
