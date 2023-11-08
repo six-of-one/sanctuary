@@ -32,7 +32,7 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
-		Mapdata, Huedata, Phasewal, lastphas = 0, pwalled, tilerend, Vx, Vy, mtm,
+		Mapdata, Huedata, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy, mtm,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
@@ -227,9 +227,10 @@ Gauntlet = function() {
 									"Some invisible walls can be shot",
 									"Pushwalls can be destroyed",
 									"Poisoned: you are dizzy<br>Player loses # health",
+									"Cycle walls keep shifting",
 
 // expanded - liquids - all help after this makes a nonsolid item that can be walked through, damage still occurs
-									"Water slows you down",																								// 81
+									"Water slows you down",																								// 82
 									"Lava is very dangerous<br>Avoid lava or take # damage",
 									"Toxic ooze is dangerous<br>Avoid slime or take # damage",
 
@@ -257,7 +258,7 @@ Gauntlet = function() {
 // collect magic before	27
 		helpcleared = 0, // option - tutorial count down
 // easy way to detect non shootables - via help codes
-		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, RNDHLP = 74, PSWDHLP = 79, WTHLP = 81,
+		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, RNDHLP = 74, PSWDHLP = 79, WTHLP = 82,
 // help message ranges for tutorial exclusion
 		G1HLP = 48, G2HLP = 72,
 // special help for (diff from "all walls are invisible") invisible walls
@@ -313,20 +314,20 @@ Gauntlet = function() {
 // this is the field power that damages, this is toggled on by ffieldpulse ops
         FFIELDPOW:       { sx: 28, sy: 12, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 3, sound: 'ffield',  nohlp: 61  },
 // animated floor items
-        WATER:      { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 81  },
+        WATER:      { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
 // series of water boundary blocks code: 0x8140, with a pool wall appearing top, center and right, selected by MEXLOW 1, 2, 3
-        WATERT:     { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 81  },
-        WATERC:     { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 81  },
-        WATERR:     { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 81  },
+        WATERT:     { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
+        WATERC:     { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
+        WATERR:     { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
 // series of lava blocks code: 0x8150. with MEXLOW as water
-        LAVA:       { sx: 16, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.8, damage: 10, sound: 'null', nohlp: 82  },
-        LAVAT:      { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.8, damage: 10, sound: 'null', nohlp: 82  },
-        LAVAC:      { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.8, damage: 10, sound: 'null', nohlp: 82  },
-        LAVAR:      { sx: 28, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.8, damage: 10, sound: 'null', nohlp: 82  },
-        NWASTE:     { sx: 16, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, gluesp: 0.7, damage: 1, sound: 'null', nohlp: 83  },
-        NWASTET:    { sx: 19, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, gluesp: 0.7, damage: 1, sound: 'null', nohlp: 83  },
-        NWASTEC:    { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, gluesp: 0.7, damage: 1, sound: 'null', nohlp: 83  },
-        NWASTER:    { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, gluesp: 0.7, damage: 1, sound: 'null', nohlp: 83  },
+        LAVA:       { sx: 16, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.8, damage: 10, sound: 'null', nohlp: 83  },
+        LAVAT:      { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.8, damage: 10, sound: 'null', nohlp: 83  },
+        LAVAC:      { sx: 24, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.8, damage: 10, sound: 'null', nohlp: 83  },
+        LAVAR:      { sx: 28, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.8, damage: 10, sound: 'null', nohlp: 83  },
+        NWASTE:     { sx: 16, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, gluesp: 0.7, damage: 1, sound: 'null', nohlp: 84  },
+        NWASTET:    { sx: 19, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, gluesp: 0.7, damage: 1, sound: 'null', nohlp: 84  },
+        NWASTEC:    { sx: 22, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, gluesp: 0.7, damage: 1, sound: 'null', nohlp: 84  },
+        NWASTER:    { sx: 25, sy: 27, frames:3, speed: 1*FPS, fpf: FPS/5, gluesp: 0.7, damage: 1, sound: 'null', nohlp: 84  },
         FIRESTK:    { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.7, damage: 0, sound: 'null', nohlp: 999  },
         PFLOOR1:    { sx: 28, sy: 27, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 999  },
 // other "wall" ents
@@ -336,8 +337,8 @@ Gauntlet = function() {
         WALLPASS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
         WALLRND:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
         WALLRND2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
-        WALLPHS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  sound: 'wallphase',  nohlp: 999 },
-        WALLPHS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  sound: 'wallphase',  nohlp: 999 },
+        WALLPHS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  sound: 'wallphase',  nohlp: 81 },
+        WALLPHS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  sound: 'wallphase',  nohlp: 81 },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -2701,14 +2702,14 @@ if (document.getElementById("noclip").checked) return false;
 			self.w = Mtw * TILE;
 			self.h = Mth * TILE;
 
-			Mapdata = null;			var ppw = "pw: ";
+			Mapdata = null;
 			Phasewal = [];
 			for(var n = 0 ; n < (Mtw * Mth) ; n++) {
 				parseHue(0, 0, n);
-				if (Lphase > 0) {
-					Phasewal[Lphase] = Lsecs; ppw += Phasewal[Lphase] + ": ";}
+				if (Lphase > 0)
+					Phasewal[Lphase] = Lsecs;
 				if (Lphase > lastphas) lastphas = Lphase;
-				} alert(ppw+" lp:"+lastphas);
+				}
 		}
 
 // make sure mults is not undefed - later load deathmult from cooky
@@ -4032,18 +4033,19 @@ var txsv = ":";
 						}
 					if (entity.pwall && entity.hb < heartbeet) {
 						entity.pwall++;
-						if (Phasewal[entity.pwall] == undefined) entity.pwall = 1;
+						if (Phasewal[entity.pwall] == undefined) { if (entity.pwall == 2) altphas = Math.abs(1 - altphas); entity.pwall = 1; }
+						if (Phasewal[entity.pwall] == undefined) continue;
 //						var pw = entity.pwall;
 						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
 						parseHue(0, 0, n2);
-						if (Lphase == entity.pwall) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }
+						if (Lphase == entity.pwall && !altphas) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }
 						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; Mapdata[r] = Mastermap.cells[r].ihpixel; }
 
 // next phase, this wall
 						if (Lsecs < 2) Lsecs = 2;
 						entity.hb = heartbeet + Lsecs;
-						if (pwalled < heartbeet) Musicth.play(Musicth.sounds[entity.type.sound]);
-						pwalled = heartbeet + Lsecs;
+						if (pwalled != entity.pwall) Musicth.play(Musicth.sounds[entity.type.sound]);
+						pwalled = entity.pwall;
 					}
 				}
 // pass 2 - set wall shapes --not shadows
@@ -4053,8 +4055,7 @@ var txsv = ":";
 				var ppx = p2t(entity.x), ppy = p2t(entity.y);
 					if (entity.rwall) {
 // likewise if you want an interesting "empty" tile, leave out the 999 test
-						if (entity.nohlp != 999) entity.sx = walltype(ppx, ppy, Mastermap, 
-							);
+						if (entity.nohlp != 999) entity.sx = walltype(ppx, ppy, Mastermap, iswallpr);
 //						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
 //						var cell = reloaded.cells[n2];
 //						if (cell != undefined) cell.shadow = shadowtype(cell.tx, cell.ty, Mastermap);
