@@ -4017,7 +4017,7 @@ var txsv = ":";
 					}
 				}
 				var ctx = reloaded.cells[0].ctx;
-				tilerend.maptiles(Mastermap, ctx, true);
+				tilerend.maptiles(Mastermap, ctx);
 			}
 
 			var hinv = 0;
@@ -4790,17 +4790,11 @@ var txsv = ":";
 		 ctx.drawImage(map.background, rx, ry, w, h, xz, yz, w, h);
     },
 
-    maptiles: function(map, ctx, vo) {
+    maptiles: function(map, ctx) {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
 		 if (wallsprites == undefined) wallsprites = sprites;
-// option vo, to only redraw viewport tiles
+// option vo, to only redraw viewport tiles - wont work because of patchwork viewport on unpinned levels
 		 var vxz = 0, vyz = 0, vtw = map.tw, vth = map.th;
-		 if (vo) {
-			 vxz = p2t(game.viewport.x);
-			 vyz = p2t(game.viewport.y);
-			 vtw = p2t(game.viewport.w);
-			 vth = p2t(game.viewport.h);
-			}
 
 // first cycle - map entire map bkg with a larger floor tile if specced
 		if (map.level.gflr)	// this is set before map load
