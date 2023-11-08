@@ -31,8 +31,9 @@ Gauntlet = function() {
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
-		Mapdata, Huedata, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy, mtm,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, wallsprites, entsprites,
+		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
+		Mapdata, Huedata, Movexit, lastmex = 0, Movit = null, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy, mtm,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
@@ -261,6 +262,7 @@ Gauntlet = function() {
 		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, RNDHLP = 74, PSWDHLP = 79, WTHLP = 82,
 // help message ranges for tutorial exclusion
 		G1HLP = 48, G2HLP = 72,
+		MOVEX = 0x4040,
 // special help for (diff from "all walls are invisible") invisible walls
 		INVSWALCD = 0x811F, INVWALCD = 0x812F, IVWHLP = 76, IVWSHLP = 78,
 		PUSHWAL = 0x80D0, PWALLSPD = 0.6, pmvx, pmvy,
@@ -380,8 +382,8 @@ Gauntlet = function() {
         EXIT4:       { sx: 14, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 4  },
         EXIT8:       { sx: 15, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 8  },
         EXIT6:       { sx: 16, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 6  },
-        EXITMOVE:    { sx: 9,  sy: 12, speed: 3*FPS, fpf: FPS/2, frames: 5 },
-        EXITCLOS:    { sx: 23, sy: 11, speed: 3*FPS, fpf: FPS/2, frames: 6 },
+        EXITMOVE:    { sx: 9,  sy: 12, speed: 3*FPS, fpf: FPS/5, hbtim: 3, sound: 'movexit' },
+//        EXITCLOS:    { sx: 23, sy: 11, speed: 3*FPS, fpf: FPS/2, frames: 6 },
         EXITNONE:    { sx: 13, sy: 12, speed: 1*FPS, fpf: FPS/30 }
       },
       FX = {
@@ -1194,6 +1196,7 @@ Gauntlet = function() {
 					case 3: spref.addExit(x, y, DOOR.EXIT6);
 							break;
 					case 4: spref.addExit(x, y, DOOR.EXITMOVE);
+								Movexit[lastmex++] = Mastercell.ptr;
 							break;
 				 }
 			 }
@@ -2697,12 +2700,13 @@ if (document.getElementById("noclip").checked) return false;
 		Mtw = tw;
 		Mth = th;
 		Phasewal = [];
+		Movexit  = []; Movexit[0] = undefined;
 
 		if (dohu)
 		{
 			parseImage(hues, function(tx, ty, pixel, map) { return; }, self);
 			Huedata = [];
-			for(var n = 0 ; n < (Mtw * Mth) ; n++) Huedata[n] = Mapdata[n];
+			for (var n = 0 ; n < (Mtw * Mth) ; n++) Huedata[n] = Mapdata[n];
 
 // put back for level load
 			Mtw = tw;
@@ -4015,6 +4019,7 @@ var txsv = ":";
 			heartbeet += 1;
 
 			this.gluesp = 1;	// glue slow is reset here, mr burton
+// poisoned -- woozy controls turn off here
 			if (this.poison > 0) {
 // poison confuses controls by activating them - because it wasnt a button press, we need to turn it back off a second later
 				if (this.moving.left == this.poison) this.moving.left = false;
@@ -4024,14 +4029,14 @@ var txsv = ":";
 				this.setDir();
 				this.poison--; // count down poison effect
 			}
-// random walls
-//			var wallupd = false;
+
 			if (!document.getElementById("nommv").checked)
 			{
 // pass 1 - change walls
 			for(n = 0, nc = Mastermap.entities.length ; n < nc ; n++) {
 					  entity = Mastermap.entities[n];
 					var r = mpixel(entity.x,entity.y, entity.x,entity.y , 2);
+// random walls
 					if (entity.rwall)
 					if (Math.random() < 0.45) {
 //						wallupd = true;
@@ -4076,6 +4081,21 @@ var txsv = ":";
 					var ctx = reloaded.cells[0].ctx;
 					tilerend.maptiles(Mastermap, ctx);
 					} */
+				if (Movexit[0] != undefined)
+				{
+					var newex = Game.Math.randomInt(0, (lastmex - 1));
+					for(n = 0; n < lastmex ; n++) {
+// exit is open and ready to move
+						if (Movexit[n].sx == 13 && Movexit[n].hb < heartbeet) { Movit = Movexit[n]; Movit.nohlp = 999; Movit.movit = -1; Musicth.play(Musicth.sounds[entity.type.sound]); break; }
+						else if (Movexit[n].sx > 9) break;
+						}
+// exits are all closed, open a random selection
+					if (n >= lastmex) {
+						Movit = Movexit[newex];
+						Movit.hb = heartbeet + Movit.type.hbtim;
+						Movit.movit = 1;
+						}
+				}
 			}
 
 			var hinv = 0;
@@ -4276,6 +4296,12 @@ var txsv = ":";
 				createCookie("_ops_"+"fhue", document.getElementById("fhue").value,7777);
 				}
 /// TEST - remove
+		}
+		if (Movit != null)
+		if ((frame % (Movit.type.fpf)) === 0) {
+			Movit.sx += Movit.movit;
+			if (Movit.sx == 9) { Movit.movit = 0; Movit = null;}
+			else if (Movit.sx == 13) { Movit.nohlp = 0; Movit.movit = 0; Movit = null; }
 		}
     },
 
