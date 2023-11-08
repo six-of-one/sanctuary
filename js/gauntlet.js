@@ -32,7 +32,7 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false, wallsprites, entsprites,
-		walltype, shadowtype, doortype, Mapdata, Huedata, tilerend, Vx, Vy, mtm,
+		walltype, shadowtype, doortype, Mapdata, Huedata, Phasewal, lastphas = 0, tilerend, Vx, Vy, mtm,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
@@ -1316,7 +1316,7 @@ Gauntlet = function() {
 // xFE - hues override: xFFFF: 0 - 255 interpolate to 0 - 359, byte 1 = floor/wall, byte 0 = items
 // xFC - tile override: 0xF000 - extra tiles set #, x0F00 - trap code, 0xFF - lower byte floors ref, 0 is level floor
 // xFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
-// xF8 - phase wall code #, sequential - 1st phase set, {1,2,3,4}, break (no 5) 2nd phase set, {6,7,8,9,10,11}, and on
+// xF8 - phase wall code # byte 0, sequential - 1st phase set, {1,2,3,4}, break (no 5) 2nd phase set, {6,7,8,9,10,11}, and on -- byte 1 is time delay (default 2 sec)
 // xF4 - trap code - trap # match 80B#, this wall or item will be removed by indicated trap
 // xF -
 /*
@@ -1327,30 +1327,41 @@ Gauntlet = function() {
 // XF -
 // any other codes: color triple 0xFFFFFF that will load between gbas layer and gflr
 
-var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap;
+var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 
-	function parseHue(px, py, ctx) {
+	function parseHue(px, py, ns, ctx) {
 		Lhue_bkg = 0;
 		Lhue_item = 0;
 		Lcolor = 0;
 		Lxtr = 0;
 		Ltile = 0;
 		Ltrap = 0;
+		Lsecs = 0;
+		Lphase = 0;
 // no data loaded
 		if (Huedata == null) return -1;
 		var n = px + (py * Mtw), mask = 0xFF0000;
+		if (ns != undefined) n = ns;
 
 		var d = Huedata[n];
 
+// hue codes wall, items
 		if ((d & mask) == 0xFE0000) {
 			Lhue_bkg = (d & 0xFF00) / 0x100;
 			Lhue_item = (d & 0xFF);
 			return 0;
 		}
+// tile override
 		if ((d & mask) == 0xFC0000) {
 			Lxtr = (d & 0xF000) / 0x1000;
 			Ltrap = (d & 0xF00) / 0x100;
 			Ltile = (d & 0xFF);
+			return 0;
+		}
+// phase wall seq
+		if ((d & mask) == 0xF80000) {
+			Lsecs = (d & 0xFF00) / 0x100;
+			Lphase = (d & 0xFF);
 			return 0;
 		}
 		Lcolor = d;
@@ -2687,6 +2698,12 @@ if (document.getElementById("noclip").checked) return false;
 			self.h = Mth * TILE;
 
 			Mapdata = null;
+			Phasewal = [];
+			for(var n = 0 ; n < (Mtw * Mth) ; n++) {
+				parseHue(0, 0, n);
+				if (Lphase > 0)
+					Phasewal[Lphase] = Lsecs;
+				}
 		}
 
 // make sure mults is not undefed - later load deathmult from cooky
