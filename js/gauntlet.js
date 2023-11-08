@@ -225,7 +225,7 @@ Gauntlet = function() {
 									"Walls may be invisible",
 									"help # 77",
 									"Some invisible walls can be shot",
-									"Pushwalls  can be destroyed",
+									"Pushwalls can be destroyed",
 									"Poisoned: you are dizzy<br>Player loses # health",
 
 // expanded - liquids - all help after this makes a nonsolid item that can be walked through, damage still occurs
@@ -336,8 +336,8 @@ Gauntlet = function() {
         WALLPASS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
         WALLRND:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
         WALLRND2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
-        WALLPHS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  sound: 'wallphase' },
-        WALLPHS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  sound: 'wallphase' },
+        WALLPHS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  sound: 'wallphase',  nohlp: 999 },
+        WALLPHS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  sound: 'wallphase',  nohlp: 999 },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -1090,7 +1090,7 @@ Gauntlet = function() {
 	function type(pixel)           { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 	function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
 	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
-	function iswallpr(pixel)       { if (isp(pixel, PIXEL.WALL)) return false; if (pixel >= PXWALRND && pixel <= PXWALPHAS) return true; return (pixel & MEXHIGH) == PXWALSHT ? false : true; };
+	function iswallpr(pixel)       { if (pixel >= PXWALRND && pixel <= PXWALPHAS) return true; };
 	function iswallrw(pixel)       { return (isp(pixel, PIXEL.WALL))     };
 	function isfloor(pixel)        { return isp(pixel, PIXEL.FLOOR);     };
 	function isstart(pixel)        { return isp(pixel, PIXEL.START);     };
@@ -2378,7 +2378,7 @@ var lvu = document.getElementById("flvl").value;
 				if (!collision.player && entity.weapon && subcol) collision = undefined;
 				else if (ffcol == true)
 				{
-					if (collision.pwall && collision.nohlp == 999) collision.pwall = -1;	// when ent on vacant phase wall spot, PW is temp blocked
+//					if (collision.pwall && collision.nohlp == 999) collision.pwall = -1;	// when ent on vacant phase wall spot, PW is temp blocked
 					if (entity.player)
 					{
 // slow down in glue, water, etc
@@ -4053,13 +4053,14 @@ var txsv = ":";
 				var ppx = p2t(entity.x), ppy = p2t(entity.y);
 					if (entity.rwall) {
 // likewise if you want an interesting "empty" tile, leave out the 999 test
-						if (entity.nohlp != 999) entity.sx = walltype(ppx, ppy, Mastermap);
+						if (entity.nohlp != 999) entity.sx = walltype(ppx, ppy, Mastermap, 
+							);
 //						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
 //						var cell = reloaded.cells[n2];
 //						if (cell != undefined) cell.shadow = shadowtype(cell.tx, cell.ty, Mastermap);
 					}
 					if (entity.pwall) {
-						if (entity.nohlp != 999) entity.sx = walltype(ppx, ppy, Mastermap);
+						if (entity.nohlp != 999) entity.sx = walltype(ppx, ppy, Mastermap, iswallpr);
 					}
 				}
 /*				if (wallupd) {			// this is too costly on refresh
