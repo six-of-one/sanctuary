@@ -1314,8 +1314,11 @@ Gauntlet = function() {
 // process level colors, hue overrides, special color instructions, tile overrides
 // first byte - codes: xFE, xFC, xFA, xF8, xF6, xF4, xF2
 // xFE - hues override: xFFFF: 0 - 255 interpolate to 0 - 359, byte 1 = floor/wall, byte 0 = items
-// XFC - tile override: 0xF000 - extra tiles set #, x0F00 - trap code, 0xFF - lower byte floors ref, 0 is level floor
-// XFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
+// xFC - tile override: 0xF000 - extra tiles set #, x0F00 - trap code, 0xFF - lower byte floors ref, 0 is level floor
+// xFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
+// xF8 - phase wall code #, sequential - 1st phase set, {1,2,3,4}, break (no 5) 2nd phase set, {6,7,8,9,10,11}, and on
+// xF4 - trap code - trap # match 80B#, this wall or item will be removed by indicated trap
+// xF -
 /*
 	var mgrad = ctx.createLinearGradient(0, 0, 0, 170);
 	mgrad.addColorStop(0, "red");
