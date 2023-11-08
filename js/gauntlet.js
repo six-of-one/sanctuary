@@ -823,9 +823,9 @@ Gauntlet = function() {
       { id: 'opendoor',        name: 'sounds/g1_door',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'teleport',        	name: 'sounds/g1_teleport',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'ffield',        	name: 'sounds/g2_ffield',              formats: ['ogg'], volume: 0.6, pool: ua.is.ie ? 2 : 6 },
-      { id: 'trap',        			name: 'sounds/g1_wallexit',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
+      { id: 'trap',        			name: 'sounds/g1_trap',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'stun',      		  name: 'sounds/g1_stun',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
-      { id: 'wallexit',        name: 'sounds/g1_wallexit',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
+      { id: 'wallexit',        name: 'sounds/g2_wallexit',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'dtouch',        name: 'sounds/g1_deathtouch',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'healthcnt',      name: 'sounds/g1_healthcount',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'sbuzz',      		  name: 'sounds/g1_buzz',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
@@ -1804,7 +1804,12 @@ var lvu = document.getElementById("flvl").value;
 			/// perhaps relate to how many special potions, multiplier, score gained, etc
 							thieftim = 1000 * (thieftotim + (thieftotim * Math.random())) + timestamp();
 					}
-					if (g4rc >= Math.random()) Musicth.play(Musicth.sounds.g4sec);		// rnd play 4 sec, but not treasure rooms
+					if (g4rc >= Math.random()) {
+						if (Math.random() > 0.66)
+							Musicth.play(Musicth.sounds.g4sec);		// rnd play 4 sec, but not treasure rooms
+						else
+							Musicth.play(Musicth.sounds.g4sec2);
+					}
 			}
 // dev controls - block rnd loads, or force them on levels
 			var blrnd = document.getElementById("blrndlod").checked;
@@ -4032,12 +4037,12 @@ var txsv = ":";
 						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
 						}
 					if (entity.pwall && entity.hb < heartbeet) {
+						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
+						parseHue(0, 0, n2);
 						entity.pwall++;
 						if (Phasewal[entity.pwall] == undefined) { if (entity.pwall == 2) altphas = true; entity.pwall = 1; }
 //						if (Phasewal[entity.pwall] == undefined) continue;
 //						var pw = entity.pwall;
-						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
-						parseHue(0, 0, n2);
 						if (Lphase == entity.pwall || (altphas && entity.nohlp == 999)) { if (!Mastermap.occupied(entity.x, entity.y, entity.w, entity.h, entity))
 							{Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }}
 						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
