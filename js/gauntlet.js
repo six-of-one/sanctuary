@@ -4087,7 +4087,7 @@ var txsv = ":";
 					for(n = 0; n < lastmex ; n++) {
 // exit is open and ready to move
 						if (Movexit[n].frame == 4 && Movexit[n].hb < heartbeet) { Movit = Movexit[n]; Movit.nohlp = 999; Movit.movit = -1; Musicth.play(Musicth.sounds[Movit.type.sound]); break; }
-						else if (Movexit[n].sx > 0) break;
+						else if (Movexit[n].frame > 0) break;
 						}
 // exits are all closed, open a random selection
 					if (n >= lastmex) {
@@ -4300,8 +4300,8 @@ var txsv = ":";
 		if (Movit != null)
 		if ((frame % (Movit.type.fpf)) === 0) {
 			Movit.frame += Movit.movit;
-			if (Movit.frame == 0) { Movit.movit = 0; Movit = null;}
-			else if (Movit.frame == 4) { Movit.nohlp = 0; Movit.movit = 0; Movit = null; }
+			if (Movit.frame =< 0) { Movit.movit = 0; Movit.frame = 0; Movit = null;}
+			else if (Movit.frame >= 4) { Movit.nohlp = 0; Movit.movit = 0; Movit.frame 4; Movit = null; }
 		}
     },
 
