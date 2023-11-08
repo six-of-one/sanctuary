@@ -3997,7 +3997,7 @@ var txsv = ":";
 					if (!document.getElementById("nommv").checked)
 					if (entity.rwall)
 					if (Math.random() < 0.45) {
-						var r = mpixel(entity.x,entity.y, entity.x,entity.y , 2); if (bb = 0) alert(entity.pixel+":"+Mastermap.cells[r].ihpixel); bb = 1;
+						var r = mpixel(entity.x,entity.y, entity.x,entity.y , 2);
 						if (entity.nohlp == 999) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }
 						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = 15; Mapdata[r] = Mastermap.cells[r].ihpixel; }
 						}
@@ -4005,7 +4005,7 @@ var txsv = ":";
 			for(n = 0, nc = Mastermap.entities.length ; n < nc ; n++) {
 					entity = Mastermap.entities[n];
 // if you leave out this if, it does real weird stuff
-					if (entity.rwall)
+					if (entity.rwall && entity.nohlp != 999)
 					entity.sx = walltype(p2t(entity.x), p2t(entity.y), Mastermap);
 				}
 			var hinv = 0;
@@ -4778,17 +4778,25 @@ var txsv = ":";
 		 ctx.drawImage(map.background, rx, ry, w, h, xz, yz, w, h);
     },
 
-    maptiles: function(map, ctx) {
+    maptiles: function(map, ctx, vo) {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
 		 if (wallsprites == undefined) wallsprites = sprites;
+// option vo, to only redraw viewport tiles
+		 var vxz = 0, vyz = 0, vtw = map.tw, vth = map.th;
+		 if (vo) {
+			 vxz = viewport.x;
+			 vyz = viewport.y;
+			 vtw = viewport.w;
+			 vth = viewport.h;
+			}
 
 // first cycle - map entire map bkg with a larger floor tile if specced
 		if (map.level.gflr)	// this is set before map load
 		 {
 			var gbas = document.getElementById("gfloorbas");
 			var gimg = document.getElementById("gfloor");
-			for(ty = 0, th = map.th ; ty < th ; ty=ty+8) {
-			  for(tx = 0, tw = map.tw ; tx < tw ; tx=tx+8) {
+			for(ty = vyz, th = vth ; ty < th ; ty=ty+8) {
+			  for(tx = vxz, tw = vtw ; tx < tw ; tx=tx+8) {
 						ctx.drawImage(gbas, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
 /// TEST - update
 							var flhue = document.getElementById("fhue").value;
@@ -4807,8 +4815,8 @@ var txsv = ":";
 		 if (document.getElementById("invwal").checked) map.level.wall = WALL.INVIS;
 /// TEST - remove
 // second cycle - everything else
-      for(ty = 0, th = map.th ; ty < th ; ty++) {
-        for(tx = 0, tw = map.tw ; tx < tw ; tx++) {
+      for(ty = vyz, th = vth ; ty < th ; ty++) {
+        for(tx = vxz, tw = vtw ; tx < tw ; tx++) {
           cell = map.cell(tx * TILE, ty * TILE);
 			  cell.ctx = ctx;						// for traps turning walls to floor, stalling walls to exits
 			  if (cell.spriteset == undefined) cell.spriteset = sprites;		//		shootable walls, g2 shot walls, g2 random walls, and so
