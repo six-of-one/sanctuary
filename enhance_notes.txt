@@ -15,6 +15,11 @@ dev:
 push wall collision
  \ elevate them above other treasure tiles
 
+upgrade sprites to always use ent.sx / ent.sy instead of ent.type.sx (and maybe the rest as well)
+sprite hue dev override ?
+sprite oversize...
+
+loadable wall segments & cell.spriteset
 
 
 imm issues:
@@ -73,10 +78,6 @@ player shot speed (xshot speed is not tested, seems fast)
 >not all g1 audio fx in use
 - thought to limit announce during treasure room count down
 
-- wall replace routine for surround & shadows
--- partial done with trap walls
--- shadows are trickier
->trap walls, walls to exits, moving wall, random walls, std shot walls -- shootable walls ?
 
 >make monsters slow on shot poison a timed effect - can cross lvl boundary
 >think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
@@ -89,8 +90,6 @@ save system via cooky
 
 finish g1 map population
 finish wall layers
-unpinned corners / edges
-level wrap across left / right
 
 g1 audio elements swap in	-> ref genesis sound test for note s
 g1 gfx tiles
@@ -99,21 +98,17 @@ g1 gfx tiles
 g1 has some sprites that seem to "oversize" the map cell - ref. box generators, foods, etc
 
 g2:
+map editor o/p scanner
 -push wall pushing
 
--shootable "standard" wall - gives goody or baddy > need list of items
--moving "pattern" wall
--moving "ranodmly" wall
--- trap walls done
 -invisible "become temp visible" walls -- likely a code deal with some overlay mask
 \_ x-- hint walls, but always on
-sngl potion stuns, dbl potion kills pickles (sup sorc too)
 
 new-ish:
 
 loadable wall seg, other modes (a la druid)
 hue shift floors & loadable wall segment
-color match 40400F walls & loadable wall with them | _ section
+
 :- possible multiple floor tile loader	(bigger tile area - victory road tex)
 trainable map reader (load g2 maps from maze ed, speccy maps)
 2nd player local
@@ -345,6 +340,9 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
+--- > moving wall, random walls
+   \_ shadows with these have excessive cost of re-write of map bkg every second
+
 x-- reflective shots bouncy bounce
 
 x-- mugger ops
@@ -352,6 +350,8 @@ x-- thief start snd, taunts
    \_( thief does not "travel" like a monster, he is moved along a path...no matter what )
 
 x-- rand load is borken ! (user choice difficulty was set 0, code was gud)
+
+x-- color match 40401F walls & loadable wall with them | _ section
 
 x-- moving exits (they may be a bit more "random" than g2)
 
