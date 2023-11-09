@@ -3764,6 +3764,7 @@ var txsv = ":";
 					rlk = rlitem(rllock, 0.21, cell);
 					Mastercell.ptr.stun = heartbeet + 2;
 					cell.ctx = ctx;
+					this.keys--;
 				}
 				if (rlk < 0) {	// if lock chest empty, get 500 pts
 				this.addscore(treasure.type.score);
@@ -5017,7 +5018,7 @@ var txsv = ":";
 // blender
 						B2 = tx + ty * Mtw;
 						if (document.getElementById("noblend").checked) B2 = -2;
-						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB) && Bh == 0 && blnck(bcell,cell,bch)) {
+						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && Bh == 0 && blnck(bcell,cell,bch)) {
 							this.tile(Blendctx2, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
 							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
 							var b1Data = bimg1.data;
@@ -5067,7 +5068,7 @@ var txsv = ":";
 // blender
 						B2 = tx + ty * Mtw; Bh = wallhue;
 						if (document.getElementById("noblend").checked) B2 = -2;
-						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB) && wallhue == 0 && blnck(bcell,cell,bch)) {
+						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && wallhue == 0 && blnck(bcell,cell,bch)) {
 							this.tile(Blendctx2, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
 							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
 							var b1Data = bimg1.data;
