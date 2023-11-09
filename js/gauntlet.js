@@ -4248,7 +4248,7 @@ var txsv = ":";
 			stalling = stalling + 1;
 /// TEST - remove
 // dev: no stalling
-		if (!document.getElementById("nostal").checked)
+		if (!document.getElementById("nostal").checked) 
 /// TEST - remove
 			if (stalling == DOORSTALL) {
 
@@ -5016,6 +5016,7 @@ var txsv = ":";
 					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000)  {// diff walls by low nibble
 // blender
 						B2 = tx + ty * Mtw;
+						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB) && Bh == 0 && blnck(bcell,cell,bch)) {
 							this.tile(Blendctx2, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
 							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
@@ -5065,6 +5066,7 @@ var txsv = ":";
 /// TEST - update
 // blender
 						B2 = tx + ty * Mtw; Bh = wallhue;
+						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB) && wallhue == 0 && blnck(bcell,cell,bch)) {
 							this.tile(Blendctx2, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
 							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
