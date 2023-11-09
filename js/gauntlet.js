@@ -4912,7 +4912,7 @@ var txsv = ":";
 		 var hintinv = document.getElementById("invhint").checked;
 		 if (document.getElementById("invwal").checked) map.level.wall = WALL.INVIS;
 /// TEST - remove
-		 var B1, B2, bcell;
+		 var B1, B2, Bh, bcell;
 // second cycle - everything else
       for(ty = vyz, th = vth ; ty < th ; ty++) {
         for(tx = vxz, tw = vtw ; tx < tw ; tx++) {
@@ -4965,7 +4965,7 @@ var txsv = ":";
 					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000)  {// diff walls by low nibble
 // blender
 						B2 = tx + ty * Mtw;
-						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) {
+						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB) && Bh == 0) {
 							this.tile(Blendctx2, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
 							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
 							var b1Data = bimg1.data;
@@ -4973,13 +4973,26 @@ var txsv = ":";
 							var b2Data = bimg2.data;
 							var pixs, XTILE = 4 * TILE, bl1, bl2, addr = 0.0625;
 							for(var j = 0; j < TILE; j ++) { bl1 = 1.0; bl2 = 0.0;
-								for(var i = 9; i < (XTILE - 32) ; i += 4) {
+								for(var i = 36; i < (XTILE - 36) ; i += 4) {
 									pixs = i + j * XTILE;
 									b1Data[pixs] = Math.round(b1Data[pixs] * bl1 + b2Data[pixs] * bl2);
 									b1Data[pixs+1] = Math.round(b1Data[pixs+1] * bl1 + b2Data[pixs+1] * bl2);
 									b1Data[pixs+2] = Math.round(b1Data[pixs+2] * bl1 + b2Data[pixs+2] * bl2);
 //									b1Data[pixs+3] = b1Data[pixs+3] * bl1 + b2Data[pixs+3] * bl2;
 									bl1 -= addr; bl2 += addr;
+								}
+								for(var i = 0; i < 36; i += 4) {
+									pixs = i + j * XTILE;
+									var pixb = (124 - i) + j * XTILE;
+									b1Data[pixs] = b1Data[pixb];
+									b1Data[pixs+1] = b1Data[pixb+1];
+									b1Data[pixs+2] = b1Data[pixb+2];
+								}
+								for(var i = (XTILE - 36); i < XTILE; i += 4) {
+									pixs = i + j * XTILE;
+									b1Data[pixs] = b2Data[pixs];
+									b1Data[pixs+1] = b2Data[pixs+1];
+									b1Data[pixs+2] = b2Data[pixs+2];
 								}}
 //							var pixs = 4 * TILE * TILE;
 //							while (pixs--) {
@@ -4995,7 +5008,7 @@ var txsv = ":";
 						this.tile(ctx, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
 // blend for next
 						this.tile(Blendctx1, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
-						B1 = tx + ty * Mtw;
+						B1 = tx + ty * Mtw; Bh = 0;
 						bcell = cell;
 					  }
 					else
@@ -5006,24 +5019,35 @@ var txsv = ":";
 						ctx.filter = "hue-rotate("+wallhue+"deg)";
 /// TEST - update
 // blender
-						B2 = tx + ty * Mtw;
-						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) {
+						B2 = tx + ty * Mtw; Bh = wallhue;
+						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB) && wallhue == 0) {
 							this.tile(Blendctx2, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
 							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
 							var b1Data = bimg1.data;
 							var bimg2 = Blendctx2.getImageData(0, 0, TILE, TILE);
 							var b2Data = bimg2.data;
 							var pixs, XTILE = 4 * TILE, bl1, bl2, addr = 0.0625;
-							for(var j = 0; j < XTILE; j += 4) { bl1 = 1.0; bl2 = 0.0;
-								for(var i = 0; i < XTILE ; i += 4) {
+							for(var j = 0; j < TILE; j ++) { bl1 = 1.0; bl2 = 0.0;
+								for(var i = 36; i < (XTILE - 36) ; i += 4) {
 									pixs = i + j * XTILE;
-									b1Data[pixs] = b1Data[pixs] * bl1 + b2Data[pixs] * bl2;
 									b1Data[pixs] = Math.round(b1Data[pixs] * bl1 + b2Data[pixs] * bl2);
 									b1Data[pixs+1] = Math.round(b1Data[pixs+1] * bl1 + b2Data[pixs+1] * bl2);
 									b1Data[pixs+2] = Math.round(b1Data[pixs+2] * bl1 + b2Data[pixs+2] * bl2);
-									if (i > (XTILE - 32)) { bl1 = 0.0; bl2 == 1.0; }
-									else
-									if (i > 32) { bl1 -= addr; bl2 += addr; }
+//									b1Data[pixs+3] = b1Data[pixs+3] * bl1 + b2Data[pixs+3] * bl2;
+									bl1 -= addr; bl2 += addr;
+								}
+								for(var i = 0; i < 36; i += 4) {
+									pixs = i + j * XTILE;
+									var pixb = (36 - i) + j * XTILE;
+									b1Data[pixs] = b1Data[pixb];
+									b1Data[pixs+1] = b1Data[pixb+1];
+									b1Data[pixs+2] = b1Data[pixb+2];
+								}
+								for(var i = (XTILE - 36); i < XTILE; i += 4) {
+									pixs = i + j * XTILE;
+									b1Data[pixs] = b2Data[pixs];
+									b1Data[pixs+1] = b2Data[pixs+1];
+									b1Data[pixs+2] = b2Data[pixs+2];
 								}}
 //							var pixs = 4 * TILE * TILE;
 //							while (pixs--) {
