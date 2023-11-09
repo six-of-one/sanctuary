@@ -4884,6 +4884,12 @@ var txsv = ":";
 
     maptiles: function(map, ctx) {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
+//						0     2     4     6     8    10    12    14    16    18    20    22    24
+		var bch = [ 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 ],
+			 bcv = [ 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 4, 4, 0, 0, 0, 0, 1, 1 ];
+
+		function blnck(cell1,cell2,barr) { var bt = barr[cell1.wall]; if (bt > 0 && bt == barr[cell2.wall]) return true; };
+
 		 if (wallsprites == undefined) wallsprites = sprites;
 // option vo, to only redraw viewport tiles - wont work because of patchwork viewport on unpinned levels
 		 var vxz = 0, vyz = 0, vtw = map.tw, vth = map.th;
@@ -4965,7 +4971,7 @@ var txsv = ":";
 					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000)  {// diff walls by low nibble
 // blender
 						B2 = tx + ty * Mtw;
-						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB) && Bh == 0) {
+						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB) && Bh == 0 && blnck(bcell,cell,bch)) {
 							this.tile(Blendctx2, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
 							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
 							var b1Data = bimg1.data;
@@ -5014,7 +5020,7 @@ var txsv = ":";
 /// TEST - update
 // blender
 						B2 = tx + ty * Mtw; Bh = wallhue;
-						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB) && wallhue == 0) {
+						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB) && wallhue == 0 && blnck(bcell,cell,bch)) {
 							this.tile(Blendctx2, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
 							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
 							var b1Data = bimg1.data;
