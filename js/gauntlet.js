@@ -2152,7 +2152,7 @@ var lvu = document.getElementById("flvl").value;
 						if (monster.type.name == "mugger")
 						 {
 								entity.hurt(monster.type.steal);
-								monster.stolen = 4;
+								monster.stolen = 7;
 						 }
 						else if (entity.xspeed > 0)
 						{
