@@ -350,7 +350,7 @@ Gauntlet = function() {
 		TROOMCNT = [ ], TROOMSUP = [ ], RNGLOAD = [ ],
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
-		reflectcnt = 3, wallcoll, 			// reflective shot, count of reflections
+		reflectcnt = 4, wallcoll, 			// reflective shot, count of reflections
 		POISONTM = 15,		// 10 secs of poison (muddle controls from dizzy effect)
 		POISONDIZ = 0.2,	// chance dizzy condition will confuse player
 		SUPERSHTFR = 10,	// super shot proj frame
@@ -2430,16 +2430,11 @@ var lvu = document.getElementById("flvl").value;
 					collision = undefined;
 				}
 
-				if (entity.reflect) 
+				if (entity.reflect && collision != undefined)
 				{
-					var reflection = false;
-					if (collision != undefined)
-					if (isdoor(collision.pixel) || wallcoll) reflection = true;
-					wallcoll = false;
-
-//				if (collision.pixel == undefined || isdoor(collision.pixel))
-					if (reflection)
+					if (isdoor(collision.pixel) || wallcoll)
 						{
+						wallcoll = false;
 						entity.reflect = countdown(entity.reflect);
 						var rfc = entity.reflect;
 						if (entity.dir === DIR.UPLEFT) {var nd = DIR.DOWNLEFT; if (Math.random() < 0.5) nd = DIR.UPRIGHT };			// iterim solution - some will reflect, and some wont
@@ -2456,7 +2451,7 @@ var lvu = document.getElementById("flvl").value;
 						entity = Mastermap.addWeapon(entity.x, entity.y, entity.owner.type.weapon, nd, entity.owner);
 						entity.reflect = rfc;
 					}
-					else entity.reflect = 0;
+//					else entity.reflect = 0;
 				}
 		 }
       if (!collision && !dryrun) {
@@ -3241,7 +3236,7 @@ if (document.getElementById("noclip").checked) return false;
 
       var collision = map.trymove(this, this.dir, this.type.speed + xspd, this.owner);
       if (collision) {
-			if (!this.type.monster && !this.reflect)
+			if (!this.type.monster)
 				this.owner.reloading = countdown(this.owner.reloading, this.type.reload * 0.8); // speed up reloading process if previous weapon hit something, makes player feel powerful
         publish(EVENT.WEAPON_COLLIDE, this, collision);
       }
