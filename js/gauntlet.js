@@ -350,6 +350,7 @@ Gauntlet = function() {
 		TROOMCNT = [ ], TROOMSUP = [ ], RNGLOAD = [ ],
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
+		reflectcnt = 3, 			// reflective shot, count of reflections
 		POISONTM = 15,		// 10 secs of poison (muddle controls from dizzy effect)
 		POISONDIZ = 0.2,	// chance dizzy condition will confuse player
 		SUPERSHTFR = 10,	// super shot proj frame
@@ -1984,6 +1985,7 @@ var lvu = document.getElementById("flvl").value;
 		 }
 		 else
 		 {
+				if (player.lreflect) Mastercell.ptr.reflect = reflectcnt;
 				Mastercell.ptr.xshotpwr = player.xshotpwr; // weapon fire contains xtra shot power flag
 				Mastercell.ptr.xshotspd = player.xshotspd; // weapon fire contains xtra shot speed flag
 		 }
@@ -2427,6 +2429,25 @@ var lvu = document.getElementById("flvl").value;
 					}
 					collision = undefined;
 				}
+				if (entity.reflect && collision != undefined)
+				if (collision != entity.owner  || entity.reflect != reflectcnt)
+				if (isdoor(collision.pixel))
+//				if (collision.pixel == undefined || isdoor(collision.pixel))
+				{
+					var rfc = --entity.reflect;
+					if (entity.dir === DIR.UPLEFT) var nd = DIR.DOWNLEFT;
+					if (entity.dir === DIR.DOWNLEFT) nd = DIR.UPLEFT;
+					if (entity.dir === DIR.UPRIGHT) nd = DIR.DOWNRIGHT;
+					if (entity.dir === DIR.DOWNRIGHT) nd = DIR.UPRIGHT;
+					if (entity.dir === DIR.RIGHT) nd = DIR.LEFT;
+					if (entity.dir === DIR.LEFT) nd = DIR.RIGHT;
+					if (entity.dir === DIR.UP) nd = DIR.DOWN;
+					if (entity.dir === DIR.DOWN) nd = DIR.UP;
+					Musicth.play(Musicth.sounds.bouncshot);
+//					collision = undefined;
+					entity = Mastermap.addWeapon(entity.x, entity.y, entity.owner.type.weapon, nd, entity.owner);
+					entity.reflect = rfc;
+				}
 		 }
       if (!collision && !dryrun) {
 			var nx = this.tpos.x, ny = this.tpos.y;
@@ -2803,6 +2824,7 @@ if (document.getElementById("noclip").checked) return false;
       entity.active = true;
 		entity.to = heartbeet + wto;
 		entity.numer = false; // these are a reused pool, turn this off
+      entity.reflect = 0;
       return entity;
     },
 
