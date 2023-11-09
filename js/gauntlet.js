@@ -3764,7 +3764,7 @@ var txsv = ":";
 					rlk = rlitem(rllock, 0.21, cell);
 					Mastercell.ptr.stun = heartbeet + 2;
 					cell.ctx = ctx;
-					this.keys--;
+					this.keys = countdown(this.keys);
 				}
 				if (rlk < 0) {	// if lock chest empty, get 500 pts
 				this.addscore(treasure.type.score);
