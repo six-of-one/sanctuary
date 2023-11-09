@@ -2429,24 +2429,34 @@ var lvu = document.getElementById("flvl").value;
 					}
 					collision = undefined;
 				}
-				if (entity.reflect && collision != undefined)
-				if (collision != entity.owner  || entity.reflect != reflectcnt)
-				if (isdoor(collision.pixel))
-//				if (collision.pixel == undefined || isdoor(collision.pixel))
+				if (entity.reflect)
 				{
-					var rfc = --entity.reflect;
-					if (entity.dir === DIR.UPLEFT) var nd = DIR.DOWNLEFT;
-					if (entity.dir === DIR.DOWNLEFT) nd = DIR.UPLEFT;
-					if (entity.dir === DIR.UPRIGHT) nd = DIR.DOWNRIGHT;
-					if (entity.dir === DIR.DOWNRIGHT) nd = DIR.UPRIGHT;
-					if (entity.dir === DIR.RIGHT) nd = DIR.LEFT;
-					if (entity.dir === DIR.LEFT) nd = DIR.RIGHT;
-					if (entity.dir === DIR.UP) nd = DIR.DOWN;
-					if (entity.dir === DIR.DOWN) nd = DIR.UP;
-					Musicth.play(Musicth.sounds.bouncshot);
-//					collision = undefined;
-					entity = Mastermap.addWeapon(entity.x, entity.y, entity.owner.type.weapon, nd, entity.owner);
-					entity.reflect = rfc;
+					var reflection = false;
+					if (collision != undefined)
+					if (isdoor(collision.pixel) || !collision.health || !istreasure(collision.pixel)) reflection = true;
+
+					if (collision.type != undefined) if (entity.owner.type.name == collision.type.name && entity.reflect == reflectcnt) reflection = false;
+
+//				if (collision.pixel == undefined || isdoor(collision.pixel))
+					if (reflection)
+						{ alert(entity.type.sy+" : "+collision.pixel);
+						entity.reflect = countdown(entity.reflect);
+						var rfc = entity.reflect;
+						if (entity.dir === DIR.UPLEFT) var nd = DIR.DOWNLEFT;
+						if (entity.dir === DIR.DOWNLEFT) nd = DIR.UPLEFT;
+						if (entity.dir === DIR.UPRIGHT) nd = DIR.DOWNRIGHT;
+						if (entity.dir === DIR.DOWNRIGHT) nd = DIR.UPRIGHT;
+						if (entity.dir === DIR.RIGHT) nd = DIR.LEFT;
+						if (entity.dir === DIR.LEFT) nd = DIR.RIGHT;
+						if (entity.dir === DIR.UP) nd = DIR.DOWN;
+						if (entity.dir === DIR.DOWN) nd = DIR.UP;
+						Musicth.play(Musicth.sounds.bouncshot);
+	//					collision = undefined;
+						entity.type.monster = true;
+						entity = Mastermap.addWeapon(entity.x, entity.y, entity.owner.type.weapon, nd, entity.owner);
+						entity.reflect = rfc;
+					}
+					else entity.reflect = 0;
 				}
 		 }
       if (!collision && !dryrun) {
@@ -3229,7 +3239,7 @@ if (document.getElementById("noclip").checked) return false;
 
       var collision = map.trymove(this, this.dir, this.type.speed + xspd, this.owner);
       if (collision) {
-			if (!this.type.monster)
+			if (!this.type.monster && !this.reflect)
 				this.owner.reloading = countdown(this.owner.reloading, this.type.reload * 0.8); // speed up reloading process if previous weapon hit something, makes player feel powerful
         publish(EVENT.WEAPON_COLLIDE, this, collision);
       }
