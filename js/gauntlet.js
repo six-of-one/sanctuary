@@ -1830,7 +1830,6 @@ var lvu = document.getElementById("flvl").value;
 					rprof = Game.Math.randomInt(1,rlline);			// for now pick a random profile
 					if (troomtime > 0) rprof = rlline + 1;
 					for (f = 0;f <= rlloop;f++) RLOAD[f] = Math.ceil(RLPROF[f][rprof] * ldiff);		// get item counts for a profile
-alert("rl: "+ldiff+"->"+RLPROF[3][rprof]+":"+RLPROF[5][rprof]+":"+RLPROF[8][rprof]+":"+RLPROF[11][rprof]+":"+RLPROF[13][rprof]+":"+RLPROF[18][rprof]+":"+RLPROF[25][rprof]+":"+RLPROF[32][rprof]);
 					for (f = 0;f <= rlloop;f++)
 					{
 							sft = 6000;

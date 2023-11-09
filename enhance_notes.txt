@@ -19,7 +19,6 @@ push wall collision
 
 imm issues:
 
-rand load is borken !
 
 thief start snd / mugger ops
 ( thief does not "travel" like a monster, he is moved along a path...no matter what )
@@ -344,6 +343,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- rand load is borken ! (user choice difficulty was set 0, code was gud)
 
 x-- moving exits (they may be a bit more "random" than g2)
 
