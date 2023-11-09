@@ -391,7 +391,7 @@ Gauntlet = function() {
         MONSTER_DEATH:   { sx: 17, sy: 12, frames: 6, fpf: FPS/20 },
         WEAPON_HIT:      { sx: 23, sy: 12, frames: 2, fpf: FPS/20 },
         PLAYER_GLOW:     { frames: FPS/2, border: 5 },
-        NUMER:           { sx: 24, sy: 13, frames:1, fpf: FPS/20  }
+        NUMER:           { sx: 24, sy: 13, frames:7, fpf: FPS/2  }
       },
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
 // the order of these lists follows the numeric code of pixels under the main entry, adding hex 10 each time
@@ -2762,7 +2762,7 @@ if (document.getElementById("noclip").checked) return false;
     addExit:      function(x, y, type)             { return DEBUG.NOEXITS      ? null : this.add(x, y, Exit,      null,               type);             },
     addWeapon:    function(x, y, type, dir, owner) { return DEBUG.NOWEAPONS    ? null : this.add(x, y, Weapon,    this.pool.weapons,  type, dir, owner); },
     addMonster:   function(x, y, type, generator)  { return DEBUG.NOMONSTERS   ? null : this.add(x, y, Monster,   this.pool.monsters, type, generator);  },
-    addFx:        function(x, y, type, delay, tim) { return DEBUG.NOFX         ? null : this.add(x, y, Fx,        this.pool.fx,       type, delay, tim); },
+    addFx:        function(x, y, type, delay)      { return DEBUG.NOFX         ? null : this.add(x, y, Fx,        this.pool.fx,       type, delay);      },
 
     add: function(x, y, klass, pool) {
       var cfunc, entity, args = [].slice.call(arguments, 4);
@@ -3018,7 +3018,7 @@ if (document.getElementById("noclip").checked) return false;
 		 {
 				this.health = Math.max(0, this.health - damage);
 				if (this.health > 0) return;
-				var re = Mastermap.addFx(this.x, this.y, FX.NUMER, 0, 2.2);
+				var re = Mastermap.addFx(this.x, this.y, FX.NUMER);
 				if (re != null) {
 					re.sy = re.type.sy + Deathnote[Deathmult];
 					re.numer = true; // special display class because of sprite render using entity.type.sy instead of entity.sy
@@ -3031,7 +3031,7 @@ if (document.getElementById("noclip").checked) return false;
 		 {
 				if (this.stun < heartbeet || this.stun == undefined) { this.stun = heartbeet + 10; return; }
 
-				var re = Mastermap.addFx(this.x, this.y, FX.NUMER, 0, 2.2);
+				var re = Mastermap.addFx(this.x, this.y, FX.NUMER);
 				if (re != null) {
 					re.sy = re.type.sy + Deathnote[0];
 					re.numer = true; // special display class because of sprite render using entity.type.sy instead of entity.sy
@@ -3396,11 +3396,10 @@ if (document.getElementById("noclip").checked) return false;
 
   var Fx = Class.create({
 
-    initialize: function(type, delay, tim) {
+    initialize: function(type, delay) {
       this.type  = type;
       this.start = null;
       this.delay = delay || 0;
-      this.to = heartbeet + tim;
     },
 
     fx:       true,
@@ -3410,7 +3409,6 @@ if (document.getElementById("noclip").checked) return false;
       if (this.delay && --this.delay)
         return;
       this.start = this.start || frame;
-		if (this.to > heartbeet) return;
       this.frame = animate(frame - this.start, this.type.fpf, this.type.frames + 1);
       if (this.frame === this.type.frames)
         publish(EVENT.FX_FINISHED, this);
@@ -3721,7 +3719,7 @@ var txsv = ":";
 				{
 					var tp = tp100;
 					if (treasure.type.score == 500) tp = tp500;
-					var re = Mastermap.addFx(treasure.x, treasure.y, FX.NUMER, 0, 7.2);
+					var re = Mastermap.addFx(treasure.x, treasure.y, FX.NUMER);
 					if (re != null) {
 						re.sy = re.type.sy + tp;
 						re.numer = true;
