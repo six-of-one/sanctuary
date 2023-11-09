@@ -1439,9 +1439,10 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 // for strict g1/g2 - only one theif
 //				if (one_theif) theif_ad = mug_ad;
 				one_theif++;
-				if (Math.random() < thf_mug_bal) var mug_addr = 0x10;		// g1 only will block this -- bal, first time more chance of thf
+				var addo = theif_ad;
+				if (Math.random() < thf_mug_bal) addo = mug_ad;		// g1 only will block this -- bal, first time more chance of thf
 				else thf_mug_bal = 0.65;																		// g2 seems to send out a lot of muggers
-				Mastermap.load_cell(thcell.tx, thcell.ty, theif_ad + mug_addr,Mastermap);
+				Mastermap.load_cell(thcell.tx, thcell.ty, addo,Mastermap);
 				Mastercell.ptr.theif = 0;	// spawned -- NOT generated or placed
 // could start a new thief where the old one was killed - if local thieftrack is saved
 				Mastercell.ptr.thieftrack = 0;	// spawned -- NOT generated or placed
