@@ -108,8 +108,8 @@ Gauntlet = function() {
         GRUNT1:  { sx: 0, sy: 18, frames: 3, fpf: FPS/10, score:  30, health:  10, speed: 100/FPS, damage: 60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 13, 13, 8, 2 ], generator: { glvl: [ 13, 13, 8, 2 ], health: 10, speed: 3.5*FPS, max: 40, score: 300, sx: 32, sy: 6 }, name: "grunt",  weapon: null , hits: 'hithump',     nohlp: 42              },
         WIZARD1: { sx: 0, sy: 20, frames: 3, fpf: FPS/10, score:  30, health:  10, speed: 110/FPS, damage: 60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 14, 14, 9, 3 ], generator: { glvl: [ 14, 14, 9, 3 ], health: 10, speed: 4.0*FPS, max: 20, score: 400, sx: 32, sy: 6 }, name: "sorcerer", weapon: null , hits: 'hithump',     nohlp: 44            },
         LOBBER1: { sx: 0, sy: 22, frames: 3, fpf: FPS/10, score:  10, health:  10, speed: 80/FPS,  damage: 40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 15, 15, 10, 5 ], generator: { glvl: [ 15, 15, 10, 5 ], health: 10, speed: 3.5*FPS, max: 20, score: 100, sx: 32, sy: 6 }, name: "lobber", weapon: { speed: 180/FPS, reload: 1.9*FPS, damage: 10, sx: 24, sy: 9, fpf: FPS/10, monster: true, lobsht: true, foir: 'firelob' }   ,     nohlp: 45                 },
-        THIEF:   { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 220/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null  ,     nohlp: 39               },
-        MUGGER:  { sx: 0, sy: 24, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 233/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 17, 17, 17, 17 ], generator: { glvl: [ 17, 17, 17, 17 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger", weapon: null  ,     nohlp: 62               },
+        THIEF:   { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 220/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null,  bsound: 'hitheif',   nohlp: 39               },
+        MUGGER:  { sx: 0, sy: 24, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 233/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 17, 17, 17, 17 ], generator: { glvl: [ 17, 17, 17, 17 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger", weapon: null , bsound: 'himug',    nohlp: 62               },
 // g2 calls this the acid blob - it looks like an angry pickle...
         PICKLE:  { sx: 0, sy:  25, frames: 3, fpf: FPS/10, score:  1000, health:  60, speed: 40/FPS, damage:  60, selfharm: 300,      canbeshot: false,  canbehit: false, notfot: true, invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 18, 18, 18, 18 ], generator: { glvl: [ 18, 18, 18, 18 ], health: 10, speed: 1.5*FPS, max: 20, score: 500, sx: 32, sy: 8 }, scorefx: 0, twopot: 1, name: "Acid blob", weapon: null  ,  hits: 'hitpickle',   nohlp: 63               },
 		 SUPERSOC: { sx: 0, sy: 7,  frames: 3, fpf: FPS/10, score: 100, health:  10, speed: 1/FPS, damage: 120/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 19, 19, 19, 19 ], generator: { glvl: [ 19, 19, 19, 19 ], health: 40, speed: 1.0*FPS, max: 20, score: 1000, sx: 32, sy: 8 }, scorefx: 5, twopot: 1, name: "Super sorcerer", weapon: { speed: 240/FPS, reload: 3*FPS, damage: 50, sx: 24, sy: 7, fpf: FPS/10, monster: true } , hits: 'hithump',     nohlp: 69          },
@@ -758,7 +758,7 @@ Gauntlet = function() {
       { id: 'hitghost',         		name: 'sounds/g1hit_ghost',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'hithump',         		name: 'sounds/g1hit_grunt',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
 // theif
-      { id: 'hitheif',         		name: 'sounds/g1thf_appr',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'hitheif',         		name: 'sounds/g2thf_appr',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'thfycc1',         		name: 'sounds/g1thf_yccm',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'thfycc2',         		name: 'sounds/g1thf_ycc2',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'thfheh1',         		name: 'sounds/g1thf_hehe1',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
@@ -836,8 +836,8 @@ Gauntlet = function() {
       { id: 'sbuzz',      		  name: 'sounds/g1_buzz',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
       { id: 'coindrp',      		  name: 'sounds/g1_coindrop',              formats: ['ogg'], volume: 0.8, pool: ua.is.ie ? 2 : 6 },
 // gII sounds
-      { id: 'stmug',      name: 'sounds/g2_stmugger',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
-      { id: 'stheif',      name: 'sounds/g2_sttheif',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'himug',      name: 'sounds/g2mug_appr',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'g2hitheif',      name: 'sounds/g2thf_appr',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'unlkches',      name: 'sounds/g2_unlkchest',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'movexit',      name: 'sounds/g2_movexit',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'shotwall',      name: 'sounds/g2_shotwall',            formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
@@ -1438,7 +1438,9 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 				Mastercell.ptr.theif = 0;	// spawned -- NOT generated or placed
 // could start a new thief where the old one was killed - if local thieftrack is saved
 				Mastercell.ptr.thieftrack = 0;	// spawned -- NOT generated or placed
-				Musicth.play(Musicth.sounds.hitheif);
+//				Musicth.play(Musicth.sounds.hitheif);
+				Musicth.play(Musicth.sounds[Mastercell.ptr.type.bsound]);
+
 		}
   }
 
@@ -5171,7 +5173,7 @@ var txsv = ":";
 					if (thieftim  != 0 && (thieftim < timestamp()))
 					{
 							spawn(); // start theif
-							if (Math.random() < thiefrnd * 0.25)	// enhanced - 1/4 chance to start another theif
+							if (Math.random() < thiefrnd * 0.25)	// enhanced - 1/4 chance to start another theif				-- expanded rules, option off for g1/g2 mode only
 									thieftim = 1000 * (thieftotim + (thieftotim * Math.random())) + timestamp();
 							else
 									thieftim = 0; // stop timer
