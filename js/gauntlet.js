@@ -117,7 +117,7 @@ Gauntlet = function() {
       },
 // track a potential "richest" player path - (really have to track them all...)
 		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25, thiefexit = false,
-		THFTALK = [  'thfycc1',  'thfycc2', 'thfheh1', 'thfheh2', 'thfheh3' ],
+		THFTALK = [  'thfycc1',  'thfycc2', 'thfheh1', 'thfheh2', 'thfheh3', 'thflau1', 'thflau2' ],
 // list of tutorial and help messages to display
 		HELPDIS = [
 									"Null 0 entry - no usable",
@@ -759,6 +759,8 @@ Gauntlet = function() {
       { id: 'hithump',         		name: 'sounds/g1hit_grunt',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
 // theif
       { id: 'hitheif',         		name: 'sounds/g2thf_appr',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'thflau1',         		name: 'sounds/g1thf_lau1',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
+      { id: 'thflau2',         		name: 'sounds/g1thf_lau2',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'thfycc1',         		name: 'sounds/g1thf_yccm',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'thfycc2',         		name: 'sounds/g1thf_ycc2',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
       { id: 'thfheh1',         		name: 'sounds/g1thf_hehe1',               formats: ['ogg'], volume: 1.0, pool: ua.is.ie ? 2 : 6 },
@@ -2893,7 +2895,7 @@ if (document.getElementById("noclip").checked) return false;
 			{
 					this.thcount--;
 					this.thieftrack = this.thieftrack - 1;
-					if (this.thcount == 5) Musicth.play(Musicth.sounds[THFTALK[Game.Math.randomInt(2, 4)]]);
+					if (this.thcount == 5) Musicth.play(Musicth.sounds[THFTALK[Game.Math.randomInt(2, 5)]]);
 					if (this.thieftrack == 15) Musicth.play(Musicth.sounds[THFTALK[Game.Math.randomInt(0, 1)]]);
 					if (this.thieftrack < 2)
 					{
@@ -5170,6 +5172,7 @@ var txsv = ":";
 /// TEST - remove
 //document.title = thieftim+": "+ ((thieftim - timestamp())/1000)+" :tft (&-stmp)/1000: ";
 /// TEST - remove
+					if (troomtime == 0)
 					if (thieftim  != 0 && (thieftim < timestamp()))
 					{
 							spawn(); // start theif
