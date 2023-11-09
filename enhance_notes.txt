@@ -19,8 +19,11 @@ push wall collision
 
 imm issues:
 
+too many shots with reflective shots
 
+rotate scuttles movex & cycle wall?
 
+movex are solid on load until cycle
 
 - some g2 sounds may need vol atten -- in progress
 - g2 announcer does not match g1

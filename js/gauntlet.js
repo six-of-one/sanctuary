@@ -2449,7 +2449,7 @@ var lvu = document.getElementById("flvl").value;
 						if (entity.dir === DIR.DOWN) nd = DIR.UP;
 						Musicth.play(Musicth.sounds.bouncshot);
 						entity = Mastermap.addWeapon(entity.x, entity.y, entity.owner.type.weapon, nd, entity.owner);
-						entity.type.monster = true;
+						entity.norelod =  true;
 						entity.reflect = rfc;
 					}
 				}
@@ -2832,7 +2832,7 @@ if (document.getElementById("noclip").checked) return false;
 		entity.to = heartbeet + wto;
 		entity.numer = false; // these are a reused pool, turn this off
       entity.reflect = 0;
-      entity.type.monster = false;
+      entity.norelod = false;
       return entity;
     },
 
@@ -3237,7 +3237,7 @@ if (document.getElementById("noclip").checked) return false;
 
       var collision = map.trymove(this, this.dir, this.type.speed + xspd, this.owner);
       if (collision) {
-			if (!this.type.monster)
+			if (!this.type.monster && !this.norelod)
 				this.owner.reloading = countdown(this.owner.reloading, this.type.reload * 0.8); // speed up reloading process if previous weapon hit something, makes player feel powerful
         publish(EVENT.WEAPON_COLLIDE, this, collision);
       }
@@ -4249,7 +4249,7 @@ var txsv = ":";
 			stalling = stalling + 1;
 /// TEST - remove
 // dev: no stalling
-		if (!document.getElementById("nostal").checked) 
+		if (!document.getElementById("nostal").checked)
 /// TEST - remove
 			if (stalling == DOORSTALL) {
 
