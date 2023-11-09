@@ -19,11 +19,17 @@ push wall collision
 
 imm issues:
 
+rand load is borken !
+
+thief start snd / mugger ops
+( thief does not "travel" like a monster, he is moved along a path...no matter what )
+
+
 - some g2 sounds may need vol atten -- in progress
 - g2 announcer does not match g1
 
 g2 ? food research (find in files, or redo)
-g1/g2 wall & door stall times
+g1/g2 wall & door stall times @ difficulty
 
 check sound for picking poison (is potion pick sound, need g2 ref)
 
@@ -52,7 +58,7 @@ theif / mugger should fight monsters in path - get blocked by object on start, p
 stalling with keys takes 2 * stall for doors
 (also might be affected by skill)
 \_ takes about 18 health (without keys) and 36 health (with keys) to stall the doors and about 325 health to stall the walls
- \_ about twice as long in Gauntlet 2 than in Gauntlet
+ \_ walls about twice as long in Gauntlet 2 than in Gauntlet
 
 
 player dmg: melee
@@ -61,7 +67,7 @@ monster dmg: melee - turn off autohurt to test
 
 is it possible to code adjust the "contained" corner	(re wall changes)
 
-player shot speed
+player shot speed (xshot speed is not tested, seems fast)
 
 >a few announce & help msg left - ssop, etc.
 >not all g1 audio fx in use
@@ -105,15 +111,18 @@ sngl potion stuns, dbl potion kills pickles (sup sorc too)
 
 new-ish:
 
-hue shift floors & loadable wall segment
 loadable wall seg, other modes (a la druid)
+hue shift floors & loadable wall segment
 color match 40400F walls & loadable wall with them | _ section
 :- possible multiple floor tile loader	(bigger tile area - victory road tex)
 trainable map reader (load g2 maps from maze ed, speccy maps)
 2nd player local
 
+what would cookie overrides control ?
+what overrides/ cheats should players have ?
+
 companion potion: cat face on blue potion
-- next creature you touch becomes follower companion
+- potion active, next creature you touch becomes follower companion
 - will stay with you until you die, then they are released
 -
 - ghosts kill accd to level on touch - 1st level ghost kills 1 level of enemy
@@ -189,24 +198,25 @@ door stall is 15 secs - difficult is 0 easiest
 
 GII elements:
 
-locked treasures
-poison food / potion that slows monsters
-moving exits
-moving walls (regular phase, not random)
-invisible walls (need a 50% vis on touch or shot option cooling to invisible after 4 mins) -- code to handle these as gII is done
+x-- locked treasures
+x-- poison food / potion that slows monsters
+x-- moving exits
+x-- moving walls (regular phase, not random)
+x-- invisible walls 
+  \_(need a 50% vis on touch or shot option cooling to invisible after 4 mins) -- code to handle these as gII is done
 super sorceror
 mugger - thief that steals food
 dragon
 temp potions - repulse, invuln, super shot, reflective, teleport		-- code done on 1 - 3
-stun tiles
-force fields
-moveable (pushable) walls
-shootable "regular" walls that give goody
-"flicker" random walls
+x-- stun tiles
+x-- force fields
+x-- moveable (pushable) walls
+x-- shootable "regular" walls that give goody
+x-- "flicker" random walls
 "special" treasure room
 monsters move different, or faster
-x--- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or super / reflect shot destroys)
-x--- "IT" - not sure want this - 10 pts for getting tho, no pts on tag
+x- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or super / reflect shot destroys)
+"IT" - not sure want this - 10 pts for getting tho, no pts on tag
 
 >>>>>>>>>>>>>>>>>>>>>>
 expansion:
@@ -258,7 +268,7 @@ lvl 1-7 as gauntlet (or alternates)
 level 8-69 from gauntlet set
 \option to randomize these maps -^
 unpin, mirror & flip 70 - 99
-100+ add in new maps, enhancements
+100+ add in new maps, enhancements - unless blocked
 - slow down treasure rooms occur freq, but every 4th have a chance for a "super" treasure room
 - super treasure room idea - potion bomb "key" blocks & perm potion "key" blocks
 
@@ -311,6 +321,10 @@ player stats:		(once we have name keeping)
 - each type of monster & gen destroyed
 - total play stats per life & poss per map stats
 
+crossovers interested in:
+
+victory road
+archon
 
 >>>>>>>>>>>>>>>>>>>>>>
 code fails
@@ -330,6 +344,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- moving exits (they may be a bit more "random" than g2)
 
 x-- g2 phase wall, rnd wall
 
