@@ -4971,18 +4971,22 @@ var txsv = ":";
 							var b1Data = bimg1.data;
 							var bimg2 = Blendctx2.getImageData(0, 0, TILE, TILE);
 							var b2Data = bimg2.data;
-							var pixs = 4 * TILE * TILE, bl1, bl2, addr = (1 / 16);
-							for(var j = 0; j < TILE; j++) { bl1 = 1.0; bl2 = 0.0;
-								for(var i = 0; i < TILE ; i++) {
-									pixs = i + j * TILE;
+					/*		var pixs, XTILE = 4 * TILE, bl1, bl2, addr = 0.0625;
+							for(var j = 0; j < XTILE; j += 4) { bl1 = 1.0; bl2 = 0.0;
+								for(var i = 0; i < XTILE ; i += 4) {
+									pixs = i + j * XTILE;
 									b1Data[pixs] = b1Data[pixs] * bl1 + b2Data[pixs] * bl2;
-									if (i > (TILE - 8)) { bl1 = 0.0; bl2 == 1.0; }
+									b1Data[pixs+1] = b1Data[pixs+1] * bl1 + b2Data[pixs+1] * bl2;
+									b1Data[pixs+2] = b1Data[pixs+2] * bl1 + b2Data[pixs+2] * bl2;
+									b1Data[pixs+3] = b1Data[pixs+3] * bl1 + b2Data[pixs+3] * bl2;
+									if (i > (XTILE - 32)) { bl1 = 0.0; bl2 == 1.0; }
 									else
-									if (i > 8) { bl1 -= addr; bl2 += addr; }
-								}}
-//							while (pixs--) {
-//								b1Data[pixs] = b1Data[pixs] * 0.5 + b2Data[pixs] * 0.5;
-//								}
+									if (i > 32) { bl1 -= addr; bl2 += addr; }
+								}} */
+							var pixs = 4 * TILE * TILE;
+							while (pixs--) {
+								b1Data[pixs] = b1Data[pixs] * 0.5 + b2Data[pixs] * 0.5;
+								}
 							bimg1.data = b1Data;
 //							Blendctx1.putImageData(bimg1, 0, 0);
 //							this.tile(ctx, bimg1, 0, 0, tx, ty);
@@ -5011,18 +5015,22 @@ var txsv = ":";
 							var b1Data = bimg1.data;
 							var bimg2 = Blendctx2.getImageData(0, 0, TILE, TILE);
 							var b2Data = bimg2.data;
-							var pixs = 4 * TILE * TILE, bl1, bl2, addr = 0.0625;
-							for(var j = 0; j < TILE; j++) { bl1 = 1.0; bl2 = 0.0;
-								for(var i = 0; i < TILE ; i++) {
-									pixs = i + j * TILE;
+	/*						var pixs, XTILE = 4 * TILE, bl1, bl2, addr = 0.0625;
+							for(var j = 0; j < XTILE; j += 4) { bl1 = 1.0; bl2 = 0.0;
+								for(var i = 0; i < XTILE ; i += 4) {
+									pixs = i + j * XTILE;
 									b1Data[pixs] = b1Data[pixs] * bl1 + b2Data[pixs] * bl2;
-									if (i > (TILE - 8)) { bl1 = 0.0; bl2 == 1.0; }
+									b1Data[pixs+1] = b1Data[pixs+1] * bl1 + b2Data[pixs+1] * bl2;
+									b1Data[pixs+2] = b1Data[pixs+2] * bl1 + b2Data[pixs+2] * bl2;
+									b1Data[pixs+3] = b1Data[pixs+3] * bl1 + b2Data[pixs+3] * bl2;
+									if (i > (XTILE - 32)) { bl1 = 0.0; bl2 == 1.0; }
 									else
-									if (i > 8) { bl1 -= addr; bl2 += addr; }
-								}}
-//							while (pixs--) {
-//								b1Data[pixs] = b1Data[pixs] * 0.5 + b2Data[pixs] * 0.5;
-//								}
+									if (i > 32) { bl1 -= addr; bl2 += addr; }
+								}} */
+							var pixs = 4 * TILE * TILE;
+							while (pixs--) {
+								b1Data[pixs] = b1Data[pixs] * 0.5 + b2Data[pixs] * 0.5;
+								}
 							bimg1.data = b1Data;
 //							Blendctx1.putImageData(bimg1, 0, 0);
 //							this.tile(ctx, bimg1, 0, 0, tx, ty);
