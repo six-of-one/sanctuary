@@ -5014,7 +5014,7 @@ var txsv = ":";
 			else if (is.valid(cell.wall))
 			  {
 //					cell.ptile = fcellstr;
-					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000)  {// diff walls by low nibble
+					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000 && (cell.pixel & MEXHIGH) != TRAPWALL)  {// diff walls by low nibble
 // blender
 						B2 = tx + ty * Mtw;
 						if (document.getElementById("noblend").checked) B2 = -2;
