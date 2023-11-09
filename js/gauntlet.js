@@ -2741,6 +2741,10 @@ if (document.getElementById("noclip").checked) return false;
 		if (level.unpinx) { Munhx = Mtw * TILE - 1; }
 		if (level.unpiny) { Munhy = Mth * TILE - 12; }
 
+		Blendcanvas1 = Game.createCanvas(TILE, TILE);
+      Blendctx1    = Blendcanvas1.getContext('2d');
+		Blendcanvas2 = Game.createCanvas(TILE, TILE);
+      Blendctx2    = Blendcanvas2.getContext('2d');
     },
 
     //-------------------------------------------------------------------------
@@ -4908,6 +4912,7 @@ var txsv = ":";
 		 var hintinv = document.getElementById("invhint").checked;
 		 if (document.getElementById("invwal").checked) map.level.wall = WALL.INVIS;
 /// TEST - remove
+		 var B1, B2, bcell;
 // second cycle - everything else
       for(ty = vyz, th = vth ; ty < th ; ty++) {
         for(tx = vxz, tw = vtw ; tx < tw ; tx++) {
@@ -4958,7 +4963,38 @@ var txsv = ":";
 			  {
 //					cell.ptile = fcellstr;
 					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000)  {// diff walls by low nibble
+// blender
+						B2 = tx + ty * Mtw;
+						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) {
+							this.tile(Blendctx2, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
+							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
+							var b1Data = bimg1.data;
+							var bimg2 = Blendctx2.getImageData(0, 0, TILE, TILE);
+							var b2Data = bimg2.data;
+							var pixs = 4 * TILE * TILE, bl1, bl2, addr = (1 / 16);
+							for(var j = 0; j < TILE; j++) { bl1 = 1.0; bl2 = 0.0;
+								for(var i = 0; i < TILE ; i++) {
+									pixs = i + j * TILE;
+									b1Data[pixs] = b1Data[pixs] * bl1 + b2Data[pixs] * bl2;
+									if (i > (TILE - 8)) { bl1 = 0.0; bl2 == 1.0; }
+									else
+									if (i > 8) { bl1 -= addr; bl2 += addr; }
+								}}
+//							while (pixs--) {
+//								b1Data[pixs] = b1Data[pixs] * 0.5 + b2Data[pixs] * 0.5;
+//								}
+							bimg1.data = b1Data;
+//							Blendctx1.putImageData(bimg1, 0, 0);
+//							this.tile(ctx, bimg1, 0, 0, tx, ty);
+							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
+							}
+						else
+
 						this.tile(ctx, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
+// blend for next
+						this.tile(Blendctx1, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
+						B1 = tx + ty * Mtw;
+						bcell = cell;
 					  }
 					else
 					if (map.level.wall != WALL.INVIS) { 		// dont load wall tile for invis walls -- only applies to std level walls
@@ -4967,7 +5003,39 @@ var txsv = ":";
 						if (wallhue <0 || wallhue > 360) wallhue = 0;
 						ctx.filter = "hue-rotate("+wallhue+"deg)";
 /// TEST - update
+// blender
+						B2 = tx + ty * Mtw;
+						if (B2 == (B1 + 1) && (cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) {
+							this.tile(Blendctx2, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
+							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
+							var b1Data = bimg1.data;
+							var bimg2 = Blendctx2.getImageData(0, 0, TILE, TILE);
+							var b2Data = bimg2.data;
+							var pixs = 4 * TILE * TILE, bl1, bl2, addr = 0.0625;
+							for(var j = 0; j < TILE; j++) { bl1 = 1.0; bl2 = 0.0;
+								for(var i = 0; i < TILE ; i++) {
+									pixs = i + j * TILE;
+									b1Data[pixs] = b1Data[pixs] * bl1 + b2Data[pixs] * bl2;
+									if (i > (TILE - 8)) { bl1 = 0.0; bl2 == 1.0; }
+									else
+									if (i > 8) { bl1 -= addr; bl2 += addr; }
+								}}
+//							while (pixs--) {
+//								b1Data[pixs] = b1Data[pixs] * 0.5 + b2Data[pixs] * 0.5;
+//								}
+							bimg1.data = b1Data;
+//							Blendctx1.putImageData(bimg1, 0, 0);
+//							this.tile(ctx, bimg1, 0, 0, tx, ty);
+							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
+							}
+						else
+
 						this.tile(ctx, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
+// blend for next
+						this.tile(Blendctx1, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, 0, 0);
+						B1 = tx + ty * Mtw;
+						bcell = cell;
+
 						ctx.filter = "hue-rotate(0deg)";
 						if (map.level.brikovr) this.tile(ctx, cell.spriteset, cell.wall, map.level.brikovr, tx, ty);
 					}
