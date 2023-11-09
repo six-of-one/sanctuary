@@ -534,7 +534,7 @@ Gauntlet = function() {
 [	0x008118,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1	]
       ],
 
-		RLOAD = [0, 0, 0, 0, 0, 0],
+		RLOAD = [0],
 // difficulty level for rnd load profile
 		diff_level = 1, def_diff = 7,
 
@@ -3721,7 +3721,7 @@ var txsv = ":";
 					Mastercell.ptr.stun = heartbeet + 2;
 					cell.ctx = ctx;
 				}
-				if (rlk < 0)	// if lock chest empty, get 500 pts
+				if (rlk < 0) {	// if lock chest empty, get 500 pts
 				this.addscore(treasure.type.score);
 				if (treasure.type.score == 100 || treasure.type.score == 500)
 				{
@@ -3732,7 +3732,7 @@ var txsv = ":";
 						re.sy = re.type.sy + tp;
 						re.numer = true;
 					}
-				}
+				}}
 // score multiplier
 				if (treasure.type.scmult)
 				 {
