@@ -350,7 +350,7 @@ Gauntlet = function() {
 		TROOMCNT = [ ], TROOMSUP = [ ], RNGLOAD = [ ],
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
-		reflectcnt = 3, 			// reflective shot, count of reflections
+		reflectcnt = 3, wallcoll, 			// reflective shot, count of reflections
 		POISONTM = 15,		// 10 secs of poison (muddle controls from dizzy effect)
 		POISONDIZ = 0.2,	// chance dizzy condition will confuse player
 		SUPERSHTFR = 10,	// super shot proj frame
@@ -2429,23 +2429,23 @@ var lvu = document.getElementById("flvl").value;
 					}
 					collision = undefined;
 				}
-				if (entity.reflect)
+
+				if (entity.reflect) 
 				{
 					var reflection = false;
 					if (collision != undefined)
-					if (isdoor(collision.pixel) || !collision.health || !istreasure(collision.pixel)) reflection = true;
-
-					if (collision.type != undefined) if (entity.owner.type.name == collision.type.name && entity.reflect == reflectcnt) reflection = false;
+					if (isdoor(collision.pixel) || wallcoll) reflection = true;
+					wallcoll = false;
 
 //				if (collision.pixel == undefined || isdoor(collision.pixel))
 					if (reflection)
-						{ alert(entity.type.sy+" : "+collision.pixel);
+						{
 						entity.reflect = countdown(entity.reflect);
 						var rfc = entity.reflect;
-						if (entity.dir === DIR.UPLEFT) var nd = DIR.DOWNLEFT;
-						if (entity.dir === DIR.DOWNLEFT) nd = DIR.UPLEFT;
-						if (entity.dir === DIR.UPRIGHT) nd = DIR.DOWNRIGHT;
-						if (entity.dir === DIR.DOWNRIGHT) nd = DIR.UPRIGHT;
+						if (entity.dir === DIR.UPLEFT) {var nd = DIR.DOWNLEFT; if (Math.random() < 0.5) nd = DIR.UPRIGHT };			// iterim solution - some will reflect, and some wont
+						if (entity.dir === DIR.DOWNLEFT) { nd = DIR.UPLEFT; if (Math.random() < 0.5) nd = DIR.DOWNRIGHT };
+						if (entity.dir === DIR.UPRIGHT) { nd = DIR.DOWNRIGHT; if (Math.random() < 0.5) nd = DIR.UPLEFT };
+						if (entity.dir === DIR.DOWNRIGHT) { nd = DIR.UPRIGHT; if (Math.random() < 0.5) nd = DIR.DOWNLEFT };
 						if (entity.dir === DIR.RIGHT) nd = DIR.LEFT;
 						if (entity.dir === DIR.LEFT) nd = DIR.RIGHT;
 						if (entity.dir === DIR.UP) nd = DIR.DOWN;
@@ -2599,15 +2599,17 @@ if (document.getElementById("noclip").checked) return false;
 
 // since edje walls can become exits, make sure shots expire at edge
 			if (cell == undefined) {
-// getting stuck with detect x = Mtw - 1, y = Mth - 2, attempt fix
+// getting stuck with detect x = Mtw - 1, y = Mth - 2, attempt fix  -- this is a specific player gets stuck case...
 				if (p2t(x) == (Mtw - 1) && p2t(y) >= (Mth - 2) && (dir == DIR.UP || dir == DIR.UPLEFT || dir == DIR.UPRIGHT)) return false;
 				return true;
 				}
 
+			wallcoll = false;
 			if (cell.wall !== undefined && cell.wall !== null)		{		// walls to exits sets null
 //				if (mtm != "bw: "+cell.tx+":"+cell.ty) { mtm = "bw: "+cell.tx+":"+cell.ty; alert("bw: "+cell.tx+":"+cell.ty);}
+				wallcoll = cell;
 				return true;
-}
+				}
         for(i = 0, ni = cell.occupied.length ; i < ni ; i++) {
           item = cell.occupied[i];
           if ((item != ignore) && !set_contains(checked, item)) {
