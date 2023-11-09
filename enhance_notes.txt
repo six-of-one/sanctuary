@@ -20,7 +20,6 @@ push wall collision
 imm issues:
 
 
-( thief does not "travel" like a monster, he is moved along a path...no matter what )
 
 
 - some g2 sounds may need vol atten -- in progress
@@ -345,6 +344,7 @@ done:
 
 x-- mugger ops
 x-- thief start snd, taunts
+   \_( thief does not "travel" like a monster, he is moved along a path...no matter what )
 
 x-- rand load is borken ! (user choice difficulty was set 0, code was gud)
 
