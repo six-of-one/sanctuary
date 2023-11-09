@@ -342,6 +342,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
+x-- reflective shots bouncy bounce
+
 x-- mugger ops
 x-- thief start snd, taunts
    \_( thief does not "travel" like a monster, he is moved along a path...no matter what )

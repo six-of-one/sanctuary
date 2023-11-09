@@ -1543,6 +1543,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		document.getElementById("noah").checked = false;
 		document.getElementById("nommv").checked = false;
 		document.getElementById("nogen").checked = false;
+		document.getElementById("noblend").checked = false;
 
 		if (readCookie("_ops_"+"seltut") == "true") document.getElementById("seltut").checked = true;
 		if (readCookie("_ops_"+"selg2tut") == "true") document.getElementById("selg2tut").checked = true;
@@ -1562,6 +1563,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		if (readCookie("_dev_"+"noah") == "true") document.getElementById("noah").checked = true;
 		if (readCookie("_dev_"+"nommv") == "true") document.getElementById("nommv").checked = true;
 		if (readCookie("_dev_"+"nogen") == "true") document.getElementById("nogen").checked = true;
+		if (readCookie("_dev_"+"noblend") == "true") document.getElementById("noblend").checked = true;
 /// TEST - remove
 //for (i = 1; i <= 81; i++) { deleteCookie(i+"char"); deleteCookie(i+"score"); deleteCookie(i+"name"); }
 
@@ -4342,6 +4344,7 @@ var txsv = ":";
 				createCookie("_dev_"+"noah", document.getElementById("noah").checked,7777);
 				createCookie("_dev_"+"nommv", document.getElementById("nommv").checked,7777);
 				createCookie("_dev_"+"nogen", document.getElementById("nogen").checked,7777);
+				createCookie("_dev_"+"noblend", document.getElementById("noblend").checked,7777);
 				createCookie("_ops_"+"whue", document.getElementById("whue").value,7777);
 				createCookie("_ops_"+"fhue", document.getElementById("fhue").value,7777);
 				}
