@@ -4994,13 +4994,7 @@ var txsv = ":";
 									b1Data[pixs+1] = b2Data[pixs+1];
 									b1Data[pixs+2] = b2Data[pixs+2];
 								}}
-//							var pixs = 4 * TILE * TILE;
-//							while (pixs--) {
-//								b1Data[pixs] = b1Data[pixs] * 0.5 + b2Data[pixs] * 0.5;
-//								}
 							bimg1.data = b1Data;
-//							Blendctx1.putImageData(bimg1, 0, 0);
-//							this.tile(ctx, bimg1, 0, 0, tx, ty);
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 							}
 						else
@@ -5049,13 +5043,7 @@ var txsv = ":";
 									b1Data[pixs+1] = b2Data[pixs+1];
 									b1Data[pixs+2] = b2Data[pixs+2];
 								}}
-//							var pixs = 4 * TILE * TILE;
-//							while (pixs--) {
-//								b1Data[pixs] = b1Data[pixs] * 0.5 + b2Data[pixs] * 0.5;
-//								}
 							bimg1.data = b1Data;
-//							Blendctx1.putImageData(bimg1, 0, 0);
-//							this.tile(ctx, bimg1, 0, 0, tx, ty);
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 							}
 						else
