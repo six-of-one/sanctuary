@@ -20,7 +20,7 @@ push wall collision
 imm issues:
 
 
-thief start snd / mugger ops
+mugger ops
 ( thief does not "travel" like a monster, he is moved along a path...no matter what )
 
 
@@ -343,6 +343,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- thief start snd, taunts
 
 x-- rand load is borken ! (user choice difficulty was set 0, code was gud)
 

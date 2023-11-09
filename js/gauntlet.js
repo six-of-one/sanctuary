@@ -108,15 +108,15 @@ Gauntlet = function() {
         GRUNT1:  { sx: 0, sy: 18, frames: 3, fpf: FPS/10, score:  30, health:  10, speed: 100/FPS, damage: 60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 13, 13, 8, 2 ], generator: { glvl: [ 13, 13, 8, 2 ], health: 10, speed: 3.5*FPS, max: 40, score: 300, sx: 32, sy: 6 }, name: "grunt",  weapon: null , hits: 'hithump',     nohlp: 42              },
         WIZARD1: { sx: 0, sy: 20, frames: 3, fpf: FPS/10, score:  30, health:  10, speed: 110/FPS, damage: 60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 14, 14, 9, 3 ], generator: { glvl: [ 14, 14, 9, 3 ], health: 10, speed: 4.0*FPS, max: 20, score: 400, sx: 32, sy: 6 }, name: "sorcerer", weapon: null , hits: 'hithump',     nohlp: 44            },
         LOBBER1: { sx: 0, sy: 22, frames: 3, fpf: FPS/10, score:  10, health:  10, speed: 80/FPS,  damage: 40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 15, 15, 10, 5 ], generator: { glvl: [ 15, 15, 10, 5 ], health: 10, speed: 3.5*FPS, max: 20, score: 100, sx: 32, sy: 6 }, name: "lobber", weapon: { speed: 180/FPS, reload: 1.9*FPS, damage: 10, sx: 24, sy: 9, fpf: FPS/10, monster: true, lobsht: true, foir: 'firelob' }   ,     nohlp: 45                 },
-        THIEF:   { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 220/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null,  bsound: 'hitheif',   nohlp: 39               },
-        MUGGER:  { sx: 0, sy: 24, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 233/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 17, 17, 17, 17 ], generator: { glvl: [ 17, 17, 17, 17 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger", weapon: null , bsound: 'himug',    nohlp: 62               },
+        THIEF:   { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 220/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null,  steal: 500, bsound: 'hitheif',   nohlp: 39               },
+        MUGGER:  { sx: 0, sy: 24, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 233/FPS, damage: 0, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 17, 17, 17, 17 ], generator: { glvl: [ 17, 17, 17, 17 ], health: 10, speed: 5.5*FPS, max: 20, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger", weapon: null , steal: 100, bsound: 'himug',    nohlp: 62               },
 // g2 calls this the acid blob - it looks like an angry pickle...
         PICKLE:  { sx: 0, sy:  25, frames: 3, fpf: FPS/10, score:  1000, health:  60, speed: 40/FPS, damage:  60, selfharm: 300,      canbeshot: false,  canbehit: false, notfot: true, invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 18, 18, 18, 18 ], generator: { glvl: [ 18, 18, 18, 18 ], health: 10, speed: 1.5*FPS, max: 20, score: 500, sx: 32, sy: 8 }, scorefx: 0, twopot: 1, name: "Acid blob", weapon: null  ,  hits: 'hitpickle',   nohlp: 63               },
 		 SUPERSOC: { sx: 0, sy: 7,  frames: 3, fpf: FPS/10, score: 100, health:  10, speed: 1/FPS, damage: 120/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 19, 19, 19, 19 ], generator: { glvl: [ 19, 19, 19, 19 ], health: 40, speed: 1.0*FPS, max: 20, score: 1000, sx: 32, sy: 8 }, scorefx: 5, twopot: 1, name: "Super sorcerer", weapon: { speed: 240/FPS, reload: 3*FPS, damage: 50, sx: 24, sy: 7, fpf: FPS/10, monster: true } , hits: 'hithump',     nohlp: 69          },
             IT:  { sx: 24, sy: 23, frames: 7, fpf: FPS/10, score: 6000, health: 600, speed: 140/FPS, damage:  0, selfharm: 660,      canbeshot: true,  canbehit: false, notfot: true, invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 20, 20, 20, 20 ], generator: { glvl: [ 20, 20, 20, 20 ], health: 50, speed: 1.5*FPS, max: 20, score: 500, sx: 32, sy: 8 }, scorefx: 3, twopot: 2, name: "IT", weapon: null  ,  hits: 'hithump',   nohlp: 70             }
       },
 // track a potential "richest" player path - (really have to track them all...)
-		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, theif_ad = 0x400100, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25, thiefexit = false,
+		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, one_theif = 0, theif_ad = 0x400100, mug_ad = 0x400110, thf_mug_bal = 0.2, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25, thiefexit = false,
 		THFTALK = [  'thfycc1',  'thfycc2', 'thfheh1', 'thfheh2', 'thfheh3', 'thflau1', 'thflau2' ],
 // list of tutorial and help messages to display
 		HELPDIS = [
@@ -1409,7 +1409,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
   }
 
 // xperimental - doin mod stuff
-// currently spawns theif for std g1 ops
+// currently spawns theif/muger for std g1/g2 ops
   function spawn()
   {
 		var thcell,cell, cells  = reloaded.cells;
@@ -1436,7 +1436,12 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		if (fnd)
 		{
 //document.title = "THFC:  "+thcell.tx+" : "+thcell.ty;
-				Mastermap.load_cell(thcell.tx, thcell.ty, theif_ad,Mastermap);
+// for strict g1/g2 - only one theif
+//				if (one_theif) theif_ad = mug_ad;
+				one_theif++;
+				if (Math.random() < thf_mug_bal) var mug_addr = 0x10;		// g1 only will block this -- bal, first time more chance of thf
+				else thf_mug_bal = 0.65;																		// g2 seems to send out a lot of muggers
+				Mastermap.load_cell(thcell.tx, thcell.ty, theif_ad + mug_addr,Mastermap);
 				Mastercell.ptr.theif = 0;	// spawned -- NOT generated or placed
 // could start a new thief where the old one was killed - if local thieftrack is saved
 				Mastercell.ptr.thieftrack = 0;	// spawned -- NOT generated or placed
@@ -2144,7 +2149,12 @@ var lvu = document.getElementById("flvl").value;
 			{
 				if (monster.stolen == 0 || monster.stolen == undefined)
 				 {
-						if (entity.xspeed > 0)
+						if (monster.type.name == "mugger")
+						 {
+								entity.hurt(monster.type.steal);
+								monster.stolen = 4;
+						 }
+						else if (entity.xspeed > 0)
 						{
 								entity.xspeed = entity.xspeed - 1;
 								if (entity.xspeed < 0) entity.xspeed = 0;
@@ -2190,15 +2200,15 @@ var lvu = document.getElementById("flvl").value;
 								entity.keys = entity.keys - 1;
 								monster.stolen = 2;
 						}
-						else if (entity.score > 500)
+						else if (entity.score > monster.type.steal)
 						{
-							entity.score = entity.score - 500;
+							entity.score = entity.score - monster.type.steal;
 							monster.stolen = 1;
 						}
 						if (monster.stolen)
 						{
 							monster.thcount = 35;
-							helpdis(nohlpkth, undefined, 2000, undefined, undefined);
+							if (monster.type.name != "mugger") helpdis(nohlpkth, undefined, 2000, undefined, undefined);
 						}
 				  }
 			}
