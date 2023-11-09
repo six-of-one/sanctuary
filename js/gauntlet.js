@@ -5178,10 +5178,10 @@ var txsv = ":";
 							else
 									thieftim = 0; // stop timer
 					}
-					if ((+Math.floor(x) != THIEFTRX[thieftrack - 1]) || (+Math.floor(y) != THIEFTRY[thieftrack - 1]))
+					if ((Math.floor(x) != THIEFTRX[thieftrack - 1]) || (Math.floor(y) != THIEFTRY[thieftrack - 1]))
 					{
-							THIEFTRX[thieftrack] = +Math.floor(x);
-							THIEFTRY[thieftrack] = +Math.floor(y);
+							THIEFTRX[thieftrack] = Math.floor(x);
+							THIEFTRY[thieftrack] = Math.floor(y);
 							thieftrack++;
 					}
 		  }
