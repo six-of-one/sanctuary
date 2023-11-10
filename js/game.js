@@ -745,13 +745,9 @@ Game.Math = {
 		rot = spl_rot;
 
 // clear score board if displayed prev
-		if (spl_cyc == 11)
-	  {
-				document.getElementById("warscor").style.visibility = "hidden";
-				document.getElementById("wizscor").style.visibility = "hidden";
-				document.getElementById("valscor").style.visibility = "hidden";
-				document.getElementById("elfscor").style.visibility = "hidden";
-	  }
+		if (spl_cyc == 11) $('scordiv').hide();
+
+//				document.getElementById("scordiv").style.visibility = "hidden";
 
 	  if (spl_cyc < 1 || spl_cyc > 12) spl_cyc = 0;
 	  spl_cyc++;
@@ -804,6 +800,18 @@ Game.Math = {
 		if (Math.random() > 0.9) spl_cyc = 2;
 		else
 		{
+				loadscortabl();
+				$('scordiv').show();
+//				document.getElementById("scordiv").style.visibility = "visible";
+				document.getElementById("scordiv").style.zIndex = "-1";
+		}
+	}
+
+	  setTimeout('splashrot()',rot);
+  }
+
+	function loadscortabl() {
+
 				document.getElementById("warscor").innerHTML = "&nbsp;&nbsp;WARRIORS<br><br>";
 				document.getElementById("wizscor").innerHTML = "&nbsp;&nbsp;WIZARDS<br><br>";
 				document.getElementById("valscor").innerHTML = "&nbsp;&nbsp;VALKYRIES<br><br>";
@@ -816,19 +824,19 @@ Game.Math = {
 						for (var i = 1; i <= scoredex; i++)
 						 {
 					var nam = readCookie(i+"name"), scor = readCookie(i+"score"), cahr = readCookie(i+"char");
-
+// need sort
 							 if (cahr == "warrior" && wsc-- > 0) document.getElementById("warscor").innerHTML += " "+10 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
 							 if (cahr == "wizard" && zsc-- > 0) document.getElementById("wizscor").innerHTML += " "+10 - zsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
 							 if (cahr == "valkyrie" && vsc-- > 0) document.getElementById("valscor").innerHTML += " "+10 - vsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
 							 if (cahr == "elf" && esc-- > 0) document.getElementById("elfscor").innerHTML += " "+10 - esc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
 /// TEST - remove
-			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890._ ";
+/*			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890._ ";
 			var res = "";
 				for(var j = 0; j < 6; j++) {
         var rnd = Math.floor(Math.random() * ablist.length);
 				res = res + ablist.charAt(rnd); }
 //				deleteCookie(i+"name");
-				createCookie(i+"name", res,7777); 
+				createCookie(i+"name", res,7777);  */
 /// TEST - remove
 
 								HSCORE[i,0] = scor;
@@ -840,19 +848,7 @@ Game.Math = {
 						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + ";; ";
 						 alert(tstr); */
 				 }
-				document.getElementById("warscor").style.visibility = "visible";
-				document.getElementById("warscor").style.zIndex = "-1";
-				document.getElementById("wizscor").style.visibility = "visible";
-				document.getElementById("wizscor").style.zIndex = "-1";
-				document.getElementById("valscor").style.visibility = "visible";
-				document.getElementById("valscor").style.zIndex = "-1";
-				document.getElementById("elfscor").style.visibility = "visible";
-				document.getElementById("elfscor").style.zIndex = "-1";
 		}
-	}
-
-	  setTimeout('splashrot()',rot);
-  }
 
 // in singleplayer, multiplier rots down to 1
 // treasure rooms pause rot - have to detect room time here

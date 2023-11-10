@@ -1705,6 +1705,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 				onloaded();
       }
       else {
+				Game.loadscortabl();
 			  $('booting').show();
 
 					var lvs = level.url;
