@@ -3641,10 +3641,6 @@ var txsv = ":";
         return;
       }
 
-/// TEST - update
-		this.hue = document.getElementById("phue").value;
-/// TEST - update
-
       this.autohurt(frame);
 
       this.hurting   = countdown(this.hurting);
@@ -4084,6 +4080,11 @@ var txsv = ":";
 
     autohurt: function(frame) {
       if ((frame % (FPS/1)) === 0) {
+
+/// TEST - update
+		this.hue = document.getElementById("phue").value;
+/// TEST - update
+
 // this is game 1 second interval pulse - prob should be on a timer
 			heartbeet += 1;
 
@@ -5227,7 +5228,12 @@ var txsv = ":";
         player.ctx.globalAlpha = 1 - (weak ? player.type.dom.weak.state*0.9 : 0); // piggy back the DOM scoreboard animator (but dont go completely transparent)
         player.ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, maxglow, maxglow, STILE, STILE);
 
+		  if (player.hue != undefined)
+				ctx.filter = "hue-rotate("+player.hue+"deg)";
+
         ctx.drawImage(player.canvas, 0, 0, STILE + 2*maxglow, STILE + 2*maxglow, x + dx - maxglow + shrink/2 - viewport.x, y + dy - maxglow + shrink/2 - viewport.y, TILE + 2*maxglow - shrink, TILE + 2*maxglow - shrink);
+
+		  ctx.filter = "hue-rotate(0deg)";
 // thief tracker
 		  if (thieftrack > 0)
 		  {
