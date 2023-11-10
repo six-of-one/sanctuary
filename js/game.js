@@ -809,10 +809,10 @@ Game.Math = {
   }
 
 	function loadscortabl() {
-				document.getElementById("warscor").innerHTML = "<TR><TD colspan='3' style='text-align: center; width:75%; font-size:20pt;'>WARRIORS</TD></TR>";
-				document.getElementById("wizscor").innerHTML = "<TR><TD colspan='3' style='text-align: center; width:75%; font-size:20pt;'>WIZARDS</TD></TR>";
-				document.getElementById("valscor").innerHTML = "<TR><TD colspan='3' style='text-align: center; width:75%; font-size:20pt;'>VALKYRIES</TD></TR>";
-				document.getElementById("elfscor").innerHTML = "<TR><TD colspan='3' style='text-align: center; width:75%; font-size:20pt;'>ELVES</TD></TR>";
+				document.getElementById("warscor").innerHTML = '<TR><TD colspan=@3@ style=@text-align: center; width:75%; font-size:20pt;@>WARRIORS</TD></TR>';
+				document.getElementById("wizscor").innerHTML = '<TR><TD colspan=@3@ style=@text-align: center; width:75%; font-size:20pt;@>WIZARDS</TD></TR>';
+				document.getElementById("valscor").innerHTML = '<TR><TD colspan=@3@ style=@text-align: center; width:75%; font-size:20pt;@>VALKYRIES</TD></TR>';
+				document.getElementById("elfscor").innerHTML = '<TR><TD colspan=@3@ style=@text-align: center; width:75%; font-size:20pt;@>ELVES</TD></TR>';
 				var wsc = 10, vsc = 10, zsc = 10, esc = 10;
 				var HSCORE = [ 0, "Names", "character" ];
 				var scoredex = readCookieDef("hindex",0,0);
@@ -822,10 +822,10 @@ Game.Math = {
 						 {
 					var nam = readCookie(i+"name"), scor = readCookie(i+"score"), cahr = readCookie(i+"char");
 // need sort
-							 if (cahr == "warrior" && wsc-- > 0) document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(10 - wsc)+'</TD><TD style="width:30%;">'+nam+'</TD><TD style="width:60%;">'+scor+'</TD></TR>';
-							 if (cahr == "wizard" && zsc-- > 0) document.getElementById("wizscor").innerHTML += '<TR><TD style="width:10%;">'+(10 - zsc)+'</TD><TD style="width:30%;">'+nam+'</TD><TD style="width:60%;">'+scor+'</TD></TR>';
-							 if (cahr == "valkyrie" && vsc-- > 0) document.getElementById("valscor").innerHTML += '<TR><TD style="width:10%;">'+(10 - vsc)+'</TD><TD style="width:30%;">'+nam+'</TD><TD style="width:60%;">'+scor+'</TD></TR>';
-							 if (cahr == "elf" && esc-- > 0) document.getElementById("elfscor").innerHTML += '<TR><TD style="width:10%;">'+(10 - esc)+'</TD><TD style="width:30%;">'+nam+'</TD><TD style="width:60%;">'+scor+'</TD></TR>';
+							 if (cahr == "warrior" && wsc-- > 0) document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(10 - wsc)+'</TD><TD style="width:30%;">'+nam+'</TD><TD style="width:60%;text-align:right">'+scor+'</TD></TR>';
+							 if (cahr == "wizard" && zsc-- > 0) document.getElementById("wizscor").innerHTML += '<TR><TD style="width:10%;">'+(10 - zsc)+'</TD><TD style="width:30%;">'+nam+'</TD><TD style="width:60%;text-align:right">'+scor+'</TD></TR>';
+							 if (cahr == "valkyrie" && vsc-- > 0) document.getElementById("valscor").innerHTML += '<TR><TD style="width:10%;">'+(10 - vsc)+'</TD><TD style="width:30%;">'+nam+'</TD><TD style="width:60%;text-align:right">'+scor+'</TD></TR>';
+							 if (cahr == "elf" && esc-- > 0) document.getElementById("elfscor").innerHTML += '<TR><TD style="width:10%;">'+(10 - esc)+'</TD><TD style="width:30%;">'+nam+'</TD><TD style="width:60%;text-align:right">'+scor+'</TD></TR>';
 /// TEST - remove
 /*			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890._ ";
 			var res = "";
