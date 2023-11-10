@@ -2448,6 +2448,7 @@ var lvu = document.getElementById("flvl").value;
 						if (entity.dir === DIR.UP) nd = DIR.DOWN;
 						if (entity.dir === DIR.DOWN) nd = DIR.UP;
 						Musicth.play(Musicth.sounds.bouncshot);
+						entity.norelod =  true;
 						entity = Mastermap.addWeapon(entity.x, entity.y, entity.owner.type.weapon, nd, entity.owner);
 						entity.norelod =  true;
 						entity.reflect = rfc;
