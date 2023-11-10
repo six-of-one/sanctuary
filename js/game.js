@@ -818,9 +818,9 @@ Game.Math = {
 					var nam = readCookie(i+"name"), scor = readCookie(i+"score"), cahr = readCookie(i+"char");
 
 							 if (cahr == "warrior" && wsc-- > 0) document.getElementById("warscor").innerHTML += " "+10 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
-							 if (cahr == "wizard" && zsc-- > 0) document.getElementById("wizscor").innerHTML += " "+10 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
-							 if (cahr == "valkyrie" && vsc-- > 0) document.getElementById("valscor").innerHTML += " "+10 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
-							 if (cahr == "elf" && esc-- > 0) document.getElementById("elfscor").innerHTML += " "+10 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
+							 if (cahr == "wizard" && zsc-- > 0) document.getElementById("wizscor").innerHTML += " "+10 - zsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
+							 if (cahr == "valkyrie" && vsc-- > 0) document.getElementById("valscor").innerHTML += " "+10 - vsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
+							 if (cahr == "elf" && esc-- > 0) document.getElementById("elfscor").innerHTML += " "+10 - esc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
 /// TEST - remove
 			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890._ ";
 			var res = "";
