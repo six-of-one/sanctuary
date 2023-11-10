@@ -8,6 +8,13 @@ body {
 	user-select: none;
 }
 
+.scordiv {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+}
+
 .ovrspl {
 	position: relative;
 	z-index: 4;

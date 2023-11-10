@@ -801,9 +801,9 @@ Game.Math = {
 		else
 		{
 				loadscortabl();
+				document.getElementById("scordiv").style.zIndex = "-1";
 				$('scordiv').show();
 //				document.getElementById("scordiv").style.visibility = "visible";
-				document.getElementById("scordiv").style.zIndex = "-1";
 		}
 	}
 
