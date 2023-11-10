@@ -744,6 +744,15 @@ Game.Math = {
 		var rot;
 		rot = spl_rot;
 
+// clear score board if displayed prev
+		if (spl_cyc == 11)
+	  {
+				document.getElementById("warscor").style.visibility = false;
+				document.getElementById("wizscor").style.visibility = false;
+				document.getElementById("valscor").style.visibility = false;
+				document.getElementById("elfscor").style.visibility = false;
+	  }
+
 	  if (spl_cyc < 1 || spl_cyc > 12) spl_cyc = 0;
 	  spl_cyc++;
 /// TEST - remove
@@ -795,13 +804,23 @@ Game.Math = {
 		if (Math.random() > 0.9) spl_cyc = 2;
 		else
 		{
+				document.getElementById("warscor").value = "&nbsp;&nbsp;WARRIORS<br><br>";
+				document.getElementById("wizscor").value = "&nbsp;&nbsp;WIZARDS<br><br>";
+				document.getElementById("valscor").value = "&nbsp;&nbsp;VALKYRIES<br><br>";
+				document.getElementById("elfscor").value = "&nbsp;&nbsp;WARRIORS<br><br>";
+				var wsc = 10, vsc = 10, zsc = 10, esc = 10;
 				var HSCORE = [ 0, "Names", "character" ];
 				var scoredex = readCookieDef("hindex",0,0);
 				if (scoredex > 0)
 				{
 						for (var i = 1; i <= scoredex; i++)
 						 {
+					var nam = readCookie(i+"name"), scor = readCookie(i+"score"), cahr = readCookie(i+"char");
 
+							 if (cahr == "warrior" && wsc-- > 0) document.getElementById("warscor").value += " "+11 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
+							 if (cahr == "wizard" && wsc-- > 0) document.getElementById("wizscor").value += " "+11 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
+							 if (cahr == "valkyrie" && wsc-- > 0) document.getElementById("valscor").value += " "+11 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
+							 if (cahr == "elf" && wsc-- > 0) document.getElementById("elfscor").value += " "+11 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
 /// TEST - remove
 /*			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890._ ";
 			var res = "";
@@ -811,15 +830,19 @@ Game.Math = {
 				createCookie(scoredex+"name", res,7777); */
 /// TEST - remove
 
-								HSCORE[i,0] = readCookie(i+"score");
-								HSCORE[i,1] = readCookie(i+"name");
-								HSCORE[i,2] = readCookie(i+"char");
+								HSCORE[i,0] = scor;
+								HSCORE[i,1] = nam;
+								HSCORE[i,2] = cahr;
 						 }
-						HSCORE.sort((a,b) => a[0] - b[0]);
+/*						HSCORE.sort((a,b) => a[0] - b[0]);
 						var tstr = "";
 						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + ";; ";
-						 alert(tstr);
+						 alert(tstr); */
 				 }
+				document.getElementById("warscor").style.visibility = true;
+				document.getElementById("wizscor").style.visibility = true;
+				document.getElementById("valscor").style.visibility = true;
+				document.getElementById("elfscor").style.visibility = true;
 		}
 	}
 
