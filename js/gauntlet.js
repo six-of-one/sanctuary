@@ -4364,6 +4364,7 @@ var txsv = ":";
 				createCookie("_dev_"+"noblend", document.getElementById("noblend").checked,7777);
 				createCookie("_ops_"+"whue", document.getElementById("whue").value,7777);
 				createCookie("_ops_"+"fhue", document.getElementById("fhue").value,7777);
+				createCookie("_ops_"+"phue", document.getElementById("phue").value,7777);
 				}
 /// TEST - remove
 		}
