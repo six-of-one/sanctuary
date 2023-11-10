@@ -800,6 +800,7 @@ Game.Math = {
 		if (Math.random() > 0.9) spl_cyc = 2;
 		else
 		{
+			if (Math.random() < 0.38) document.splashrot.src = "images/splash" + spl_loop.substring(spl_cyc,spl_cyc+1) + 2".jpg"
 				loadscortabl();
 				$('scordiv').show();
 		}
