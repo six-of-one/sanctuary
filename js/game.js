@@ -747,10 +747,10 @@ Game.Math = {
 // clear score board if displayed prev
 		if (spl_cyc == 11)
 	  {
-				document.getElementById("warscor").style.visibility = false;
-				document.getElementById("wizscor").style.visibility = false;
-				document.getElementById("valscor").style.visibility = false;
-				document.getElementById("elfscor").style.visibility = false;
+				document.getElementById("warscor").style.visibility = "hidden";
+				document.getElementById("wizscor").style.visibility = "hidden";
+				document.getElementById("valscor").style.visibility = "hidden";
+				document.getElementById("elfscor").style.visibility = "hidden";
 	  }
 
 	  if (spl_cyc < 1 || spl_cyc > 12) spl_cyc = 0;
@@ -804,10 +804,10 @@ Game.Math = {
 		if (Math.random() > 0.9) spl_cyc = 2;
 		else
 		{
-				document.getElementById("warscor").value = "&nbsp;&nbsp;WARRIORS<br><br>";
-				document.getElementById("wizscor").value = "&nbsp;&nbsp;WIZARDS<br><br>";
-				document.getElementById("valscor").value = "&nbsp;&nbsp;VALKYRIES<br><br>";
-				document.getElementById("elfscor").value = "&nbsp;&nbsp;WARRIORS<br><br>";
+				document.getElementById("warscor").innerHTML = "&nbsp;&nbsp;WARRIORS<br><br>";
+				document.getElementById("wizscor").innerHTML = "&nbsp;&nbsp;WIZARDS<br><br>";
+				document.getElementById("valscor").innerHTML = "&nbsp;&nbsp;VALKYRIES<br><br>";
+				document.getElementById("elfscor").innerHTML = "&nbsp;&nbsp;ELVES<br><br>";
 				var wsc = 10, vsc = 10, zsc = 10, esc = 10;
 				var HSCORE = [ 0, "Names", "character" ];
 				var scoredex = readCookieDef("hindex",0,0);
@@ -817,17 +817,18 @@ Game.Math = {
 						 {
 					var nam = readCookie(i+"name"), scor = readCookie(i+"score"), cahr = readCookie(i+"char");
 
-							 if (cahr == "warrior" && wsc-- > 0) document.getElementById("warscor").value += " "+11 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
-							 if (cahr == "wizard" && wsc-- > 0) document.getElementById("wizscor").value += " "+11 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
-							 if (cahr == "valkyrie" && wsc-- > 0) document.getElementById("valscor").value += " "+11 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
-							 if (cahr == "elf" && wsc-- > 0) document.getElementById("elfscor").value += " "+11 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
+							 if (cahr == "warrior" && wsc-- > 0) document.getElementById("warscor").innerHTML += " "+10 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
+							 if (cahr == "wizard" && zsc-- > 0) document.getElementById("wizscor").innerHTML += " "+10 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
+							 if (cahr == "valkyrie" && vsc-- > 0) document.getElementById("valscor").innerHTML += " "+10 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
+							 if (cahr == "elf" && esc-- > 0) document.getElementById("elfscor").innerHTML += " "+10 - wsc+" &nbsp;"+nam+" &nbsp;&nbsp;&nbsp;&nbsp;"+scor+"<br>";
 /// TEST - remove
-/*			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890._ ";
+			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890._ ";
 			var res = "";
 				for(var j = 0; j < 6; j++) {
         var rnd = Math.floor(Math.random() * ablist.length);
 				res = res + ablist.charAt(rnd); }
-				createCookie(scoredex+"name", res,7777); */
+//				deleteCookie(i+"name");
+				createCookie(i+"name", res,7777); 
 /// TEST - remove
 
 								HSCORE[i,0] = scor;
@@ -839,10 +840,14 @@ Game.Math = {
 						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + ";; ";
 						 alert(tstr); */
 				 }
-				document.getElementById("warscor").style.visibility = true;
-				document.getElementById("wizscor").style.visibility = true;
-				document.getElementById("valscor").style.visibility = true;
-				document.getElementById("elfscor").style.visibility = true;
+				document.getElementById("warscor").style.visibility = "visible";
+				document.getElementById("warscor").style.zIndex = "-1";
+				document.getElementById("wizscor").style.visibility = "visible";
+				document.getElementById("wizscor").style.zIndex = "-1";
+				document.getElementById("valscor").style.visibility = "visible";
+				document.getElementById("valscor").style.zIndex = "-1";
+				document.getElementById("elfscor").style.visibility = "visible";
+				document.getElementById("elfscor").style.zIndex = "-1";
 		}
 	}
 
