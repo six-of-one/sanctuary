@@ -746,6 +746,9 @@ Game.Math = {
 
 	  if (spl_cyc < 1 || spl_cyc > 12) spl_cyc = 0;
 	  spl_cyc++;
+/// TEST - remove
+		spl_cyc = 11;
+/// TEST - remove
 
 	  if (spl_cyc == 1)
 	{
@@ -805,7 +808,7 @@ Game.Math = {
 						HSCORE.sort((a,b) => a[0] - b[0]);
 						var tstr = "";
 						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + ";; ";
-//						 alert(tstr);
+						 alert(tstr);
 				 }
 		}
 	}

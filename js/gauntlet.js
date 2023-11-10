@@ -870,7 +870,7 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',     url: "levels/7level.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/floor012.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/xfloor7.png",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
       { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 2',       url: "levels/g2level2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
@@ -1201,7 +1201,7 @@ Gauntlet = function() {
 					case 3: spref.addExit(x, y, DOOR.EXIT6);
 							break;
 					case 4: spref.addExit(x, y, DOOR.EXITMOVE);
-								Movexit[lastmex++] = Mastercell.ptr; Mastercell.ptr.frame = 0;
+								Movexit[lastmex++] = Mastercell.ptr; Mastercell.ptr.nohlp = 999; Mastercell.ptr.frame = 0;
 							break;
 				 }
 			 }
@@ -2291,13 +2291,24 @@ var lvu = document.getElementById("flvl").value;
 		if (heartbeet > chtime) createCookie("chartm_"+this.player.type.name,heartbeet,7777);
 
 		if (this.player.score > 8000) {
+/// TEST - remove
+			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890._ ";
+			var res = "";
+				for(var j = 0; j < scoredex; j++) {
+				for(var i = 0; i < 3; i++) {
+        var rnd = Math.floor(Math.random() * list.length);
+				res = res + list.charAt(rnd); }
+			createCookie(scoredex+"name", res,7777);
+			}
+/// TEST - remove
+
 			scoredex++;
 			createCookie(scoredex+"char", this.player.type.name,7777);
 			createCookie(scoredex+"score",(this.player.score / this.player.droppedcoins),7777);
-			createCookie(scoredex+"name", "proggy-nif",7777);
+			createCookie(scoredex+"name", res,7777);
 			createCookie("hindex", scoredex,7777);
 			HSCORE[scoredex,0] = (this.player.score / this.player.droppedcoins);
-			HSCORE[scoredex,1] = "proggy-nif";
+			HSCORE[scoredex,1] = res;
 			HSCORE[scoredex,2] = this.player.type.name;
 //			HSCORE[scoredex,0] = readCookie(scoredex+"score");
 //			HSCORE[scoredex,1] = readCookie(scoredex+"name");

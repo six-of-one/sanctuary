@@ -24,11 +24,9 @@ loadable wall segments & cell.spriteset
 
 imm issues:
 
-too many shots with reflective shots
 
 rotate scuttles movex & cycle wall?
 
-movex are solid on load until cycle
 
 - some g2 sounds may need vol atten -- in progress
 - g2 announcer does not match g1
@@ -39,7 +37,7 @@ g1/g2 wall & door stall times @ difficulty
 check sound for picking poison (is potion pick sound, need g2 ref)
 
 
-super shots possibly destroys more than its coded to now
+super shots possibly should destroy more than its coded to now
 (reg food, treasure, etc)
 
 
@@ -340,6 +338,12 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- movex are solid on load until cycle
+
+x-- too many shots with reflective shots
+
+------------------- 023.11.09
 
 --- > moving wall, random walls
    \_ shadows with these have excessive cost of re-write of map bkg every second
