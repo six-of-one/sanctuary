@@ -117,12 +117,29 @@ body {
 }
 
 /**************************/
+/* score table elemetns   */
+/**************************/
+
+table {
+ width:100%;
+ padding:1px;
+ overflow:hidden;
+ white-space:nowrap;
+}
+tr {
+ clear: both;
+}
+td {
+ clear: both;
+}
+
+/**************************/
 /* unique id-based styles */
 /**************************/
 
 #gauntlet       { margin: 1em auto; position: relative; background: black; }
 #booting        { position: absolute; width: 26%; left: 20%; top: 40%;      } 
-#scordiv        {position:absolute; width:350px; padding:5px;font-family:Verdana;font-size:14pt; font-weight:bold;}
+#scordiv        { position:absolute; font-family:Verdana;font-size:14pt; font-weight:bold;}
 #splash         { position: absolute; display: none; }
 #canvas         { display: inline-block; vertical-align: top; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 #help           { position: absolute; width: 53%; left: 22%; top: 30%; text-align: center; font-size: 1.5em; font-weight: bold; background-color: rgba(0, 0, 0, 0.75); border: 6px solid red; color: white; padding: 1em; display: inline-block; border-radius: 0.5em; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
