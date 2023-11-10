@@ -2294,12 +2294,9 @@ var lvu = document.getElementById("flvl").value;
 /// TEST - remove
 			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890._ ";
 			var res = "";
-				for(var j = 0; j < scoredex; j++) {
-				for(var i = 0; i < 3; i++) {
-        var rnd = Math.floor(Math.random() * list.length);
-				res = res + list.charAt(rnd); }
-			createCookie(scoredex+"name", res,7777);
-			}
+				 for(var i = 0; i < 3; i++) {
+			var rnd = Math.floor(Math.random() * ablist.length);
+				 res = res + ablist.charAt(rnd); }
 /// TEST - remove
 
 			scoredex++;

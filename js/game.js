@@ -801,6 +801,16 @@ Game.Math = {
 				{
 						for (var i = 1; i <= scoredex; i++)
 						 {
+
+/// TEST - remove
+/*			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890._ ";
+			var res = "";
+				for(var j = 0; j < 6; j++) {
+        var rnd = Math.floor(Math.random() * ablist.length);
+				res = res + ablist.charAt(rnd); }
+				createCookie(scoredex+"name", res,7777); */
+/// TEST - remove
+
 								HSCORE[i,0] = readCookie(i+"score");
 								HSCORE[i,1] = readCookie(i+"name");
 								HSCORE[i,2] = readCookie(i+"char");
