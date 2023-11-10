@@ -1525,6 +1525,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		document.getElementById("sellvl").value = readCookie("_ops_"+"sellvl");
 		document.getElementById("whue").value = readCookie("_ops_"+"whue");
 		document.getElementById("fhue").value = readCookie("_ops_"+"fhue");
+		document.getElementById("phue").value = readCookie("_ops_"+"phue");
 		document.getElementById("seltut").checked = false;
 		document.getElementById("selg2tut").checked = false;
 		document.getElementById("seltutx").checked = false;
@@ -3639,6 +3640,10 @@ var txsv = ":";
           publish(EVENT.PLAYER_EXIT, this);
         return;
       }
+
+/// TEST - update
+		this.hue = document.getElementById("phue").value;
+/// TEST - update
 
       this.autohurt(frame);
 
