@@ -314,9 +314,9 @@ Gauntlet = function() {
         FFIELDUNITL:       { sx: 8, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
         FFIELDUNITR:       { sx: 12, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
 // this is the power field down - specced by MEXLOW bit 4 of FFIELDUNIT = 0x8130
-        FFIELDDIM:       { sx: 27, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 61  },
+        FFIELDDIM:       { sx: 27, sy: 25, frames:1, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 61  },
 // this is the field power that damages, this is toggled on by ffieldpulse ops
-        FFIELDPOW:       { sx: 28, sy: 12, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 3, sound: 'ffield',  nohlp: 61  },
+        FFIELDPOW:       { sx: 28, sy: 25, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 3, sound: 'ffield',  nohlp: 61  },
 // animated floor items
         WATER:      { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
 // series of water boundary blocks code: 0x8140, with a pool wall appearing top, center and right, selected by MEXLOW 1, 2, 3
