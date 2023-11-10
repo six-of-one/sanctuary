@@ -1571,6 +1571,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 
     onstart: function(event, previous, current, type, nlevel) {
 //		scoredex++;
+		 $('scordiv').hide();
       this.player.join(type);
       this.load(to.number(nlevel, this.loadLevel()));
 // intro
