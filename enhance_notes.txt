@@ -58,6 +58,7 @@ need sounds:
 
 port list:
 
+annc for g2 limiteds
 lobber shots & move logig
 super sorc finish
 
