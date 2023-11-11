@@ -27,7 +27,7 @@ imm issues:
 
 score table didnt show after a quit
 
-rotate scuttles movex & cycle wall?
+rotate scuttles movex
 
 
 - some g2 sounds may need vol atten -- in progress

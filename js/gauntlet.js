@@ -1527,6 +1527,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		document.getElementById("whue").value = readCookie("_ops_"+"whue");
 		document.getElementById("fhue").value = readCookie("_ops_"+"fhue");
 		document.getElementById("phue").value = readCookie("_ops_"+"phue");
+		document.getElementById("ashue").value = readCookie("_ops_"+"ashue");
 		document.getElementById("seltut").checked = false;
 		document.getElementById("selg2tut").checked = false;
 		document.getElementById("seltutx").checked = false;
@@ -2605,7 +2606,7 @@ else { celpr += c+" xy: "+ cell.x+":"+cell.y;
 celpr += ", ";
 document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y)+celpr+"  e:"+(Mtw - 1)+":"+(Mth - 1);
 */
-document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y);
+//document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y);
 /// TEST - remove
 
 	var n, ptw = false;
@@ -3688,7 +3689,7 @@ var txsv = ":";
         dir = directions[d];
 // player trying to cross unpinned edge
 /// TEST - remove
-dent = this;
+//dent = this;
 //document.title = "-pl xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t(this.x)+":"+p2t(this.y);
 /// TEST - remove
 
@@ -4382,6 +4383,7 @@ dent = this;
 				createCookie("_ops_"+"whue", document.getElementById("whue").value,7777);
 				createCookie("_ops_"+"fhue", document.getElementById("fhue").value,7777);
 				createCookie("_ops_"+"phue", document.getElementById("phue").value,7777);
+				createCookie("_ops_"+"ashue", document.getElementById("ashue").value,7777);
 				}
 /// TEST - remove
 		}
@@ -5289,6 +5291,9 @@ dent = this;
 
 				if (entity.hue != undefined)
 					ctx.filter = "hue-rotate("+entity.hue+"deg)";
+/// TEST - update
+				ctx.filter = "hue-rotate("+document.getElementById("ashue").value+"deg)";
+/// TEST - update
 
 				if (entity.type.wall) {
 						this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
