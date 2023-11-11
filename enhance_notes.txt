@@ -43,7 +43,6 @@ super shots possibly should destroy more than its coded to now
 (reg food, treasure, etc)
 
 
-- limited transportability needs to remove just about everything
 
 
 dead player is only lvl 1 bone pile
@@ -205,9 +204,9 @@ x-- moving walls (regular phase, not random)
 x-- invisible walls 
   \_(need a 50% vis on touch or shot option cooling to invisible after 4 mins) -- code to handle these as gII is done
 super sorceror
-mugger - thief that steals food
+x-- mugger - thief that steals food
 dragon
-temp potions - repulse, invuln, super shot, reflective, teleport		-- code done on 1 - 4
+x-- temp potions - repulse, invuln, super shot, reflective, teleport
 x-- stun tiles
 x-- force fields
 x-- moveable (pushable) walls
