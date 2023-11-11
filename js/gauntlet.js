@@ -2378,6 +2378,7 @@ var lvu = document.getElementById("flvl").value;
 		if (teled != undefined) ttd = teled;
       this.tpos.x = entity.x + (isLeft(dir) ? -speed : isRight(dir) ? speed : 0) * ttd;
       this.tpos.y = entity.y + (isUp(dir)   ? -speed : isDown(dir)  ? speed : 0) * ttd;
+		 if (ttd > 1) { alert("testing again: "+this.tpos.x+":"+this.tpos.y); if (this.tpos.y < -5) this.tpos.y = Mth * TILE + this.tpos.y; }
 // mod for lobber shot
 		 if (entity.lobsht != undefined)
 		 if (entity.lobsht)
@@ -2479,11 +2480,14 @@ var lvu = document.getElementById("flvl").value;
 
         this.occupy(this.tpos.x, this.tpos.y, entity);
       }
-		else if (this.ltele) {
-			var wc = -1;
+		else if (entity.ltele && ttd == 1) 
+		if (dir == DIR.LEFT || dir == DIR.RIGHT || dir == DIR.UP || dir == DIR.DOWN) // not on diagonals for now
+		{
+			var wc = 25;
 			if (wallcoll) wc = wallcoll.wall;
-			if (TELEWAL[wc]) {
-				collision = map.trymove(this, dir, 1, null, false, 2);
+			if (TELEWAL[wc]) { alert("tested: "+this.tpos.x+":"+this.tpos.y);
+				collision = Mastermap.trymove(entity, dir, 1, null, false, 60);
+				if (!collision) Musicth.play(Musicth.sounds.teleport);
 			}
 		}
       return collision;
@@ -2601,6 +2605,7 @@ else { celpr += c+" xy: "+ cell.x+":"+cell.y;
 celpr += ", ";
 document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y)+celpr+"  e:"+(Mtw - 1)+":"+(Mth - 1);
 */
+document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y);
 /// TEST - remove
 
 	var n, ptw = false;
@@ -3683,7 +3688,7 @@ var txsv = ":";
         dir = directions[d];
 // player trying to cross unpinned edge
 /// TEST - remove
-//dent = this;
+dent = this;
 //document.title = "-pl xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t(this.x)+":"+p2t(this.y);
 /// TEST - remove
 
