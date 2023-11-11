@@ -351,7 +351,7 @@ Gauntlet = function() {
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
 		reflectcnt = 4, wallcoll, 			// reflective shot, count of reflections
-		TELEWAL = [ 0, 1, 2, 4, 5, 8, 10 ], // can limited teleport thru these
+		TELEWAL = [ 1, 1, 2, 0, 4, 5, 0, 0, 8, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], // can limited teleport thru these
 		POISONTM = 15,		// 10 secs of poison (muddle controls from dizzy effect)
 		POISONDIZ = 0.2,	// chance dizzy condition will confuse player
 		SUPERSHTFR = 10,	// super shot proj frame
@@ -2373,10 +2373,11 @@ var lvu = document.getElementById("flvl").value;
 
     tpos: { }, // a persistent intermediate object to avoid GC allocations (caller is responsible for using result immediately and not hanging on to a reference)
 
-    trymove: function(entity, dir, speed, ignore, dryrun) {
-      var collision, nocoll = true, tos = timestamp();
-      this.tpos.x = entity.x + (isLeft(dir) ? -speed : isRight(dir) ? speed : 0);
-      this.tpos.y = entity.y + (isUp(dir)   ? -speed : isDown(dir)  ? speed : 0);
+    trymove: function(entity, dir, speed, ignore, dryrun, teled) {
+  var collision, nocoll = true, tos = timestamp(), ttd = 1;
+		if (teled != undefined) ttd = teled;
+      this.tpos.x = entity.x + (isLeft(dir) ? -speed : isRight(dir) ? speed : 0) * ttd;
+      this.tpos.y = entity.y + (isUp(dir)   ? -speed : isDown(dir)  ? speed : 0) * ttd;
 // mod for lobber shot
 		 if (entity.lobsht != undefined)
 		 if (entity.lobsht)
@@ -2478,7 +2479,13 @@ var lvu = document.getElementById("flvl").value;
 
         this.occupy(this.tpos.x, this.tpos.y, entity);
       }
-		else if (this.ltele
+		else if (this.ltele) {
+			var wc = -1;
+			if (wallcoll) wc = wallcoll.wall;
+			if (TELEWAL[wc]) {
+				collision = map.trymove(this, dir, 1, null, false, 2);
+			}
+		}
       return collision;
     },
 
