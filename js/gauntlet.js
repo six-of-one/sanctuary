@@ -351,6 +351,7 @@ Gauntlet = function() {
 		TREASUREROOM = [ ], tlevel = 0, troomfin, timerupd,	treasurerc = 0, leveldisp, levelhelp, lastrt, trtauntrnd = 0.45,
 		spotionlv = 0, spotionloop = 0, spotionct = 0, spotionmax = 5, spotionrnd = 0.17, SPOTION = [ ], 		// hidden potion set
 		reflectcnt = 4, wallcoll, 			// reflective shot, count of reflections
+		TELEWAL = [ 0, 1, 2, 4, 5, 8, 10 ], // can limited teleport thru these
 		POISONTM = 15,		// 10 secs of poison (muddle controls from dizzy effect)
 		POISONDIZ = 0.2,	// chance dizzy condition will confuse player
 		SUPERSHTFR = 10,	// super shot proj frame
@@ -2477,6 +2478,7 @@ var lvu = document.getElementById("flvl").value;
 
         this.occupy(this.tpos.x, this.tpos.y, entity);
       }
+		else if (this.ltele
       return collision;
     },
 
@@ -4184,13 +4186,15 @@ var txsv = ":";
 /// TEST - remove
 				this.hurt(1 + hinv, this, true);
 
-// count down temps - may want a setTimeout fn for these and stalling
+// count downs may want a setTimeout fn for these and stalling
 			if ((frame % (FPS)) === 0)
 			{
-					if (this.lank > 0) this.lank--;
-					if (this.lrepuls > 0) this.lrepuls--;
-					if (this.linvis > 0) this.linvis--;
-					if (this.linvuln > 0) this.linvuln--;
+// limited items that count down and expire
+					if (this.lank > 0) this.lank = countdown(this.lank);
+					if (this.lrepuls > 0) this.lrepuls = countdown(this.lrepuls);
+					if (this.linvis > 0) this.linvis = countdown(this.linvis);
+					if (this.linvuln > 0) this.linvuln = countdown(this.linvuln);
+// treasure room timer
  					if (!troomfin)
 					if (troomtime > 0)
 					{
