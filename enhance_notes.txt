@@ -68,6 +68,8 @@ stalling with keys takes 2 * stall for doors
 \_ takes about 18 health (without keys) and 36 health (with keys) to stall the doors and about 325 health to stall the walls
  \_ walls about twice as long in Gauntlet 2 than in Gauntlet
 
+dying with keys doesnt produce key pile
+
 g1 gfx tiles
 - spirtes		-- decide how much of this we want / can use
 - walls & floors	(+g2)
