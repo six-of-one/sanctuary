@@ -2378,7 +2378,7 @@ var lvu = document.getElementById("flvl").value;
 		if (teled != undefined) ttd = teled;
       this.tpos.x = entity.x + (isLeft(dir) ? -speed : isRight(dir) ? speed : 0) * ttd;
       this.tpos.y = entity.y + (isUp(dir)   ? -speed : isDown(dir)  ? speed : 0) * ttd;
-		 if (ttd > 1) { alert("testing again: "+this.tpos.x+":"+this.tpos.y); if (this.tpos.y < -5) this.tpos.y = Mth * TILE + this.tpos.y; }
+		 if (ttd > 1) { if (this.tpos.y < -5) this.tpos.y = Mth * TILE + this.tpos.y; }
 // mod for lobber shot
 		 if (entity.lobsht != undefined)
 		 if (entity.lobsht)
@@ -2485,7 +2485,7 @@ var lvu = document.getElementById("flvl").value;
 		{
 			var wc = 25;
 			if (wallcoll) wc = wallcoll.wall;
-			if (TELEWAL[wc]) { alert("tested: "+this.tpos.x+":"+this.tpos.y);
+			if (TELEWAL[wc]) {
 				collision = Mastermap.trymove(entity, dir, 1, null, false, 60);
 				if (!collision) Musicth.play(Musicth.sounds.teleport);
 			}
