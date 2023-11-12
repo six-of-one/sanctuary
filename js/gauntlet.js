@@ -2994,6 +2994,12 @@ if (document.getElementById("noclip").checked) return false;
 		}
 		else
 		{
+			var lobrev = false; // dont let player close inside lob distance if poss
+			if (this.type.name == "lobber") {
+				var ldist = distance(this.x, this.y, player.x, player.y);
+					if (ldist < 120) lobrev = 2; //move back
+					else if (ldist < 180) lobrev = 3; // stop, face player
+				}
 			var vec = this.directionTo(player, away);
 			dirs = PREFERRED_DIRECTIONS[vec];
 			if (this.vx && !this.vy) {
@@ -3010,9 +3016,10 @@ if (document.getElementById("noclip").checked) return false;
 				if (vec == DIR.DOWNLEFT) dirs = PREFERRED_DIRECTIONS[DIR.UPLEFT];
 				if (vec == DIR.DOWNRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.UPRIGHT];
 				}
-			if (this.vx && this.vy) dirs = RV_PREFERRED_DIRECTIONS[vec];
+			if (this.vx && this.vy || lobrev == 2) dirs = RV_PREFERRED_DIRECTIONS[vec];
 
 			for(n = 0, max = dirs.length ; n < max ; n++) {
+				if (lobrev == 3) speed = 0;
 			  if (this.step(map, player, dirs[n], speed, n < 2 ? 0 : this.type.travelling * (n-2), !away))
 				 return;
 			}
