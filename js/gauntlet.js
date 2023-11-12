@@ -3305,7 +3305,7 @@ if (document.getElementById("noclip").checked) return false;
     hurt: function(damage, by, nuke) {
 		 if (this.stun > heartbeet) return;
 		 var reret = true; // early return
-		 if (by.weapon && (this.type.canbeshot == 2 ||(this.type.canbeshot == 3 && by.lsuper) && !nuke) {
+		 if (by.weapon && (this.type.canbeshot == 2 ||(this.type.canbeshot == 3 && by.lsuper)) && !nuke) {
 			 var regud = false, rx, ry;
 				if (this.type.wall)
 				{

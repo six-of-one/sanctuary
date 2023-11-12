@@ -36,11 +36,6 @@ g1/g2 wall & door stall times @ difficulty
 check sound for picking poison (is potion pick sound, need g2 ref)
 
 
-super shots possibly should destroy more than its coded to now
-(reg food, treasure, etc)
-
-
-
 
 dead player is only lvl 1 bone pile
 
@@ -55,7 +50,6 @@ need sounds:
 
 port list:
 
-annc for g2 limiteds
 lobber shots & move logig
 super sorc finish
 
@@ -347,6 +341,11 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- super shots possibly should destroy more than its coded to now (reg food, treasure, etc)
+   \_done, but based on a vague memory - needs tested in g2
+
+x-- annc for g2 limiteds
 
 x-- some g2 sounds may need vol atten -- in progress
    \_overall might want to regig as many as poss. from a cleaner source
