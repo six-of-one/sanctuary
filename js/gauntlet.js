@@ -272,17 +272,17 @@ Gauntlet = function() {
       TREASURE = {
         HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
         HEALRND: { sx: 2, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'collectfood',  nohlp: 74   },
-        FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
-        FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16  },
-        FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100,   sound: 'collectfood',  nohlp: 16   },
+        FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 3,   sound: 'collectfood',  nohlp: 16  },
+        FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 3,   sound: 'collectfood',  nohlp: 16  },
+        FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 3,   sound: 'collectfood',  nohlp: 16   },
         POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion',  nohlp: 80 },
         KEY:     { sx: 21, sy: 10, frames: 1, fpf: FPS/10, score:  100, key:    true,  sound: 'collectkey' , nohlp: 18   },
         POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion', nohlp: 19 },
         POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', nohlp: 19  },
         BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion',  nohlp: 80 },
-        GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100,  scmult : 1, troom: 1,             sound: 'collectgold', nohlp: 14, blkhlp: 15   },
+        GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100, canbeshot: 3,  scmult : 1, troom: 1,             sound: 'collectgold', nohlp: 14, blkhlp: 15   },
         LOCKED:  { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true, gud: 1, sound: 'unlkches', nohlp:   56 },
-        BAG:     { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500,  scmult : 3.5, troom: 1,                sound: 'collectgold', nohlp: 15, blkhlp: 14   },
+        BAG:     { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500, canbeshot: 3,  scmult : 3.5, troom: 1,                sound: 'collectgold', nohlp: 15, blkhlp: 14   },
 // teleport, trap, stun, force field tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport',  nohlp: 25  },
         TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap', nohlp: 20 },
@@ -307,7 +307,7 @@ Gauntlet = function() {
         SHOTWALL:       { sx: 0, sy: 38, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:30, wall:true,   sound: 'null' ,  nohlp: 26},
 // shotable and non-shot fake items, see grid 39 of backgrounds
         SHOTFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, score:  50, canbeshot: 2, health:16, wall:true,   sound: 'null' , nohlp: 58 },
-        PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: false, wall:true,   sound: 'null' , nohlp: 58 },
+        PERMFAKER:       { sx: 0, sy: 39, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 3, wall:true,   sound: 'null' , nohlp: 58 },
 // this is the red wall pillar thingy code:0x8130 with [ inward ] facing up, down, left, right by MEXLOW bits 0, 1, 2, 3
         FFIELDUNIT:       { sx: 0, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
         FFIELDUNITD:       { sx: 4, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
@@ -1985,7 +1985,7 @@ var lvu = document.getElementById("flvl").value;
 		 Mastercell.ptr.lsuper = false;
 		 if (player.lsuper > 0) // fire a super shot
 		 {
-				player.lsuper--;
+				player.lsuper = countdown(player.lsuper);
 				Mastercell.ptr.lsuper = true;
 				Mastercell.ptr.damage = 100; // estimate - for damage soaks - dragon, players
 				Mastercell.ptr.xshotspd = true; // super are fast shot
@@ -3305,7 +3305,7 @@ if (document.getElementById("noclip").checked) return false;
     hurt: function(damage, by, nuke) {
 		 if (this.stun > heartbeet) return;
 		 var reret = true; // early return
-		 if (by.weapon && this.type.canbeshot == 2 && !nuke) {
+		 if (by.weapon && (this.type.canbeshot == 2 ||(this.type.canbeshot == 3 && by.lsuper) && !nuke) {
 			 var regud = false, rx, ry;
 				if (this.type.wall)
 				{
