@@ -2994,35 +2994,46 @@ if (document.getElementById("noclip").checked) return false;
 		}
 		else
 		{
-	  var lobrev = false; // dont let player close inside lob distance if poss
+			this.lobrev = false; // dont let player close inside lob distance if poss
 			if (this.type.name == "lobber") {
 					this.firedist = distance(this.x, this.y, player.x, player.y);
-					if (this.firedist < 110) { lobrev = 2; if (this.vx || this.vy) lobrev = 4; } //move back -- but in vx / vy reverse zone move back is move fwd
-					else if (this.firedist < 200) lobrev = 3; // stop, face player
+					if (this.firedist < 110) { this.lobrev = 2; if (this.vx || this.vy) this.lobrev = 4; } //move back -- but in vx / vy reverse zone move back is move fwd
+					else if (this.firedist < 200) this.lobrev = 1; // stop, face player
 				}
 	  var vec = this.directionTo(player, away);
 			dirs = PREFERRED_DIRECTIONS[vec];
-			if (this.vx && !this.vy && lobrev != 4) {
+			if (this.vx && !this.vy && this.lobrev != 4) {
 				if (vec == DIR.LEFT || vec == DIR.RIGHT) dirs = RV_PREFERRED_DIRECTIONS[vec];
 				if (vec == DIR.UPLEFT) dirs = PREFERRED_DIRECTIONS[DIR.UPRIGHT];
 				if (vec == DIR.UPRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.UPLEFT];
 				if (vec == DIR.DOWNLEFT) dirs = PREFERRED_DIRECTIONS[DIR.DOWNRIGHT];
 				if (vec == DIR.DOWNRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.DOWNLEFT];
 				}
-			if (!this.vx && this.vy && lobrev != 4) {
+			if (!this.vx && this.vy && this.lobrev != 4) {
 				if (vec == DIR.UP || vec == DIR.DOWN) dirs = RV_PREFERRED_DIRECTIONS[vec];
 				if (vec == DIR.UPLEFT) dirs = PREFERRED_DIRECTIONS[DIR.DOWNLEFT];
 				if (vec == DIR.UPRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.DOWNRIGHT];
 				if (vec == DIR.DOWNLEFT) dirs = PREFERRED_DIRECTIONS[DIR.UPLEFT];
 				if (vec == DIR.DOWNRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.UPRIGHT];
 				}
-			if ((this.vx && this.vy || lobrev == 2)  && lobrev != 4) dirs = RV_PREFERRED_DIRECTIONS[vec];
+			if ((this.vx && this.vy || this.lobrev == 2)  && this.lobrev != 4) dirs = RV_PREFERRED_DIRECTIONS[vec];
 
 			for(n = 0, max = dirs.length ; n < max ; n++) {
-				if (lobrev == 3) speed = 0;
+				if (this.lobrev == 1) speed = 0;
 			  if (this.step(map, player, dirs[n], speed, n < 2 ? 0 : this.type.travelling * (n-2), !away))
 				 return;
 			}
+// lets see if stationary lobbers can fire
+		this.firedist = distance(this.x, this.y, player.x, player.y);	// distance to target & pos for wep tracking (mostly lobbers)
+		if (this.type.weapon != undefined)
+		if (this.type.weapon.lobsht && this.firedist > 90  && this.firedist < 300) {
+
+			if (this.lobrev < 2 && allowfire && this.type.weapon && this.fire(map, player)) {
+				 this.thinking   = this.type.thinking;
+				 this.travelling = 0;
+			  }
+		  }
+
       }
 
     },
@@ -3035,7 +3046,7 @@ if (document.getElementById("noclip").checked) return false;
 		this.targy = player.y;
 // lobber always has chance at shot
 		if (this.type.weapon != undefined)
-		if (this.type.weapon.lobsht && this.firedist > 90) lob = true;
+		if (this.type.weapon.lobsht && this.firedist > 90 && this.lobrev < 2) lob = true;
       if (!collision || lob) {
         this.dir = dir;
 // need to improve lobber hitability - when close to player, shots always miss
