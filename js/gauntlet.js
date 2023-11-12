@@ -3088,7 +3088,7 @@ if (document.getElementById("noclip").checked) return false;
           dy = Math.abs(p2t(this.y) - p2t(player.y));
           dd = Math.abs(dx-dy);
 // lobber can fire if blocked
-			  if ((this.type.weapon.lobsht) && (dd < 2) && (Math.random() < 0.5)) lob = true;
+			  if ((this.type.weapon.lobsht) && (dd < 10) && (Math.random() < 0.35)) lob = true;
 
           if ( lob || (((dx < 2) && isVertical(this.dir))   ||
               ((dy < 2) && isHorizontal(this.dir)) ||
