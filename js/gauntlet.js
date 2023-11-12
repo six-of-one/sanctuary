@@ -2380,6 +2380,23 @@ var lvu = document.getElementById("flvl").value;
 		if (teled != undefined) ttd = teled;
       this.tpos.x = entity.x + (isLeft(dir) ? -speed : isRight(dir) ? speed : 0) * ttd;
       this.tpos.y = entity.y + (isUp(dir)   ? -speed : isDown(dir)  ? speed : 0) * ttd;
+
+		 if (entity.lobshot) {			// lobber shot targets direct! not always at 90 deg angle (like all other shots move)
+// Calculate direction towards player
+			 var toX = entity.targx - entity.x;
+			 var toY = entity.targy - entity.y;
+
+// Normalize
+			 var toLen = Math.sqrt(toX * toX + toY * toY);
+			 toX = toX / toLen;
+			 toY = toY / toLen;
+
+// Move towards the player
+			 this.tpos.x = entity.x + toX * speed;
+			 this.tpos.y = entity.y + toY * speed;
+			}
+
+// ttd - teleport distance used by temp teleportability device
 		 if (ttd > 1) { if (this.tpos.y < -5) this.tpos.y = Mth * TILE + this.tpos.y; }
 // mod for lobber shot
 		 if (entity.lobsht != undefined)
