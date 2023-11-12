@@ -2404,7 +2404,6 @@ var lvu = document.getElementById("flvl").value;
 				this.tpos.y = entity.y + (toY * speed);
 				dest = distance(this.tpos.x, this.tpos.y, entity.targx, entity.targy);
 			}
-document.title = "lobsh tr"+" toxy "+toX+":"+toY+" xy "+Math.round(this.tpos.x)+":"+Math.round(this.tpos.y)+" 2t: "+p2t(this.tpos.x)+":"+p2t(this.tpos.y)+" dtt: "+entity.lobdist+ " fly tim:"+Math.floor(tos - entity.timeout);
 
 			 if (!entity.lobhot) nocoll = false; // no collision until hot
 			 if ((tos - entity.timeout)  > 1600 || dest < 3) // lobber shot dies after # secs
@@ -2882,10 +2881,10 @@ if (document.getElementById("noclip").checked) return false;
       entity.reflect = 0;
       entity.norelod = false;
 		if (klass == Generator) {
-			entity.dx = -4;
-			entity.dy = -4;
-			entity.dw = 8;
-			entity.dh = 8;
+			entity.dx = -6;
+			entity.dy = -6;
+			entity.dw = 12;
+			entity.dh = 12;
 			}
       return entity;
     },
