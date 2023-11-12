@@ -2438,8 +2438,8 @@ var lvu = document.getElementById("flvl").value;
 					if (collision.nohlp == 999) ffcol = true;	// for no collision items with no help
 				}
 				if (collision.pixel != undefined) {
+					if (collision.pixel == 0x8120) subcol = true; // fake exit; pfi
 					if (collision.pixel == 0x8125) subcol = true;	// fake key, pfi
-					if (collision.pixel == 0x8122) subcol = true; // fake exit; pfi
 					if (collision.pixel == 0x812e) subcol = true; // fake pickle; pfi
 				}
 				if (!collision.player && entity.weapon && subcol) collision = undefined;
