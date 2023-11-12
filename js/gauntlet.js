@@ -2881,6 +2881,12 @@ if (document.getElementById("noclip").checked) return false;
 		entity.numer = false; // these are a reused pool, turn this off
       entity.reflect = 0;
       entity.norelod = false;
+		if (klass == Generator) {
+			entity.dx = -4;
+			entity.dy = -4;
+			entity.dw = 8;
+			entity.dh = 8;
+			}
       return entity;
     },
 
