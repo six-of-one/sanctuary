@@ -17,7 +17,7 @@ push wall collision
 
 upgrade sprites to always use ent.sx / ent.sy instead of ent.type.sx (and maybe the rest as well)
 sprite hue dev override ?
-sprite oversize...
+
 x0F0000 remove from TYPE mask & use for extra sets of gfx
 
 loadable wall segments & cell.spriteset
@@ -340,6 +340,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- sprite oversize... generator oversize worked - this can be implemented, check g1 & g2
 
 x-- lobber shots & move logig
 

@@ -39,13 +39,13 @@ Gauntlet = function() {
 // FCUSTILE is after brikover last wall cover in backgrounds.png
 		ftilestr, fcellstr, FCUSTILE = 37, FCUSTIL2 = 0, FDESTWALL = 38, FAKES = 39, HINTIV = 40,
 
-		 MEXHIGH = 0xFFFFF0,
+		 MEXHIGH = 0xF0FFF0,
 		 MEXLOW = 0x00000F,
 // special because some colors are not properly discerned by parseImag
 // bit 16 is shifted to exlow
 // this should be stable as most codes using 0x10 also use more bits masked with 0xE0
 // having said, this has a bug watch and a reminder to look for odd behavior for all ops with low bits of MEXHIGH
-		 MEXHIGB = 0xFFFFE0,
+		 MEXHIGB = 0xF0FFE0,
 		 MEXLOB = 0x00001F,
 
 // highscores
@@ -436,9 +436,10 @@ Gauntlet = function() {
         EXIT:           0x004000, // DARK GREEN
         FLOOR:			   0xA08000, // LT BROWN
         MASK: {
-          TYPE:         0xFFF000,
+          TYPE:         0xF0F000,
           EXHIGH:       0x000FF0,
-          EXLOW:        0x00000F
+          EXLOW:        0x00000F,
+			 ALTGR:			0x0F0000  // alternate gfx nybble - up to 15 diff floors/ walls and ents, on load fail, default back to std
         }
       },
 // jvsg floors - 1 tile per map cell - 32 x 32 px per each stored 0th row of backgrounds.png
@@ -5041,6 +5042,16 @@ var txsv = ":";
 			for(ty = vyz, th = vth ; ty < th ; ty=ty+8) {
 			  for(tx = vxz, tw = vtw ; tx < tw ; tx=tx+8) {
 						ctx.drawImage(gbas, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
+// new case of color under transp floors
+			     var hu = parseHue(tx, ty);
+
+					  if (hu > 0) {
+							ctx.beginPath();
+							ctx.rect(tx * TILE, ty * TILE, TILE * 8, TILE * 8);
+							ctx.fillStyle = Lrgb;
+							ctx.fill();
+							ctx.closePath();
+							}
 /// TEST - update
 							var flhue = document.getElementById("fhue").value;
 							if (flhue <0 || flhue > 360) flhue = 0;
