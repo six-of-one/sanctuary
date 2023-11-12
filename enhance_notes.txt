@@ -50,7 +50,6 @@ need sounds:
 
 port list:
 
-lobber shots & move logig
 super sorc finish
 
 theif / mugger should fight monsters in path - get blocked by object on start, pushwall across path
@@ -341,6 +340,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- lobber shots & move logig
 
 x-- super shots possibly should destroy more than its coded to now (reg food, treasure, etc)
    \_done, but based on a vague memory - needs tested in g2

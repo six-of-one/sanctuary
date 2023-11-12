@@ -3295,6 +3295,7 @@ if (document.getElementById("noclip").checked) return false;
 			 this.lobsht = true;
 			this.targx = owner.targx;
 			this.targy = owner.targy;
+			this.lobnotr = false;
 			if (Math.random() < 0.15) this.lobnotr = true; // occasionally fire a non tracker
 			this.lobhot = false;	// shot wont hit until "hot"
 			}
