@@ -2604,7 +2604,7 @@ if (cell == undefined) celpr += "u:"+c;
 else { celpr += c+" xy: "+ cell.x+":"+cell.y;
 	if (cell.wall !== undefined && cell.wall !== null) celpr += "-bangwall:" + cell.tx+":"+cell.ty }
 celpr += ", ";
-document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y)+celpr+"  e:"+(Mtw - 1)+":"+(Mth - 1);
+//document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y)+celpr+"  e:"+(Mtw - 1)+":"+(Mth - 1);
 */
 //document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y);
 /// TEST - remove
@@ -2994,13 +2994,13 @@ if (document.getElementById("noclip").checked) return false;
 		}
 		else
 		{
-			var lobrev = false; // dont let player close inside lob distance if poss
+	  var lobrev = false; // dont let player close inside lob distance if poss
 			if (this.type.name == "lobber") {
-				var ldist = distance(this.x, this.y, player.x, player.y);
+			  var ldist = distance(this.x, this.y, player.x, player.y);
 					if (ldist < 120) lobrev = 2; //move back
 					else if (ldist < 180) lobrev = 3; // stop, face player
 				}
-			var vec = this.directionTo(player, away);
+	  var vec = this.directionTo(player, away);
 			dirs = PREFERRED_DIRECTIONS[vec];
 			if (this.vx && !this.vy) {
 				if (vec == DIR.LEFT || vec == DIR.RIGHT) dirs = RV_PREFERRED_DIRECTIONS[vec];
@@ -3035,11 +3035,16 @@ if (document.getElementById("noclip").checked) return false;
 		if (this.type.weapon.lobsht) lob = true;
       if (!collision || lob) {
         this.dir = dir;
+// need to improve lobber hitability - when close to player, shots always miss
+				if (lob) {
+					this.lobdist = distance(this.x, this.y, player.x, player.y);
+					this.lobtargx = player.x;
+					this.lobtargy = player.y;
+					}
         if (allowfire && this.type.weapon && this.fire(map, player)) {
           this.thinking   = this.type.thinking;
           this.travelling = 0;
         }
-// maybe could fix odd lobber move here with if (collision || lob)
         else {
           this.thinking   = 0;
           this.travelling = travelling;
@@ -3256,7 +3261,13 @@ if (document.getElementById("noclip").checked) return false;
       this.dir   = dir;
       this.owner = owner;
 		 if ( this.type.lobsht == undefined) this.lobsht = false;
-		 else this.lobsht = true;
+		 else {
+			 this.lobsht = true;
+			this.lobdist = owner.lobdist;
+			this.lobtargx = ownerlobtargx;
+			this.lobtargy = owner.lobtargy;
+			}
+		 this.to = heartbeet;		// measure seconds weapon is flying
 		 this.timeout = timestamp();
     },
 
@@ -3283,6 +3294,9 @@ if (document.getElementById("noclip").checked) return false;
 		 if (this.lobsht != undefined)
 		 if (this.lobsht)
 		 {
+			  var lobd = distance(this.x, this.y, this.lobtargx, this.lobtargy);
+					document.title = "lobsh xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t(this.x)+":"+p2t(this.y)+" dtt: "+lobd;
+					if (Math.abs(this.bto - lobd) > 50) {this.bto = lobd; alert("lobsht: "+lobd+" units");}
 				this.frame = Math.floor((tos - this.timeout) / 100);
 				if (this.frame > 9) this.frame = 8;
 		 }
