@@ -18,6 +18,7 @@ push wall collision
 upgrade sprites to always use ent.sx / ent.sy instead of ent.type.sx (and maybe the rest as well)
 sprite hue dev override ?
 sprite oversize...
+x0F0000 remove from TYPE mask & use for extra sets of gfx
 
 loadable wall segments & cell.spriteset
 
@@ -28,10 +29,6 @@ imm issues:
 score table didnt show after a quit
 
 
-
-
-- some g2 sounds may need vol atten -- in progress
-- g2 announcer does not match g1
 
 g2 ? food research (find in files, or redo)
 g1/g2 wall & door stall times @ difficulty
@@ -198,6 +195,11 @@ door stall is 15 secs - difficult is 0 easiest
 
 GII elements:
 
+g2 joystick select ^ > v <
+w - e - z - v
+g2 stor pl colors
+g - y - b - r
+
 x-- locked treasures
 x-- poison food / potion that slows monsters
 x-- moving exits
@@ -345,6 +347,10 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- some g2 sounds may need vol atten -- in progress
+   \_overall might want to regig as many as poss. from a cleaner source
+x-- g2 announcer does not match g1	(replaced from machine sample)
 
 n-  note: movex must have movement active on load
 
