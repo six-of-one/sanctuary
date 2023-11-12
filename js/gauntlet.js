@@ -355,6 +355,7 @@ Gauntlet = function() {
 		POISONTM = 15,		// 10 secs of poison (muddle controls from dizzy effect)
 		POISONDIZ = 0.2,	// chance dizzy condition will confuse player
 		SUPERSHTFR = 10,	// super shot proj frame
+		LOBBERFUSE = 24,	// distance from target lobber shots go "hot"
 		TELEPORTILE = 0x0080a0,
 		FFIELDTILE = 0x008130,
 // until target traps are coded any trap will remove these
@@ -2384,8 +2385,7 @@ var lvu = document.getElementById("flvl").value;
 		 if (entity.lobsht != undefined)
 		 if (entity.lobsht)
 		 {
-			 if ((tos - entity.timeout)  < 900) // lobber shot doesnt collide for 1 secs
-					nocoll = false;
+			 if (!entity.lobhot) nocoll = false; // no collision until hot
 			 if ((tos - entity.timeout)  > 2000) // lobber shot dies after 2 secs
 			 {
 					collision = true;
@@ -2996,27 +2996,27 @@ if (document.getElementById("noclip").checked) return false;
 		{
 	  var lobrev = false; // dont let player close inside lob distance if poss
 			if (this.type.name == "lobber") {
-			  var ldist = distance(this.x, this.y, player.x, player.y);
-					if (ldist < 120) lobrev = 2; //move back
-					else if (ldist < 180) lobrev = 3; // stop, face player
+					this.firedist = distance(this.x, this.y, player.x, player.y);
+					if (this.firedist < 110) { lobrev = 2; if (this.vx || this.vy) lobrev = 4; } //move back -- but in vx / vy reverse zone move back is move fwd
+					else if (this.firedist < 200) lobrev = 3; // stop, face player
 				}
 	  var vec = this.directionTo(player, away);
 			dirs = PREFERRED_DIRECTIONS[vec];
-			if (this.vx && !this.vy) {
+			if (this.vx && !this.vy && lobrev != 4) {
 				if (vec == DIR.LEFT || vec == DIR.RIGHT) dirs = RV_PREFERRED_DIRECTIONS[vec];
 				if (vec == DIR.UPLEFT) dirs = PREFERRED_DIRECTIONS[DIR.UPRIGHT];
 				if (vec == DIR.UPRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.UPLEFT];
 				if (vec == DIR.DOWNLEFT) dirs = PREFERRED_DIRECTIONS[DIR.DOWNRIGHT];
 				if (vec == DIR.DOWNRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.DOWNLEFT];
 				}
-			if (!this.vx && this.vy) {
+			if (!this.vx && this.vy && lobrev != 4) {
 				if (vec == DIR.UP || vec == DIR.DOWN) dirs = RV_PREFERRED_DIRECTIONS[vec];
 				if (vec == DIR.UPLEFT) dirs = PREFERRED_DIRECTIONS[DIR.DOWNLEFT];
 				if (vec == DIR.UPRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.DOWNRIGHT];
 				if (vec == DIR.DOWNLEFT) dirs = PREFERRED_DIRECTIONS[DIR.UPLEFT];
 				if (vec == DIR.DOWNRIGHT) dirs = PREFERRED_DIRECTIONS[DIR.UPRIGHT];
 				}
-			if (this.vx && this.vy || lobrev == 2) dirs = RV_PREFERRED_DIRECTIONS[vec];
+			if ((this.vx && this.vy || lobrev == 2)  && lobrev != 4) dirs = RV_PREFERRED_DIRECTIONS[vec];
 
 			for(n = 0, max = dirs.length ; n < max ; n++) {
 				if (lobrev == 3) speed = 0;
@@ -3029,19 +3029,17 @@ if (document.getElementById("noclip").checked) return false;
 
     step: function(map, player, dir, speed, travelling, allowfire) {
       var collision = map.trymove(this, dir, speed * slowmonster);
+  var lob = false;
+		this.firedist = distance(this.x, this.y, player.x, player.y);	// distance to target & pos for wep tracking (mostly lobbers)
+		this.targx = player.x;
+		this.targy = player.y;
 // lobber always has chance at shot
-		var lob = false;
 		if (this.type.weapon != undefined)
-		if (this.type.weapon.lobsht) lob = true;
+		if (this.type.weapon.lobsht && this.firedist > 90) lob = true;
       if (!collision || lob) {
         this.dir = dir;
 // need to improve lobber hitability - when close to player, shots always miss
-				if (lob) {
-					this.lobdist = distance(this.x, this.y, player.x, player.y);
-					this.lobtargx = player.x;
-					this.lobtargy = player.y;
-					}
-        if (allowfire && this.type.weapon && this.fire(map, player)) {
+		if (allowfire && this.type.weapon && this.fire(map, player)) {
           this.thinking   = this.type.thinking;
           this.travelling = 0;
         }
@@ -3263,9 +3261,9 @@ if (document.getElementById("noclip").checked) return false;
 		 if ( this.type.lobsht == undefined) this.lobsht = false;
 		 else {
 			 this.lobsht = true;
-			this.lobdist = owner.lobdist;
-			this.lobtargx = ownerlobtargx;
-			this.lobtargy = owner.lobtargy;
+			this.targx = owner.targx;
+			this.targy = owner.targy;
+			this.lobhot = false;	// shot wont hit until "hot"
 			}
 		 this.to = heartbeet;		// measure seconds weapon is flying
 		 this.timeout = timestamp();
@@ -3294,9 +3292,10 @@ if (document.getElementById("noclip").checked) return false;
 		 if (this.lobsht != undefined)
 		 if (this.lobsht)
 		 {
-			  var lobd = distance(this.x, this.y, this.lobtargx, this.lobtargy);
-					document.title = "lobsh xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t(this.x)+":"+p2t(this.y)+" dtt: "+lobd;
-					if (Math.abs(this.bto - lobd) > 50) {this.bto = lobd; alert("lobsht: "+lobd+" units");}
+					this.lobdist = distance(this.x, this.y, this.targx, this.targy);
+					document.title = "lobsh xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t(this.x)+":"+p2t(this.y)+" dtt: "+this.lobdist+ " fly tim:"+Math.floor(tos - this.timeout);
+//					if (Math.abs(this.bto - lobd) > 50) {this.bto = lobd; alert("lobsht: "+this.lobdist+" units");}
+				if (this.lobdist < LOBBERFUSE) this.lobhot = true; // can now hit
 				this.frame = Math.floor((tos - this.timeout) / 100);
 				if (this.frame > 9) this.frame = 8;
 		 }
