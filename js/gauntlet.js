@@ -2387,24 +2387,27 @@ var lvu = document.getElementById("flvl").value;
 		 if (entity.lobsht)
 		 {
 // lobber shot targets direct! not always at 90 deg angle (like all other shots move)
+	  var dest = 6;
 // Calculate direction towards player
-			 var toX = entity.targx - entity.x;
-			 var toY = entity.targy - entity.y;
+			if (!entity.lobnotr)
+			{
+		  var toX = entity.targx - entity.x;
+		  var toY = entity.targy - entity.y;
 
 // Normalize
-			 var toLen = Math.sqrt((toX * toX) + (toY * toY));
-			 toX = toX / toLen;
-			 toY = toY / toLen;
+		  var toLen = Math.sqrt((toX * toX) + (toY * toY));
+				toX = toX / toLen;
+				toY = toY / toLen;
 
 // Move towards the player
-			 this.tpos.x = entity.x + (toX * speed);
-			 this.tpos.y = entity.y + (toY * speed);
-
+				this.tpos.x = entity.x + (toX * speed);
+				this.tpos.y = entity.y + (toY * speed);
+				dest = distance(this.tpos.x, this.tpos.y, entity.targx, entity.targy);
+			}
 document.title = "lobsh tr"+" toxy "+toX+":"+toY+" xy "+Math.round(this.tpos.x)+":"+Math.round(this.tpos.y)+" 2t: "+p2t(this.tpos.x)+":"+p2t(this.tpos.y)+" dtt: "+entity.lobdist+ " fly tim:"+Math.floor(tos - entity.timeout);
 
 			 if (!entity.lobhot) nocoll = false; // no collision until hot
-			 var dest = ((this.tpos.x == entity.targx) && (this.tpos.y == entity.targy));
-			 if ((tos - entity.timeout)  > 1600 || dest) // lobber shot dies after # secs
+			 if ((tos - entity.timeout)  > 1600 || dest < 3) // lobber shot dies after # secs
 			 {
 					collision = true;
 					nocoll = false;
@@ -3292,6 +3295,7 @@ if (document.getElementById("noclip").checked) return false;
 			 this.lobsht = true;
 			this.targx = owner.targx;
 			this.targy = owner.targy;
+			if (Math.random() < 0.15) this.lobnotr = true; // occasionally fire a non tracker
 			this.lobhot = false;	// shot wont hit until "hot"
 			}
 		 this.to = heartbeet;		// measure seconds weapon is flying
