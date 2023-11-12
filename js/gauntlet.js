@@ -355,7 +355,7 @@ Gauntlet = function() {
 		POISONTM = 15,		// 10 secs of poison (muddle controls from dizzy effect)
 		POISONDIZ = 0.2,	// chance dizzy condition will confuse player
 		SUPERSHTFR = 10,	// super shot proj frame
-		LOBBERFUSE = 24,	// distance from target lobber shots go "hot"
+		LOBBERFUSE = 27,	// distance from target lobber shots go "hot"
 		TELEPORTILE = 0x0080a0,
 		FFIELDTILE = 0x008130,
 // until target traps are coded any trap will remove these
@@ -2380,30 +2380,31 @@ var lvu = document.getElementById("flvl").value;
 		if (teled != undefined) ttd = teled;
       this.tpos.x = entity.x + (isLeft(dir) ? -speed : isRight(dir) ? speed : 0) * ttd;
       this.tpos.y = entity.y + (isUp(dir)   ? -speed : isDown(dir)  ? speed : 0) * ttd;
-
-		 if (entity.lobshot) {			// lobber shot targets direct! not always at 90 deg angle (like all other shots move)
-// Calculate direction towards player
-			 var toX = entity.targx - entity.x;
-			 var toY = entity.targy - entity.y;
-
-// Normalize
-			 var toLen = Math.sqrt(toX * toX + toY * toY);
-			 toX = toX / toLen;
-			 toY = toY / toLen;
-
-// Move towards the player
-			 this.tpos.x = entity.x + toX * speed;
-			 this.tpos.y = entity.y + toY * speed;
-			}
-
-// ttd - teleport distance used by temp teleportability device
+// ttd - teleport distance used by temp teleportability device for attempt to teleport thru walls - min single wall dist is about 58
 		 if (ttd > 1) { if (this.tpos.y < -5) this.tpos.y = Mth * TILE + this.tpos.y; }
 // mod for lobber shot
 		 if (entity.lobsht != undefined)
 		 if (entity.lobsht)
 		 {
+// lobber shot targets direct! not always at 90 deg angle (like all other shots move)
+// Calculate direction towards player
+			 var toX = entity.targx - entity.x;
+			 var toY = entity.targy - entity.y;
+
+// Normalize
+			 var toLen = Math.sqrt((toX * toX) + (toY * toY));
+			 toX = toX / toLen;
+			 toY = toY / toLen;
+
+// Move towards the player
+			 this.tpos.x = entity.x + (toX * speed);
+			 this.tpos.y = entity.y + (toY * speed);
+
+document.title = "lobsh tr"+" toxy "+toX+":"+toY+" xy "+Math.round(this.tpos.x)+":"+Math.round(this.tpos.y)+" 2t: "+p2t(this.tpos.x)+":"+p2t(this.tpos.y)+" dtt: "+entity.lobdist+ " fly tim:"+Math.floor(tos - entity.timeout);
+
 			 if (!entity.lobhot) nocoll = false; // no collision until hot
-			 if ((tos - entity.timeout)  > 2000) // lobber shot dies after 2 secs
+			 var dest = ((this.tpos.x == entity.targx) && (this.tpos.y == entity.targy));
+			 if ((tos - entity.timeout)  > 1600 || dest) // lobber shot dies after # secs
 			 {
 					collision = true;
 					nocoll = false;
@@ -3320,9 +3321,7 @@ if (document.getElementById("noclip").checked) return false;
 		 if (this.lobsht != undefined)
 		 if (this.lobsht)
 		 {
-					this.lobdist = distance(this.x, this.y, this.targx, this.targy);
-					document.title = "lobsh xy "+Math.round(this.x)+":"+Math.round(this.y)+" 2t: "+p2t(this.x)+":"+p2t(this.y)+" dtt: "+this.lobdist+ " fly tim:"+Math.floor(tos - this.timeout);
-//					if (Math.abs(this.bto - lobd) > 50) {this.bto = lobd; alert("lobsht: "+this.lobdist+" units");}
+				this.lobdist = distance(this.x, this.y, this.targx, this.targy);
 				if (this.lobdist < LOBBERFUSE) this.lobhot = true; // can now hit
 				this.frame = Math.floor((tos - this.timeout) / 100);
 				if (this.frame > 9) this.frame = 8;
@@ -3330,7 +3329,7 @@ if (document.getElementById("noclip").checked) return false;
 		 else
       this.frame = this.type.rotate ? animate(frame, this.type.fpf, 8) : this.dir;
 		if (this.lsuper) this.frame = SUPERSHTFR;
-		 if (this.to < heartbeet) Mastermap.remove(this);
+		 if (this.to < heartbeet) Mastermap.remove(this);		// should either be: a. timestamp() test - b. distance test
     }
 
   });
