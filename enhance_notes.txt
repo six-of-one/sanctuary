@@ -19,6 +19,9 @@ upgrade sprites to always use ent.sx / ent.sy instead of ent.type.sx (and maybe 
 
 loadable wall segments & cell.spriteset
 
+change fadeout on 1pl die - maybe allow re-entry if right away (10 - 15 secs hang)
+zoom out & zoom back in on re-enter, or if no re-ent go to splash loop
+
 
 imm issues:
 
@@ -26,7 +29,7 @@ score table didnt show after a quit
 
 g2 ? food research (find in files, or redo)
 
-check sound for picking poison (is potion pick sound, need g2 ref)
+check sound for picking poison (is potion pick sound?, need g2 ref)
 
 dead player is only lvl 1 bone pile
 
