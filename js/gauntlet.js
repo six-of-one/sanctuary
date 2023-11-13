@@ -108,7 +108,8 @@ Gauntlet = function() {
         GRUNT1:  { sx: 0, sy: 18, frames: 3, fpf: FPS/10, score:  30, health:  10, speed: 100/FPS, damage: 60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false,                     travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 13, 13, 8, 2 ], generator: { glvl: [ 13, 13, 8, 2 ], health: 10, speed: 3.5*FPS, max: 44, score: 300, sx: 32, sy: 6 }, name: "grunt",  weapon: null , hits: 'hithump',     nohlp: 42              },
         WIZARD1: { sx: 0, sy: 20, frames: 3, fpf: FPS/10, score:  30, health:  10, speed: 110/FPS, damage: 60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 14, 14, 9, 3 ], generator: { glvl: [ 14, 14, 9, 3 ], health: 10, speed: 4.0*FPS, max: 28, score: 400, sx: 32, sy: 6 }, name: "sorcerer", weapon: null , hits: 'hithump',     nohlp: 44            },
         LOBBER1: { sx: 0, sy: 22, frames: 3, fpf: FPS/10, score:  10, health:  10, speed: 80/FPS,  damage: 40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 15, 15, 10, 5 ], generator: { glvl: [ 15, 15, 10, 5 ], health: 10, speed: 3.5*FPS, max: 32, score: 100, sx: 32, sy: 6 }, name: "lobber", weapon: { speed: 180/FPS, reload: 1.9*FPS, damage: 10, sx: 24, sy: 9, fpf: FPS/10, monster: true, lobsht: true, foir: 'firelob' }   ,     nohlp: 45                 },
-        THIEF:   { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 220/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 14, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null,  steal: 500, bsound: 'hitheif',   nohlp: 39               },
+// theif speed: 220/FPS is speed of elf+xspd
+        THIEF:   { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 225/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 14, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null,  steal: 500, bsound: 'hitheif',   nohlp: 39               },
         MUGGER:  { sx: 0, sy: 24, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 233/FPS, damage: 0, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 17, 17, 17, 17 ], generator: { glvl: [ 17, 17, 17, 17 ], health: 10, speed: 5.5*FPS, max: 16, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger", weapon: null , steal: 100, bsound: 'himug',    nohlp: 62               },
 // g2 calls this the acid blob - it looks like an angry pickle...
         PICKLE:  { sx: 0, sy:  25, frames: 3, fpf: FPS/10, score:  1000, health:  60, speed: 40/FPS, damage:  60, selfharm: 300,      canbeshot: false,  canbehit: false, notfot: true, invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 18, 18, 18, 18 ], generator: { glvl: [ 18, 18, 18, 18 ], health: 10, speed: 1.5*FPS, max: 20, score: 500, sx: 32, sy: 8 }, scorefx: 0, twopot: 1, name: "Acid blob", weapon: null  ,  hits: 'hitpickle',   nohlp: 63               },
@@ -873,7 +874,7 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',     url: "levels/7level.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/xfloor2.png",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/xfloor6.png",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
       { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 2',       url: "levels/g2level2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
@@ -2627,7 +2628,8 @@ var lvu = document.getElementById("flvl").value;
       // have to check for any player FIRST, so even if player is near a wall or other monster he will still get hit (otherwise its possible to use monsters as semi-shields against other monsters)
       if ((game.player != ignore) && overlapEntity(x, y, w, h, game.player))
         return game.player;
-var celpr = " c:";
+/// TEST - remove
+//var celpr = " c:";
       // now loop again checking for walls and other entities
       for(c = 0 ; c < nc ; c++) {
         cell = cells[c];
@@ -2993,6 +2995,7 @@ if (document.getElementById("noclip").checked) return false;
 			}
 			psx = this.x;
 			psy = this.y;
+			if (!this.blocked)
 			if (this.stolen > 0)
 			{
 					this.thcount--;
@@ -3022,6 +3025,10 @@ if (document.getElementById("noclip").checked) return false;
 // theif could have "hookshot" method here - increase dist
 			if (distance(this.x,this.y,collision.x,collision.y) < 20)
 					publish(EVENT.MONSTER_COLLIDE, this, collision);
+
+			if (collision.monster) {
+				this.blocked = true;
+				}
 
 // point theif the right way
 			this.dir = THFDIR[(Math.sign(this.y - psy) + 1)][(Math.sign(this.x - psx) + 1)];
@@ -5337,6 +5344,7 @@ var txsv = ":";
 					if (thieftim  != 0 && (thieftim < timestamp()))
 					{
 							spawn(); // start theif
+							Mastercell.ptr.blocked = false;	// keep track of stuck theif
 							if (Math.random() < thiefrnd * 0.25)	// enhanced - 1/4 chance to start another theif				-- expanded rules, option off for g1/g2 mode only
 									thieftim = 1000 * (thieftotim + (thieftotim * Math.random())) + timestamp();
 							else
