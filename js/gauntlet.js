@@ -3020,6 +3020,8 @@ if (document.getElementById("noclip").checked) return false;
 			}
 			Mastermap.occupy(this.x, this.y, this);		// allow spawn theif to collide / be shot
 // theif need collision detect
+			this.blocked = false;
+
 			collision = Mastermap.occupied(this.x, this.y, this.w, this.h, this);
 			if (collision.player)
 // theif could have "hookshot" method here - increase dist
@@ -3028,6 +3030,12 @@ if (document.getElementById("noclip").checked) return false;
 
 			if (collision.monster) {
 				this.blocked = true;
+				collision.hurt(this.type.damage, this);
+				}
+
+			if (collision.pixel == 0x80D0) {
+				this.blocked = true;
+				collision.hurt(this.type.damage, this);
 				}
 
 // point theif the right way
