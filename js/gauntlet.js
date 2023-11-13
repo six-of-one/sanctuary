@@ -373,7 +373,7 @@ Gauntlet = function() {
 // after {n} health tics with no player move / fire, all walls are exits
 /// RESTORE to 200 for arcade mode cbx
 		WALLSTALL = 100,
-// after {n} health tics with no player move / fire, all doors open
+// after {n} health tics with no player move / fire, all doors open -- G2 adds 5 to door stall times, g1 wallstall 188, g2 wallstall 328
 		DOORSTALL = 15, KEYSTALL = 34, doorstalled,
 		stalling,
 		ffieldpulse,
