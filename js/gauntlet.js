@@ -1639,10 +1639,10 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		 for (sk = 0;sk < cfg.levels.length;sk++)
 		 {
 				if (cfg.levels[sk].name == 'Treasure')
-		 {
-			 TREASUREROOM[c] = cfg.levels[sk];
-			 TREASUREROOM[c++].lvl = sk;
-		 }
+				{
+					TREASUREROOM[c] = cfg.levels[sk];
+					TREASUREROOM[c++].lvl = sk;
+				}
 // rename any level named "Research X"
 				 if (cfg.levels[sk].name == "Research X")
 				{
@@ -1700,6 +1700,13 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 //		 treasurerc = 1;
 //		 spotionlv = 1;
 
+		var plannc = false;
+		var shotsnow = "<br><br><br><font color=orange>shots now stun other players";
+		var anncshots = Musicth.sounds.ancyssop;
+//		plannc = true;
+		if (Math.random() < 0.5) { shotsnow = "<br><br><br><font color=red>shots now hurt other players"; anncshots = Musicth.sounds.ancyshop; }
+//		Musicth.play(anncshots);
+
 // check for hidden potions
 		if (nlevel > 5)
 		{
@@ -1713,7 +1720,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 						spotionloop = 0;
 						potionhelp = "<br><br><br><font color=yellow>FIND THE HIDDEN POTION</font>";
 // NOTE: overlap can occur if treasure room taunt happens in 3 secs or extended announce occurs
-						if (Math.random() < 0.66) Musicth.play(Musicth.sounds.anchidpot);
+						if (Math.random() < 0.66 && !plannc) { Musicth.play(Musicth.sounds.anchidpot); plannc = true; }
 				}
 		}
 
@@ -1744,7 +1751,7 @@ var lvu = document.getElementById("flvl").value;
 			if (levelhelp == undefined) levelhelp = level.help;		/// NOTE: test & add in level msgs that have annc (5, 6, 7)
 			if (levelhelp == undefined) levelhelp = HELPDIS[Game.Math.randomInt(nohlplvl,nohlplvlend)];
 /// NOTE: special level notes & annc here - shots stun & hurt, ploff
-			levelhelp = levelhelp + potionhelp;
+			levelhelp = levelhelp + potionhelp + shotsnow;
 //		turned on during player exiting
 			var img = document.getElementById("tweenmsg");
 			if (trdisp)
