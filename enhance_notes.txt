@@ -17,32 +17,16 @@ push wall collision
 
 upgrade sprites to always use ent.sx / ent.sy instead of ent.type.sx (and maybe the rest as well)
 
-
 loadable wall segments & cell.spriteset
 
 
 imm issues:
 
-
 score table didnt show after a quit
 
-
-
 g2 ? food research (find in files, or redo)
-g1/g2 wall & door stall times @ difficulty - appx ~ times
-door
-g1 (war, skill 7) 15 (no k) 36 (k)
-g1 (war, skill 4) 17 (no k) 38 (k)
-g1 (war, skill 0) 12 (no k) 34 (k)
-g1 (wiz, skill 0) 15 (no k) 35 (k)
-g2 (val, skill 2) 20 (no k) 40 (k)
-wall
-g1 (wiz, skill 3) 188 hlth (3m 19s watch)
-g2 (val, skill 2) 328 hlth (5m 50s watch)
 
 check sound for picking poison (is potion pick sound, need g2 ref)
-
-
 
 dead player is only lvl 1 bone pile
 
@@ -60,11 +44,6 @@ port list:
 super sorc finish
 
 theif / mugger should fight monsters in path - get blocked by object on start, pushwall across path
-
-stalling with keys takes 2 * stall for doors
-(also might be affected by skill)
-\_ takes about 18 health (without keys) and 36 health (with keys) to stall the doors and about 325 health to stall the walls
- \_ walls about twice as long in Gauntlet 2 than in Gauntlet
 
 dying with keys doesnt produce key pile
 
@@ -221,6 +200,17 @@ monsters move different, or faster
 x- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or super / reflect shot destroys)
 "IT" - not sure want this - 10 pts for getting tho, no pts on tag
 
+g1/g2 wall & door stall times @ difficulty - appx ~ times
+door
+g1 (war, skill 7) 15 (no k) 36 (k)
+g1 (war, skill 4) 17 (no k) 38 (k)
+g1 (war, skill 0) 12 (no k) 34 (k)
+g1 (wiz, skill 0) 15 (no k) 35 (k)
+g2 (val, skill 2) 20 (no k) 40 (k)
+wall
+g1 (wiz, skill 3) 188 hlth (3m 19s watch)
+g2 (val, skill 2) 328 hlth (5m 50s watch)
+
 >>>>>>>>>>>>>>>>>>>>>>
 expansion:
 
@@ -348,6 +338,11 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- stalling with keys takes 2 * stall for doors
+    (also might be affected by skill -- not much accd to res.)
+   \_ takes about 18 health (without keys) and 36 health (with keys) to stall the doors and about 325 health to stall the walls
+    \_ walls about twice as long in Gauntlet 2 than in Gauntlet
 
 x-- x0F0000 remove from TYPE mask & use for extra sets of gfx
 
