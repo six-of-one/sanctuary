@@ -439,7 +439,7 @@ Gauntlet = function() {
           TYPE:         0xF0F000,
           EXHIGH:       0x000FF0,
           EXLOW:        0x00000F,
-			 ALTGR:			0x0F0000  // alternate gfx nybble - up to 15 diff floors/ walls and ents, on load fail, default back to std
+          ALTGR:			0x0F0000  // alternate gfx nybble - up to 15 diff floors/ walls and ents, on load fail, default back to std
         }
       },
 // jvsg floors - 1 tile per map cell - 32 x 32 px per each stored 0th row of backgrounds.png
@@ -1214,7 +1214,20 @@ Gauntlet = function() {
 					Mastercell.ptr.sx = doortype(tx,ty,map);
 			}
 		  else if (isgenerator(pixel)) {
-			 spref.addGenerator(x, y, MONSTERS[(type(pixel) < MONSTERS.length) ? type(pixel) : 0]);
+			 var ent = spref.addGenerator(x, y, MONSTERS[(type(pixel) < MONSTERS.length) ? type(pixel) : 0]);
+			  if (pixel != 0xF00000 && pixel != 0xF00060 && pixel != 0xF000B0) {
+					ent.dx = -5;
+					ent.dy = -5;
+					ent.dw = 10;
+					ent.dh = 10;
+					}
+				else
+					{
+					ent.dx = -2;
+					ent.dy = -2;
+					ent.dw = 4;
+					ent.dh = 4;
+					}
 			}
 		  else if (istreasure(pixel))
 			 {
@@ -2881,12 +2894,6 @@ if (document.getElementById("noclip").checked) return false;
 		entity.numer = false; // these are a reused pool, turn this off
       entity.reflect = 0;
       entity.norelod = false;
-		if (klass == Generator) {
-			entity.dx = -6;
-			entity.dy = -6;
-			entity.dw = 12;
-			entity.dh = 12;
-			}
       return entity;
     },
 
