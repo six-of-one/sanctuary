@@ -109,7 +109,7 @@ Gauntlet = function() {
         WIZARD1: { sx: 0, sy: 20, frames: 3, fpf: FPS/10, score:  30, health:  10, speed: 110/FPS, damage: 60/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 14, 14, 9, 3 ], generator: { glvl: [ 14, 14, 9, 3 ], health: 10, speed: 4.0*FPS, max: 28, score: 400, sx: 32, sy: 6 }, name: "sorcerer", weapon: null , hits: 'hithump',     nohlp: 44            },
         LOBBER1: { sx: 0, sy: 22, frames: 3, fpf: FPS/10, score:  10, health:  10, speed: 80/FPS,  damage: 40/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 15, 15, 10, 5 ], generator: { glvl: [ 15, 15, 10, 5 ], health: 10, speed: 3.5*FPS, max: 32, score: 100, sx: 32, sy: 6 }, name: "lobber", weapon: { speed: 180/FPS, reload: 1.9*FPS, damage: 10, sx: 24, sy: 9, fpf: FPS/10, monster: true, lobsht: true, foir: 'firelob' }   ,     nohlp: 45                 },
 // theif speed: 220/FPS is speed of elf+xspd
-        THIEF:   { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 225/FPS, damage: 5/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 14, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null,  steal: 500, bsound: 'hitheif',   nohlp: 39               },
+        THIEF:   { sx: 0, sy: 23, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 225/FPS, damage: 20/FPS, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ], generator: { glvl: [ 16, 16, 16, 16 ], health: 10, speed: 5.5*FPS, max: 14, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief", weapon: null,  steal: 500, bsound: 'hitheif',   nohlp: 39               },
         MUGGER:  { sx: 0, sy: 24, frames: 3, fpf: FPS/10, score:  50, health:  10, speed: 233/FPS, damage: 0, selfharm: 0,      canbeshot: true,  canbehit: true,  invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 17, 17, 17, 17 ], generator: { glvl: [ 17, 17, 17, 17 ], health: 10, speed: 5.5*FPS, max: 16, score: 100, sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger", weapon: null , steal: 100, bsound: 'himug',    nohlp: 62               },
 // g2 calls this the acid blob - it looks like an angry pickle...
         PICKLE:  { sx: 0, sy:  25, frames: 3, fpf: FPS/10, score:  1000, health:  60, speed: 40/FPS, damage:  60, selfharm: 300,      canbeshot: false,  canbehit: false, notfot: true, invisibility: false, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 18, 18, 18, 18 ], generator: { glvl: [ 18, 18, 18, 18 ], health: 10, speed: 1.5*FPS, max: 20, score: 500, sx: 32, sy: 8 }, scorefx: 0, twopot: 1, name: "Acid blob", weapon: null  ,  hits: 'hitpickle',   nohlp: 63               },
@@ -3028,10 +3028,10 @@ if (document.getElementById("noclip").checked) return false;
 			if (distance(this.x,this.y,collision.x,collision.y) < 20)
 					publish(EVENT.MONSTER_COLLIDE, this, collision);
 
-			if (collision.monster) {
+/*			if (collision.monster) {
 				this.blocked = true;
 				collision.hurt(this.type.damage, this);
-				}
+				}*/
 
 			if (collision.pixel == 0x80D0) {
 				this.blocked = true;
