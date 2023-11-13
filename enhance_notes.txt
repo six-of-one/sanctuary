@@ -29,7 +29,11 @@ score table didnt show after a quit
 
 
 g2 ? food research (find in files, or redo)
-g1/g2 wall & door stall times @ difficulty
+g1/g2 wall & door stall times @ difficulty - appx ~ times
+g1 (war, skill 7) 15 (no k) 36 (k)
+g1 (war, skill 4) 17 (no k) 38 (k)
+g1 (war, skill 0) 12 (no k) 34 (k)
+g1 (wiz, skill 0) 15 (no k) 35 (k)
 
 check sound for picking poison (is potion pick sound, need g2 ref)
 
@@ -51,6 +55,7 @@ port list:
 super sorc finish
 
 theif / mugger should fight monsters in path - get blocked by object on start, pushwall across path
+
 stalling with keys takes 2 * stall for doors
 (also might be affected by skill)
 \_ takes about 18 health (without keys) and 36 health (with keys) to stall the doors and about 325 health to stall the walls

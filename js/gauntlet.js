@@ -374,7 +374,7 @@ Gauntlet = function() {
 /// RESTORE to 200 for arcade mode cbx
 		WALLSTALL = 100,
 // after {n} health tics with no player move / fire, all doors open
-		DOORSTALL = 30,
+		DOORSTALL = 15, KEYSTALL = 34, doorstalled,
 		stalling,
 		ffieldpulse,
 		heartbeet = 0,
@@ -3033,7 +3033,7 @@ if (document.getElementById("noclip").checked) return false;
 				collision.hurt(this.type.damage, this);
 				}*/
 
-			if (collision.pixel == 0x80D0) {
+			if (collision.type.pushwal) {
 				this.blocked = true;
 				collision.hurt(this.type.damage, this);
 				}
@@ -3601,6 +3601,7 @@ var txsv = ":";
 		this.pushwal = null;
 		this.stun = 0;
 		 stalling = 0;
+		 doorstalled = DOORSTALL;
     },
 
     player: true,
@@ -3750,6 +3751,8 @@ var txsv = ":";
           publish(EVENT.PLAYER_FIRE, this);
         }
 			stalling = 0; // reset on player fire
+			doorstalled = DOORSTALL;
+			if (this.keys) doorstalled = KEYSTALL;	// stalling doors out takes longer if player is holding keys
 			return; // can't fire and move at same time
       }
 
@@ -3757,6 +3760,8 @@ var txsv = ":";
         return;
 
 		stalling = 0; // reset on player move
+		doorstalled = DOORSTALL;
+		if (this.keys) doorstalled = KEYSTALL;
 
       var d, dmax, dir, collision,
           directions = SLIDE_DIRECTIONS[this.moving.dir];
@@ -4365,7 +4370,7 @@ var txsv = ":";
 // dev: no stalling
 		if (!document.getElementById("nostal").checked)
 /// TEST - remove
-			if (stalling == DOORSTALL) {
+			if (stalling == doorstalled) {
 
 				var cells   = reloaded.cells,
 					 opendr = 0, cell, c, nc = cells.length;
