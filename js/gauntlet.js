@@ -1544,6 +1544,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		document.getElementById("fhue").value = readCookie("_ops_"+"fhue");
 		document.getElementById("phue").value = readCookie("_ops_"+"phue");
 		document.getElementById("ashue").value = readCookie("_ops_"+"ashue");
+		document.getElementById("vports").value = readCookie("_ops_"+"vports");
 		document.getElementById("seltut").checked = false;
 		document.getElementById("selg2tut").checked = false;
 		document.getElementById("seltutx").checked = false;
@@ -4476,6 +4477,7 @@ var txsv = ":";
 				createCookie("_ops_"+"fhue", document.getElementById("fhue").value,7777);
 				createCookie("_ops_"+"phue", document.getElementById("phue").value,7777);
 				createCookie("_ops_"+"ashue", document.getElementById("ashue").value,7777);
+				createCookie("_ops_"+"vports", document.getElementById("vports").value,7777);
 				}
 /// TEST - remove
 		}
@@ -4717,6 +4719,11 @@ var txsv = ":";
   var Viewport = Class.create({
 
     initialize: function() {
+		 var vp = document.getElementById("vports").value;
+		 if (vp < 16) vp = 16;
+		 if (vp < 24) vp = 24;
+		 VIEWPORT.TW = vp;
+		 VIEWPORT.TH = vp;
       subscribe(EVENT.START_LEVEL, this.onStartLevel.bind(this));
     },
 
