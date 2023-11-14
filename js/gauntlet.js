@@ -4720,8 +4720,8 @@ var txsv = ":";
 
     initialize: function() {
 		 var vp = document.getElementById("vports").value;
-		 if (vp < 16) vp = 16;
-		 if (vp < 24) vp = 24;
+		 if (vp < 10) vp = 10;
+		 if (vp > 40) vp = 40;
 		 VIEWPORT.TW = vp;
 		 VIEWPORT.TH = vp;
       subscribe(EVENT.START_LEVEL, this.onStartLevel.bind(this));
