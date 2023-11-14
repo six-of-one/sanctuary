@@ -875,7 +875,7 @@ Gauntlet = function() {
     levels: [
 //      { name: 'intro',     url: "levels/7level.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
       { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/xfloor6.png",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
-      { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null },
+//      { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 2',       url: "levels/g2level2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
       { name: 'Level 3',       url: "levels/glevel3.png",  floor: FLOOR.DARK_STONE,      wall: WALL.GREEN3,    gflr: "gfx/g1floor3.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Some food can be destroyed" },
@@ -4819,7 +4819,7 @@ var txsv = ":";
     },
 
     size: function(tw, map) {
-      this.tw = Game.Math.minmax(tw, 18, map.th < map.tw ? map.tw : map.th * (VIEWPORT.TW/VIEWPORT.TH));
+      this.tw = Game.Math.minmax(tw, 10, map.th < map.tw ? map.tw : map.th * (VIEWPORT.TW/VIEWPORT.TH));
       this.th = this.tw * (VIEWPORT.TH / VIEWPORT.TW);
       this.w  = this.tw * TILE;
       this.h  = this.th * TILE;
