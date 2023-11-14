@@ -4721,6 +4721,7 @@ var txsv = ":";
 
     initialize: function() {
 		 var vp = document.getElementById("vports").value;		// user select viewport size, requires game reload to change
+		 if (!/^\d+$/.test(vp)) vp = 16;
 		 if (vp < 10) vp = 10;
 		 if (vp > 40) vp = 40;
 		 VIEWPORT.TW = vp;
