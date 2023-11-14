@@ -342,6 +342,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
+x-- variable viewport so arcade mode can be accomodated
+
 x-- stalling with keys takes 2 * stall for doors
     (also might be affected by skill -- not much accd to res.)
    \_ takes about 18 health (without keys) and 36 health (with keys) to stall the doors and about 325 health to stall the walls

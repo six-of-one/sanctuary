@@ -874,7 +874,7 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',     url: "levels/7level.png",  floor: FLOOR.MULTIC,      wall: WALL.GREEN3,    gflr: "gfx/floor016.jpg",         music: 'nullm',   nornd: 1,	 	score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/floor014.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',     url: "levels/glevel1r.png",  floor: FLOOR.RND,      wall: WALL.GREEN3,    gflr: "gfx/floor020.jpg",      music: 'nullm',   nornd: 1,	unpinx: 1, unpiny: 1,	score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Demo',     url: "levels/glevel0.png", floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor0.jpg",    music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 1',       url: "levels/g2level1.png",  floor: FLOOR.LIGHT_STONE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor1.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: null },
       { name: 'Level 2',       url: "levels/g2level2.png",  floor: FLOOR.BROWN_LAMINATE,      wall: WALL.BROWN1,   gflr: "gfx/g1floor2.jpg",      music: 'nullm',   nornd: 1,      score:  1000, help: "Ghosts must be shot" },
@@ -5081,16 +5081,20 @@ var txsv = ":";
 		if (map.level.gflr)	// this is set before map load
 		 {
 			var gbas = document.getElementById("gfloorbas");
-			var gimg = document.getElementById("gfloor");
-			for(ty = vyz, th = vth ; ty < th ; ty=ty+8) {
-			  for(tx = vxz, tw = vtw ; tx < tw ; tx=tx+8) {
-						ctx.drawImage(gbas, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
+			var gimg = document.getElementById("gfloor");	// tiled images should be W == H and divisible by 32 and properly loop for best appearances
+			var gap = 8; // with 256 x 256 tile, they have to map over 32 x 32 level grid 8 sections at a time
+			if (gimg.width != 256) gap = Math.floor(gimg.width / 32);
+			if (gap < 1) gap = 1;
+			if (gap > 60) gap = 60;		// size 1920 x 1920, prob too big anyway
+			for(ty = vyz, th = vth ; ty < th ; ty=ty+gap) {
+			  for(tx = vxz, tw = vtw ; tx < tw ; tx=tx+gap) {
+						ctx.drawImage(gbas, 0, 0, STILE * gap, STILE * gap, tx * TILE, ty * TILE, TILE * gap, TILE * gap);
 // new case of color under transp floors
 			     var hu = parseHue(tx, ty);
 
 					  if (hu > 0) {
 							ctx.beginPath();
-							ctx.rect(tx * TILE, ty * TILE, TILE * 8, TILE * 8);
+							ctx.rect(tx * TILE, ty * TILE, TILE * gap, TILE * gap);
 							ctx.fillStyle = Lrgb;
 							ctx.fill();
 							ctx.closePath();
@@ -5101,7 +5105,7 @@ var txsv = ":";
 							ctx.filter = "hue-rotate("+flhue+"deg)";
 /// TEST - update
 							if (gimg.width > 25)		// for some reason when the load fails w x h is 24 x 24
-								ctx.drawImage(gimg, 0, 0, STILE * 8, STILE * 8, tx * TILE, ty * TILE, TILE * 8, TILE * 8);
+								ctx.drawImage(gimg, 0, 0, STILE * gap, STILE * gap, tx * TILE, ty * TILE, TILE * gap, TILE * gap);
 							ctx.filter = "hue-rotate(0deg)";
 				  }
 				}
