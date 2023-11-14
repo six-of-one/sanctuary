@@ -3041,6 +3041,7 @@ if (document.getElementById("noclip").checked) return false;
 				collision.hurt(this.type.damage, this);
 				}*/
 
+			if (collision.type != undefined)
 			if (collision.type.pushwal) {
 				this.blocked = true;
 				collision.hurt(this.type.damage, this);
@@ -4719,7 +4720,7 @@ var txsv = ":";
   var Viewport = Class.create({
 
     initialize: function() {
-		 var vp = document.getElementById("vports").value;
+		 var vp = document.getElementById("vports").value;		// user select viewport size, requires game reload to change
 		 if (vp < 10) vp = 10;
 		 if (vp > 40) vp = 40;
 		 VIEWPORT.TW = vp;
