@@ -1105,7 +1105,7 @@ Gauntlet = function() {
 	function isp(pixel, type)      { return ((pixel & PIXEL.MASK.TYPE) === type); };
 	function type(pixel)           { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 	function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
-	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
+	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; if (pixel >= 0x8210 && pixel <= 0x822F) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
 	function iswallpr(pixel)       { if (pixel >= PXWALRND && pixel <= PXWALPHAS) return true; };
 	function iswallrw(pixel)       { return (isp(pixel, PIXEL.WALL))     };
 	function isfloor(pixel)        { return isp(pixel, PIXEL.FLOOR);     };
@@ -1252,6 +1252,8 @@ Gauntlet = function() {
 				 if (Mastercell.ptr.type.wall) {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
 					 Mastercell.ptr.sy = Mastercell.ptr.type.sy; // backgrounds.png line of rubble shotwall
+					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.spriteset = Mastermap.sprites.shotwalls; }
+					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 15; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.spriteset = Mastermap.sprites.shotwalls; }
 				 }
 				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2 || ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) {
 					 Mastercell.ptr.rwall = (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2);
