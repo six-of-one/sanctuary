@@ -8,7 +8,6 @@ I didnt feel like calling it a "port"
 web: https://www.moddb.com/mods/gauntlet-sanctuary
 forum: https://www.moddb.com/mods/gauntlet-sanctuary/forum
 bug submit: https://discord.com/channels/708519047712735302/732784469072674817
-live streams: https://www.twitch.tv/number_s1x
 
 warning:
 

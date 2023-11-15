@@ -21,6 +21,8 @@ loadable wall segments & cell.spriteset
 change fadeout on 1pl die - maybe allow re-entry if right away (10 - 15 secs hang)
 zoom out & zoom back in on re-enter, or if no re-ent go to splash loop
 
+make it so difficulty cant be set back below 9 after racking a buku score on diff: 999 or so
+
 
 imm issues:
 
@@ -155,29 +157,55 @@ movement is quirky compared to original
     <div id="tweenmsg" >Get bonus multiplier by collecting treasure<br><br><br><br><font color="yellow">FIND THE HIDDEN POTION</font></div>
 
 >>>>>>>>>>>>>>>>>>>>>>
-elements I did not see:
+G I elements:
 
-special potions
-temp invisible
+4 players & shots
+start / exit, exit to 4, exit to 8
+
+treasure: chest, bag
+food: bottle/skin, turkey plate, ham plate, plate w/cup
+potion bombs: blue (shootable), orange (no shot)
+keys, doors
+special potions: xspeed, xshotpwr, xshotspeed, xarmor, xfight, xmagic
+limited invisibility
+
+generator: pyramidical, bone piles -- 3 levels
+monster: grunt, ghost, demon, sorceror, lobber -- 3 levels
+mon shots: demon, lobber
+death: point rotation system for potion bombing
+thief & treasure bag from shooting thief (also stolen key or potion when theif shot)
+
 shootable walls - the "dirt" kind
-timed treasure rooms
-thief & treasure bag from shooting thief
+traps that open walls
+teleporters
+
 level wrap to opposite side
+timed treasure rooms
 
-limited maps - many arcade maps are left out (though its likely the creator wanted original maps)
+all related audio fx
+announcer info/ taunts
 
-other elements to check:
+save last map to replay on re-entry as map 8
+map layout
+level population
 
 corner unpin above level 100
 levels flip / mirror above 100 -- code is done, needs logic control
 shots stun & hurt other player levels
-cant take keys / bombs after inv. full - cant walk through them either
 
-door stall is 15 secs - difficult is 0 easiest
+door stall is 15 health tics
+wall stall is ? health tics
+display pts for: treasures, potion bombing death
+
+-----------------
+do we use these ?:
+-----------------
+
+cant take keys / bombs after inv. full - cant walk through them either
 
 >>>>>>>>>>>>>>>>>>>>>>
 
-GII elements:
+G II elements:
 
 g2 joystick select ^ > v <
 w - e - z - v
@@ -214,6 +242,31 @@ g2 (val, skill 2) 20 (no k) 40 (k)
 wall
 g1 (wiz, skill 3) 188 hlth (3m 19s watch)
 g2 (val, skill 2) 328 hlth (5m 50s watch)
+
+>>>>>>>>>>>>>>>>>>>>>>
+
+sanctuary elements:
+
+generators for: death, acid puddle, theif, mugger, super sorceror
+more elements added to shot gudwall
+
+maze solver path system
+random level contents profile (used for treasure room content too)
+
+multi color walls - include shotwalls, gud walls, pass & cycle walls
+indiv cell invisible walls + invis shotwall (seperate from level wide invis walls)
+\_ visible walls when level wide walls are invis
+
+more floor tiles display (smol) besides main level tile
+hue override ents, cell tile & content
+cell tile all color provision
+\_spec color under transparent tile
+adds new floor tile gfx
+
+liquid textures (slow & damage so far)
+
+multiple added fake items
+
 
 >>>>>>>>>>>>>>>>>>>>>>
 expansion:
