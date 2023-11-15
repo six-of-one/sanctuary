@@ -2612,13 +2612,6 @@ var lvu = document.getElementById("flvl").value;
       var nx = ((x%TILE) + w) > TILE ? 1 : 0,
           ny = ((y%TILE) + h) > TILE ? 1 : 0;
 
-// change test for across unpin
-/*		var n;
-		if (x < 5 && dir == DIR.LEFT) { n = mpixel(x,y, x - TILE, y, 2); if (this.cells[n] != undefined) set_add(cells, this.cells[n]); }
-		else if (x > (TILE * (Mtw - 1) - 5) && dir == DIR.RIGHT) { n = mpixel(x,y, x + TILE, y, 2); if (this.cells[n] != undefined) set_add(cells, this.cells[n]); }
-		else if (y < 5 && dir == DIR.UP) { n = mpixel(x,y, x, y - TILE, 2); if (this.cells[n] != undefined) set_add(cells, this.cells[n]); }
-		else if (y > (TILE * (Mth - 1) - 5) && dir == DIR.DOWN) { n = mpixel(x,y, x, y + TILE, 2); if (this.cells[n] != undefined) set_add(cells, this.cells[n]); }
-		else { */
 			set_add(cells, this.cell(x, y));
 			if (nx > 0)
 			  set_add(cells, this.cell(x + TILE, y));
@@ -2659,15 +2652,16 @@ celpr += ", ";
 //document.title = "-pl xy "+Math.round(dent.x)+":"+Math.round(dent.y)+" 2t: "+p2t(dent.x)+":"+p2t(dent.y)+" celltst: "+nc+" xy: "+Math.round(x)+":"+Math.round(y);
 /// TEST - remove
 
+// this is cross the unpinned edge ops code
 	var n, ptw = false;
 		     if (x < 7 || x > (TILE * (Mtw - 1) - 7) && dir == DIR.LEFT) { n = mpixel(x,y, x - TILE, y, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
 		else if (x < 7 || x > (TILE * (Mtw - 1) - 7) && dir == DIR.RIGHT) { ptw = false;; n = mpixel(x,y, x + TILE, y, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
 		else if (y < 7 || y > (TILE * (Mth - 1) - 9) && dir == DIR.UP) { ptw = false; n = mpixel(x,y, x, y - TILE, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
 		else if (y < 7 || y > (TILE * (Mth - 1) - 9) && dir == DIR.DOWN) { ptw = false; n = mpixel(x,y, x, y + TILE, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
 
-/// TEST - remove
+/// TEST - this will be needed because of the above code flakyness around the 0 unpin y line and some wall edges
 if (document.getElementById("noclip").checked) return false;
-/// TEST - remove
+/// TEST
 
 // since edje walls can become exits, make sure shots expire at edge
 			if (cell == undefined) {
@@ -3044,7 +3038,8 @@ if (document.getElementById("noclip").checked) return false;
 			if (distance(this.x,this.y,collision.x,collision.y) < 20)
 					publish(EVENT.MONSTER_COLLIDE, this, collision);
 
-/*			if (collision.monster) {
+/* this does not seem to work as expected - theif passes most monsters and when he gets stuck, he doesnt kill the monster
+			if (collision.monster) {
 				this.blocked = true;
 				collision.hurt(this.type.damage, this);
 				}*/
@@ -3957,11 +3952,7 @@ var txsv = ":";
 // cross the unpin lines...
 							var bdist1, tpx = treasure.x, tpy = treasure.y, cpx = cell.x, cpy = cell.y;		// measure dest tele to line
 							var bdist2, ttx = treasure.x, tty = treasure.y, ctx = cell.x, cty = cell.y;		// measure src  tele to line
-/* this is the logic set...
-								if (cell.ptr.vx < 0 && !cell.ptr.vy) { bdist1 = distance(cell.x,cell.y,Mtw * TILE,treasure.y); bdist2 = distance(0,cell.y,treasure.x,treasure.y); }
-								if (cell.ptr.vx > 0 && !cell.ptr.vy) { bdist1 = distance(cell.x,cell.y,0,treasure.y); bdist2 = distance(Mtw * TILE,cell.y,treasure.x,treasure.y); }
-								if (cell.ptr.vy < 0 && !cell.ptr.vx) { bdist1 = distance(cell.x,cell.y,treasure.x,Mtw * TILE); bdist2 = distance(cell.x,0,treasure.x,treasure.y); }
-								if (cell.ptr.vy > 0 && !cell.ptr.vx) { bdist1 = distance(cell.x,cell.y,treasure.x,0); bdist2 = distance(cell.x,Mtw * TILE,treasure.x,treasure.y); }	*/
+
 							if (cell.ptr.vx || cell.ptr.vy && !game.viewport.outside(cell.x, cell.y, TILE, TILE)) {
 								if (cell.ptr.vx < 0) { tpx = Mtw * TILE; ctx = 0; }
 								if (cell.ptr.vx > 0) { tpx = 0; ctx = Mtw * TILE; }
@@ -3970,7 +3961,7 @@ var txsv = ":";
 								bdist1 = distance(cpx,cpy,tpx,tpy); bdist2 = distance(ctx,cty,ttx,tty);
 								if ((bdist1 + bdist2) < cdist) cdist = bdist1 + bdist2;
 								}
-// need to handle unpinned here
+
 							if (cdist < tdist)
 							{
 									tdist = cdist;
