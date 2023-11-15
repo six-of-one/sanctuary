@@ -373,7 +373,7 @@ Gauntlet = function() {
 // tell load a start was found - if not randomly add one to prevent load fail
 		fndstart = 0,
 // after {n} health tics with no player move / fire, all walls are exits
-/// RESTORE to 200 for arcade mode cbx
+/// RESTORE to 188 for g1 arcade mode cbx -- 328 for g2 mode
 		WALLSTALL = 100,
 // after {n} health tics with no player move / fire, all doors open -- G2 adds 5 to door stall times, g1 wallstall 188, g2 wallstall 328
 		DOORSTALL = 15, KEYSTALL = 34, doorstalled,
@@ -2170,7 +2170,7 @@ var lvu = document.getElementById("flvl").value;
 		 }
       else if (entity.exit)
 		 {
-				if (entity.type.sx != 9 || entity.frame == 4)
+				if (entity.type.sx != 9 || entity.frame == 4)		// catch moving exit only on full open frame
 /// TEST - remove
 //			document.title = player.x+"."+player.y+":x.y - dx: "+distance(player.x,player.y,entity.x,player.y)+" -- dy: "+distance(player.x,player.y,player.x,entity.y)+" -- delt:"+distance(player.x,player.y,entity.x,entity.y);
 					player.exit(entity);
