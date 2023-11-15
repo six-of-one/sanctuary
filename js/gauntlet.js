@@ -31,7 +31,7 @@ Gauntlet = function() {
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, wallsprites, entsprites,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth,
 		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
 		Mapdata, Huedata, Movexit, lastmex = 0, Movit = null, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy, mtm,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
@@ -1251,7 +1251,6 @@ Gauntlet = function() {
 // wall types all work to build wall appearance
 				 if (Mastercell.ptr.type.wall) {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
-//					 Mastercell.ptr.sy = Mastercell.ptr.type.sy; // backgrounds.png line of rubble shotwall
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
 					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
 				 }
@@ -5071,14 +5070,12 @@ var txsv = ":";
 
     maptiles: function(map, ctx) {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
-			 Mastersprites = this.sprites;
 //						0     2     4     6     8    10    12    14    16    18    20    22    24
 		var bch = [ 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 ],
 			 bcv = [ 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 4, 4, 0, 0, 0, 0, 1, 1 ];
 
 		function blnck(cell1,cell2,barr) { var bt = barr[cell1.wall]; if (bt > 0 && bt == barr[cell2.wall]) return true; };
 
-		 if (wallsprites == undefined) wallsprites = sprites;
 // option vo, to only redraw viewport tiles - wont work because of patchwork viewport on unpinned levels
 		 var vxz = 0, vyz = 0, vtw = map.tw, vth = map.th;
 
@@ -5347,8 +5344,6 @@ var txsv = ":";
             border  = 0,
             maxglow = FX.PLAYER_GLOW.border;
 
-		 if (entsprites == undefined) entsprites = sprites;
-
 			if (exiting > 0.5) // player is 'gone' once halfway through exit
           return;
 
@@ -5404,12 +5399,14 @@ var txsv = ":";
 		 hold[held] = null;
       for(n = 0, max = entities.length ; n < max ; n++) {
         entity = entities[n];
-			if (entity.type.wall && entity.spriteset == undefined) {
-				entity.spriteset = wallsprites;
-				if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F) entity.spriteset = this.sprites.shotwalls;
+			if (entity.spriteset == undefined) {
+				if (entity.type.wall) {
+					entity.spriteset = this.sprites.backgrounds;
+					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F) entity.spriteset = this.sprites.shotwalls;
+					}
+				else
+				entity.spriteset = sprites;
 				}
-			else
-			if (entity.spriteset == undefined) entity.spriteset = sprites;
 			entity.vx = 0; entity.vy = 0;
         if (entity.active && (!entity.onrender || entity.onrender(frame) !== false) && !viewport.outside(entity.x, entity.y, TILE, TILE)) {
 // note: RUNORG
@@ -5420,28 +5417,19 @@ var txsv = ":";
 				ctx.filter = "hue-rotate("+document.getElementById("ashue").value+"deg)";
 /// TEST - update
 
-				if (entity.type.wall) {
+					if (entity.type.pushwal)
+					{ hold[held++] = entity; hold[held] = null; }
+					else
 						this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
-					}
-				else if (entity.door)
-						this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
-				else if (entity.numer)
-						this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
-				else {
-						if (entity.type.pushwal)
-						{ hold[held++] = entity; hold[held] = null; }
-						else
-							this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
-						}
-						entity.vx = Vx;
-						entity.vy = Vy;
+
+					entity.vx = Vx;
+					entity.vy = Vy;
 				ctx.filter = "hue-rotate(0deg)";
         }
       }
 		held = 0;		// save and do pushwalls last
 		while (hold[held] != null) {
 			entity = hold[held++];
-				this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 						entity.vx = Vx;
 						entity.vy = Vy;

@@ -15,7 +15,6 @@ dev:
 push wall collision
  \ elevate them above other treasure tiles
 
-upgrade sprites to always use ent.sx / ent.sy instead of ent.type.sx (and maybe the rest as well)
 
 loadable wall segments & cell.spriteset
 
@@ -343,6 +342,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- upgrade sprites to always use ent.sx / ent.sy instead of ent.type.sx (and maybe the rest as well)
 
 x-- rotated maps with a single unpin edge end up scrolling wrong
 
