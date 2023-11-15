@@ -2771,7 +2771,8 @@ if (document.getElementById("noclip").checked) return false;
 		if (cb == true || level.unpinx) Munpinx = true;
 		cb = document.getElementById("yunp").checked;
 		if (cb == true || level.unpiny) Munpiny = true;
-		if (Mrot) { var swp = Munpinx; Munpinx = Munpiny; Munpiny = swp; } // rotate swaps single unpins
+		var rdunpx = level.unpinx, rdunpy = level.unpiny;
+		if (Mrot) { var swp = Munpinx; Munpinx = Munpiny; Munpiny = swp; rdunpx = level.unpiny; rdunpy = level.unpinx; } // rotate swaps single unpins
 /// TEST - remove
 		 if (level.mw == null || level.mw == undefined) { level.mw = source.width; level.mh = source.height; }
 		 else { source.width = level.mw; source.height = level.mh; }
@@ -2791,8 +2792,8 @@ if (document.getElementById("noclip").checked) return false;
 		if (hues.width == source.width && hues.height == source.height) dohu = true;
 
 // while looking nice, this breaks g1 lvl 3 doors (a fix is in place, but the former broken doors, may not sound off
-		if (Munpinx && (level.unpinx != Munpinx)) source.width--;
-		if (Munpiny && (level.unpiny != Munpiny)) source.height--;
+		if (Munpinx && (rdunpx != Munpinx)) source.width--;
+		if (Munpiny && (rdunpy != Munpiny)) source.height--;
 
 		var tw     = source.width,
           th     = source.height,
@@ -2852,8 +2853,8 @@ if (document.getElementById("noclip").checked) return false;
       self.w        = Mtw * TILE;
       self.h        = Mth * TILE;
 
-		if (level.unpinx) { Munhx = Mtw * TILE - 1; }
-		if (level.unpiny) { Munhy = Mth * TILE - 12; }
+		if (Munpinx) { Munhx = Mtw * TILE - 1; }
+		if (Munpiny) { Munhy = Mth * TILE - 12; }
 
 		Blendcanvas1 = Game.createCanvas(TILE, TILE);
       Blendctx1    = Blendcanvas1.getContext('2d');

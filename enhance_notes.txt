@@ -35,6 +35,8 @@ dead player is only lvl 1 bone pile
 
 is it still too easy to hit exits (exit maze) & stun tiles
 
+look at treasure collect giving score mult logic
+
 
 need sounds:
 
@@ -342,7 +344,7 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
-rotated maps with a single unpin edge end up scrolling wrong
+x-- rotated maps with a single unpin edge end up scrolling wrong
 
 x-- variable viewport so arcade mode can be accomodated
 
