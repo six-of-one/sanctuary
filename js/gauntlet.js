@@ -3838,6 +3838,10 @@ var txsv = ":";
           source = level.source,
           tw     = Mtw; //source.width,
           th     = Mth; //source.height;
+		var cen = Math.floor(this.health / 100) * 100,
+			 dec = Math.floor((this.health - cen) / 10),
+			 ons = this.health - cen - (dec * 10),
+			 od = (dec % 2 === 1);
 
       if (treasure.type.pushwal)
 		 {
@@ -3927,9 +3931,14 @@ var txsv = ":";
 		 }
 
 		 var hrp = undefined;
-		 if (treasure.type.nohlp == RNDHLP) treasure.type.health = 50 + Game.Math.randomInt(1,3) * 50;
+		 if (treasure.type.nohlp == RNDHLP) {
+// "odd five, even seven" - give 200 health
+			 if ((od && ons == 5) || (!od && ons == 7) treasure.type.health = 200;
+			 else treasure.type.health = 50 + Game.Math.randomInt(1,2) * 50;
+
+			}
 		 if (treasure.type.health > 0) hrp = treasure.type.health;
-		 if (!treasure.type.damage) {
+		 if (!treasure.type.damage) { alert("? fd: "+this.health+" : "+cen+" : "+od+" : "+ons);
 			 helpdis(treasure.type.nohlp, undefined, 2000, hrp, undefined);
 			 if (treasure.type.blkhlp != undefined) HELPCLEAR[treasure.type.blkhlp] = 0;
 		 }
