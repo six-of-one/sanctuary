@@ -3933,12 +3933,12 @@ var txsv = ":";
 		 var hrp = undefined;
 		 if (treasure.type.nohlp == RNDHLP) {
 // "odd five, even seven" - give 200 health
-			 if ((od && ons == 5) || (!od && ons == 7) treasure.type.health = 200;
+			 if ((od && ons == 5) || (!od && ons == 7)) treasure.type.health = 200;
 			 else treasure.type.health = 50 + Game.Math.randomInt(1,2) * 50;
 
 			}
 		 if (treasure.type.health > 0) hrp = treasure.type.health;
-		 if (!treasure.type.damage) { alert("? fd: "+this.health+" : "+cen+" : "+od+" : "+ons);
+		 if (!treasure.type.damage) {
 			 helpdis(treasure.type.nohlp, undefined, 2000, hrp, undefined);
 			 if (treasure.type.blkhlp != undefined) HELPCLEAR[treasure.type.blkhlp] = 0;
 		 }

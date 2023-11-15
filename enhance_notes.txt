@@ -247,15 +247,27 @@ g2 (val, skill 2) 328 hlth (5m 50s watch)
 
 sanctuary elements:
 
+shoot thru diagonal wall issue
+
 generators for: death, acid puddle, theif, mugger, super sorceror
 more elements added to shot gudwall
++500 pts for empty locked chest
+limited life booster (amiga gfx set: ank)
 
-maze solver path system
+lobber targeting may be different (& range)
+poison (consumed) effect is different
+multiple added fake items
+moving exit randomness diff
+phase walls not operate same (standing in wall appear spot)
+
 random level contents profile (used for treasure room content too)
+maze solver path system
 
 multi color walls - include shotwalls, gud walls, pass & cycle walls
+blur together diff wall colors
 indiv cell invisible walls + invis shotwall (seperate from level wide invis walls)
 \_ visible walls when level wide walls are invis
+invis wall hint override
 
 more floor tiles display (smol) besides main level tile
 hue override ents, cell tile & content
@@ -265,7 +277,6 @@ adds new floor tile gfx
 
 liquid textures (slow & damage so far)
 
-multiple added fake items
 
 
 >>>>>>>>>>>>>>>>>>>>>>
