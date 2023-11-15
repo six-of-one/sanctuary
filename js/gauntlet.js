@@ -1252,8 +1252,8 @@ Gauntlet = function() {
 				 if (Mastercell.ptr.type.wall) {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
 					 Mastercell.ptr.sy = Mastercell.ptr.type.sy; // backgrounds.png line of rubble shotwall
-					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.spriteset = Mastermap.sprites.shotwalls; }
-					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 15; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.spriteset = Mastermap.sprites.shotwalls; }
+					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
+					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
 				 }
 				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2 || ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) {
 					 Mastercell.ptr.rwall = (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2);
@@ -5077,6 +5077,7 @@ var txsv = ":";
 
     maptiles: function(map, ctx) {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
+			 Mastersprites = this.sprites;
 //						0     2     4     6     8    10    12    14    16    18    20    22    24
 		var bch = [ 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 ],
 			 bcv = [ 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 4, 4, 0, 0, 0, 0, 1, 1 ];
@@ -5409,7 +5410,10 @@ var txsv = ":";
 		 hold[held] = null;
       for(n = 0, max = entities.length ; n < max ; n++) {
         entity = entities[n];
-			if (entity.type.wall && entity.spriteset == undefined) entity.spriteset = wallsprites;
+			if (entity.type.wall && entity.spriteset == undefined) {
+				entity.spriteset = wallsprites;
+				if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F) entity.spriteset = this.sprites.shotwalls;
+				}
 			else
 			if (entity.spriteset == undefined) entity.spriteset = sprites;
 			entity.vx = 0; entity.vy = 0;
