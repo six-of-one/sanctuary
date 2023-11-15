@@ -1251,7 +1251,7 @@ Gauntlet = function() {
 // wall types all work to build wall appearance
 				 if (Mastercell.ptr.type.wall) {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
-					 Mastercell.ptr.sy = Mastercell.ptr.type.sy; // backgrounds.png line of rubble shotwall
+//					 Mastercell.ptr.sy = Mastercell.ptr.type.sy; // backgrounds.png line of rubble shotwall
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
 					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
 				 }
@@ -2906,6 +2906,7 @@ if (document.getElementById("noclip").checked) return false;
 		entity.numer = false; // these are a reused pool, turn this off
       entity.reflect = 0;
       entity.norelod = false;
+		if (entity.type != undefined) { entity.sx = entity.type.sx; entity.sy = entity.type.sy; }
       return entity;
     },
 
@@ -3623,6 +3624,8 @@ var txsv = ":";
 
     join: function(type) {
       this.type      = type;
+      this.sx        = type.sx;
+      this.sy        = type.sy;
       this.dead      = false;
       this.exiting   = false;
       this.firing    = false;
@@ -4523,11 +4526,11 @@ var txsv = ":";
       if (this.dead)
         this.frame = 32;
       else if (this.exiting)
-        this.frame = this.type.sx + animate(this.exiting.count, this.exiting.fpf, 8);
+        this.frame = this.sx + animate(this.exiting.count, this.exiting.fpf, 8);
       else if (is.valid(this.moving.dir) || this.firing)
-        this.frame = this.type.sx + this.dir + (8 * animate(frame, this.type.fpf, this.type.frames));
+        this.frame = this.sx + this.dir + (8 * animate(frame, this.type.fpf, this.type.frames));
       else
-        this.frame = this.type.sx + this.dir;
+        this.frame = this.sx + this.dir;
 // invisible status - last 10 secs flicker slows down
 		 if (this.linvis > 10 || (timestamp() & 0x200))
 		 if (this.linvis && (timestamp() & 0x80)) this.frame = 33;
@@ -5330,8 +5333,8 @@ var txsv = ":";
       if (player.onrender(frame) !== false) {
 
         var sprites = this.sprites.entities,
-            sx      = player.type.sx + player.frame,
-            sy      = player.type.sy,
+            sx      = player.sx + player.frame,
+            sy      = player.sy,
             x       = player.x,
             y       = player.y - 2, // wiggle, wiggle, wiggle
             exiting = player.exiting ? (player.exiting.max - player.exiting.count) / player.exiting.max : 0,
@@ -5421,14 +5424,14 @@ var txsv = ":";
 						this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 					}
 				else if (entity.door)
-						this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+						this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else if (entity.numer)
-						this.sprite(ctx, entity.spriteset, viewport, entity.type.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+						this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 				else {
 						if (entity.type.pushwal)
 						{ hold[held++] = entity; hold[held] = null; }
 						else
-							this.sprite(ctx, entity.spriteset, viewport, entity.type.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+							this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 						}
 						entity.vx = Vx;
 						entity.vy = Vy;
@@ -5438,7 +5441,8 @@ var txsv = ":";
 		held = 0;		// save and do pushwalls last
 		while (hold[held] != null) {
 			entity = hold[held++];
-				this.sprite(ctx, entity.spriteset, viewport, entity.type.sx + (entity.frame || 0), entity.type.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+				this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+				this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 						entity.vx = Vx;
 						entity.vy = Vy;
 			}
