@@ -17,6 +17,7 @@ push wall collision
 
 
 loadable wall segments & cell.spriteset
+- shotwall colors not hue shifting
 
 change fadeout on 1pl die - maybe allow re-entry if right away (10 - 15 secs hang)
 zoom out & zoom back in on re-enter, or if no re-ent go to splash loop
@@ -25,6 +26,8 @@ make it so difficulty cant be set back below 9 after racking a buku score on dif
 
 
 imm issues:
+
+cycle walls display wrong off state ?
 
 score table didnt show after a quit
 
@@ -159,43 +162,48 @@ movement is quirky compared to original
 >>>>>>>>>>>>>>>>>>>>>>
 G I elements:
 
-4 players & shots
-start / exit, exit to 4, exit to 8
+x-- 4 players & shots
+x-- start / exit, exit to 4, exit to 8
 
-treasure: chest, bag
-food: bottle/skin, turkey plate, ham plate, plate w/cup
-potion bombs: blue (shootable), orange (no shot)
-keys, doors
-special potions: xspeed, xshotpwr, xshotspeed, xarmor, xfight, xmagic
-limited invisibility
+x-- treasure: chest, bag
+x-- food: bottle/skin (shot), turkey plate, ham plate, plate w/cup
+x-- potion bombs: blue (shootable), orange (no shot)
+x-- keys, doors (doors open counter clock, but occasionally do odd stops)
+x-- special potions: xspeed, xshotpwr, xshotspeed, xarmor, xfight, xmagic (not sure of all exact stats)
+x-- limited invisibility
 
-generator: pyramidical, bone piles -- 3 levels
-monster: grunt, ghost, demon, sorceror, lobber -- 3 levels
-mon shots: demon, lobber
-death: point rotation system for potion bombing
-thief & treasure bag from shooting thief (also stolen key or potion when theif shot)
+x-- generator: pyramidical, bone piles -- 3 levels
+x-- monster: grunt, ghost, demon, sorceror, lobber -- 3 levels
+x-- mon shots: demon, lobber
+x-- death: point rotation system for potion bombing
+x-- thief & treasure bag from shooting thief (also stolen key or potion when theif shot)
+    \_ theif has some issues, not blocked, no monster fight
 
-shootable walls - the "dirt" kind
-traps that open walls
-teleporters
+x-- shootable walls - the "dirt" kind
+x-- traps that open walls
+x-- teleporters
 
-level wrap to opposite side
-timed treasure rooms
+x-- level wrap to opposite side (some issues)
+x-- timed treasure rooms
 
-all related audio fx
-announcer info/ taunts
+x-- all related audio fx (not all in play)
+x-- announcer info/ taunts
 
-save last map to replay on re-entry as map 8
-map layout
+x-- save last map to replay on re-entry as map 8
+x-- map layout
 level population
 
+-- these are coded in to operate, but not fixed in level flow yet
 corner unpin above level 100
 levels flip / mirror above 100 -- code is done, needs logic control
+
 shots stun & hurt other player levels
 
-door stall is 15 health tics
-wall stall is ? health tics
-display pts for: treasures, potion bombing death
+x-- door stall is 15 health tics
+x-- wall stall is 188 health tics
+x-- display pts for: treasures, potion bombing death
+
+x-- viewport size
 
 -----------------
 do we use these ?:
@@ -212,8 +220,11 @@ w - e - z - v
 g2 stor pl colors
 g - y - b - r
 
-x-- locked treasures
+x-- rnd value bottle food (max val 200 on 10s odd: five, 10s even: seven)
+display pts on rnd food
+x-- locked treasures (& load out)
 x-- poison food / potion that slows monsters
+x-- exit to 6
 x-- moving exits
 x-- moving walls (regular phase, not random)
 x-- invisible walls 
@@ -222,15 +233,17 @@ super sorceror
 x-- mugger - thief that steals food
 dragon
 x-- temp potions - repulse, invuln, super shot, reflective, teleport
+x-- multiple trap/ remove walls
 x-- stun tiles
 x-- force fields
 x-- moveable (pushable) walls
-x-- shootable "regular" walls that give goody
+x-- shootable "regular" walls that give goody (& load out)
 x-- "flicker" random walls
 "special" treasure room
 monsters move different, or faster
 x- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or super / reflect shot destroys)
 "IT" - not sure want this - 10 pts for getting tho, no pts on tag
+diff color grunts
 
 g1/g2 wall & door stall times @ difficulty - appx ~ times
 door
@@ -247,11 +260,14 @@ g2 (val, skill 2) 328 hlth (5m 50s watch)
 
 sanctuary elements:
 
-shoot thru diagonal wall issue
+skill selection (arcade op chose)
+select starting level 1-7 or last 8th played
+
 
 generators for: death, acid puddle, theif, mugger, super sorceror
 more elements added to shot gudwall
 +500 pts for empty locked chest
+add pts for other things not pointed (lvl exit, acid blob, IT (killable too), shot walls...)
 limited life booster (amiga gfx set: ank)
 
 lobber targeting may be different (& range)
@@ -277,7 +293,11 @@ adds new floor tile gfx
 
 liquid textures (slow & damage so far)
 
+viewport size adjustable 10 - 40
 
+monsters seem slightly smarter
+
+shoot thru diagonal wall issue
 
 >>>>>>>>>>>>>>>>>>>>>>
 expansion:
