@@ -1249,7 +1249,7 @@ Gauntlet = function() {
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
 				spref.addTreasure(x, y, ad);
 // wall types all work to build wall appearance
-				 if (Mastercell.ptr.type.pushwal) Mastercell.ptr.sx = walltype(tx, ty, map, iswall);
+				 if (ad == TREASURE.PUSH) Mastercell.ptr.sx = walltype(tx, ty, map, iswall); // PUSHWALEN
 				 if (Mastercell.ptr.type.wall) {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
@@ -5411,7 +5411,7 @@ var txsv = ":";
       for(n = 0, max = entities.length ; n < max ; n++) {
         entity = entities[n];
 			if (entity.spriteset == undefined) {
-				if (entity.type.wall) {
+				if (entity.type.wall || entity.type.pushwal) {
 					entity.spriteset = this.sprites.backgrounds;
 					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8110 && entity.pixel <= 0x812F || entity.pixel == PUSHWALEN) entity.spriteset = this.sprites.shotwalls;
 					}
