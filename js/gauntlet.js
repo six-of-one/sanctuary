@@ -1105,7 +1105,7 @@ Gauntlet = function() {
 	function isp(pixel, type)      { return ((pixel & PIXEL.MASK.TYPE) === type); };
 	function type(pixel)           { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 	function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
-	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; if (pixel >= 0x8210 && pixel <= 0x822F) return true; if (pixel = PUSHWALEN) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
+	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; if (pixel >= 0x8210 && pixel <= 0x822F) return true; if (pixel == PUSHWALEN) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
 	function iswallpr(pixel)       { if (pixel >= PXWALRND && pixel <= PXWALPHAS) return true; };
 	function iswallrw(pixel)       { return (isp(pixel, PIXEL.WALL))     };
 	function isfloor(pixel)        { return isp(pixel, PIXEL.FLOOR);     };
@@ -5413,7 +5413,7 @@ var txsv = ":";
 			if (entity.spriteset == undefined) {
 				if (entity.type.wall) {
 					entity.spriteset = this.sprites.backgrounds;
-					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8110 && entity.pixel <= 0x812F || entity.pixel = PUSHWALEN) entity.spriteset = this.sprites.shotwalls;
+					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8110 && entity.pixel <= 0x812F || entity.pixel == PUSHWALEN) entity.spriteset = this.sprites.shotwalls;
 					}
 				else
 				entity.spriteset = sprites;
