@@ -37,7 +37,7 @@ Gauntlet = function() {
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
-		ftilestr, fcellstr, FCUSTILE = 37, FCUSTIL2 = 0, FDESTWALL = 38, FAKES = 29, HINTIV = 40, INVWALSY = 1, INVWALA = 0,
+		ftilestr, fcellstr, FCUSTILE = 37, FCUSTIL2 = 0, FDESTWALL = 38, FAKES = 29, PWSY = 30, HINTIV = 40, INVWALSY = 1, INVWALA = 0,
 
 		 MEXHIGH = 0xF0FFF0,
 		 MEXLOW = 0x00000F,
@@ -268,29 +268,29 @@ Gauntlet = function() {
 		MOVEX = 0x4040,
 // special help for (diff from "all walls are invisible") invisible walls
 		INVSWALCD = 0x811F, INVWALCD = 0x812F, IVWHLP = 76, IVWSHLP = 78,
-		PUSHWAL = 0x80D0, PWALLSPD = 0.6, pmvx, pmvy,
+		PUSHWALEN = 0x80D0, PWALLSPD = 0.6, pmvx, pmvy,
 
       TREASURE = {
-        HEALTH:  { sx: 0, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
-        HEALRND: { sx: 2, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'collectfood',  nohlp: 74   },
-        FOOD1:   { sx: 3, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 3,   sound: 'collectfood',  nohlp: 16  },
-        FOOD2:   { sx: 4, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 3,   sound: 'collectfood',  nohlp: 16  },
-        FOOD3:   { sx: 5, sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 3,   sound: 'collectfood',  nohlp: 16   },
-        POISON:  { sx: 1, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion',  nohlp: 80 },
+        HEALTH:  { sx: 0,  sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 2,   sound: 'collectfood', nohlp: 16 },
+        HEALRND: { sx: 2,  sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  200, canbeshot: 2,   sound: 'collectfood',  nohlp: 74   },
+        FOOD1:   { sx: 3,  sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 3,   sound: 'collectfood',  nohlp: 16  },
+        FOOD2:   { sx: 4,  sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 3,   sound: 'collectfood',  nohlp: 16  },
+        FOOD3:   { sx: 5,  sy: 11, frames: 1, fpf: FPS/10, score:  10, health:  100, canbeshot: 3,   sound: 'collectfood',  nohlp: 16   },
+        POISON:  { sx: 1,  sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion',  nohlp: 80 },
         KEY:     { sx: 21, sy: 10, frames: 1, fpf: FPS/10, score:  100, key:    true,  sound: 'collectkey' , nohlp: 18   },
-        POTION:  { sx: 6, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion', nohlp: 19 },
-        POTIONORG:  { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', nohlp: 19  },
-        BADPOT:  { sx: 8, sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion',  nohlp: 80 },
+        POTION:  { sx: 6,  sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 2,  sound: 'collectpotion', nohlp: 19 },
+        POTIONORG: { sx: 7, sy: 11, frames: 1, fpf: FPS/10, score:  50, potion: true, canbeshot: 0,  sound: 'collectpotion', nohlp: 19  },
+        BADPOT:  { sx: 8,  sy: 11, frames: 1, fpf: FPS/10, score:   0, damage:  50, poison: true, canbeshot: 2,   sound: 'collectpotion',  nohlp: 80 },
         GOLD:    { sx: 16, sy: 10, frames: 3, fpf: FPS/10, score: 100, canbeshot: 3,  scmult : 1, troom: 1,             sound: 'collectgold', nohlp: 14, blkhlp: 15   },
         LOCKED:  { sx: 19, sy: 10, frames: 1, fpf: FPS/10, score: 500,  lock: true, gud: 1, sound: 'unlkches', nohlp:   56 },
         BAG:     { sx: 20, sy: 10, frames: 1, fpf: FPS/10, score: 500, canbeshot: 3,  scmult : 3.5, troom: 1,                sound: 'collectgold', nohlp: 15, blkhlp: 14   },
 // teleport, trap, stun, force field tiles as treasure objects for now -- these are animated, and operate on touch so it works
-        TELEPORT:       { sx: 1, sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport',  nohlp: 25  },
+        TELEPORT:   { sx: 1,  sy: 12, frames:4, speed: 1*FPS, fpf: FPS/5, teleport: true,   sound: 'teleport',  nohlp: 25  },
         TRAP:       { sx: 23, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/5, trap: true,   sound: 'trap', nohlp: 20 },
         STUN:       { sx: 27, sy: 10, frames:4, speed: 1*FPS, fpf: FPS/4, stun: true,   sound: 'stun', nohlp: 49  },
-        PUSH:       { sx: 0, sy: 12, frames:1, speed: 1*FPS, fpf: FPS/4, health:270, canbeshot: 2, pushwal: 6,   sound: 'null', nohlp: 57  },
+        PUSH:       { sx: 0,  sy: 30, frames:1, speed: 1*FPS, fpf: FPS/4, health:270, canbeshot: 2, pushwal: 6,   sound: 'null', nohlp: 57  },
 // extra power potions
-        XSPEED:     { sx: 9, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxspd',  sound: 'collectpotion', nohlp: 1  },
+        XSPEED:     { sx: 9,  sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxspd',  sound: 'collectpotion', nohlp: 1  },
         XSHOTPWR:   { sx: 10, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtpwr',   sound: 'collectpotion',  nohlp: 2  },
         XSHOTSPD:   { sx: 11, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxshtspd',   sound: 'collectpotion', nohlp: 3  },
         XARMOR:     { sx: 12, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, potion: true, canbeshot: 2, annc: 'ancxarm',   sound: 'collectpotion', nohlp: 4  },
@@ -302,30 +302,30 @@ Gauntlet = function() {
         LIMREPUL:       { sx: 17, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, annc: 'g2anrep',   sound: 'collectpotion',  nohlp: 52  },
         LIMREFLC:       { sx: 18, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, annc: 'g2anrefls',   sound: 'collectpotion', nohlp: 53  },
         LIMSUPER:       { sx: 19, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,  sound: 'collectpotion', nohlp: 54  },
-        LIMTELE:       { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, annc: 'g2antt',   sound: 'collectpotion',  nohlp: 55  },
-        LIMANK:       { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 75  },
+        LIMTELE:        { sx: 20, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true, annc: 'g2antt',   sound: 'collectpotion',  nohlp: 55  },
+        LIMANK:         { sx: 21, sy: 11, frames:1, speed: 1*FPS, fpf: FPS/4, powers: true,   sound: 'collectpotion',  nohlp: 75  },
 // shootable wall - see grid 38 of backgrounds
-		  FAKEENTR:			{ sx: 0, sy: 38, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:30, wall:true,   sound: 'null' ,  nohlp: 26}, // fake entry to hold slot of old shotwall
-        SHOTWALL:       { sx: 0, sy: 2, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:30, wall:true,   sound: 'null' ,  nohlp: 26},	// new shotwalls, have wall form with rubble instaed of the single square of unformed rubble
-        SHOTWALL2:       { sx: 0, sy: 16, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:30, wall:true,   sound: 'null' ,  nohlp: 26},
+		  FAKEENTR:			{ sx: 0,  sy: 38, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:30, wall:true,   sound: 'null' ,  nohlp: 26}, // fake entry to hold slot of old shotwall
+        SHOTWALL:       { sx: 0,  sy: 2, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:30, wall:true,   sound: 'null' ,  nohlp: 26},	// new shotwalls, have wall form with rubble instaed of the single square of unformed rubble
+        SHOTWALL2:      { sx: 0,  sy: 16, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:30, wall:true,   sound: 'null' ,  nohlp: 26},
 // shotable and non-shot fake items, see grid 39 of backgrounds
-        SHOTFAKER:       { sx: 8, sy: 29, frames:1, speed: 1*FPS, fpf: FPS/4, score:  50, canbeshot: 2, health:16, wall:true,   sound: 'null' , nohlp: 58 },
-        PERMFAKER:       { sx: 8, sy: 29, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 3, wall:true,   sound: 'null' , nohlp: 58 },
+        SHOTFAKER:      { sx: 8,  sy: 29, frames:1, speed: 1*FPS, fpf: FPS/4, score:  50, canbeshot: 2, health:16, wall:true,   sound: 'null' , nohlp: 58 },
+        PERMFAKER:      { sx: 8,  sy: 29, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 3, wall:true,   sound: 'null' , nohlp: 58 },
 // this is the red wall pillar thingy code:0x8130 with [ inward ] facing up, down, left, right by MEXLOW bits 0, 1, 2, 3
-        FFIELDUNIT:       { sx: 0, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
-        FFIELDUNITD:       { sx: 4, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
-        FFIELDUNITL:       { sx: 8, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
-        FFIELDUNITR:       { sx: 12, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
+        FFIELDUNIT:     { sx: 0,  sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
+        FFIELDUNITD:    { sx: 4,  sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
+        FFIELDUNITL:    { sx: 8,  sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
+        FFIELDUNITR:    { sx: 12, sy: 27, frames:4, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null'  },
 // this is the power field down - specced by MEXLOW bit 4 of FFIELDUNIT = 0x8130
-        FFIELDDIM:       { sx: 27, sy: 25, frames:1, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 61  },
+        FFIELDDIM:      { sx: 27, sy: 25, frames:1, speed: 1*FPS, fpf: FPS/5, damage: 0, sound: 'null',  nohlp: 61  },
 // this is the field power that damages, this is toggled on by ffieldpulse ops
-        FFIELDPOW:       { sx: 28, sy: 25, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 3, sound: 'ffield',  nohlp: 61  },
+        FFIELDPOW:      { sx: 28, sy: 25, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 3, sound: 'ffield',  nohlp: 61  },
 // animated floor items
-        WATER:      { sx: 0, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
+        WATER:      { sx: 0,  sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
 // series of water boundary blocks code: 0x8140, with a pool wall appearing top, center and right, selected by MEXLOW 1, 2, 3
-        WATERT:     { sx: 4, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
-        WATERC:     { sx: 8, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
-        WATERR:     { sx: 12 , sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
+        WATERT:     { sx: 4,  sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
+        WATERC:     { sx: 8,  sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
+        WATERR:     { sx: 12, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.5, damage: 0, sound: 'null', nohlp: 82  },
 // series of lava blocks code: 0x8150. with MEXLOW as water
         LAVA:       { sx: 16, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.8, damage: 10, sound: 'null', nohlp: 83  },
         LAVAT:      { sx: 20, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.8, damage: 10, sound: 'null', nohlp: 83  },
@@ -338,14 +338,14 @@ Gauntlet = function() {
         FIRESTK:    { sx: 32, sy: 26, frames:4, speed: 1*FPS, fpf: FPS/5, gluesp: 0.7, damage: 0, sound: 'null', nohlp: 999  },
         PFLOOR1:    { sx: 28, sy: 27, frames:8, speed: 1*FPS, fpf: FPS/2, damage: 0, sound: 'null', nohlp: 999  },
 // other "wall" ents
-        WALLGUD:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true, gud: 3,   sound: 'shotwall',  nohlp: 65 },
-        WALLGUD2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true, gud: 3,   sound: 'shotwall',  nohlp: 65 },
-        WALLPASS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
-        WALLPASS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
-        WALLRND:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
-        WALLRND2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
-        WALLPHS:       { sx: 0, sy: 1, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  bsound: 'wallphase',  nohlp: 81 },
-        WALLPHS2:       { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  bsound: 'wallphase',  nohlp: 81 },
+        WALLGUD:       { sx: 0, sy: 1,  frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true, gud: 3,   sound: 'shotwall',  nohlp: 65 },
+        WALLGUD2:      { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, canbeshot: 2, health:10, wall:true, gud: 3,   sound: 'shotwall',  nohlp: 65 },
+        WALLPASS:      { sx: 0, sy: 1,  frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
+        WALLPASS2:     { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:true,   sound: 'null',  nohlp: 999 },
+        WALLRND:       { sx: 0, sy: 1,  frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
+        WALLRND2:      { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:3,  sound: 'null',  nohlp: 72 },
+        WALLPHS:       { sx: 0, sy: 1,  frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  bsound: 'wallphase',  nohlp: 81 },
+        WALLPHS2:      { sx: 0, sy: 17, frames:1, speed: 1*FPS, fpf: FPS/4, wall:4,  bsound: 'wallphase',  nohlp: 81 },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -1105,7 +1105,7 @@ Gauntlet = function() {
 	function isp(pixel, type)      { return ((pixel & PIXEL.MASK.TYPE) === type); };
 	function type(pixel)           { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 	function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
-	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; if (pixel >= 0x8210 && pixel <= 0x822F) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
+	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; if (pixel >= 0x8210 && pixel <= 0x822F) return true; if (pixel = PUSHWALEN) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
 	function iswallpr(pixel)       { if (pixel >= PXWALRND && pixel <= PXWALPHAS) return true; };
 	function iswallrw(pixel)       { return (isp(pixel, PIXEL.WALL))     };
 	function isfloor(pixel)        { return isp(pixel, PIXEL.FLOOR);     };
@@ -1249,6 +1249,7 @@ Gauntlet = function() {
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
 				spref.addTreasure(x, y, ad);
 // wall types all work to build wall appearance
+				 if (Mastercell.ptr.type.pushwal) Mastercell.ptr.sx = walltype(tx, ty, map, iswall);
 				 if (Mastercell.ptr.type.wall) {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
@@ -5412,7 +5413,7 @@ var txsv = ":";
 			if (entity.spriteset == undefined) {
 				if (entity.type.wall) {
 					entity.spriteset = this.sprites.backgrounds;
-					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8110 && entity.pixel <= 0x812F) entity.spriteset = this.sprites.shotwalls;
+					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8110 && entity.pixel <= 0x812F || entity.pixel = PUSHWALEN) entity.spriteset = this.sprites.shotwalls;
 					}
 				else
 				entity.spriteset = sprites;
@@ -5432,7 +5433,7 @@ var txsv = ":";
 					if (entity.type.pushwal)
 					{ hold[held++] = entity; hold[held] = null; }
 					else
-					  if (map.level.wall != WALL.INVIS || entity.lvlwall != true)
+					  if (Mastermap.level.wall != WALL.INVIS || entity.lvlwall != true)
 							this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 
 					entity.vx = Vx;
