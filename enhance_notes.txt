@@ -17,21 +17,20 @@ push wall collision
 
 
 loadable wall segments & cell.spriteset
-- shotwall colors not hue shifting
 
 change fadeout on 1pl die - maybe allow re-entry if right away (10 - 15 secs hang)
 zoom out & zoom back in on re-enter, or if no re-ent go to splash loop
 
 make it so difficulty cant be set back below 9 after racking a buku score on diff: 999 or so
 
-check what shotwalls do when reg level walls are invis
 
 
 imm issues:
 
-cycle walls display wrong off state ?
+cycle walls display wrong off state ?	(is this rotate issue? not seeing now)
 
 score table didnt show after a quit
+started one time from score talbe and scores did not go away
 
 g2 ? food research (find in files, or redo)
 
@@ -43,7 +42,6 @@ is it still too easy to hit exits (exit maze) & stun tiles
 
 look at treasure collect giving score mult logic
 
-started one time from score talbe and scores did not go away
 
 
 need sounds:
@@ -430,6 +428,9 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- shotwall colors not hue shifting
+   \_check what shotwalls do when reg level walls are invis
 
 x-- upgrade sprites to always use ent.sx / ent.sy instead of ent.type.sx (and maybe the rest as well)
 
