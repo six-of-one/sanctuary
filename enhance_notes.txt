@@ -43,6 +43,8 @@ is it still too easy to hit exits (exit maze) & stun tiles
 
 look at treasure collect giving score mult logic
 
+started one time from score talbe and scores did not go away
+
 
 need sounds:
 

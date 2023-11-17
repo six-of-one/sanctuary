@@ -37,7 +37,7 @@ Gauntlet = function() {
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
-		ftilestr, fcellstr, FCUSTILE = 37, FCUSTIL2 = 0, FDESTWALL = 38, FAKES = 29, HINTIV = 40, INVWALA = 15,
+		ftilestr, fcellstr, FCUSTILE = 37, FCUSTIL2 = 0, FDESTWALL = 38, FAKES = 29, HINTIV = 40, INVWALSY = 1, INVWALA = 0,
 
 		 MEXHIGH = 0xF0FFF0,
 		 MEXLOW = 0x00000F,
@@ -52,7 +52,7 @@ Gauntlet = function() {
 	scoredex = 0, dpstim = 0, dpsacc = 0,
 	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
-// invisible wall & shotable invisible are in FAKES, item 15 = INVWALA
+// invisible wall & shotable invisible are in INVWALSY, item 0 = INVWALA (0 shadow)
 			G1WALL = [	0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 26	],
 
 // handle death potion bomb rotating score -
@@ -4230,7 +4230,7 @@ var txsv = ":";
 					if (Math.random() < 0.45) {
 //						wallupd = true;
 						if (entity.nohlp == 999) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }
-						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = INVWALA; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
+						else { entity.nohlp = 999; entity.sy = INVWALSY; entity.sx = INVWALA; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
 						}
 					if (entity.pwall && entity.hb < heartbeet) {
 						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
@@ -4241,7 +4241,7 @@ var txsv = ":";
 //						var pw = entity.pwall;
 						if (Lphase == entity.pwall || (altphas && entity.nohlp == 999)) { if (!Mastermap.occupied(entity.x, entity.y, entity.w, entity.h, entity))
 							{Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }}
-						else { entity.nohlp = 999; entity.sy = FAKES; entity.sx = INVWALA; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
+						else { entity.nohlp = 999; entity.sy = INVWALSY; entity.sx = INVWALA; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
 
 // next phase, this wall
 						if (Lsecs < 2) Lsecs = 2;
