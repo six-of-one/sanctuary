@@ -4535,7 +4535,7 @@ var txsv = ":";
 
     onrender: function(frame) {
       if (this.dead)
-        this.frame = 32;
+        this.frame = 32;	// dead and bone pile
       else if (this.exiting)
         this.frame = this.sx + animate(this.exiting.count, this.exiting.fpf, 8);
       else if (is.valid(this.moving.dir) || this.firing)
