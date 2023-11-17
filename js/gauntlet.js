@@ -1268,6 +1268,7 @@ Gauntlet = function() {
 					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLGUD2)) + (0x10 * (ad == TREASURE.WALLPASS2));
 					 Mastercell.ptr.sx = walltype(tx, ty, map);
 					 }
+				 Mastercell.ptr.lvlwall = (sb == 0 && (ad == TREASURE.WALLRND || ad == TREASURE.WALLPHS || ad == TREASURE.WALLGUD || ad == TREASURE.WALLPASS || ad == TREASURE.SHOTWALL)); // lvlwall - ent wall in lvl wall color
 				 }
 		  else if (ismonster(pixel))
 			 spref.addMonster(x, y, MONSTERS[type(pixel) < MONSTERS.length ? type(pixel) : 0]);
@@ -5425,11 +5426,14 @@ var txsv = ":";
 /// TEST - update
 				ctx.filter = "hue-rotate("+document.getElementById("ashue").value+"deg)";
 /// TEST - update
+// we have an entity posing as a wall - if a level wall, use level wall hue
+				if (entity.lvlwall == true) ctx.filter = "hue-rotate("+document.getElementById("whue").value+"deg)";
 
 					if (entity.type.pushwal)
 					{ hold[held++] = entity; hold[held] = null; }
 					else
-						this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+					  if (map.level.wall != WALL.INVIS || entity.lvlwall != true)
+							this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 
 					entity.vx = Vx;
 					entity.vy = Vy;
