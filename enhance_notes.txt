@@ -36,9 +36,8 @@ g2 ? food research (find in files, or redo)
 
 check sound for picking poison (is potion pick sound?, need g2 ref)
 
-dead player is only lvl 1 bone pile
 
-is it still too easy to hit exits (exit maze) & stun tiles
+is it still too easy to hit exits (exit maze) & stun tiles ?
 
 look at treasure collect giving score mult logic
 
@@ -55,8 +54,9 @@ port list:
 super sorc finish
 
 theif / mugger should fight monsters in path - get blocked by object on start, pushwall across path
+\_ this is, amazingly, way more difficult than expected to implement
 
-dying with keys doesnt produce key pile
+dying with keys (and potion) doesnt produce key pile
 
 g1 gfx tiles
 - spirtes		-- decide how much of this we want / can use
@@ -428,6 +428,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- dead player is only lvl 1 bone pile
 
 x-- shotwall colors not hue shifting
    \_check what shotwalls do when reg level walls are invis
