@@ -2182,7 +2182,7 @@ var lvu = document.getElementById("flvl").value;
     },
 
     onMonsterCollide: function(monster, entity) {
-      if (entity.player) {
+      if (entity.player && !monster.inv) {
 			helpdis(monster.type.nohlp, undefined, 2000, Math.floor(monster.type.damage), undefined);		// ISSUE: player armor
         entity.hurt(monster.type.damage, monster);
 // monster hit player sound
