@@ -2912,6 +2912,7 @@ if (document.getElementById("noclip").checked) return false;
       entity.norelod = false;
 		if (entity.type != undefined) { entity.sx = entity.type.sx; entity.sy = entity.type.sy; }
 		entity.firetim = 0;
+		entity.inv = false;
 		if (entity.type.name == "Super sorcerer") { entity.sx = SSINVX; entity.sy = SSINV; entity.to = Game.Math.randomInt(3, 5); entity.inv = true; }
       return entity;
     },
@@ -2996,7 +2997,7 @@ if (document.getElementById("noclip").checked) return false;
 			this.firetim = countdown(this.firetim);
 			this.hb = countdown(this.hb);		// countdown to actual shot frame
 			if (this.hb == 1) this.fire(map, player);
-			if (this.firetim < 2) { this.sx = SSINVX; this.sy = SSINV; }
+			if (this.firetim < 2) { this.sx = SSINVX; this.sy = SSINV; this.inv = true; }
 			}
 		else
 		if (this.hb != heartbeet) { this.hb = heartbeet; this.to = countdown(this.to); }
@@ -3248,7 +3249,7 @@ if (document.getElementById("noclip").checked) return false;
 				return;
 		 }
 
-      if ((by.weapon && this.type.canbeshot) || (by.player && this.type.canbehit) || (by == this) || nuke) {
+      if ((by.weapon && this.type.canbeshot && !this.inv) || (by.player && this.type.canbehit && !this.inv) || (by == this) || nuke) {
         this.health = Math.max(0, this.health - damage);
 
 			var lvl = Math.max(0, Math.ceil(this.health / 10));
@@ -3294,12 +3295,13 @@ if (document.getElementById("noclip").checked) return false;
     },
 
     onrender: function(frame) {
-		this.inv = false;
-		if (this.type.invisibility != undefined)
+
+		if (this.type.invisibility != undefined) {
+			this.inv = false;
       if (this.type.invisibility && ((frame+this.df)%(this.type.invisibility.on + this.type.invisibility.off) < this.type.invisibility.on)) {
 			this.inv = true;
 			return false;
-			}
+			}}
 
 		if (this.type.name == "IT") { this.frame =  animate(frame, this.type.fpf, this.type.frames); return; }
       this.frame = this.dir + (8 * animate(frame + this.df, this.type.fpf, this.type.frames));
