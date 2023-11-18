@@ -51,7 +51,7 @@ need sounds:
 
 port list:
 
-super sorc finish
+super sorc finish - need locator
 
 theif / mugger should fight monsters in path - get blocked by object on start, pushwall across path
 \_ this is, amazingly, way more difficult than expected to implement
