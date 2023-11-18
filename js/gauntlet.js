@@ -2998,7 +2998,7 @@ if (document.getElementById("noclip").checked) return false;
 			this.firetim = countdown(this.firetim);
 			this.hb = countdown(this.hb);		// countdown to actual shot frame
 			if (this.hb == 1) this.fire(map, player);
-			if (this.firetim < 2) { this.sx = SSINVX; this.sy = SSINV; this.inv = true; }
+			if (this.firetim < 2 && this.hb < 1) { this.sx = SSINVX; this.sy = SSINV; this.inv = true; }
 			}
 		else
 		if (this.hb != heartbeet) { this.hb = heartbeet; this.to = countdown(this.to); }

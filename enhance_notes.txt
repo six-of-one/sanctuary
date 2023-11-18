@@ -23,6 +23,7 @@ zoom out & zoom back in on re-enter, or if no re-ent go to splash loop
 
 make it so difficulty cant be set back below 9 after racking a buku score on diff: 999 or so
 
+limited teleport does not: telefrag, blot out walls
 
 
 imm issues:
