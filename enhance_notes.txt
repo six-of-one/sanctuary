@@ -429,6 +429,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
+x-- invisible sorcerors COULD be shot/ fought
+
 x-- dead player is only lvl 1 bone pile
 
 x-- shotwall colors not hue shifting

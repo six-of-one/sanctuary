@@ -2913,7 +2913,6 @@ if (document.getElementById("noclip").checked) return false;
 		if (entity.type != undefined) { entity.sx = entity.type.sx; entity.sy = entity.type.sy; }
 		entity.firetim = 0;
 		entity.inv = false;
-		if (entity.type.name == "Super sorcerer") { entity.sx = SSINVX; entity.sy = SSINV; entity.to = Game.Math.randomInt(3, 5); entity.inv = true; }
       return entity;
     },
 
@@ -2964,6 +2963,7 @@ if (document.getElementById("noclip").checked) return false;
 				this.stolen = 0;
 				this.theif       = NOSPAWNTHF;	// so placed & genned thiefs do not auto track
 			}
+		if (type.name == "Super sorcerer") { this.sx = SSINVX; this.sy = SSINV; this.to = Game.Math.randomInt(3, 5); this.inv = true; }
     },
 
     monster: true,
