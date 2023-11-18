@@ -2966,6 +2966,9 @@ if (document.getElementById("noclip").checked) return false;
 
     update: function(frame, player, map, viewport) {
 
+if (!viewport.outside(this.x, this.y, TILE, TILE))
+if (this.type.name == "Super sorcerer") {this.to++; if (this.hbc == undefined) this.hbc = 0; if (this.hb != heartbeet) { this.hb = heartbeet; this.hbc++; } if (this.to & 0x7f == 0x7f) document.title = "ss tim: "+this.to+" : "+this.hbc; }
+
 // theif works offscreen
 		 if (!(this.type.theif && this.theif != NOSPAWNTHF))
       // monsters dont move offscreen g1 / g2 - difficulty option
