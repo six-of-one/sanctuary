@@ -2911,7 +2911,8 @@ if (document.getElementById("noclip").checked) return false;
       entity.reflect = 0;
       entity.norelod = false;
 		if (entity.type != undefined) { entity.sx = entity.type.sx; entity.sy = entity.type.sy; }
-		if (entity.type.name == "Super sorcerer") { entity.sx = SSINVX; entity.sy = SSINV; entity.to = Game.Math.randomInt(3, 5); entity.firetim = 0; }
+		entity.firetim = 0;
+		if (entity.type.name == "Super sorcerer") { entity.sx = SSINVX; entity.sy = SSINV; entity.to = Game.Math.randomInt(3, 5); }
       return entity;
     },
 
@@ -2977,21 +2978,38 @@ if (document.getElementById("noclip").checked) return false;
 
 	if (this.type.name == "Super sorcerer") {
 
+// 1 potion bomb stuns
+		if (this.stun > heartbeet) {
+			this.sx = 0;
+			this.sy = 7;
+			if (Math.abs(this.stun - heartbeet) < 2) {
+				this.to = Game.Math.randomInt(4, 7);
+				this.firetim = 0;
+				this.sx = SSINVX; this.sy = SSINV;
+				}
+			}
+		else
+// countdown to fireing after appearance
 		if (this.firetim > 0) {
-			this.firetim--;
+			this.firetim = countdown(this.firetim);
+			this.hb = countdown(this.hb);		// countdown to actual shot frame
+			if (this.hb == 1) this.fire(map, player);
+			if (this.firetim < 2) { this.sx = SSINVX; this.sy = SSINV; }
 			}
 		else
 		if (this.hb != heartbeet) { this.hb = heartbeet; this.to = countdown(this.to); }
 		if (this.to < 1) {
+// shot solution on player
 // saet fire timer
-			this.firetim = Game.Math.randomInt(30, 55);
+			this.firetim = Game.Math.randomInt(40, 65);
+			this.hb = Game.Math.randomInt(11, 25);
 // face player
-			this.dir = THFDIR[(Math.sign(player.y - this.y) + 1)][(Math.sign(player.x - this.x) + 1)];
+			this.dir = THFDIR[(Math.sign(p2t(player.y) - p2t(this.y)) + 1)][(Math.sign(p2t(player.x) - p2t(this.x)) + 1)];
 // come into view
 			this.sx = 0;
 			this.sy = 7;
 // reset appear timer
-			this.to = Game.Math.randomInt(5, 7);
+			this.to = Game.Math.randomInt(2, 4);
 			}
 		}
 
@@ -3012,7 +3030,7 @@ if (document.getElementById("noclip").checked) return false;
 // dev: no move
 			if (document.getElementById("nommv").checked) return;
 /// TEST - remove
-		if (this.stun > heartbeet) return;		// make supsoc visible too
+		if (this.stun > heartbeet) return;
 
       // let travelling monsters travel
       if (this.travelling > 0)
@@ -3212,7 +3230,7 @@ if (document.getElementById("noclip").checked) return false;
 				by.addscore(Math.floor( (Deathscore[Deathmult] - 1) /  (by.scmult > 1 ? 1.33333 : 1) ) );
 				return;
 		 }
-      if (nuke && this.type.twopot) // angry pickle (acid blob) nuked
+      if (nuke && this.type.twopot) // angry pickle (acid blob), super sorc, IT, nuked
 		 {
 				if (this.stun < heartbeet || this.stun == undefined) { this.stun = heartbeet + 10; return; }
 
