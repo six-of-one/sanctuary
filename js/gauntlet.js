@@ -2966,8 +2966,11 @@ if (document.getElementById("noclip").checked) return false;
 
     update: function(frame, player, map, viewport) {
 
-if (!viewport.outside(this.x, this.y, TILE, TILE))
-if (this.type.name == "Super sorcerer") {this.to++; if (this.hbc == undefined) this.hbc = 0; if (this.hb != heartbeet) { this.hb = heartbeet; this.hbc++; } if (this.to & 0x7f == 0x7f) document.title = "ss tim: "+this.to+" : "+this.hbc; }
+	if (!viewport.outside(this.x, this.y, TILE, TILE) && this.type.name == "Super sorcerer") {
+		this.to++;	// tic rate appx 40 - 50 per heartbeet cnt
+		if (this.hbc == undefined) this.hbc = 0; if (this.hb != heartbeet) { this.hb = heartbeet; this.hbc++; } 
+		document.title = "ss tim: "+this.to+" : "+this.hbc; 
+		}
 
 // theif works offscreen
 		 if (!(this.type.theif && this.theif != NOSPAWNTHF))
@@ -2982,7 +2985,7 @@ if (this.type.name == "Super sorcerer") {this.to++; if (this.hbc == undefined) t
       if (this.thinking && --this.thinking)
         return;
 
-      // am i going towards a live player, or AWAY from a dead one, if away, my speed should be slow (the player is dead, I'm no longer interested in him)
+      // mon going towards a live player, or AWAY from a dead one, if away, mon speed should be slow (the player is dead, mon no longer interested in him)
       var away  = !player.active(), speed;
 		 if (player.linvis || player.lrepuls) away = true;		// note: for invisibility monster dir should be set random occasionally
 
