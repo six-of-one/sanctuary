@@ -63,6 +63,8 @@ Gauntlet = function() {
 		Deathnote = [0, 2, 1, 3, 0, 4, 0, 1 ],
 // 5 = 100, 6 = 500 for treasure pts & keys
 		tp100 = 5, tp500 = 6,
+// super sorceror invis = 1 unit past last lobber shot
+		SSINVX = 33, SSINV = 9,
 
       FPS      = 60,
       TILE     = 32,
@@ -2909,6 +2911,7 @@ if (document.getElementById("noclip").checked) return false;
       entity.reflect = 0;
       entity.norelod = false;
 		if (entity.type != undefined) { entity.sx = entity.type.sx; entity.sy = entity.type.sy; }
+		if (entity.type.name == "Super sorcerer") { entity.sx = SSINVX; entity.sy = SSINV; entity.to = Game.Math.randomInt(3, 5); entity.firetim = 0; }
       return entity;
     },
 
@@ -2966,17 +2969,31 @@ if (document.getElementById("noclip").checked) return false;
 
     update: function(frame, player, map, viewport) {
 
-	if (!viewport.outside(this.x, this.y, TILE, TILE) && this.type.name == "Super sorcerer") {
-		this.to++;	// tic rate appx 40 - 50 per heartbeet cnt
-		if (this.hbc == undefined) this.hbc = 0; if (this.hb != heartbeet) { this.hb = heartbeet; this.hbc++; } 
-		document.title = "ss tim: "+this.to+" : "+this.hbc; 
-		}
-
 // theif works offscreen
 		 if (!(this.type.theif && this.theif != NOSPAWNTHF))
       // monsters dont move offscreen g1 / g2 - difficulty option
       if (viewport.outside(this.x, this.y, TILE, TILE))
         return;
+
+	if (this.type.name == "Super sorcerer") {
+
+		if (this.firetim > 0) {
+			this.firetim--;
+			}
+		else
+		if (this.hb != heartbeet) { this.hb = heartbeet; this.to = countdown(this.to); }
+		if (this.to < 1) {
+// saet fire timer
+			this.firetim = Game.Math.randomInt(30, 55);
+// face player
+			this.dir = THFDIR[(Math.sign(player.y - this.y) + 1)][(Math.sign(player.x - this.x) + 1)];
+// come into view
+			this.sx = 0;
+			this.sy = 7;
+// reset appear timer
+			this.to = Game.Math.randomInt(5, 7);
+			}
+		}
 
       // keep reloading (if applicable)
       this.reloading = countdown(this.reloading);
