@@ -68,12 +68,13 @@ Gauntlet = function() {
 
       FPS      = 60,
       TILE     = 32,
+      NTILE    = -32,
       STILE    = 32,
       VIEWPORT = { TW: 24, TH: 24 },		// size of viewing map - arcade is closer to 16 x 16, tho setitng smaller sizes seems to have no effect
       DIR      = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7 },
 // teleport adjust by last player dir		- use player dir code (0 - 7) and these on teleport {x,y} to test surrounding cells
-		DIRTX = [ 0, 32, 32, 32, 0, -32, -32, -32],
-		DIRTY = [ -32, -32, 0, 32, 32, 32, 0, -32],
+		DIRTX = [ 0, TILE, TILE, TILE, 0, NTILE, NTILE, NTILE],
+		DIRTY = [ NTILE, NTILE, 0, TILE, TILE, TILE, 0, NTILE],
 // point spawned theif in the dir his path indicates
 		THFDIR = [
 					[ 7, 0, 1 ],
@@ -5144,9 +5145,9 @@ var txsv = ":";
 		if (map.level.gflr)	// this is set before map load
 		 {
 			var gbas = document.getElementById("gfloorbas");
-			var gimg = document.getElementById("gfloor");	// tiled images should be W == H and divisible by 32 and properly loop for best appearances
-			var gap = 8; // with 256 x 256 tile, they have to map over 32 x 32 level grid 8 sections at a time
-			if (gimg.width != 256) gap = Math.floor(gimg.width / 32);
+			var gimg = document.getElementById("gfloor");	// tiled images should be W == H and divisible by TILE (currently 32) and properly loop for best appearances
+			var gap = 256 / TILE; //8; // with 256 x 256 tile, they have to map over TILE (32) x TILE (32) level grid 8 sections at a time
+			if (gimg.width != 256) gap = Math.floor(gimg.width / TILE);
 			if (gap < 1) gap = 1;
 			if (gap > 60) gap = 60;		// size 1920 x 1920, prob too big anyway
 			for(ty = vyz, th = vth ; ty < th ; ty=ty+gap) {
