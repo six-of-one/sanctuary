@@ -64,7 +64,7 @@ Gauntlet = function() {
 // 5 = 100, 6 = 500 for treasure pts & keys
 		tp100 = 5, tp500 = 6,
 // super sorceror invis = 1 unit past last lobber shot
-		SSINVX = 33, SSINV = 9,
+		SSINVX = 33, SSINV = 9, SSVIS = 7,
 
       FPS      = 60,
       TILE     = 32,
@@ -2912,7 +2912,7 @@ if (document.getElementById("noclip").checked) return false;
       entity.norelod = false;
 		if (entity.type != undefined) { entity.sx = entity.type.sx; entity.sy = entity.type.sy; }
 		entity.firetim = 0;
-		if (entity.type.name == "Super sorcerer") { entity.sx = SSINVX; entity.sy = SSINV; entity.to = Game.Math.randomInt(3, 5); }
+		if (entity.type.name == "Super sorcerer") { entity.sx = SSINVX; entity.sy = SSINV; entity.to = Game.Math.randomInt(3, 5); entity.inv = true; }
       return entity;
     },
 
@@ -2981,11 +2981,13 @@ if (document.getElementById("noclip").checked) return false;
 // 1 potion bomb stuns
 		if (this.stun > heartbeet) {
 			this.sx = 0;
-			this.sy = 7;
+			this.sy = SSVIS;
+			this.inv = false;
 			if (Math.abs(this.stun - heartbeet) < 2) {
 				this.to = Game.Math.randomInt(4, 7);
 				this.firetim = 0;
 				this.sx = SSINVX; this.sy = SSINV;
+				this.inv = true;
 				}
 			}
 		else
@@ -3004,10 +3006,11 @@ if (document.getElementById("noclip").checked) return false;
 			this.firetim = Game.Math.randomInt(40, 65);
 			this.hb = Game.Math.randomInt(11, 25);
 // face player
-			this.dir = THFDIR[(Math.sign(p2t(player.y) - p2t(this.y)) + 1)][(Math.sign(p2t(player.x) - p2t(this.x)) + 1)];
+			this.dir = THFDIR[(Math.sign(p2t(player.y + 16) - p2t(this.y)) + 1)][(Math.sign(p2t(player.x + 16) - p2t(this.x)) + 1)];
 // come into view
 			this.sx = 0;
-			this.sy = 7;
+			this.sy = SSVIS;
+			this.inv = false;
 // reset appear timer
 			this.to = Game.Math.randomInt(2, 4);
 			}
@@ -3291,9 +3294,12 @@ if (document.getElementById("noclip").checked) return false;
     },
 
     onrender: function(frame) {
+		this.inv = false;
 		if (this.type.invisibility != undefined)
-      if (this.type.invisibility && ((frame+this.df)%(this.type.invisibility.on + this.type.invisibility.off) < this.type.invisibility.on))
-        return false;
+      if (this.type.invisibility && ((frame+this.df)%(this.type.invisibility.on + this.type.invisibility.off) < this.type.invisibility.on)) {
+			this.inv = true;
+			return false;
+			}
 
 		if (this.type.name == "IT") { this.frame =  animate(frame, this.type.fpf, this.type.frames); return; }
       this.frame = this.dir + (8 * animate(frame + this.df, this.type.fpf, this.type.frames));
