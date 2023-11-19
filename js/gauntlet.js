@@ -3012,11 +3012,17 @@ if (document.getElementById("noclip").checked) return false;
 // shot solution on player
 // runs a 4 direction loop around player looking for clear slot between rng and brng
 			var nt = Game.Math.randomInt(3, 6), n, rng = 160, brng = 64, ssx, ssy;
+var ttt = 18;
 			while (rng >= brng) {
 				for (n = nt; n >= 0; n--) {
 					ssx = player.x + DIRSSX[ n ] * rng;
 					ssy = player.y + DIRSSY[ n ] * rng;
 					collision = Mastermap.occupied(ssx, ssy, this.w, this.h, this);
+/// TEST - remove
+var re = Mastermap.addFx(ssx, ssy, FX.NUMER);
+re.sy = ttt;
+if (ttt == 18) ttt = 19;
+/// TEST - remove
 					if (!collision) { Mastermap.occupy(ssx, ssy, this); rng = -1; break; }
 					}
 				rng  = rng - TILE;
