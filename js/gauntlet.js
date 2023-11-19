@@ -81,6 +81,10 @@ Gauntlet = function() {
 					[ 6, 4, 2 ],
 					[ 5, 4, 3 ],
 							],
+// super sorceror selects player target from one of 4 dir
+		DIRSSX = [ 0, TILE, 0, NTILE, 0, TILE, 0 ],
+		DIRSSY = [ NTILE, 0, TILE, 0, NTILE, 0, TILE ],
+
 		wto = 3,		// shots timeout in 3 secs
 // abiility & power potion enhance
 		ppotmax = 2,
