@@ -3011,6 +3011,7 @@ if (document.getElementById("noclip").checked) return false;
 		if (this.to < 1) {
 // shot solution on player
 // runs a 4 direction loop around player looking for clear slot between rng and brng
+//		(note that a clear slot is not always a clear shot, which the arcade often had)
 			var nt = Game.Math.randomInt(3, 6), n, rng = 160, brng = 64, ssx, ssy;
 			while (rng >= brng) {
 				for (n = nt; n >= 0; n--) {
@@ -3023,8 +3024,8 @@ if (document.getElementById("noclip").checked) return false;
 			}
 // saet fire timer
 			if (rng < 0) {
-				this.firetim = Game.Math.randomInt(40, 65);
-				this.hb = Game.Math.randomInt(11, 25);
+				this.firetim = Game.Math.randomInt(50, 85);
+				this.hb = Game.Math.randomInt(7, 17);
 // face player
 				this.dir = THFDIR[(Math.sign(p2t(player.y + 16) - p2t(this.y)) + 1)][(Math.sign(p2t(player.x + 16) - p2t(this.x)) + 1)];
 // come into view
