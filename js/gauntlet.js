@@ -82,8 +82,8 @@ Gauntlet = function() {
 					[ 5, 4, 3 ],
 							],
 // super sorceror selects player target from one of 4 dir
-		DIRSSX = [ 0, TILE, 0, NTILE, 0, TILE, 0 ],
-		DIRSSY = [ NTILE, 0, TILE, 0, NTILE, 0, TILE ],
+		DIRSSX = [ 0, 1, 0, -1, 0, 1, 0 ],
+		DIRSSY = [ -1, 0, 1, 0, -1, 0, 1 ],
 
 		wto = 3,		// shots timeout in 3 secs
 // abiility & power potion enhance
@@ -3008,17 +3008,29 @@ if (document.getElementById("noclip").checked) return false;
 		if (this.hb != heartbeet) { this.hb = heartbeet; this.to = countdown(this.to); }
 		if (this.to < 1) {
 // shot solution on player
+			var nt = Game.Math.randomInt(3, 6), n, rng = 160, brng = 64, ssx, ssy;
+			while (rng >= brng) {
+				for (n = nt; n >= 0; n--) {
+					ssx = this.x + DIRSSX[ n ] * rng;
+					ssy = this.y + DIRSSY[ n ] * rng;
+					collision = Mastermap.occupied(ssx, ssy, this.w, this.h, this);
+					if (!collision) { Mastermap.occupy(ssx, ssy, this); rng = -1; break; }
+					}
+				rng  = rng - TILE;
+			}
 // saet fire timer
-			this.firetim = Game.Math.randomInt(40, 65);
-			this.hb = Game.Math.randomInt(11, 25);
+			if (rng < 0) {
+				this.firetim = Game.Math.randomInt(40, 65);
+				this.hb = Game.Math.randomInt(11, 25);
 // face player
-			this.dir = THFDIR[(Math.sign(p2t(player.y + 16) - p2t(this.y)) + 1)][(Math.sign(p2t(player.x + 16) - p2t(this.x)) + 1)];
+				this.dir = THFDIR[(Math.sign(p2t(player.y + 16) - p2t(this.y)) + 1)][(Math.sign(p2t(player.x + 16) - p2t(this.x)) + 1)];
 // come into view
-			this.sx = 0;
-			this.sy = SSVIS;
-			this.inv = false;
+				this.sx = 0;
+				this.sy = SSVIS;
+				this.inv = false;
 // reset appear timer
-			this.to = Game.Math.randomInt(2, 4);
+				this.to = Game.Math.randomInt(2, 4);
+				}
 			}
 		}
 
