@@ -127,135 +127,135 @@ Gauntlet = function() {
 		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, one_theif = 0, theif_ad = 0x400100, mug_ad = 0x400110, thf_mug_bal = 0.2, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25, thiefexit = false,
 		THFTALK = [  'thfycc1',  'thfycc2', 'thfheh1', 'thfheh2', 'thfheh3', 'thflau1', 'thflau2' ],
 // list of tutorial and help messages to display
-		HELPDIS = [
-									"Null 0 entry - no usable",
+      HELPDIS = [
+                           "Null 0 entry - no usable",
 // ops
-									"You now have extra speed",																						// 1
-									"You now have extra shot power",
-									"You now have extra shot speed",
-									"You now have extra armor",
-									"You now have extra fight power",																				// 5
-									"You now have extra magic power",
-									"You now have limited invisibility",
+                           "You now have extra speed",                                                                  // 1
+                           "You now have extra shot power",
+                           "You now have extra shot speed",
+                           "You now have extra armor",
+                           "You now have extra fight power",                                                            // 5
+                           "You now have extra magic power",
+                           "You now have limited invisibility",
 // lvl notification
-									"<font color=yellow>Find the hidden potion</font>",
-									"<font color=red>You have # seconds to collect treasures</font>",
-									"<font color=yellow>You must exit to receive bonus points</font>",									// 10
-									"Player shots now stun other players",
-									"Player shots now hurt other players",
-									"Players can now go off screen",
+                           "<font color=yellow>Find the hidden potion</font>",
+                           "<font color=red>You have # seconds to collect treasures</font>",
+                           "<font color=yellow>You must exit to receive bonus points</font>",                           // 10
+                           "Player shots now stun other players",
+                           "Player shots now hurt other players",
+                           "Players can now go off screen",
 // help only
-									"Treasure: 100 points",
-									"Treasure: 500 points",																								// 15
-									"Food: health increased by #",
-									"Food: health increased by RND",
+                           "Treasure: 100 points",
+                           "Treasure: 500 points",                                                                      // 15
+                           "Food: health increased by #",
+                           "Food: health increased by RND",
 // help items & rnd lvl messages
-									"Save keys to open doors",
-									"Save potions for later use",
-									"Traps make walls disappear",																						// 20
-									"Some food destroyed by shots",
-//									"Shooting magic potions has a lesser effect",							// g IV dialog
-									"Shooting a potion has a lesser effect",
-									"Magic potions work differently for each player",
-									"Magic potions affect everything on screen",
-									"Transporters move you to<br> the closest transporter visible",										// 25
-									"Some walls may be destroyed",
-									"Stalling will cause doors to open",
-									"Find exit to next level",
-									"Get bonus multiplier by collecting treasure",
-									"More players allow higher bonus multiplier",																// 30
-									"Add more players for greater fire power",
-									"Have friends join in",
+                           "Save keys to open doors",
+                           "Save potions for later use",
+                           "Traps make walls disappear",                                                                // 20
+                           "Some food destroyed by shots",
+//                           "Shooting magic potions has a lesser effect",                     // g IV dialog
+                           "Shooting a potion has a lesser effect",
+                           "Magic potions work differently for each player",
+                           "Magic potions affect everything on screen",
+                           "Transporters move you to<br> the closest transporter visible",                              // 25
+                           "Some walls may be destroyed",
+                           "Stalling will cause doors to open",
+                           "Find exit to next level",
+                           "Get bonus multiplier by collecting treasure",
+                           "More players allow higher bonus multiplier",                                                // 30
+                           "Add more players for greater fire power",
+                           "Have friends join in",
 // lvl messages 2, 3, 4, 5, 6, 7
-									"Ghosts must be shot",
-									"Some food can be destroyed",
-									"Fight hand to hand by running into grunts",																	// 35
-									"Beware the demons which shoot you",
-									"Sorcerers may be invisible",
-									"Use magic to kill death",
+                           "Ghosts must be shot",
+                           "Some food can be destroyed",
+                           "Fight hand to hand by running into grunts",                                                 // 35
+                           "Beware the demons which shoot you",
+                           "Sorcerers may be invisible",
+                           "Use magic to kill death",
 // thief msg
-									"Kill thief to recover stolen item",
-									"Item on next level",																								// 40
+                           "Kill thief to recover stolen item",
+                           "Item on next level",                                                                        // 40
 // ply action only
-									"Player loses # health<br>Shoot or avoid ghosts",
-									"Player loses # health<br>Shoot or fight grunts",
-									"Player loses # health<br>Shoot or fight demons",
-									"Player loses # health<br>Shoot or fight sorcerers",
-									"Player loses # health<br>Shoot or fight lobbers",															// 45
+                           "Player loses # health<br>Shoot or avoid ghosts",
+                           "Player loses # health<br>Shoot or fight grunts",
+                           "Player loses # health<br>Shoot or fight demons",
+                           "Player loses # health<br>Shoot or fight sorcerers",
+                           "Player loses # health<br>Shoot or fight lobbers",                                           // 45
 
-									"Collect magic potion before pressing magic",
-									"You are full of bombs and/or keys",
-									"Shots do not hurt other players yet",
+                           "Collect magic potion before pressing magic",
+                           "You are full of bombs and/or keys",
+                           "Shots do not hurt other players yet",
 // gII
-									"Some tiles stun players",
-									"Shooting poison slows monsters",																				// 50
-									"You now have invulnerability",
-									"You now have extra repulsiveness",
-									"You now have reflective shots",
-									"You now have super shots",
-									"You now have teleportability",																					// 55
-//									"Some chests are locked",
-//									"Some treasure requires keys",
-									"Use key to open treasure chest",
-//									"Some walls may be pushed",
-									"Push movable walls",																								// 57
+                           "Some tiles stun players",
+                           "Shooting poison slows monsters",                                                            // 50
+                           "You now have invulnerability",
+                           "You now have extra repulsiveness",
+                           "You now have reflective shots",
+                           "You now have super shots",
+                           "You now have teleportability",                                                              // 55
+//                           "Some chests are locked",
+//                           "Some treasure requires keys",
+                           "Use key to open treasure chest",
+//                           "Some walls may be pushed",
+                           "Push movable walls",                                                                        // 57
 // expanded
-									"Fooled you!  Some items may be fake",
-									"You now have the healing ankh",
-									"Player loses # health<br>use magic to kill death",														// 60
+                           "Fooled you!  Some items may be fake",
+                           "You now have the healing ankh",
+                           "Player loses # health<br>use magic to kill death",                                          // 60
 // g2 messages start here
 // g2 also reverses monster hit msg, to say player loses {N} health second, as here
-									"Avoid force fields<br>Player loses # health",																// 61
+                           "Avoid force fields<br>Player loses # health",                                               // 61
 
 // mugger msg
-									"Kill mugger to recover stolen health",
-									"Avoid acid puddles<br>Player loses # health",
-									"Acid puddles move randomly",																						// 64
-									"Some walls can be shot and turn into good or bad",
+                           "Kill mugger to recover stolen health",
+                           "Avoid acid puddles<br>Player loses # health",
+                           "Acid puddles move randomly",                                                                // 64
+                           "Some walls can be shot and turn into good or bad",
 // use if g2 mode is active, when getting a key
-									"Save keys to open doors or chests",
-									"There can be more than one trap",
-//									"Death 'dies' after taking<br>up to 200 health",
+                           "Save keys to open doors or chests",
+                           "There can be more than one trap",
+//                           "Death 'dies' after taking<br>up to 200 health",
 // alt idea, sounds better
-									"Death disappears after<br>taking up to 200 health",
-									"Shoot super sorceror<br>Player loses # health",
+                           "Death disappears after<br>taking up to 200 health",
+                           "Shoot super sorceror<br>Player loses # health",
 // this is g2 msg, diff from g1 msg
-//									"Have friends join in any time",
-									"You are now IT",																										// 70
-//									"Monsters follow player<br>who is IT",
-									"Tag, you're IT",
-									"Some walls move randomly",
-//									"Monsters may move differently",
+//                           "Have friends join in any time",
+                           "You are now IT",                                                                            // 70
+//                           "Monsters follow player<br>who is IT",
+                           "Tag, you're IT",
+                           "Some walls move randomly",
+//                           "Monsters may move differently",
 
 /// --------------------------------------------------------------------------------------
 // extended tut for new items & significant points of previous items not already declared
-									"Some fake items can be shot",																					// 73 - these may seem like g2, but they are extended
-									"Food: # health<br>Some food provides variable health",
+                           "Some fake items can be shot",                                                               // 73 - these may seem like g2, but they are extended
+                           "Food: # health<br>Some food provides variable health",
 // placeholders for expansion
-									"You now have the healing ankh",
-									"Walls may be invisible",
-									"help # 77",
-									"Some invisible walls can be shot",
-									"Pushwalls can be destroyed",
-									"Poisoned: you are dizzy<br>Player loses # health",
-									"Cycle walls keep shifting",
+                           "You now have the healing ankh",
+                           "Walls may be invisible",
+                           "help # 77",
+                           "Some invisible walls can be shot",
+                           "Pushwalls can be destroyed",
+                           "Poisoned: you are dizzy<br>Player loses # health",
+                           "Cycle walls keep shifting",
 
 // expanded - liquids - all help after this makes a nonsolid item that can be walked through, damage still occurs
-									"Water slows you down",																								// 82
-									"Lava is very dangerous<br>Avoid lava or take # damage",
-									"Toxic ooze is dangerous<br>Avoid slime or take # damage",
+                           "Water slows you down",                                                                      // 82
+                           "Lava is very dangerous<br>Avoid lava or take # damage",
+                           "Toxic ooze is dangerous<br>Avoid slime or take # damage",
 
 
-//									"Level 4+ grunts can throw clubs",
-//									"Heavy death can shoot to drain life",
-//									"",
+//                           "Level 4+ grunts can throw clubs",
+//                           "Heavy death can shoot to drain life",
+//                           "",
 
 // these are in the g1 intro, but not coded in
-//									"Shoot ghosts",
-//									"Shoot ghost generators",
-//									"Some ghosts take more shots",
-//									"Fight grunts",
-									"Your goal: find exit"
+//                           "Shoot ghosts",
+//                           "Shoot ghost generators",
+//                           "Some ghosts take more shots",
+//                           "Fight grunts",
+                            "Your goal: find exit"
 
 									],
 		HELPANNC = [ ], // announcer help tie ins
