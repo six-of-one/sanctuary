@@ -10,6 +10,10 @@ gar - garrison on amiga
 gJ - gauntlet javascript		(gJ.0 - original)
 ================================================================================================================================================
 
+
+-- upload notes on days ending in 9
+
+
 dev:
 
 push wall collision
@@ -52,7 +56,7 @@ need sounds:
 
 port list:
 
-super sorc finish - need locator
+
 
 theif / mugger should fight monsters in path - get blocked by object on start, pushwall across path
 \_ this is, amazingly, way more difficult than expected to implement
@@ -96,7 +100,7 @@ map editor o/p scanner
 -push wall pushing
 
 -invisible "become temp visible" walls -- likely a code deal with some overlay mask
-\_ x-- hint walls, but always on
+\_ x-- hint walls, but always on (not intending to keep this)
 
 new-ish:
 
@@ -125,6 +129,8 @@ companion potion: cat face on blue potion
 
 
 limits on g1, g2, sanctuary (items, monsters, modes, extras ...)
+\_selectable list of options for std elements, extras, overrides, etc
+
 
 >>>>>>>>>>>>>>>>>>>>>>
 WIP: arcade sound & gfx
@@ -232,7 +238,7 @@ x-- moving exits
 x-- moving walls (regular phase, not random)
 x-- invisible walls 
   \_(need a 50% vis on touch or shot option cooling to invisible after 4 mins) -- code to handle these as gII is done
-super sorceror
+x-- super sorceror (targeting is not ideal, but overall supr sorc functions)
 x-- mugger - thief that steals food
 dragon
 x-- temp potions - repulse, invuln, super shot, reflective, teleport
@@ -429,6 +435,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- super sorc finish
 
 x-- invisible sorcerors COULD be shot/ fought
 
