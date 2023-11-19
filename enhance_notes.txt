@@ -207,6 +207,7 @@ corner unpin above level 100
 levels flip / mirror above 100 -- code is done, needs logic control
 
 shots stun & hurt other player levels
+\_ audio / tut messages in, no level ops yet, no dmg/stun yet
 
 x-- door stall is 15 health tics
 x-- wall stall is 188 health tics
@@ -249,9 +250,11 @@ x-- moveable (pushable) walls
 x-- shootable "regular" walls that give goody (& load out)
 x-- "flicker" random walls
 "special" treasure room
-monsters move different, or faster
+monsters move different, or faster -- (sanctuary monsters are already 'smarter' than g1/g2 mons)
 x- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or super / reflect shot destroys)
+\_ needs to move randomly
 "IT" - not sure want this - 10 pts for getting tho, no pts on tag
+\_ not fully coded in - waiting on multiplayer
 diff color grunts
 
 g1/g2 wall & door stall times @ difficulty - appx ~ times
