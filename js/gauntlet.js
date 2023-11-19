@@ -3011,8 +3011,8 @@ if (document.getElementById("noclip").checked) return false;
 			var nt = Game.Math.randomInt(3, 6), n, rng = 160, brng = 64, ssx, ssy;
 			while (rng >= brng) {
 				for (n = nt; n >= 0; n--) {
-					ssx = this.x + DIRSSX[ n ] * rng;
-					ssy = this.y + DIRSSY[ n ] * rng;
+					ssx = player.x + DIRSSX[ n ] * rng;
+					ssy = player.y + DIRSSY[ n ] * rng;
 					collision = Mastermap.occupied(ssx, ssy, this.w, this.h, this);
 					if (!collision) { Mastermap.occupy(ssx, ssy, this); rng = -1; break; }
 					}
