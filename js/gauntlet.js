@@ -2665,10 +2665,10 @@ celpr += ", ";
 
 // this is cross the unpinned edge ops code
 	var n, ptw = false;
-		     if (x < 7 || x > (TILE * (Mtw - 1) - 7) && dir == DIR.LEFT) { n = mpixel(x,y, x - TILE, y, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
-		else if (x < 7 || x > (TILE * (Mtw - 1) - 7) && dir == DIR.RIGHT) { ptw = false;; n = mpixel(x,y, x + TILE, y, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
-		else if (y < 7 || y > (TILE * (Mth - 1) - 9) && dir == DIR.UP) { ptw = false; n = mpixel(x,y, x, y - TILE, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
-		else if (y < 7 || y > (TILE * (Mth - 1) - 9) && dir == DIR.DOWN) { ptw = false; n = mpixel(x,y, x, y + TILE, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
+		     if (x < 7 || x > (TILE * (Mtw - 1) - 7) && dir == DIR.LEFT)  {              n = mpixel(x,y, x - TILE, y, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
+		else if (x < 7 || x > (TILE * (Mtw - 1) - 7) && dir == DIR.RIGHT) { ptw = false; n = mpixel(x,y, x + TILE, y, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
+		else if (y < 7 || y > (TILE * (Mth - 1) - 9) && dir == DIR.UP)    { ptw = false; n = mpixel(x,y, x, y - TILE, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
+		else if (y < 7 || y > (TILE * (Mth - 1) - 9) && dir == DIR.DOWN)  { ptw = false; n = mpixel(x,y, x, y + TILE, 2); if (this.cells[n] != undefined) { if (this.cells[n].ptr) ptw = this.cells[n].ptr.type.wall; if (!this.cells[n].wall && !ptw) return false; }}
 
 /// TEST - this will be needed because of the above code flakyness around the 0 unpin y line and some wall edges
 if (document.getElementById("noclip").checked) return false;
@@ -3022,6 +3022,7 @@ var ttt = 18;
 var re = Mastermap.addFx(ssx, ssy, FX.NUMER);
 re.sy = ttt;
 if (ttt == 18) ttt = 19;
+if (collision) re.sy = 13;
 /// TEST - remove
 					if (!collision) { Mastermap.occupy(ssx, ssy, this); rng = -1; break; }
 					}
