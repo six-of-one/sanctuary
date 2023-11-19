@@ -43,6 +43,7 @@ check sound for picking poison (is potion pick sound?, need g2 ref)
 
 
 is it still too easy to hit exits (exit maze) & stun tiles ?
+are the release walls traps to easy to see?
 
 look at treasure collect giving score mult logic
 
@@ -60,6 +61,7 @@ port list:
 
 theif / mugger should fight monsters in path - get blocked by object on start, pushwall across path
 \_ this is, amazingly, way more difficult than expected to implement
+ \_ theif is also starting in treasure rooms
 
 dying with keys (and potion) doesnt produce key pile
 

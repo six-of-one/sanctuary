@@ -1002,7 +1002,7 @@ Gauntlet = function() {
       { name: 'Research X',   url: "levels/glevel10.png",   floor: FLOOR.RND,                   wall: WALL.YELLOW10,    gflr: "gfx/g1floor10.jpg",                                                      music: 'nullm',      score:  1000, help: null },
       { name: 'Research X',   url: "levels/glevel9.png",    floor: FLOOR.RND,                   wall: WALL.ORANG9,      gflr: "gfx/g1floor9.jpg",                                                       music: 'nullm',      score:  1000, help: null },
       { name: 'Research X',   url: "levels/glevel8.png",    floor: FLOOR.RND,                   wall: WALL.BLUE8,       gflr: "gfx/g1floor8.jpg",                                         unpinx: 1,    music: 'nullm',      score:  1000, help: null },
-      { name: 'Z gon',        url: "levels/glevelZ.png",    floor: FLOOR.RND,                   wall: WALL.ORANG9,      gflr: "gfx/g1floor0z.jpg",  brikovr:  WALL.DESTBRIK,                            music: 'nullm',      score:  1000, help: null },
+      { name: 'Z gon',        url: "levels/glevelZ.png",    floor: FLOOR.RND,                   wall: WALL.ORANG9,      gflr: "gfx/g1floor0z.jpg",  brikovr:  WALL.DESTBRIK,              unpinx: 1,    music: 'nullm',      score:  1000, help: null },
       { name: 'Treasure',     url: "levels/glevel115.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 30,  unpinx: 1,    music: 'must30',     score:  1000, help: null },
       { name: 'Treasure',     url: "levels/glevel116.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 20,                music: 'must21',     score:  1000, help: null },
       { name: 'Treasure',     url: "levels/glevel117.png",  floor: FLOOR.LIGHBROWN_BOARDS,      wall: WALL.ORANG9,      gflr: "gfx/g1floor1.jpg",   brikovr:  WALL.G1BRICKD,  rtime: 22,                music: 'must25',     score:  1000, help: null },
@@ -2986,7 +2986,7 @@ if (document.getElementById("noclip").checked) return false;
 
 	if (this.type.name == "Super sorcerer") {
 
-// 1 potion bomb stuns
+// 1 potion bomb stuns & makes visible - 2nd kills
 		if (this.stun > heartbeet) {		// || document.getElementById("nommv").checked) {
 			this.sx = 0;
 			this.sy = SSVIS;
