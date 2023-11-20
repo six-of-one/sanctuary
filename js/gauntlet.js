@@ -2136,6 +2136,7 @@ var lvu = document.getElementById("flvl").value;
 /// TEST - remove
 				entity.hurt(dmg + xdmg, weapon);
 		 }
+// when invhint option on and walls shot, a flicker effect lights up 3 or 4 units of wall around impact
 		 else if (wallcoll)
 				if (Mastermap.level.wall == WALL.INVIS && document.getElementById("invhint").checked) {
 					var itx = p2t(wallcoll.x), ity = p2t(wallcoll.y);

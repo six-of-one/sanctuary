@@ -103,8 +103,6 @@ g2:
 map editor o/p scanner
 -push wall pushing
 
--invisible "become temp visible" walls (when option & shot) -- likely a code deal with some overlay mask
-\_ x-- hint walls, but always on (not intending to keep this)
 
 new-ish:
 
@@ -446,6 +444,9 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- invisible "become temp visible" walls (when option & shot) -- likely a code deal with some overlay mask
+    \_ perm hint walls, but always on (not intending to keep this)
 
 x-- css to resize score table based on various viewport - 384 x 384 to 1050 x 1050
    \_ added title font size adjust
