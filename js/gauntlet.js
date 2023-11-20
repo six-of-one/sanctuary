@@ -37,7 +37,7 @@ Gauntlet = function() {
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
 // FCUSTILE is after brikover last wall cover in backgrounds.png
-		ftilestr, fcellstr, FCUSTILE = 37, FCUSTIL2 = 0, FDESTWALL = 38, FAKES = 29, PWSY = 30, HINTIV = 40, INVWALSY = 1, INVWALA = 0,
+		ftilestr, fcellstr, FCUSTILE = 37, FCUSTIL2 = 0, FDESTWALL = 38, FAKES = 29, PWSY = 30, HINTIV = 40, INVWALSY = 1, INVWALA = 0, wallshothint, 
 
 		 MEXHIGH = 0xF0FFF0,
 		 MEXLOW = 0x00000F,
@@ -650,9 +650,10 @@ Gauntlet = function() {
     ],
 
     images: [
-      { id: 'backgrounds', url: "images/backgrounds.png" }, // http://opengameart.org/content/gauntlet-like-tiles
+      { id: 'backgrounds', url: "images/backgrounds.png" },  // http://opengameart.org/content/gauntlet-like-tiles
       { id: 'entities',    url: "images/entities.png"    },  // http://opengameart.org/forumtopic/request-for-tileset-spritesheet-similar-to-gauntlet-ii
       { id: 'shotwalls',   url: "images/shotwalls.png"   }
+      { id: 'invshothint', url: "images/invshothint.png" }   // when invisble hint is on and a wall is shot, these are the FX set
     ],
 
     sounds: [
@@ -2920,6 +2921,7 @@ if (document.getElementById("noclip").checked) return false;
 		if (entity.type != undefined) { entity.sx = entity.type.sx; entity.sy = entity.type.sy; }
 		entity.firetim = 0;
 		entity.inv = false;
+		entity.spriteset = null;
       return entity;
     },
 
@@ -4940,6 +4942,7 @@ var txsv = ":";
 
     initialize: function(sprites) {
       this.sprites = sprites;
+		 wallshothint = sprites.invshothint;
     },
 
     sprite: function(ctx, sprites, viewport, sx, sy, x, y, w, h) {
@@ -4950,6 +4953,9 @@ var txsv = ":";
 		 var txu = tyu = txo = tyo = false;
 			Vx = 0;
 			Vy = 0;
+
+		 if (sprites == null) return;
+
 // draw the spriotes unpinned !
 // the early returns had  to be removed - they blocked the corner tests
 // -- this likely means sprites are being called outside display area
@@ -5055,6 +5061,7 @@ var txsv = ":";
     },
 
     tile: function(ctx, sprites, sx, sy, tx, ty) {
+		 if (sprites == null) return;
       ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, tx * TILE, ty * TILE, TILE, TILE);
     },
 
@@ -5200,7 +5207,7 @@ var txsv = ":";
 		 fcellstr = map.cell(0, 0); // preload so no undefine
 		 ftilestr = 0;
 /// TEST - remove
-		 var hintinv = document.getElementById("invhint").checked;
+		 var chtinv = document.getElementById("invcht").checked;
 		 if (document.getElementById("invwal").checked) map.level.wall = WALL.INVIS;
 /// TEST - remove
 		 var B1, B2, Bh, bcell;
@@ -5359,7 +5366,7 @@ var txsv = ":";
 						if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr)) // underneath an invisible wall - load as under an ent
 								this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 
-						if (hintinv) this.tile(ctx, cell.spriteset, cell.wall, HINTIV, tx, ty);
+						if (chtinv) this.tile(ctx, cell.spriteset, cell.wall, HINTIV, tx, ty);
 					}
 			  }
 			else if (fcellstr != null) {		// this is some ent - copy floor tile under it from imm. previous
@@ -5385,7 +5392,7 @@ var txsv = ":";
 				if (!map.level.gflr)
 						this.tile(ctx, cell.spriteset, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
 			}
-			if (map.level.wall != WALL.INVIS || hintinv)
+			if (map.level.wall != WALL.INVIS || chtinv)
 				if (cell.shadow)		// dont shadow for invis walls
 					this.tile(ctx, cell.spriteset, cell.shadow, WALL.INVIS, tx, ty);
 // when a following tile is covered and being revealed, this sets it to the prev. tile if area is cust tile (differ from spec tile on map)
