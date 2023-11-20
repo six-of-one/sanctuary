@@ -2351,7 +2351,7 @@ var lvu = document.getElementById("flvl").value;
     loadHighWho:   function() { return this.storage[STORAGE.WHO];                     },
 
     saveHighScore: function() {
-		if (max_diff_level > 9) return;
+		if (max_diff_level > 9) return; alert(max_diff_level);
       if ((this.player.score / this.player.droppedcoins) > this.loadHighScore()) {
         this.storage[STORAGE.SCORE] = (this.player.score / this.player.droppedcoins);
         this.storage[STORAGE.WHO]   = this.player.type.name;
@@ -4761,6 +4761,7 @@ var txsv = ":";
     refreshPlayerScore: function(player) {
       if (player.score != player.vscore) {
         player.type.dom.score.update(this.formatScore(player.vscore = this.inc(player.vscore, player.score)));
+		  if (max_diff_level < 10)
         if (player.vscore > this.high.score) {
           this.refreshHighScore(player.vscore, player.type.name);
           if (!this.high.active) {
