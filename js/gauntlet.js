@@ -2351,7 +2351,7 @@ var lvu = document.getElementById("flvl").value;
     loadHighWho:   function() { return this.storage[STORAGE.WHO];                     },
 
     saveHighScore: function() {
-		if (max_diff_level > 9) return; alert(max_diff_level);
+		if (max_diff_level > 9) return;
       if ((this.player.score / this.player.droppedcoins) > this.loadHighScore()) {
         this.storage[STORAGE.SCORE] = (this.player.score / this.player.droppedcoins);
         this.storage[STORAGE.WHO]   = this.player.type.name;
@@ -4632,8 +4632,14 @@ var txsv = ":";
     },
 
     onrender: function(frame) {
-      if (this.dead)
-        this.frame = 32;	// dead and bone pile
+      if (this.dead) {
+			this.frame = 33;	// blank
+			if (this.potions) { reloaded.addTreasure(this.x, this.y, TREASURE.POTIONORG); }
+			else
+			if (this.keys) { var trs = TREASURE.KEY; if (this.keys > 1) trs = TREASURE.KEYPILE; reloaded.addTreasure(this.x, this.y, trs); Mastercell.ptr.keys = this.keys; }
+			else
+				reloaded.addGenerator(this.x, this.y, MONSTERS[(type(0xF00000) < MONSTERS.length) ? type(0xF00000) : 0]);	// lvl 3 bone pile
+			}
       else if (this.exiting)
         this.frame = this.sx + animate(this.exiting.count, this.exiting.fpf, 8);
       else if (is.valid(this.moving.dir) || this.firing)

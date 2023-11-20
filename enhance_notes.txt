@@ -65,7 +65,7 @@ theif / mugger should fight monsters in path - get blocked by object on start, p
 \_ this is, amazingly, way more difficult than expected to implement
  \_ theif is also starting in treasure rooms
 
-dying with keys (and potion) doesnt produce key pile
+dying with keys (and potion) doesnt produce key/ potion pile
 
 g1 gfx tiles
 - spirtes		-- decide how much of this we want / can use
