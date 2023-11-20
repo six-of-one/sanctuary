@@ -2149,7 +2149,7 @@ var lvu = document.getElementById("flvl").value;
 						re.sy = cells[(ix + iy * Mtw)].wall;
 				 var	rdx = Math.abs(itx - ix), rdy = Math.abs(ity - iy);
 						if (rdx > 1 || rdy > 1) re.sx = 7;
-						if (rd2 > 1 || rd2 > 1) re.sx = 14;
+						if (rdx > 2 || rdy > 2) re.sx = 14;
 						re.spriteset = wallshothint;
 						}
 				}
