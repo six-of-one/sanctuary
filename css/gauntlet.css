@@ -139,7 +139,7 @@ td {
 
 
 #bkimage {
-   background: url(../images/b2left-bk.png) no-repeat, url('../images/b2right-bk.png') top right no-repeat, black;
+   background: url(../images/b1left-bk.png) no-repeat, url('../images/b1right-bk.png') top right no-repeat, black;
    background-size:  auto, auto;
    padding-left: 200px;
    padding-right: 200px;
