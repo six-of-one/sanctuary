@@ -421,6 +421,10 @@ crossovers interested in:
 victory road
 archon
 time bandit
+druid (c64)
+doom
+quake
+crossfire (sierra vision 1984)
 
 >>>>>>>>>>>>>>>>>>>>>>
 code fails
@@ -440,6 +444,10 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+------------------- 023.11.19
+
+x-- added a page bezel offscreen of game
 
 x-- super sorc finish
 
