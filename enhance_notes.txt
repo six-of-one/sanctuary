@@ -45,9 +45,8 @@ check sound for picking poison (is potion pick sound?, need g2 ref)
 is it still too easy to hit exits (exit maze) & stun tiles ?
 are the release walls traps to easy to see?
 
-look at treasure collect giving score mult logic
 
-inv wall cheat not on: gud, pass, phase, rnd walls
+inv wall hint/cheet not on: gud, pass, phase, rnd walls
 
 
 
@@ -151,6 +150,7 @@ elf:				3.9 sec
 some issue shooting level 1 & 2 gens - see research level
 
 diagonal shot fail between walls w/diagonal gap		< sort of works...spacing is just a bit off >
+-- this comes from player cbox size not setting player in correct spot for shot
 
 monsters seem "too" smart for g1 -- these are good for g2 "monsters may move differently"
  
@@ -447,6 +447,8 @@ done:
 
 x-- dying with keys (and potion) doesnt produce key/ potion pile
    \_ also produces a live gen when making lvl 3 bone pile
+
+x-- look at treasure collect giving score mult logic (is as designated, based on difficulty)
 
 x-- invisible "become temp visible" walls (when option & shot) -- likely a code deal with some overlay mask
     \_ perm hint walls, but always on (not intending to keep this)
