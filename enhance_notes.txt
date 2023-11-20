@@ -103,7 +103,7 @@ g2:
 map editor o/p scanner
 -push wall pushing
 
--invisible "become temp visible" walls -- likely a code deal with some overlay mask
+-invisible "become temp visible" walls (when option & shot) -- likely a code deal with some overlay mask
 \_ x-- hint walls, but always on (not intending to keep this)
 
 new-ish:

@@ -2136,11 +2136,23 @@ var lvu = document.getElementById("flvl").value;
 /// TEST - remove
 				entity.hurt(dmg + xdmg, weapon);
 		 }
-		 else if (wallcoll) {
-			 var re = Mastermap.addFx(wallcoll.x, wallcoll.y, FX.INVFLAS);
-			 re.sy = wallcoll.wall;
-			 re.spriteset = wallshothint;
-		 }
+		 else if (wallcoll)
+				if (Mastermap.level.wall == WALL.INVIS && document.getElementById("invhint").checked) {
+					var itx = p2t(wallcoll.x), ity = p2t(wallcoll.y);
+					var cells = reloaded.cells;
+					for (var ix = itx - 3;ix < itx + 4;ix++)
+					for (var iy = ity - 3;iy < ity + 4;iy++)
+
+					 if ((ix >= 0 && ix < Mtw) && (iy >= 0 && iy < Mth))
+						{
+				 var	re = Mastermap.addFx(t2p(ix), t2p(iy), FX.INVFLAS);
+						re.sy = cells[(ix + iy * Mtw)].wall;
+				 var	rdx = Math.abs(itx - ix), rdy = Math.abs(ity - iy);
+						if (rdx > 1 || rdy > 1) re.sx = 7;
+						if (rd2 > 1 || rd2 > 1) re.sx = 14;
+						re.spriteset = wallshothint;
+						}
+				}
 // monster shot player
       else if (weapon.type.monster && entity.player) {
 			helpdis(weapon.nohlp, undefined, 2000, weapon.type.damage, undefined);
