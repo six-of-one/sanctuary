@@ -810,10 +810,10 @@ Game.Math = {
   }
 
 	function loadscortabl() {
-				document.getElementById("warscor").innerHTML = '<TR><TD colspan="3" style="text-align: center; width:75%; font-size:20pt;">WARRIORS</TD></TR>';
-				document.getElementById("wizscor").innerHTML = '<TR><TD colspan="3" style="text-align: center; width:75%; font-size:20pt;">WIZARDS</TD></TR>';
-				document.getElementById("valscor").innerHTML = '<TR><TD colspan="3" style="text-align: center; width:75%; font-size:20pt;">VALKYRIES</TD></TR>';
-				document.getElementById("elfscor").innerHTML = '<TR><TD colspan="3" style="text-align: center; width:75%; font-size:20pt;">ELVES</TD></TR>';
+				document.getElementById("warscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">WARRIORS</TD></TR>';
+				document.getElementById("wizscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">WIZARDS</TD></TR>';
+				document.getElementById("valscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">VALKYRIES</TD></TR>';
+				document.getElementById("elfscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">ELVES</TD></TR>';
 				var wsc = 10, vsc = 10, zsc = 10, esc = 10;
 				var HSCORE = [ 0, "Names", "character" ];
 				var scoredex = readCookieDef("hindex",0,0);
