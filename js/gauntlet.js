@@ -407,7 +407,8 @@ Gauntlet = function() {
         MONSTER_DEATH:   { sx: 17, sy: 12, frames: 6, fpf: FPS/20 },
         WEAPON_HIT:      { sx: 23, sy: 12, frames: 2, fpf: FPS/20 },
         PLAYER_GLOW:     { frames: FPS/2, border: 5 },
-        NUMER:           { sx: 24, sy: 13, frames:7, fpf: FPS/3  }
+        NUMER:           { sx: 24, sy: 13, frames:7,  fpf: FPS/3  },
+        INVFLAS:         { sx: 0,  sy: 0,  frames:7,  fpf: FPS/6  }
       },
       PLAYERS   = [ PLAYER.WARRIOR, PLAYER.VALKYRIE, PLAYER.WIZARD, PLAYER.ELF ],
 // the order of these lists follows the numeric code of pixels under the main entry, adding hex 10 each time
@@ -652,7 +653,7 @@ Gauntlet = function() {
     images: [
       { id: 'backgrounds', url: "images/backgrounds.png" },  // http://opengameart.org/content/gauntlet-like-tiles
       { id: 'entities',    url: "images/entities.png"    },  // http://opengameart.org/forumtopic/request-for-tileset-spritesheet-similar-to-gauntlet-ii
-      { id: 'shotwalls',   url: "images/shotwalls.png"   }
+      { id: 'shotwalls',   url: "images/shotwalls.png"   },
       { id: 'invshothint', url: "images/invshothint.png" }   // when invisble hint is on and a wall is shot, these are the FX set
     ],
 
@@ -2096,7 +2097,8 @@ var lvu = document.getElementById("flvl").value;
           y = weapon.y + (entity.y ? (entity.y - weapon.y)/2 : 0);
 
 		 var nosup = true;
-      if (weapon.type.player && (entity.monster || entity.generator || entity.treasure ))
+      if (weapon.type.player)
+      if (entity.monster || entity.generator || entity.treasure )
 		 {
 				var r, rn, xdmg = 0, dmg, vdmg = weapon.type.wind;
 				if (weapon.xshotpwr) vdmg = vdmg + Math.min(weapon.xshotpwr, ppotmax);
@@ -2133,6 +2135,11 @@ var lvu = document.getElementById("flvl").value;
 				else
 /// TEST - remove
 				entity.hurt(dmg + xdmg, weapon);
+		 }
+		 else if (wallcoll) {
+			 var re = Mastermap.addFx(wallcoll.x, wallcoll.y, FX.INVFLAS);
+			 re.sy = wallcoll.wall;
+			 re.spriteset = wallshothint;
 		 }
 // monster shot player
       else if (weapon.type.monster && entity.player) {

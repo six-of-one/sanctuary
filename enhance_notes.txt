@@ -47,6 +47,8 @@ are the release walls traps to easy to see?
 
 look at treasure collect giving score mult logic
 
+inv wall cheat not on: gud, pass, phase, rnd walls
+
 
 
 need sounds:
