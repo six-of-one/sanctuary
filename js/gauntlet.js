@@ -553,7 +553,7 @@ Gauntlet = function() {
 
 		RLOAD = [0],
 // difficulty level for rnd load profile
-		diff_level = 1, def_diff = 7, max_diff_level = 0,
+		diff_level = 1, def_diff = 7, max_diff_level,
 
 	DEBUG = {
         RESET:      Game.qsBool("reset"),
@@ -1881,7 +1881,7 @@ var lvu = document.getElementById("flvl").value;
 
 // difficulty level set once per onplay
 			diff_level = document.getElementById("seldiff").value;
-			if (diff_level > max_diff_level) max_diff_level = diff_level;
+			if (diff_level > max_diff_level || max_diff_level == undefined) max_diff_level = diff_level;
 
 			if ((Mastermap.level.nornd == undefined || frnd == true) && blrnd != true)	// random load a level
 			{
