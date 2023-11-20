@@ -137,6 +137,14 @@ td {
 /* unique id-based styles */
 /**************************/
 
+
+#bkimage {
+	background: url(../images/b2left-bk.png) no-repeat, url('../images/b2right-bk.png') top right no-repeat, black;
+	background-size:  auto, auto;
+	padding-left: 200px;
+	padding-right: 200px;
+	}
+
 #gauntlet       { margin: 1em auto; position: relative; background: black; }
 #booting        { position: absolute; width: 26%; left: 20%; top: 40%;      } 
 #scordiv        { position:absolute; font-family:Verdana;font-size:14pt; font-weight:bold;}
