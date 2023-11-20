@@ -553,7 +553,7 @@ Gauntlet = function() {
 
 		RLOAD = [0],
 // difficulty level for rnd load profile
-		diff_level = 1, def_diff = 7,
+		diff_level = 1, def_diff = 7, max_diff_level = 0,
 
 	DEBUG = {
         RESET:      Game.qsBool("reset"),
@@ -1879,11 +1879,14 @@ var lvu = document.getElementById("flvl").value;
 			var blrnd = document.getElementById("blrndlod").checked;
 			var frnd = document.getElementById("forndlod").checked;
 
+// difficulty level set once per onplay
+			diff_level = document.getElementById("seldiff").value;
+			if (diff_level > max_diff_level) max_diff_level = diff_level;
+
 			if ((Mastermap.level.nornd == undefined || frnd == true) && blrnd != true)	// random load a level
 			{
 					var f, rprof, ldiff;
 
-					diff_level = document.getElementById("seldiff").value;
 					ldiff = diff_level / def_diff;
 // treasure will come thru here unless blocked
 					rprof = Game.Math.randomInt(1,rlline);			// for now pick a random profile
@@ -2348,7 +2351,7 @@ var lvu = document.getElementById("flvl").value;
     loadHighWho:   function() { return this.storage[STORAGE.WHO];                     },
 
     saveHighScore: function() {
-		if (diff_level > 9) return;
+		if (max_diff_level > 9) return;
       if ((this.player.score / this.player.droppedcoins) > this.loadHighScore()) {
         this.storage[STORAGE.SCORE] = (this.player.score / this.player.droppedcoins);
         this.storage[STORAGE.WHO]   = this.player.type.name;
@@ -2359,7 +2362,7 @@ var lvu = document.getElementById("flvl").value;
 
 		if (this.player.score > 8000) {
 /// TEST - remove
-			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890._ ";
+			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ_"; // 1234567890._ ";
 			var res = "";
 				 for(var i = 0; i < 3; i++) {
 			var rnd = Math.floor(Math.random() * ablist.length);
