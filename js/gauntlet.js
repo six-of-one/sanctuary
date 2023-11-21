@@ -888,7 +888,7 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/xfloor7.png",                     nornd: 1, unpinx: 1, unpiny: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/g2floor26.jpg",                     nornd: 1, unpinx: 1, unpiny: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Demo',         url: "levels/glevel0.png",    floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor0.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
       { name: 'Level 1',      url: "levels/g2level1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor1.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
       { name: 'Level 2',      url: "levels/g2level2.png",   floor: FLOOR.BROWN_LAMINATE,        wall: WALL.BROWN1,      gflr: "gfx/g1floor2.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "Ghosts must be shot" },
@@ -5345,7 +5345,7 @@ var txsv = ":";
 						B2 = tx + ty * Mtw; Bh = wallhue;
 						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && wallhue == 0 && blnck(bcell,cell,bch)) {
-							this.tile(Blendctx2, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
+							this.tile(Blendctx2, cell.spriteset, cell.wall, map.level.wall, 0, 0);
 							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
 							var b1Data = bimg1.data;
 							var bimg2 = Blendctx2.getImageData(0, 0, TILE, TILE);
@@ -5362,7 +5362,7 @@ var txsv = ":";
 								}
 								for(var i = 0; i < 36; i += 4) {
 									pixs = i + j * XTILE;
-									var pixb = (36 - i) + j * XTILE;
+									var pixb = (124 - i) + j * XTILE;
 									b1Data[pixs] = b1Data[pixb];
 									b1Data[pixs+1] = b1Data[pixb+1];
 									b1Data[pixs+2] = b1Data[pixb+2];

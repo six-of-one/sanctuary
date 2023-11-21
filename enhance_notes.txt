@@ -62,7 +62,6 @@ theif / mugger should fight monsters in path - get blocked by object on start, p
 \_ this is, amazingly, way more difficult than expected to implement
 
 
-
 g1 gfx tiles
 - spirtes		-- decide how much of this we want / can use
 - walls & floors	(+g2)
