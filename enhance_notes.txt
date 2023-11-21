@@ -25,8 +25,6 @@ loadable wall segments & cell.spriteset
 change fadeout on 1pl die - maybe allow re-entry if right away (10 - 15 secs hang)
 zoom out & zoom back in on re-enter, or if no re-ent go to splash loop
 
-make it so difficulty cant be set back below 9 after racking a buku score on diff: 999 or so
-
 limited teleport does not: telefrag, blot out walls
 
 
@@ -444,6 +442,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- make it so difficulty cant be set back below 9 after racking a buku score on diff: 999 or so
 
 x-- dying with keys (and potion) doesnt produce key/ potion pile
    \_ also produces a live gen when making lvl 3 bone pile
