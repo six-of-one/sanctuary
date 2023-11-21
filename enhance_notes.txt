@@ -60,7 +60,6 @@ port list:
 
 theif / mugger should fight monsters in path - get blocked by object on start, pushwall across path
 \_ this is, amazingly, way more difficult than expected to implement
- \_ theif is also starting in treasure rooms
 
 
 
@@ -444,6 +443,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- theif is also starting in treasure rooms (code logic is otherwise...)
 
 x-- make it so difficulty cant be set back below 9 after racking a buku score on diff: 999 or so
 
