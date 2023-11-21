@@ -25,7 +25,7 @@ loadable wall segments & cell.spriteset
 change fadeout on 1pl die - maybe allow re-entry if right away (10 - 15 secs hang)
 zoom out & zoom back in on re-enter, or if no re-ent go to splash loop
 
-limited teleport does not: telefrag, blot out walls
+limited teleport does not: telefrag (it uses fight to kill monsters), blot out walls
 
 
 imm issues:
