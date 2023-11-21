@@ -4416,7 +4416,7 @@ var txsv = ":";
  					if (!troomfin)
 					if (troomtime > 0)
 					{
-							troomtime--;
+							troomtime = countdown(troomtime);
 							var taunt = 50 % troomtime;		// time mod 50 - see image cap chart, hit values 48, 42, 24, 21, 16, 14, 12 -- (either 2 or 8 result)
 							timerupd.level.update("Time: " + troomtime);
 							if (troomtime < 11) Musicth.play(TROOMCNT[troomtime]);
@@ -5496,7 +5496,7 @@ var txsv = ":";
 /// TEST - remove
 //document.title = thieftim+": "+ ((thieftim - timestamp())/1000)+" :tft (&-stmp)/1000: ";
 /// TEST - remove
-					if (troomtime == 0)
+					if (troomtime < 1)
 					if (thieftim  != 0 && (thieftim < timestamp()))
 					{
 							spawn(); // start theif

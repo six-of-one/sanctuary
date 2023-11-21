@@ -97,6 +97,8 @@ finish wall layers
 g1 audio elements swap in	-> ref genesis sound test for note s
 
 g2:
+g2 set of exits (select 1 rest are fake) not implemented yet
+
 map editor o/p scanner
 -push wall pushing
 
