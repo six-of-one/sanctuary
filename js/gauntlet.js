@@ -2100,7 +2100,7 @@ var lvu = document.getElementById("flvl").value;
           y = weapon.y + (entity.y ? (entity.y - weapon.y)/2 : 0);
 
 		 var nosup = true;
-      if (weapon.type.player)
+      if (weapon.type.player) {
       if (entity.monster || entity.generator || entity.treasure )
 		 {
 				var r, rn, xdmg = 0, dmg, vdmg = weapon.type.wind;
@@ -2157,6 +2157,7 @@ var lvu = document.getElementById("flvl").value;
 						re.spriteset = wallshothint;
 						}
 				}
+			}
 // monster shot player
       else if (weapon.type.monster && entity.player) {
 			helpdis(weapon.nohlp, undefined, 2000, weapon.type.damage, undefined);
