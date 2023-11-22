@@ -4971,9 +4971,10 @@ var txsv = ":";
 //   hv 0 = horiz, 1 = vert
 
   var bimg1;
-// short blend horiz - some pieces have less blend area
+// short blend horiz & vert - some pieces have less blend area
 //                   0     2     4     6     8    10    12    14    16    18    20    22    24     XX XX
   var shortblndh = [ 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 3, 3, 3, 3, 3, 0, 0, 0, 3, 0, 0, 3, 3, 0, 0, 0, 0 ];
+  var shortblndv = [ 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0 ];
 
   function wallblend(prov, scell, sbcell, wallcod, hv) {
 
@@ -4989,7 +4990,9 @@ var txsv = ":";
 			var pixs, XTILE = 4 * TILE, bl1, bl2, addr = 0.0625;
 			for(var j = 0; j < TILE; j ++) { bl1 = 1.0; bl2 = 0.0;
 				for(var i = 36; i < (XTILE - 36) ; i += 4) {
-					if (!shortblndh[scell.wall]) {						// no shortblending - blend the middle
+			  var shrblc = shortblndh[scell.wall];
+					if (hv) shrblc = shortblndv[scell.wall];
+					if (!shrblc) {						// no shortblending - blend the middle
 						pixs = dadr(i, j, hv); //i + j * XTILE;
 						b1Data[pixs] = Math.round(b1Data[pixs] * bl1 + b2Data[pixs] * bl2);
 						b1Data[pixs+1] = Math.round(b1Data[pixs+1] * bl1 + b2Data[pixs+1] * bl2);
@@ -5005,7 +5008,7 @@ var txsv = ":";
 						}
 				}
 				for(var i = 0; i < 36; i += 4) {
-					if (shortblndh[scell.wall]) {						// shortblending - blend the beginning
+					if (shrblc) {						// shortblending - blend the beginning
 						pixs = dadr(i, j, hv); //pixs = i + j * XTILE;
 						b1Data[pixs] = Math.round(b1Data[pixs] * bl1 + b2Data[pixs] * bl2);
 						b1Data[pixs+1] = Math.round(b1Data[pixs+1] * bl1 + b2Data[pixs+1] * bl2);
@@ -5369,9 +5372,17 @@ var txsv = ":";
 							wallblend(this, cell, bcell, G1WALL[cell.pixel & MEXLOB], 0);
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 							}
-						else
+						else {
+							mpixel(tx,ty, tx,ty - 1, 1);
+							bcell = map.cell(d1 * TILE, d2 * TILE); // and alas - d* is a debug ref used in mpixel for testing  reloaded.cells[mpixel(tx,ty, tx,ty - TILE, 1)];
+							if (bcell != undefined && bcell.wall && B2 >= 0 && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bcv)) {
+								wallblend(this, cell, bcell, G1WALL[cell.pixel & MEXLOB], 1);
+								ctx.putImageData(bimg1, tx * TILE, ty * TILE);
+								}
+							else
 
-						this.tile(ctx, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
+							this.tile(ctx, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
+							}
 // blend for next
 						Blendctx1.filter = "hue-rotate(0deg)";
 						B1 = tx + ty * Mtw;
