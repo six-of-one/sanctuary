@@ -4970,7 +4970,7 @@ var txsv = ":";
   var bimg1;
   function wallblend(prov, scell, sbcell, wallcod, hv) {
 
-			prov.tile(Blendctx1, sbcell.spriteset, scell.wall, sbcell.bw, 0, 0);
+			prov.tile(Blendctx1, sbcell.spriteset, scell.wall, sbcell.bwc, 0, 0);
 			Blendctx1.filter = "hue-rotate(0deg)";
 			prov.tile(Blendctx2, scell.spriteset, scell.wall, wallcod, 0, 0);
 			bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
@@ -5350,7 +5350,7 @@ var txsv = ":";
 						Blendctx1.filter = "hue-rotate(0deg)";
 						B1 = tx + ty * Mtw;
 						bcell = cell;
-						cell.bw = G1WALL[cell.pixel & MEXLOB];
+						cell.bwc = G1WALL[cell.pixel & MEXLOB];
 					  }
 					else
 					if (map.level.wall != WALL.INVIS) { 		// dont load wall tile for invis walls -- only applies to std level walls
@@ -5370,7 +5370,7 @@ var txsv = ":";
 						Blendctx1.filter = "hue-rotate("+wallhue+"deg)";		// this will catch in the next loop, then reset
 						B1 = tx + ty * Mtw;
 						bcell = cell;
-						cell.bw = map.level.wall;
+						cell.bwc = map.level.wall;
 
 						ctx.filter = "hue-rotate(0deg)";
 						if (map.level.brikovr) this.tile(ctx, cell.spriteset, cell.wall, map.level.brikovr, tx, ty);
@@ -5384,8 +5384,8 @@ var txsv = ":";
 						if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr)) // underneath an invisible wall - load as under an ent
 								this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 
-						cell.bw = 39; // currently all blank row
-						if (chtinv) { this.tile(ctx, cell.spriteset, cell.wall, HINTIV, tx, ty); cell.bw = HINTIV; }
+						cell.bwc = 39; // currently all blank row
+						if (chtinv) { this.tile(ctx, cell.spriteset, cell.wall, HINTIV, tx, ty); cell.bwc = HINTIV; }
 					}
 			  }
 			else if (fcellstr != null) {		// this is some ent - copy floor tile under it from imm. previous
