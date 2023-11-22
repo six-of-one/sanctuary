@@ -4965,11 +4965,13 @@ var txsv = ":";
   });
 
 // blender code for wall renders
+//   hv 0 = horiz, 1 = vert
 
-  wallblend: function(sbcell, scell, wallcod, hv) {
+  var bimg1;
+  function wallblend(prov, scell, wallcod, hv) {
 
-			this.tile(Blendctx2, scell.spriteset, wallcod, 0, 0);
-			var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
+			prov.tile(Blendctx2, scell.spriteset, scell.wall, wallcod, 0, 0);
+			bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
 			var b1Data = bimg1.data;
 			var bimg2 = Blendctx2.getImageData(0, 0, TILE, TILE);
 			var b2Data = bimg2.data;
@@ -4996,7 +4998,8 @@ var txsv = ":";
 					b1Data[pixs+1] = b2Data[pixs+1];
 					b1Data[pixs+2] = b2Data[pixs+2];
 				}}
-				return(b1Data);
+				bimg1.data = b1Data;
+//				return(b1Data);
 			}
 
   //===========================================================================
@@ -5330,6 +5333,8 @@ var txsv = ":";
 						B2 = tx + ty * Mtw;
 						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && Bh == 0 && blnck(bcell,cell,bch)) {
+							wallblend(this, cell, G1WALL[cell.pixel & MEXLOB], 0);
+/*
 							this.tile(Blendctx2, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
 							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
 							var b1Data = bimg1.data;
@@ -5358,7 +5363,7 @@ var txsv = ":";
 									b1Data[pixs+1] = b2Data[pixs+1];
 									b1Data[pixs+2] = b2Data[pixs+2];
 								}}
-							bimg1.data = b1Data;
+							bimg1.data = b1Data;*/
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 							}
 						else
@@ -5380,9 +5385,11 @@ var txsv = ":";
 						B2 = tx + ty * Mtw; Bh = wallhue;
 						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && wallhue == 0 && blnck(bcell,cell,bch)) {
+							wallblend(this, cell, map.level.wall, 0);
+/*
 							this.tile(Blendctx2, cell.spriteset, cell.wall, map.level.wall, 0, 0);
-							var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
-							var b1Data = bimg1.data;
+							var bimg1b = Blendctx1.getImageData(0, 0, TILE, TILE);
+							var b1Data = bimg1b.data;
 							var bimg2 = Blendctx2.getImageData(0, 0, TILE, TILE);
 							var b2Data = bimg2.data;
 							var pixs, XTILE = 4 * TILE, bl1, bl2, addr = 0.0625;
@@ -5408,7 +5415,7 @@ var txsv = ":";
 									b1Data[pixs+1] = b2Data[pixs+1];
 									b1Data[pixs+2] = b2Data[pixs+2];
 								}}
-							bimg1.data = b1Data;
+							bimg1b.data = b1Data;*/
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 							}
 						else
