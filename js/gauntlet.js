@@ -5278,16 +5278,17 @@ var txsv = ":";
 		 var chtinv = document.getElementById("invcht").checked;
 		 if (document.getElementById("invwal").checked) map.level.wall = WALL.INVIS;
 /// TEST - remove
-		 var B1, B2, 	bcell;
+		 var B1, B2, bcell;
 // second cycle - everything else
       for(ty = vyz, th = vth ; ty < th ; ty++) {
         for(tx = vxz, tw = vtw ; tx < tw ; tx++) {
-          cell = map.cell(tx * TILE, ty * TILE);
-			  cell.ctx = ctx;						// for traps turning walls to floor, stalling walls to exits
-			  if (cell.spriteset == undefined) cell.spriteset = sprites;		//		shootable walls, g2 shot walls, g2 random walls, and so
+				cell = map.cell(tx * TILE, ty * TILE);
+				cell.ctx = ctx;						// for traps turning walls to floor, stalling walls to exits
+				if (cell.spriteset == undefined) cell.spriteset = sprites;		//		shootable walls, g2 shot walls, g2 random walls, and so
 //			  cell.tileptr = this;
-			  cell.map = map;
-			  var hu = parseHue(tx, ty);
+				cell.map = map;
+		  var hu = parseHue(tx, ty);
+				B2 = tx + ty * Mtw;
 
 		  if (cell.nothing) {
 				fcellstr = cell;
@@ -5330,7 +5331,6 @@ var txsv = ":";
 //					cell.ptile = fcellstr;
 					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000 && (cell.pixel & MEXHIGH) != TRAPWALL)  {// diff walls by low nibble
 // blender
-						B2 = tx + ty * Mtw;
 						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) {
 							wallblend(this, cell, G1WALL[cell.pixel & MEXLOB], 0);
@@ -5351,8 +5351,6 @@ var txsv = ":";
 						if (wallhue <0 || wallhue > 360) wallhue = 0;
 /// TEST - update
 // blender
-						var wrwal = false;
-						B2 = tx + ty * Mtw;
 						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) {
 							Blendctx2.filter = "hue-rotate("+wallhue+"deg)";
@@ -5360,11 +5358,10 @@ var txsv = ":";
 							Blendctx2.filter = "hue-rotate(0deg)";
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 							}
-						else
-							wrwal = true;
-
-						ctx.filter = "hue-rotate("+wallhue+"deg)";
-						if (wrwal == true) this.tile(ctx, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
+						else {
+							ctx.filter = "hue-rotate("+wallhue+"deg)";
+							this.tile(ctx, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
+							}
 // blend for next
 						Blendctx1.filter = "hue-rotate("+wallhue+"deg)";
 						this.tile(Blendctx1, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, 0, 0);
