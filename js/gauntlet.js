@@ -4992,10 +4992,10 @@ var txsv = ":";
 				}
 				for(var i = 0; i < 36; i += 4) {
 					pixs = i + j * XTILE;
-					var pixb = (124 - i) + j * XTILE;
-					b1Data[pixs] = b1Data[pixb];
-					b1Data[pixs+1] = b1Data[pixb+1];
-					b1Data[pixs+2] = b1Data[pixb+2];
+//					var pixb = (124 - i) + j * XTILE;
+					b1Data[pixs] = b1Data[pixs];
+					b1Data[pixs+1] = b1Data[pixs+1];
+					b1Data[pixs+2] = b1Data[pixs+2];
 				}
 				for(var i = (XTILE - 36); i < XTILE; i += 4) {
 					pixs = i + j * XTILE;
@@ -5359,7 +5359,7 @@ var txsv = ":";
 					if (map.level.wall != WALL.INVIS) { 		// dont load wall tile for invis walls -- only applies to std level walls
 // blender
 						if (document.getElementById("noblend").checked) B2 = -2;
-						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) {
+						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch) && (bcell.pixel & MEXHIGH) != TRAPWALL) {
 							Blendctx2.filter = "hue-rotate("+wallhue+"deg)";
 							wallblend(this, cell, bcell, map.level.wall, 0);
 							Blendctx2.filter = "hue-rotate(0deg)";
