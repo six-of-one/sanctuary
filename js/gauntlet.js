@@ -1148,7 +1148,9 @@ Gauntlet = function() {
 
      function walltype(tx,ty,map,findwall)   {
 		  if (findwall == undefined) findwall = iswall;
+// first the 4 -- x +-1 and y +-1 pieces, forming +
 			var wally = (findwall(mpixel(tx,ty, tx,   ty-1)) ? 1 : 0) | (findwall(mpixel(tx,ty, tx+1, ty))   ? 2 : 0) | (findwall(mpixel(tx,ty, tx,   ty+1)) ? 4 : 0) | (findwall(mpixel(tx,ty, tx-1, ty))   ? 8 : 0);
+// now test for 4 corners x & y +-1 forming a full 8 unit surround
 			if (wally > 13) {
 				if (findwall(mpixel(tx,ty, tx-1, ty+1)))  { wally += 6; if (findwall(mpixel(tx,ty, tx+1, ty+1))) wally += 4; }
 				else if (findwall(mpixel(tx,ty, tx+1, ty+1))) wally += 8;
