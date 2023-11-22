@@ -4968,8 +4968,10 @@ var txsv = ":";
 //   hv 0 = horiz, 1 = vert
 
   var bimg1;
-  function wallblend(prov, scell, wallcod, hv) {
+  function wallblend(prov, scell, sbcell, wallcod, hv) {
 
+			prov.tile(Blendctx1, sbcell.spriteset, scell.wall, sbcell.bw, 0, 0);
+			Blendctx1.filter = "hue-rotate(0deg)";
 			prov.tile(Blendctx2, scell.spriteset, scell.wall, wallcod, 0, 0);
 			bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
 			var b1Data = bimg1.data;
@@ -5231,7 +5233,7 @@ var txsv = ":";
     maptiles: function(map, ctx) {
       var n, cell, tx, ty, tw, th, sprites = this.sprites.backgrounds;
 //						0     2     4     6     8    10    12    14    16    18    20    22    24
-		var bch = [ 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 ],
+		var bch = [ 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
 			 bcv = [ 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 4, 4, 0, 0, 0, 0, 1, 1 ];
 
 		function blnck(cell1,cell2,barr) { var bt = barr[cell1.wall]; if (bt > 0 && bt == barr[cell2.wall]) return true; };
@@ -5328,33 +5330,35 @@ var txsv = ":";
 			  }
 			else if (is.valid(cell.wall))
 			  {
+// NEXT: set wallhue from parseHue here
+/// TEST - update
+			  var wallhue = document.getElementById("whue").value;
+					if (wallhue <0 || wallhue > 360) wallhue = 0;
+/// TEST - update
 //					cell.ptile = fcellstr;
 					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000 && (cell.pixel & MEXHIGH) != TRAPWALL)  {// diff walls by low nibble
 // blender
 						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) {
-							wallblend(this, cell, G1WALL[cell.pixel & MEXLOB], 0);
+							wallblend(this, cell, bcell, G1WALL[cell.pixel & MEXLOB], 0);
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 							}
 						else
 
 						this.tile(ctx, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
 // blend for next
-						this.tile(Blendctx1, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
+						Blendctx1.filter = "hue-rotate(0deg)";
 						B1 = tx + ty * Mtw;
 						bcell = cell;
+						cell.bw = G1WALL[cell.pixel & MEXLOB];
 					  }
 					else
 					if (map.level.wall != WALL.INVIS) { 		// dont load wall tile for invis walls -- only applies to std level walls
-/// TEST - update
-						var wallhue = document.getElementById("whue").value;
-						if (wallhue <0 || wallhue > 360) wallhue = 0;
-/// TEST - update
 // blender
 						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) {
 							Blendctx2.filter = "hue-rotate("+wallhue+"deg)";
-							wallblend(this, cell, map.level.wall, 0);
+							wallblend(this, cell, bcell, map.level.wall, 0);
 							Blendctx2.filter = "hue-rotate(0deg)";
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 							}
@@ -5363,12 +5367,11 @@ var txsv = ":";
 							this.tile(ctx, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
 							}
 // blend for next
-						Blendctx1.filter = "hue-rotate("+wallhue+"deg)";
-						this.tile(Blendctx1, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, 0, 0);
+						Blendctx1.filter = "hue-rotate("+wallhue+"deg)";		// this will catch in the next loop, then reset
 						B1 = tx + ty * Mtw;
 						bcell = cell;
+						cell.bw = map.level.wall;
 
-						Blendctx1.filter = "hue-rotate(0deg)";
 						ctx.filter = "hue-rotate(0deg)";
 						if (map.level.brikovr) this.tile(ctx, cell.spriteset, cell.wall, map.level.brikovr, tx, ty);
 					}
@@ -5381,7 +5384,8 @@ var txsv = ":";
 						if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr)) // underneath an invisible wall - load as under an ent
 								this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 
-						if (chtinv) this.tile(ctx, cell.spriteset, cell.wall, HINTIV, tx, ty);
+						cell.bw = 39; // currently all blank row
+						if (chtinv) { this.tile(ctx, cell.spriteset, cell.wall, HINTIV, tx, ty); cell.bw = HINTIV; }
 					}
 			  }
 			else if (fcellstr != null) {		// this is some ent - copy floor tile under it from imm. previous
