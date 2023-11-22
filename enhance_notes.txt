@@ -30,6 +30,8 @@ limited teleport does not: telefrag (it uses fight to kill monsters), blot out w
 
 imm issues:
 
+super sorc shots no longer damage player
+
 cycle walls display wrong off state ?	(is this rotate issue? not seeing now)
 
 score table didnt show after a quit
