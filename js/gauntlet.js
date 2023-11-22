@@ -4964,6 +4964,41 @@ var txsv = ":";
 
   });
 
+// blender code for wall renders
+
+  wallblend: function(sbcell, scell, wallcod, hv) {
+
+			this.tile(Blendctx2, scell.spriteset, wallcod, 0, 0);
+			var bimg1 = Blendctx1.getImageData(0, 0, TILE, TILE);
+			var b1Data = bimg1.data;
+			var bimg2 = Blendctx2.getImageData(0, 0, TILE, TILE);
+			var b2Data = bimg2.data;
+			var pixs, XTILE = 4 * TILE, bl1, bl2, addr = 0.0625;
+			for(var j = 0; j < TILE; j ++) { bl1 = 1.0; bl2 = 0.0;
+				for(var i = 36; i < (XTILE - 36) ; i += 4) {
+					pixs = i + j * XTILE;
+					b1Data[pixs] = Math.round(b1Data[pixs] * bl1 + b2Data[pixs] * bl2);
+					b1Data[pixs+1] = Math.round(b1Data[pixs+1] * bl1 + b2Data[pixs+1] * bl2);
+					b1Data[pixs+2] = Math.round(b1Data[pixs+2] * bl1 + b2Data[pixs+2] * bl2);
+//									b1Data[pixs+3] = b1Data[pixs+3] * bl1 + b2Data[pixs+3] * bl2;
+					bl1 -= addr; bl2 += addr;
+				}
+				for(var i = 0; i < 36; i += 4) {
+					pixs = i + j * XTILE;
+					var pixb = (124 - i) + j * XTILE;
+					b1Data[pixs] = b1Data[pixb];
+					b1Data[pixs+1] = b1Data[pixb+1];
+					b1Data[pixs+2] = b1Data[pixb+2];
+				}
+				for(var i = (XTILE - 36); i < XTILE; i += 4) {
+					pixs = i + j * XTILE;
+					b1Data[pixs] = b2Data[pixs];
+					b1Data[pixs+1] = b2Data[pixs+1];
+					b1Data[pixs+2] = b2Data[pixs+2];
+				}}
+				return(b1Data);
+			}
+
   //===========================================================================
   // RENDERING CODE
   //===========================================================================
