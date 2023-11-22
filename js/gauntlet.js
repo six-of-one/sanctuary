@@ -5374,7 +5374,8 @@ var txsv = ":";
 							}
 						else {
 							mpixel(tx,ty, tx,ty - 1, 1);
-							bcell = map.cell(d1 * TILE, d2 * TILE); // and alas - d* is a debug ref used in mpixel for testing  reloaded.cells[mpixel(tx,ty, tx,ty - TILE, 1)];
+							bcell = map.cell(d1 * TILE, d2 * TILE); // and alas - d* is a debug ref used in mpixel for testing  
+//							bcell = reloaded.cells[mpixel(tx,ty, tx,ty - 1, 1)];
 							if (bcell != undefined && bcell.wall && B2 >= 0 && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bcv)) {
 								wallblend(this, cell, bcell, G1WALL[cell.pixel & MEXLOB], 1);
 								ctx.putImageData(bimg1, tx * TILE, ty * TILE);
