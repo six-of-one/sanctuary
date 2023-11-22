@@ -5359,7 +5359,7 @@ var txsv = ":";
 					if (map.level.wall != WALL.INVIS) { 		// dont load wall tile for invis walls -- only applies to std level walls
 // blender
 						if (document.getElementById("noblend").checked) B2 = -2;
-						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch) && (bcell.pixel & MEXHIGH) != TRAPWALL) {
+						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) {
 							Blendctx2.filter = "hue-rotate("+wallhue+"deg)";
 							wallblend(this, cell, bcell, map.level.wall, 0);
 							Blendctx2.filter = "hue-rotate(0deg)";
