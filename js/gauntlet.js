@@ -5278,7 +5278,7 @@ var txsv = ":";
 		 var chtinv = document.getElementById("invcht").checked;
 		 if (document.getElementById("invwal").checked) map.level.wall = WALL.INVIS;
 /// TEST - remove
-		 var B1, B2, Bh, bcell;
+		 var B1, B2, bcell;
 // second cycle - everything else
       for(ty = vyz, th = vth ; ty < th ; ty++) {
         for(tx = vxz, tw = vtw ; tx < tw ; tx++) {
@@ -5332,7 +5332,7 @@ var txsv = ":";
 // blender
 						B2 = tx + ty * Mtw;
 						if (document.getElementById("noblend").checked) B2 = -2;
-						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && Bh == 0 && blnck(bcell,cell,bch)) {
+						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) {
 							wallblend(this, cell, G1WALL[cell.pixel & MEXLOB], 0);
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 							}
@@ -5341,7 +5341,7 @@ var txsv = ":";
 						this.tile(ctx, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
 // blend for next
 						this.tile(Blendctx1, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], 0, 0);
-						B1 = tx + ty * Mtw; Bh = 0;
+						B1 = tx + ty * Mtw;
 						bcell = cell;
 					  }
 					else
@@ -5349,23 +5349,27 @@ var txsv = ":";
 /// TEST - update
 						var wallhue = document.getElementById("whue").value;
 						if (wallhue <0 || wallhue > 360) wallhue = 0;
-						ctx.filter = "hue-rotate("+wallhue+"deg)";
 /// TEST - update
 // blender
-						B2 = tx + ty * Mtw; Bh = wallhue;
+						var wrwal = false;
+						B2 = tx + ty * Mtw;
 						if (document.getElementById("noblend").checked) B2 = -2;
-						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && wallhue == 0 && blnck(bcell,cell,bch)) {
+						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) {
 							wallblend(this, cell, map.level.wall, 0);
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 							}
 						else
+							wrwal = true;
 
-						this.tile(ctx, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
+						ctx.filter = "hue-rotate("+wallhue+"deg)";
+						if (wrwal == true) this.tile(ctx, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
 // blend for next
+						Blendctx1.filter = "hue-rotate("+wallhue+"deg)";
 						this.tile(Blendctx1, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, 0, 0);
 						B1 = tx + ty * Mtw;
 						bcell = cell;
 
+						Blendctx1.filter = "hue-rotate(0deg)";
 						ctx.filter = "hue-rotate(0deg)";
 						if (map.level.brikovr) this.tile(ctx, cell.spriteset, cell.wall, map.level.brikovr, tx, ty);
 					}
