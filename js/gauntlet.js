@@ -5278,7 +5278,7 @@ var txsv = ":";
 		 var chtinv = document.getElementById("invcht").checked;
 		 if (document.getElementById("invwal").checked) map.level.wall = WALL.INVIS;
 /// TEST - remove
-		 var B1, B2, bcell;
+		 var B1, B2, 	bcell;
 // second cycle - everything else
       for(ty = vyz, th = vth ; ty < th ; ty++) {
         for(tx = vxz, tw = vtw ; tx < tw ; tx++) {
@@ -5355,7 +5355,9 @@ var txsv = ":";
 						B2 = tx + ty * Mtw;
 						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) {
+							Blendctx2.filter = "hue-rotate("+wallhue+"deg)";
 							wallblend(this, cell, map.level.wall, 0);
+							Blendctx2.filter = "hue-rotate(0deg)";
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 							}
 						else
