@@ -5444,9 +5444,20 @@ var txsv = ":";
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 							}
 						else {
+							mpixel(tx,ty, tx,ty - 1, 1);
+							bcell = map.cell(d1 * TILE, d2 * TILE);
+
+							if (bcell != undefined && bcell.wall && B2 >= 0 && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bcv)) {
+								Blendctx2.filter = "hue-rotate("+wallhue+"deg)";
+								wallblend(this, cell, bcell, map.level.wall, 1);
+								Blendctx2.filter = "hue-rotate(0deg)";
+								ctx.putImageData(bimg1, tx * TILE, ty * TILE);
+								}
+							else
+								{
 							ctx.filter = "hue-rotate("+wallhue+"deg)";
 							this.tile(ctx, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
-							}
+							}}
 // blend for next
 						Blendctx1.filter = "hue-rotate("+wallhue+"deg)";		// this will catch in the next loop, then reset
 						B1 = tx + ty * Mtw;
