@@ -4296,11 +4296,6 @@ var txsv = ":";
 /// TEST - update ?
 
         damage = automatic ? damage : damage/(this.type.armor + this.xarmor);
-        this.health = Math.max(0, this.health - damage);
-        if (!automatic) {
-          this.hurting = FX.PLAYER_GLOW.frames;
-          publish(EVENT.PLAYER_HURT, this, damage);
-        }
 /// TEST - update ?
 				if (document.getElementById("sdps").checked)
 				{
@@ -4321,7 +4316,11 @@ var txsv = ":";
 					}
 				}
 /// TEST - remove
-
+        this.health = Math.max(0, this.health - damage);
+        if (!automatic) {
+          this.hurting = FX.PLAYER_GLOW.frames;
+          publish(EVENT.PLAYER_HURT, this, damage);
+        }
         if (this.health === 0)
           this.die();
       }
