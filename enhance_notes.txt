@@ -24,12 +24,15 @@ loadable wall segments & cell.spriteset
 
 change fadeout on 1pl die - maybe allow re-entry if right away (10 - 15 secs hang)
 zoom out & zoom back in on re-enter, or if no re-ent go to splash loop
+- hold the "end" seq of zoom+fade for a timer, then go if no keypress
 
 limited teleport does not: telefrag (it uses fight to kill monsters), blot out walls
-
+-- reasonably sure in g2, _everything_ not on an edge wall was bounced over (food, treasure, doors, keys, pot, etc)
 
 imm issues:
 
+rotate & liquid pool edges - only need one tag that auto selects from 4 possible with pooltype(tx, ty, map);
+\_ but keep 1st liquid only (no edges) for just that
 
 cycle walls display wrong off state ?	(is this rotate issue? not seeing now)
 
