@@ -75,6 +75,7 @@ g1 has some sprites that seem to "oversize" the map cell - ref. box generators, 
 player dmg: melee
 melee mis gens
 monster dmg: melee - turn off autohurt to test
+g1: lvl 1 grunt - 10 dmg / sec to warrior
 
 is it possible to code adjust the "contained" corner	(re wall changes)
 

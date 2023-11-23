@@ -4290,12 +4290,39 @@ var txsv = ":";
     hurt: function(damage, by, automatic) {
 		if (automatic || (this.linvuln < 1))
       if (this.active() && !DEBUG.NODAMAGE) {
+/// TEST - update ?
+		  var prearmd;	// pre armor reduction damage
+				if (prearmd == undefined) prearmd = 0;
+				prearmd += damage;
+/// TEST - update ?
+
         damage = automatic ? damage : damage/(this.type.armor + this.xarmor);
         this.health = Math.max(0, this.health - damage);
         if (!automatic) {
           this.hurting = FX.PLAYER_GLOW.frames;
           publish(EVENT.PLAYER_HURT, this, damage);
         }
+/// TEST - update ?
+				if (document.getElementById("sdps").checked)
+				{
+					var hpst = document.getElementById("hpsout").title;
+					var dphm  = 0;	// damage per 30 secs
+					if (document.getElementById("sdphm").checked) dphm = 30;
+					if (dpstim < heartbeet) {
+						document.getElementById("hpsout").value = dpsacc;
+						if (dpst.length > 256) dpst = "dps: ";
+						document.getElementById("hpsout").title = hpst + " : "+dpsacc+" pa:"+prearmd;
+						dpsacc = 0;
+						prearmd = 0;
+						dpstim = heartbeet + dphm;
+					}
+					else
+					{
+						dpsacc += damage;
+					}
+				}
+/// TEST - remove
+
         if (this.health === 0)
           this.die();
       }
