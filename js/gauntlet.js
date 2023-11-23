@@ -4985,11 +4985,55 @@ var txsv = ":";
 			var b1Data = bimg1.data;
 			var bimg2 = Blendctx2.getImageData(0, 0, TILE, TILE);
 			var b2Data = bimg2.data;
-			var pixs, XTILE = 4 * TILE, bl1, bl2, addr = 0.0625;
-			for(var j = 0; j < TILE; j++) { bl1 = 1.0; bl2 = 0.0;
+			var pixs, XTILE = 4 * TILE, bl1, bl2, addr = 0.0625, shrblc;
+// vertical blend loop
+		if (hv) {
+				shrblc = shortblndv[scell.wall];
+			 for(var i = 0; i < XTILE; i += 4) { bl1 = 1.0; bl2 = 0.0;
+			   for(var j = 9; j < (TILE - 9); j++) {
+					if (!shrblc) {						// no shortblending - blend the middle
+						pixs = i + j * XTILE;
+						b1Data[pixs] = Math.round(b1Data[pixs] * bl1 + b2Data[pixs] * bl2);
+						b1Data[pixs+1] = Math.round(b1Data[pixs+1] * bl1 + b2Data[pixs+1] * bl2);
+						b1Data[pixs+2] = Math.round(b1Data[pixs+2] * bl1 + b2Data[pixs+2] * bl2);
+//										b1Data[pixs+3] = b1Data[pixs+3] * bl1 + b2Data[pixs+3] * bl2;
+						bl1 -= addr; bl2 += addr;
+						} else {													// if blending the start, the middle is piece 2
+							pixs = i + j * XTILE;
+//							var pixb = (124 - i) + j * XTILE;
+							b1Data[pixs] = b2Data[pixs];
+							b1Data[pixs+1] = b2Data[pixs+1];
+							b1Data[pixs+2] = b2Data[pixs+2];
+						}
+				}
+				for(var j = 0; j < 9; j++) {
+					if (shrblc) {						// shortblending - blend the beginning
+						pixs = i + j * XTILE;
+						b1Data[pixs] = Math.round(b1Data[pixs] * bl1 + b2Data[pixs] * bl2);
+						b1Data[pixs+1] = Math.round(b1Data[pixs+1] * bl1 + b2Data[pixs+1] * bl2);
+						b1Data[pixs+2] = Math.round(b1Data[pixs+2] * bl1 + b2Data[pixs+2] * bl2);
+//										b1Data[pixs+3] = b1Data[pixs+3] * bl1 + b2Data[pixs+3] * bl2;
+						bl1 -= addr; bl2 += addr;
+					} else {
+						pixs = i + j * XTILE;
+//					var pixb = (124 - i) + j * XTILE;
+						b1Data[pixs] = b1Data[pixs];
+						b1Data[pixs+1] = b1Data[pixs+1];
+						b1Data[pixs+2] = b1Data[pixs+2];
+					}
+				}
+				for(var j = (TILE - 9); j < TILE; j++) {	// the end is always the 2nd piece
+					pixs = i + j * XTILE;
+					b1Data[pixs] = b2Data[pixs];
+					b1Data[pixs+1] = b2Data[pixs+1];
+					b1Data[pixs+2] = b2Data[pixs+2];
+				}}
+
+			} else {
+// horizontal blend loop
+				shrblc = shortblndh[scell.wall];
+			 for(var j = 0; j < TILE; j++) { bl1 = 1.0; bl2 = 0.0;
 				for(var i = 36; i < (XTILE - 36) ; i += 4) {
-			  var shrblc = shortblndh[scell.wall];
-					if (hv) shrblc = shortblndv[scell.wall];
 					if (!shrblc) {						// no shortblending - blend the middle
 						pixs = i + j * XTILE;
 						b1Data[pixs] = Math.round(b1Data[pixs] * bl1 + b2Data[pixs] * bl2);
@@ -5027,6 +5071,7 @@ var txsv = ":";
 					b1Data[pixs+1] = b2Data[pixs+1];
 					b1Data[pixs+2] = b2Data[pixs+2];
 				}}
+			}
 				bimg1.data = b1Data;
 //				return(b1Data);
 			}
