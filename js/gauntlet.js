@@ -3303,7 +3303,7 @@ if (document.getElementById("noclip").checked) return false;
 
 			var lvl = Math.max(0, Math.ceil(this.health / 10));
 			var monlvl = this.type.mlvl[lvl];
-			this.type = MONSTERS[monlvl];
+			if (monlvl != undefined) this.type = MONSTERS[monlvl];
 
         if (this.health === 0)
           this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null, nuke);
