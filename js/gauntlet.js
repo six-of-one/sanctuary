@@ -4292,7 +4292,7 @@ var txsv = ":";
       if (this.active() && !DEBUG.NODAMAGE) {
 /// TEST - update ?
 // pre armor reduction damage
-				prearmd += Math.floor(damage);
+				prearmd += damage;
 /// TEST - update ?
 
         damage = automatic ? damage : damage/(this.type.armor + this.xarmor);
@@ -4303,16 +4303,16 @@ var txsv = ":";
 					var dphm  = 0;	// damage per 30 secs
 					if (document.getElementById("sdphm").checked) dphm = 30;
 					if (dpstim < heartbeet) {
-						document.getElementById("hpsout").value = dpsacc;
+						document.getElementById("hpsout").value = Math.ceil(dpsacc);
 						if (hpst.length > 360) hpst = "dps: ";
-						document.getElementById("hpsout").title = hpst + " : "+dpsacc+" pa:"+prearmd;
+						document.getElementById("hpsout").title = hpst + " : "+Math.ceil(dpsacc)+" pa:"+Math.ceil(prearmd);
 						dpsacc = 0;
 						prearmd = 0;
 						dpstim = heartbeet + dphm;
 					}
 					else
 					{
-						dpsacc += Math.floor(damage);
+						dpsacc += damage;
 					}
 				}
 /// TEST - remove
