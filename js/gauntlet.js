@@ -5352,7 +5352,7 @@ var txsv = ":";
 		 var chtinv = document.getElementById("invcht").checked;
 		 if (document.getElementById("invwal").checked) map.level.wall = WALL.INVIS;
 /// TEST - remove
-		 var B1, B2, bcell;
+		 var B1, B2, bcell, blw;
 // second cycle - everything else
       for(ty = vyz, th = vth ; ty < th ; ty++) {
         for(tx = vxz, tw = vtw ; tx < tw ; tx++) {
@@ -5407,26 +5407,28 @@ var txsv = ":";
 			  var wallhue = document.getElementById("whue").value;
 					if (wallhue <0 || wallhue > 360) wallhue = 0;
 /// TEST - update
+					blw = -1;
 //					cell.ptile = fcellstr;
-					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000 && (cell.pixel & MEXHIGH) != TRAPWALL)  {// diff walls by low nibble
+					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000 && (cell.pixel & MEXHIGH) != TRAPWALL)   {// diff walls by low nibble
 // blender
 						if (document.getElementById("noblend").checked) B2 = -2;
-						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) {
-							wallblend(this, cell, bcell, G1WALL[cell.pixel & MEXLOB], 0);
-							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
-							}
-						else {
+						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) blw = 0;
+						else
+						{
+//							bcell = reloaded.cells[mpixel(tx,ty, tx,ty - 1, 1)];
 							mpixel(tx,ty, tx,ty - 1, 1);
 							bcell = map.cell(d1 * TILE, d2 * TILE); // and alas - d* is a debug ref used in mpixel for testing
-//							bcell = reloaded.cells[mpixel(tx,ty, tx,ty - 1, 1)];
-							if (bcell != undefined && bcell.wall && B2 >= 0 && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bcv)) {
-								wallblend(this, cell, bcell, G1WALL[cell.pixel & MEXLOB], 1);
-								ctx.putImageData(bimg1, tx * TILE, ty * TILE);
-								}
-							else
+							if (bcell != undefined && bcell.wall && B2 >= 0 && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bcv)) blw = 1;
+						}
+						if (blw >= 0)
+						{
+							wallblend(this, cell, bcell, G1WALL[cell.pixel & MEXLOB], blw);
+							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
+						}
+						else
 
 							this.tile(ctx, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
-							}
+
 // blend for next
 						Blendctx1.filter = "hue-rotate(0deg)";
 						B1 = tx + ty * Mtw;
@@ -5437,27 +5439,25 @@ var txsv = ":";
 					if (map.level.wall != WALL.INVIS) { 		// dont load wall tile for invis walls -- only applies to std level walls
 // blender
 						if (document.getElementById("noblend").checked) B2 = -2;
-						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) {
-							Blendctx2.filter = "hue-rotate("+wallhue+"deg)";
-							wallblend(this, cell, bcell, map.level.wall, 0);
-							Blendctx2.filter = "hue-rotate(0deg)";
-							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
-							}
+						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) blw = 0;
 						else {
 							mpixel(tx,ty, tx,ty - 1, 1);
 							bcell = map.cell(d1 * TILE, d2 * TILE);
 
-							if (bcell != undefined && bcell.wall && B2 >= 0 && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bcv)) {
+							if (bcell != undefined && bcell.wall && B2 >= 0 && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bcv)) blw = 1;
+						}
+						if (blw >= 0)
+						{
 								Blendctx2.filter = "hue-rotate("+wallhue+"deg)";
-								wallblend(this, cell, bcell, map.level.wall, 1);
+								wallblend(this, cell, bcell, map.level.wall, blw);
 								Blendctx2.filter = "hue-rotate(0deg)";
 								ctx.putImageData(bimg1, tx * TILE, ty * TILE);
-								}
-							else
-								{
+						}
+						else
+						{
 							ctx.filter = "hue-rotate("+wallhue+"deg)";
 							this.tile(ctx, cell.spriteset, cell.wall, DEBUG.WALL || map.level.wall, tx, ty);
-							}}
+						}
 // blend for next
 						Blendctx1.filter = "hue-rotate("+wallhue+"deg)";		// this will catch in the next loop, then reset
 						B1 = tx + ty * Mtw;
