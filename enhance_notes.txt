@@ -30,7 +30,6 @@ limited teleport does not: telefrag (it uses fight to kill monsters), blot out w
 
 imm issues:
 
-super sorc shots no longer damage player
 
 cycle walls display wrong off state ?	(is this rotate issue? not seeing now)
 
@@ -444,6 +443,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- super sorc shots no longer damage player (it was all monster shots...)
 
 x-- theif is also starting in treasure rooms (code logic is otherwise...)
 
