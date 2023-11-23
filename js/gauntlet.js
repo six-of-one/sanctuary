@@ -4310,7 +4310,7 @@ var txsv = ":";
 					if (document.getElementById("sdphm").checked) dphm = 30;
 					if (dpstim < heartbeet) {
 						document.getElementById("hpsout").value = dpsacc;
-						if (dpst.length > 256) dpst = "dps: ";
+						if (dpst.length > 360) hpst = "dps: ";
 						document.getElementById("hpsout").title = hpst + " : "+dpsacc+" pa:"+prearmd;
 						dpsacc = 0;
 						prearmd = 0;
