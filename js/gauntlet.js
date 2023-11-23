@@ -49,7 +49,7 @@ Gauntlet = function() {
 		 MEXLOB = 0x00001F,
 
 // highscores
-	scoredex = 0, dpstim = 0, dpsacc = 0,
+	scoredex = 0, dpstim = 0, dpsacc = 0, prearmd = 0,
 	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
 // invisible wall & shotable invisible are in INVWALSY, item 0 = INVWALA (0 shadow)
@@ -4291,9 +4291,8 @@ var txsv = ":";
 		if (automatic || (this.linvuln < 1))
       if (this.active() && !DEBUG.NODAMAGE) {
 /// TEST - update ?
-		  var prearmd;	// pre armor reduction damage
-				if (prearmd == undefined) prearmd = 0;
-				prearmd += damage;
+// pre armor reduction damage
+				prearmd += Math.floor(damage);
 /// TEST - update ?
 
         damage = automatic ? damage : damage/(this.type.armor + this.xarmor);
@@ -4310,7 +4309,7 @@ var txsv = ":";
 					if (document.getElementById("sdphm").checked) dphm = 30;
 					if (dpstim < heartbeet) {
 						document.getElementById("hpsout").value = dpsacc;
-						if (dpst.length > 360) hpst = "dps: ";
+						if (hpst.length > 360) hpst = "dps: ";
 						document.getElementById("hpsout").title = hpst + " : "+dpsacc+" pa:"+prearmd;
 						dpsacc = 0;
 						prearmd = 0;
@@ -4318,7 +4317,7 @@ var txsv = ":";
 					}
 					else
 					{
-						dpsacc += damage;
+						dpsacc += Math.floor(damage);
 					}
 				}
 /// TEST - remove
