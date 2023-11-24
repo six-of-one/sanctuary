@@ -333,20 +333,20 @@ Gauntlet = function() {
 // this is the field power that damages, this is toggled on by ffieldpulse ops
         FFIELDPOW:         { sx: 28, sy: 25,   frames:8,  speed: 1*FPS,   fpf: FPS/2,    damage: 3,                                                    sound: 'ffield',        nohlp: 61 },
 // animated floor items
-        WATER:             { sx: 0,  sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0, gluesp: 0.5,  poolside: 0,                         sound: 'null',          nohlp: 82  },
+        WATER:             { sx: 0,  sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0, gluesp: 0.5,                                       sound: 'null',          nohlp: 82  },
 // series of water boundary blocks code: 0x8140, with a pool wall appearing top, center and right, selected by MEXLOW 1, 2, 3
-        WATERT:            { sx: 4,  sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5, poolside: 1,                         sound: 'null',          nohlp: 82  },
-        WATERC:            { sx: 8,  sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5, poolside: 1,                         sound: 'null',          nohlp: 82  },
-        WATERR:            { sx: 12, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5, poolside: 1,                         sound: 'null',          nohlp: 82  },
+        WATERT:            { sx: 4,  sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5,                                      sound: 'null',          nohlp: 82  },
+        WATERC:            { sx: 8,  sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5,                                      sound: 'null',          nohlp: 82  },
+        WATERR:            { sx: 12, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5,                                      sound: 'null',          nohlp: 82  },
 // series of lava blocks code: 0x8150. with MEXLOW as water
-        LAVA:              { sx: 16, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 10, gluesp: 0.8, poolside: 0,                         sound: 'null',          nohlp: 83  },
-        LAVAT:             { sx: 20, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 10, gluesp: 0.8, poolside: 1,                         sound: 'null',          nohlp: 83  },
-        LAVAC:             { sx: 24, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 10, gluesp: 0.8, poolside: 1,                         sound: 'null',          nohlp: 83  },
-        LAVAR:             { sx: 28, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 10, gluesp: 0.8, poolside: 1,                         sound: 'null',          nohlp: 83  },
-        NWASTE:            { sx: 16, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7, poolside: 0,                         sound: 'null',          nohlp: 84  },
-        NWASTET:           { sx: 19, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7, poolside: 1,                         sound: 'null',          nohlp: 84  },
-        NWASTEC:           { sx: 22, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7, poolside: 1,                         sound: 'null',          nohlp: 84  },
-        NWASTER:           { sx: 25, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7, poolside: 1,                         sound: 'null',          nohlp: 84  },
+        LAVA:              { sx: 16, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 10, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
+        LAVAT:             { sx: 20, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 10, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
+        LAVAC:             { sx: 24, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 10, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
+        LAVAR:             { sx: 28, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 10, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
+        NWASTE:            { sx: 16, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
+        NWASTET:           { sx: 19, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
+        NWASTEC:           { sx: 22, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
+        NWASTER:           { sx: 25, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
         FIRESTK:           { sx: 32, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.7,                                      sound: 'null',          nohlp: 999  },
         PFLOOR1:           { sx: 28, sy: 27,   frames:8,  speed: 1*FPS,   fpf: FPS/2,    damage: 0,                                                    sound: 'null',          nohlp: 999  },
 // other "wall" ents
@@ -1272,7 +1272,7 @@ Gauntlet = function() {
 				 if (ad == TREASURE.XSPEED && (sb > 0)) switch(sb) { case 1: ad = TREASURE.XSHOTPWR; break; case 2: ad = TREASURE.XSHOTSPD; break; case 3: ad = TREASURE.XARMOR; break; case 4: ad = TREASURE.XFIGHT; break; case 5: ad = TREASURE.XMAGIC; break; }
 				 if (ad == TREASURE.LIMINVIS && (sb > 0)) switch(sb) { case 1: ad = TREASURE.LIMINVUL; break; case 2: ad = TREASURE.LIMREPUL; break; case 3: ad = TREASURE.LIMREFLC; break; case 4: ad = TREASURE.LIMSUPER; break; case 5: ad = TREASURE.LIMTELE; break; case 6: ad = TREASURE.LIMANK; break; }
 				 if (ad == TREASURE.WATER && (sb > 0)) switch(sb) { case 1: ad = TREASURE.WATERT; break; case 2: ad = TREASURE.WATERC; break; case 3: ad = TREASURE.WATERR; break; }
-				 if (ad == TREASURE.LAVA && (sb > 0)) switch(sb) { case 1: ad = TREASURE.LAVAT; break; case 2: ad = TREASURE.LAVAC; break; case 3: ad = TREASURE.LAVAR; break; poolside }
+				 if (ad == TREASURE.LAVA && (sb > 0)) switch(sb) { case 1: ad = TREASURE.LAVAT; break; case 2: ad = TREASURE.LAVAC; break; case 3: ad = TREASURE.LAVAR; break; }
 				 if (ad == TREASURE.NWASTE && (sb > 0)) switch(sb) { case 1: ad = TREASURE.NWASTET; break; case 2: ad = TREASURE.NWASTEC; break; case 3: ad = TREASURE.NWASTER; break; }
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
 				spref.addTreasure(x, y, ad);
