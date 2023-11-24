@@ -50,6 +50,7 @@ are the release walls traps to easy to see?
 
 inv wall hint/cheet not on: gud, pass, phase, rnd walls
 
+armor doesnt match g1/g2 - should be one of the option items
 
 
 need sounds:
@@ -78,6 +79,7 @@ monster dmg: melee - turn off autohurt to test
 g1: lvl 1 grunt - 10 dmg / sec to warrior
 
 is it possible to code adjust the "contained" corner	(re wall changes)
+\_ this can be done if changed cells have a "dirty" flag
 
 player shot speed (xshot speed is not tested, seems fast)
 

@@ -49,7 +49,8 @@ Gauntlet = function() {
 		 MEXLOB = 0x00001F,
 
 // highscores
-	scoredex = 0, dpstim = 0, dpsacc = 0, prearmd = 0,
+	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys,
+	dpstim = 0, dpsacc = 0, prearmd = 0,
 	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
 // invisible wall & shotable invisible are in INVWALSY, item 0 = INVWALA (0 shadow)
@@ -502,6 +503,14 @@ Gauntlet = function() {
         SCORE:   "gauntlet.score",
         WHO:     "gauntlet.who",
         COINS:   "gauntlet.coins"
+        BEETS:   "gauntlet.beets"
+        GPOTS:   "gauntlet.gpots"
+        GFUDS:   "gauntlet.gfuds"
+        GKEYS:   "gauntlet.gkeys"
+        GSPEC:   "gauntlet.gspec"
+        GLIMS:   "gauntlet.glims"
+        FPOTS:   "gauntlet.fpots"
+        FKEYS:   "gauntlet.fkeys"
       },
 // chest & wall goody/bady profiles
 		rllock = 11, rlswall = 12, swloop = 38,
@@ -1636,6 +1645,18 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			RNGLOAD[1] = TREASURE.GOLD;
 //			stolen_load = 0;
 			FLVLRND = Game.Math.randomInt(FLOOR.MIN, FLOOR.MAX);
+
+			beets = to.number(this.storage[STORAGE.B],0);
+			allcoins = to.number(this.storage[STORAGE.COINS],0);
+			gpots = to.number(this.storage[STORAGE.GPOTS],0);
+			gfuds = to.number(this.storage[STORAGE.GFUDS],0);
+			gkeys = to.number(this.storage[STORAGE.GKEYS],0);
+			gspec = to.number(this.storage[STORAGE.GSPEC],0);
+			glims = to.number(this.storage[STORAGE.GLIMS],0);
+			fpots = to.number(this.storage[STORAGE.FPOTS],0);
+			fkeys = to.number(this.storage[STORAGE.FKEYS],0);
+			allcoins++;
+			this.storage[STORAGE.COINS] = allcoins;
     },
 
     onload: function(event, previous, current, nlevel) {
@@ -2354,6 +2375,15 @@ var lvu = document.getElementById("flvl").value;
     loadHighWho:   function() { return this.storage[STORAGE.WHO];                     },
 
     saveHighScore: function() {
+		this.storage[STORAGE.COINS] = allcoins;
+		this.storage[STORAGE.GPOTS] = gpots;
+		this.storage[STORAGE.GFUDS] = gfuds;
+		this.storage[STORAGE.GKEYS] = gkeys;
+		this.storage[STORAGE.GSPEC] = gspec;
+		this.storage[STORAGE.GLIMS] = glims;
+		this.storage[STORAGE.FPOTS] = fpots;
+		this.storage[STORAGE.FKEYS] = fkeys;
+		this.storage[STORAGE.BEETS] = beets + heartbeet;
 		if (max_diff_level > 9) return;
       if ((this.player.score / this.player.droppedcoins) > this.loadHighScore()) {
         this.storage[STORAGE.SCORE] = (this.player.score / this.player.droppedcoins);
@@ -4254,6 +4284,7 @@ var txsv = ":";
 				this.heal(this.type.health);
 				this.coins--;
 				this.droppedcoins++;
+				allcoins++;
 				Musicth.play(Musicth.sounds.coindrp);
 		 }
 	},
