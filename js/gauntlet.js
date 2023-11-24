@@ -49,7 +49,7 @@ Gauntlet = function() {
 		 MEXLOB = 0x00001F,
 
 // highscores
-	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys, deds, gtrs, gltrs, gexits, celf, cwar, cwiz, cval,
+	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys, deds, gtrs, gltrs, gexits, celf, cwar, cwiz, cval, curwiz, curwar, curval, curelf,
 	igpots, igfuds, igkeys, igspec, iglims, ifpots, ifkeys, ideds, igtrs, igltrs, igexits,
 	dpstim = 0, dpsacc = 0, prearmd = 0,
 	HSCORE = [ 0, "Names", "character" ],
@@ -1676,6 +1676,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			cwar  = to.number(this.storage[STORAGE.CWAR],0);
 			cval  = to.number(this.storage[STORAGE.CVAL],0);
 			celf  = to.number(this.storage[STORAGE.CELF],0);
+			curwiz = curwar = curval = curelf = " ";
 			igpots = gpots;	// track individual stats temp
 			igfuds = gfuds;
 			igkeys = gkeys;
@@ -1689,10 +1690,10 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			ideds  = deds;
 			allcoins++;
 			this.storage[STORAGE.COINS] = allcoins;
-			if (type.name == "wizard") cwiz++;
-			if (type.name == "warrior") cwar++;
-			if (type.name == "valkyrie") cval++;
-			if (type.name == "elf") celf++;
+			if (type.name == "wizard") { cwiz++; curwiz = "*"; }
+			if (type.name == "warrior") { cwar++; curwar = "*"; }
+			if (type.name == "valkyrie") { cval++; curval = "*"; }
+			if (type.name == "elf") {  celf++; curelf = "*"; }
 			this.storage[STORAGE.CWIZ] = cwiz;
 			this.storage[STORAGE.CWAR] = cwar;
 			this.storage[STORAGE.CVAL] = cval;
@@ -2024,8 +2025,11 @@ var lvu = document.getElementById("flvl").value;
 
     onfinish: function(event, previous, current) {
       this.saveHighScore();
+// a one time popup display of stats per play (on quit or dead)
+// goal: a properly css formatted sheet, as a popup and a side bar selectable display
 		alert("stats: total -- this adventure\n        secs: "+(beets+heartbeet)+": "+heartbeet+"\n     deaths: "+deds+": "+(deds-ideds)+"\n treasures: "+gtrs+": "+(gtrs-igtrs)+"\nlocked trs: "+gltrs+": "+(gltrs-igltrs)+"\n    potions: "+gpots+": "+(gpots-igpots)+"\n       foods: "+gfuds+": "+(gfuds-igfuds)+
-		 "\n        keys: "+gkeys+": "+(gkeys-igkeys)+"\n   specials: "+gspec+": "+(gspec-igspec)+"\n   limiteds: "+glims+": "+(glims-iglims)+"\n fired pots: "+fpots+": "+(fpots-ifpots)+"\n used keys: "+fkeys+": "+(fkeys-ifkeys)+"\n        exits: "+gexits+": "+(gexits-igexits)+"\n----------------\n     wizards: "+cwiz+"\n    warriors: "+cwar+"\n  valkyries: "+cval+"\n        elves: "+celf+"\nreplace this with\na proper css overlay");
+		 "\n        keys: "+gkeys+": "+(gkeys-igkeys)+"\n   specials: "+gspec+": "+(gspec-igspec)+"\n   limiteds: "+glims+": "+(glims-iglims)+"\n fired pots: "+fpots+": "+(fpots-ifpots)+"\n used keys: "+fkeys+": "+(fkeys-ifkeys)+"\n         exits: "+gexits+": "+(gexits-igexits)+
+		 "\n----------------\n     wizards: "+cwiz+curwiz+"\n    warriors: "+cwar+curwar+"\n  valkyries: "+cval+curval+"\n        elves: "+celf+curelf+"\nreplace this with\na proper css overlay");
       this.player.leave();
 
 // restart intros
