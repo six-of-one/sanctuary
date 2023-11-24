@@ -2235,7 +2235,7 @@ var lvu = document.getElementById("flvl").value;
 				entity.counterclock(entity); // set door stops so door only opens counterclockwise
 				if (player.keys && entity.open())
 			 {
-					player.keys--;
+					player.keys = countdown(player.keys);
 					fkeys++;
 			 }
 		 }
@@ -2387,6 +2387,7 @@ var lvu = document.getElementById("flvl").value;
     loadHighWho:   function() { return this.storage[STORAGE.WHO];                     },
 
     saveHighScore: function() {
+		alert("stats: total -- your current play\nsecs: "+beets+heartbeet+": "+heartbeet+"\ndeaths: "+deds+": "+deds-ideds+"\npotions:"+gpots+": "+gpots-igpots+"\nfoods:"+gfuds+": "+gfuds-igfuds+"\nkeys:"+gkeys+": "+gkeys-igkeys+"\nspecials:"+gspec+": "+gspec-igspec+"\nimiteds:"+glims+": "+glims-iglims+"\nfired pots:"+fpots+": "+fpots-ifpots+"\n used keys:"+fkeys+": "+fkeys-ifkeys);
 		this.storage[STORAGE.COINS] = allcoins;
 		this.storage[STORAGE.GPOTS] = gpots;
 		this.storage[STORAGE.GFUDS] = gfuds;
@@ -4042,6 +4043,7 @@ var txsv = ":";
 					Mastercell.ptr.stun = heartbeet + 2;
 					cell.ctx = ctx;
 					this.keys = countdown(this.keys);
+					fkeys++;
 				}
 				if (rlk < 0) {	// if lock chest empty, get 500 pts
 				this.addscore(treasure.type.score);
