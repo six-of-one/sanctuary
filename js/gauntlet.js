@@ -516,10 +516,10 @@ Gauntlet = function() {
         FKEYS:   "gauntlet.fkeys",
         GTRS:    "gauntlet.gtrs",
         GLTRS:   "gauntlet.gloktrs",
-        DEDS:    "gauntlet.deds"
-        CWIZ:    "gauntlet.wizs"
-        CWAR:    "gauntlet.wars"
-        CVAL:    "gauntlet.vals"
+        DEDS:    "gauntlet.deds",
+        CWIZ:    "gauntlet.wizs",
+        CWAR:    "gauntlet.wars",
+        CVAL:    "gauntlet.vals",
         CELF:    "gauntlet.elfs"
       },
 // chest & wall goody/bady profiles
@@ -1686,10 +1686,10 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			ideds  = deds;
 			allcoins++;
 			this.storage[STORAGE.COINS] = allcoins;
-			if (this.type.name == "wizard") cwiz++;
-			if (this.type.name == "warrior") cwar++;
-			if (this.type.name == "valkyrie") cval++;
-			if (this.type.name == "elf") celf++;
+			if (type.name == "wizard") cwiz++;
+			if (type.name == "warrior") cwar++;
+			if (type.name == "valkyrie") cval++;
+			if (type.name == "elf") celf++;
 			this.storage[STORAGE.CWIZ] = cwiz;
 			this.storage[STORAGE.CWAR] = cwar;
 			this.storage[STORAGE.CVAL] = cval;
@@ -2415,8 +2415,8 @@ var lvu = document.getElementById("flvl").value;
     loadHighWho:   function() { return this.storage[STORAGE.WHO];                     },
 
     saveHighScore: function() {
-		alert("stats: total -- this adventure\n   secs: "+(beets+heartbeet)+": "+heartbeet+"\n    deaths: "+deds+": "+(deds-ideds)+"\n treasures: "+gtrs+": "+(gtrs-igtrs)+"\nlocked trs: "+gltrs+": "+(gltrs-igltrs)+"\n   potions: "+gpots+": "+(gpots-igpots)+"\n     foods: "+gfuds+": "+(gfuds-igfuds)+
-		 "\n      keys: "+gkeys+": "+(gkeys-igkeys)+"\n  specials: "+gspec+": "+(gspec-igspec)+"\n  limiteds: "+glims+": "+(glims-iglims)+"\nfired pots: "+fpots+": "+(fpots-ifpots)+"\n used keys: "+fkeys+": "+(fkeys-ifkeys)+"\n   wizards: "+cwiz+"\n  warriors: "+cwar+"\n valkyries: "+cval+"\n    elves: "+celf+"\nreplace this with\na proper css overlay");
+		alert("stats: total -- this adventure\n        secs: "+(beets+heartbeet)+": "+heartbeet+"\n     deaths: "+deds+": "+(deds-ideds)+"\n treasures: "+gtrs+": "+(gtrs-igtrs)+"\nlocked trs: "+gltrs+": "+(gltrs-igltrs)+"\n    potions: "+gpots+": "+(gpots-igpots)+"\n       foods: "+gfuds+": "+(gfuds-igfuds)+
+		 "\n        keys: "+gkeys+": "+(gkeys-igkeys)+"\n   specials: "+gspec+": "+(gspec-igspec)+"\n   limiteds: "+glims+": "+(glims-iglims)+"\n fired pots: "+fpots+": "+(fpots-ifpots)+"\n used keys: "+fkeys+": "+(fkeys-ifkeys)+"\n     wizards: "+cwiz+"\n    warriors: "+cwar+"\n  valkyries: "+cval+"\n        elves: "+celf+"\nreplace this with\na proper css overlay");
 
 		this.storage[STORAGE.COINS] = allcoins;
 		this.storage[STORAGE.GPOTS] = gpots;
