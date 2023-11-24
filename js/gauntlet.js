@@ -2170,8 +2170,10 @@ var lvu = document.getElementById("flvl").value;
           y = weapon.y + (entity.y ? (entity.y - weapon.y)/2 : 0);
 
 		 var nosup = true;
+		 var etw = false;
+		 if (entity.type != undefined) etw = entity.type.wall;
       if (weapon.type.player) {
-      if (entity.monster || entity.generator || entity.treasure )
+      if (entity.monster || entity.generator || (entity.treasure && etw < 2))
 		 {
 				var r, rn, xdmg = 0, dmg, vdmg = weapon.type.wind;
 				if (weapon.xshotpwr) vdmg = vdmg + Math.min(weapon.xshotpwr, ppotmax);
@@ -2210,22 +2212,27 @@ var lvu = document.getElementById("flvl").value;
 				entity.hurt(dmg + xdmg, weapon);
 		 }
 // when invhint option on and walls shot, a flicker effect lights up 3 or 4 units of wall around impact
-		 else if (wallcoll)
+		 else if (wallcoll || etw)
 				if (Mastermap.level.wall == WALL.INVIS && document.getElementById("invhint").checked) {
 					var itx = p2t(wallcoll.x), ity = p2t(wallcoll.y);
 					var cells = reloaded.cells;
 					for (var ix = itx - 3;ix < itx + 4;ix++)
 					for (var iy = ity - 3;iy < ity + 4;iy++)
 
-					 if ((ix >= 0 && ix < Mtw) && (iy >= 0 && iy < Mth))
+					 if ((ix >= 0 && ix < Mtw) && (iy >= 0 && iy < Mth)) {
+						 if (iswall(cells[(ix + iy * Mtw)].pixel) || iswallrw(cells[(ix + iy * Mtw)].pixel))
 						{
 				 var	re = Mastermap.addFx(t2p(ix), t2p(iy), FX.INVFLAS);
-						re.sy = cells[(ix + iy * Mtw)].wall;
+							if (iswallrw(cells[(ix + iy * Mtw)].pixel)) re.sy = cells[(ix + iy * Mtw)].wall;
+							else { re.sy = cells[(ix + iy * Mtw)].sx;  }
+/*							if (iswall(cells[(ix + iy * Mtw)].pixel)) re.sy = cells[(ix + iy * Mtw)].sy;
+							else if (iswallrw(cells[(ix + iy * Mtw)].pixel)) re.sy = cells[(ix + iy * Mtw)].sy;*/
 				 var	rdx = Math.abs(itx - ix), rdy = Math.abs(ity - iy);
 						if (rdx > 1 || rdy > 1) re.sx = 7;
 						if (rdx > 2 || rdy > 2) re.sx = 14;
 						re.spriteset = wallshothint;
 						}
+					}
 				}
 			}
 // monster shot player
