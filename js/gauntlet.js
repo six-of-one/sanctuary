@@ -50,6 +50,7 @@ Gauntlet = function() {
 
 // highscores
 	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys, deds,
+	igpots, igfuds, igkeys, igspec, iglims, ifpots, ifkeys, ideds,
 	dpstim = 0, dpsacc = 0, prearmd = 0,
 	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
@@ -1647,7 +1648,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 //			stolen_load = 0;
 			FLVLRND = Game.Math.randomInt(FLOOR.MIN, FLOOR.MAX);
 
-			beets = to.number(this.storage[STORAGE.B],0);
+			beets = to.number(this.storage[STORAGE.B],0);		// master stats
 		allcoins = to.number(this.storage[STORAGE.COINS],0);
 			gpots = to.number(this.storage[STORAGE.GPOTS],0);
 			gfuds = to.number(this.storage[STORAGE.GFUDS],0);
@@ -1657,6 +1658,14 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			fpots = to.number(this.storage[STORAGE.FPOTS],0);
 			fkeys = to.number(this.storage[STORAGE.FKEYS],0);
 			deds  = to.number(this.storage[STORAGE.DEDS],0);
+			igpots = gpots;	// track individual stats temp
+			igfuds = gfuds;
+			igkeys = gkeys;
+			igspec = gspec;
+			iglims = glims;
+			ifpots = fpots;
+			ifkeys = fkeys;
+			ideds = deds;
 			allcoins++;
 			this.storage[STORAGE.COINS] = allcoins;
     },
