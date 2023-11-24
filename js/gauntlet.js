@@ -49,7 +49,7 @@ Gauntlet = function() {
 		 MEXLOB = 0x00001F,
 
 // highscores
-	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys,
+	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys, deds,
 	dpstim = 0, dpsacc = 0, prearmd = 0,
 	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
@@ -502,15 +502,16 @@ Gauntlet = function() {
         NLEVEL:  "gauntlet.nlevel",
         SCORE:   "gauntlet.score",
         WHO:     "gauntlet.who",
-        COINS:   "gauntlet.coins"
-        BEETS:   "gauntlet.beets"
-        GPOTS:   "gauntlet.gpots"
-        GFUDS:   "gauntlet.gfuds"
-        GKEYS:   "gauntlet.gkeys"
-        GSPEC:   "gauntlet.gspec"
-        GLIMS:   "gauntlet.glims"
-        FPOTS:   "gauntlet.fpots"
-        FKEYS:   "gauntlet.fkeys"
+        COINS:   "gauntlet.coins",
+        BEETS:   "gauntlet.beets",
+        GPOTS:   "gauntlet.gpots",
+        GFUDS:   "gauntlet.gfuds",
+        GKEYS:   "gauntlet.gkeys",
+        GSPEC:   "gauntlet.gspec",
+        GLIMS:   "gauntlet.glims",
+        FPOTS:   "gauntlet.fpots",
+        FKEYS:   "gauntlet.fkeys",
+        DEDS:    "gauntlet.deds"
       },
 // chest & wall goody/bady profiles
 		rllock = 11, rlswall = 12, swloop = 38,
@@ -1647,7 +1648,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			FLVLRND = Game.Math.randomInt(FLOOR.MIN, FLOOR.MAX);
 
 			beets = to.number(this.storage[STORAGE.B],0);
-			allcoins = to.number(this.storage[STORAGE.COINS],0);
+		allcoins = to.number(this.storage[STORAGE.COINS],0);
 			gpots = to.number(this.storage[STORAGE.GPOTS],0);
 			gfuds = to.number(this.storage[STORAGE.GFUDS],0);
 			gkeys = to.number(this.storage[STORAGE.GKEYS],0);
@@ -1655,6 +1656,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			glims = to.number(this.storage[STORAGE.GLIMS],0);
 			fpots = to.number(this.storage[STORAGE.FPOTS],0);
 			fkeys = to.number(this.storage[STORAGE.FKEYS],0);
+			deds  = to.number(this.storage[STORAGE.DEDS],0);
 			allcoins++;
 			this.storage[STORAGE.COINS] = allcoins;
     },
@@ -2225,6 +2227,7 @@ var lvu = document.getElementById("flvl").value;
 				if (player.keys && entity.open())
 			 {
 					player.keys--;
+					fkeys++;
 			 }
 		 }
       else if (entity.exit)
@@ -2383,6 +2386,7 @@ var lvu = document.getElementById("flvl").value;
 		this.storage[STORAGE.GLIMS] = glims;
 		this.storage[STORAGE.FPOTS] = fpots;
 		this.storage[STORAGE.FKEYS] = fkeys;
+		this.storage[STORAGE.DEDS]  = deds;
 		this.storage[STORAGE.BEETS] = beets + heartbeet;
 		if (max_diff_level > 9) return;
       if ((this.player.score / this.player.droppedcoins) > this.loadHighScore()) {
@@ -4228,14 +4232,17 @@ var txsv = ":";
 						Musicth.play(Musicth.sounds[this.type.annc]);
 						Musicth.play(Musicth.sounds.ancnhs);
 						Musicth.play(Musicth.sounds[treasure.type.annc]);
+					if (powerp) gspec++;
+					if (limitp) glims++;
 				}
 		 }
       if (treasure.type.potion && powerp < 1)
-        this.potions++;
+        { this.potions++; gpots++; }
       else if (treasure.type.key)
-        this.keys++;
+        { this.keys++; gkeys++; }
       else if (treasure.type.health)
 		{
+			gfuds++;
         this.heal(treasure.type.health);
 			if (treasure.type.nohlp == 16) // record for eaten all food lately taunt, & rnd on 3 eats
 			{
@@ -4666,6 +4673,7 @@ var txsv = ":";
 
     die: function() {
       this.dead = true;
+		 deds++;
       publish(EVENT.PLAYER_DEATH, this);
 // clear treasure room on single player death -- NOTE: multiplay
 		troomfin = false;
@@ -4677,6 +4685,7 @@ var txsv = ":";
     nuke: function() {
       if (this.potions) {
         this.potions--;
+			fpots++;
 /// debug code - remove pre-release
 			if (DEBUGON)
 					this.potions = 3;
