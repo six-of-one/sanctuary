@@ -1181,7 +1181,7 @@ Gauntlet = function() {
 				if (!dr) dr = (iswall(mpixel(tx,ty,  tx,   ty-1)) ? 1 : 0) | (iswall(mpixel(tx,ty,  tx+1, ty))   ? 2 : 0) | (iswall(mpixel(tx,ty,  tx,   ty+1)) ? 4 : 0) | (iswall(mpixel(tx,ty,  tx-1, ty))   ? 8 : 0);
 				return (dr);
 		};
-      function pooltype(tx,ty,map) { if (isliquid(mpixel(tx,ty,tx,ty))) return (isliquid(mpixel(tx,ty, tx, ty+1))   ? 0 : 1) | (isliquid(mpixel(tx,ty, tx+1, ty)) ? 0 : 2) };
+      function pooltype(tx,ty,map) { if (isliquid(mpixel(tx,ty,tx,ty))) return (isliquid(mpixel(tx,ty, tx, ty-1))   ? 0 : 1) | (isliquid(mpixel(tx,ty, tx+1, ty)) ? 0 : 2) };
 
 	function pMapcell(tx, ty, pixel, map, spref) {
 
