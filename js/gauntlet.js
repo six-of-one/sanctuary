@@ -291,9 +291,9 @@ Gauntlet = function() {
         POTION:            { sx: 6,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:  50,               potion: true, canbeshot: 2,         sound: 'collectpotion', nohlp: 19 },
         POTIONORG:         { sx: 7,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:  50,               potion: true, canbeshot: 0,         sound: 'collectpotion', nohlp: 19 },
         BADPOT:            { sx: 8,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:   0, damage:  50,  poison: true, canbeshot: 2,         sound: 'collectpotion', nohlp: 80 },
-        GOLD:              { sx: 16, sy: 10,   frames: 3,                 fpf: FPS/10,   score: 100, scmult : 1,   troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 14, blkhlp: 15 },
+        GOLD:              { sx: 16, sy: 10,   frames: 3,                 fpf: FPS/10,   score: 100, scmult: 1,    troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 14, blkhlp: 15 },
         LOCKED:            { sx: 19, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 500, lock: true,   gud: 1,                             sound: 'unlkches',      nohlp: 56 },
-        BAG:               { sx: 20, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 500, scmult : 3.5, troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 15, blkhlp: 14 },
+        BAG:               { sx: 20, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 500, scmult: 3.5,  troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 15, blkhlp: 14 },
 // teleport, trap, stun, force field tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:          { sx: 1,  sy: 12,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    teleport: true,                                               sound: 'teleport',      nohlp: 25 },
         TRAP:              { sx: 23, sy: 10,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    trap: true,                                                   sound: 'trap',          nohlp: 20 },
@@ -2227,7 +2227,7 @@ var lvu = document.getElementById("flvl").value;
 				return;
 			}
 			if (entity.type.lock) gltrs++;
-			else gtrs++;
+			else if (entity.type.scmult != undefined) gtrs++;
         player.collect(entity);
 		 }
       else if (entity.door)
