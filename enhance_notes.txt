@@ -17,7 +17,7 @@ gJ - gauntlet javascript		(gJ.0 - original)
 dev:
 
 push wall collision
- \ elevate them above other treasure tiles
+ \ x-- elevate them above other treasure tiles
 
 
 loadable wall segments & cell.spriteset
@@ -31,12 +31,10 @@ limited teleport does not: telefrag (it uses fight to kill monsters), blot out w
 
 imm issues:
 
-rotate & liquid pool edges - only need one tag that auto selects from 4 possible with pooltype(tx, ty, map);
-\_ but keep 1st liquid only (no edges) for just that
 
 cycle walls display wrong off state ?	(is this rotate issue? not seeing now)
 
-score table didnt show after a quit
+score table doesnt always show after a quit (may not be issue after splash cyc restore)
 started one time from score talbe and scores did not go away
 
 g2 ? food research (find in files, or redo)
@@ -48,6 +46,7 @@ is it still too easy to hit exits (exit maze) & stun tiles ?
 are the release walls traps to easy to see?
 
 
+cycle walls have some tracking issues and blockage issues
 inv wall hint/cheet not on: gud, pass, phase, rnd walls
 
 armor doesnt match g1/g2 - should be one of the option items
@@ -449,6 +448,9 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- rotate & liquid pool edges - only need one tag that auto selects from 4 possible with pooltype(tx, ty, map);
+   \_ but keep 1st liquid only (no edges) for just that
 
 x-- super sorc shots no longer damage player (it was all monster shots...)
 
