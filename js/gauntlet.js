@@ -2021,6 +2021,8 @@ var lvu = document.getElementById("flvl").value;
 
     onfinish: function(event, previous, current) {
       this.saveHighScore();
+		alert("stats: total -- this adventure\n        secs: "+(beets+heartbeet)+": "+heartbeet+"\n     deaths: "+deds+": "+(deds-ideds)+"\n treasures: "+gtrs+": "+(gtrs-igtrs)+"\nlocked trs: "+gltrs+": "+(gltrs-igltrs)+"\n    potions: "+gpots+": "+(gpots-igpots)+"\n       foods: "+gfuds+": "+(gfuds-igfuds)+
+		 "\n        keys: "+gkeys+": "+(gkeys-igkeys)+"\n   specials: "+gspec+": "+(gspec-igspec)+"\n   limiteds: "+glims+": "+(glims-iglims)+"\n fired pots: "+fpots+": "+(fpots-ifpots)+"\n used keys: "+fkeys+": "+(fkeys-ifkeys)+"\n----------------\n     wizards: "+cwiz+"\n    warriors: "+cwar+"\n  valkyries: "+cval+"\n        elves: "+celf+"\nreplace this with\na proper css overlay");
       this.player.leave();
 
 // restart intros
@@ -2415,8 +2417,6 @@ var lvu = document.getElementById("flvl").value;
     loadHighWho:   function() { return this.storage[STORAGE.WHO];                     },
 
     saveHighScore: function() {
-		alert("stats: total -- this adventure\n        secs: "+(beets+heartbeet)+": "+heartbeet+"\n     deaths: "+deds+": "+(deds-ideds)+"\n treasures: "+gtrs+": "+(gtrs-igtrs)+"\nlocked trs: "+gltrs+": "+(gltrs-igltrs)+"\n    potions: "+gpots+": "+(gpots-igpots)+"\n       foods: "+gfuds+": "+(gfuds-igfuds)+
-		 "\n        keys: "+gkeys+": "+(gkeys-igkeys)+"\n   specials: "+gspec+": "+(gspec-igspec)+"\n   limiteds: "+glims+": "+(glims-iglims)+"\n fired pots: "+fpots+": "+(fpots-ifpots)+"\n used keys: "+fkeys+": "+(fkeys-ifkeys)+"\n     wizards: "+cwiz+"\n    warriors: "+cwar+"\n  valkyries: "+cval+"\n        elves: "+celf+"\nreplace this with\na proper css overlay");
 
 		this.storage[STORAGE.COINS] = allcoins;
 		this.storage[STORAGE.GPOTS] = gpots;
@@ -2430,6 +2430,7 @@ var lvu = document.getElementById("flvl").value;
 		this.storage[STORAGE.GLTRS] = gltrs;
 		this.storage[STORAGE.DEDS]  = deds;
 		this.storage[STORAGE.BEETS] = beets + heartbeet;
+
 		if (max_diff_level > 9) return;
       if ((this.player.score / this.player.droppedcoins) > this.loadHighScore()) {
         this.storage[STORAGE.SCORE] = (this.player.score / this.player.droppedcoins);
