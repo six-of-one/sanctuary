@@ -49,8 +49,8 @@ Gauntlet = function() {
 		 MEXLOB = 0x00001F,
 
 // highscores
-	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys, deds,
-	igpots, igfuds, igkeys, igspec, iglims, ifpots, ifkeys, ideds,
+	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys, deds, gtrs, gltrs,
+	igpots, igfuds, igkeys, igspec, iglims, ifpots, ifkeys, ideds, igtrs, igltrs,
 	dpstim = 0, dpsacc = 0, prearmd = 0,
 	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
@@ -512,6 +512,8 @@ Gauntlet = function() {
         GLIMS:   "gauntlet.glims",
         FPOTS:   "gauntlet.fpots",
         FKEYS:   "gauntlet.fkeys",
+        GTRS:    "gauntlet.gtrs",
+        GLTRS:   "gauntlet.gloktrs",
         DEDS:    "gauntlet.deds"
       },
 // chest & wall goody/bady profiles
@@ -1648,7 +1650,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 //			stolen_load = 0;
 			FLVLRND = Game.Math.randomInt(FLOOR.MIN, FLOOR.MAX);
 
-			beets = to.number(this.storage[STORAGE.B],0);		// master stats
+			beets = to.number(this.storage[STORAGE.BEETS],0);		// master stats
 		allcoins = to.number(this.storage[STORAGE.COINS],0);
 			gpots = to.number(this.storage[STORAGE.GPOTS],0);
 			gfuds = to.number(this.storage[STORAGE.GFUDS],0);
@@ -1657,6 +1659,8 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			glims = to.number(this.storage[STORAGE.GLIMS],0);
 			fpots = to.number(this.storage[STORAGE.FPOTS],0);
 			fkeys = to.number(this.storage[STORAGE.FKEYS],0);
+			gtrs  = to.number(this.storage[STORAGE.GTRS],0);
+			gltrs = to.number(this.storage[STORAGE.GLTRS],0);
 			deds  = to.number(this.storage[STORAGE.DEDS],0);
 			igpots = gpots;	// track individual stats temp
 			igfuds = gfuds;
@@ -1665,7 +1669,9 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			iglims = glims;
 			ifpots = fpots;
 			ifkeys = fkeys;
-			ideds = deds;
+			igtrs  = gtrs;
+			igltrs = gltrs;
+			ideds  = deds;
 			allcoins++;
 			this.storage[STORAGE.COINS] = allcoins;
     },
@@ -2220,6 +2226,8 @@ var lvu = document.getElementById("flvl").value;
 				helpdis(entity.type.nohlp, undefined, 2000, undefined, undefined);
 				return;
 			}
+			if (entity.type.lock) gltrs++;
+			else gtrs++;
         player.collect(entity);
 		 }
       else if (entity.door)
@@ -2387,7 +2395,9 @@ var lvu = document.getElementById("flvl").value;
     loadHighWho:   function() { return this.storage[STORAGE.WHO];                     },
 
     saveHighScore: function() {
-		alert("stats: total -- your current play\nsecs: "+beets+heartbeet+": "+heartbeet+"\ndeaths: "+deds+": "+deds-ideds+"\npotions:"+gpots+": "+gpots-igpots+"\nfoods:"+gfuds+": "+gfuds-igfuds+"\nkeys:"+gkeys+": "+gkeys-igkeys+"\nspecials:"+gspec+": "+gspec-igspec+"\nimiteds:"+glims+": "+glims-iglims+"\nfired pots:"+fpots+": "+fpots-ifpots+"\n used keys:"+fkeys+": "+fkeys-ifkeys);
+		alert("stats: total -- this adventure\n   secs: "+(beets+heartbeet)+": "+heartbeet+"\n    deaths: "+deds+": "+(deds-ideds)+"\n treasures: "+gtrs+": "+(gtrs-igtrs)+"\nlocked trs: "+gltrs+": "+(gltrs-igltrs)+"\n   potions: "+gpots+": "+(gpots-igpots)+"\n     foods: "+gfuds+": "+(gfuds-igfuds)+
+		 "\n      keys: "+gkeys+": "+(gkeys-igkeys)+"\n  specials: "+gspec+": "+(gspec-igspec)+"\n  limiteds: "+glims+": "+(glims-iglims)+"\nfired pots: "+fpots+": "+(fpots-ifpots)+"\n used keys: "+fkeys+": "+(fkeys-ifkeys));
+
 		this.storage[STORAGE.COINS] = allcoins;
 		this.storage[STORAGE.GPOTS] = gpots;
 		this.storage[STORAGE.GFUDS] = gfuds;
@@ -2396,6 +2406,8 @@ var lvu = document.getElementById("flvl").value;
 		this.storage[STORAGE.GLIMS] = glims;
 		this.storage[STORAGE.FPOTS] = fpots;
 		this.storage[STORAGE.FKEYS] = fkeys;
+		this.storage[STORAGE.GTRS]  = gtrs;
+		this.storage[STORAGE.GLTRS] = gltrs;
 		this.storage[STORAGE.DEDS]  = deds;
 		this.storage[STORAGE.BEETS] = beets + heartbeet;
 		if (max_diff_level > 9) return;
