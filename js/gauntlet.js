@@ -49,7 +49,7 @@ Gauntlet = function() {
 		 MEXLOB = 0x00001F,
 
 // highscores
-	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys, deds, gtrs, gltrs,
+	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys, deds, gtrs, gltrs, celf, cwar, cwiz, cval,
 	igpots, igfuds, igkeys, igspec, iglims, ifpots, ifkeys, ideds, igtrs, igltrs,
 	dpstim = 0, dpsacc = 0, prearmd = 0,
 	HSCORE = [ 0, "Names", "character" ],
@@ -517,6 +517,10 @@ Gauntlet = function() {
         GTRS:    "gauntlet.gtrs",
         GLTRS:   "gauntlet.gloktrs",
         DEDS:    "gauntlet.deds"
+        CWIZ:    "gauntlet.wizs"
+        CWAR:    "gauntlet.wars"
+        CVAL:    "gauntlet.vals"
+        CELF:    "gauntlet.elfs"
       },
 // chest & wall goody/bady profiles
 		rllock = 11, rlswall = 12, swloop = 38,
@@ -1666,6 +1670,10 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			gtrs  = to.number(this.storage[STORAGE.GTRS],0);
 			gltrs = to.number(this.storage[STORAGE.GLTRS],0);
 			deds  = to.number(this.storage[STORAGE.DEDS],0);
+			cwiz  = to.number(this.storage[STORAGE.CWIZ],0);
+			cwar  = to.number(this.storage[STORAGE.CWAR],0);
+			cval  = to.number(this.storage[STORAGE.CVAL],0);
+			celf  = to.number(this.storage[STORAGE.CELF],0);
 			igpots = gpots;	// track individual stats temp
 			igfuds = gfuds;
 			igkeys = gkeys;
@@ -1678,6 +1686,14 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			ideds  = deds;
 			allcoins++;
 			this.storage[STORAGE.COINS] = allcoins;
+			if (this.type.name == "wizard") cwiz++;
+			if (this.type.name == "warrior") cwar++;
+			if (this.type.name == "valkyrie") cval++;
+			if (this.type.name == "elf") celf++;
+			this.storage[STORAGE.CWIZ] = cwiz;
+			this.storage[STORAGE.CWAR] = cwar;
+			this.storage[STORAGE.CVAL] = cval;
+			this.storage[STORAGE.CELF] = celf;
     },
 
     onload: function(event, previous, current, nlevel) {
@@ -2400,7 +2416,7 @@ var lvu = document.getElementById("flvl").value;
 
     saveHighScore: function() {
 		alert("stats: total -- this adventure\n   secs: "+(beets+heartbeet)+": "+heartbeet+"\n    deaths: "+deds+": "+(deds-ideds)+"\n treasures: "+gtrs+": "+(gtrs-igtrs)+"\nlocked trs: "+gltrs+": "+(gltrs-igltrs)+"\n   potions: "+gpots+": "+(gpots-igpots)+"\n     foods: "+gfuds+": "+(gfuds-igfuds)+
-		 "\n      keys: "+gkeys+": "+(gkeys-igkeys)+"\n  specials: "+gspec+": "+(gspec-igspec)+"\n  limiteds: "+glims+": "+(glims-iglims)+"\nfired pots: "+fpots+": "+(fpots-ifpots)+"\n used keys: "+fkeys+": "+(fkeys-ifkeys)+"\nreplace this with\na proper css overlay");
+		 "\n      keys: "+gkeys+": "+(gkeys-igkeys)+"\n  specials: "+gspec+": "+(gspec-igspec)+"\n  limiteds: "+glims+": "+(glims-iglims)+"\nfired pots: "+fpots+": "+(fpots-ifpots)+"\n used keys: "+fkeys+": "+(fkeys-ifkeys)+"\n   wizards: "+cwiz+"\n  warriors: "+cwar+"\n valkyries: "+cval+"\n    elves: "+celf+"\nreplace this with\na proper css overlay");
 
 		this.storage[STORAGE.COINS] = allcoins;
 		this.storage[STORAGE.GPOTS] = gpots;
