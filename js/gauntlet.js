@@ -49,8 +49,8 @@ Gauntlet = function() {
 		 MEXLOB = 0x00001F,
 
 // highscores
-	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys, deds, gtrs, gltrs, celf, cwar, cwiz, cval,
-	igpots, igfuds, igkeys, igspec, iglims, ifpots, ifkeys, ideds, igtrs, igltrs,
+	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys, deds, gtrs, gltrs, gexits, celf, cwar, cwiz, cval,
+	igpots, igfuds, igkeys, igspec, iglims, ifpots, ifkeys, ideds, igtrs, igltrs, igexits,
 	dpstim = 0, dpsacc = 0, prearmd = 0,
 	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
@@ -516,6 +516,7 @@ Gauntlet = function() {
         FKEYS:   "gauntlet.fkeys",
         GTRS:    "gauntlet.gtrs",
         GLTRS:   "gauntlet.gloktrs",
+        GEXS:   "gauntlet.gexits",
         DEDS:    "gauntlet.deds",
         CWIZ:    "gauntlet.wizs",
         CWAR:    "gauntlet.wars",
@@ -1669,6 +1670,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			fkeys = to.number(this.storage[STORAGE.FKEYS],0);
 			gtrs  = to.number(this.storage[STORAGE.GTRS],0);
 			gltrs = to.number(this.storage[STORAGE.GLTRS],0);
+			gexits = to.number(this.storage[STORAGE.GEXS],0);
 			deds  = to.number(this.storage[STORAGE.DEDS],0);
 			cwiz  = to.number(this.storage[STORAGE.CWIZ],0);
 			cwar  = to.number(this.storage[STORAGE.CWAR],0);
@@ -1683,6 +1685,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			ifkeys = fkeys;
 			igtrs  = gtrs;
 			igltrs = gltrs;
+			igexits = gexits;
 			ideds  = deds;
 			allcoins++;
 			this.storage[STORAGE.COINS] = allcoins;
@@ -2022,7 +2025,7 @@ var lvu = document.getElementById("flvl").value;
     onfinish: function(event, previous, current) {
       this.saveHighScore();
 		alert("stats: total -- this adventure\n        secs: "+(beets+heartbeet)+": "+heartbeet+"\n     deaths: "+deds+": "+(deds-ideds)+"\n treasures: "+gtrs+": "+(gtrs-igtrs)+"\nlocked trs: "+gltrs+": "+(gltrs-igltrs)+"\n    potions: "+gpots+": "+(gpots-igpots)+"\n       foods: "+gfuds+": "+(gfuds-igfuds)+
-		 "\n        keys: "+gkeys+": "+(gkeys-igkeys)+"\n   specials: "+gspec+": "+(gspec-igspec)+"\n   limiteds: "+glims+": "+(glims-iglims)+"\n fired pots: "+fpots+": "+(fpots-ifpots)+"\n used keys: "+fkeys+": "+(fkeys-ifkeys)+"\n----------------\n     wizards: "+cwiz+"\n    warriors: "+cwar+"\n  valkyries: "+cval+"\n        elves: "+celf+"\nreplace this with\na proper css overlay");
+		 "\n        keys: "+gkeys+": "+(gkeys-igkeys)+"\n   specials: "+gspec+": "+(gspec-igspec)+"\n   limiteds: "+glims+": "+(glims-iglims)+"\n fired pots: "+fpots+": "+(fpots-ifpots)+"\n used keys: "+fkeys+": "+(fkeys-ifkeys)+"\n        exits: "+gexits+": "+(gexits-igexits)+"\n----------------\n     wizards: "+cwiz+"\n    warriors: "+cwar+"\n  valkyries: "+cval+"\n        elves: "+celf+"\nreplace this with\na proper css overlay");
       this.player.leave();
 
 // restart intros
@@ -2125,6 +2128,7 @@ var lvu = document.getElementById("flvl").value;
     },
 
     onPlayerExit: function(player) {
+		gexits++;
 		 if (RUNORG)
 		 {
 			if (!this.map.last)
@@ -2428,6 +2432,7 @@ var lvu = document.getElementById("flvl").value;
 		this.storage[STORAGE.FKEYS] = fkeys;
 		this.storage[STORAGE.GTRS]  = gtrs;
 		this.storage[STORAGE.GLTRS] = gltrs;
+		this.storage[STORAGE.GEXS] = gexits;
 		this.storage[STORAGE.DEDS]  = deds;
 		this.storage[STORAGE.BEETS] = beets + heartbeet;
 
