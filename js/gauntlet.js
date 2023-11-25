@@ -2220,13 +2220,14 @@ var lvu = document.getElementById("flvl").value;
 					for (var iy = ity - 3;iy < ity + 4;iy++)
 
 					 if ((ix >= 0 && ix < Mtw) && (iy >= 0 && iy < Mth)) {
-						 if (iswall(cells[(ix + iy * Mtw)].pixel) || iswallrw(cells[(ix + iy * Mtw)].pixel))
+						 var clr = cells[(ix + iy * Mtw)];
+						 if (iswall(clr.ptr.pixel) || iswallpr(clr.ptr.pixel) || iswallrw(clr.pixel))
 						{
 				 var	re = Mastermap.addFx(t2p(ix), t2p(iy), FX.INVFLAS);
-							if (iswallrw(cells[(ix + iy * Mtw)].pixel)) re.sy = cells[(ix + iy * Mtw)].wall;
-							else { re.sy = cells[(ix + iy * Mtw)].sx;  }
-/*							if (iswall(cells[(ix + iy * Mtw)].pixel)) re.sy = cells[(ix + iy * Mtw)].sy;
-							else if (iswallrw(cells[(ix + iy * Mtw)].pixel)) re.sy = cells[(ix + iy * Mtw)].sy;*/
+							if (iswallrw(clr.pixel)) re.sy = clr.wall;
+							else if (clr.ptr.nohlp != 999) { re.sy = clr.ptr.sx; } // alert("inv hint:" + etw +" sy: "+re.sy+ " c: "+clr.pixel);
+/*							if (iswall(clr.pixel)) re.sy = clr.sy;
+							else if (iswallrw(clr.pixel)) re.sy = clr.sy;*/
 				 var	rdx = Math.abs(itx - ix), rdy = Math.abs(ity - iy);
 						if (rdx > 1 || rdy > 1) re.sx = 7;
 						if (rdx > 2 || rdy > 2) re.sx = 14;
