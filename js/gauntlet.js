@@ -2176,7 +2176,7 @@ var lvu = document.getElementById("flvl").value;
 		 var etw = false, etwc = null;
 		 if (entity) { if (entity.type != undefined) if (entity.type.wall != undefined) { etw = entity.type.wall; etwc = entity; } }
       if (weapon.type.player) {
-      if (entity.monster || entity.generator || (entity.treasure && etw && etw < 2))
+      if ((entity.monster || entity.generator || entity.treasure) && (!etw || etw < 2))
 		 {
 				var r, rn, xdmg = 0, dmg, vdmg = weapon.type.wind;
 				if (weapon.xshotpwr) vdmg = vdmg + Math.min(weapon.xshotpwr, ppotmax);
@@ -3702,7 +3702,7 @@ vartxt.value += "	]\n"
 								}
 						}
 // monsters mostly wont fire potions destruct power
-						if (weapon.type.player || (Math.random() < 0.15))
+						if (by.weapon.type.player || (Math.random() < 0.15))
 							Mastermap.nuke(null, by.owner);
 						Musicth.play(Musicth.sounds.nuke);
 				}
