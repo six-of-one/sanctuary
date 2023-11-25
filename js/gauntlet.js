@@ -2015,6 +2015,7 @@ var lvu = document.getElementById("flvl").value;
     },
 
     onbeforequit: function(event, previous, current) {
+		 if (game.player.respawn) { game.player.respawn = 2; return; }		// ESC key aborts respawn, goes through player.die()
       if (!confirm('Quit Game?'))
         return false;
     },
@@ -4753,7 +4754,7 @@ var txsv = ":";
     },
 
     respawner: function() {
-		 this.respawn = FPS * 6; // seconds after death player has to hit coindrop to respawn
+		 this.respawn = FPS * 10; // seconds after death player has to hit coindrop to respawn
 		 helpdis(RSPHLP, undefined, 2000, Math.round(this.respawn / FPS), undefined);
 		 deds++;
 	 },
