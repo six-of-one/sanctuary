@@ -29,6 +29,7 @@ zoom out & zoom back in on re-enter, or if no re-ent go to splash loop
 limited teleport does not: telefrag (it uses fight to kill monsters), blot out walls
 -- reasonably sure in g2, _everything_ not on an edge wall was bounced over (food, treasure, doors, keys, pot, etc)
 
+
 imm issues:
 
 
@@ -89,7 +90,7 @@ player shot speed (xshot speed is not tested, seems fast)
 >make monsters slow on shot poison a timed effect - can cross lvl boundary
 >think about shrinking gen / move dist ot true g1 levels?  (this will freeze monsters / gens while in viewport now)
 
-save system via cooky
+save system via cooky - needs adjust to take less cooky space
 > score tables
 > input name, pick custom color (hue shift selector for this)
 (way to look at all scores ?, clear below top 10 & clear all, send to server?)
@@ -242,8 +243,8 @@ x-- poison food / potion that slows monsters
 x-- exit to 6
 x-- moving exits
 x-- moving walls (regular phase, not random)
-x-- invisible walls 
-  \_(need a 50% vis on touch or shot option cooling to invisible after 4 mins) -- code to handle these as gII is done
+x-- invisible walls
+  \_(need a 50% vis on touch or shot option cooling to invisible after ? secs) -- code to handle these as gII is done
 x-- super sorceror (targeting is not ideal, but overall supr sorc functions)
 x-- mugger - thief that steals food
 dragon
