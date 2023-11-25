@@ -236,7 +236,7 @@ Gauntlet = function() {
 // placeholders for expansion
                            "You now have the healing ankh",
                            "Walls may be invisible",
-                           "help # 77",
+                           "You have # seconds to respawn with coindrop key",
                            "Some invisible walls can be shot",
                            "Pushwalls can be destroyed",
                            "Poisoned: you are dizzy<br>Player loses # health",
@@ -271,7 +271,7 @@ Gauntlet = function() {
 // collect magic before	27
 		helpcleared = 0, // option - tutorial count down
 // easy way to detect non shootables - via help codes
-		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, RNDHLP = 74, PSWDHLP = 79, WTHLP = 82,
+		FFHLP = 61, TRPHLP = 20, STNHLP = 49, PCKLHLP = 63, FITCH = 58, FICBS = 73, RNDHLP = 74, RSPHLP = 77, PSWDHLP = 79, WTHLP = 82,
 // help message ranges for tutorial exclusion
 		G1HLP = 48, G2HLP = 72,
 		MOVEX = 0x4040,
@@ -3944,8 +3944,11 @@ var txsv = ":";
 
     update: function(frame, player, map, viewport) {
 
-		if (this.respawn) this.respawn = countdown(this.respawn);
-		if (this.respawn == 1) { alert("dying now"); this.die(); }
+		if (this.respawn) {
+			this.respawn = countdown(this.respawn);
+			timerupd.level.update("Time: " + Math.round(this.respawn / FPS));
+			}
+		if (this.respawn == 1) { timerupd.level.update(""); this.die(); }
 		if (this.dead || this.respawn)
         return;
 
@@ -4360,6 +4363,7 @@ var txsv = ":";
 		 {
 			 if (this.respawn) {
 				 var rx = this.x, ry = this.y;
+				 timerupd.level.update("");
 				 if (this.deadent.generator) Mastermap.remove(this.deadent);
 				 this.join(this.type);
 				 Mastermap.occupy(rx, ry, this);
@@ -4749,12 +4753,14 @@ var txsv = ":";
     },
 
     respawner: function() {
-		 this.respawn = FPS * 6; alert(this.respawn);	// seconds after death player has to hit coindrop to respawn
+		 this.respawn = FPS * 6; // seconds after death player has to hit coindrop to respawn
+		 helpdis(RSPHLP, undefined, 2000, Math.round(ethis.respawn / FPS), undefined);
 		 deds++;
 	 },
 
     die: function() {
       this.dead = true;
+		this.respawn = false;
       publish(EVENT.PLAYER_DEATH, this);
 // clear treasure room on single player death -- NOTE: multiplay
 		troomfin = false;
