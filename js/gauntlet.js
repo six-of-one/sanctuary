@@ -3702,7 +3702,7 @@ vartxt.value += "	]\n"
 								}
 						}
 // monsters mostly wont fire potions destruct power
-						if (by.weapon.type.player || (Math.random() < 0.15))
+						if (by.type.player || (Math.random() < 0.15))
 							Mastermap.nuke(null, by.owner);
 						Musicth.play(Musicth.sounds.nuke);
 				}
