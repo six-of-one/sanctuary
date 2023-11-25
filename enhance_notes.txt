@@ -449,7 +449,7 @@ done:
 
 x-- keypile pickup incorrect
 
-x-- change fadeout on 1pl die - maybe allow re-entry if right away (6 secs hang)
+x-- change fadeout on 1pl die - maybe allow re-entry if right away (6..no wait, 10 secs hang)
    \_ hold until die testing for a coindrop
 
 x-- inv wall hint/cheet not on: gud, pass, phase, rnd walls

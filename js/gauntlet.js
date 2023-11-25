@@ -11,7 +11,7 @@ Gauntlet = function() {
 											DEBUGON = 0,
 // debug - provide a one time start level
 											initlevel = 0,
-	vardbg = 0, dent, d1, d2, bb = 0,
+	vardbg = 0, dent, d1, d2, bb = 0, PARSE = [ ],
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -575,6 +575,7 @@ Gauntlet = function() {
 // difficulty level for rnd load profile
 		diff_level = 1, def_diff = 7, max_diff_level,
 
+// use imdex.html?grid=true,nodamage=true,level=10
 	DEBUG = {
         RESET:      Game.qsBool("reset"),
         GRID:       Game.qsBool("grid"),
@@ -1824,6 +1825,7 @@ var lvu = document.getElementById("flvl").value;
 
 	 if (lvu != "") lvs = lvu;
 /// TEST - remove
+					level.plvl = Game.createImage(document.getElementById("plvl").value +"?cachebuster=" + VERSION);		// parse test
 					level.hued = Game.createImage("h"+lvs +"?cachebuster=" + VERSION);		// special color and hues map for a level
 					level.source = Game.createImage(lvs +"?cachebuster=" + VERSION, { onload: onloaded });
 
@@ -2894,7 +2896,8 @@ if (document.getElementById("noclip").checked) return false;
 
       var level  = cfg.levels[nlevel],
           source = level.source,
-          hues = level.hued;
+          hues = level.hued,
+          parser = level.plvl;
 
 /// TEST - remove
 		Mirx = document.getElementById("xmiror").checked;
@@ -2933,6 +2936,34 @@ if (document.getElementById("noclip").checked) return false;
 		var tw     = source.width,
           th     = source.height,
           self   = this;
+
+/// TEST - update
+// this is the parsing system test unit
+
+		if (parser.width > 25) {
+		var 	vartxt = document.getElementById("varout");
+				vartxt.value = "parsing set:\n\n"; vartxt.style.display = "block"
+				Mtw = parser.width;
+				Mth = parser.height;	alert("parse w x h: "+Mtw+":"+Mth);
+				parseImage(parser, function(tx, ty, pixel, map) { return; }, self);
+		var	trnsit = 16; // pixel blocks of this size
+		var	partst = [ ], punit = 0;
+				for(var ty = 0 ; ty < Mth ; ty+=trnsit)
+					for(var tx = 0 ; tx < Mtw ; tx+=trnsit)
+					{
+						vartxt += "	PARSE ["+(punit++)+"] = {";
+// 1 - get block of data of trnsit size
+						for(var pty = 0 ; pty < trnsit ; pty++)
+							for(var ptx = 0 ; ptx < trnsit ; ptx++) {
+								partst[ ptx + pty * trnsit] = Mapdata[ ptx + tx + (pty + ty) * Mtw ];
+// 2 - for now, write out data
+								vartxt += partst[ ptx + pty * trnsit];
+								if (!(pty == trnsit - 1 && ptx == trnsit - 1)) vartxt += ", ";
+							}
+						vartxt += "	};";
+					}
+			}
+/// TEST - update
 
       self.nlevel   = nlevel;
       self.level    = level;
