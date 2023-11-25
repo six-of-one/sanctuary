@@ -4754,7 +4754,7 @@ var txsv = ":";
 
     respawner: function() {
 		 this.respawn = FPS * 6; // seconds after death player has to hit coindrop to respawn
-		 helpdis(RSPHLP, undefined, 2000, Math.round(ethis.respawn / FPS), undefined);
+		 helpdis(RSPHLP, undefined, 2000, Math.round(this.respawn / FPS), undefined);
 		 deds++;
 	 },
 
