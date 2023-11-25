@@ -2938,7 +2938,7 @@ if (document.getElementById("noclip").checked) return false;
           self   = this;
 
 /// TEST - update
-// this is the parsing system test unit		- .dev/tlvl1.png
+// this is the parsing system test unit		 .dev/tlvl1.png
 
 		if (parser.width > 25) {
 		var 	vartxt = document.getElementById("varout");
@@ -2948,20 +2948,21 @@ if (document.getElementById("noclip").checked) return false;
 				parseImage(parser, function(tx, ty, pixel, map) { return; }, self);
 		var	trnsit = 16; // pixel blocks of this size
 		var	partst = [ ], punit = 0;
-				for(var ty = 0 ; ty < Mth ; ty+=trnsit)
+				for(var ty = 0 ; ty < Mth ; ty+=trnsit) {
 					for(var tx = 0 ; tx < Mtw ; tx+=trnsit)
+					if (punit <= 64)
 					{
-						vartxt.value += "	PARSE ["+(punit++)+"] = {";
+						vartxt.value += "	PARSE ["+(punit++)+"] = ["; document.title = "";
 // 1 - get block of data of trnsit size
 						for(var pty = 0 ; pty < trnsit ; pty++)
 							for(var ptx = 0 ; ptx < trnsit ; ptx++) {
-								partst[ ptx + pty * trnsit] = Mapdata[ ptx + tx + (pty + ty) * Mtw ];
+								partst[ ptx + pty * trnsit] = Mapdata[ (ptx + tx) + (pty + ty) * Mtw ];  document.title += (ptx + tx) + (pty + ty) * Mtw +":"
 // 2 - for now, write out data
-								vartxt.value += partst[ ptx + pty * trnsit];
-								if (!(pty == trnsit - 1 && ptx == trnsit - 1)) vartxt += ", ";
+								vartxt.value += partst[ ptx + pty * trnsit] + ", ";
+//								if (!(pty == trnsit - 1 && ptx == trnsit - 1)) vartxt += ", ";
 							}
-						vartxt.value += "	};";
-					}
+						vartxt.value += "	],\n"; //alert(punit);
+					} }
 			}
 /// TEST - update
 
