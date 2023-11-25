@@ -2170,8 +2170,8 @@ var lvu = document.getElementById("flvl").value;
           y = weapon.y + (entity.y ? (entity.y - weapon.y)/2 : 0);
 
 		 var nosup = true;
-		 var etw = false;
-		 if (entity.type != undefined) if (entity.type.wall != undefined) etw = entity.type.wall;
+		 var etw = false, etwc = null;
+		 if (entity.type != undefined) if (entity.type.wall != undefined) { etw = entity.type.wall; etwc = entity; }
       if (weapon.type.player) {
       if (entity.monster || entity.generator || (entity.treasure && etw && etw < 2))
 		 {
@@ -2213,19 +2213,22 @@ var lvu = document.getElementById("flvl").value;
 		 }
 // when invhint option on and walls shot, a flicker effect lights up 3 or 4 units of wall around impact
 		 else if (wallcoll || etw)
-				if (Mastermap.level.wall == WALL.INVIS && document.getElementById("invhint").checked) {
-					var itx = p2t(wallcoll.x), ity = p2t(wallcoll.y);
+				if (Mastermap.level.wall == WALL.INVIS && document.getElementById("invhint").checked) { document.title = "etw- "+ etw;
 					var cells = reloaded.cells;
+					if (!wallcoll && etwc) wallcoll = etwc; 
+					var itx = p2t(wallcoll.x), ity = p2t(wallcoll.y);
 					for (var ix = itx - 3;ix < itx + 4;ix++)
 					for (var iy = ity - 3;iy < ity + 4;iy++)
 
 					 if ((ix >= 0 && ix < Mtw) && (iy >= 0 && iy < Mth)) {
 						 var clr = cells[(ix + iy * Mtw)];
-						 if (iswall(clr.ptr.pixel) || iswallpr(clr.ptr.pixel) || iswallrw(clr.pixel))
+						 var cpp = 0, cpw = 0;
+						 if (clr.ptr != undefined) { cpp = clr.ptr.pixel; cpw = clr.ptr.wall; }
+						 if (cpw || iswall(cpp) || iswallpr(cpp) || iswallrw(clr.pixel))
 						{
 				 var	re = Mastermap.addFx(t2p(ix), t2p(iy), FX.INVFLAS);
 							if (iswallrw(clr.pixel)) re.sy = clr.wall;
-							else if (clr.ptr.nohlp != 999) { re.sy = clr.ptr.sx; } // alert("inv hint:" + etw +" sy: "+re.sy+ " c: "+clr.pixel);
+							else if (cpp.nohlp != 999) { re.sy = clr.ptr.sx; } document.title += " h:"  +" sy: "+re.sy+ " c: "+cpp;
 /*							if (iswall(clr.pixel)) re.sy = clr.sy;
 							else if (iswallrw(clr.pixel)) re.sy = clr.sy;*/
 				 var	rdx = Math.abs(itx - ix), rdy = Math.abs(ity - iy);
