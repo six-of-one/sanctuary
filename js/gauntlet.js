@@ -4306,7 +4306,10 @@ var txsv = ":";
       if (treasure.type.potion && powerp < 1)
         { this.potions++; gpots++; }
       else if (treasure.type.key)
-        { this.keys++; gkeys++; }
+			{
+				if (treasure.keys > 0) { this.keys += treasure.keys; gkeys += treasure.keys; }
+				else { this.keys++; gkeys++; }
+			}
       else if (treasure.type.health)
 		{
 			gfuds++;

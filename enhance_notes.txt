@@ -22,15 +22,13 @@ push wall collision
 
 loadable wall segments & cell.spriteset
 
-change fadeout on 1pl die - maybe allow re-entry if right away (10 - 15 secs hang)
-zoom out & zoom back in on re-enter, or if no re-ent go to splash loop
-- hold the "end" seq of zoom+fade for a timer, then go if no keypress
 
 limited teleport does not: telefrag (it uses fight to kill monsters), blot out walls
 -- reasonably sure in g2, _everything_ not on an edge wall was bounced over (food, treasure, doors, keys, pot, etc)
 
 
 imm issues:
+
 
 
 cycle walls display wrong off state ?	(is this rotate issue? not seeing now)
@@ -448,6 +446,11 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- keypile pickup incorrect
+
+x-- change fadeout on 1pl die - maybe allow re-entry if right away (6 secs hang)
+   \_ hold until die testing for a coindrop
 
 x-- inv wall hint/cheet not on: gud, pass, phase, rnd walls
 
