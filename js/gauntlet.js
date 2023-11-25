@@ -4357,6 +4357,7 @@ var txsv = ":";
 		 {
 			 if (this.respawn) {
 				 var rx = this.x, ry = this.y;
+				 if (this.deadent.generator) Mastermap.remove(this.deadent);
 				 this.join(this.type);
 				 Mastermap.occupy(rx, ry, this);
 			 } else {
@@ -4745,7 +4746,7 @@ var txsv = ":";
     },
 
     respawner: function() {
-		 this.respawn = FPS * 6; alert(this.respawn);
+		 this.respawn = FPS * 6; alert(this.respawn);	// seconds after death player has to hit coindrop to respawn
 		 deds++;
 	 },
 
@@ -4781,11 +4782,12 @@ var txsv = ":";
       if (this.respawn) {
       if (this.frame != 33) {
 			this.frame = 33;	// blank
-			if (this.potions) { reloaded.addTreasure(this.x, this.y, TREASURE.POTIONORG); }		// g1 - g2 is keys / bone pile only
+// record ent dying player leaves in case of respawn
+			if (this.potions) { this.deadent = reloaded.addTreasure(this.x, this.y, TREASURE.POTIONORG); }		// g1 - g2 is keys / bone pile only
 			else
-			if (this.keys) { var trs = TREASURE.KEY; if (this.keys > 1) trs = TREASURE.KEYPILE; reloaded.addTreasure(this.x, this.y, trs); Mastercell.ptr.keys = this.keys; }
+			if (this.keys) { var trs = TREASURE.KEY; if (this.keys > 1) trs = TREASURE.KEYPILE; this.deadent = reloaded.addTreasure(this.x, this.y, trs); Mastercell.ptr.keys = this.keys; }
 			else
-				reloaded.addGenerator(this.x, this.y, MONSTERS[(type(0xF00000) < MONSTERS.length) ? type(0xF00000) : 0]);	// lvl 3 bone pile
+				this.deadent = reloaded.addGenerator(this.x, this.y, MONSTERS[(type(0xF00000) < MONSTERS.length) ? type(0xF00000) : 0]);	// lvl 3 bone pile
 			}}
       else if (this.exiting)
         this.frame = this.sx + animate(this.exiting.count, this.exiting.fpf, 8);
