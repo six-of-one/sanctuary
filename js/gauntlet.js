@@ -2246,8 +2246,8 @@ var lvu = document.getElementById("flvl").value;
 			helpdis(weapon.nohlp, undefined, 2000, weapon.type.damage, undefined);
 			entity.hurt(weapon.type.damage, weapon);
 			}
-// monster shot monster
-      else if (weapon.type.monster && entity.monster)
+// monster shot monster / treasure
+      else if (weapon.type.monster && (entity.monster || entity.treasure && !etw))
         entity.hurt(weapon.type.damage, weapon);
 
       this.map.addFx(x, y, FX.WEAPON_HIT);

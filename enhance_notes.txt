@@ -27,6 +27,9 @@ limited teleport does not: telefrag (it uses fight to kill monsters), blot out w
 -- reasonably sure in g2, _everything_ not on an edge wall was bounced over (food, treasure, doors, keys, pot, etc)
 
 
+note: the lobber shot ext in entities.png
+
+
 imm issues:
 
 
