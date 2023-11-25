@@ -347,8 +347,8 @@ Gauntlet = function() {
         NWASTET:           { sx: 19, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
         NWASTEC:           { sx: 22, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
         NWASTER:           { sx: 25, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
-        FIRESTK:           { sx: 32, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.7,                                      sound: 'null',          nohlp: 999  },
-        PFLOOR1:           { sx: 28, sy: 27,   frames:8,  speed: 1*FPS,   fpf: FPS/2,    damage: 0,                                                    sound: 'null',          nohlp: 999  },
+        FIRESTK:           { sx: 32, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.9,                                      sound: 'null',          nohlp: 999 },
+        PFLOOR1:           { sx: 28, sy: 27,   frames:8,  speed: 1*FPS,   fpf: FPS/2,    damage: 0,                                                    sound: 'null',          nohlp: 999 },
 // other "wall" ents
         WALLGUD:           { sx: 0,  sy: 1,    frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:10, wall:true, gud: 3,           canbeshot: 2,         sound: 'shotwall',      nohlp: 65 },
         WALLGUD2:          { sx: 0,  sy: 17,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:10, wall:true, gud: 3,           canbeshot: 2,         sound: 'shotwall',      nohlp: 65 },

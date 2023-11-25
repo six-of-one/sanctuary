@@ -47,7 +47,6 @@ are the release walls traps to easy to see?
 
 
 cycle walls have some tracking issues and blockage issues
-inv wall hint/cheet not on: gud, pass, phase, rnd walls
 
 armor doesnt match g1/g2 - should be one of the option items
 
@@ -448,6 +447,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- inv wall hint/cheet not on: gud, pass, phase, rnd walls
 
 x-- rotate & liquid pool edges - only need one tag that auto selects from 4 possible with pooltype(tx, ty, map);
    \_ but keep 1st liquid only (no edges) for just that
