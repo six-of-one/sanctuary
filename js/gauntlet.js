@@ -322,7 +322,7 @@ Gauntlet = function() {
         SHOTWALL2:         { sx: 0,  sy: 16,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:30, wall:true,                   canbeshot: 2,         sound: 'null',          nohlp: 26 },
 // shotable and non-shot fake items, see grid 39 of backgrounds
         SHOTFAKER:         { sx: 8,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    score:  50, health:16,  wall:true,      canbeshot: 2,         sound: 'null',          nohlp: 58 },
-        PERMFAKER:         { sx: 8,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,                            wall:true,      canbeshot: 3,         sound: 'null',          nohlp: 58 },
+        PERMFAKER:         { sx: 8,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,                            wall:3,         canbeshot: 3,         sound: 'null',          nohlp: 58 },
 // this is the red wall pillar thingy code:0x8130 with [ inward ] facing up, down, left, right by MEXLOW bits 0, 1, 2, 3
         FFIELDUNIT:        { sx: 0,  sy: 27,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,                                                    sound: 'null'  },
         FFIELDUNITD:       { sx: 4,  sy: 27,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,                                                    sound: 'null'  },
@@ -2171,9 +2171,9 @@ var lvu = document.getElementById("flvl").value;
 
 		 var nosup = true;
 		 var etw = false;
-		 if (entity.type != undefined) etw = entity.type.wall;
+		 if (entity.type != undefined) if (entity.type.wall != undefined) etw = entity.type.wall;
       if (weapon.type.player) {
-      if (entity.monster || entity.generator || (entity.treasure && etw < 2))
+      if (entity.monster || entity.generator || (entity.treasure && etw && etw < 2))
 		 {
 				var r, rn, xdmg = 0, dmg, vdmg = weapon.type.wind;
 				if (weapon.xshotpwr) vdmg = vdmg + Math.min(weapon.xshotpwr, ppotmax);
