@@ -2222,15 +2222,14 @@ var lvu = document.getElementById("flvl").value;
 
 					 if ((ix >= 0 && ix < Mtw) && (iy >= 0 && iy < Mth)) {
 						 var clr = cells[(ix + iy * Mtw)];
-						 var cpp = 0, cpw = 0, cph = 999;
+						 var cpp = 0, cpw = 0, cph = 0;
 						 if (clr.ptr != undefined) { cpp = clr.ptr.pixel; cph = clr.ptr.nohlp; cpw = clr.ptr.wall; }
-						 if (cpw || iswall(cpp) || iswallpr(cpp) || iswallrw(clr.pixel))
+						 if (cph != 999 && (cpw || iswall(cpp) || iswallpr(cpp)) || iswallrw(clr.pixel))
 						{
 				 var	re = Mastermap.addFx(t2p(ix), t2p(iy), FX.INVFLAS);
 							if (iswallrw(clr.pixel)) re.sy = clr.wall;
-							else if (cph != 999) { re.sy = clr.ptr.sx; }
-/*							if (iswall(clr.pixel)) re.sy = clr.sy;
-							else if (iswallrw(clr.pixel)) re.sy = clr.sy;*/
+// this does not hightlight 811F or 812F invisible perm or shootable wall segment - leabing it this way for now
+							else { re.sy = clr.ptr.sx; }
 				 var	rdx = Math.abs(itx - ix), rdy = Math.abs(ity - iy);
 						if (rdx > 1 || rdy > 1) re.sx = 7;
 						if (rdx > 2 || rdy > 2) re.sx = 14;
