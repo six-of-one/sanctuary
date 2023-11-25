@@ -3819,7 +3819,7 @@ var txsv = ":";
     player: true,
     cbox:   CBOX.PLAYER,
 
-    active: function() { return !this.dead && !this.exiting; && !this.respawn },
+    active: function() { return !this.dead && !this.exiting && !this.respawn; },
 
     join: function(type) {
       this.type      = type;
@@ -3945,7 +3945,7 @@ var txsv = ":";
     update: function(frame, player, map, viewport) {
 
 		if (this.respawn) this.respawn = countdown(this.respawn);
-		if (this.respawn == 1) this.dead = true;
+		if (this.respawn == 1) { alert("dying now"); this.die(); }
 		if (this.dead || this.respawn)
         return;
 
@@ -4433,7 +4433,7 @@ var txsv = ":";
           publish(EVENT.PLAYER_HURT, this, damage);
         }
         if (this.health === 0)
-          this.die();
+          this.respawner();
       }
     },
 
@@ -4744,10 +4744,13 @@ var txsv = ":";
       return this.health < 100;
     },
 
-    die: function() {
-//      this.dead = true;
-      this.respawn = FPS * 6;
+    respawner: function() {
+		 this.respawn = FPS * 6; alert(this.respawn);
 		 deds++;
+	 },
+
+    die: function() {
+      this.dead = true;
       publish(EVENT.PLAYER_DEATH, this);
 // clear treasure room on single player death -- NOTE: multiplay
 		troomfin = false;
