@@ -3819,13 +3819,14 @@ var txsv = ":";
     player: true,
     cbox:   CBOX.PLAYER,
 
-    active: function() { return !this.dead && !this.exiting; },
+    active: function() { return !this.dead && !this.exiting; && !this.respawn },
 
     join: function(type) {
       this.type      = type;
       this.sx        = type.sx;
       this.sy        = type.sy;
       this.dead      = false;
+      this.respawn   = false;
       this.exiting   = false;
       this.firing    = false;
       this.moving    = {};
@@ -3931,6 +3932,7 @@ var txsv = ":";
 // original code cleared keys every level - set PLAYMODE detect here
 //      this.keys    = DEBUG.KEYS || 0;
       this.dead    = false;
+      this.respawn = false;
       this.exiting = false;
 
 
@@ -3942,7 +3944,9 @@ var txsv = ":";
 
     update: function(frame, player, map, viewport) {
 
-      if (this.dead)
+		if (this.respawn) this.respawn = countdown(this.respawn);
+		if (this.respawn == 1) this.dead = true;
+		if (this.dead || this.respawn)
         return;
 
       if (this.exiting) {
@@ -4351,11 +4355,17 @@ var txsv = ":";
     coindrop: function() {
 		 if (this.coins > 0)
 		 {
+			 if (this.respawn) {
+				 var rx = this.x, ry = this.y;
+				 this.join(this.type);
+				 Mastermap.occupy(rx, ry, this);
+			 } else {
 				this.heal(this.type.health);
 				this.coins--;
 				this.droppedcoins++;
 				allcoins++;
 				Musicth.play(Musicth.sounds.coindrp);
+			 }
 		 }
 	},
 
@@ -4735,7 +4745,8 @@ var txsv = ":";
     },
 
     die: function() {
-      this.dead = true;
+//      this.dead = true;
+      this.respawn = FPS * 6;
 		 deds++;
       publish(EVENT.PLAYER_DEATH, this);
 // clear treasure room on single player death -- NOTE: multiplay
@@ -4763,14 +4774,16 @@ var txsv = ":";
     },
 
     onrender: function(frame) {
-      if (this.dead) {
+		if (this.dead) return;
+      if (this.respawn) {
+      if (this.frame != 33) {
 			this.frame = 33;	// blank
-			if (this.potions) { reloaded.addTreasure(this.x, this.y, TREASURE.POTIONORG); }
+			if (this.potions) { reloaded.addTreasure(this.x, this.y, TREASURE.POTIONORG); }		// g1 - g2 is keys / bone pile only
 			else
 			if (this.keys) { var trs = TREASURE.KEY; if (this.keys > 1) trs = TREASURE.KEYPILE; reloaded.addTreasure(this.x, this.y, trs); Mastercell.ptr.keys = this.keys; }
 			else
 				reloaded.addGenerator(this.x, this.y, MONSTERS[(type(0xF00000) < MONSTERS.length) ? type(0xF00000) : 0]);	// lvl 3 bone pile
-			}
+			}}
       else if (this.exiting)
         this.frame = this.sx + animate(this.exiting.count, this.exiting.fpf, 8);
       else if (is.valid(this.moving.dir) || this.firing)
