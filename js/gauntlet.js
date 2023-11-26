@@ -31,7 +31,7 @@ Gauntlet = function() {
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, ENTLVLWAL = -6, ENTLVLSHWAL = -8,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, ENTLVLWAL = -6, ENTLVLSHWAL = -5,
 		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
 		Mapdata, Huedata, Movexit, lastmex = 0, Movit = null, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy, mtm,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
@@ -1291,7 +1291,7 @@ Gauntlet = function() {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
 					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
-//					 if (!sb && Mastermap.level.gwal != undefined && ad != TREASURE.SHOTWALL2) Mastercell.ptr.bwc = ENTLVLSHWAL;
+//					 if (sb === 0 && ad != TREASURE.SHOTWALL2) Mastercell.ptr.bwc = ENTLVLSHWAL;
 				 }
 				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2 || ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) {
 					 Mastercell.ptr.rwall = (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2);
@@ -1301,13 +1301,13 @@ Gauntlet = function() {
 					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLRND2) + (0x10 * (ad == TREASURE.WALLPHS2)));
 					 Mastercell.ptr.sx = walltype(tx, ty, map, iswallpr);
 					 Mastercell.ptr.svsy = Mastercell.ptr.sy;
-				`	 if (!sb && Mastermap.level.gwal != undefined && ad != TREASURE.WALLRND2 && ad != TREASURE.WALLPHS2) Mastercell.ptr.bwc = ENTLVLWAL;
+					 if (sb === 0 && ad != TREASURE.WALLRND2 && ad != TREASURE.WALLPHS2) Mastercell.ptr.bwc = ENTLVLWAL;
 					 }
 				 if (ad == TREASURE.WALLGUD || ad == TREASURE.WALLGUD2 || ad == TREASURE.WALLPASS || ad == TREASURE.WALLPASS2) {
 					 Mastercell.ptr.sy = Mastermap.level.wall;
 					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLGUD2)) + (0x10 * (ad == TREASURE.WALLPASS2));
 					 Mastercell.ptr.sx = walltype(tx, ty, map);
-				`	 if (!sb && Mastermap.level.gwal != undefined && ad != TREASURE.WALLPASS2 && ad != TREASURE.WALLGUD2) Mastercell.ptr.bwc = ENTLVLWAL;
+					 if (sb === 0 && ad != TREASURE.WALLPASS2 && ad != TREASURE.WALLGUD2) Mastercell.ptr.bwc = ENTLVLWAL;
 					 }
 
 				 Mastercell.ptr.lvlwall = (sb == 0 && (ad == TREASURE.WALLRND || ad == TREASURE.WALLPHS || ad == TREASURE.WALLGUD || ad == TREASURE.WALLPASS || ad == TREASURE.SHOTWALL)); // lvlwall - ent wall in lvl wall color
@@ -5520,7 +5520,6 @@ var txsv = ":";
 		 {
 			var gbas = document.getElementById("gfloorbas");
 			var gimg = document.getElementById("gfloor");	// tiled images should be W == H and divisible by TILE (currently 32) and properly loop for best appearances
-			var gwal = document.getElementById("gwall");
 			var gap = 256 / TILE; //8; // with 256 x 256 tile, they have to map over TILE (32) x TILE (32) level grid 8 sections at a time
 			if (gimg.width != 256) gap = Math.floor(gimg.width / TILE);
 			if (gap < 1) gap = 1;
@@ -5647,7 +5646,6 @@ var txsv = ":";
 // level wall
 						if (map.level.gwal)
 							if (cell.spriteset != gwal) { cell.spriteset = gwal; map.level.wall = 0; }
-						var gwal = document.getElementById("gwall");
 // blender
 						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) blw = 0;
@@ -5816,8 +5814,8 @@ var txsv = ":";
 			if (entity.spriteset == undefined) {
 				if (entity.type.wall || entity.type.pushwal) {
 					entity.spriteset = this.sprites.backgrounds;
-					if (entity.bwc == ENTLVLWAL) { entity.spriteset = gwal; entity.sy = 0; entity.svsy = 0; }
-					if (entity.bwc == ENTLVLSHWAL) { entity.spriteset = gwal; entity.sy = 1; }
+					if (entity.bwc == ENTLVLWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = 0; entity.svsy = 0; }
+					if (entity.bwc == ENTLVLSHWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = 1; }
 					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8110 && entity.pixel <= 0x812F || entity.pixel == PUSHWALEN) entity.spriteset = this.sprites.shotwalls;
 					}
 				else
