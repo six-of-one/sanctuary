@@ -1815,6 +1815,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		self     = this,
 		onloaded = function() { $('booting').hide(); self.play(new Map(nlevel)); };
 		document.getElementById("gfloor").src = level.gflr;		// set this here so its ready on map build
+		if (level.gwal != undefined) document.getElementById("gwall").src = level.gwal;		// set this here so its ready on map build
       if (level.source) {
 				onloaded();
       }
@@ -5544,6 +5545,10 @@ var txsv = ":";
 				  }
 				}
 		 }
+		if (map.level.gwal)	// this is set before map load
+		 {
+			var gwal = document.getElementById("gwall");
+		 }
 		 fcellstr = map.cell(0, 0); // preload so no undefine
 		 ftilestr = 0;
 /// TEST - remove
@@ -5635,6 +5640,10 @@ var txsv = ":";
 					  }
 					else
 					if (map.level.wall != WALL.INVIS) { 		// dont load wall tile for invis walls -- only applies to std level walls
+// level wall
+						if (map.level.gwal)
+							if (cell.spriteset != gwal) { cell.spriteset = gwal; map.level.wall = 0; }
+						var gwal = document.getElementById("gwall");
 // blender
 						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) blw = 0;
