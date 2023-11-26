@@ -909,10 +909,12 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/g2floor26.jpg",                     nornd: 1, unpinx: 1, unpiny: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/g2floor7.jpg",                    nornd: 1, unpinx: 1, unpiny: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Demo',         url: "levels/glevel0.png",    floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor0.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
-      { name: 'Level 1',      url: "levels/g2level1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor1.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
+      { name: 'Level 1',      url: "levels/g2level1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor1.jpg",  gwal: "gfx/g2wall1.jpg",                nornd: 1,    music: 'nullm',      score:  1000, help: null },
+//      { name: 'Level 1',      url: "levels/glevel1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor1.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
       { name: 'Level 2',      url: "levels/g2level2.png",   floor: FLOOR.BROWN_LAMINATE,        wall: WALL.BROWN1,      gflr: "gfx/g1floor2.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "Ghosts must be shot" },
+//      { name: 'Level 2',      url: "levels/glevel2.png",   floor: FLOOR.BROWN_LAMINATE,        wall: WALL.BROWN1,      gflr: "gfx/g1floor2.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "Ghosts must be shot" },
       { name: 'Level 3',      url: "levels/glevel3.png",    floor: FLOOR.DARK_STONE,            wall: WALL.GREEN3,      gflr: "gfx/g1floor3.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "Some food can be destroyed" },
       { name: 'Level 4',      url: "levels/glevel4.png",    floor: FLOOR.WOOD,                  wall: WALL.GRAY7,       gflr: "gfx/g1floor4.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "Fight hand to hand by running into grunts" },
       { name: 'Level 5',      url: "levels/glevel5.png",    floor: FLOOR.PURPLE_LAMINATE,       wall: WALL.RED5,        gflr: "gfx/g1floor5.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "Beware the demons which shoot you" },
@@ -1552,6 +1554,8 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		 var img = document.getElementById("gfloor");
 		img.style.visibility = "hidden";
 		img = document.getElementById("gfloorbas");
+		img.style.visibility = "hidden";
+		img = document.getElementById("gwall");
 		img.style.visibility = "hidden";
     },
 
@@ -5511,6 +5515,7 @@ var txsv = ":";
 		 {
 			var gbas = document.getElementById("gfloorbas");
 			var gimg = document.getElementById("gfloor");	// tiled images should be W == H and divisible by TILE (currently 32) and properly loop for best appearances
+			var gwal = document.getElementById("gwall");
 			var gap = 256 / TILE; //8; // with 256 x 256 tile, they have to map over TILE (32) x TILE (32) level grid 8 sections at a time
 			if (gimg.width != 256) gap = Math.floor(gimg.width / TILE);
 			if (gap < 1) gap = 1;
