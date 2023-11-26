@@ -52,6 +52,8 @@ cycle walls have some tracking issues and blockage issues
 
 armor doesnt match g1/g2 - should be one of the option items
 
+trap walls not replacing all shadows, now
+
 
 need sounds:
 
