@@ -5842,7 +5842,7 @@ var txsv = ":";
 					if (entity.type.pushwal)
 					{ hold[held++] = entity; hold[held] = null; }
 					else
-					if (entity.invisibility == true)
+					if (entity.invisibility == true)		// random and cycle walls that use gwal need to invisible here this way
 						this.sprite(ctx, wallshothint, viewport, 7, 0, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 					else
 					  if (Mastermap.level.wall != WALL.INVIS || entity.lvlwall != true)

@@ -20,7 +20,6 @@ push wall collision
  \ x-- elevate them above other treasure tiles
 
 
-
 limited teleport does not: telefrag (it uses fight to kill monsters), blot out walls
 -- reasonably sure in g2, _everything_ not on an edge wall was bounced over (food, treasure, doors, keys, pot, etc)
 
