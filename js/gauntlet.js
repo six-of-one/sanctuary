@@ -5842,7 +5842,10 @@ var txsv = ":";
 					if (entity.type.pushwal)
 					{ hold[held++] = entity; hold[held] = null; }
 					else
-					  if (Mastermap.level.wall != WALL.INVIS || entity.lvlwall != true && entity.invisibility != true)
+					if (entity.invisibility == true)
+						this.sprite(ctx, wallshothint, viewport, 7, 0, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+					else
+					  if (Mastermap.level.wall != WALL.INVIS || entity.lvlwall != true)
 							this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 
 					entity.vx = Vx;
