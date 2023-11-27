@@ -2908,7 +2908,7 @@ if (document.getElementById("noclip").checked) return false;
           hues = level.hued,
           parser = level.plvl;
 
-		if (this.level.gshw == undefined) this.level.gshw = 1;	// start of shotwalls in gwal
+		if (level.gshw == undefined) level.gshw = 1;	// start of shotwalls in gwal
 
 /// TEST - remove
 		Mirx = document.getElementById("xmiror").checked;
