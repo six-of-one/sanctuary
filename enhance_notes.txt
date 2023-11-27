@@ -20,14 +20,15 @@ push wall collision
  \ x-- elevate them above other treasure tiles
 
 
-loadable wall segments & cell.spriteset
-
 
 limited teleport does not: telefrag (it uses fight to kill monsters), blot out walls
 -- reasonably sure in g2, _everything_ not on an edge wall was bounced over (food, treasure, doors, keys, pot, etc)
 
 
 note: the lobber shot ext in entities.png
+
+complete gwal shotwalls
+ent level walls do not yet blend
 
 
 imm issues:
@@ -451,6 +452,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- loadable wall segments & cell.spriteset (ops complete, walls gfx will take some time)
 
 x-- keypile pickup incorrect
 
