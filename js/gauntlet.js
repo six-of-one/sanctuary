@@ -1291,7 +1291,7 @@ Gauntlet = function() {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
 					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
-					 if (sb === 0 && ad == TREASURE.SHOTWALL) Mastercell.ptr.bwc = ENTLVLSHWAL;
+					 if (sb < Mastermap.level.gshw && ad == TREASURE.SHOTWALL) { Mastercell.ptr.bwc = ENTLVLSHWAL; Mastercell.ptr.sy = sb; }
 				 }
 				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2 || ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) {
 					 Mastercell.ptr.rwall = (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2);
@@ -1301,13 +1301,13 @@ Gauntlet = function() {
 					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLRND2) + (0x10 * (ad == TREASURE.WALLPHS2)));
 					 Mastercell.ptr.sx = walltype(tx, ty, map, iswallpr);
 					 Mastercell.ptr.svsy = Mastercell.ptr.sy;
-					 if (sb === 0 && ad != TREASURE.WALLRND2 && ad != TREASURE.WALLPHS2) Mastercell.ptr.bwc = ENTLVLWAL;
+					 if (sb < Mastermap.level.gshw && ad != TREASURE.WALLRND2 && ad != TREASURE.WALLPHS2) Mastercell.ptr.bwc = ENTLVLWAL;	// tell sprite display to handle this ent as a level wall and use gwal tiles
 					 }
 				 if (ad == TREASURE.WALLGUD || ad == TREASURE.WALLGUD2 || ad == TREASURE.WALLPASS || ad == TREASURE.WALLPASS2) {
 					 Mastercell.ptr.sy = Mastermap.level.wall;
 					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLGUD2)) + (0x10 * (ad == TREASURE.WALLPASS2));
 					 Mastercell.ptr.sx = walltype(tx, ty, map);
-					 if (sb === 0 && ad != TREASURE.WALLPASS2 && ad != TREASURE.WALLGUD2) Mastercell.ptr.bwc = ENTLVLWAL;
+					 if (sb < Mastermap.level.gshw && ad != TREASURE.WALLPASS2 && ad != TREASURE.WALLGUD2) Mastercell.ptr.bwc = ENTLVLWAL;
 					 }
 
 				 Mastercell.ptr.lvlwall = (sb == 0 && (ad == TREASURE.WALLRND || ad == TREASURE.WALLPHS || ad == TREASURE.WALLGUD || ad == TREASURE.WALLPASS || ad == TREASURE.SHOTWALL)); // lvlwall - ent wall in lvl wall color
@@ -2907,6 +2907,8 @@ if (document.getElementById("noclip").checked) return false;
           source = level.source,
           hues = level.hued,
           parser = level.plvl;
+
+		if (this.level.gshw == undefined) this.level.gshw = 1;	// start of shotwalls in gwal
 
 /// TEST - remove
 		Mirx = document.getElementById("xmiror").checked;
@@ -5816,7 +5818,7 @@ var txsv = ":";
 					entity.spriteset = this.sprites.backgrounds;
 					if (entity.bwc == ENTLVLWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = 0; entity.svsy = 0; }
 					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8110 && entity.pixel <= 0x812F || entity.pixel == PUSHWALEN) entity.spriteset = this.sprites.shotwalls;
-					if (entity.bwc == ENTLVLSHWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = 1; }
+					if (entity.bwc == ENTLVLSHWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy += Mastermap.level.gshw; }
 					}
 				else
 				entity.spriteset = sprites;
