@@ -1291,7 +1291,7 @@ Gauntlet = function() {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
 					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
-//					 if (sb === 0 && ad != TREASURE.SHOTWALL2) Mastercell.ptr.bwc = ENTLVLSHWAL;
+					 if (sb === 0 && ad != TREASURE.SHOTWALL2) Mastercell.ptr.bwc = ENTLVLSHWAL;
 				 }
 				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2 || ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) {
 					 Mastercell.ptr.rwall = (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2);
