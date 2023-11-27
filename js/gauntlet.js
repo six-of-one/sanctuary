@@ -4527,7 +4527,7 @@ var txsv = ":";
 					if (Math.random() < 0.45) {
 //						wallupd = true;
 						if (entity.nohlp == 999) { Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }
-						else { entity.nohlp = 999; entity.sy = INVWALSY; entity.sx = INVWALA; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
+						else { entity.nohlp = 999; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
 						}
 					if (entity.pwall && entity.hb < heartbeet) {
 						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
@@ -4538,7 +4538,7 @@ var txsv = ":";
 //						var pw = entity.pwall;
 						if (Lphase == entity.pwall || (altphas && entity.nohlp == 999)) { if (!Mastermap.occupied(entity.x, entity.y, entity.w, entity.h, entity))
 							{Mapdata[r] = entity.pixel; entity.nohlp = 0; entity.sy = entity.svsy; }}
-						else { entity.nohlp = 999; entity.sy = INVWALSY; entity.sx = INVWALA; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
+						else { entity.nohlp = 999; if (Mastermap.cells != undefined) Mapdata[r] = Mastermap.cells[r].ihpixel; else Mapdata[r] = 0xA08060; }
 
 // next phase, this wall
 						if (Lsecs < 2) Lsecs = 2;
@@ -4553,14 +4553,18 @@ var txsv = ":";
 // if you leave out this if, it does real weird stuff
 				var ppx = p2t(entity.x), ppy = p2t(entity.y);
 					if (entity.rwall) {
+						entity.invisibility = false;
 // likewise if you want an interesting "empty" tile, leave out the 999 test
 						if (entity.nohlp != 999) entity.sx = walltype(ppx, ppy, Mastermap, iswallpr);
+						else entity.invisibility = true;
 //						var n2 = p2t(entity.x) + p2t(entity.y) * Mtw;
 //						var cell = reloaded.cells[n2];
 //						if (cell != undefined) cell.shadow = shadowtype(cell.tx, cell.ty, Mastermap);
 					}
 					if (entity.pwall) {
+						entity.invisibility = false;
 						if (entity.nohlp != 999) entity.sx = walltype(ppx, ppy, Mastermap, iswallpr);
+						else entity.invisibility = true;
 					}
 				}
 /*				if (wallupd) {			// this is too costly on refresh
@@ -5838,7 +5842,7 @@ var txsv = ":";
 					if (entity.type.pushwal)
 					{ hold[held++] = entity; hold[held] = null; }
 					else
-					  if (Mastermap.level.wall != WALL.INVIS || entity.lvlwall != true)
+					  if (Mastermap.level.wall != WALL.INVIS || entity.lvlwall != true && entity.invisibility != true)
 							this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 
 					entity.vx = Vx;
