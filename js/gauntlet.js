@@ -672,10 +672,12 @@ Gauntlet = function() {
     ],
 
     images: [
-      { id: 'backgrounds', url: "images/backgrounds.png" },  // http://opengameart.org/content/gauntlet-like-tiles
-      { id: 'entities',    url: "images/entities.png"    },  // http://opengameart.org/forumtopic/request-for-tileset-spritesheet-similar-to-gauntlet-ii
-      { id: 'shotwalls',   url: "images/shotwalls.png"   },
-      { id: 'invshothint', url: "images/invshothint.png" }   // when invisble hint is on and a wall is shot, these are the FX set
+      { id: 'backgrounds',    url: "images/backgrounds.png"   },  // http://opengameart.org/content/gauntlet-like-tiles
+      { id: 'entities',       url: "images/entities.png"      },  // http://opengameart.org/forumtopic/request-for-tileset-spritesheet-similar-to-gauntlet-ii
+      { id: 'shotwalls',      url: "images/shotwalls.png"     },
+      { id: 'invshothint',    url: "images/invshothint.png"   },   // when invisble hint is on and a wall is shot, these are the FX set
+      { id: 'backgrounds1',   url: "images/backgrounds1.png"  },
+      { id: 'entities1',      url: "images/entities1.png"     }
     ],
 
     sounds: [
