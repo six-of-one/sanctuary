@@ -96,7 +96,7 @@ Gauntlet = function() {
       PLAYER = {
         WARRIOR:      { sx: 0,  sy: 0,    frames: 3,   fpf: FPS/10,   coins: 3,     health: 2000,  speed: 180/FPS, gluesp: 1, damage: 50/FPS,   armor: 2, magic: 10, mind:10, mindg:4,    weapon: { speed: 600/FPS, reload: 1.15*FPS, damage: 20, wind:10, rotate: true,  sx: 24,  sy: 0, fpf: FPS/10, player: true }, sex: "male",   name: "warrior",  helo: 'hlowar1', annc: 'ancwar1', blip: 'blipwarrior',  fcol: "<font color=red>"    }, // Thor
         VALKYRIE:     { sx: 0,  sy: 1,    frames: 3,   fpf: FPS/10,   coins: 3,     health: 2000,  speed: 215/FPS, gluesp: 1, damage: 40/FPS,   armor: 3, magic: 10, mind:10, mindg:4,    weapon: { speed: 620/FPS, reload: 1*FPS,    damage: 10, wind:19, rotate: false, sx: 24,  sy: 1, fpf: FPS/10, player: true }, sex: "female", name: "valkyrie", helo: 'hloval1', annc: 'ancval1', blip: 'blipvalkyrie', fcol: "<font color=blue>"   }, // Thyra
-        WIZARD:       { sx: 0,  sy: 2,    frames: 3,   fpf: FPS/10,   coins: 3,     health: 2000,  speed: 190/FPS, gluesp: 1, damage: 30/FPS,   armor: 1, magic: 30, mind:16, mindg:13,   weapon: { speed: 640/FPS, reload: 1.1*FPS,  damage: 10, wind:28, rotate: false, sx: 24,  sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard",   helo: 'hlowiz1', annc: 'ancwiz1', blip: 'blipwizard',   fcol: "<font color=yellow>" }, // Merlin
+        WIZARD:       { sx: 0,  sy: 2,    frames: 2,   fpf: FPS/10,   coins: 3,     health: 2000,  speed: 190/FPS, gluesp: 1, damage: 30/FPS,   armor: 1, magic: 30, mind:16, mindg:13,   weapon: { speed: 640/FPS, reload: 1.1*FPS,  damage: 10, wind:28, rotate: false, sx: 24,  sy: 2, fpf: FPS/10, player: true }, sex: "male",   name: "wizard",   helo: 'hlowiz1', annc: 'ancwiz1', blip: 'blipwizard',   fcol: "<font color=yellow>" }, // Merlin
         ELF:          { sx: 0,  sy: 3,    frames: 3,   fpf: FPS/10,   coins: 3,     health: 2000,  speed: 245/FPS, gluesp: 1, damage: 20/FPS,   armor: 1, magic: 30, mind:16, mindg:25,   weapon: { speed: 660/FPS, reload: 1*FPS,    damage: 10, wind:22, rotate: false, sx: 24,  sy: 3, fpf: FPS/10, player: true }, sex: "male",   name: "elf",      helo: 'hloelf1', annc: 'ancelf1', blip: 'blipelf',      fcol: "<font color=green>"  }  // Questor
       },
       MONSTER =  {
@@ -911,7 +911,7 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/g2floor7.jpg", gwal: "gfx/g2wall16.jpg", nornd: 1, unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/g2floor7.jpg", gwal: "gfx/g2wall10.png", nornd: 1, unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Demo',         url: "levels/glevel0.png",    floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor0.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
       { name: 'Level 1',      url: "levels/g2level1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g2floor1.jpg", gwal: "gfx/g2wall1.jpg",                 nornd: 1,    music: 'nullm',      score:  1000, help: null },
 //      { name: 'Level 1',      url: "levels/glevel1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor1.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
@@ -1300,14 +1300,14 @@ Gauntlet = function() {
 					 if (ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) Mastercell.ptr.pwall = 1;
 					 Mastercell.ptr.hb = 0;
 					 Mastercell.ptr.sy = Mastermap.level.wall;
-					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLRND2) + (0x10 * (ad == TREASURE.WALLPHS2)));
+					 if (sb > 0 || (ad == TREASURE.WALLRND2) || (ad == TREASURE.WALLPHS2)) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLRND2) + (0x10 * (ad == TREASURE.WALLPHS2)));
 					 Mastercell.ptr.sx = walltype(tx, ty, map, iswallpr);
 					 Mastercell.ptr.svsy = Mastercell.ptr.sy;
 					 if (sb < Mastermap.level.gshw && ad != TREASURE.WALLRND2 && ad != TREASURE.WALLPHS2) Mastercell.ptr.bwc = ENTLVLWAL;	// tell sprite display to handle this ent as a level wall and use gwal tiles
 					 }
 				 if (ad == TREASURE.WALLGUD || ad == TREASURE.WALLGUD2 || ad == TREASURE.WALLPASS || ad == TREASURE.WALLPASS2) {
 					 Mastercell.ptr.sy = Mastermap.level.wall;
-					 if (sb > 0) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLGUD2)) + (0x10 * (ad == TREASURE.WALLPASS2));
+					 if (sb > 0 || (ad == TREASURE.WALLGUD2) || (ad == TREASURE.WALLPASS2)) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLGUD2)) + (0x10 * (ad == TREASURE.WALLPASS2));
 					 Mastercell.ptr.sx = walltype(tx, ty, map);
 					 if (sb < Mastermap.level.gshw && ad != TREASURE.WALLPASS2 && ad != TREASURE.WALLGUD2) Mastercell.ptr.bwc = ENTLVLWAL;
 					 }
