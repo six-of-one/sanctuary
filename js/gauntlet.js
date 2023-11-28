@@ -48,7 +48,7 @@ Gauntlet = function() {
 //	custom g1 tiler on 0x00000F code of floor tiles
 // FCUSTILE is after brikover last wall cover in backgrounds.png
 		FCUSTILE = 37, FCUSTIL2 = 0,
-// tile number of visual path mapper hint/cheat in row 0
+// tile number column of visual path mapper hint/cheet in row 0
 		MAPGPS = 15,
 // old destoryable wall single cell of "rubble" appearance = replaced by shotwalls.png entire wall shape set with rubbles (or individual gwall set)
 		FDESTWALL = 38,
@@ -497,7 +497,7 @@ Gauntlet = function() {
       FLOOR = { 	BROWN_BOARDS: 1, LIGHBROWN_BOARDS: 2, GREEN_BOARDS: 3, GREY_BOARDS: 4, WOOD: 5, LIGHT_STONE: 6, DARK_STONE: 7, BROWN_LAMINATE: 8,
 									PURPLE_LAMINATE: 9, PURPLEPHASE: 10, MULTIC: 11, BEES: 12, BOOK: 13, MTILE: 14, YELLOWBR: 15, RND: 16,
 									MIN: 1, MAX: 14 }, FLVLRND = null,
-// jvsg walls - 32 x 32 px per each wall "unit" - rows 1 - 7 of backgrounds.png
+// jvsg walls - 32 x 32 px per each wall "unit" - rows 2 - 7 of backgrounds.png
       WALL  = { 	INVIS: 1, BLUE: 2, BLUE_BRICK: 3, PURPLE_TILE: 4, BLUE_COBBLE: 5, PURPLE_COBBLE: 6, CONCRETE: 7,
 // g1 wall codes - rows 8 - 36 in backgrounds.png
 // --- rows 27 - 36 are overlay patterns with the previous walls all being solid colors
@@ -5564,8 +5564,8 @@ var txsv = ":";
 		 {
 			var gbas = document.getElementById("gfloorbas");
 			var gimg = document.getElementById("gfloor");	// tiled images should be W == H and divisible by TILE (currently 32) and properly loop for best appearances
-			var gap = 256 / TILE; //8; // with 256 x 256 tile, they have to map over TILE (32) x TILE (32) level grid 8 sections at a time
-			if (gimg.width != 256) gap = Math.floor(gimg.width / TILE);
+			var gap = 256 / TILE; //8; // with 256 x 256 tile, they have to map over TILE (32) x TILE (32) level grid ${gap} sections at a time
+			if (gimg.width != 256) gap = Math.floor(gimg.width / TILE);		// this will appear strangely if width not evenly divisible by TILE (32)
 			if (gap < 1) gap = 1;
 			if (gap > 60) gap = 60;		// size 1920 x 1920, prob too big anyway
 			for(ty = vyz, th = vth ; ty < th ; ty=ty+gap) {
