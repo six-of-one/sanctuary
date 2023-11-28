@@ -87,7 +87,7 @@ Gauntlet = function() {
 	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
 // invisible wall & shotable invisible are in INVWALSY, item 0 = INVWALA (0 shadow)
-			G1WALL = [	0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 26	],
+//			G1WALL = [	0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 26	],
 
 // handle death potion bomb rotating score -
 //				note: NON g1, this is multiplied by moded score x {1 or 1.333} by current code!
@@ -5685,18 +5685,18 @@ var txsv = ":";
 						}
 						if (blw >= 0)
 						{
-							wallblend(this, cell, bcell, G1WALL[wsb], blw);
+							wallblend(this, cell, bcell, wsb + 1, blw);
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 						}
 						else
 
-							this.tile(ctx, cell.spriteset, cell.wall, G1WALL[wsb], tx, ty);
+							this.tile(ctx, cell.spriteset, cell.wall, wsb + 1, tx, ty);
 
 // blend for next
 						Blendctx1.filter = "hue-rotate(0deg)";
 						B1 = tx + ty * Mtw;
 						bcell = cell;
-						cell.bwc = G1WALL[wsb];
+						cell.bwc = wsb + 1;
 					  }
 					else
 					if (map.level.wall != WALL.INVIS) { 		// dont load wall tile for invis walls -- only applies to std level walls
@@ -5875,7 +5875,7 @@ var txsv = ":";
 			if (entity.spriteset == undefined) {
 				if (entity.type.wall || entity.type.pushwal) {
 					entity.spriteset = this.sprites.backgrounds;
-					if (entity.bwc == ENTLVLWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = entity.sb + GWDEF; entity.svsy = GWDEF; }
+					if (entity.bwc == ENTLVLWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = entity.sb + GWDEF; entity.svsy = entity.sy; }
 					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8110 && entity.pixel <= 0x812F || entity.pixel == PUSHWALEN) entity.spriteset = this.sprites.shotwalls;
 					if (entity.bwc == ENTLVLSHWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = entity.sb + GWDEF + Mastermap.level.gshw; }
 					}
