@@ -5641,7 +5641,10 @@ var txsv = ":";
 
 				  if (cell.pixel & MEXLOB)		// special diff floor tiles - up to 15 as of now
 				  {
-						this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
+					  if (nfl <= map.level.govfl)
+							this.tile(ctx, gwal, nfl, 0, tx, ty);	// override some cust floor tiles
+					  else
+							this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 				  }
 // no g floor tile & nothing else spec
 				  else if (!map.level.gflr)
@@ -5761,8 +5764,12 @@ var txsv = ":";
 						this.tile(ctx, cell.spriteset, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
 			}
 			if (map.level.wall != WALL.INVIS || chtinv)
-				if (cell.shadow)		// dont shadow for invis walls
-					this.tile(ctx, shadowtiles, cell.shadow, SHADTILE, tx, ty);
+				if (cell.shadow) {		// dont shadow for invis walls
+					if  (map.level.gshd)
+						this.tile(ctx, cell.spriteset, cell.shadow, SHADTILE, tx, ty);		// shadows are in gwal gfx
+					else
+						this.tile(ctx, shadowtiles, cell.shadow, SHADTILE, tx, ty);
+					}
 // when a following tile is covered and being revealed, this sets it to the prev. tile if area is cust tile (differ from spec tile on map)
         }
       }
