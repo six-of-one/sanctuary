@@ -946,7 +946,7 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/g2floor7.jpg", gwal: "gfx/g2wall10.png", nornd: 1, unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/g2floor6.jpg", gwal: "gfx/g2wall16.png", nornd: 1, unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R", gshd: 1 },
 //      { name: 'Demo',         url: "levels/glevel0.png",    floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor0.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
       { name: 'Level 1',      url: "levels/g2level1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g2floor1.jpg", gwal: "gfx/g2wall1.jpg",                 nornd: 1,    music: 'nullm',      score:  1000, help: null },
 //      { name: 'Level 1',      url: "levels/glevel1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor1.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
@@ -5772,7 +5772,7 @@ var txsv = ":";
 			if (map.level.wall != WALL.INVIS || chtinv)
 				if (cell.shadow) {		// dont shadow for invis walls
 					if  (map.level.gshd) // goal: make so it only tags gwal walls, any sb > this is norm shadow
-						this.tile(ctx, cell.spriteset, cell.shadow, SHADTILE, tx, ty);		// shadows are in gwal gfx
+						this.tile(ctx, gwal, cell.shadow, SHADTILE, tx, ty);		// shadows are in gwal gfx
 					else
 						this.tile(ctx, shadowtiles, cell.shadow, SHADTILE, tx, ty);
 					}
