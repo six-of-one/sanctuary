@@ -29,6 +29,8 @@ note: the lobber shot ext in entities.png
 complete gwal shotwalls
 ent level walls do not yet blend
 
+add provision for using orig sound fx on jsgv levels, if installed
+
 
 imm issues:
 
