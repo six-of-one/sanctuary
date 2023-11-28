@@ -31,34 +31,64 @@ Gauntlet = function() {
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
+// Mth, Mtw - level master width & height to make rotates easier
+// gwal - general wall pointer when walls arent using backgrounds.png
+// ENTLVLWAL - code to tell engine this is an ent showing as a wall, {ent}.aswal is the local flag
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, ENTLVLWAL = -6, ENTLVLSHWAL = -5, NX = 0, NY = 0,
+// levelwide master values for unpins, unpin high/low x, high/lowy, mirror and rotates
 		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
-		Mapdata, Huedata, Movexit, lastmex = 0, Movit = null, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy, mtm,
+// data set for map pixels, hue override pixels, moving exits (3), phasewalls (4), tile render master, Vx, Vy to .vx, .vy: drew this ent across upin line
+		Mapdata, Huedata, Movexit, lastmex = 0, Movit = null, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy,
+// debug code, remove
+		mtm,
+// exit to 4,6,8, ref pixel val for ent, shot a potion flag, slowmonsters (2), paused game for announce display
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
-//	custom g1 tiler on 0x00000F code of floor tiles - save last tile & last cell
+//	save last tile & last cell in the floor writing loop - current method to put custom floor under an ent (hue pixel override is now avail as an alt)
+		ftilestr, fcellstr,
+//	custom g1 tiler on 0x00000F code of floor tiles
 // FCUSTILE is after brikover last wall cover in backgrounds.png
-		ftilestr, fcellstr, FCUSTILE = 37, FCUSTIL2 = 0, FDESTWALL = 38, FAKES = 29, PWSY = 30, HINTIV = 40, INVWALSY = 1, INVWALA = 0, wallshothint, 
+		FCUSTILE = 37, FCUSTIL2 = 0,
+// tile number of visual path mapper hint/cheat in row 0
+		MAPGPS = 15,
+// old destoryable wall single cell of "rubble" appearance = replaced by shotwalls.png entire wall shape set with rubbles (or individual gwall set)
+		FDESTWALL = 38,
+// fake items in shotwalls.png
+		FAKES = 29,
+// not used ?
+		PWSY = 30,
+// invisible wall total cheat (not the shot hint) - prob. remove this
+		HINTIV = 40,
+// invisible wall display (2) - used by random walls, cycle walls, level master pointer to invshothint.png, that ghosts walls when shot
+		INVWALSY = 1, INVWALA = 0, wallshothint,
 
+// detect pixel codes for all map things
+// map extra high is the main color code pixel detector
+// 0x0F0000 nybble (nominally) sets alternate gfx sets: backgrounds1.png, entities2.png and so on
+// map extra low nybble used to select special potions, etc
 		 MEXHIGH = 0xF0FFF0,
 		 MEXLOW = 0x00000F,
-// special because some colors are not properly discerned by parseImag
+// wall color special - because some colors *were* not properly discerned by parseImag
 // bit 16 is shifted to exlow
-// this should be stable as most codes using 0x10 also use more bits masked with 0xE0
+// this should be stable as most codes (traps, etc) using 0x10 also use more bits masked with 0xE0
 // having said, this has a bug watch and a reminder to look for odd behavior for all ops with low bits of MEXHIGH
 		 MEXHIGB = 0xF0FFE0,
 		 MEXLOB = 0x00001F,
 
-// highscores
-	scoredex = 0, allcoins, beets, gpots, gfuds, gkeys, gspec, glims, fpots, fkeys, deds, gtrs, gltrs, gexits, celf, cwar, cwiz, cval, curwiz, curwar, curval, curelf,
-	igpots, igfuds, igkeys, igspec, iglims, ifpots, ifkeys, ideds, igtrs, igltrs, igexits,
+// stats package - all coin drops, heartbeet tot, deaths, got vars things, fired pots & keys, char count total, curr char in play
+	allcoins, beets, deds, gpots, gfuds, gkeys, gspec, glims, gtrs, gltrs, gexits, fpots, fkeys, celf, cwar, cwiz, cval, curwiz, curwar, curval, curelf,
+// per play stats count (save start total, diff is that play)
+	ideds, igpots, igfuds, igkeys, igspec, iglims, igtrs, igltrs, igexits, ifpots, ifkeys,
+// dps/hps display (preamrd - damage accum pre armor lowering total)
 	dpstim = 0, dpsacc = 0, prearmd = 0,
+// highscores, index and array
+	scoredex = 0,
 	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
 // invisible wall & shotable invisible are in INVWALSY, item 0 = INVWALA (0 shadow)
 			G1WALL = [	0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 26	],
 
 // handle death potion bomb rotating score -
-//				note: NON g1, this is multiplied by score x {n} by current code!
+//				note: NON g1, this is multiplied by moded score x {1 or 1.333} by current code!
 		Deathmult, Dmmax = 7,
 		Deathscore = [1000, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
 // give notice after potion burst of death pts
@@ -67,8 +97,9 @@ Gauntlet = function() {
 		tp100 = 5, tp500 = 6,
 // super sorceror invis = 1 unit past last lobber shot
 		SSINVX = 33, SSINV = 9, SSVIS = 7,
-
+// FPS target
       FPS      = 60,
+// tile read, neg tile value for position selection x,y, tile scale on write
       TILE     = 32,
       NTILE    = -32,
       STILE    = 32,
@@ -88,9 +119,11 @@ Gauntlet = function() {
 		DIRSSY = [ -1, 0, 1, 0, -1, 0, 1 ],
 
 		wto = 3,		// shots timeout in 3 secs
-// abiility & power potion enhance
+// abiility & power potion enhance - magic & shotpow only (apparently a minimun)
 		ppotmax = 2,
+// not used, not sure its purpose
 		abshotpot = -3,
+// weapon damage & rng damage by array - arr val [wind + Math.min(weapon.xshotpwr, ppotmax)]
 		ABILIND = [ 10, 0, 10, 10, 0, 10, 10, 10, 30, 30, 20, 30, 30, 30, 30, 30, 30, 30, 30, 10, 20, 20, 10, 20, 20, 20, 30, 30, 10, 20, 20, 20, 30, 30, 0.15, 0, 0, 0.3, 0, 0, 1, 0.8, 0.65, 1, 1, 0.85 ],
 		ABILRNG = [ 0, 0, 0, 10.25, 0, 0, 10.25, 0, 0, 0, 0, 0, 0, 0, 0, 5.25, 0, 0, 5.25, 0, 0, 10.25, 0, 0, 5.2, 0, 0, 5.2, 10.5, 10.5, 10.85, 10.4, 0, 5.2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       PLAYER = {
@@ -5716,7 +5749,7 @@ var txsv = ":";
 
 // map gps
 		  if (document.getElementById("mazsolv").checked)
-		  if (cell.mapcht) this.tile(ctx, cell.spriteset,  15, 0, tx, ty);			// currently unit 15 of row 0 backgrounds.png is the yellow brick overlay
+		  if (cell.mapcht) this.tile(ctx, cell.spriteset,  MAPGPS, 0, tx, ty);			// currently unit 15 of row 0 backgrounds.png is the yellow brick overlay
 
 			if (map.level.wall == WALL.INVIS)				// do floor tile for invis walls
 			{
