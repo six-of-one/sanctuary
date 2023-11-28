@@ -32,9 +32,9 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 // Mth, Mtw - level master width & height to make rotates easier
-// gwal - general wall pointer when walls arent using backgrounds.png, GSHW - default for shotwall slot in gwal
-// ENTLVLWAL - code to tell engine this is an ent showing as a wall, {ent}.aswal is the local flag
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, GSHW = 1, ENTLVLWAL = -6, ENTLVLSHWAL = -5, NX = 0, NY = 0,
+// gwal - general wall pointer when walls arent using backgrounds.png, GWDEF - def start of walls in gwal, GSHW - default for wall & shotwall count in gwal
+// ENTLVLWAL - gwal code to tell engine this is an ent showing as a wall, {ent}.aswal is the local flag
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, GWDEF = 2, GSHW = 1, ENTLVLWAL = -6, ENTLVLSHWAL = -5, NX = 0, NY = 0,
 // levelwide master values for unpins, unpin high/low x, high/lowy, mirror and rotates
 		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
 // data set for map pixels, hue override pixels, moving exits (3), phasewalls (4), tile render master, Vx, Vy to .vx, .vy: drew this ent across upin line
@@ -1323,13 +1323,14 @@ Gauntlet = function() {
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
 				spref.addTreasure(x, y, ad);
 				 Mastercell.ptr.aswall = false; 	// set all treasure as not a wall
+				 Mastercell.ptr.sb = sb;			// get wall lower byte codes
 // wall types all work to build wall appearance
 				 if (ad == TREASURE.PUSH) { Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;} // PUSHWALEN
 				 if (Mastercell.ptr.type.wall) {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
 					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
-					 if (sb < Mastermap.level.gshw && ad == TREASURE.SHOTWALL) { Mastercell.ptr.bwc = ENTLVLSHWAL; Mastercell.ptr.sy = sb; }
+					 if (sb < Mastermap.level.gshw && ad == TREASURE.SHOTWALL) { Mastercell.ptr.bwc = ENTLVLSHWAL; }
 				 }
 				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2 || ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) {
 					 Mastercell.ptr.rwall = (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2);
@@ -2948,7 +2949,7 @@ if (document.getElementById("noclip").checked) return false;
           hues = level.hued,
           parser = level.plvl;
 
-		if (level.gshw == undefined) level.gshw = GSHW;	// default start of shotwalls in gwal
+		if (level.gshw == undefined) level.gshw = GSHW;	// default count of walls/ shotwalls in gwal
 
 /// TEST - remove
 		Mirx = document.getElementById("xmiror").checked;
@@ -5616,6 +5617,7 @@ var txsv = ":";
 				cell.map = map;
 		  var hu = parseHue(tx, ty);
 				B2 = tx + ty * Mtw;
+		  var wsb = cell.pixel & MEXLOB; // wall code small byte (curr 0x1F)
 
 		  if (cell.nothing) {
 				fcellstr = cell;
@@ -5639,7 +5641,7 @@ var txsv = ":";
 			var nfl = cell.pixel & MEXLOW, nft = FCUSTILE;
 				  if (cell.pixel & 0x10) nft = FCUSTIL2;
 
-				  if (cell.pixel & MEXLOB)		// special diff floor tiles - up to 15 as of now
+				  if (wsb)		// special diff floor tiles - up to 15 as of now
 				  {
 					  if (nfl <= map.level.govfl)
 							this.tile(ctx, gwal, nfl, 0, tx, ty);	// override some cust floor tiles
@@ -5666,45 +5668,49 @@ var txsv = ":";
 /// TEST - update
 					blw = -1;
 //					cell.ptile = fcellstr;
-					if ((cell.pixel & MEXLOB) && (cell.pixel & MEXHIGB) == 0x404000 && (cell.pixel & MEXHIGH) != TRAPWALL)   {// diff walls by low nibble
+
+						if (map.level.gwal && (wsb < map.level.gshw || wsb == 0))
+							if (cell.spriteset != gwal) { cell.spriteset = gwal; map.level.wall = GWDEF; }
+
+					if (wsb && (cell.pixel & MEXHIGB) == 0x404000 && (cell.pixel & MEXHIGH) != TRAPWALL)   {// diff walls by low nibble
 // blender
 						if (document.getElementById("noblend").checked) B2 = -2;
-						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) blw = 0;
+						if (B2 == (B1 + 1) && (wsb != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) blw = 0;
 						else
 						{
 //							bcell = reloaded.cells[mpixel(tx,ty, tx,ty - 1, 1)];
 							mpixel(tx,ty, tx,ty - 1, 1);
 							bcell = map.cell(d1 * TILE, d2 * TILE); // and alas - d* is a debug ref used in mpixel for testing
-							if (bcell != undefined && bcell.wall && B2 >= 0 && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bcv)) blw = 1;
+							if (bcell != undefined && bcell.wall && B2 >= 0 && (wsb != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bcv)) blw = 1;
 						}
 						if (blw >= 0)
 						{
-							wallblend(this, cell, bcell, G1WALL[cell.pixel & MEXLOB], blw);
+							wallblend(this, cell, bcell, G1WALL[wsb], blw);
 							ctx.putImageData(bimg1, tx * TILE, ty * TILE);
 						}
 						else
 
-							this.tile(ctx, cell.spriteset, cell.wall, G1WALL[cell.pixel & MEXLOB], tx, ty);
+							this.tile(ctx, cell.spriteset, cell.wall, G1WALL[wsb], tx, ty);
 
 // blend for next
 						Blendctx1.filter = "hue-rotate(0deg)";
 						B1 = tx + ty * Mtw;
 						bcell = cell;
-						cell.bwc = G1WALL[cell.pixel & MEXLOB];
+						cell.bwc = G1WALL[wsb];
 					  }
 					else
 					if (map.level.wall != WALL.INVIS) { 		// dont load wall tile for invis walls -- only applies to std level walls
 // level wall
-						if (map.level.gwal)
-							if (cell.spriteset != gwal) { cell.spriteset = gwal; map.level.wall = 0; }
+//						if (map.level.gwal)
+//							if (cell.spriteset != gwal) { cell.spriteset = gwal; map.level.wall = 0; }
 // blender
 						if (document.getElementById("noblend").checked) B2 = -2;
-						if (B2 == (B1 + 1) && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) blw = 0;
+						if (B2 == (B1 + 1) && (wsb != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) blw = 0;
 						else {
 							mpixel(tx,ty, tx,ty - 1, 1);
 							bcell = map.cell(d1 * TILE, d2 * TILE);
 
-							if (bcell != undefined && bcell.wall && B2 >= 0 && ((cell.pixel & MEXLOB) != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bcv)) blw = 1;
+							if (bcell != undefined && bcell.wall && B2 >= 0 && (wsb != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bcv)) blw = 1;
 						}
 						if (blw >= 0)
 						{
@@ -5869,9 +5875,9 @@ var txsv = ":";
 			if (entity.spriteset == undefined) {
 				if (entity.type.wall || entity.type.pushwal) {
 					entity.spriteset = this.sprites.backgrounds;
-					if (entity.bwc == ENTLVLWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = 0; entity.svsy = 0; }
+					if (entity.bwc == ENTLVLWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = entity.sb + GWDEF; entity.svsy = GWDEF; }
 					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8110 && entity.pixel <= 0x812F || entity.pixel == PUSHWALEN) entity.spriteset = this.sprites.shotwalls;
-					if (entity.bwc == ENTLVLSHWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy += Mastermap.level.gshw; }
+					if (entity.bwc == ENTLVLSHWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = entity.sb + GWDEF + Mastermap.level.gshw; }
 					}
 				else
 				entity.spriteset = sprites;
