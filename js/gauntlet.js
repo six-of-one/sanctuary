@@ -5765,7 +5765,7 @@ var txsv = ":";
 			}
 			if (map.level.wall != WALL.INVIS || chtinv)
 				if (cell.shadow) {		// dont shadow for invis walls
-					if  (map.level.gshd)
+					if  (map.level.gshd) // goal: make so it only tags gwal walls, any sb > this is norm shadow
 						this.tile(ctx, cell.spriteset, cell.shadow, SHADTILE, tx, ty);		// shadows are in gwal gfx
 					else
 						this.tile(ctx, shadowtiles, cell.shadow, SHADTILE, tx, ty);
