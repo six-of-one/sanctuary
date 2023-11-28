@@ -5669,7 +5669,7 @@ var txsv = ":";
 					blw = -1;
 //					cell.ptile = fcellstr;
 
-						if (map.level.gwal && (wsb < map.level.gshw || wsb == 0))
+						if (map.level.gwal && (wsb < map.level.gshw))
 							if (cell.spriteset != gwal) { cell.spriteset = gwal; map.level.wall = GWDEF; }
 
 					if (wsb && (cell.pixel & MEXHIGB) == 0x404000 && (cell.pixel & MEXHIGH) != TRAPWALL)   {// diff walls by low nibble
@@ -5701,8 +5701,8 @@ var txsv = ":";
 					else
 					if (map.level.wall != WALL.INVIS) { 		// dont load wall tile for invis walls -- only applies to std level walls
 // level wall
-//						if (map.level.gwal)
-//							if (cell.spriteset != gwal) { cell.spriteset = gwal; map.level.wall = 0; }
+						if (map.level.gwal)
+							if (cell.spriteset != gwal) { cell.spriteset = gwal; map.level.wall = GWDEF; }
 // blender
 						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && (wsb != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) blw = 0;
