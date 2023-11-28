@@ -5550,7 +5550,7 @@ var txsv = ":";
 							}
 /// TEST - update
 							var flhue = document.getElementById("fhue").value;
-							if (flhue <0 || flhue > 360) flhue = 0;
+							if (flhue < 0 || flhue > 360) flhue = 0;
 							ctx.filter = "hue-rotate("+flhue+"deg)";
 /// TEST - update
 							if (gimg.width > 25)		// for some reason when the load fails w x h is 24 x 24
@@ -5622,7 +5622,7 @@ var txsv = ":";
 // NEXT: set wallhue from parseHue here
 /// TEST - update
 			  var wallhue = document.getElementById("whue").value;
-					if (wallhue <0 || wallhue > 360) wallhue = 0;
+					if (wallhue < 0 || wallhue > 360) wallhue = 0;
 /// TEST - update
 					blw = -1;
 //					cell.ptile = fcellstr;
