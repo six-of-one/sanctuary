@@ -1287,12 +1287,13 @@ Gauntlet = function() {
 				 if (ad == TREASURE.NWASTE && (sb > 0)) switch(pooltype(tx,ty,map)) { case 1: ad = TREASURE.NWASTET; break; case 2: ad = TREASURE.NWASTER; break; case 3: ad = TREASURE.NWASTEC; break; }
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
 				spref.addTreasure(x, y, ad);
+				 Mastercell.ptr.aswall = false; 	// set all treasure as not a wall
 // wall types all work to build wall appearance
-				 if (ad == TREASURE.PUSH) Mastercell.ptr.sx = walltype(tx, ty, map, iswall); // PUSHWALEN
+				 if (ad == TREASURE.PUSH) { Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;} // PUSHWALEN
 				 if (Mastercell.ptr.type.wall) {
 					 Mastercell.ptr.sx = pixel & MEXLOW; // color of rubble shotwall
-					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
-					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); }
+					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
+					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
 					 if (sb < Mastermap.level.gshw && ad == TREASURE.SHOTWALL) { Mastercell.ptr.bwc = ENTLVLSHWAL; Mastercell.ptr.sy = sb; }
 				 }
 				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2 || ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) {
@@ -1304,12 +1305,14 @@ Gauntlet = function() {
 					 Mastercell.ptr.sx = walltype(tx, ty, map, iswallpr);
 					 Mastercell.ptr.svsy = Mastercell.ptr.sy;
 					 if (sb < Mastermap.level.gshw && ad != TREASURE.WALLRND2 && ad != TREASURE.WALLPHS2) Mastercell.ptr.bwc = ENTLVLWAL;	// tell sprite display to handle this ent as a level wall and use gwal tiles
+					 Mastercell.ptr.aswall = true;
 					 }
 				 if (ad == TREASURE.WALLGUD || ad == TREASURE.WALLGUD2 || ad == TREASURE.WALLPASS || ad == TREASURE.WALLPASS2) {
 					 Mastercell.ptr.sy = Mastermap.level.wall;
 					 if (sb > 0 || (ad == TREASURE.WALLGUD2) || (ad == TREASURE.WALLPASS2)) Mastercell.ptr.sy = sb + 1 + (0x10 * (ad == TREASURE.WALLGUD2)) + (0x10 * (ad == TREASURE.WALLPASS2));
 					 Mastercell.ptr.sx = walltype(tx, ty, map);
 					 if (sb < Mastermap.level.gshw && ad != TREASURE.WALLPASS2 && ad != TREASURE.WALLGUD2) Mastercell.ptr.bwc = ENTLVLWAL;
+					 Mastercell.ptr.aswall = true;
 					 }
 
 				 Mastercell.ptr.lvlwall = (sb == 0 && (ad == TREASURE.WALLRND || ad == TREASURE.WALLPHS || ad == TREASURE.WALLGUD || ad == TREASURE.WALLPASS || ad == TREASURE.SHOTWALL)); // lvlwall - ent wall in lvl wall color
