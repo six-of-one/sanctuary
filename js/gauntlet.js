@@ -32,9 +32,9 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 // Mth, Mtw - level master width & height to make rotates easier
-// gwal - general wall pointer when walls arent using backgrounds.png
+// gwal - general wall pointer when walls arent using backgrounds.png, GSHW - default for shotwall slot in gwal
 // ENTLVLWAL - code to tell engine this is an ent showing as a wall, {ent}.aswal is the local flag
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, ENTLVLWAL = -6, ENTLVLSHWAL = -5, NX = 0, NY = 0,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, GSHW = 1, ENTLVLWAL = -6, ENTLVLSHWAL = -5, NX = 0, NY = 0,
 // levelwide master values for unpins, unpin high/low x, high/lowy, mirror and rotates
 		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
 // data set for map pixels, hue override pixels, moving exits (3), phasewalls (4), tile render master, Vx, Vy to .vx, .vy: drew this ent across upin line
@@ -2946,7 +2946,7 @@ if (document.getElementById("noclip").checked) return false;
           hues = level.hued,
           parser = level.plvl;
 
-		if (level.gshw == undefined) level.gshw = 1;	// start of shotwalls in gwal
+		if (level.gshw == undefined) level.gshw = GSHW;	// default start of shotwalls in gwal
 
 /// TEST - remove
 		Mirx = document.getElementById("xmiror").checked;
@@ -5627,13 +5627,14 @@ var txsv = ":";
 					}
 				else
 				this.tile(ctx, cell.spriteset, NX, NY, tx, ty);
-				nfl = nft = 0;
+				nfl = NX;
+				nft = NY;
 			 }
 			else if (isp(cell.pixel,0xA08000))	// all floors except 0x000000
 			  {
 				  if (hu == 0 && Ltile > 0) cell.pixel = 0xA08000 | Ltile;
 			var nfl = cell.pixel & MEXLOW, nft = FCUSTILE;
-				  if (cell.pixel & 0x10) nft = 0;
+				  if (cell.pixel & 0x10) nft = FCUSTIL2;
 
 				  if (cell.pixel & MEXLOB)		// special diff floor tiles - up to 15 as of now
 				  {
@@ -5642,9 +5643,9 @@ var txsv = ":";
 // no g floor tile & nothing else spec
 				  else if (!map.level.gflr)
 						{
-							nfl = map.level.floor; nft = 0;
+							nfl = map.level.floor; nft = FCUSTIL2;
 							if (nfl == undefined || nfl == FLOOR.RND) nfl = FLVLRND;
-							this.tile(ctx, cell.spriteset, DEBUG.FLOOR || nfl, 0, tx, ty);
+							this.tile(ctx, cell.spriteset, DEBUG.FLOOR || nfl, nft, tx, ty);
 						}
 					ftilestr = nfl; // store for non floor content tests
 // if cust tile in an area and a cell is occupied by ent or removable - this sets it to prev tiles cust state
@@ -5723,7 +5724,7 @@ var txsv = ":";
 					else if (fcellstr != null) {
 						if (hu == 0 && Ltile > 0) {
 							nfl = Ltile & MEXLOW, nft = FCUSTILE;
-							if (Ltile & 0x10) nft = 0;
+							if (Ltile & 0x10) nft = FCUSTIL2;
 						}
 						if (Ltile != 96 || !map.level.gflr)	// normal floor tile, already written
 						if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr)) // underneath an invisible wall - load as under an ent
@@ -5737,7 +5738,7 @@ var txsv = ":";
 					cell.ihpixel = 0;
 					if (hu == 0 && Ltile > 0) {
 						if (map.level.gflr || Ltile & MEXLOW) { nfl = Ltile & MEXLOW, nft = FCUSTILE; }
-						if (Ltile & 0x10) nft = 0;
+						if (Ltile & 0x10) nft = FCUSTIL2;
 						if (Ltile == 96 && map.level.gflr) continue;	// normal floor tile, already written
 						cell.ihpixel = 0xA08000 | Ltile & 0x1F;
 					}
