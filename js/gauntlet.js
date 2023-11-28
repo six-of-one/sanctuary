@@ -48,6 +48,8 @@ Gauntlet = function() {
 //	custom g1 tiler on 0x00000F code of floor tiles
 // FCUSTILE is after brikover last wall cover in backgrounds.png
 		FCUSTILE = 37, FCUSTIL2 = 0,
+// row of wall shadows, spriteset for shadows
+		SHADTILE = 1, shadowtiles,
 // tile number column of visual path mapper hint/cheet in row 0
 		MAPGPS = 15,
 // old destoryable wall single cell of "rubble" appearance = replaced by shotwalls.png entire wall shape set with rubbles (or individual gwall set)
@@ -5331,6 +5333,7 @@ var txsv = ":";
     initialize: function(sprites) {
       this.sprites = sprites;
 		 wallshothint = sprites.invshothint;
+		 shadowtiles = sprites.backgrounds;
     },
 
     sprite: function(ctx, sprites, viewport, sx, sy, x, y, w, h) {
@@ -5759,7 +5762,7 @@ var txsv = ":";
 			}
 			if (map.level.wall != WALL.INVIS || chtinv)
 				if (cell.shadow)		// dont shadow for invis walls
-					this.tile(ctx, cell.spriteset, cell.shadow, WALL.INVIS, tx, ty);
+					this.tile(ctx, shadowtiles, cell.shadow, SHADTILE, tx, ty);
 // when a following tile is covered and being revealed, this sets it to the prev. tile if area is cust tile (differ from spec tile on map)
         }
       }
