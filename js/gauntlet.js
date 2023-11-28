@@ -31,7 +31,7 @@ Gauntlet = function() {
 // and could not get exit instance to pass exit to 4, 8 passed into the level load code
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, ENTLVLWAL = -6, ENTLVLSHWAL = -5,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, ENTLVLWAL = -6, ENTLVLSHWAL = -5, NX = 0, NY = 0,
 		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
 		Mapdata, Huedata, Movexit, lastmex = 0, Movit = null, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy, mtm,
 		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
@@ -5593,7 +5593,7 @@ var txsv = ":";
 					fcellstr = null;	// the only way to pass this is in huedata
 					}
 				else
-				this.tile(ctx, cell.spriteset, 0, 0, tx, ty);
+				this.tile(ctx, cell.spriteset, NX, NY, tx, ty);
 				nfl = nft = 0;
 			 }
 			else if (isp(cell.pixel,0xA08000))	// all floors except 0x000000
