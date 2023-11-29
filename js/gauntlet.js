@@ -946,9 +946,9 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/g2floor27.jpg", gwal: "gfx/g2wall_T.png", nornd: 1, unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R", gshw: 3 },
+      { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/g2floor27.jpg", gwal: "gfx/g2wall_T.png", nornd: 1, unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Demo',         url: "levels/glevel0.png",    floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor0.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
-      { name: 'Level 1',      url: "levels/g2level1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g2floor1.jpg", gwal: "gfx/g2wall1.jpg",                 nornd: 1,    music: 'nullm',      score:  1000, help: null },
+      { name: 'Level 1',      url: "levels/g2level1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g2floor1.jpg",  gwal: "gfx/g2wall1.jpg",                nornd: 1,    music: 'nullm',      score:  1000, help: null },
 //      { name: 'Level 1',      url: "levels/glevel1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor1.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
       { name: 'Level 2',      url: "levels/g2level2.png",   floor: FLOOR.BROWN_LAMINATE,        wall: WALL.BROWN1,      gflr: "gfx/g1floor2.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "Ghosts must be shot" },
 //      { name: 'Level 2',      url: "levels/glevel2.png",   floor: FLOOR.BROWN_LAMINATE,        wall: WALL.BROWN1,      gflr: "gfx/g1floor2.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "Ghosts must be shot" },
@@ -5669,8 +5669,10 @@ var txsv = ":";
 					blw = -1;
 //					cell.ptile = fcellstr;
 
-						if (map.level.gwal && (wsb < map.level.gshw))
+						if (map.level.gwal && (wsb < map.level.gshw)) {
 							if (cell.spriteset != gwal) { cell.spriteset = gwal; map.level.wall = GWDEF; }
+							wsb++;
+							}
 
 					if (wsb && (cell.pixel & MEXHIGB) == 0x404000 && (cell.pixel & MEXHIGH) != TRAPWALL)   {// diff walls by low nibble
 // blender
