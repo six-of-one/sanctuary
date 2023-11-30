@@ -948,7 +948,7 @@ Gauntlet = function() {
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
       { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/d1floor1.jpg", gwal: "gfx/g2wall14.jpg", nornd: 1, unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Demo',         url: "levels/glevel0.png",    floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor0.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
-      { name: 'Level 1',      url: "levels/g2level1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g2floor1.jpg",  gwal: "gfx/g2wall1.jpg",                nornd: 1,    music: 'nullm',      score:  1000, help: null },
+      { name: 'Level 1',      url: "levels/g2levelT.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g2floor1.jpg",  gwal: "gfx/g2wall1.jpg",                nornd: 1,    music: 'nullm',      score:  1000, help: null },
 //      { name: 'Level 1',      url: "levels/glevel1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor1.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
       { name: 'Level 2',      url: "levels/g2level2.png",   floor: FLOOR.BROWN_LAMINATE,        wall: WALL.BROWN1,      gflr: "gfx/g1floor2.jpg",  gwal: "gfx/g2wall2.jpg",                nornd: 1,    music: 'nullm',      score:  1000, help: "Ghosts must be shot" },
 //      { name: 'Level 2',      url: "levels/glevel2.png",   floor: FLOOR.BROWN_LAMINATE,        wall: WALL.BROWN1,      gflr: "gfx/g1floor2.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "Ghosts must be shot" },
@@ -3026,7 +3026,7 @@ vartxt.value += "	]\n"
 								for(var lod = 0 ; lod < (trnsit * trnsit); lod++)
 									if (PARSE[srch][lod+1] == partst[lod]) match++;
 							}
-						var succ = Math.floor(256 * 0.95);
+						var succ = Math.floor(256 * 0.98); // consider 95% match success for now
 						if (punit == 0 || match < succ) {
 							if (PARSE[punit] == null) PARSE[punit] = [];
 							PARSE[punit][0] = "0x000000";		// need pixel code translates
@@ -3036,15 +3036,14 @@ vartxt.value += "	]\n"
 							}
 
 					} }
-//				for(var srch = 0 ; srch < punit ; srch++) {
-					var srch = 0;
+				for(var srch = 0 ; srch < punit ; srch++) {
 					vartxt.value += "	PARSE ["+srch+"] = [";
 							for(var lod = 0 ; lod <= (trnsit * trnsit); lod++) {
 								vartxt.value += PARSE[srch][lod];
-								if (lod < (trnsit * trnsit)) vartxt += ", ";
+								if (lod < (trnsit * trnsit)) vartxt.value += ", ";
 								}
 					vartxt.value += "	];\n";
-//					}
+					}
 			}
 // when processing result data, pMapcell is called with
 //		pMapcell(tx, ty, Mapdata[tx + (ty*Mtw)], map, this);
