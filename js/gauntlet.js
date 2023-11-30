@@ -11,7 +11,7 @@ Gauntlet = function() {
 											DEBUGON = 0,
 // debug - provide a one time start level
 											initlevel = 0,
-	vardbg = 0, dent, d1, d2, bb = 0, PARSE = [ ],
+	vardbg = 0, dent, d1, d2, bb = 0, PARSE,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -3005,6 +3005,7 @@ vartxt.value += "	PARSE \n[ ";
 				for(var ty = 0 ; ty < 16 * 512 ; ty++) { vartxt.value += Mapdata[ ty ] + ", "; if (++punit == 16) {vartxt.value += " ],\n[ "; punit = 0;}}
 vartxt.value += "	]\n"
 */
+				if (PARSE == null) PARSE = [];
 				for(var ty = 0 ; ty < Mth ; ty+=trnsit) {
 					for(var tx = 0 ; tx < Mtw ; tx+=trnsit)
 //					if (punit <= 64)
@@ -3023,25 +3024,27 @@ vartxt.value += "	]\n"
 						if (punit > 0) {
 							for(var srch = 0 ; srch < punit ; srch++)
 								for(var lod = 0 ; lod < (trnsit * trnsit); lod++)
-									if (PARSE [srch, lod+1] == partst[lod]) match++;
+									if (PARSE[srch][lod+1] == partst[lod]) match++;
 							}
 						var succ = Math.floor(256 * 0.95);
 						if (punit == 0 || match < succ) {
-							PARSE [punit, 0] = "0x000000";		// need pixel code translates
+							if (PARSE[punit] == null) PARSE[punit] = [];
+							PARSE[punit][0] = "0x000000";		// need pixel code translates
 							for(var lod = 0 ; lod < (trnsit * trnsit); lod++)
-								PARSE [punit, lod+1] = partst[lod];
+								PARSE[punit][lod+1] = partst[lod];
 							punit++;
 							}
 
 					} }
-				for(var srch = 0 ; srch < punit ; srch++) {
+//				for(var srch = 0 ; srch < punit ; srch++) {
+					var srch = 0;
 					vartxt.value += "	PARSE ["+srch+"] = [";
 							for(var lod = 0 ; lod <= (trnsit * trnsit); lod++) {
-								vartxt.value += PARSE[ srch, lod];
+								vartxt.value += PARSE[srch][lod];
 								if (lod < (trnsit * trnsit)) vartxt += ", ";
 								}
 					vartxt.value += "	];\n";
-					}
+//					}
 			}
 // when processing result data, pMapcell is called with
 //		pMapcell(tx, ty, Mapdata[tx + (ty*Mtw)], map, this);
