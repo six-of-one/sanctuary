@@ -60,8 +60,10 @@ Gauntlet = function() {
 		PWSY = 30,
 // invisible wall total cheat (not the shot hint) - prob. remove this
 		HINTIV = 40,
-// invisible wall display (2) - used by random walls, cycle walls, level master pointer to invshothint.png, that ghosts walls when shot
-		INVWALSY = 1, INVWALA = 0, wallshothint,
+// invisible wall display: 404000 level walls are invisible - all others visible
+// except: PFI/SFI (perm & shootable) fakes = 0x00000F code are invisible and NOT hinted by shot walls
+// entity wall inv pointers (2) - used by random walls, cycle walls, level master pointer to invshothint.png, that ghosts walls when shot
+		invisiblewall = false, INVWALSY = 1, INVWALA = 0, wallshothint,
 
 // detect pixel codes for all map things
 // map extra high is the main color code pixel detector
@@ -946,7 +948,7 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/d1floor1.jpg", gwal: "gfx/g2wall14.jpg", nornd: 1, unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R" },
+      { name: 'Research 6',   url: "levels/glevel1r.png",   floor: FLOOR.RND,                   wall: WALL.GREEN3,      gflr: "gfx/floor025.jpg", gwal: "gfx/g2wall2.jpg", nornd: 1, unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R" },
 //      { name: 'Demo',         url: "levels/glevel0.png",    floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor0.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
       { name: 'Level 1',      url: "levels/g2levelT.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g2floor1.jpg",  gwal: "gfx/g2wall1.jpg",                nornd: 1,    music: 'nullm',      score:  1000, help: null },
 //      { name: 'Level 1',      url: "levels/glevel1.png",   floor: FLOOR.LIGHT_STONE,           wall: WALL.BROWN1,      gflr: "gfx/g1floor1.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: null },
@@ -2266,7 +2268,7 @@ var lvu = document.getElementById("flvl").value;
 		 }
 // when invhint option on and walls shot, a flicker effect lights up 3 or 4 units of wall around impact
 		 if (wallcoll || etwc)
-				if (Mastermap.level.wall == WALL.INVIS && document.getElementById("invhint").checked) {
+				if (invisiblewall && document.getElementById("invhint").checked) {
 					var cells = reloaded.cells;
 					if (!wallcoll && etwc) wallcoll = etwc;
 					var itx = p2t(wallcoll.x), ity = p2t(wallcoll.y);
@@ -3026,7 +3028,7 @@ vartxt.value += "	]\n"
 								for(var lod = 0 ; lod < (trnsit * trnsit); lod++)
 									if (PARSE[srch][lod+1] == partst[lod]) match++;
 							}
-						var succ = Math.floor(256 * 0.98); // consider 95% match success for now
+						var succ = 253; //Math.floor(256 * 0.98); // consider 95% match success for now
 						if (punit == 0 || match < succ) {
 							if (PARSE[punit] == null) PARSE[punit] = [];
 							PARSE[punit][0] = "0x000000";		// need pixel code translates
@@ -5632,7 +5634,7 @@ var txsv = ":";
 		 ftilestr = 0;
 /// TEST - remove
 		 var chtinv = document.getElementById("invcht").checked;
-		 if (document.getElementById("invwal").checked) map.level.wall = WALL.INVIS;
+		 if (document.getElementById("invwal").checked) invisiblewall = true;
 /// TEST - remove
 		 var B1, B2, bcell, blw;
 // second cycle - everything else
@@ -5729,7 +5731,7 @@ var txsv = ":";
 						cell.bwc = wsb + 1;
 					  }
 					else
-					if (map.level.wall != WALL.INVIS) { 		// dont load wall tile for invis walls -- only applies to std level walls
+					if (!invisiblewall) { 		// dont load wall tile for invis walls -- only applies to std level walls
 // level wall
 						if (map.level.gwal)
 							if (cell.spriteset != gwal) { cell.spriteset = gwal; map.level.wall = GWDEF; }
@@ -5794,12 +5796,12 @@ var txsv = ":";
 		  if (document.getElementById("mazsolv").checked)
 		  if (cell.mapcht) this.tile(ctx, cell.spriteset,  MAPGPS, 0, tx, ty);			// currently unit 15 of row 0 backgrounds.png is the yellow brick overlay
 
-			if (map.level.wall == WALL.INVIS)				// do floor tile for invis walls
+			if (invisiblewall)				// do floor tile for invis walls
 			{
 				if (!map.level.gflr)
 						this.tile(ctx, cell.spriteset, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
 			}
-			if (map.level.wall != WALL.INVIS || chtinv)
+			if (!invisiblewall || chtinv)
 				if (cell.shadow) {		// dont shadow for invis walls
 					if  (map.level.gshd) // goal: make so it only tags gwal walls, any sb > this is norm shadow
 						this.tile(ctx, gwal, cell.shadow, SHADTILE, tx, ty);		// shadows are in gwal gfx
@@ -5930,7 +5932,7 @@ var txsv = ":";
 					if (entity.invisibility == true)		// random and cycle walls that use gwal need to invisible here this way
 						this.sprite(ctx, wallshothint, viewport, 7, 0, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 					else
-					  if (Mastermap.level.wall != WALL.INVIS || entity.lvlwall != true) {
+					  if (!invisiblewall || entity.lvlwall != true) {
 							this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 							}
 
