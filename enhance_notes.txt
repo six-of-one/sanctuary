@@ -34,7 +34,7 @@ add provision for using orig sound fx on jsgv levels, if installed
 
 imm issues:
 
-
+converting g2 walls / floors + g1 walls
 
 cycle walls display wrong off state ?	(is this rotate issue? not seeing now)
 
@@ -454,7 +454,12 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
+------------------- 023.11.
+
 x-- loadable wall segments & cell.spriteset (ops complete, walls gfx will take some time)
+   \_ gwal subset can have more than 1 wall/ destroywall, extra minitiles, its own shadow set (or no shadow at all)
+    \_ possibly also add extra permanent and shootable fake items
+     _ all controlled by a per-level set of vars with std items available above that #
 
 x-- keypile pickup incorrect
 
