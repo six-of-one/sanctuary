@@ -2999,7 +2999,7 @@ if (document.getElementById("noclip").checked) return false;
 				Mth = parser.height; alert("parse w x h: "+Mtw+":"+Mth);
 				parseImage(parser, function(tx, ty, pixel, map) { return; }, self);
 		var	trnsit = 16; // pixel blocks of this size
-		var	partst = [ ], punit = 0;
+		var	partst = [ ], punit = 0, match;
 /*
 vartxt.value += "	PARSE \n[ ";
 				for(var ty = 0 ; ty < 16 * 512 ; ty++) { vartxt.value += Mapdata[ ty ] + ", "; if (++punit == 16) {vartxt.value += " ],\n[ "; punit = 0;}}
@@ -3009,17 +3009,39 @@ vartxt.value += "	]\n"
 					for(var tx = 0 ; tx < Mtw ; tx+=trnsit)
 //					if (punit <= 64)
 					{
-						vartxt.value += "	PARSE ["+(punit++)+"] = ["; if (punit == 1) document.title = "";
-// 1 - get block of data of trnsit size
+						//vartxt.value += "	PARSE ["+(punit++)+"] = ["; if (punit == 1) document.title = "";
+// 1 - get block of data of trnsit * trnsit size
 						for(var pty = 0 ; pty < trnsit ; pty++)
 							for(var ptx = 0 ; ptx < trnsit ; ptx++) {
-								partst[ ptx + pty * trnsit] = Mapdata[ (ptx + tx) + (pty + ty) * Mtw ];  if (punit == 1) document.title += (ptx + tx) + (pty + ty) * Mtw +":"
+								partst[ ptx + pty * trnsit] = Mapdata[ (ptx + tx) + (pty + ty) * Mtw ]; 	// if (punit == 1) document.title += (ptx + tx) + (pty + ty) * Mtw +":"
 // 2 - for now, write out data
-								vartxt.value += partst[ ptx + pty * trnsit] + ", ";
+//								vartxt.value += partst[ ptx + pty * trnsit] + ", ";
 //								if (!(pty == trnsit - 1 && ptx == trnsit - 1)) vartxt += ", ";
 							}
-						vartxt.value += "	],\n"; //alert(punit);
+						match = 0;
+
+						if (punit > 0) {
+							for(var srch = 0 ; srch < punit ; srch++)
+								for(var lod = 0 ; lod < (trnsit * trnsit); lod++)
+									if (PARSE [srch, lod+1] == partst[lod]) match++;
+							}
+						var succ = Math.floor(256 * 0.95);
+						if (punit == 0 || match < succ) {
+							PARSE [punit, 0] = "0x000000";		// need pixel code translates
+							for(var lod = 0 ; lod < (trnsit * trnsit); lod++)
+								PARSE [punit, lod+1] = partst[lod];
+							punit++;
+							}
+
 					} }
+				for(var srch = 0 ; srch < punit ; srch++) {
+					vartxt.value += "	PARSE ["+srch+"] = [";
+							for(var lod = 0 ; lod <= (trnsit * trnsit); lod++) {
+								vartxt.value += PARSE[ srch, lod];
+								if (lod < (trnsit * trnsit)) vartxt += ", ";
+								}
+					vartxt.value += "	];\n";
+					}
 			}
 // when processing result data, pMapcell is called with
 //		pMapcell(tx, ty, Mapdata[tx + (ty*Mtw)], map, this);
