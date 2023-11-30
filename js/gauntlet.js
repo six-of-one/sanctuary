@@ -3000,12 +3000,14 @@ if (document.getElementById("noclip").checked) return false;
 				parseImage(parser, function(tx, ty, pixel, map) { return; }, self);
 		var	trnsit = 16; // pixel blocks of this size
 		var	partst = [ ], punit = 0;
+/*
 vartxt.value += "	PARSE \n[ ";
 				for(var ty = 0 ; ty < 16 * 512 ; ty++) { vartxt.value += Mapdata[ ty ] + ", "; if (++punit == 16) {vartxt.value += " ],\n[ "; punit = 0;}}
 vartxt.value += "	]\n"
-/*				for(var ty = 0 ; ty < Mth ; ty+=trnsit) {
+*/
+				for(var ty = 0 ; ty < Mth ; ty+=trnsit) {
 					for(var tx = 0 ; tx < Mtw ; tx+=trnsit)
-					if (punit <= 64)
+//					if (punit <= 64)
 					{
 						vartxt.value += "	PARSE ["+(punit++)+"] = ["; if (punit == 1) document.title = "";
 // 1 - get block of data of trnsit size
@@ -3017,8 +3019,10 @@ vartxt.value += "	]\n"
 //								if (!(pty == trnsit - 1 && ptx == trnsit - 1)) vartxt += ", ";
 							}
 						vartxt.value += "	],\n"; //alert(punit);
-					} } */
+					} }
 			}
+// when processing result data, pMapcell is called with
+//		pMapcell(tx, ty, Mapdata[tx + (ty*Mtw)], map, this);
 /// TEST - update
 
       self.nlevel   = nlevel;
