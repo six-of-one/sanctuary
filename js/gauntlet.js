@@ -63,7 +63,7 @@ Gauntlet = function() {
 // invisible wall display: 404000 level walls are invisible - all others visible
 // except: PFI/SFI (perm & shootable) fakes = 0x00000F code are invisible and NOT hinted by shot walls
 // entity wall inv pointers (2) - used by random walls, cycle walls, level master pointer to invshothint.png, that ghosts walls when shot
-		invisiblewall = false, INVWALSY = 1, INVWALA = 0, wallshothint,
+		Minvisiblewall, INVWALSY = 1, INVWALA = 0, wallshothint,
 
 // detect pixel codes for all map things
 // map extra high is the main color code pixel detector
@@ -2268,7 +2268,7 @@ var lvu = document.getElementById("flvl").value;
 		 }
 // when invhint option on and walls shot, a flicker effect lights up 3 or 4 units of wall around impact
 		 if (wallcoll || etwc)
-				if (invisiblewall && document.getElementById("invhint").checked) {
+				if (Minvisiblewall && document.getElementById("invhint").checked) {
 					var cells = reloaded.cells;
 					if (!wallcoll && etwc) wallcoll = etwc;
 					var itx = p2t(wallcoll.x), ity = p2t(wallcoll.y);
@@ -5634,7 +5634,7 @@ var txsv = ":";
 		 ftilestr = 0;
 /// TEST - remove
 		 var chtinv = document.getElementById("invcht").checked;
-		 if (document.getElementById("invwal").checked) invisiblewall = true;
+		 if (document.getElementById("invwal").checked) Minvisiblewall = true;
 /// TEST - remove
 		 var B1, B2, bcell, blw;
 // second cycle - everything else
@@ -5704,7 +5704,7 @@ var txsv = ":";
 							wsb++;
 							}
 
-					if (wsb && (cell.pixel & MEXHIGB) == 0x404000 && (cell.pixel & MEXHIGH) != TRAPWALL)   {// diff walls by low nibble
+					if (cell.pixel != 0x404000 && (cell.pixel & MEXHIGH) != TRAPWALL) {// diff walls by low nibble
 // blender
 						if (document.getElementById("noblend").checked) B2 = -2;
 						if (B2 == (B1 + 1) && (wsb != (bcell.pixel & MEXLOB)) && blnck(bcell,cell,bch)) blw = 0;
@@ -5731,7 +5731,7 @@ var txsv = ":";
 						cell.bwc = wsb + 1;
 					  }
 					else
-					if (!invisiblewall) { 		// dont load wall tile for invis walls -- only applies to std level walls
+					if (Minvisiblewall != true) { 		// dont load wall tile for invis walls -- only applies to std level walls
 // level wall
 						if (map.level.gwal)
 							if (cell.spriteset != gwal) { cell.spriteset = gwal; map.level.wall = GWDEF; }
@@ -5796,12 +5796,12 @@ var txsv = ":";
 		  if (document.getElementById("mazsolv").checked)
 		  if (cell.mapcht) this.tile(ctx, cell.spriteset,  MAPGPS, 0, tx, ty);			// currently unit 15 of row 0 backgrounds.png is the yellow brick overlay
 
-			if (invisiblewall)				// do floor tile for invis walls
+			if (Minvisiblewall)				// do floor tile for invis walls
 			{
 				if (!map.level.gflr)
 						this.tile(ctx, cell.spriteset, DEBUG.FLOOR || map.level.floor, 0, tx, ty);
 			}
-			if (!invisiblewall || chtinv)
+			if (Minvisiblewall != true || chtinv)
 				if (cell.shadow) {		// dont shadow for invis walls
 					if  (map.level.gshd) // goal: make so it only tags gwal walls, any sb > this is norm shadow
 						this.tile(ctx, gwal, cell.shadow, SHADTILE, tx, ty);		// shadows are in gwal gfx
@@ -5932,7 +5932,7 @@ var txsv = ":";
 					if (entity.invisibility == true)		// random and cycle walls that use gwal need to invisible here this way
 						this.sprite(ctx, wallshothint, viewport, 7, 0, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 					else
-					  if (!invisiblewall || entity.lvlwall != true) {
+					  if (Minvisiblewall != true || entity.lvlwall != true) {
 							this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 							}
 
