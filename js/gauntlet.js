@@ -4262,7 +4262,7 @@ var txsv = ":";
 		 if (treasure.type.nohlp == RNDHLP) {
 // "odd five, even seven" - give 200 health
 			 if ((od && ons == 5) || (!od && ons == 7)) treasure.type.health = 200;
-			 else treasure.type.health = 50 + Game.Math.randomInt(1,2) * 50;
+			 else treasure.type.health = Game.Math.randomInt(1,8) * 25;
 
 			}
 		 if (treasure.type.health > 0) hrp = treasure.type.health;
