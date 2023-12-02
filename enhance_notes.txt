@@ -41,7 +41,6 @@ cycle walls display wrong off state ?	(is this rotate issue? not seeing now)
 score table doesnt always show after a quit (may not be issue after splash cyc restore)
 started one time from score talbe and scores did not go away
 
-g2 ? food research (find in files, or redo)
 
 check sound for picking poison (is potion pick sound?, need g2 ref)
 
@@ -53,8 +52,6 @@ are the release walls traps to easy to see?
 cycle walls have some tracking issues and blockage issues
 
 armor doesnt match g1/g2 - should be one of the option items
-
-trap walls not replacing all shadows, now
 
 
 need sounds:
@@ -279,6 +276,8 @@ wall
 g1 (wiz, skill 3) 188 hlth (3m 19s watch)
 g2 (val, skill 2) 328 hlth (5m 50s watch)
 
+g2 ? food research (find in files, or redo)
+
 >>>>>>>>>>>>>>>>>>>>>>
 
 sanctuary elements:
@@ -454,7 +453,10 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 done:
 
-------------------- 023.11.
+x-- trap walls not replacing all shadows, now (seems to work at this point)
+   \_ nor do commit notes id the issue
+
+------------------- 023.11.29
 
 x-- loadable wall segments & cell.spriteset (ops complete, walls gfx will take some time)
    \_ gwal subset can have more than 1 wall/ destroywall, extra minitiles, its own shadow set (or no shadow at all)
