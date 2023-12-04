@@ -2692,6 +2692,7 @@ var lvu = document.getElementById("flvl").value;
 						if (collision.type.damage > 0) // dmg players in active FF
 						{
 							helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
+// add entity.tiledmg, entity.tdsnd and move these into heartbeet
 							Musicth.play(Musicth.sounds[collision.type.sound]);
 							entity.hurt(collision.type.damage);
 						}
