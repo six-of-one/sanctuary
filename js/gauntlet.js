@@ -5609,6 +5609,7 @@ var txsv = ":";
 			 bcv = [ 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 4, 4, 0, 0, 0, 0, 1, 1 ];
 
 		function blnck(cell1,cell2,barr) { var bt = barr[cell1.wall]; if (bt > 0 && bt == barr[cell2.wall]) return true; };
+		var tmdfgf = false, tmdfgw, tmdfb, tmdff, tmgft, tmbft, tmfft, pcell = null; // code for which used, gfloor, gwal, backgrounds, floor
 
 // option vo, to only redraw viewport tiles - wont work because of patchwork viewport on unpinned levels
 		 var vxz = 0, vyz = 0, vtw = map.tw, vth = map.th;
@@ -5616,6 +5617,7 @@ var txsv = ":";
 // first cycle - map entire map bkg with a larger floor tile if specced
 		if (map.level.gflr)	// this is set before map load
 		 {
+			 tmdfgf = true; // all tiles written first as gfloor / sub gfloor (in case glfoor fails load)
 			var gbas = document.getElementById("gfloorbas");
 			var gimg = document.getElementById("gfloor");	// tiled images should be W == H and divisible by TILE (currently 32) and properly loop for best appearances
 			var gap = 256 / TILE; //8; // with 256 x 256 tile, they have to map over TILE (32) x TILE (32) level grid ${gap} sections at a time
@@ -5669,6 +5671,8 @@ var txsv = ":";
 				B2 = tx + ty * Mtw;
 		  var wsb = cell.pixel & MEXLOB; // wall code small byte (curr 0x1F)
 
+			  tmdfgw = 0, tmdfb = 0, tmdff = 0;
+
 		  if (cell.nothing) {
 				fcellstr = cell;
 			  if (hu > 0) {
@@ -5693,10 +5697,16 @@ var txsv = ":";
 
 				  if (wsb)		// special diff floor tiles - up to 15 as of now
 				  {
-					  if (nfl <= map.level.govfl)
+					  if (nfl <= map.level.govfl) {
 							this.tile(ctx, gwal, nfl, 0, tx, ty);	// override some cust floor tiles
-					  else
+							tmdfgw = nfl;
+						   tmgft = 0;
+							}
+					  else {
 							this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
+							tmdfb = nfl;
+						   tmbft = nft;
+							}
 				  }
 // no g floor tile & nothing else spec
 				  else if (!map.level.gflr)
@@ -5704,6 +5714,8 @@ var txsv = ":";
 							nfl = map.level.floor; nft = FCUSTIL2;
 							if (nfl == undefined || nfl == FLOOR.RND) nfl = FLVLRND;
 							this.tile(ctx, cell.spriteset, DEBUG.FLOOR || nfl, nft, tx, ty);
+							tmdff = nfl;
+							tmfft = nft;
 						}
 					ftilestr = nfl; // store for non floor content tests
 // if cust tile in an area and a cell is occupied by ent or removable - this sets it to prev tiles cust state
@@ -5806,6 +5818,17 @@ var txsv = ":";
 						if (Ltile == 96 && map.level.gflr) continue;	// normal floor tile, already written
 						cell.ihpixel = 0xA08000 | Ltile & 0x1F;
 					}
+					var noover = true;
+					if (map.level.tmdf != undefined)
+					{
+						if (!isfloor(pcell.pixel))
+						if (!tmdfgf) {
+							if (tmdff)  { this.tile(ctx, cell.spriteset, DEBUG.FLOOR || tmdff, tmfft, tx, ty); noover = false; }
+							if (tmdfb)  { this.tile(ctx, cell.spriteset, tmdfb, tmbft, tx, ty); noover = false; }
+							if (tmdfgw) { this.tile(ctx, gwal, tmdfgw, tmgft, tx, ty); noover = false; }
+						}
+					}
+					if (noover)
 					if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr)) {
 							this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 							if (cell.ihpixel == 0) cell.ihpixel = fcellstr.pixel;
@@ -5829,6 +5852,7 @@ var txsv = ":";
 						this.tile(ctx, shadowtiles, cell.shadow, SHADTILE, tx, ty);
 					}
 // when a following tile is covered and being revealed, this sets it to the prev. tile if area is cust tile (differ from spec tile on map)
+				pcell = cell;	// save immediate previous cell for tmdf ops
         }
       }
       if (DEBUG.GRID)
