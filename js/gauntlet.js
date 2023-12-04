@@ -5810,7 +5810,18 @@ var txsv = ":";
 						if (chtinv) { this.tile(ctx, cell.spriteset, cell.wall, HINTIV, tx, ty); cell.bwc = HINTIV; }
 					}
 			  }
-			else if (fcellstr != null) {		// this is some ent - copy floor tile under it from imm. previous
+			else {		// this is some ent - copy floor tile under it from imm. previous
+					var noover = true;	// tmdf does not override std ops
+					if (map.level.tmdf != undefined)
+					{
+//						if (!isfloor(pcell.pixel))
+						if (!tmdfgf) {
+							if (tmdff)  { this.tile(ctx, cell.spriteset, DEBUG.FLOOR || tmdff, tmfft, tx, ty); noover = false; }
+							if (tmdfb)  { this.tile(ctx, cell.spriteset, tmdfb, tmbft, tx, ty); noover = false; }
+							if (tmdfgw) { this.tile(ctx, gwal, tmdfgw, tmgft, tx, ty); noover = false; }
+						}
+					}
+					if (fcellstr != null && noover) {
 					cell.ihpixel = 0;
 					if (hu == 0 && Ltile > 0) {
 						if (map.level.gflr || Ltile & MEXLOW) { nfl = Ltile & MEXLOW, nft = FCUSTILE; }
@@ -5818,20 +5829,10 @@ var txsv = ":";
 						if (Ltile == 96 && map.level.gflr) continue;	// normal floor tile, already written
 						cell.ihpixel = 0xA08000 | Ltile & 0x1F;
 					}
-					var noover = true;
-					if (map.level.tmdf != undefined)
-					{
-						if (!isfloor(pcell.pixel))
-						if (!tmdfgf) {
-							if (tmdff)  { this.tile(ctx, cell.spriteset, DEBUG.FLOOR || tmdff, tmfft, tx, ty); noover = false; }
-							if (tmdfb)  { this.tile(ctx, cell.spriteset, tmdfb, tmbft, tx, ty); noover = false; }
-							if (tmdfgw) { this.tile(ctx, gwal, tmdfgw, tmgft, tx, ty); noover = false; }
-						}
-					}
-					if (noover)
 					if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr)) {
 							this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 							if (cell.ihpixel == 0) cell.ihpixel = fcellstr.pixel;
+					}
 					}
 				}
 
