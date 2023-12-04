@@ -31,10 +31,15 @@ ent level walls do not yet blend
 
 add provision for using orig sound fx on jsgv levels, if installed
 
+"all walls are invisible" lvl load msg
+
 
 imm issues:
 
 converting g2 walls / floors + g1 walls
+
+original jsgv levels have some x wrap issue when > 31 units
+
 
 cycle walls display wrong off state ?	(is this rotate issue? not seeing now)
 
@@ -222,6 +227,8 @@ x-- wall stall is 188 health tics
 x-- display pts for: treasures, potion bombing death
 
 x-- viewport size
+
+walls: that smol corner shadow coloring on |- and certain corner shadows
 
 -----------------
 do we use these ?:
