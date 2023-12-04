@@ -5609,7 +5609,7 @@ var txsv = ":";
 			 bcv = [ 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 4, 4, 0, 0, 0, 0, 1, 1 ];
 
 		function blnck(cell1,cell2,barr) { var bt = barr[cell1.wall]; if (bt > 0 && bt == barr[cell2.wall]) return true; };
-		var tmdfgf = false, tmdfgw, tmdfb, tmdff, tmgft, tmbft, tmfft, pcell = null; // code for which used, gfloor, gwal, backgrounds, floor
+		var tmdfgf = false, tmdfgw = 0, tmdfb = 0, tmdff= 0, tmgft, tmbft, tmfft, pcell = null; // code for which used, gfloor, gwal, backgrounds, floor
 
 // option vo, to only redraw viewport tiles - wont work because of patchwork viewport on unpinned levels
 		 var vxz = 0, vyz = 0, vtw = map.tw, vth = map.th;
@@ -5670,8 +5670,6 @@ var txsv = ":";
 		  var hu = parseHue(tx, ty);
 				B2 = tx + ty * Mtw;
 		  var wsb = cell.pixel & MEXLOB; // wall code small byte (curr 0x1F)
-
-			  tmdfgw = 0, tmdfb = 0, tmdff = 0;
 
 		  if (cell.nothing) {
 				fcellstr = cell;
@@ -5820,6 +5818,8 @@ var txsv = ":";
 							if (tmdfb)  { this.tile(ctx, cell.spriteset, tmdfb, tmbft, tx, ty); noover = false; }
 							if (tmdfgw) { this.tile(ctx, gwal, tmdfgw, tmgft, tx, ty); noover = false; }
 						}
+						else
+							noover = false;
 					}
 					if (fcellstr != null && noover) {
 					cell.ihpixel = 0;
