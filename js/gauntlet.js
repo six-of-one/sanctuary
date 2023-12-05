@@ -4598,11 +4598,14 @@ var txsv = ":";
       if ((frame % (FPS/4)) === 0) {
 // tile dmg happens ever tick until leaving the tile
 				if (this.tiledmg > 0) {
+					var godmg = true;
 					if (this.ffield.type.fld != undefined)
-					if (this.ffield.type.fld == 0) continue;
-					if (this.psnd < 1) { Musicth.play(this.tdsnd); this.psnd = 2; }
-					else this.psnd = countdown(this.psnd);
-					this.hurt(this.tiledmg, this, false);	// this also checks limited invuln
+					if (this.ffield.type.fld == 0) godmg = false;
+					if (godmg) {
+						if (this.psnd < 1) { Musicth.play(this.tdsnd); this.psnd = 2; }
+						else this.psnd = countdown(this.psnd);
+						this.hurt(this.tiledmg, this, false);	// this also checks limited invuln
+						}
 					}
 		}
       if ((frame % (FPS/1)) === 0) {
