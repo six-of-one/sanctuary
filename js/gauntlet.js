@@ -2652,6 +2652,7 @@ var lvu = document.getElementById("flvl").value;
 		 }
 
 		 entity.tiledmg = 0; // clear damage tiles - get set here in move, damage done in heartbeet
+		 entity.tdsnd = Musicth.sounds.nullm;
 		if (nocoll)		// no coll escapes collision check for lobbers
 // end lobber shot
 		 {
@@ -2694,8 +2695,6 @@ var lvu = document.getElementById("flvl").value;
 						{
 							helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
 // add entity.tiledmg, entity.tdsnd and move these into heartbeet
-//							Musicth.play(Musicth.sounds[collision.type.sound]);
-//							entity.hurt(collision.type.damage);
 							entity.tiledmg = collision.type.damage;
 							entity.tdsnd = Musicth.sounds[collision.type.sound];
 							entity.psnd = 2;
@@ -4687,6 +4686,14 @@ var txsv = ":";
 
 			var hinv = 0;
 			if (this.linvuln > 0) hinv = 1; // invulnerable takes another health per tick
+			else {
+// tile dmg happens ever tick until leaving the tile
+				if (this.tiledmg > 0) {
+					if (this.psnd < 1) { Musicth.play(this.tdsnd); this.psnd = 2; }
+					else this.psnd = countdown(this.psnd);
+					this.hurt(this.tiledmg, this, false);	// this also checks limited invuln
+					}
+				}
 // difficulty > 7 (std hard) adds dmg at 1% per diff
 			if (diff_level > 7) hinv = hinv + (diff_level / 100);
 // ankh item - found in amiga sprites - add 1 health per sec + diff/100
