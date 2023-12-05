@@ -2696,6 +2696,11 @@ var lvu = document.getElementById("flvl").value;
 						{
 							var hlp = true;
 							if (collision.type.fld == 0) hlp = false;
+							else {
+								Musicth.play(Musicth.sounds[collision.type.sound]);
+								entity.psnd = 3;
+								entity.hurt(collision.type.damage);	// hurt has to be immediate when moving thru an active force field
+								}
 							if (hlp) helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
 // add entity.tiledmg, entity.tdsnd and move these into heartbeet
 							entity.tiledmg = collision.type.damage;
