@@ -376,14 +376,14 @@ Gauntlet = function() {
         WATERC:            { sx: 8,  sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5,                                      sound: 'null',          nohlp: 82  },
         WATERR:            { sx: 12, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5,                                      sound: 'null',          nohlp: 82  },
 // series of lava blocks code: 0x8150. with MEXLOW as water
-        LAVA:              { sx: 16, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 40, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
-        LAVAT:             { sx: 20, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 40, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
-        LAVAC:             { sx: 24, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 40, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
-        LAVAR:             { sx: 28, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 40, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
-        NWASTE:            { sx: 16, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 5,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
-        NWASTET:           { sx: 19, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 5,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
-        NWASTEC:           { sx: 22, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 5,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
-        NWASTER:           { sx: 25, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 5,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
+        LAVA:              { sx: 16, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 20, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
+        LAVAT:             { sx: 20, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 20, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
+        LAVAC:             { sx: 24, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 20, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
+        LAVAR:             { sx: 28, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 20, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
+        NWASTE:            { sx: 16, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 2,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
+        NWASTET:           { sx: 19, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 2,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
+        NWASTEC:           { sx: 22, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 2,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
+        NWASTER:           { sx: 25, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 2,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
         FIRESTK:           { sx: 32, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.9,                                      sound: 'null',          nohlp: 999 },
         PFLOOR1:           { sx: 28, sy: 27,   frames:8,  speed: 1*FPS,   fpf: FPS/2,    damage: 0,                                                    sound: 'null',          nohlp: 999 },
 // other "wall" ents
@@ -4590,6 +4590,15 @@ var txsv = ":";
     },
 
     autohurt: function(frame) {
+// tile dmg is more than per sec
+      if ((frame % (FPS/4)) === 0) {
+// tile dmg happens ever tick until leaving the tile
+				if (this.tiledmg > 0) {
+					if (this.psnd < 1) { Musicth.play(this.tdsnd); this.psnd = 2; }
+					else this.psnd = countdown(this.psnd);
+					this.hurt(this.tiledmg, this, false);	// this also checks limited invuln
+					}
+		}
       if ((frame % (FPS/1)) === 0) {
 
 /// TEST - update
@@ -4685,14 +4694,6 @@ var txsv = ":";
 
 			var hinv = 0;
 			if (this.linvuln > 0) hinv = 1; // invulnerable takes another health per tick
-			else {
-// tile dmg happens ever tick until leaving the tile
-				if (this.tiledmg > 0) {
-					if (this.psnd < 1) { Musicth.play(this.tdsnd); this.psnd = 2; }
-					else this.psnd = countdown(this.psnd);
-					this.hurt(this.tiledmg, this, false);	// this also checks limited invuln
-					}
-				}
 // difficulty > 7 (std hard) adds dmg at 1% per diff
 			if (diff_level > 7) hinv = hinv + (diff_level / 100);
 // ankh item - found in amiga sprites - add 1 health per sec + diff/100
