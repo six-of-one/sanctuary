@@ -4599,7 +4599,7 @@ var txsv = ":";
 // tile dmg happens ever tick until leaving the tile
 				if (this.tiledmg > 0) {
 					var godmg = true;
-					if (this.ffield.type.fld != undefined)
+					if (this.ffield != null)
 					if (this.ffield.type.fld == 0) godmg = false;
 					if (godmg) {
 						if (this.psnd < 1) { Musicth.play(this.tdsnd); this.psnd = 2; }
