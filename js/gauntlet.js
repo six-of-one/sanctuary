@@ -366,9 +366,9 @@ Gauntlet = function() {
         FFIELDUNITL:       { sx: 8,  sy: 27,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,                                                    sound: 'null'  },
         FFIELDUNITR:       { sx: 12, sy: 27,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,                                                    sound: 'null'  },
 // this is the power field down - specced by MEXLOW bit 4 of FFIELDUNIT = 0x8130
-        FFIELDDIM:         { sx: 27, sy: 25,   frames:1,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,                                                    sound: 'null',          nohlp: 61 },
+        FFIELDDIM:         { sx: 27, sy: 25,   frames:1,  speed: 1*FPS,   fpf: FPS/5,    damage: 3,  fld: 0,                                           sound: 'ffield',        nohlp: 61 },
 // this is the field power that damages, this is toggled on by ffieldpulse ops
-        FFIELDPOW:         { sx: 28, sy: 25,   frames:8,  speed: 1*FPS,   fpf: FPS/2,    damage: 3,                                                    sound: 'ffield',        nohlp: 61 },
+        FFIELDPOW:         { sx: 28, sy: 25,   frames:8,  speed: 1*FPS,   fpf: FPS/2,    damage: 3,  fld: 1,                                           sound: 'ffield',        nohlp: 61 },
 // animated floor items
         WATER:             { sx: 0,  sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0, gluesp: 0.5,                                       sound: 'null',          nohlp: 82  },
 // series of water boundary blocks code: 0x8140, with a pool wall appearing top, center and right, selected by MEXLOW 1, 2, 3
@@ -2653,6 +2653,7 @@ var lvu = document.getElementById("flvl").value;
 
 		 entity.tiledmg = 0; // clear damage tiles - get set here in move, damage done in heartbeet
 		 entity.tdsnd = Musicth.sounds.nullm;
+		 entity.ffield = null; // force fields had state on/off that needs detected
 		if (nocoll)		// no coll escapes collision check for lobbers
 // end lobber shot
 		 {
@@ -2691,13 +2692,16 @@ var lvu = document.getElementById("flvl").value;
 						if (collision.rwall && collision.nohlp == 999) collision.rwall = 0;	// when players step on vacant random wall spot, RW ends
 						if (collision.type.nohlp >= WTHLP) entity.gluesp = collision.type.gluesp;
 // handle tiles that do dmg - forcefield, liquids, etc
-						if (collision.type.damage > 0) // dmg players in active FF
+						if (collision.type.damage > 0 || collision.type.nohlp == FFHLP) // dmg players in active FF or on a damage tile
 						{
-							helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
+							var hlp = true;
+							if (collision.type.fld == 0) hlp = false;
+							if (hlp) helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
 // add entity.tiledmg, entity.tdsnd and move these into heartbeet
 							entity.tiledmg = collision.type.damage;
 							entity.tdsnd = Musicth.sounds[collision.type.sound];
 							entity.psnd = 2;
+							if (collision.type.fld != undefined) entity.ffield = collision;
 						}
 // non damage tiles like water
 						else if (collision.type.nohlp != FFHLP && collision.type.nohlp != 999) 		// ffdim still uses FFHLP with no dmg
@@ -4594,6 +4598,8 @@ var txsv = ":";
       if ((frame % (FPS/4)) === 0) {
 // tile dmg happens ever tick until leaving the tile
 				if (this.tiledmg > 0) {
+					if (this.ffield.type.fld != undefined)
+					if (this.ffield.type.fld == 0) continue;
 					if (this.psnd < 1) { Musicth.play(this.tdsnd); this.psnd = 2; }
 					else this.psnd = countdown(this.psnd);
 					this.hurt(this.tiledmg, this, false);	// this also checks limited invuln
