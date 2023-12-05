@@ -33,13 +33,16 @@ add provision for using orig sound fx on jsgv levels, if installed
 
 "all walls are invisible" lvl load msg
 
+option to have monsters: take tile dmg, slow in glue, etc
+
 
 imm issues:
+
 
 converting g2 walls / floors + g1 walls
 
 original jsgv levels have some x wrap issue when > 31 units
-
+- this may have been after a treasure level that snuck in
 
 cycle walls display wrong off state ?	(is this rotate issue? not seeing now)
 
@@ -85,7 +88,7 @@ monster dmg: melee - turn off autohurt to test
 g1: lvl 1 grunt - 10 dmg / sec to warrior
 
 is it possible to code adjust the "contained" corner	(re wall changes)
-\_ this can be done if changed cells have a "dirty" flag
+\_ this can be done if changed cells have a "dirty" flag and gfloor can be copied from sep canvas ctx
 
 player shot speed (xshot speed is not tested, seems fast)
 
@@ -111,7 +114,7 @@ g2:
 g2 set of exits (select 1 rest are fake) not implemented yet
 
 map editor o/p scanner
--push wall pushing
+-push wall pushing collision
 
 
 new-ish:
@@ -228,6 +231,8 @@ x-- display pts for: treasures, potion bombing death
 
 x-- viewport size
 
+trap tiles have a 'blend into floor tex'
+
 walls: that smol corner shadow coloring on |- and certain corner shadows
 
 -----------------
@@ -271,6 +276,7 @@ x- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or sup
 "IT" - not sure want this - 10 pts for getting tho, no pts on tag
 \_ not fully coded in - waiting on multiplayer
 diff color grunts
+ffield, stun tiles have a 'blend into floor tex'
 
 g1/g2 wall & door stall times @ difficulty - appx ~ times
 door
@@ -373,6 +379,7 @@ enhance invisible wall code so - shots, potions, or some limited item makes wall
 new maps, perhaps with a maphack type system using the "image" set ops
 larger walls, 2nd level, lower levels (composit area and scale down, show past edges
 stairs, elevators, special teleports
+-- (one idea, a hue override or so that makes a 2nd floor not show, while stored, beyond the map border)
 "bonkers" level - see 207 img from bkg set - (in this case, do a "close to player" exit incase level is not playable)
 lvl 1-7 as gauntlet (or alternates)
 level 8-69 from gauntlet set
@@ -381,11 +388,14 @@ unpin, mirror & flip 70 - 99
 100+ add in new maps, enhancements - unless blocked
 - slow down treasure rooms occur freq, but every 4th have a chance for a "super" treasure room
 - super treasure room idea - potion bomb "key" blocks & perm potion "key" blocks
+( or cfg page options on all this ... )
 
 monsters could act even weirder - like a bunch just run off until they "see" a player later
 - some might be "bonkers", attacking other monsters, taking & holding keys or treasures
 - "patrol" monsters that walk a beat until they "see" a player
 basilisk
+shapeshifter - has base unit health, takes form & health of ent it touches, 
+- lose 1 base unit of health when it reverts (as the form it took is killed)
 
 buy stuff guy, with new stuffs, keys, food, potions. temps
 
@@ -459,6 +469,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- can no longer set still in damage liquid/tiles or active forcefield and NOT take damage
 
 x-- trap walls not replacing all shadows, now (seems to work at this point)
    \_ nor do commit notes id the issue
