@@ -2651,6 +2651,7 @@ var lvu = document.getElementById("flvl").value;
 			 }
 		 }
 
+		 entity.tiledmg = 0; // clear damage tiles - get set here in move, damage done in heartbeet
 		if (nocoll)		// no coll escapes collision check for lobbers
 // end lobber shot
 		 {
@@ -2693,8 +2694,12 @@ var lvu = document.getElementById("flvl").value;
 						{
 							helpdis(collision.type.nohlp, undefined, 2000, collision.type.damage, undefined);
 // add entity.tiledmg, entity.tdsnd and move these into heartbeet
-							Musicth.play(Musicth.sounds[collision.type.sound]);
-							entity.hurt(collision.type.damage);
+//							Musicth.play(Musicth.sounds[collision.type.sound]);
+//							entity.hurt(collision.type.damage);
+							entity.tiledmg = collision.type.damage;
+							entity.tdsnd = Musicth.sounds[collision.type.sound];
+							entity.psnd = 2;
+						}
 						}
 // non damage tiles like water
 						else if (collision.type.nohlp != FFHLP && collision.type.nohlp != 999) 		// ffdim still uses FFHLP with no dmg
