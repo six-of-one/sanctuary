@@ -376,14 +376,14 @@ Gauntlet = function() {
         WATERC:            { sx: 8,  sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5,                                      sound: 'null',          nohlp: 82  },
         WATERR:            { sx: 12, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5,                                      sound: 'null',          nohlp: 82  },
 // series of lava blocks code: 0x8150. with MEXLOW as water
-        LAVA:              { sx: 16, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 10, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
-        LAVAT:             { sx: 20, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 10, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
-        LAVAC:             { sx: 24, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 10, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
-        LAVAR:             { sx: 28, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 10, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
-        NWASTE:            { sx: 16, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
-        NWASTET:           { sx: 19, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
-        NWASTEC:           { sx: 22, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
-        NWASTER:           { sx: 25, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 1,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
+        LAVA:              { sx: 16, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 40, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
+        LAVAT:             { sx: 20, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 40, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
+        LAVAC:             { sx: 24, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 40, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
+        LAVAR:             { sx: 28, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 40, gluesp: 0.8,                                      sound: 'null',          nohlp: 83  },
+        NWASTE:            { sx: 16, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 5,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
+        NWASTET:           { sx: 19, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 5,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
+        NWASTEC:           { sx: 22, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 5,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
+        NWASTER:           { sx: 25, sy: 27,   frames:3,  speed: 1*FPS,   fpf: FPS/5,    damage: 5,  gluesp: 0.7,                                      sound: 'null',          nohlp: 84  },
         FIRESTK:           { sx: 32, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.9,                                      sound: 'null',          nohlp: 999 },
         PFLOOR1:           { sx: 28, sy: 27,   frames:8,  speed: 1*FPS,   fpf: FPS/2,    damage: 0,                                                    sound: 'null',          nohlp: 999 },
 // other "wall" ents
@@ -2698,7 +2698,6 @@ var lvu = document.getElementById("flvl").value;
 							entity.tiledmg = collision.type.damage;
 							entity.tdsnd = Musicth.sounds[collision.type.sound];
 							entity.psnd = 2;
-						}
 						}
 // non damage tiles like water
 						else if (collision.type.nohlp != FFHLP && collision.type.nohlp != 999) 		// ffdim still uses FFHLP with no dmg
