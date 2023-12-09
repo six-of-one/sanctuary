@@ -35,6 +35,8 @@ add provision for using orig sound fx on jsgv levels, if installed
 
 option to have monsters: take tile dmg, slow in glue, etc
 
+could limit "slide" of monsters in strict g1/g2 mode
+
 
 imm issues:
 
@@ -150,6 +152,8 @@ companion potion: cat face on blue potion
 
 limits on g1, g2, sanctuary (items, monsters, modes, extras ...)
 \_selectable list of options for std elements, extras, overrides, etc
+
+gauntness w & f + gauntlet like wall tiles
 
 
 >>>>>>>>>>>>>>>>>>>>>>

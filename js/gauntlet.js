@@ -948,7 +948,7 @@ Gauntlet = function() {
 // gflr is gfx file for floor tiles
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: WALL.GREEN3,      gflr: "gfx/floor026.jpg", gwal: "gfx/wall_T.png", nornd: 1, unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R", gshw: 3 },
+      { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: WALL.GREEN3,      gflr: "gfx/floor026.jpg",   gwal: "gfx/wall_T.png",   nornd: 1,    unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R", gshw: 3 },
       { name: 'Z gon',        url: "levels/glevelZ.png",                                        wall: WALL.ORANG9,      gflr: "gfx/g1floor0z.jpg",  gwal: "gfx/g1wallZ.png",               unpinx: 1,    music: 'nullm',      score:  1000, help: null, gshd: 1 },
 /*
       { name: 'Training',       url: "levels/trainer1.png", floor: FLOOR.LIGHT_STONE,           wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, tmdf: 1, nornd: 1, help: "Shoot ghosts and find the exit" },
