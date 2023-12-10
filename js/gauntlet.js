@@ -353,13 +353,15 @@ Gauntlet = function() {
         LIMSUPER:          { sx: 19, sy: 11,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    powers: true,                                                 sound: 'collectpotion', nohlp: 54 },
         LIMTELE:           { sx: 20, sy: 11,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    powers: true,                             annc: 'g2antt',     sound: 'collectpotion', nohlp: 55 },
         LIMANK:            { sx: 21, sy: 11,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    powers: true,                                                 sound: 'collectpotion', nohlp: 75 },
+// old shot wall which was just a rubble square in 13 colors and 3 fine grain blue/green/pink
+//        FAKEENTR:          { sx: 0,  sy: 38,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:30, wall:true,                   canbeshot: 2,         sound: 'null',          nohlp: 26 }, // fake entry to hold slot of old shotwall
+        NOCOLFAKER:        { sx: 8,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,               wall:true,                                         sound: 'null',          nohlp: 0  }, // NCFI no collision / no shoot fake item
 // shootable wall - see grid 38 of backgrounds
-        FAKEENTR:          { sx: 0,  sy: 38,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:30, wall:true,                   canbeshot: 2,         sound: 'null',          nohlp: 26 }, // fake entry to hold slot of old shotwall
         SHOTWALL:          { sx: 0,  sy: 2,    frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:30, wall:true,                   canbeshot: 2,         sound: 'null',          nohlp: 26 }, // new shotwalls, have wall form with rubble instaed of the single square of unformed rubble
         SHOTWALL2:         { sx: 0,  sy: 16,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:30, wall:true,                   canbeshot: 2,         sound: 'null',          nohlp: 26 },
-// shotable and non-shot fake items, see grid 39 of backgrounds
-        SHOTFAKER:         { sx: 8,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    score:  50, health:16,  wall:true,      canbeshot: 2,         sound: 'null',          nohlp: 58 },
-        PERMFAKER:         { sx: 8,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,                            wall:3,         canbeshot: 3,         sound: 'null',          nohlp: 58 },
+// shotable and non-shot fake items, see grid 29 of shotwalls
+        SHOTFAKER:         { sx: 8,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    score:  50, health:16,  wall:true,      canbeshot: 2,         sound: 'null',          nohlp: 58 }, // SFI  shootable fake item
+        PERMFAKER:         { sx: 8,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,                            wall:3,         canbeshot: 3,         sound: 'null',          nohlp: 58 }, // PFI  perm fake item - no shoot, blocks path
 // this is the red wall pillar thingy code:0x8130 with [ inward ] facing up, down, left, right by MEXLOW bits 0, 1, 2, 3
         FFIELDUNIT:        { sx: 0,  sy: 27,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,                                                    sound: 'null'  },
         FFIELDUNITD:       { sx: 4,  sy: 27,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,                                                    sound: 'null'  },
@@ -471,7 +473,7 @@ Gauntlet = function() {
 						],
       TREASURES = [ TREASURE.HEALTH, TREASURE.HEALRND, TREASURE.FOOD1, TREASURE.FOOD2, TREASURE.FOOD3, TREASURE.KEY, TREASURE.POTION, TREASURE.GOLD,
 											TREASURE.LOCKED, TREASURE.BAG, TREASURE.TELEPORT, TREASURE.TRAP, TREASURE.STUN, TREASURE.PUSH,
-											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.FAKEENTR, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER, TREASURE.LAVA, TREASURE.NWASTE,
+											TREASURE.XSPEED, TREASURE.LIMINVIS, TREASURE.NOCOLFAKER, TREASURE.SHOTFAKER, TREASURE.PERMFAKER, TREASURE.FFIELDUNIT, TREASURE.WATER, TREASURE.LAVA, TREASURE.NWASTE,
 											TREASURE.FIRESTK, TREASURE.PFLOOR1, TREASURE.WALLGUD, TREASURE.WALLGUD2, TREASURE.WALLPASS, TREASURE.WALLPASS2, TREASURE.WALLRND, TREASURE.WALLRND2, TREASURE.WALLPHS, TREASURE.WALLPHS2,
 											TREASURE.SHOTWALL, TREASURE.SHOTWALL2,
 // these are selected by MEXLOW case {}, or other code
@@ -2735,6 +2737,10 @@ var lvu = document.getElementById("flvl").value;
 					}
 					collision = undefined;
 				}
+// NCFI - no collision / no shot
+				if (collision)
+					if ((collision.pixel & MEXHIGH) == 0x8100) collision = undefined;
+
 
 				if (entity.reflect && collision != undefined)
 				{
@@ -6008,7 +6014,7 @@ var txsv = ":";
 				if (entity.type.wall || entity.type.pushwal) {
 					entity.spriteset = this.sprites.backgrounds;
 					if (entity.bwc == ENTLVLWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = entity.sb + GWDEF; entity.svsy = entity.sy; }
-					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8110 && entity.pixel <= 0x812F || entity.pixel == PUSHWALEN) entity.spriteset = this.sprites.shotwalls;
+					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8100 && entity.pixel <= 0x812F || entity.pixel == PUSHWALEN) entity.spriteset = this.sprites.shotwalls;
 					if (entity.bwc == ENTLVLSHWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = entity.sb + GWDEF + Mastermap.level.gshw; }
 					}
 				else
