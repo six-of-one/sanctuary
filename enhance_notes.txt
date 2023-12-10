@@ -39,8 +39,13 @@ could limit "slide" of monsters in strict g1/g2 mode
 
 add sfi/pfi layers to gwal, level.gfi is count of fakes (and active logic) 
 -- gshw * 2 (+ GWDEF cur. 2) is start # after walls / shootable walls, loaded from 0x8210, 0x8220
+- other ideas: door layer, specific items (swap out or new) layer
 
 replace/remove cfg - chk box & text value, if value is empty, remove
+
+heu override code to place 2 digit item under: trap wall, shot wall, gudy wall, cycle wall
+
+
 
 imm issues:
 

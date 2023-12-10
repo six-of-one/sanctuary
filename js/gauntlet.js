@@ -397,11 +397,11 @@ Gauntlet = function() {
         WALLPHS2:          { sx: 0,  sy: 17,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    wall:4,                                                      bsound: 'wallphase',     nohlp: 81 },
 // treasure specials - crossovers and tie-in greetings
 // 1. mappy / mappy arrangement
-        MRAD:              { sx: 24, sy: 24,   frames: 1,                 fpf: FPS/10,   score: 1000, scmult: 1,   troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
-        MTV:               { sx: 25, sy: 24,   frames: 1,                 fpf: FPS/10,   score: 2000, scmult: 1,   troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
-        MCOMP:             { sx: 26, sy: 24,   frames: 1,                 fpf: FPS/10,   score: 3000, scmult: 1,   troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
-        MART:              { sx: 27, sy: 24,   frames: 1,                 fpf: FPS/10,   score: 4000, scmult: 1,   troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
-        MSAFE:             { sx: 28, sy: 24,   frames: 1,                 fpf: FPS/10,   score: 5000, scmult: 1,   troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
+        MRAD:              { sx: 24, sy: 21,   frames: 1,                 fpf: FPS/10,   score: 1000,                            canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
+        MTV:               { sx: 26, sy: 21,   frames: 1,                 fpf: FPS/10,   score: 2000,                            canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
+        MCOMP:             { sx: 28, sy: 21,   frames: 1,                 fpf: FPS/10,   score: 3000,                            canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
+        MART:              { sx: 30, sy: 21,   frames: 1,                 fpf: FPS/10,   score: 4000,                            canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
+        MSAFE:             { sx: 32, sy: 21,   frames: 1,                 fpf: FPS/10,   score: 5000,                            canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
