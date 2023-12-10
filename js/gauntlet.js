@@ -422,11 +422,11 @@ Gauntlet = function() {
 		LOBBERFUSE = 27,	// distance from target lobber shots go "hot"
 		TELEPORTILE = 0x0080a0,
 		FFIELDTILE = 0x008130,
+		FKEXIT = 0x810F,
 // until target traps are coded any trap will remove these
 		TRAPWALL = 0x404030,
 		TRAPTRIG = 0x0080b0,
 // special "treasure" walls
-//		PXWALSHT = 0x8100,
 		PXWALGUD = 0x8190,
 		PXWALPASS = 0x81CF,
 		PXWALRND = 0x81D0,
@@ -1371,6 +1371,7 @@ Gauntlet = function() {
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
 					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
 					 if (sb < Mastermap.level.gshw && ad == TREASURE.SHOTWALL) { Mastercell.ptr.bwc = ENTLVLSHWAL; }
+					 if (ad == FKEXIT) Mastercell.ptr.sx = 16;	// NCFI invisible wall is fake exit (a non shootable, non blocking invisible wall... is just a floor tile)
 				 }
 				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2 || ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) {
 					 Mastercell.ptr.rwall = (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2);
