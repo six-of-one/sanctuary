@@ -395,6 +395,13 @@ Gauntlet = function() {
         WALLRND2:          { sx: 0,  sy: 17,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    wall:3,                                                       sound: 'null',          nohlp: 72 },
         WALLPHS:           { sx: 0,  sy: 1,    frames:1,  speed: 1*FPS,   fpf: FPS/4,    wall:4,                                                      bsound: 'wallphase',     nohlp: 81 },
         WALLPHS2:          { sx: 0,  sy: 17,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    wall:4,                                                      bsound: 'wallphase',     nohlp: 81 },
+// treasure specials - crossovers and tie-in greetings
+// 1. mappy / mappy arrangement
+        MRAD:              { sx: 24, sy: 24,   frames: 1,                 fpf: FPS/10,   score: 1000, scmult: 1,   troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
+        MTV:               { sx: 25, sy: 24,   frames: 1,                 fpf: FPS/10,   score: 2000, scmult: 1,   troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
+        MCOMP:             { sx: 26, sy: 24,   frames: 1,                 fpf: FPS/10,   score: 3000, scmult: 1,   troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
+        MART:              { sx: 27, sy: 24,   frames: 1,                 fpf: FPS/10,   score: 4000, scmult: 1,   troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
+        MSAFE:             { sx: 28, sy: 24,   frames: 1,                 fpf: FPS/10,   score: 5000, scmult: 1,   troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -469,7 +476,9 @@ Gauntlet = function() {
 											TREASURE.LIMINVUL, TREASURE.LIMREPUL, TREASURE.LIMREFLC, TREASURE.LIMSUPER, TREASURE.LIMTELE, TREASURE.LIMANK,
 											TREASURE.POTIONORG, TREASURE.BADBOT, TREASURE.POISON, TREASURE.WATERT, TREASURE.WATERC, TREASURE.WATERR, TREASURE.LAVAT, TREASURE.LAVAC, TREASURE.LAVAR,
 											TREASURE.NWASTET, TREASURE.NWASTEC, TREASURE.NWASTER,
-											TREASURE.FFIELDUNITD, TREASURE.FFIELDUNITL, TREASURE.FFIELDUNITR
+											TREASURE.FFIELDUNITD, TREASURE.FFIELDUNITL, TREASURE.FFIELDUNITR,
+// crossover & tie in
+											TREASURE.MRAD, TREASURE.MTV, TREASURE.MCOMP, TREASURE.MART, TREASURE.MSAFE
 						],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,    h: TILE          },
@@ -1345,6 +1354,8 @@ Gauntlet = function() {
 				 if (ad == TREASURE.LAVA && (sb > 0)) switch(pooltype(tx,ty,map)) { case 1: ad = TREASURE.LAVAT; break; case 2: ad = TREASURE.LAVAR; break; case 3: ad = TREASURE.LAVAC; break; }
 				 if (ad == TREASURE.NWASTE && (sb > 0)) switch(pooltype(tx,ty,map)) { case 1: ad = TREASURE.NWASTET; break; case 2: ad = TREASURE.NWASTER; break; case 3: ad = TREASURE.NWASTEC; break; }
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
+// crossovers & tie-ins
+				 if (ad == TREASURE.GOLD && (sb > 0)) switch(sb) { case 1: ad = TREASURE.MRAD; break; case 2: ad = TREASURE.MTV; break; case 3: ad = TREASURE.MCOMP; break; case 4: ad = TREASURE.MART; break; case 5: ad = TREASURE.MSAFE; break; }
 				spref.addTreasure(x, y, ad);
 				 Mastercell.ptr.aswall = false; 	// set all treasure as not a wall
 				 Mastercell.ptr.sb = sb;			// get wall lower byte codes
