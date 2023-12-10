@@ -426,7 +426,7 @@ Gauntlet = function() {
 		TRAPWALL = 0x404030,
 		TRAPTRIG = 0x0080b0,
 // special "treasure" walls
-		PXWALSHT = 0x8100,
+//		PXWALSHT = 0x8100,
 		PXWALGUD = 0x8190,
 		PXWALPASS = 0x81CF,
 		PXWALRND = 0x81D0,
@@ -1213,7 +1213,7 @@ Gauntlet = function() {
 	function isp(pixel, type)      { return ((pixel & PIXEL.MASK.TYPE) === type); };
 	function type(pixel)           { return  (pixel & PIXEL.MASK.EXHIGH) >> 4;    };
 	function isnothing(pixel)      { return isp(pixel, PIXEL.NOTHING);   };
-	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; if (pixel >= 0x8210 && pixel <= 0x822F) return true; if (pixel == PUSHWALEN) return true; return (pixel & MEXHIGH) == PXWALSHT ? true : false; };
+	function iswall(pixel)         { if (isp(pixel, PIXEL.WALL)) return true; if (pixel >= PXWALGUD && pixel <= PXWALPASS) return true; if (pixel >= 0x8210 && pixel <= 0x822F) return true; if (pixel == PUSHWALEN) return true; };
 	function iswallpr(pixel)       { if (pixel >= PXWALRND && pixel <= PXWALPHAS) return true; };
 	function iswallrw(pixel)       { return (isp(pixel, PIXEL.WALL))     };
 	function isfloor(pixel)        { return isp(pixel, PIXEL.FLOOR);     };
