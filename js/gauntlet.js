@@ -402,6 +402,8 @@ Gauntlet = function() {
         MCOMP:             { sx: 28, sy: 21,   frames: 1,                 fpf: FPS/10,   score: 3000, ew: 32, dw: 32,            canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
         MART:              { sx: 30, sy: 21,   frames: 1,                 fpf: FPS/10,   score: 4000, ew: 32, dw: 32,            canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
         MSAFE:             { sx: 32, sy: 21,   frames: 1,                 fpf: FPS/10,   score: 5000, ew: 32, dw: 32,            canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
+        MBELL:             { sx: 34, sy: 20,   frames: 2,                 fpf: FPS/10,   score: 6000, ew: 32, dw: 32,            canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
+        MBALL:             { sx: 34, sy: 21,   frames: 2,                 fpf: FPS/10,   score: 7000, ew: 32, dw: 32,            canbeshot: 3,         sound: 'collectgold',   nohlp: 0 },
 
 // note on this: FPS/1 is slower than FPS/5 -- speed is for moving ents
 // note: when you add to TREASURE list, you MUST add to 'TREASURES = [' below
@@ -478,7 +480,7 @@ Gauntlet = function() {
 											TREASURE.NWASTET, TREASURE.NWASTEC, TREASURE.NWASTER,
 											TREASURE.FFIELDUNITD, TREASURE.FFIELDUNITL, TREASURE.FFIELDUNITR,
 // crossover & tie in
-											TREASURE.MRAD, TREASURE.MTV, TREASURE.MCOMP, TREASURE.MART, TREASURE.MSAFE
+											TREASURE.MRAD, TREASURE.MTV, TREASURE.MCOMP, TREASURE.MART, TREASURE.MSAFE, TREASURE.MBELL, TREASURE.MBALL
 						],
       CBOX = {
         FULL:    { x: 0,      y: 0,      w: TILE,    h: TILE          },
@@ -1355,7 +1357,7 @@ Gauntlet = function() {
 				 if (ad == TREASURE.NWASTE && (sb > 0)) switch(pooltype(tx,ty,map)) { case 1: ad = TREASURE.NWASTET; break; case 2: ad = TREASURE.NWASTER; break; case 3: ad = TREASURE.NWASTEC; break; }
 				 if (ad == TREASURE.FFIELDUNIT && (sb > 0)) switch(sb) { case 1: ad = TREASURE.FFIELDUNITD; break; case 2: ad = TREASURE.FFIELDUNITL; break; case 3: ad = TREASURE.FFIELDUNITR; break; case 4: ad =  TREASURE.FFIELDDIM; break; };
 // crossovers & tie-ins
-				 if (ad == TREASURE.GOLD && (sb > 0)) switch(sb) { case 1: ad = TREASURE.MRAD; break; case 2: ad = TREASURE.MTV; break; case 3: ad = TREASURE.MCOMP; break; case 4: ad = TREASURE.MART; break; case 5: ad = TREASURE.MSAFE; break; }
+				 if (ad == TREASURE.GOLD && (sb > 0)) switch(sb) { case 1: ad = TREASURE.MRAD; break; case 2: ad = TREASURE.MTV; break; case 3: ad = TREASURE.MCOMP; break; case 4: ad = TREASURE.MART; break; case 5: ad = TREASURE.MSAFE; break; case 6: ad = TREASURE.MBELL; break; case 7: ad = TREASURE.MBALL; break; }
 				spref.addTreasure(x, y, ad);
 				 Mastercell.ptr.aswall = false; 	// set all treasure as not a wall
 				 Mastercell.ptr.sb = sb;			// get wall lower byte codes
