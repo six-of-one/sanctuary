@@ -355,13 +355,13 @@ Gauntlet = function() {
         LIMANK:            { sx: 21, sy: 11,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    powers: true,                                                 sound: 'collectpotion', nohlp: 75 },
 // old shot wall which was just a rubble square in 13 colors and 3 fine grain blue/green/pink
 //        FAKEENTR:          { sx: 0,  sy: 38,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:30, wall:true,                   canbeshot: 2,         sound: 'null',          nohlp: 26 }, // fake entry to hold slot of old shotwall
-        NOCOLFAKER:        { sx: 8,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,               wall:true,                                         sound: 'null',          nohlp: 0  }, // NCFI no collision / no shoot fake item
+        NOCOLFAKER:        { sx: 0,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,               wall:true,                                         sound: 'null',          nohlp: 0  }, // NCFI no collision / no shoot fake item
 // shootable wall - see grid 38 of backgrounds
         SHOTWALL:          { sx: 0,  sy: 2,    frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:30, wall:true,                   canbeshot: 2,         sound: 'null',          nohlp: 26 }, // new shotwalls, have wall form with rubble instaed of the single square of unformed rubble
         SHOTWALL2:         { sx: 0,  sy: 16,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:30, wall:true,                   canbeshot: 2,         sound: 'null',          nohlp: 26 },
 // shotable and non-shot fake items, see grid 29 of shotwalls
-        SHOTFAKER:         { sx: 8,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    score:  50, health:16,  wall:true,      canbeshot: 2,         sound: 'null',          nohlp: 58 }, // SFI  shootable fake item
-        PERMFAKER:         { sx: 8,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,                            wall:3,         canbeshot: 3,         sound: 'null',          nohlp: 58 }, // PFI  perm fake item - no shoot, blocks path
+        SHOTFAKER:         { sx: 0,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    score:  50, health:16,  wall:true,      canbeshot: 2,         sound: 'null',          nohlp: 58 }, // SFI  shootable fake item
+        PERMFAKER:         { sx: 0,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,                            wall:3,         canbeshot: 3,         sound: 'null',          nohlp: 58 }, // PFI  perm fake item - no shoot, blocks path
 // this is the red wall pillar thingy code:0x8130 with [ inward ] facing up, down, left, right by MEXLOW bits 0, 1, 2, 3
         FFIELDUNIT:        { sx: 0,  sy: 27,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,                                                    sound: 'null'  },
         FFIELDUNITD:       { sx: 4,  sy: 27,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,                                                    sound: 'null'  },
@@ -427,6 +427,7 @@ Gauntlet = function() {
 		FKDETH = 0x810E, FKDETHB = 0x811E,
 		FKACID = 0x810D, FKACIDB = 0x811D,
 		FKTELE = 0x810C, FKTELEB = 0x811C, FKTELEC = 0x812C,
+		FKKEY  = 0x812A,
 		FKGORO = 0x812D,
 		FKMBDG = 0x812E,
 // until target traps are coded any trap will remove these
@@ -1377,10 +1378,10 @@ Gauntlet = function() {
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
 					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
 					 if (sb < Mastermap.level.gshw && ad == TREASURE.SHOTWALL) { Mastercell.ptr.bwc = ENTLVLSHWAL; }
-					 if (ad == FKEXIT) Mastercell.ptr.sx = 16;	// NCFI invisible wall is fake exit (a non shootable, non blocking invisible wall... is just a floor tile)
-					 if (ad == FKTELE || ad == FKTELEB || ad == FKTELEC) { Mastercell.ptr.sx = 19; Mastercell.ptr.frames = 7; }
-					 if (ad == FKGORO) Mastercell.ptr.sx = 17;
-					 if (ad == FKMBDG) Mastercell.ptr.sx = 18;
+					 if (pixel == FKEXIT) Mastercell.ptr.sx = 16;	// NCFI invisible wall is fake exit (a non shootable, non blocking invisible wall... is just a floor tile)
+					 if (pixel == FKTELE || pixel == FKTELEB || pixel == FKTELEC) { Mastercell.ptr.sx = 19; Mastercell.ptr.frames = 7; }
+					 if (pixel == FKGORO) Mastercell.ptr.sx = 17;
+					 if (pixel == FKMBDG) Mastercell.ptr.sx = 18;
 				 }
 				 if (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2 || ad == TREASURE.WALLPHS || ad == TREASURE.WALLPHS2) {
 					 Mastercell.ptr.rwall = (ad == TREASURE.WALLRND || ad == TREASURE.WALLRND2);
@@ -2708,9 +2709,9 @@ var lvu = document.getElementById("flvl").value;
 					if (collision.nohlp == 999) ffcol = true;	// for no collision items with no help
 				}
 				if (collision.pixel != undefined) {
-					if (collision.pixel == 0x8120) subcol = true; // fake exit; pfi
-					if (collision.pixel == 0x8125) subcol = true;	// fake key, pfi
-					if (collision.pixel == 0x812e) subcol = true; // fake pickle; pfi
+					if (collision.pixel == FKEXIT) subcol = true; // fake exit; pfi
+					if (collision.pixel == FKKEY)  subcol = true;	// fake key, pfi
+//					if (collision.pixel == 0x812e) subcol = true; // fake pickle; pfi
 				}
 				if (!collision.player && entity.weapon && subcol) collision = undefined;
 				else if (ffcol == true)
