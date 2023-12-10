@@ -45,6 +45,7 @@ replace/remove cfg - chk box & text value, if value is empty, remove
 
 heu override code to place 2 digit item under: trap wall, shot wall, gudy wall, cycle wall
 
+adjust trap walls: remove trap now has to look for restore trap and v-v
 
 
 imm issues:
@@ -163,6 +164,8 @@ limits on g1, g2, sanctuary (items, monsters, modes, extras ...)
 \_selectable list of options for std elements, extras, overrides, etc
 
 gauntness w & f + gauntlet like wall tiles
+
+mappy idea: 5 items in troom, 2x 3x 4x 5x 6x multiplier for gather in seq
 
 
 >>>>>>>>>>>>>>>>>>>>>>

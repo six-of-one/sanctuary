@@ -5429,7 +5429,7 @@ var txsv = ":";
 		 shadowtiles = sprites.backgrounds;
     },
 
-    sprite: function(ctx, sprites, viewport, sx, sy, x, y, w, h) {
+    sprite: function(ctx, sprites, viewport, sx, sy, x, y, w, h, ew, eh) {
 
 		var nvx = rx = viewport.x,
 			 ry = viewport.y,
@@ -5439,6 +5439,10 @@ var txsv = ":";
 			Vy = 0;
 
 		 if (sprites == null) return;
+
+// extended width & height on some sprites - this is extend distance beyond STILE, STILE (4,5 parm) nominal 32 x 32
+		 if (ew == undefined) ew = 0;
+		 if (eh == undefined) eh = 0;
 
 // draw the spriotes unpinned !
 // the early returns had  to be removed - they blocked the corner tests
@@ -5451,7 +5455,7 @@ var txsv = ":";
 			 rx = (viewport.x + viewport.w) - Mastermap.w;
 			 nx = viewport.w - (rx - x);
 			 if (x < rx && nx >= 0) {
-				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE + ew, STILE + eh, nx, y - ry, w || TILE, h || TILE);
 				Vx = 1;
 				Vy = 0;
 			 }
@@ -5462,7 +5466,7 @@ var txsv = ":";
 			 rx = (Mastermap.w + viewport.x);
 			 nx = (0 - viewport.x) - (Mastermap.w - x);
 			 if (x > rx && nx >= 0) {
-				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, y - ry, w || TILE, h || TILE);
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE + ew, STILE + eh, nx, y - ry, w || TILE, h || TILE);
 				Vx = -1;
 				Vy = 0;
 			 }
@@ -5474,7 +5478,7 @@ var txsv = ":";
 			 ry = (viewport.y + viewport.h) - Mastermap.h;
 			 ny = viewport.h - (ry - y);
 			 if (y < ry && ny >= 0) {
-				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - nvx, ny, w || TILE, h || TILE);
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE + ew, STILE + eh, x - nvx, ny, w || TILE, h || TILE);
 				Vx = 0;
 				Vy = 1;
 			 }
@@ -5485,7 +5489,7 @@ var txsv = ":";
 			 ry = (Mastermap.h + viewport.y);
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
 			 if (y > ry && ny >= 0) {
-				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - nvx, ny, w || TILE, h || TILE);
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE + ew, STILE + eh, x - nvx, ny, w || TILE, h || TILE);
 				Vx = 0;
 				Vy = -1;
 			 }
@@ -5497,7 +5501,7 @@ var txsv = ":";
 			 ry = (Mastermap.h + viewport.y);
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
 			 if (x > rx && nx >= 0 && y > ry && ny >= 0) {
-				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE + ew, STILE + eh, nx, ny, w || TILE, h || TILE);
 				Vx = -1;
 				Vy = -1;
 				return;
@@ -5509,7 +5513,7 @@ var txsv = ":";
 			 ry = (Mastermap.h + viewport.y);
 			 ny = (0 - viewport.y) - (Mastermap.h - y);
 			 if (x < rx && nx >= 0 && y > ry && ny >= 0) {
-				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE + ew, STILE + eh, nx, ny, w || TILE, h || TILE);
 				Vx = 1;
 				Vy = -1;
 				return;
@@ -5521,7 +5525,7 @@ var txsv = ":";
 			 ry = (viewport.y + viewport.h) - Mastermap.h;
 			 ny = viewport.h - (ry - y);
 			 if (x > rx && nx >= 0 && y < ry && ny >= 0) {
-				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE + ew, STILE + eh, nx, ny, w || TILE, h || TILE);
 				Vx = -1;
 				Vy = 1;
 				return;
@@ -5533,7 +5537,7 @@ var txsv = ":";
 			 ry = (viewport.y + viewport.h) - Mastermap.h;
 			 ny = viewport.h - (ry - y);
 			 if (x < rx && nx >= 0 && y < ry && ny >= 0) {
-				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, nx, ny, w || TILE, h || TILE);
+				ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE + ew, STILE + eh, nx, ny, w || TILE, h || TILE);
 				Vx = 1;
 				Vy = 1;
 				return;
@@ -5541,7 +5545,7 @@ var txsv = ":";
 		 }
 
 // normal viewport sprites
-      ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE, STILE, x - viewport.x, y - viewport.y, w || TILE, h || TILE);
+      ctx.drawImage(sprites, sx * STILE, sy * STILE, STILE + ew, STILE + eh, x - viewport.x, y - viewport.y, w || TILE, h || TILE);
     },
 
     tile: function(ctx, sprites, sx, sy, tx, ty) {
@@ -6020,7 +6024,7 @@ var txsv = ":";
 						this.sprite(ctx, wallshothint, viewport, 7, 0, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
 					else
 					  if (Minvisiblewall != true || entity.lvlwall != true) {
-							this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0));
+							this.sprite(ctx, entity.spriteset, viewport, entity.sx + (entity.frame || 0), entity.sy, entity.x + (entity.dx || 0), entity.y + (entity.dy || 0), TILE + (entity.dw || 0), TILE + (entity.dh || 0), entity.ew, entity.eh);
 							}
 
 					entity.vx = Vx;
