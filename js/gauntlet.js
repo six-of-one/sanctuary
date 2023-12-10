@@ -3209,7 +3209,7 @@ vartxt.value += "	]\n"
 		if (entity.type != undefined) {
 			entity.sx = entity.type.sx; entity.sy = entity.type.sy;
 // x,y offset, w,h multiplier on sprite
-			entity.dx = entity.type.dx; entity.dy = entity.type.dy; entity.d = entity.type.dw; entity.dh = entity.type.dh;
+			entity.dx = entity.type.dx; entity.dy = entity.type.dy; entity.dw = entity.type.dw; entity.dh = entity.type.dh;
 // extended read w,h on sprite sheet
 			entity.ew = entity.type.ew; entity.eh = entity.type.eh;
 			}
