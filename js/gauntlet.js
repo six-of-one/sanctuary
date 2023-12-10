@@ -334,7 +334,7 @@ Gauntlet = function() {
         LOCKED:            { sx: 19, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 500, lock: true,   gud: 1,                             sound: 'unlkches',      nohlp: 56 },
         BAG:               { sx: 20, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 500, scmult: 3.5,  troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 15, blkhlp: 14 },
 // teleport, trap, stun, force field tiles as treasure objects for now -- these are animated, and operate on touch so it works
-        TELEPORT:          { sx: 1,  sy: 12,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    teleport: true,                                               sound: 'teleport',      nohlp: 25 },
+        TELEPORT:          { sx: 24, sy: 22,   frames:8,  speed: 1*FPS,   fpf: FPS/5,    teleport: true,                                               sound: 'teleport',      nohlp: 25 },
         TRAP:              { sx: 23, sy: 10,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    trap: true,                                                   sound: 'trap',          nohlp: 20 },
         STUN:              { sx: 27, sy: 10,   frames:4,  speed: 1*FPS,   fpf: FPS/4,    stun: true,                                                   sound: 'stun',          nohlp: 49 },
         PUSH:              { sx: 0,  sy: 30,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:270, pushwal: 6,                 canbeshot: 2,         sound: 'null',          nohlp: 57 },
