@@ -355,13 +355,13 @@ Gauntlet = function() {
         LIMANK:            { sx: 21, sy: 11,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    powers: true,                                                 sound: 'collectpotion', nohlp: 75 },
 // old shot wall which was just a rubble square in 13 colors and 3 fine grain blue/green/pink
 //        FAKEENTR:          { sx: 0,  sy: 38,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:30, wall:true,                   canbeshot: 2,         sound: 'null',          nohlp: 26 }, // fake entry to hold slot of old shotwall
-        NOCOLFAKER:        { sx: 0,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,               wall:true,                                         sound: 'null',          nohlp: 0  }, // NCFI no collision / no shoot fake item
+        NOCOLFAKER:        { sx: 0,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/5,               wall:true,                                         sound: 'null',          nohlp: 0  }, // NCFI no collision / no shoot fake item
 // shootable wall - see grid 38 of backgrounds
         SHOTWALL:          { sx: 0,  sy: 2,    frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:30, wall:true,                   canbeshot: 2,         sound: 'null',          nohlp: 26 }, // new shotwalls, have wall form with rubble instaed of the single square of unformed rubble
         SHOTWALL2:         { sx: 0,  sy: 16,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:30, wall:true,                   canbeshot: 2,         sound: 'null',          nohlp: 26 },
 // shotable and non-shot fake items, see grid 29 of shotwalls
-        SHOTFAKER:         { sx: 0,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    score:  50, health:16,  wall:true,      canbeshot: 2,         sound: 'null',          nohlp: 58 }, // SFI  shootable fake item
-        PERMFAKER:         { sx: 0,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/4,                            wall:3,         canbeshot: 3,         sound: 'null',          nohlp: 58 }, // PFI  perm fake item - no shoot, blocks path
+        SHOTFAKER:         { sx: 0,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/5,    score:  50, health:16,  wall:true,      canbeshot: 2,         sound: 'null',          nohlp: 58 }, // SFI  shootable fake item
+        PERMFAKER:         { sx: 0,  sy: 29,   frames:1,  speed: 1*FPS,   fpf: FPS/5,                            wall:3,         canbeshot: 3,         sound: 'null',          nohlp: 58 }, // PFI  perm fake item - no shoot, blocks path
 // this is the red wall pillar thingy code:0x8130 with [ inward ] facing up, down, left, right by MEXLOW bits 0, 1, 2, 3
         FFIELDUNIT:        { sx: 0,  sy: 27,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,                                                    sound: 'null'  },
         FFIELDUNITD:       { sx: 4,  sy: 27,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,                                                    sound: 'null'  },
@@ -3227,6 +3227,7 @@ vartxt.value += "	]\n"
       entity.reflect = 0;
       entity.norelod = false;
 		if (entity.type != undefined) {
+			entity.frames = entity.type.frames;
 			entity.sx = entity.type.sx; entity.sy = entity.type.sy;
 // x,y offset, w,h multiplier on sprite
 			entity.dx = entity.type.dx; entity.dy = entity.type.dy; entity.dw = entity.type.dw; entity.dh = entity.type.dh;
@@ -3887,7 +3888,7 @@ vartxt.value += "	]\n"
     },
 
     onrender: function(frame) {
-      this.frame = animate(frame, this.type.fpf, this.type.frames);
+      this.frame = animate(frame, this.type.fpf, this.frames);
     }
 
   });
