@@ -314,6 +314,41 @@ g2 ? food research (find in files, or redo)
 
 >>>>>>>>>>>>>>>>>>>>>>
 
+G IV elements:
+
+coward (runs away) treasures
+mimic (evil, attacks) treasures (enh: add locked chest)
+
+tiles:
+no fire
+no magic
+slow (earth) [e.g. glue]
+slide (water)
+blow (wind)
+damage (fire)
+
+4 gateway stones
+(also main dragon protector)
+
+up & down stairs
+buy stuff guy (thief sprite, so go figure)
+central hub to earth, water, wind, fire towers & main castle
+
+shootable walls are shaded reg. walls
+(saw none that were gudy bady walls)
+
+rings:
+float over (wont hit tele, tiles, etc)
+heal
+
+upgrade abilities/ health w/exp system
+(health has an upper limit)
+weapon / item advancement system that enh. abilities
+camping mode allows upgrades, select activatable item
+
+
+>>>>>>>>>>>>>>>>>>>>>>
+
 sanctuary elements:
 
 skill selection (arcade op chose)
