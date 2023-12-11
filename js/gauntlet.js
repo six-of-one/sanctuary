@@ -580,38 +580,38 @@ Gauntlet = function() {
         CVAL:    "gauntlet.vals",
         CELF:    "gauntlet.elfs",
 // top4 score table
-        WIZ1:    "gauntlet.z1",
-        WIZ2:    "gauntlet.z2",
-        WIZ3:    "gauntlet.z3",
-        WIZ4:    "gauntlet.z4",
-        WAR1:    "gauntlet.w1",
-        WAR2:    "gauntlet.w2",
-        WAR3:    "gauntlet.w3",
-        WAR4:    "gauntlet.w4",
-        VAL1:    "gauntlet.v1",
-        VAL2:    "gauntlet.v2",
-        VAL3:    "gauntlet.v3",
-        VAL4:    "gauntlet.v4",
-        ELF1:    "gauntlet.e1",
-        ELF2:    "gauntlet.e2",
-        ELF3:    "gauntlet.e3",
-        ELF4:    "gauntlet.e4",
-        NWIZ1:   "gauntlet.nz1",
-        NWIZ2:   "gauntlet.nz2",
-        NWIZ3:   "gauntlet.nz3",
-        NWIZ4:   "gauntlet.nz4",
-        NWAR1:   "gauntlet.nw1",
-        NWAR2:   "gauntlet.nw2",
-        NWAR3:   "gauntlet.nw3",
-        NWAR4:   "gauntlet.nw4",
-        NVAL1:   "gauntlet.nv1",
-        NVAL2:   "gauntlet.nv2",
-        NVAL3:   "gauntlet.nv3",
-        NVAL4:   "gauntlet.nv4",
-        NELF1:   "gauntlet.ne1",
-        NELF2:   "gauntlet.ne2",
-        NELF3:   "gauntlet.ne3",
-        NELF4:   "gauntlet.ne4"
+        Z1:      "gauntlet.z1",
+        Z2:      "gauntlet.z2",
+        Z3:      "gauntlet.z3",
+        Z4:      "gauntlet.z4",
+        W1:      "gauntlet.w1",
+        W2:      "gauntlet.w2",
+        W3:      "gauntlet.w3",
+        W4:      "gauntlet.w4",
+        V1:      "gauntlet.v1",
+        V2:      "gauntlet.v2",
+        V3:      "gauntlet.v3",
+        V4:      "gauntlet.v4",
+        E1:      "gauntlet.e1",
+        E2:      "gauntlet.e2",
+        E3:      "gauntlet.e3",
+        E4:      "gauntlet.e4",
+        NZ1:     "gauntlet.nz1",
+        NZ2:     "gauntlet.nz2",
+        NZ3:     "gauntlet.nz3",
+        NZ4:     "gauntlet.nz4",
+        NW1:     "gauntlet.nw1",
+        NW2:     "gauntlet.nw2",
+        NW3:     "gauntlet.nw3",
+        NW4:     "gauntlet.nw4",
+        NV1:     "gauntlet.nv1",
+        NV2:     "gauntlet.nv2",
+        NV3:     "gauntlet.nv3",
+        NV4:     "gauntlet.nv4",
+        NE1:     "gauntlet.ne1",
+        NE2:     "gauntlet.ne2",
+        NE3:     "gauntlet.ne3",
+        NE4:     "gauntlet.ne4"
       },
 // chest & wall goody/bady profiles
 		rllock = 11, rlswall = 12, swloop = 38,
@@ -1719,13 +1719,13 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 				HSCORE[i,2] = readCookie(i+"char");
 		 }
 // load user options here
-		document.getElementById("seldiff").value = readCookie("_ops_"+"seldiff");
-		document.getElementById("sellvl").value = readCookie("_ops_"+"sellvl");
-		document.getElementById("whue").value = readCookie("_ops_"+"whue");
-		document.getElementById("fhue").value = readCookie("_ops_"+"fhue");
-		document.getElementById("phue").value = readCookie("_ops_"+"phue");
-		document.getElementById("ashue").value = readCookie("_ops_"+"ashue");
-		document.getElementById("vports").value = readCookie("_ops_"+"vports");
+		document.getElementById("seldiff").value = readCookie("_o_"+"seldiff");
+		document.getElementById("sellvl").value = readCookie("_o_"+"sellvl");
+		document.getElementById("whue").value = readCookie("_o_"+"whue");
+		document.getElementById("fhue").value = readCookie("_o_"+"fhue");
+		document.getElementById("phue").value = readCookie("_o_"+"phue");
+		document.getElementById("ashue").value = readCookie("_o_"+"ashue");
+		document.getElementById("vports").value = readCookie("_o_"+"vports");
 		document.getElementById("seltut").checked = false;
 		document.getElementById("selg2tut").checked = false;
 		document.getElementById("seltutx").checked = false;
@@ -1746,25 +1746,25 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		document.getElementById("nogen").checked = false;
 		document.getElementById("noblend").checked = false;
 
-		if (readCookie("_ops_"+"seltut") == "true") document.getElementById("seltut").checked = true;
-		if (readCookie("_ops_"+"selg2tut") == "true") document.getElementById("selg2tut").checked = true;
-		if (readCookie("_ops_"+"seltutx") == "true") document.getElementById("seltutx").checked = true;
-		if (readCookie("_dev_"+"mazsolv") == "true") document.getElementById("mazsolv").checked = true;
-		if (readCookie("_dev_"+"xunp") == "true") document.getElementById("xunp").checked = true;
-		if (readCookie("_dev_"+"yunp") == "true") document.getElementById("yunp").checked = true;
-		if (readCookie("_dev_"+"xmiror") == "true") document.getElementById("xmiror").checked = true;
-		if (readCookie("_dev_"+"ymiror") == "true") document.getElementById("ymiror").checked = true;
-		if (readCookie("_dev_"+"rotat") == "true") document.getElementById("rotat").checked = true;
-		if (readCookie("_dev_"+"invwal") == "true") document.getElementById("invwal").checked = true;
-		if (readCookie("_dev_"+"invhint") == "true") document.getElementById("invhint").checked = true;
-		if (readCookie("_dev_"+"spedis") == "true") document.getElementById("spedis").checked = true;
-		if (readCookie("_dev_"+"blrndlod") == "true") document.getElementById("blrndlod").checked = true;
-		if (readCookie("_dev_"+"forndlod") == "true") document.getElementById("forndlod").checked = true;
-		if (readCookie("_dev_"+"nostal") == "true") document.getElementById("nostal").checked = true;
-		if (readCookie("_dev_"+"noah") == "true") document.getElementById("noah").checked = true;
-		if (readCookie("_dev_"+"nommv") == "true") document.getElementById("nommv").checked = true;
-		if (readCookie("_dev_"+"nogen") == "true") document.getElementById("nogen").checked = true;
-		if (readCookie("_dev_"+"noblend") == "true") document.getElementById("noblend").checked = true;
+		if (readCookie("_o_"+"seltut") == "true") document.getElementById("seltut").checked = true;
+		if (readCookie("_o_"+"selg2tut") == "true") document.getElementById("selg2tut").checked = true;
+		if (readCookie("_o_"+"seltutx") == "true") document.getElementById("seltutx").checked = true;
+		if (readCookie("_d_"+"mazsolv") == "true") document.getElementById("mazsolv").checked = true;
+		if (readCookie("_d_"+"xunp") == "true") document.getElementById("xunp").checked = true;
+		if (readCookie("_d_"+"yunp") == "true") document.getElementById("yunp").checked = true;
+		if (readCookie("_d_"+"xmiror") == "true") document.getElementById("xmiror").checked = true;
+		if (readCookie("_d_"+"ymiror") == "true") document.getElementById("ymiror").checked = true;
+		if (readCookie("_d_"+"rotat") == "true") document.getElementById("rotat").checked = true;
+		if (readCookie("_d_"+"invwal") == "true") document.getElementById("invwal").checked = true;
+		if (readCookie("_d_"+"invhint") == "true") document.getElementById("invhint").checked = true;
+		if (readCookie("_d_"+"spedis") == "true") document.getElementById("spedis").checked = true;
+		if (readCookie("_d_"+"blrndlod") == "true") document.getElementById("blrndlod").checked = true;
+		if (readCookie("_d_"+"forndlod") == "true") document.getElementById("forndlod").checked = true;
+		if (readCookie("_d_"+"nostal") == "true") document.getElementById("nostal").checked = true;
+		if (readCookie("_d_"+"noah") == "true") document.getElementById("noah").checked = true;
+		if (readCookie("_d_"+"nommv") == "true") document.getElementById("nommv").checked = true;
+		if (readCookie("_d_"+"nogen") == "true") document.getElementById("nogen").checked = true;
+		if (readCookie("_d_"+"noblend") == "true") document.getElementById("noblend").checked = true;
 /// TEST - remove
 //for (i = 1; i <= 81; i++) { deleteCookie(i+"char"); deleteCookie(i+"score"); deleteCookie(i+"name"); }
 
@@ -4967,36 +4967,36 @@ var txsv = ":";
 					document.getElementById("playsnd").checked = false;
 				}
 // dev cook storage
-//				createCookie("_dev_"+, document.getElementById().checked,7777);
+//				createCookie("_d_"+, document.getElementById().checked,7777);
 // the first 5 are (planned) normal ops and should be kept after TEST is removed...
 				if ((heartbeet & 15) == 7) {
-				createCookie("_ops_"+"seldiff", document.getElementById("seldiff").value,7777);
-				createCookie("_ops_"+"sellvl", document.getElementById("sellvl").value,7777);
-				createCookie("_ops_"+"seltut", document.getElementById("seltut").checked,7777);
-				createCookie("_ops_"+"selg2tut", document.getElementById("selg2tut").checked,7777);
-				createCookie("_ops_"+"seltutx", document.getElementById("seltutx").checked,7777);
-				createCookie("_dev_"+"mazsolv", document.getElementById("mazsolv").checked,7777);
+				createCookie("_o_"+"seldiff", document.getElementById("seldiff").value,7777);
+				createCookie("_o_"+"sellvl", document.getElementById("sellvl").value,7777);
+				createCookie("_o_"+"seltut", document.getElementById("seltut").checked,7777);
+				createCookie("_o_"+"selg2tut", document.getElementById("selg2tut").checked,7777);
+				createCookie("_o_"+"seltutx", document.getElementById("seltutx").checked,7777);
+				createCookie("_d_"+"mazsolv", document.getElementById("mazsolv").checked,7777);
 // keep     -^
-				createCookie("_dev_"+"xunp", document.getElementById("xunp").checked,7777);
-				createCookie("_dev_"+"yunp", document.getElementById("yunp").checked,7777);
-				createCookie("_dev_"+"xmiror", document.getElementById("xmiror").checked,7777);
-				createCookie("_dev_"+"ymiror", document.getElementById("ymiror").checked,7777);
-				createCookie("_dev_"+"rotat", document.getElementById("rotat").checked,7777);
-				createCookie("_dev_"+"invwal", document.getElementById("invwal").checked,7777);
-				createCookie("_dev_"+"invhint", document.getElementById("invhint").checked,7777);
-				createCookie("_dev_"+"spedis", document.getElementById("spedis").checked,7777);
-				createCookie("_dev_"+"blrndlod", document.getElementById("blrndlod").checked,7777);
-				createCookie("_dev_"+"forndlod", document.getElementById("forndlod").checked,7777);
-				createCookie("_dev_"+"nostal", document.getElementById("nostal").checked,7777);
-				createCookie("_dev_"+"noah", document.getElementById("noah").checked,7777);
-				createCookie("_dev_"+"nommv", document.getElementById("nommv").checked,7777);
-				createCookie("_dev_"+"nogen", document.getElementById("nogen").checked,7777);
-				createCookie("_dev_"+"noblend", document.getElementById("noblend").checked,7777);
-				createCookie("_ops_"+"whue", document.getElementById("whue").value,7777);
-				createCookie("_ops_"+"fhue", document.getElementById("fhue").value,7777);
-				createCookie("_ops_"+"phue", document.getElementById("phue").value,7777);
-				createCookie("_ops_"+"ashue", document.getElementById("ashue").value,7777);
-				createCookie("_ops_"+"vports", document.getElementById("vports").value,7777);
+				createCookie("_d_"+"xunp", document.getElementById("xunp").checked,7777);
+				createCookie("_d_"+"yunp", document.getElementById("yunp").checked,7777);
+				createCookie("_d_"+"xmiror", document.getElementById("xmiror").checked,7777);
+				createCookie("_d_"+"ymiror", document.getElementById("ymiror").checked,7777);
+				createCookie("_d_"+"rotat", document.getElementById("rotat").checked,7777);
+				createCookie("_d_"+"invwal", document.getElementById("invwal").checked,7777);
+				createCookie("_d_"+"invhint", document.getElementById("invhint").checked,7777);
+				createCookie("_d_"+"spedis", document.getElementById("spedis").checked,7777);
+				createCookie("_d_"+"blrndlod", document.getElementById("blrndlod").checked,7777);
+				createCookie("_d_"+"forndlod", document.getElementById("forndlod").checked,7777);
+				createCookie("_d_"+"nostal", document.getElementById("nostal").checked,7777);
+				createCookie("_d_"+"noah", document.getElementById("noah").checked,7777);
+				createCookie("_d_"+"nommv", document.getElementById("nommv").checked,7777);
+				createCookie("_d_"+"nogen", document.getElementById("nogen").checked,7777);
+				createCookie("_d_"+"noblend", document.getElementById("noblend").checked,7777);
+				createCookie("_o_"+"whue", document.getElementById("whue").value,7777);
+				createCookie("_o_"+"fhue", document.getElementById("fhue").value,7777);
+				createCookie("_o_"+"phue", document.getElementById("phue").value,7777);
+				createCookie("_o_"+"ashue", document.getElementById("ashue").value,7777);
+				createCookie("_o_"+"vports", document.getElementById("vports").value,7777);
 				}
 /// TEST - remove
 		}
@@ -5258,7 +5258,7 @@ var txsv = ":";
     initialize: function() {
 // user select viewport size, requires game reload to change
 		 var vp = document.getElementById("vports").value; // check for manual entry
-		 if (!/^\d+$/.test(vp)) vp = readCookie("_ops_"+"vports"); //-- value is not loaded yet
+		 if (!/^\d+$/.test(vp)) vp = readCookie("_o_"+"vports"); //-- value is not loaded yet
 		 if (!/^\d+$/.test(vp)) vp = 16;
 		 if (vp < 10) vp = 10;
 		 if (vp > 40) vp = 40;
