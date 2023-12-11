@@ -816,36 +816,27 @@ Game.Math = {
 				document.getElementById("elfscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">ELVES</TD></TR>';
 				var wsc = 10, vsc = 10, zsc = 10, esc = 10;
 				var HSCORE = [ 0, "Names", "character" ];
-				var scoredex = readCookieDef("hindex",0,0);
-				if (scoredex > 0)
-				{
-						for (var i = 1; i <= scoredex; i++)
-						 {
-					var nam = readCookie(i+"name"), scor = readCookie(i+"score"), cahr = readCookie(i+"char");
-// need sort
-							 if (cahr == "warrior" && wsc-- > 0) document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(10 - wsc)+'</TD><TD style="width:30%;">'+nam+'</TD><TD style="width:60%;text-align:right">'+scor+'</TD></TR>';
-							 if (cahr == "wizard" && zsc-- > 0) document.getElementById("wizscor").innerHTML += '<TR><TD style="width:10%;">'+(10 - zsc)+'</TD><TD style="width:30%;">'+nam+'</TD><TD style="width:60%;text-align:right">'+scor+'</TD></TR>';
-							 if (cahr == "valkyrie" && vsc-- > 0) document.getElementById("valscor").innerHTML += '<TR><TD style="width:10%;">'+(10 - vsc)+'</TD><TD style="width:30%;">'+nam+'</TD><TD style="width:60%;text-align:right">'+scor+'</TD></TR>';
-							 if (cahr == "elf" && esc-- > 0) document.getElementById("elfscor").innerHTML += '<TR><TD style="width:10%;">'+(10 - esc)+'</TD><TD style="width:30%;">'+nam+'</TD><TD style="width:60%;text-align:right">'+scor+'</TD></TR>';
-/// TEST - remove
-/*			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890._ ";
-			var res = "";
-				for(var j = 0; j < 6; j++) {
-        var rnd = Math.floor(Math.random() * ablist.length);
-				res = res + ablist.charAt(rnd); }
-//				deleteCookie(i+"name");
-				createCookie(i+"name", res,7777);  */
-/// TEST - remove
 
-								HSCORE[i,0] = scor;
-								HSCORE[i,1] = nam;
-								HSCORE[i,2] = cahr;
-						 }
-/*						HSCORE.sort((a,b) => a[0] - b[0]);
-						var tstr = "";
-						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + ";; ";
-						 alert(tstr); */
-				 }
+			if (ZSCORE[0, 0] == undefined) {
+					ZSCORE[0, 0] = 1;
+					ZSCORE[1, 0] = 8000;
+					ZSCORE[1, 1] = "B F";
+					WSCORE[1, 0] = 8000;
+					WSCORE[1, 1] = "HAL";
+					VSCORE[1, 0] = 8000;
+					VSCORE[1, 1] = "EDL";
+					ESCORE[1, 0] = 8000;
+					ESCORE[1, 1] = "ED ";
+				}
+//					var nam = readCookie(i+"name"), scor = readCookie(i+"score"), cahr = readCookie(i+"char");
+				for (var i = 1; i <= 1; i++)
+				{
+					document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+WSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+WSCORE[i, 0]+'</TD></TR>';
+					document.getElementById("wizscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ZSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+ZSCORE[i, 0]+'</TD></TR>';
+					document.getElementById("valscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+VSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+VSCORE[i, 0]+'</TD></TR>';
+					document.getElementById("elfscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ESCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+ESCORE[i, 0]+'</TD></TR>';
+				}
+
 		}
 
 // in singleplayer, multiplier rots down to 1

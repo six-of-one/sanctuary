@@ -86,6 +86,12 @@ Gauntlet = function() {
 	dpstim = 0, dpsacc = 0, prearmd = 0,
 // highscores, index and array
 	scoredex = 0,
+	scortabmax = 11,
+	scores = null,
+	ZSCORE = [ 0, 0 ],
+	WSCORE = [ 0, 0 ],
+	VSCORE = [ 0, 0 ],
+	ESCORE = [ 0, 0 ],
 	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
 // invisible wall & shotable invisible are in INVWALSY, item 0 = INVWALA (0 shadow)
@@ -1710,14 +1716,6 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
       this.sounds.playMenuMusic();
 			setTimeout('splashrot()',19500);
 
-		 scoredex = readCookieDef("hindex",0,0);
-		if (scoredex > 0)
-		for (var i = 1; i <= scoredex; i++)
-		 {
-				HSCORE[i,0] = readCookie(i+"score");
-				HSCORE[i,1] = readCookie(i+"name");
-				HSCORE[i,2] = readCookie(i+"char");
-		 }
 // load user options here
 		document.getElementById("seldiff").value = readCookie("_o_"+"seldiff");
 		document.getElementById("sellvl").value = readCookie("_o_"+"sellvl");
@@ -1775,7 +1773,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
     },
 
     onstart: function(event, previous, current, type, nlevel) {
-//		scoredex++;
+
 		 $('scordiv').hide();
       this.player.join(type);
       this.load(to.number(nlevel, this.loadLevel()));
@@ -1820,6 +1818,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			cwar  = to.number(this.storage[STORAGE.CWAR],0);
 			cval  = to.number(this.storage[STORAGE.CVAL],0);
 			celf  = to.number(this.storage[STORAGE.CELF],0);
+			scores = this;
 			curwiz = curwar = curval = curelf = " ";
 			igpots = gpots;	// track individual stats temp
 			igfuds = gfuds;
@@ -2613,14 +2612,7 @@ var lvu = document.getElementById("flvl").value;
 				 for(var i = 0; i < 3; i++) {
 			var rnd = Math.floor(Math.random() * ablist.length);
 				 res = res + ablist.charAt(rnd); }
-/// TEST - remove
-/*
-			scoredex++;
-			createCookie(scoredex+"char", this.player.type.name,7777);
-			createCookie(scoredex+"score",(this.player.score / this.player.droppedcoins),7777);
-			createCookie(scoredex+"name", res,7777);
-			createCookie("hindex", scoredex,7777);
-*/
+
 			HSCORE[scoredex,0] = (this.player.score / this.player.droppedcoins);
 			HSCORE[scoredex,1] = res;
 			HSCORE[scoredex,2] = this.player.type.name;
@@ -2628,12 +2620,6 @@ var lvu = document.getElementById("flvl").value;
 //			HSCORE[scoredex,1] = readCookie(scoredex+"name");
 //			HSCORE[scoredex,2] = readCookie(scoredex+"char");
 //						HSCORE.sort((a,b) => a[0] - b[0]);
-		}
-		if (DEBUGON)
-		{
-						var tstr = scoredex + ":";
-						 for (i = 1; i <= 6; i++) tstr = tstr + HSCORE[i,0] + "- " + HSCORE[i,1] + "- " + HSCORE[i,2] + "\n";
-						 alert(tstr);
 		}
 
     },
