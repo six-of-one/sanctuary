@@ -128,7 +128,6 @@ finish wall layers
 g1 audio elements swap in	-> ref genesis sound test for note s
 
 g2:
-g2 set of exits (select 1 rest are fake) not implemented yet
 
 map editor o/p scanner
 -push wall pushing collision
@@ -277,6 +276,7 @@ x-- locked treasures (& load out)
 x-- poison food / potion that slows monsters
 x-- exit to 6
 x-- moving exits
+x-- all become fake exits except one at random
 x-- moving walls (regular phase, not random)
 x-- invisible walls
   \_(need a 50% vis on touch or shot option cooling to invisible after ? secs) -- code to handle these as gII is done
@@ -525,6 +525,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 
 >>>>>>>>>>>>>>>>>>>>>>
 done:
+
+x-- g2 set of exits (select 1 rest are fake) not implemented yet
 
 x-- converting g2 walls / floors + g1 walls
 
