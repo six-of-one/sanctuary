@@ -3190,7 +3190,7 @@ vartxt.value += "	]\n"
 		if (lastp1rex > 0) {
 			var pickone = Game.Math.randomInt(0, lastp1rex - 1);
 				var p1r = P1rexit[pickone];
-				P1rexit[pickone] = reloaded.addExit(p1r.x, p1r.y, DOOR.EXIT4);
+				P1rexit[pickone] = reloaded.addExit(p1r.x, p1r.y, DOOR.EXIT);
 				Mastermap.remove(p1r);
 			}
     },
