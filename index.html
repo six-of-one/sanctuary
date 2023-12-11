@@ -116,7 +116,8 @@
     </div>
 
     <div id='instructions'>
-	<label for="fname">Difficulty: </label><input type="number" value="3" id="seldiff" name="seldiff" min="1" max="30" title="1 = easy, 3 = medium, 6 = hard, 9 = nightmare, > 10 wut?"> &nbsp;<b>ARROW</b> keys to move, <b>HOLD SPACE</b> to fire, <b>ENTER</b> to use potion - start on: <select  id="sellvl" title="level to start - saved: last level played">
+	<label for="fname">Difficulty: </label><input type="number" value="3" id="seldiff" name="seldiff" min="1" max="30" title="1 = easy, 3 = medium, 6 = hard, 9 = nightmare, > 10 wut?"> &nbsp;<b>ARROW</b> keys to move, <b>HOLD SPACE</b> to fire, <b>ENTER</b> to use potion
+ - start on: <select  id="sellvl" title="level to start - saved: last level played">
           <option value="0">research</option>
           <option value="1">level 1</option>
           <option value="2">level 2</option>
@@ -127,9 +128,12 @@
           <option value="7">level 7</option>
           <option value="8">saved</option>
 </select> tutorial: <input type="checkbox" id="seltut" name="seltut" value="1" title="check to display gauntlet 1 tutorial boxes once"> g2: <input type="checkbox" id="selg2tut" name="selg2tut" value="1" title="check to display gauntlet 2 tutorial boxes once"> x: <input type="checkbox" id="seltutx" name="seltutx" value="1" title="check to display extended item tutorial boxes once"> 
-maze solver <input type="checkbox" id="mazsolv" name="mazsolv" value="1" title="check to show maze solution if available"> dps: <input type="checkbox" id="sdps" name="sdps" value="1" title="show damage per second - shoot a push wall" > 30: <input type="checkbox" id="sdphm" name="sdphm" value="1" title="show damage per 30 secs - shoot a push wall" >
+maze solver <input type="checkbox" id="mazsolv" name="mazsolv" value="1" title="check to show maze solution if available"> 
+dps: <input type="checkbox" id="sdps" name="sdps" value="1" title="show damage per second - shoot a push wall" > 30: <input type="checkbox" id="sdphm" name="sdphm" value="1" title="show damage per 30 secs - shoot a push wall" >
 <input type="text" value="" size="3" id="dpsout" name="dpsout" title="dps: "><input type="text" value="" size="3" id="hpsout" name="hurtpsout" title="hps: ">
-<br> dev... unpin : x <input type="checkbox" id="xunp" name="xunp" value="1" title="testing" > y <input type="checkbox" id="yunp" name="yunp" value="1" title="testing" > -- mir: x <input type="checkbox" id="xmiror" name="xmiror" value="1" title="testing" > y <input type="checkbox" id="ymiror" name="ymiror" value="1" title="testing" >
+<br> 1st level to -- mirror: <input type="text" value="10" size="3" id="stmiror" title="select level to start rnd mirrors (Horiz)"> - flip: <input type="text" value="20" size="3" id="stflip" title="select level to start rnd flips (Vert)"> -
+rotate: <input type="text" value="30" size="3" id="strot" title="select level to start rnd rotates"> - unpin: <input type="text" value="50" size="3" id="stunpin" title="select level to start rnd unpins">
+<hr> dev... unpin : x <input type="checkbox" id="xunp" name="xunp" value="1" title="testing" > y <input type="checkbox" id="yunp" name="yunp" value="1" title="testing" > -- mir: x <input type="checkbox" id="xmiror" name="xmiror" value="1" title="testing" > y <input type="checkbox" id="ymiror" name="ymiror" value="1" title="testing" >
 rot: <input type="checkbox" id="rotat" name="rotat" value="1" title="testing" > -- invis walls <input type="checkbox" id="invwal" name="invwal" value="1" title="testing" > -- special display <input type="checkbox" id="spedis" name="spedis" value="1" title="testing" > -- 
 block rnd load <input type="checkbox" id="blrndlod" name="blrndlod" value="1" title="testing" > force rnd load <input type="checkbox" id="forndlod" name="forndlod" value="1" title="testing" > 
 parse this level <input type="text" value="" size="7" id="plvl" name="plvl" title="level image file to parse"> force level <input type="text" value="" size="7" id="flvl" name="flvl" title="override level image file to load"> # <input type="text" value="" size="3" id="nlvl" name="nlvl" title="override level number from existing maps"><br>

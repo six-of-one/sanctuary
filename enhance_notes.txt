@@ -298,6 +298,7 @@ x- acid blob (if used, it needs a weakness, like 2x potion fire destroys, or sup
 \_ not fully coded in - waiting on multiplayer
 diff color grunts
 ffield, stun tiles have a 'blend into floor tex'
+flip & mirror start on level 1
 
 g1/g2 wall & door stall times @ difficulty - appx ~ times
 door
