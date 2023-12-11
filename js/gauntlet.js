@@ -2610,12 +2610,13 @@ var lvu = document.getElementById("flvl").value;
 			var rnd = Math.floor(Math.random() * ablist.length);
 				 res = res + ablist.charAt(rnd); }
 /// TEST - remove
-
+/*
 			scoredex++;
 			createCookie(scoredex+"char", this.player.type.name,7777);
 			createCookie(scoredex+"score",(this.player.score / this.player.droppedcoins),7777);
 			createCookie(scoredex+"name", res,7777);
 			createCookie("hindex", scoredex,7777);
+*/
 			HSCORE[scoredex,0] = (this.player.score / this.player.droppedcoins);
 			HSCORE[scoredex,1] = res;
 			HSCORE[scoredex,2] = this.player.type.name;
