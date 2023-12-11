@@ -37,8 +37,8 @@ Gauntlet = function() {
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, GWDEF = 2, GSHW = 1, ENTLVLWAL = -6, ENTLVLSHWAL = -5, NX = 0, NY = 0,
 // levelwide master values for unpins, unpin high/low x, high/lowy, mirror and rotates
 		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
-// data set for map pixels, hue override pixels, moving exits (3), phasewalls (4), tile render master, Vx, Vy to .vx, .vy: drew this ent across upin line
-		Mapdata, Huedata, Movexit, lastmex = 0, Movit = null, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy,
+// data set for map pixels, hue override pixels, moving exits (3), pick one real exit - rest fake (2), phasewalls (4), tile render master, Vx, Vy to .vx, .vy: drew this ent across upin line
+		Mapdata, Huedata, Movexit, lastmex = 0, Movit = null, P1rexit, lastp1rex = 0, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy,
 // debug code, remove
 		mtm,
 // exit to 4,6,8, ref pixel val for ent, shot a potion flag, slowmonsters (2), paused game for announce display
@@ -459,8 +459,7 @@ Gauntlet = function() {
         EXIT8:       { sx: 15, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 8  },
         EXIT6:       { sx: 16, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 6  },
         EXITMOVE:    { sx: 9,  sy: 12, speed: 3*FPS, fpf: FPS/5, hbtim: 3, bsound: 'movexit' },
-//        EXITCLOS:    { sx: 23, sy: 11, speed: 3*FPS, fpf: FPS/2, frames: 6 },
-        EXITNONE:    { sx: 13, sy: 12, speed: 1*FPS, fpf: FPS/30 }
+        EXITP1R:     { sx: 13, sy: 12, speed: 1*FPS, fpf: FPS/30 }
       },
       FX = {
         GENERATOR_DEATH: { sx: 17, sy: 12, frames: 6, fpf: FPS/10 },
@@ -1329,6 +1328,10 @@ Gauntlet = function() {
 							break;
 					case 4: spref.addExit(x, y, DOOR.EXITMOVE);
 								Movexit[lastmex++] = Mastercell.ptr; Mastercell.ptr.nohlp = 999; Mastercell.ptr.frame = 0;
+							break;
+					case 5: spref.addTreasure(x, y, TREASURE.NOCOLFAKER);
+								Mastercell.ptr.sx = 16;	// fake exit gfx
+								P1rexit[lastp1rex++] = Mastercell.ptr; Mastercell.ptr.nohlp = 58; Mastercell.ptr.frame = 0;
 							break;
 				 }
 			 }
@@ -3138,6 +3141,7 @@ vartxt.value += "	]\n"
 		Mth = th;
 		Phasewal = [];
 		Movexit  = []; Movexit[0] = undefined;
+		P1rexit  = []; P1rexit[0] = undefined;
 
 		if (dohu)
 		{
