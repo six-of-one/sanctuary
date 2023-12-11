@@ -38,7 +38,7 @@ Gauntlet = function() {
 // levelwide master values for unpins, unpin high/low x, high/lowy, mirror and rotates
 		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
 // data set for map pixels, hue override pixels, moving exits (3), pick one real exit - rest fake (2), phasewalls (4), tile render master, Vx, Vy to .vx, .vy: drew this ent across upin line
-		Mapdata, Huedata, Movexit, lastmex = 0, Movit = null, P1rexit, lastp1rex = 0, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy,
+		Mapdata, Huedata, Movexit, lastmex = 0, Movit = null, P1rexit, lastp1rex, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy,
 // debug code, remove
 		mtm,
 // exit to 4,6,8, ref pixel val for ent, shot a potion flag, slowmonsters (2), paused game for announce display
@@ -1331,6 +1331,7 @@ Gauntlet = function() {
 							break;
 					case 5: spref.addTreasure(x, y, TREASURE.NOCOLFAKER);
 								Mastercell.ptr.sx = 16;	// fake exit gfx
+								Mastercell.ptr.pixel = FKEXIT;	// fake exit pixel
 								P1rexit[lastp1rex++] = Mastercell.ptr; Mastercell.ptr.nohlp = 58; Mastercell.ptr.frame = 0;
 							break;
 				 }
@@ -3141,7 +3142,7 @@ vartxt.value += "	]\n"
 		Mth = th;
 		Phasewal = [];
 		Movexit  = []; Movexit[0] = undefined;
-		P1rexit  = []; P1rexit[0] = undefined;
+		P1rexit  = []; P1rexit[0] = undefined; lastp1rex = 0;
 
 		if (dohu)
 		{
@@ -3184,6 +3185,14 @@ vartxt.value += "	]\n"
       Blendctx1    = Blendcanvas1.getContext('2d');
 		Blendcanvas2 = Game.createCanvas(TILE, TILE);
       Blendctx2    = Blendcanvas2.getContext('2d');
+
+// finish pick one real exit
+		if (lastp1rex > 0) {
+			var pickone = Game.Math.randomInt(0, lastp1rex - 1);
+				var p1r = P1rexit[pickone];
+				P1rexit[pickone] = reloaded.addExit(p1r.x, p1r.y, DOOR.EXIT4);
+				Mastermap.remove(p1r);
+			}
     },
 
     //-------------------------------------------------------------------------
