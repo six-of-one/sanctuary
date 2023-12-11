@@ -54,7 +54,8 @@ remove cooky store of score table
 save top 4 each char in storage - keep scores in array, xfer top 4 of each over
 may want to up max skill that stores highscores
 
-solid walls, others (lvl 63) -- off by 1 pixel left
+solid walls, lattice (lvl 63) -- off by 1 pixel left
+- done up to: g1: 64, g2: 12
 
 
 original jsgv levels have some x wrap issue when > 31 units
