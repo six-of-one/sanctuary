@@ -87,7 +87,7 @@ Gauntlet = function() {
 // highscores, index and array
 	scoredex = 0,
 	scortabmax = 11,
-	scores = null,
+//	scores = null,
 	ZSCORE = [ 0, 0 ],
 	WSCORE = [ 0, 0 ],
 	VSCORE = [ 0, 0 ],
@@ -1595,6 +1595,50 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			}
 			return -1;	// no item deployed
 		};
+
+  //=========================================================================
+  // SCORES
+  //=========================================================================
+
+	function loadscortabl(ref) {
+
+				document.getElementById("warscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">WARRIORS</TD></TR>';
+				document.getElementById("wizscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">WIZARDS</TD></TR>';
+				document.getElementById("valscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">VALKYRIES</TD></TR>';
+				document.getElementById("elfscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">ELVES</TD></TR>';
+
+			if (ZSCORE[0, 0] == undefined) {
+					ZSCORE[0, 0] = 1;
+					ZSCORE[1, 0] = 8000;
+					ZSCORE[1, 1] = "B F";
+					WSCORE[1, 0] = 8000;
+					WSCORE[1, 1] = "HAL";
+					VSCORE[1, 0] = 8000;
+					VSCORE[1, 1] = "EDL";
+					ESCORE[1, 0] = 8000;
+					ESCORE[1, 1] = "ED ";
+				}
+				if (ref != undefined) {
+					ZSCORE[1, 0] = to.number(ref.storage[STORAGE.Z1],10000);
+					ZSCORE[1, 1] = ref.storage[STORAGE.NZ1] | "B F";
+					WSCORE[1, 0] = to.number(ref.storage[STORAGE.W1],10000);
+					WSCORE[1, 1] = ref.storage[STORAGE.NW1] | "HAL";
+					VSCORE[1, 0] = to.number(ref.storage[STORAGE.V1],10000);
+					VSCORE[1, 1] = ref.storage[STORAGE.NV1] | "EDL";
+					ESCORE[1, 0] = to.number(ref.storage[STORAGE.E1],10000);
+					ESCORE[1, 1] = ref.storage[STORAGE.NE1] | "ED ";
+				}
+
+				for (var i = 1; i <= 1; i++)
+				{
+					document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+WSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+WSCORE[i, 0]+'</TD></TR>';
+					document.getElementById("wizscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ZSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+ZSCORE[i, 0]+'</TD></TR>';
+					document.getElementById("valscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+VSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+VSCORE[i, 0]+'</TD></TR>';
+					document.getElementById("elfscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ESCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+ESCORE[i, 0]+'</TD></TR>';
+				}
+
+		}
+
   //=========================================================================
   // PERFORMANCE - using arrays for (small) sets
   //=========================================================================
@@ -1769,7 +1813,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		if (readCookie("_d_"+"noblend") == "true") document.getElementById("noblend").checked = true;
 /// TEST - remove
 //for (i = 1; i <= 81; i++) { deleteCookie(i+"char"); deleteCookie(i+"score"); deleteCookie(i+"name"); }
-
+		loadscortabl();
     },
 
     onstart: function(event, previous, current, type, nlevel) {
@@ -1818,7 +1862,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			cwar  = to.number(this.storage[STORAGE.CWAR],0);
 			cval  = to.number(this.storage[STORAGE.CVAL],0);
 			celf  = to.number(this.storage[STORAGE.CELF],0);
-			scores = this;
+//			scores = this;
 			curwiz = curwar = curval = curelf = " ";
 			igpots = gpots;	// track individual stats temp
 			igfuds = gfuds;
@@ -1958,7 +2002,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 				onloaded();
       }
       else {
-				loadscortabl();
+				loadscortabl(this);
 			  $('booting').show();
 
 					var lvs = level.url;

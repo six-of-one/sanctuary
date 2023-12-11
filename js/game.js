@@ -801,43 +801,13 @@ Game.Math = {
 		else
 		{
 			if (Math.random() < 0.38) document.splashrot.src = "images/splash" + spl_loop.substring(spl_cyc,spl_cyc+1) + "2.jpg"
-				loadscortabl();
+//				loadscortabl();
 				$('scordiv').show();
 		}
 	}
 
 	  setTimeout('splashrot()',rot);
   }
-
-	function loadscortabl() {
-				document.getElementById("warscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">WARRIORS</TD></TR>';
-				document.getElementById("wizscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">WIZARDS</TD></TR>';
-				document.getElementById("valscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">VALKYRIES</TD></TR>';
-				document.getElementById("elfscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">ELVES</TD></TR>';
-				var wsc = 10, vsc = 10, zsc = 10, esc = 10;
-				var HSCORE = [ 0, "Names", "character" ];
-
-			if (ZSCORE[0, 0] == undefined) {
-					ZSCORE[0, 0] = 1;
-					ZSCORE[1, 0] = 8000;
-					ZSCORE[1, 1] = "B F";
-					WSCORE[1, 0] = 8000;
-					WSCORE[1, 1] = "HAL";
-					VSCORE[1, 0] = 8000;
-					VSCORE[1, 1] = "EDL";
-					ESCORE[1, 0] = 8000;
-					ESCORE[1, 1] = "ED ";
-				}
-//					var nam = readCookie(i+"name"), scor = readCookie(i+"score"), cahr = readCookie(i+"char");
-				for (var i = 1; i <= 1; i++)
-				{
-					document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+WSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+WSCORE[i, 0]+'</TD></TR>';
-					document.getElementById("wizscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ZSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+ZSCORE[i, 0]+'</TD></TR>';
-					document.getElementById("valscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+VSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+VSCORE[i, 0]+'</TD></TR>';
-					document.getElementById("elfscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ESCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+ESCORE[i, 0]+'</TD></TR>';
-				}
-
-		}
 
 // in singleplayer, multiplier rots down to 1
 // treasure rooms pause rot - have to detect room time here
