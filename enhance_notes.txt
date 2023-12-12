@@ -58,6 +58,8 @@ ncfi / pfi / sfi in gwal by code cnt
 
 imm issues:
 
+ffield display is borken - field works, not visual
+
 may want to up max skill that stores highscores
 (this is janky tho and needs tested as higher skills add a lot of helper items)
 

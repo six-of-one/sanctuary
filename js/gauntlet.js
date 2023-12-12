@@ -1425,7 +1425,7 @@ Gauntlet = function() {
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
 					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
 					 if (sb < Mastermap.level.gshw && ad == TREASURE.SHOTWALL) { Mastercell.ptr.bwc = ENTLVLSHWAL; }
-					 if (sb <= Mastermap.level.gfi && pixel >= 0x8100 && pixel <= 0x812F) Mastercell.ptr.bwc = ENTGFI;
+					 if (sb < Mastermap.level.gfi && pixel >= 0x8100 && pixel <= 0x812F) Mastercell.ptr.bwc = ENTGFI;
 					 if (pixel == FKEXIT) Mastercell.ptr.sx = 16;	// NCFI invisible wall is fake exit (a non shootable, non blocking invisible wall... is just a floor tile)
 					 if (pixel == FKTELE || pixel == FKTELEB || pixel == FKTELEC) { Mastercell.ptr.sx = 19; Mastercell.ptr.frames = 7; }
 					 if (pixel == FKGORO) Mastercell.ptr.sx = 17;
