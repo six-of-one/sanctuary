@@ -53,12 +53,9 @@ clear _dev_  _ops_ cookys
 save rand load level for replay
 save highscore table for reload
 
-ncfi / pfi / sfi in gwal by code cnt
-
 
 imm issues:
 
-ffield display is borken - field works, not visual
 
 may want to up max skill that stores highscores
 (this is janky tho and needs tested as higher skills add a lot of helper items)
@@ -537,6 +534,11 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 
 done:
+
+x-- ffield display is borken - field works, not visual
+   \_ was this change:: this.frame = animate(frame, this.type.fpf, this.type.frames); to:: this.type.fpf, this.frames);
+
+x-- ncfi / pfi / sfi in gwal by code cnt
 
 x-- shot expire change - 10 tiles off screen expires player shot, monster shot expires instantly
 

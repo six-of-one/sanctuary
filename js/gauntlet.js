@@ -5138,6 +5138,8 @@ var txsv = ":";
 							entity.type = TREASURE.FFIELDPOW;
 						if (k == 6 || k == 10 || k == 0)
 							entity.type = TREASURE.FFIELDDIM;
+						entity.frames = entity.type.frames;
+						entity.sx = entity.type.sx;
 					}
 					else
 						entity.type = TREASURE.FFIELDDIM;
