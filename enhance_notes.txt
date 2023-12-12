@@ -48,6 +48,15 @@ heu override code to place 2 digit item under: trap wall, shot wall, gudy wall, 
 
 adjust trap walls: remove trap now has to look for restore trap and v-v
 
+clear _dev_  _ops_ cookys
+
+shot expire change
+
+save rand load level for replay
+save highscore table for reload
+
+ncfi / pfi / sfi in gwal by code cnt
+
 
 imm issues:
 
@@ -92,7 +101,7 @@ port list:
 
 theif / mugger should fight monsters in path - get blocked by object on start, pushwall across path
 \_ this is, amazingly, way more difficult than expected to implement
-
+ \_ even blocking the theif in path is most challenging
 
 g1 gfx tiles
 - spirtes		-- decide how much of this we want / can use

@@ -1622,6 +1622,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 					ESCORE[1][0] = 8000;  ESCORE[2][0] = 7600;  ESCORE[3][0] = 7200;  ESCORE[4][0] = 6800;  ESCORE[5][0] = 6400;  ESCORE[6][0] = 6000;  ESCORE[7][0] = 5600;  ESCORE[8][0] = 5200;  ESCORE[9][0] = 4800;  ESCORE[10][0] = 4400;
 					ESCORE[1][1] = "ED "; ESCORE[2][1] = "BF "; ESCORE[3][1] = "LVR"; ESCORE[4][1] = "ELF"; ESCORE[5][1] = "RJF"; ESCORE[6][1] = "GEL"; ESCORE[7][1] = "SGM"; ESCORE[8][1] = "SMO"; ESCORE[9][1] = "AJM"; ESCORE[10][1] = "CJ ";
 				}
+// if given ref, load top 4
 				if (ref != undefined) {
 					ZSCORE[1][0] = to.number(ref.storage[STORAGE.Z1],19830);
 					ZSCORE[1][1] = ref.storage[STORAGE.NZ1] | "JHP";
