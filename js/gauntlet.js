@@ -1011,7 +1011,7 @@ Gauntlet = function() {
 
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: WALL.GREEN3,      gflr: "gfx/floor026.jpg",   gwal: "gfx/wall_T.png",   nornd: 1,    unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R", gshw: 3, gfi: 5 },
+      { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: WALL.GREEN3,      gflr: "gfx/floor026.jpg",   gwal: "gfx/wall_T.png",   nornd: 1,    unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R", gshw: 3, gfi: 4 },
       { name: 'Z gon',        url: "levels/glevelZ.png",                                        wall: WALL.ORANG9,      gflr: "gfx/g1floor0z.jpg",  gwal: "gfx/g1wallZ.png",               unpinx: 1,    music: 'nullm',      score:  1000, help: null },
 /*
       { name: 'Training',       url: "levels/trainer1.png", floor: FLOOR.LIGHT_STONE,           wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, tmdf: 1, nornd: 1, help: "Shoot ghosts and find the exit" },
@@ -1425,7 +1425,7 @@ Gauntlet = function() {
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
 					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
 					 if (sb < Mastermap.level.gshw && ad == TREASURE.SHOTWALL) { Mastercell.ptr.bwc = ENTLVLSHWAL; }
-					 if (sb < Mastermap.level.gfi && pixel >= 0x8100 && pixel <= 0x812F) Mastercell.ptr.bwc = ENTGFI;
+					 if (sb <= Mastermap.level.gfi && pixel >= 0x8100 && pixel <= 0x812F) Mastercell.ptr.bwc = ENTGFI;
 					 if (pixel == FKEXIT) Mastercell.ptr.sx = 16;	// NCFI invisible wall is fake exit (a non shootable, non blocking invisible wall... is just a floor tile)
 					 if (pixel == FKTELE || pixel == FKTELEB || pixel == FKTELEC) { Mastercell.ptr.sx = 19; Mastercell.ptr.frames = 7; }
 					 if (pixel == FKGORO) Mastercell.ptr.sx = 17;
