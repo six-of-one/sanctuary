@@ -34,7 +34,7 @@ Gauntlet = function() {
 // Mth, Mtw - level master width & height to make rotates easier
 // gwal - general wall pointer when walls arent using backgrounds.png, GWDEF - def start of walls in gwal, GSHW - default for wall & shotwall count in gwal
 // ENTLVLWAL - gwal code to tell engine this is an ent showing as a wall, {ent}.aswal is the local flag
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, GWDEF = 2, GSHW = 1, ENTLVLWAL = -6, ENTLVLSHWAL = -5, NX = 0, NY = 0,
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, GWDEF = 2, GSHW = 1, ENTLVLWAL = -6, ENTLVLSHWAL = -5, ENTGFI = -4, NX = 0, NY = 0,
 // levelwide master values for unpins, unpin high/low x, high/lowy, mirror and rotates
 		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
 // data set for map pixels, hue override pixels, moving exits (3), pick one real exit - rest fake (2), phasewalls (4), tile render master, Vx, Vy to .vx, .vy: drew this ent across upin line
@@ -1006,7 +1006,8 @@ Gauntlet = function() {
 // added gauntlet 1 levels as g1level{n}, gauntlet 2 as g2level{n}
 // gflr is gfx file for floor tiles
 // gwal is gfx file for custom: walls, shotwalls, shadows, nc/p/s-fi
-//          gshw - wall / shotwall count > 1, gshd - true if shadow set in gwal is used
+//          gshw - wall / shotwall count > 1, gshd - true if shadow set in gwal is used, gfi - count of fake items in gwal, replaces from start of fi list
+//          * also add cust doors to gwal
 
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
@@ -1424,6 +1425,7 @@ Gauntlet = function() {
 					 if (ad == TREASURE.SHOTWALL) { Mastercell.ptr.sy = Mastermap.level.wall; if (sb > 0) Mastercell.ptr.sy = sb + 1; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
 					 if (ad == TREASURE.SHOTWALL2) { Mastercell.ptr.sy = sb + 17; Mastercell.ptr.sx = walltype(tx, ty, map, iswall); Mastercell.ptr.aswall = true;}
 					 if (sb < Mastermap.level.gshw && ad == TREASURE.SHOTWALL) { Mastercell.ptr.bwc = ENTLVLSHWAL; }
+					 if (sb < Mastermap.level.gfi && pixel >= 0x8100 && pixel <= 0x812F) Mastercell.ptr.bwc = ENTGFI;
 					 if (pixel == FKEXIT) Mastercell.ptr.sx = 16;	// NCFI invisible wall is fake exit (a non shootable, non blocking invisible wall... is just a floor tile)
 					 if (pixel == FKTELE || pixel == FKTELEB || pixel == FKTELEC) { Mastercell.ptr.sx = 19; Mastercell.ptr.frames = 7; }
 					 if (pixel == FKGORO) Mastercell.ptr.sx = 17;
@@ -6262,6 +6264,7 @@ var txsv = ":";
 					if (entity.bwc == ENTLVLWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = entity.sb + GWDEF; entity.svsy = entity.sy; }
 					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8100 && entity.pixel <= 0x812F || entity.pixel == PUSHWALEN) entity.spriteset = this.sprites.shotwalls;
 					if (entity.bwc == ENTLVLSHWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = entity.sb + GWDEF + Mastermap.level.gshw; }
+					if (entity.bwc == ENTGFI && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = GWDEF + Mastermap.level.gshw * 2; }
 					}
 				else
 				entity.spriteset = sprites;
