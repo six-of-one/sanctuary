@@ -1674,12 +1674,6 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 					document.getElementById("elfscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ESCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+ESCORE[i][0]+'</TD></TR>';
 				}
 
-/// TEST - remove
-deleteCookie("hindex");
-
-/// TEST - remove
-
-
 		};
 
 // loop in score for each score table, sliding scores down as it goes
