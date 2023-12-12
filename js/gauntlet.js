@@ -1623,23 +1623,41 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 					ESCORE[1][1] = "ED "; ESCORE[2][1] = "BF "; ESCORE[3][1] = "LVR"; ESCORE[4][1] = "ELF"; ESCORE[5][1] = "RJF"; ESCORE[6][1] = "GEL"; ESCORE[7][1] = "SGM"; ESCORE[8][1] = "SMO"; ESCORE[9][1] = "AJM"; ESCORE[10][1] = "CJ ";
 				}
 				if (ref != undefined) {
-					ZSCORE[1][0] = to.number(ref.storage[STORAGE.Z1],10000);
-					ZSCORE[1][1] = ref.storage[STORAGE.NZ1] | "B F";
+					ZSCORE[1][0] = to.number(ref.storage[STORAGE.Z1],19830);
+					ZSCORE[1][1] = ref.storage[STORAGE.NZ1] | "JHP";
 					WSCORE[1][0] = to.number(ref.storage[STORAGE.W1],10000);
-					WSCORE[1][1] = ref.storage[STORAGE.NW1] | "HAL";
+					WSCORE[1][1] = ref.storage[STORAGE.NW1] | "JHP";
 					VSCORE[1][0] = to.number(ref.storage[STORAGE.V1],10000);
 					VSCORE[1][1] = ref.storage[STORAGE.NV1] | "JHP";
 					ESCORE[1][0] = to.number(ref.storage[STORAGE.E1],10000);
-					ESCORE[1][1] = ref.storage[STORAGE.NE1] | "ED ";
+					ESCORE[1][1] = ref.storage[STORAGE.NE1] | "JHP";
 
 					ZSCORE[2][0] = to.number(ref.storage[STORAGE.Z2],9500);
-					ZSCORE[2][1] = ref.storage[STORAGE.NZ2] | "DAN";
+					ZSCORE[2][1] = ref.storage[STORAGE.NZ2] | " Z ";
 					WSCORE[2][0] = to.number(ref.storage[STORAGE.W2],9500);
-					WSCORE[2][1] = ref.storage[STORAGE.NW2] | "ED ";
+					WSCORE[2][1] = ref.storage[STORAGE.NW2] | "RS ";
 					VSCORE[2][0] = to.number(ref.storage[STORAGE.V2],9500);
-					VSCORE[2][1] = ref.storage[STORAGE.NV2] | "EAR";
+					VSCORE[2][1] = ref.storage[STORAGE.NV2] | "BH ";
 					ESCORE[2][0] = to.number(ref.storage[STORAGE.E2],9500);
-					ESCORE[2][1] = ref.storage[STORAGE.NE2] | "BF ";
+					ESCORE[2][1] = ref.storage[STORAGE.NE2] | " - ";
+
+					ZSCORE[3][0] = to.number(ref.storage[STORAGE.Z3],9000);
+					ZSCORE[3][1] = ref.storage[STORAGE.NZ3] | "LVR";
+					WSCORE[3][0] = to.number(ref.storage[STORAGE.W3],9000);
+					WSCORE[3][1] = ref.storage[STORAGE.NW3] | "ZON";
+					VSCORE[3][0] = to.number(ref.storage[STORAGE.V3],9000);
+					VSCORE[3][1] = ref.storage[STORAGE.NV3] | "MDN";
+					ESCORE[3][0] = to.number(ref.storage[STORAGE.E3],9000);
+					ESCORE[3][1] = ref.storage[STORAGE.NE3] | "JHP";
+
+					ZSCORE[4][0] = to.number(ref.storage[STORAGE.Z4],8500);
+					ZSCORE[4][1] = ref.storage[STORAGE.NZ4] | "JHP";
+					WSCORE[4][0] = to.number(ref.storage[STORAGE.W4],8500);
+					WSCORE[4][1] = ref.storage[STORAGE.NW4] | "JHP";
+					VSCORE[4][0] = to.number(ref.storage[STORAGE.V4],8500);
+					VSCORE[4][1] = ref.storage[STORAGE.NV4] | "JHP";
+					ESCORE[4][0] = to.number(ref.storage[STORAGE.E4],8500);
+					ESCORE[4][1] = ref.storage[STORAGE.NE4] | "JHP";
 				}
 
 				for (var i = 1; i <= 10; i++)
@@ -1652,6 +1670,8 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 
 		};
 
+// loop in score for each score table, sliding scores down as it goes
+// storage only preserves top 4 scores, as arcade machine did when reset
 		function setscorez(sc, tag) {
 
 				var xf, xb, xt;
@@ -1676,6 +1696,84 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 				scores.storage[STORAGE.NZ2] = ZSCORE[2][1];
 				scores.storage[STORAGE.NZ3] = ZSCORE[3][1];
 				scores.storage[STORAGE.NZ4] = ZSCORE[4][1];
+			};
+
+		function setscorew(sc, tag) {
+
+				var xf, xb, xt;
+				if (sc > 0)
+				for (var i = 1; i <= 10; i++) {
+					if (sc > WSCORE[i][0]) { xf = WSCORE[i][0]; xt = WSCORE[i][1]; WSCORE[i][0] = sc; WSCORE[i][1] = tag; sc = 0; }
+					else if (sc == 0) {
+							xb = WSCORE[i][0];
+							tag = WSCORE[i][1];
+							WSCORE[i][0] = xf;
+							WSCORE[i][1] = xt;
+							xf = xb;
+							xt = tag;
+						}
+					}
+// save top 4
+				scores.storage[STORAGE.W1]  = WSCORE[1][0];
+				scores.storage[STORAGE.W2]  = WSCORE[2][0];
+				scores.storage[STORAGE.W3]  = WSCORE[3][0];
+				scores.storage[STORAGE.W4]  = WSCORE[4][0];
+				scores.storage[STORAGE.NW1] = WSCORE[1][1];
+				scores.storage[STORAGE.NW2] = WSCORE[2][1];
+				scores.storage[STORAGE.NW3] = WSCORE[3][1];
+				scores.storage[STORAGE.NW4] = WSCORE[4][1];
+			};
+
+		function setscorev(sc, tag) {
+
+				var xf, xb, xt;
+				if (sc > 0)
+				for (var i = 1; i <= 10; i++) {
+					if (sc > VSCORE[i][0]) { xf = VSCORE[i][0]; xt = VSCORE[i][1]; VSCORE[i][0] = sc; VSCORE[i][1] = tag; sc = 0; }
+					else if (sc == 0) {
+							xb = VSCORE[i][0];
+							tag = VSCORE[i][1];
+							VSCORE[i][0] = xf;
+							VSCORE[i][1] = xt;
+							xf = xb;
+							xt = tag;
+						}
+					}
+// save top 4
+				scores.storage[STORAGE.V1]  = VSCORE[1][0];
+				scores.storage[STORAGE.V2]  = VSCORE[2][0];
+				scores.storage[STORAGE.V3]  = VSCORE[3][0];
+				scores.storage[STORAGE.V4]  = VSCORE[4][0];
+				scores.storage[STORAGE.NV1] = VSCORE[1][1];
+				scores.storage[STORAGE.NV2] = VSCORE[2][1];
+				scores.storage[STORAGE.NV3] = VSCORE[3][1];
+				scores.storage[STORAGE.NV4] = VSCORE[4][1];
+			};
+
+		function setscoree(sc, tag) {
+
+				var xf, xb, xt;
+				if (sc > 0)
+				for (var i = 1; i <= 10; i++) {
+					if (sc > ESCORE[i][0]) { xf = ESCORE[i][0]; xt = ESCORE[i][1]; ESCORE[i][0] = sc; ESCORE[i][1] = tag; sc = 0; }
+					else if (sc == 0) {
+							xb = ESCORE[i][0];
+							tag = ESCORE[i][1];
+							ESCORE[i][0] = xf;
+							ESCORE[i][1] = xt;
+							xf = xb;
+							xt = tag;
+						}
+					}
+// save top 4
+				scores.storage[STORAGE.E1]  = ESCORE[1][0];
+				scores.storage[STORAGE.E2]  = ESCORE[2][0];
+				scores.storage[STORAGE.E3]  = ESCORE[3][0];
+				scores.storage[STORAGE.E4]  = ESCORE[4][0];
+				scores.storage[STORAGE.NE1] = ESCORE[1][1];
+				scores.storage[STORAGE.NE2] = ESCORE[2][1];
+				scores.storage[STORAGE.NE3] = ESCORE[3][1];
+				scores.storage[STORAGE.NE4] = ESCORE[4][1];
 			};
 
   //=========================================================================
@@ -2698,9 +2796,9 @@ var lvu = document.getElementById("flvl").value;
 				 res = res + ablist.charAt(rnd); }
 
 				 if (this.player.type.name == "wizard") setscorez((this.player.score / this.player.droppedcoins), res);
-				 if (this.player.type.name == "warrior") setscorez((this.player.score / this.player.droppedcoins), res);
-				 if (this.player.type.name == "valkyrie") setscorez((this.player.score / this.player.droppedcoins), res);
-				 if (this.player.type.name == "elf") setscorez((this.player.score / this.player.droppedcoins), res);
+				 if (this.player.type.name == "warrior") setscorew((this.player.score / this.player.droppedcoins), res);
+				 if (this.player.type.name == "valkyrie") setscorev((this.player.score / this.player.droppedcoins), res);
+				 if (this.player.type.name == "elf") setscoree((this.player.score / this.player.droppedcoins), res);
 		}
 
     },
