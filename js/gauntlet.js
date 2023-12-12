@@ -3946,7 +3946,6 @@ vartxt.value += "	]\n"
 			if (Math.random() < 0.11) this.lobnotr = true; // occasionally fire a non tracker
 			this.lobhot = false;	// shot wont hit until "hot"
 			}
-		 this.to = heartbeet;		// measure seconds weapon is flying -- this needs recode to millisecond timestamp()
 		 this.timeout = timestamp();
 // get help disp for weapon if set
 		 this.nohlp = type.nohlp;
@@ -3983,8 +3982,22 @@ vartxt.value += "	]\n"
 		 }
 		 else
       this.frame = this.type.rotate ? animate(frame, this.type.fpf, 8) : this.dir;
-		if (this.lsuper) this.frame = SUPERSHTFR;
-		 if (this.to < heartbeet) Mastermap.remove(this);		// should either be: a. timestamp() test - b. distance test
+  var voshl = 10;		// life of shot beyond viewport
+		if (this.lsuper) { this.frame = SUPERSHTFR; voshl = 25; }
+		if (game.viewport.outside(this.x, this.y, TILE, TILE)) {
+
+	  var px = p2t(this.x); py = p2t(this.y);
+			if (this.px == undefined) { this.px = px; this.py = py; }
+			if (distance(px,0,this.px,0) > voshl || distance(0,py,0,this.py) > voshl) {
+/// TEST - remove
+				reloaded.addTreasure(this.x, this.y, TREASURE.POTIONORG);
+/// TEST - remove
+					this.px = undefined;		// reset - these are in a pool
+					Mastermap.remove(this);
+				}
+
+			if (this.type.monster) { Mastermap.remove(this); this.px = undefined; }
+			}
     }
 
   });
