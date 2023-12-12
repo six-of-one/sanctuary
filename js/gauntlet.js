@@ -1674,6 +1674,37 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 					document.getElementById("elfscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ESCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+ESCORE[i][0]+'</TD></TR>';
 				}
 
+/// TEST - remove
+deleteCookie("_ops_"+"seldiff");
+deleteCookie("_ops_"+"sellvl");
+deleteCookie("_ops_"+"whue");
+deleteCookie("_ops_"+"fhue");
+deleteCookie("_ops_"+"phue");
+deleteCookie("_ops_"+"ashue");
+deleteCookie("_ops_"+"vports");
+
+               deleteCookie("_ops_"+"seltut")
+               deleteCookie("_ops_"+"selg2tut")
+               deleteCookie("_ops_"+"seltutx")
+               deleteCookie("_dev_"+"mazsolv")
+               deleteCookie("_dev_"+"xunp")
+               deleteCookie("_dev_"+"yunp")
+               deleteCookie("_dev_"+"xmiror")
+               deleteCookie("_dev_"+"ymiror")
+               deleteCookie("_dev_"+"rotat")
+               deleteCookie("_dev_"+"invwal")
+               deleteCookie("_dev_"+"invhint")
+               deleteCookie("_dev_"+"spedis")
+               deleteCookie("_dev_"+"blrndlod")
+               deleteCookie("_dev_"+"forndlod")
+               deleteCookie("_dev_"+"nostal")
+               deleteCookie("_dev_"+"noah")
+               deleteCookie("_dev_"+"nommv")
+               deleteCookie("_dev_"+"noblend")
+               deleteCookie("_dev_"+"nogen")
+/// TEST - remove
+
+
 		};
 
 // loop in score for each score table, sliding scores down as it goes
