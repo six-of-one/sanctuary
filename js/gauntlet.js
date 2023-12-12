@@ -3989,9 +3989,6 @@ vartxt.value += "	]\n"
 	  var px = p2t(this.x); py = p2t(this.y);
 			if (this.px == undefined) { this.px = px; this.py = py; }
 			if (distance(px,0,this.px,0) > voshl || distance(0,py,0,this.py) > voshl) {
-/// TEST - remove
-				reloaded.addTreasure(this.x, this.y, TREASURE.POTIONORG);
-/// TEST - remove
 					this.px = undefined;		// reset - these are in a pool
 					Mastermap.remove(this);
 				}
