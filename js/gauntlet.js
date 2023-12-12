@@ -1610,44 +1610,47 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			if (ZSCORE[0] == undefined) {
 					ZSCORE[0] = 1;
 					ZSCORE[1] = [ ]; ZSCORE[2] = [ ]; ZSCORE[3] = [ ]; ZSCORE[4] = [ ]; ZSCORE[5] = [ ]; ZSCORE[6] = [ ]; ZSCORE[7] = [ ]; ZSCORE[8] = [ ]; ZSCORE[9] = [ ]; ZSCORE[10] = [ ]; 
-					ZSCORE[1, 0] = 19830; ZSCORE[2, 0] = 7600;  ZSCORE[3, 0] = 7200;  ZSCORE[4, 0] = 6800;  ZSCORE[5, 0] = 6400;  ZSCORE[6, 0] = 6000;  ZSCORE[7, 0] = 5600;  ZSCORE[8, 0] = 5200;  ZSCORE[9, 0] = 4800;  ZSCORE[10, 0] = 4400;
-					ZSCORE[1, 1] = "JHP"; ZSCORE[2, 1] = "DAN"; ZSCORE[3, 1] = "BAF"; ZSCORE[4, 1] = "WIZ"; ZSCORE[5, 1] = "EDL"; ZSCORE[6, 1] = "BOB"; ZSCORE[7, 1] = "WIL"; ZSCORE[8, 1] = "MEA"; ZSCORE[9, 1] = "SWC"; ZSCORE[10, 1] = "CAD";
-					WSCORE[1, 0] = 8000;  WSCORE[2, 0] = 7600;  WSCORE[3, 0] = 7200;  WSCORE[4, 0] = 6800;  WSCORE[5, 0] = 6400;  WSCORE[6, 0] = 6000;  WSCORE[7, 0] = 5600;  WSCORE[8, 0] = 5200;  WSCORE[9, 0] = 4800;  WSCORE[10, 0] = 4400;
-					WSCORE[1, 1] = "HAL"; WSCORE[2, 1] = "ED "; WSCORE[3, 1] = "D P"; WSCORE[4, 1] = "DUM"; WSCORE[5, 1] = "ED "; WSCORE[6, 1] = "BF "; WSCORE[7, 1] = "PMC"; WSCORE[8, 1] = "D H"; WSCORE[9, 1] = "DFT"; WSCORE[10, 1] = "GDS";
-					VSCORE[1, 0] = 8000;  VSCORE[2, 0] = 7600;  VSCORE[3, 0] = 7200;  VSCORE[4, 0] = 6800;  VSCORE[5, 0] = 6400;  VSCORE[6, 0] = 6000;  VSCORE[7, 0] = 5600;  VSCORE[8, 0] = 5200;  VSCORE[9, 0] = 4800;  VSCORE[10, 0] = 4400;
-					VSCORE[1, 1] = "EDL"; VSCORE[2, 1] = "EAR"; VSCORE[3, 1] = "KEN"; VSCORE[4, 1] = "MV "; VSCORE[5, 1] = "CAL"; VSCORE[6, 1] = "MDN"; VSCORE[7, 1] = "AMA"; VSCORE[8, 1] = "ZON"; VSCORE[9, 1] = "PCT"; VSCORE[10, 1] = "REZ";
-					ESCORE[1, 0] = 8000;  ESCORE[2, 0] = 7600;  ESCORE[3, 0] = 7200;  ESCORE[4, 0] = 6800;  ESCORE[5, 0] = 6400;  ESCORE[6, 0] = 6000;  ESCORE[7, 0] = 5600;  ESCORE[8, 0] = 5200;  ESCORE[9, 0] = 4800;  ESCORE[10, 0] = 4400;
-					ESCORE[1, 1] = "ED "; ESCORE[2, 1] = "BF "; ESCORE[3, 1] = "LVR"; ESCORE[4, 1] = "ELF"; ESCORE[5, 1] = "RJF"; ESCORE[6, 1] = "GEL"; ESCORE[7, 1] = "SGM"; ESCORE[8, 1] = "SMO"; ESCORE[9, 1] = "AJM"; ESCORE[10, 1] = "CJ ";
+					WSCORE[1] = [ ]; WSCORE[2] = [ ]; WSCORE[3] = [ ]; WSCORE[4] = [ ]; WSCORE[5] = [ ]; WSCORE[6] = [ ]; WSCORE[7] = [ ]; WSCORE[8] = [ ]; WSCORE[9] = [ ]; WSCORE[10] = [ ]; 
+					VSCORE[1] = [ ]; VSCORE[2] = [ ]; VSCORE[3] = [ ]; VSCORE[4] = [ ]; VSCORE[5] = [ ]; VSCORE[6] = [ ]; VSCORE[7] = [ ]; VSCORE[8] = [ ]; VSCORE[9] = [ ]; VSCORE[10] = [ ]; 
+					ESCORE[1] = [ ]; ESCORE[2] = [ ]; ESCORE[3] = [ ]; ESCORE[4] = [ ]; ESCORE[5] = [ ]; ESCORE[6] = [ ]; ESCORE[7] = [ ]; ESCORE[8] = [ ]; ESCORE[9] = [ ]; ESCORE[10] = [ ]; 
+					ZSCORE[1][0] = 19830; ZSCORE[2][0] = 7600;  ZSCORE[3][0] = 7200;  ZSCORE[4][0] = 6800;  ZSCORE[5][0] = 6400;  ZSCORE[6][0] = 6000;  ZSCORE[7][0] = 5600;  ZSCORE[8][0] = 5200;  ZSCORE[9][0] = 4800;  ZSCORE[10][0] = 4400;
+					ZSCORE[1][1] = "JHP"; ZSCORE[2][1] = "DAN"; ZSCORE[3][1] = "BAF"; ZSCORE[4][1] = "WIZ"; ZSCORE[5][1] = "EDL"; ZSCORE[6][1] = "BOB"; ZSCORE[7][1] = "WIL"; ZSCORE[8][1] = "MEA"; ZSCORE[9][1] = "SWC"; ZSCORE[10][1] = "CAD";
+					WSCORE[1][0] = 8000;  WSCORE[2][0] = 7600;  WSCORE[3][0] = 7200;  WSCORE[4][0] = 6800;  WSCORE[5][0] = 6400;  WSCORE[6][0] = 6000;  WSCORE[7][0] = 5600;  WSCORE[8][0] = 5200;  WSCORE[9][0] = 4800;  WSCORE[10][0] = 4400;
+					WSCORE[1][1] = "HAL"; WSCORE[2][1] = "ED "; WSCORE[3][1] = "D P"; WSCORE[4][1] = "DUM"; WSCORE[5][1] = "ED "; WSCORE[6][1] = "BF "; WSCORE[7][1] = "PMC"; WSCORE[8][1] = "D H"; WSCORE[9][1] = "DFT"; WSCORE[10][1] = "GDS";
+					VSCORE[1][0] = 8000;  VSCORE[2][0] = 7600;  VSCORE[3][0] = 7200;  VSCORE[4][0] = 6800;  VSCORE[5][0] = 6400;  VSCORE[6][0] = 6000;  VSCORE[7][0] = 5600;  VSCORE[8][0] = 5200;  VSCORE[9][0] = 4800;  VSCORE[10][0] = 4400;
+					VSCORE[1][1] = "EDL"; VSCORE[2][1] = "EAR"; VSCORE[3][1] = "KEN"; VSCORE[4][1] = "MV "; VSCORE[5][1] = "CAL"; VSCORE[6][1] = "MDN"; VSCORE[7][1] = "AMA"; VSCORE[8][1] = "ZON"; VSCORE[9][1] = "PCT"; VSCORE[10][1] = "REZ";
+					ESCORE[1][0] = 8000;  ESCORE[2][0] = 7600;  ESCORE[3][0] = 7200;  ESCORE[4][0] = 6800;  ESCORE[5][0] = 6400;  ESCORE[6][0] = 6000;  ESCORE[7][0] = 5600;  ESCORE[8][0] = 5200;  ESCORE[9][0] = 4800;  ESCORE[10][0] = 4400;
+					ESCORE[1][1] = "ED "; ESCORE[2][1] = "BF "; ESCORE[3][1] = "LVR"; ESCORE[4][1] = "ELF"; ESCORE[5][1] = "RJF"; ESCORE[6][1] = "GEL"; ESCORE[7][1] = "SGM"; ESCORE[8][1] = "SMO"; ESCORE[9][1] = "AJM"; ESCORE[10][1] = "CJ ";
 				}
 				if (ref != undefined) {
-					ZSCORE[1, 0] = to.number(ref.storage[STORAGE.Z1],10000);
-					ZSCORE[1, 1] = ref.storage[STORAGE.NZ1] | "B F";
-					WSCORE[1, 0] = to.number(ref.storage[STORAGE.W1],10000);
-					WSCORE[1, 1] = ref.storage[STORAGE.NW1] | "HAL";
-					VSCORE[1, 0] = to.number(ref.storage[STORAGE.V1],10000);
-					VSCORE[1, 1] = ref.storage[STORAGE.NV1] | "JHP";
-					ESCORE[1, 0] = to.number(ref.storage[STORAGE.E1],10000);
-					ESCORE[1, 1] = ref.storage[STORAGE.NE1] | "ED ";
+					ZSCORE[1][0] = to.number(ref.storage[STORAGE.Z1],10000);
+					ZSCORE[1][1] = ref.storage[STORAGE.NZ1] | "B F";
+					WSCORE[1][0] = to.number(ref.storage[STORAGE.W1],10000);
+					WSCORE[1][1] = ref.storage[STORAGE.NW1] | "HAL";
+					VSCORE[1][0] = to.number(ref.storage[STORAGE.V1],10000);
+					VSCORE[1][1] = ref.storage[STORAGE.NV1] | "JHP";
+					ESCORE[1][0] = to.number(ref.storage[STORAGE.E1],10000);
+					ESCORE[1][1] = ref.storage[STORAGE.NE1] | "ED ";
 
-					ZSCORE[2, 0] = to.number(ref.storage[STORAGE.Z2],9500);
-					ZSCORE[2, 1] = ref.storage[STORAGE.NZ2] | "DAN";
-					WSCORE[2, 0] = to.number(ref.storage[STORAGE.W2],9500);
-					WSCORE[2, 1] = ref.storage[STORAGE.NW2] | "ED ";
-					VSCORE[2, 0] = to.number(ref.storage[STORAGE.V2],9500);
-					VSCORE[2, 1] = ref.storage[STORAGE.NV2] | "EAR";
-					ESCORE[2, 0] = to.number(ref.storage[STORAGE.E2],9500);
-					ESCORE[2, 1] = ref.storage[STORAGE.NE2] | "BF ";
+					ZSCORE[2][0] = to.number(ref.storage[STORAGE.Z2],9500);
+					ZSCORE[2][1] = ref.storage[STORAGE.NZ2] | "DAN";
+					WSCORE[2][0] = to.number(ref.storage[STORAGE.W2],9500);
+					WSCORE[2][1] = ref.storage[STORAGE.NW2] | "ED ";
+					VSCORE[2][0] = to.number(ref.storage[STORAGE.V2],9500);
+					VSCORE[2][1] = ref.storage[STORAGE.NV2] | "EAR";
+					ESCORE[2][0] = to.number(ref.storage[STORAGE.E2],9500);
+					ESCORE[2][1] = ref.storage[STORAGE.NE2] | "BF ";
 				}
 
 				for (var i = 1; i <= 10; i++)
 				{
-					document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+WSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+WSCORE[i, 0]+'</TD></TR>';
-					document.getElementById("wizscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ZSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+ZSCORE[i, 0]+'</TD></TR>';
-					document.getElementById("valscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+VSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+VSCORE[i, 0]+'</TD></TR>';
-					document.getElementById("elfscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ESCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+ESCORE[i, 0]+'</TD></TR>';
+					document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+WSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+WSCORE[i][0]+'</TD></TR>';
+					document.getElementById("wizscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ZSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+ZSCORE[i][0]+'</TD></TR>';
+					document.getElementById("valscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+VSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+VSCORE[i][0]+'</TD></TR>';
+					document.getElementById("elfscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ESCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+ESCORE[i][0]+'</TD></TR>';
 				}
 
-		}
+		};
 
   //=========================================================================
   // PERFORMANCE - using arrays for (small) sets
