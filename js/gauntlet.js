@@ -1652,6 +1652,32 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 
 		};
 
+		function setscorez(sc, tag) {
+
+				var xf, xb, xt;
+				if (sc > 0)
+				for (var i = 1; i <= 10; i++) {
+					if (sc > ZSCORE[i][0]) { xf = ZSCORE[i][0]; xt = ZSCORE[i][1]; ZSCORE[i][0] = sc; ZSCORE[i][1] = tag; sc = 0; }
+					else if (sc == 0) {
+							xb = ZSCORE[i][0];
+							tag = ZSCORE[i][1];
+							ZSCORE[i][0] = xf;
+							ZSCORE[i][1] = xt;
+							xf = xb;
+							xt = tag;
+						}
+					}
+// save top 4
+				scores.storage[STORAGE.Z1]  = ZSCORE[1][0];
+				scores.storage[STORAGE.Z2]  = ZSCORE[2][0];
+				scores.storage[STORAGE.Z3]  = ZSCORE[3][0];
+				scores.storage[STORAGE.Z4]  = ZSCORE[4][0];
+				scores.storage[STORAGE.NZ1] = ZSCORE[1][1];
+				scores.storage[STORAGE.NZ2] = ZSCORE[2][1];
+				scores.storage[STORAGE.NZ3] = ZSCORE[3][1];
+				scores.storage[STORAGE.NZ4] = ZSCORE[4][1];
+			};
+
   //=========================================================================
   // PERFORMANCE - using arrays for (small) sets
   //=========================================================================
@@ -1876,7 +1902,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			cwar  = to.number(this.storage[STORAGE.CWAR],0);
 			cval  = to.number(this.storage[STORAGE.CVAL],0);
 			celf  = to.number(this.storage[STORAGE.CELF],0);
-//			scores = this;
+			scores = this;
 			curwiz = curwar = curval = curelf = " ";
 			igpots = gpots;	// track individual stats temp
 			igfuds = gfuds;
@@ -2671,11 +2697,10 @@ var lvu = document.getElementById("flvl").value;
 			var rnd = Math.floor(Math.random() * ablist.length);
 				 res = res + ablist.charAt(rnd); }
 
-	//			 if (this.player.type.name == "warrior")
-/* keep for new score setter
-			HSCORE[scoredex,0] = (this.player.score / this.player.droppedcoins);
-			HSCORE[scoredex,1] = res;
-			HSCORE[scoredex,2] = this.player.type.name; */
+				 if (this.player.type.name == "wizard") setscorez((this.player.score / this.player.droppedcoins), res);
+				 if (this.player.type.name == "warrior") setscorez((this.player.score / this.player.droppedcoins), res);
+				 if (this.player.type.name == "valkyrie") setscorez((this.player.score / this.player.droppedcoins), res);
+				 if (this.player.type.name == "elf") setscorez((this.player.score / this.player.droppedcoins), res);
 		}
 
     },
