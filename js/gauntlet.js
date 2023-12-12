@@ -1607,16 +1607,6 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 				document.getElementById("valscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">VALKYRIES</TD></TR>';
 				document.getElementById("elfscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">ELVES</TD></TR>';
 
-/// TEST - remove
-               for (var i = 1; i <= 500; i++)
-                {
-                               deleteCookie(i+"score");
-                               deleteCookie(i+"name");
-                               deleteCookie(i+"char");
-                }
-/// TEST - remove
-
-
 			if (ZSCORE[0] == undefined) {
 					ZSCORE[0] = 1;
 					ZSCORE[1] = [ ]; ZSCORE[2] = [ ]; ZSCORE[3] = [ ]; ZSCORE[4] = [ ]; ZSCORE[5] = [ ]; ZSCORE[6] = [ ]; ZSCORE[7] = [ ]; ZSCORE[8] = [ ]; ZSCORE[9] = [ ]; ZSCORE[10] = [ ]; 
