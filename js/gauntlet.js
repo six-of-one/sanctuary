@@ -84,15 +84,15 @@ Gauntlet = function() {
 	ideds, igpots, igfuds, igkeys, igspec, iglims, igtrs, igltrs, igexits, ifpots, ifkeys,
 // dps/hps display (preamrd - damage accum pre armor lowering total)
 	dpstim = 0, dpsacc = 0, prearmd = 0,
-// highscores, index and array
-	scoredex = 0,
-	scortabmax = 11,
-//	scores = null,
+// highscores, max table size, max view size, and arrays
+	scortabmax = 10,
+	scorviewmax = 10,
+// scores storage pointer and local score arrays
+	scores = null,
 	ZSCORE = [ ],
 	WSCORE = [ ],
 	VSCORE = [ ],
 	ESCORE = [ ],
-	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
 // invisible wall & shotable invisible are in INVWALSY, item 0 = INVWALA (0 shadow)
 //			G1WALL = [	0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 26	],
@@ -1660,7 +1660,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 					ESCORE[4][1] = ref.storage[STORAGE.NE4] | "JHP";
 				}
 
-				for (var i = 1; i <= 10; i++)
+				for (var i = 1; i <= scorviewmax; i++)
 				{
 					document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+WSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+WSCORE[i][0]+'</TD></TR>';
 					document.getElementById("wizscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ZSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+ZSCORE[i][0]+'</TD></TR>';
@@ -1676,7 +1676,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 
 				var xf, xb, xt;
 				if (sc > 0)
-				for (var i = 1; i <= 10; i++) {
+				for (var i = 1; i <= scortabmax; i++) {
 					if (sc > ZSCORE[i][0]) { xf = ZSCORE[i][0]; xt = ZSCORE[i][1]; ZSCORE[i][0] = sc; ZSCORE[i][1] = tag; sc = 0; }
 					else if (sc == 0) {
 							xb = ZSCORE[i][0];
@@ -1702,7 +1702,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 
 				var xf, xb, xt;
 				if (sc > 0)
-				for (var i = 1; i <= 10; i++) {
+				for (var i = 1; i <= scortabmax; i++) {
 					if (sc > WSCORE[i][0]) { xf = WSCORE[i][0]; xt = WSCORE[i][1]; WSCORE[i][0] = sc; WSCORE[i][1] = tag; sc = 0; }
 					else if (sc == 0) {
 							xb = WSCORE[i][0];
@@ -1728,7 +1728,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 
 				var xf, xb, xt;
 				if (sc > 0)
-				for (var i = 1; i <= 10; i++) {
+				for (var i = 1; i <= scortabmax; i++) {
 					if (sc > VSCORE[i][0]) { xf = VSCORE[i][0]; xt = VSCORE[i][1]; VSCORE[i][0] = sc; VSCORE[i][1] = tag; sc = 0; }
 					else if (sc == 0) {
 							xb = VSCORE[i][0];
@@ -1754,7 +1754,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 
 				var xf, xb, xt;
 				if (sc > 0)
-				for (var i = 1; i <= 10; i++) {
+				for (var i = 1; i <= scortabmax; i++) {
 					if (sc > ESCORE[i][0]) { xf = ESCORE[i][0]; xt = ESCORE[i][1]; ESCORE[i][0] = sc; ESCORE[i][1] = tag; sc = 0; }
 					else if (sc == 0) {
 							xb = ESCORE[i][0];
