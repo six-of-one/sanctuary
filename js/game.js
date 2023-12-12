@@ -744,8 +744,7 @@ Game.Math = {
 		var rot;
 		rot = spl_rot;
 
-// clear score board if displayed prev
-		if (spl_cyc == 11) $('scordiv').hide();
+// clear score board if not displayed
 
 //				document.getElementById("scordiv").style.visibility = "hidden";
 
@@ -754,6 +753,7 @@ Game.Math = {
 /// TEST - remove
 		spl_cyc = 11;
 /// TEST - remove
+		if (spl_cyc != 11) $('scordiv').hide();
 
 	  if (spl_cyc == 1)
 	{

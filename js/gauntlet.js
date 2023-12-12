@@ -88,10 +88,10 @@ Gauntlet = function() {
 	scoredex = 0,
 	scortabmax = 11,
 //	scores = null,
-	ZSCORE = [ 0, 0 ],
-	WSCORE = [ 0, 0 ],
-	VSCORE = [ 0, 0 ],
-	ESCORE = [ 0, 0 ],
+	ZSCORE = [ ],
+	WSCORE = [ ],
+	VSCORE = [ ],
+	ESCORE = [ ],
 	HSCORE = [ 0, "Names", "character" ],
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
 // invisible wall & shotable invisible are in INVWALSY, item 0 = INVWALA (0 shadow)
@@ -1607,8 +1607,9 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 				document.getElementById("valscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">VALKYRIES</TD></TR>';
 				document.getElementById("elfscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">ELVES</TD></TR>';
 
-			if (ZSCORE[0, 0] == undefined) {
-					ZSCORE[0, 0] = 1;
+			if (ZSCORE[0] == undefined) {
+					ZSCORE[0] = 1;
+					ZSCORE[1] = [ ]; ZSCORE[2] = [ ]; ZSCORE[3] = [ ]; ZSCORE[4] = [ ]; ZSCORE[5] = [ ]; ZSCORE[6] = [ ]; ZSCORE[7] = [ ]; ZSCORE[8] = [ ]; ZSCORE[9] = [ ]; ZSCORE[10] = [ ]; 
 					ZSCORE[1, 0] = 19830; ZSCORE[2, 0] = 7600;  ZSCORE[3, 0] = 7200;  ZSCORE[4, 0] = 6800;  ZSCORE[5, 0] = 6400;  ZSCORE[6, 0] = 6000;  ZSCORE[7, 0] = 5600;  ZSCORE[8, 0] = 5200;  ZSCORE[9, 0] = 4800;  ZSCORE[10, 0] = 4400;
 					ZSCORE[1, 1] = "JHP"; ZSCORE[2, 1] = "DAN"; ZSCORE[3, 1] = "BAF"; ZSCORE[4, 1] = "WIZ"; ZSCORE[5, 1] = "EDL"; ZSCORE[6, 1] = "BOB"; ZSCORE[7, 1] = "WIL"; ZSCORE[8, 1] = "MEA"; ZSCORE[9, 1] = "SWC"; ZSCORE[10, 1] = "CAD";
 					WSCORE[1, 0] = 8000;  WSCORE[2, 0] = 7600;  WSCORE[3, 0] = 7200;  WSCORE[4, 0] = 6800;  WSCORE[5, 0] = 6400;  WSCORE[6, 0] = 6000;  WSCORE[7, 0] = 5600;  WSCORE[8, 0] = 5200;  WSCORE[9, 0] = 4800;  WSCORE[10, 0] = 4400;
@@ -1624,7 +1625,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 					WSCORE[1, 0] = to.number(ref.storage[STORAGE.W1],10000);
 					WSCORE[1, 1] = ref.storage[STORAGE.NW1] | "HAL";
 					VSCORE[1, 0] = to.number(ref.storage[STORAGE.V1],10000);
-					VSCORE[1, 1] = ref.storage[STORAGE.NV1] | "EDL";
+					VSCORE[1, 1] = ref.storage[STORAGE.NV1] | "JHP";
 					ESCORE[1, 0] = to.number(ref.storage[STORAGE.E1],10000);
 					ESCORE[1, 1] = ref.storage[STORAGE.NE1] | "ED ";
 
@@ -1638,7 +1639,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 					ESCORE[2, 1] = ref.storage[STORAGE.NE2] | "BF ";
 				}
 
-				for (var i = 1; i <= 1; i++)
+				for (var i = 1; i <= 10; i++)
 				{
 					document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+WSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+WSCORE[i, 0]+'</TD></TR>';
 					document.getElementById("wizscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ZSCORE[i, 1]+'</TD><TD style="width:60%;text-align:right">'+ZSCORE[i, 0]+'</TD></TR>';
@@ -1823,6 +1824,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 /// TEST - remove
 //for (i = 1; i <= 81; i++) { deleteCookie(i+"char"); deleteCookie(i+"score"); deleteCookie(i+"name"); }
 		loadscortabl();
+		$('scordiv').hide();
     },
 
     onstart: function(event, previous, current, type, nlevel) {
@@ -2666,7 +2668,7 @@ var lvu = document.getElementById("flvl").value;
 			var rnd = Math.floor(Math.random() * ablist.length);
 				 res = res + ablist.charAt(rnd); }
 
-				 if (this.player.type.name == "warrior")
+	//			 if (this.player.type.name == "warrior")
 /* keep for new score setter
 			HSCORE[scoredex,0] = (this.player.score / this.player.droppedcoins);
 			HSCORE[scoredex,1] = res;
