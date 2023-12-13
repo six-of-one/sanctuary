@@ -1630,40 +1630,44 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 // if given ref, load top 4
 				if (ref != undefined) {
 					ZSCORE[1][0] = to.number(ref.storage[STORAGE.Z1],19830);
-					ZSCORE[1][1] = ref.storage[STORAGE.NZ1] | "JHP";
+					ZSCORE[1][1] = ref.storage[STORAGE.NZ1];
 					WSCORE[1][0] = to.number(ref.storage[STORAGE.W1],10000);
-					WSCORE[1][1] = ref.storage[STORAGE.NW1] | "JHP";
+					WSCORE[1][1] = ref.storage[STORAGE.NW1];
 					VSCORE[1][0] = to.number(ref.storage[STORAGE.V1],10000);
-					VSCORE[1][1] = ref.storage[STORAGE.NV1] | "JHP";
+					VSCORE[1][1] = ref.storage[STORAGE.NV1];
 					ESCORE[1][0] = to.number(ref.storage[STORAGE.E1],10000);
-					ESCORE[1][1] = ref.storage[STORAGE.NE1] | "JHP";
+					ESCORE[1][1] = ref.storage[STORAGE.NE1];
 
 					ZSCORE[2][0] = to.number(ref.storage[STORAGE.Z2],9500);
-					ZSCORE[2][1] = ref.storage[STORAGE.NZ2] | " Z ";
+					ZSCORE[2][1] = ref.storage[STORAGE.NZ2];
+					if (ZSCORE[2][1] < " ") ZSCORE[2][1] = " Z ";
 					WSCORE[2][0] = to.number(ref.storage[STORAGE.W2],9500);
-					WSCORE[2][1] = ref.storage[STORAGE.NW2] | "RS ";
+					WSCORE[2][1] = ref.storage[STORAGE.NW2];
+					if (WSCORE[2][1] < " ") WSCORE[2][1] = "RS ";
 					VSCORE[2][0] = to.number(ref.storage[STORAGE.V2],9500);
-					VSCORE[2][1] = ref.storage[STORAGE.NV2] | "BH ";
+					VSCORE[2][1] = ref.storage[STORAGE.NV2];
+					if (VSCORE[2][1] < " ") VSCORE[2][1] = "BH ";
 					ESCORE[2][0] = to.number(ref.storage[STORAGE.E2],9500);
-					ESCORE[2][1] = ref.storage[STORAGE.NE2] | " - ";
+					ESCORE[2][1] = ref.storage[STORAGE.NE2];
+					if (ESCORE[2][1] < " ") ESCORE[2][1] = " _ ";
 
 					ZSCORE[3][0] = to.number(ref.storage[STORAGE.Z3],9000);
-					ZSCORE[3][1] = ref.storage[STORAGE.NZ3] | "LVR";
+					ZSCORE[3][1] = ref.storage[STORAGE.NZ3];
 					WSCORE[3][0] = to.number(ref.storage[STORAGE.W3],9000);
-					WSCORE[3][1] = ref.storage[STORAGE.NW3] | "ZON";
+					WSCORE[3][1] = ref.storage[STORAGE.NW3];
 					VSCORE[3][0] = to.number(ref.storage[STORAGE.V3],9000);
-					VSCORE[3][1] = ref.storage[STORAGE.NV3] | "MDN";
+					VSCORE[3][1] = ref.storage[STORAGE.NV3];
 					ESCORE[3][0] = to.number(ref.storage[STORAGE.E3],9000);
-					ESCORE[3][1] = ref.storage[STORAGE.NE3] | "JHP";
+					ESCORE[3][1] = ref.storage[STORAGE.NE3];
 
 					ZSCORE[4][0] = to.number(ref.storage[STORAGE.Z4],8500);
-					ZSCORE[4][1] = ref.storage[STORAGE.NZ4] | "JHP";
+					ZSCORE[4][1] = ref.storage[STORAGE.NZ4];
 					WSCORE[4][0] = to.number(ref.storage[STORAGE.W4],8500);
-					WSCORE[4][1] = ref.storage[STORAGE.NW4] | "JHP";
+					WSCORE[4][1] = ref.storage[STORAGE.NW4];
 					VSCORE[4][0] = to.number(ref.storage[STORAGE.V4],8500);
-					VSCORE[4][1] = ref.storage[STORAGE.NV4] | "JHP";
+					VSCORE[4][1] = ref.storage[STORAGE.NV4];
 					ESCORE[4][0] = to.number(ref.storage[STORAGE.E4],8500);
-					ESCORE[4][1] = ref.storage[STORAGE.NE4] | "JHP";
+					ESCORE[4][1] = ref.storage[STORAGE.NE4];
 				}
 
 				for (var i = 1; i <= scorviewmax; i++)
