@@ -54,6 +54,8 @@ save highscore table for reload
 
 imm issues:
 
+shop, ssop, unpins, mirrors code not finished yet
+
 
 may want to up max skill that stores highscores
 (this is janky tho and needs tested as higher skills add a lot of helper items)
@@ -128,7 +130,6 @@ save system via cooky - needs adjust to take less cooky space
 (way to look at all scores ?, clear below top 10 & clear all, send to server?)
 
 finish g1 map population
-finish wall layers
 
 g1 audio elements swap in	-> ref genesis sound test for note s
 
