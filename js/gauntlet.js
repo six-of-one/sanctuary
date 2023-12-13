@@ -47,19 +47,19 @@ Gauntlet = function() {
 		ftilestr, fcellstr,
 //	custom g1 tiler on 0x00000F code of floor tiles
 // FCUSTILE is after brikover last wall cover in backgrounds.png
-		FCUSTILE = 37, FCUSTIL2 = 0,
+		FCUSTILE = 40, FCUSTIL2 = 0,
 // row of wall shadows, spriteset for shadows
 		SHADTILE = 1, shadowtiles,
 // tile number column of visual path mapper hint/cheet in row 0
 		MAPGPS = 15,
 // old destoryable wall single cell of "rubble" appearance = replaced by shotwalls.png entire wall shape set with rubbles (or individual gwall set)
-		FDESTWALL = 38,
+//		FDESTWALL = 38,
 // fake items in shotwalls.png
 		FAKES = 29,
 // not used ?
 		PWSY = 30,
 // invisible wall total cheat (not the shot hint) - prob. remove this
-		HINTIV = 40,
+		HINTIV = 29,
 // invisible wall display: 404000 level walls are invisible - all others visible
 // except: PFI/SFI (perm & shootable) fakes = 0x00000F code are invisible and NOT hinted by shot walls
 // entity wall inv pointers (2) - used by random walls, cycle walls, level master pointer to invshothint.png, that ghosts walls when shot
@@ -529,7 +529,7 @@ Gauntlet = function() {
 									MIN: 1, MAX: 14 }, FLVLRND = null,
 // jvsg walls - 32 x 32 px per each wall "unit" - rows 2 - 7 of backgrounds.png
       WALL  = { 	INVIS: 1, BLUE: 2, BLUE_BRICK: 3, PURPLE_TILE: 4, BLUE_COBBLE: 5, PURPLE_COBBLE: 6, CONCRETE: 7,
-// g1 wall codes - rows 8 - 36 in backgrounds.png
+// g1 wall codes - rows 8 - 39 in backgrounds.png
 // --- rows 27 - 36 are overlay patterns with the previous walls all being solid colors
 // --- these consist of 2 versions same pattern x 4 - a "light" and a "dark", not precise opposites but optimized
 // --- and a 5th pattern of rubble topped walls and destroyable (shootable) walls
@@ -537,8 +537,8 @@ Gauntlet = function() {
 								BROWN1: 11, BROWN24: 12, RED5: 13, ORANG9: 14, ORANG31: 15, YELLOW10: 16,
 								PINK34: 17, PURPLE77: 18, PURPLE30: 19,
 								BLUE8: 20, BLUE25:21, BLUE28: 22,
-								GREEN3: 23, GREEN16: 24, GREEN50: 25, G2GREEN99: 26,
-									G1BRICKL: 27, G1BRICKD: 28, BRICK2L: 29, BRICK2D: 30, ASYML: 31, ASYMD: 32, XBRIKL: 33, XBRIKD: 34, G5COBRIK: 35, DESTBRIK: 36,
+								GREEN3: 23, GREEN16: 24, GREEN50: 25, G2GREEN99: 26, PINKPURP: 27, BLPKCY: 28, INVW: 39,
+									G1BRICKL: 30, G1BRICKD: 31, BRICK2L: 32, BRICK2D: 33, ASYML: 34, ASYMD: 35, XBRIKL: 36, XBRIKD: 37, G5COBRIK: 38, DESTBRIK: 39,
 									MIN: 1, MAX: 36 },
       EVENT = {
         START_LEVEL:         0,
@@ -6119,8 +6119,8 @@ var txsv = ":";
 						if (fcellstr.pixel == 0 || isp(fcellstr.pixel,0xA08000) && (fcellstr.pixel & MEXLOB || !map.level.gflr)) // underneath an invisible wall - load as under an ent
 								this.tile(ctx, cell.spriteset, nfl, nft, tx, ty);
 
-						cell.bwc = 39; // currently all blank row
-						if (chtinv) { this.tile(ctx, cell.spriteset, cell.wall, HINTIV, tx, ty); cell.bwc = HINTIV; }
+						cell.bwc = 41; // currently all blank row
+						if (chtinv) { this.tile(ctx, sprites, cell.wall, HINTIV, tx, ty); cell.bwc = HINTIV; }
 					}
 			  }
 			else {		// this is some ent - copy floor tile under it from imm. previous
