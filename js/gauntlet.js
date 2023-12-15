@@ -6276,10 +6276,12 @@ var txsv = ":";
 					if (entity.pixel >= 0x8210 && entity.pixel <= 0x822F || entity.pixel >= 0x8100 && entity.pixel <= 0x812F || entity.pixel == PUSHWALEN) entity.spriteset = this.sprites.shotwalls;
 					if (entity.bwc == ENTLVLSHWAL && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = entity.sb + GWDEF + Mastermap.level.gshw; }
 					if (entity.bwc == ENTGFI && Mastermap.level.gwal != undefined) { var gdr = 0; if (Mastermap.level.gdor != undefined) gdr = Math.abs(Mastermap.level.gdor); entity.spriteset = gwal; entity.sy = gdr + GWDEF + Mastermap.level.gshw * 2; }
-					if (entity.bwc == ENTLVLDOOR && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = GWDEF + Mastermap.level.gshw * 2; }
 					}
-				else
-				entity.spriteset = sprites;
+				else {
+					if (entity.bwc == ENTLVLDOOR && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = GWDEF + Mastermap.level.gshw * 2; }
+					else
+						entity.spriteset = sprites;
+					}
 				}
 			entity.vx = 0; entity.vy = 0;
         if (entity.active && (!entity.onrender || entity.onrender(frame) !== false) && !viewport.outside(entity.x, entity.y, TILE, TILE)) {
