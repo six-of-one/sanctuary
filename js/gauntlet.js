@@ -40,7 +40,7 @@ Gauntlet = function() {
 // ENTGITM - 10 items (or poss. more) past door gfx can also be swapped - sy = 10, sx = 16 - 26 (or more)
 // ENTGFI - past shotwalls (+door) are fake item replacements
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, GWDEF = 2, GSHW = 1, 
-		ENTLVLDOOR = -3, ENTLVLWAL = -6, ENTLVLSHWAL = -5, ENTGFI = -4, ENTGITM = -8, gitmrow = 10, gitmst = 16,
+		ENTLVLDOOR = -3, ENTLVLWAL = -6, ENTLVLSHWAL = -5, ENTGFI = -4, ENTGITM = -8, gitmrow = 10, gitmst = 16, gitmex = 23,
 		NX = 0, NY = 0,
 // levelwide master values for unpins, unpin high/low x, high/lowy, mirror and rotates
 		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
@@ -1025,7 +1025,7 @@ Gauntlet = function() {
 
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: 0x18,             gflr: "gfx/floor009.jpg",   gwal: "gfx/wall_T.png",    nornd: 1,   unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R", gshw: 3, gfi: 7, gdor: 1 },
+      { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: 0x18,             gflr: "gfx/floor009.jpg",   gwal: "gfx/wall_T.png",    nornd: 1,   unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R", gshw: 3, gfi: 7, gdor: 1, gitm: 2 },
       { name: 'Z gon',        url: "levels/glevelZ.png",                                        wall: WALL.ORANG9,      gflr: "gfx/g1floor0z.jpg",  gwal: "gfx/g1wallZ.png",               unpinx: 1,    music: 'nullm',      score:  1000, help: null },
 /*
       { name: 'Training',       url: "levels/trainer1.png", floor: FLOOR.LIGHT_STONE,           wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, tmdf: 1, nornd: 1, help: "Shoot ghosts and find the exit" },
@@ -1376,6 +1376,8 @@ Gauntlet = function() {
 			 {
 				 switch(type(pixel)) {
 					case 0: spref.addExit(x, y, DOOR.EXIT);
+// gitm catch
+							if (Mastercell.ptr.sy == gitmrow && Mastercell.ptr.sx == gitmex && Mastermap.level.gitm >= (gitmex - gitmst)) Mastercell.ptr.bwc = ENTGITM;
 							break;
 					case 1: spref.addExit(x, y, DOOR.EXIT4);
 							break;
@@ -1464,6 +1466,9 @@ Gauntlet = function() {
 					 if (sb < Mastermap.level.gshw && ad != TREASURE.WALLPASS2 && ad != TREASURE.WALLGUD2) Mastercell.ptr.bwc = ENTLVLWAL;
 					 Mastercell.ptr.aswall = true;
 					 }
+// gitm catch
+		  var gtst = Mastercell.ptr.sx - gitmst;
+				if (Mastercell.ptr.sy == gitmrow && Mastercell.ptr.sx >= gitmst && gtst < Mastermap.level.gitm) Mastercell.ptr.bwc = ENTGITM;
 
 				 Mastercell.ptr.lvlwall = (sb == 0 && (ad == TREASURE.WALLRND || ad == TREASURE.WALLPHS || ad == TREASURE.WALLGUD || ad == TREASURE.WALLPASS || ad == TREASURE.SHOTWALL)); // lvlwall - ent wall in lvl wall color
 				 }
@@ -6289,6 +6294,7 @@ var txsv = ":";
 					}
 				else {
 					if (entity.bwc == ENTLVLDOOR && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = GWDEF + Mastermap.level.gshw * 2; }
+					else if (entity.bwc == ENTGITM && Mastermap.level.gwal != undefined) { entity.spriteset = gwal; entity.sy = GWDEF + Mastermap.level.gshw * 2; }
 					else
 						entity.spriteset = sprites;
 					}
