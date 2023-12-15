@@ -51,6 +51,8 @@ adjust trap walls: remove trap now has to look for restore trap and v-v
 save rand load level for replay
 save highscore table for reload
 
+gwal door replace over: gdor = 1
+
 
 imm issues:
 
