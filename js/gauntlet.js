@@ -325,24 +325,24 @@ Gauntlet = function() {
 		LWAT = 0x8140, LLAV = 0x8150, LSLM = 0x8160,
 
       TREASURE = {
-        HEALTH:            { sx: 0,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:  10, health:  100,               canbeshot: 2,         sound: 'collectfood',   nohlp: 16 },
+        HEALTH:            { sx: 21, sy: 10,   frames: 1,                 fpf: FPS/10,   score:  10, health:  100,               canbeshot: 2,         sound: 'collectfood',   nohlp: 16 },
         HEALRND:           { sx: 2,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:  10, health:  200,               canbeshot: 2,         sound: 'collectfood',   nohlp: 74 },
         FOOD1:             { sx: 3,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:  10, health:  100,               canbeshot: 3,         sound: 'collectfood',   nohlp: 16 },
         FOOD2:             { sx: 4,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:  10, health:  100,               canbeshot: 3,         sound: 'collectfood',   nohlp: 16 },
         FOOD3:             { sx: 5,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:  10, health:  100,               canbeshot: 3,         sound: 'collectfood',   nohlp: 16 },
-        POISON:            { sx: 1,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:   0, damage:  50,  poison: true, canbeshot: 2,         sound: 'collectpotion', nohlp: 80 },
-        KEY:               { sx: 21, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 100,               key: true,                          sound: 'collectkey',    nohlp: 18 },
-        KEYPILE:           { sx: 22, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 100,               key: true,                          sound: 'collectkey',    nohlp: 18 },
-        POTION:            { sx: 6,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:  50,               potion: true, canbeshot: 2,         sound: 'collectpotion', nohlp: 19 },
+        POISON:            { sx: 22, sy: 11,   frames: 1,                 fpf: FPS/10,   score:   0, damage:  50,  poison: true, canbeshot: 2,         sound: 'collectpotion', nohlp: 80 },
+        KEY:               { sx: 16, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 100,               key: true,                          sound: 'collectkey',    nohlp: 18 },
+        KEYPILE:           { sx: 28, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 100,               key: true,                          sound: 'collectkey',    nohlp: 18 },
+        POTION:            { sx: 20, sy: 10,   frames: 1,                 fpf: FPS/10,   score:  50,               potion: true, canbeshot: 2,         sound: 'collectpotion', nohlp: 19 },
         POTIONORG:         { sx: 7,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:  50,               potion: true, canbeshot: 0,         sound: 'collectpotion', nohlp: 19 },
         BADPOT:            { sx: 8,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:   0, damage:  50,  poison: true, canbeshot: 2,         sound: 'collectpotion', nohlp: 80 },
-        GOLD:              { sx: 16, sy: 10,   frames: 3,                 fpf: FPS/10,   score: 100, scmult: 1,    troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 14, blkhlp: 15 },
-        LOCKED:            { sx: 19, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 500, lock: true,   gud: 1,                             sound: 'unlkches',      nohlp: 56 },
-        BAG:               { sx: 20, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 500, scmult: 3.5,  troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 15, blkhlp: 14 },
+        GOLD:              { sx: 17, sy: 10,   frames: 3,                 fpf: FPS/10,   score: 100, scmult: 1,    troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 14, blkhlp: 15 },
+        LOCKED:            { sx: 26, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 500, lock: true,   gud: 1,                             sound: 'unlkches',      nohlp: 56 },
+        BAG:               { sx: 27, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 500, scmult: 3.5,  troom: 1,     canbeshot: 3,         sound: 'collectgold',   nohlp: 15, blkhlp: 14 },
 // teleport, trap, stun, force field tiles as treasure objects for now -- these are animated, and operate on touch so it works
         TELEPORT:          { sx: 24, sy: 22,   frames:8,  speed: 1*FPS,   fpf: FPS/5,    teleport: true,                                               sound: 'teleport',      nohlp: 25 },
-        TRAP:              { sx: 23, sy: 10,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    trap: true,                                                   sound: 'trap',          nohlp: 20 },
-        STUN:              { sx: 27, sy: 10,   frames:4,  speed: 1*FPS,   fpf: FPS/4,    stun: true,                                                   sound: 'stun',          nohlp: 49 },
+        TRAP:              { sx: 24, sy: 11,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    trap: true,                                                   sound: 'trap',          nohlp: 20 },
+        STUN:              { sx: 28, sy: 11,   frames:4,  speed: 1*FPS,   fpf: FPS/4,    stun: true,                                                   sound: 'stun',          nohlp: 49 },
         PUSH:              { sx: 0,  sy: 30,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    health:270, pushwal: 6,                 canbeshot: 2,         sound: 'null',          nohlp: 57 },
 // extra power potions
         XSPEED:            { sx: 9,  sy: 11,   frames:1,  speed: 1*FPS,   fpf: FPS/4,    powers: true, potion: true, canbeshot: 2, annc: 'ancxspd',    sound: 'collectpotion', nohlp: 1 },
@@ -459,7 +459,7 @@ Gauntlet = function() {
       DOOR = {
         HORIZONTAL:  { sx: 10, sy: 10, speed: 0.05*FPS, horizontal: true,  vertical: false, dx: 2, dy: 0 },
         VERTICAL:    { sx: 5,  sy: 10, speed: 0.05*FPS, horizontal: false, vertical: true,  dx: 0, dy: 8 },
-        EXIT:        { sx: 13, sy: 12, speed: 3*FPS, fpf: FPS/30 },
+        EXIT:        { sx: 23, sy: 10, speed: 3*FPS, fpf: FPS/30 },
 // added "exit to {n}", moving and fake exits
         EXIT4:       { sx: 14, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 4  },
         EXIT8:       { sx: 15, sy: 12, speed: 3*FPS, fpf: FPS/30, lvlp: 8  },
