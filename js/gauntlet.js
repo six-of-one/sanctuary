@@ -1006,12 +1006,15 @@ Gauntlet = function() {
 // added gauntlet 1 levels as g1level{n}, gauntlet 2 as g2level{n}
 // gflr is gfx file for floor tiles
 // gwal is gfx file for custom: walls, shotwalls, shadows, nc/p/s-fi
-//          gshw - wall / shotwall count > 1, gshd - true if shadow set in gwal is used, gfi - count of fake items in gwal, replaces from start of fi list
-//          * also add cust doors to gwal
+//          govfl - count of 32x32 floor tiles to replace in BOTH fcustile/fcustile2 (sy = 0 is tile layer, 0,0 is for 0x000000 empty space)
+//          gshd  - true if shadow set in gwal is used (shadow is sy = 1)
+//          gshw  - wall / shotwall count > 1
+//          gdor  - 1: use layer after shotwals as std door replacement -- -1: dont use door repl, but skip for gfi
+//          gfi   - count of fake items in gwal, replaces from start of fi list
 
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: 0x18,             gflr: "gfx/floor009.jpg",   gwal: "gfx/wall_T.png",    nornd: 1,   unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R", gshw: 3, gfi: 4 },
+      { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: 0x18,             gflr: "gfx/floor009.jpg",   gwal: "gfx/wall_T.png",    nornd: 1,   unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R", gshw: 3, gfi: 4, gdor: 1 },
       { name: 'Z gon',        url: "levels/glevelZ.png",                                        wall: WALL.ORANG9,      gflr: "gfx/g1floor0z.jpg",  gwal: "gfx/g1wallZ.png",               unpinx: 1,    music: 'nullm',      score:  1000, help: null },
 /*
       { name: 'Training',       url: "levels/trainer1.png", floor: FLOOR.LIGHT_STONE,           wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, tmdf: 1, nornd: 1, help: "Shoot ghosts and find the exit" },
