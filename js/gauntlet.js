@@ -1006,15 +1006,16 @@ Gauntlet = function() {
 // added gauntlet 1 levels as g1level{n}, gauntlet 2 as g2level{n}
 // gflr is gfx file for floor tiles
 // gwal is gfx file for custom: walls, shotwalls, shadows, nc/p/s-fi
-//          govfl - count of 32x32 floor tiles to replace in BOTH fcustile/fcustile2 (sy = 0 is tile layer, 0,0 is for 0x000000 empty space)
-//          gshd  - true if shadow set in gwal is used (shadow is sy = 1)
-//          gshw  - wall / shotwall count > 1
-//          gdor  - 1: use layer after shotwals as std door replacement -- -1: dont use door repl, but skip for gfi
+//          govfl - count of 32x32 floor tiles to replace in BOTH fcustile/fcustile2 (replaces: sy = 0,  sx = 0:0x000000 [empty],         sx =      1: a08061,[71] sx = 2: a08062,[72] ...)
+//          gshd  - true if shadow set in gwal is used                               (shadow is sy = 1)
+//          gshw  - wall / shotwall count > 1                                        (replaces: sy =          2:a08060 (std level walls), sy =      3:a08061,      sy = 4:a08062, ... and so forth)
+//                  shotwalls should match walls                                     (replaces: sy =     2+gshw:008210 (std level walls), sy = 3+gshw:008211, sy = 4+gshw:008212, ... )
+//          gdor  - 1: layer @shotwals+1 as std door | -1: do not repl/skip for gfi  (replaces: sy = 2+(gshw*2): c0c000)
 //          gfi   - count of fake items in gwal, replaces from start of fi list
 
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: 0x18,             gflr: "gfx/floor009.jpg",   gwal: "gfx/wall_T.png",    nornd: 1,   unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R", gshw: 3, gfi: 4, gdor: 1 },
+      { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: 0x18,             gflr: "gfx/floor009.jpg",   gwal: "gfx/wall_T.png",    nornd: 1,   unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R", gshw: 3, gfi: 7, gdor: 1 },
       { name: 'Z gon',        url: "levels/glevelZ.png",                                        wall: WALL.ORANG9,      gflr: "gfx/g1floor0z.jpg",  gwal: "gfx/g1wallZ.png",               unpinx: 1,    music: 'nullm',      score:  1000, help: null },
 /*
       { name: 'Training',       url: "levels/trainer1.png", floor: FLOOR.LIGHT_STONE,           wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, tmdf: 1, nornd: 1, help: "Shoot ghosts and find the exit" },
