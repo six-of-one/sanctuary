@@ -32,9 +32,16 @@ Gauntlet = function() {
 // above a specified level all levels will have unpinned corners, unless blocked
 // if there is a non global var method of passing these class inheritance pointers around - I know it not
 // Mth, Mtw - level master width & height to make rotates easier
-// gwal - general wall pointer when walls arent using backgrounds.png, GWDEF - def start of walls in gwal, GSHW - default for wall & shotwall count in gwal
+// gwal - general wall pointer when walls arent using backgrounds.png, 
+// GWDEF - def start of walls in gwal, GSHW - default for wall & shotwall count in gwal
 // ENTLVLWAL - gwal code to tell engine this is an ent showing as a wall, {ent}.aswal is the local flag
-		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, GWDEF = 2, GSHW = 1, ENTLVLDOOR = -3, ENTLVLWAL = -6, ENTLVLSHWAL = -5, ENTGFI = -4, NX = 0, NY = 0,
+// ENTLVLSHWAL - shotwall replaced with gfx in gwal, following walls
+// ENTLVLDOOR - after shotwalls, a single row for replacing door gfx
+// ENTGITM - 10 items (or poss. more) past door gfx can also be swapped - sy = 10, sx = 16 - 26 (or more)
+// ENTGFI - past shotwalls (+door) are fake item replacements
+		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, GWDEF = 2, GSHW = 1, 
+		ENTLVLDOOR = -3, ENTLVLWAL = -6, ENTLVLSHWAL = -5, ENTGFI = -4, ENTGITM = -8, gitmrow = 10, gitmst = 16,
+		NX = 0, NY = 0,
 // levelwide master values for unpins, unpin high/low x, high/lowy, mirror and rotates
 		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
 // data set for map pixels, hue override pixels, moving exits (3), pick one real exit - rest fake (2), phasewalls (4), tile render master, Vx, Vy to .vx, .vy: drew this ent across upin line
@@ -1005,12 +1012,15 @@ Gauntlet = function() {
 
 // added gauntlet 1 levels as g1level{n}, gauntlet 2 as g2level{n}
 // gflr is gfx file for floor tiles
-// gwal is gfx file for custom: walls, shotwalls, shadows, nc/p/s-fi
+// gwal is gfx file for custom: walls, shotwalls, shadows, custtile, doors, a few items & nc/p/s-fi
+// -- this is an image override only, and changes no function
+
 //          govfl - count of 32x32 floor tiles to replace in BOTH fcustile/fcustile2 (replaces: sy = 0,  sx = 0:0x000000 [empty],         sx =      1: a08061,[71] sx = 2: a08062,[72] ...)
 //          gshd  - true if shadow set in gwal is used                               (shadow is sy = 1)
 //          gshw  - wall / shotwall count > 1                                        (replaces: sy =          2:a08060 (std level walls), sy =      3:a08061,      sy = 4:a08062, ... and so forth)
 //                  shotwalls should match walls                                     (replaces: sy =     2+gshw:008210 (std level walls), sy = 3+gshw:008211, sy = 4+gshw:008212, ... )
 //          gdor  - 1: layer @shotwals+1 as std door | -1: do not repl/skip for gfi  (replaces: sy = 2+(gshw*2): c0c000)
+//          gitm  - count of treasures following door line (sy = 10) img override    (replaces: 0x8050 key, 0x8070 treasure (3x anim), 0x8060 potion, 0x8000 food, 0x8011 poison, 0x4000 exit, and possible others)
 //          gfi   - count of fake items in gwal, replaces from start of fi list
 
     levels: [
