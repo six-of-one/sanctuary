@@ -1935,10 +1935,10 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		document.getElementById("phue").value = readCookie("_o_"+"phue");
 		document.getElementById("ashue").value = readCookie("_o_"+"ashue");
 		document.getElementById("vports").value = readCookie("_o_"+"vports");
-		document.getElementById("stmir").value = readCookie("_o_"+"stmir");
-		document.getElementById("stflp").value = readCookie("_o_"+"stflp");
-		document.getElementById("strot").value = readCookie("_o_"+"strot");
-		document.getElementById("stunp").value = readCookie("_o_"+"stunp");
+		document.getElementById("stmir").value = readCookie("_o_"+"smir");
+		document.getElementById("stflp").value = readCookie("_o_"+"sflp");
+		document.getElementById("strot").value = readCookie("_o_"+"srot");
+		document.getElementById("stunp").value = readCookie("_o_"+"sunp");
 		document.getElementById("seltut").checked = false;
 		document.getElementById("selg2tut").checked = false;
 		document.getElementById("seltutx").checked = false;
@@ -5187,10 +5187,27 @@ var txsv = ":";
 				createCookie("_o_"+"selg2tut", document.getElementById("selg2tut").checked,7777);
 				createCookie("_o_"+"seltutx", document.getElementById("seltutx").checked,7777);
 				createCookie("_d_"+"mazsolv", document.getElementById("mazsolv").checked,7777);
-				createCookie("_o_"+"stmir", document.getElementById("stmir").value,7777);
-				createCookie("_o_"+"stflp", document.getElementById("stflp").value,7777);
-				createCookie("_o_"+"strot", document.getElementById("strot").value,7777);
-				createCookie("_o_"+"stunp", document.getElementById("stunp").value,7777);
+// user effect controls of vars game random events, for some spice
+// level to start testing for rnd event
+				createCookie("_o_"+"smir", document.getElementById("stmir").value,7777);		// mirror map in X dim
+				createCookie("_o_"+"sflp", document.getElementById("stflp").value,7777);		// flip map in Y dim
+				createCookie("_o_"+"srot", document.getElementById("strot").value,7777);		// rotate map 270deg
+				createCookie("_o_"+"sunp", document.getElementById("stunp").value,7777);		// unpin X/Y or both
+				createCookie("_o_"+"sstun", document.getElementById("ststun").value,7777);		// players shots stun players
+				createCookie("_o_"+"shurt", document.getElementById("sthurt").value,7777);		// players shots hurt players
+// base % of rnd event occurance
+				createCookie("_o_"+"pmir", document.getElementById("pmir").value,7777);			// percentages - 0.1 = 10%, 0.25 = 25%, 1 = 100%
+				createCookie("_o_"+"pflp", document.getElementById("pflp").value,7777);
+				createCookie("_o_"+"prot", document.getElementById("prot").value,7777);
+				createCookie("_o_"+"punp", document.getElementById("punp").value,7777);
+				createCookie("_o_"+"pstun", document.getElementById("psstun").value,7777);
+				createCookie("_o_"+"phurt", document.getElementById("pshurt").value,7777);
+// max % and adjustments per difficulty & level
+				createCookie("_o_"+"maxp", document.getElementById("maxpr").value,7777);		// max % of all random event tests
+				createCookie("_o_"+"decp", document.getElementById("decblw").value,7777);
+				createCookie("_o_"+"incp", document.getElementById("incabv").value,7777);
+				createCookie("_o_"+"mids", document.getElementById("midskil").value,7777);		// middle difficulty - dec% below and inc% above as indicated
+				createCookie("_o_"+"lvlp", document.getElementById("inclvl").value,7777);		// inc% by this much per level advanced
 // keep     -^
 				createCookie("_d_"+"xunp", document.getElementById("xunp").checked,7777);
 				createCookie("_d_"+"yunp", document.getElementById("yunp").checked,7777);
