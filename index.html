@@ -131,9 +131,19 @@
 maze solver <input type="checkbox" id="mazsolv" name="mazsolv" value="1" title="check to show maze solution if available"> 
 dps: <input type="checkbox" id="sdps" name="sdps" value="1" title="show damage per second - shoot a push wall" > 30: <input type="checkbox" id="sdphm" name="sdphm" value="1" title="show damage per 30 secs - shoot a push wall" >
 <input type="text" value="" size="3" id="dpsout" name="dpsout" title="dps: "><input type="text" value="" size="3" id="hpsout" name="hurtpsout" title="hps: ">
-<br> 1st level to -- mirror: <input type="text" value="10" size="3" id="stmir" title="select level to start rnd mirrors (Horiz)"> - flip: <input type="text" value="20" size="3" id="stflp" title="select level to start rnd flips (Vert)"> -
-rotate: <input type="text" value="30" size="3" id="strot" title="select level to start rnd rotates"> - unpin: <input type="text" value="50" size="3" id="stunp" title="select level to start rnd unpins"> -
-shots stun: <input type="text" value="24" size="3" id="shstun" title="select level to start shots stun other players"> - shots hurt: <input type="text" value="33" size="3" id="shstun" title="select level to start shots hurt other players"> -
+<br>
+%max <input type="text" value="0.7" size="2" id="maxpr" title="select max % to cap all of these might happen tests -- 10% = 0.1"> &nbsp;
+<label title="above or below MID skill adjust base % by indicated %">skill</label> -%<input type="text" value="0.1" size="2" id="decblw" title="decr by % per skill under MID">
+&lt; <input type="text" value="5" size="1" id="midskil" title="middle diffculty for % increment / decrement of test value">
+&gt; +%<input type="text" value="0.05" size="2" id="incabv" title="incr by % per skill over MID"> &nbsp;
+<label title="level count * %mod added to base %">level</label> +%<input type="text" value="0.02" size="2" id="inclvl" title="incr by % per level count">
+&nbsp;&nbsp; <label title="first level any of these will be tested and base percent to occur - 25% = 0.25">begin on</label> --
+mirror: <input type="text" value="10" size="1" id="stmir" title="select level to start rnd mirrors (Horiz)">%<input type="text" value="0.3" size="1" id="pmir" title="base % to mirror (X axis)"> -
+flip: <input type="text" value="20" size="1" id="stflp" title="select level to start rnd flips (Vert)">%<input type="text" value="0.25" size="1" id="pflip" title="base % to flip (Y axis)"> -
+rotate: <input type="text" value="30" size="1" id="strot" title="select level to start rnd rotates">%<input type="text" value="0.15" size="1" id="prot" title="base % to rotate (270%)"> -
+unpin: <input type="text" value="50" size="1" id="stunp" title="select level to start rnd unpins">%<input type="text" value="0.25" size="1" id="punp" title="base % to unpin X or Y"> -
+shots stun: <input type="text" value="24" size="1" id="shstun" title="select level to start shots stun other players">%<input type="text" value="0.2" size="1" id="mirp" title="base % players shots stun players"> -
+shots hurt: <input type="text" value="33" size="1" id="shstun" title="select level to start shots hurt other players">%<input type="text" value="0.16" size="1" id="mirp" title="base % players shots hurt players"> -
 <hr> dev... unpin : x <input type="checkbox" id="xunp" name="xunp" value="1" title="testing" > y <input type="checkbox" id="yunp" name="yunp" value="1" title="testing" > -- mir: x <input type="checkbox" id="xmiror" name="xmiror" value="1" title="testing" > y <input type="checkbox" id="ymiror" name="ymiror" value="1" title="testing" >
 rot: <input type="checkbox" id="rotat" name="rotat" value="1" title="testing" > -- invis walls <input type="checkbox" id="invwal" name="invwal" value="1" title="testing" > -- special display <input type="checkbox" id="spedis" name="spedis" value="1" title="testing" > -- 
 block rnd load <input type="checkbox" id="blrndlod" name="blrndlod" value="1" title="testing" > force rnd load <input type="checkbox" id="forndlod" name="forndlod" value="1" title="testing" > 

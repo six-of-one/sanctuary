@@ -52,7 +52,7 @@ save highscore table for reload
 imm issues:
 
 shop, ssop, unpins, mirrors code not finished yet
--- add: base%, max%, %inc skill, $inc level
+-- add: base% ea., max% all, %inc/%dec abv/blw mid skill, %inc per level
 
 may want to up max skill that stores highscores
 (this is janky tho and needs tested as higher skills add a lot of helper items)
