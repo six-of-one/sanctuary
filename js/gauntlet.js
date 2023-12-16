@@ -1939,10 +1939,15 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		document.getElementById("stflp").value = readCookie("_o_"+"sflp");
 		document.getElementById("strot").value = readCookie("_o_"+"srot");
 		document.getElementById("stunp").value = readCookie("_o_"+"sunp");
+		document.getElementById("pmir").value = readCookie("_o_"+"pmir");
+		document.getElementById("pflp").value = readCookie("_o_"+"pflp");
+		document.getElementById("prot").value = readCookie("_o_"+"prot");
+		document.getElementById("punp").value = readCookie("_o_"+"punp");
 		document.getElementById("seltut").checked = false;
 		document.getElementById("selg2tut").checked = false;
 		document.getElementById("seltutx").checked = false;
 		document.getElementById("mazsolv").checked = false;
+// dev options, prob. remove
 		document.getElementById("xunp").checked = false;
 		document.getElementById("yunp").checked = false;
 		document.getElementById("xmiror").checked = false;
