@@ -60,13 +60,9 @@ shop, ssop, unpins, mirrors code not finished yet
 may want to up max skill that stores highscores
 (this is janky tho and needs tested as higher skills add a lot of helper items)
 
-solid walls, lattice (lvl 63) -- off by 1 pixel left
-- done up to: g1: 64, g2: 12
-
-
-original jsgv levels have some x wrap issue when > 31 units
+original jsgv levels test had some x wrap issue when > 31 units
 - this may have been after a treasure level that snuck in
-- retest did not confirm t level caused this
+- retest did not confirm t-level caused this
 
 cycle walls display wrong off state ?	(is this rotate issue? not seeing now)
 
@@ -102,9 +98,8 @@ theif / mugger should fight monsters in path - get blocked by object on start, p
 
 g1 gfx tiles
 - spirtes		-- decide how much of this we want / can use
-- walls & floors	(+g2)
 g1 has some sprites that seem to "oversize" the map cell - ref. box generators, foods, etc
-
+(test with custom per-item scaling we added)
 
 player dmg: melee
 melee mis gens
@@ -137,7 +132,7 @@ g2:
 
 map editor o/p scanner
 -push wall pushing collision
-
+-cycle wall issues
 
 new-ish:
 
@@ -533,6 +528,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 
 done:
+
+x-- solid walls, lattice (lvl 63) -- off by 1 pixel left, lattice L corner malformed
 
 x-- gwal door replace over: gdor = 1 (repl) -1 (dont repl but add to gfi)
   - gfi adds 1 for gdor if present
