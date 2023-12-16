@@ -38,10 +38,6 @@ option to have monsters: take tile dmg, slow in glue, etc
 
 could limit "slide" of monsters in strict g1/g2 mode
 
-add sfi/pfi layers to gwal, level.gfi is count of fakes (and active logic) 
--- gshw * 2 (+ GWDEF cur. 2) is start # after walls / shootable walls, loaded from 0x8100, 0x812F
-- other ideas: door layer, specific items (swap out or new) layer
-
 replace/remove cfg - chk box & text value, if value is empty, remove
 
 heu override code to place 2 digit item under: trap wall, shot wall, gudy wall, cycle wall
@@ -52,10 +48,11 @@ save rand load level for replay
 save highscore table for reload
 
 
+
 imm issues:
 
 shop, ssop, unpins, mirrors code not finished yet
-
+-- add: base%, max%, %inc skill, $inc level
 
 may want to up max skill that stores highscores
 (this is janky tho and needs tested as higher skills add a lot of helper items)
@@ -314,6 +311,9 @@ g2 (val, skill 2) 328 hlth (5m 50s watch)
 
 g2 ? food research (find in files, or redo)
 
+- assertion was made g2 skill affects stalling times ?
+ \_ g1 test indicates minimal diff (timings shown are not exact)
+
 >>>>>>>>>>>>>>>>>>>>>>
 
 G IV elements:
@@ -535,6 +535,10 @@ x-- gwal door replace over: gdor = 1 (repl) -1 (dont repl but add to gfi)
   - gfi adds 1 for gdor if present
   - gdor replace in sprite render (switch spriteset on flag for adddoor)
   - gitm - replace up to 10+ treasure img following doors: key, gold box, potion, food, poison, exit, +2 more
+
+x-- add sfi/pfi layers to gwal, level.gfi is count of fakes (and active logic)
+    - gshw * 2 (+ GWDEF cur. 2) is start # after walls / shootable walls, loaded from 0x8100, 0x812F
+    - gdor: door layer, gitm: specific items (swap out or new) layer count of tiems
 
 x-- ffield display is borken - field works, not visual
    \_ was this change:: this.frame = animate(frame, this.type.fpf, this.type.frames); to:: this.type.fpf, this.frames);
