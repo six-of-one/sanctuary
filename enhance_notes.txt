@@ -51,8 +51,6 @@ adjust trap walls: remove trap now has to look for restore trap and v-v
 save rand load level for replay
 save highscore table for reload
 
-gwal door replace over: gdor = 1
-
 
 imm issues:
 
@@ -535,6 +533,11 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 
 done:
+
+x-- gwal door replace over: gdor = 1 (repl) -1 (dont repl but add to gfi)
+  - gfi adds 1 for gdor if present
+  - gdor replace in sprite render (switch spriteset on flag for adddoor)
+  - gitm - replace up to 10+ treasure img following doors: key, gold box, potion, food, poison, exit, +2 more
 
 x-- ffield display is borken - field works, not visual
    \_ was this change:: this.frame = animate(frame, this.type.fpf, this.type.frames); to:: this.type.fpf, this.frames);
