@@ -3270,6 +3270,7 @@ if (document.getElementById("noclip").checked) return false;
 		if (level.gshw == undefined) level.gshw = GSHW;	// default count of walls/ shotwalls in gwal
 
 /// TEST - remove
+// dev code testing mirror, flip, rotat, unpin x/y
 		Mirx = document.getElementById("xmiror").checked;
 		Miry = document.getElementById("ymiror").checked;
 		Mrot = document.getElementById("rotat").checked;
@@ -3279,9 +3280,34 @@ if (document.getElementById("noclip").checked) return false;
 		if (cb == true || level.unpinx) Munpinx = true;
 		cb = document.getElementById("yunp").checked;
 		if (cb == true || level.unpiny) Munpiny = true;
-		var rdunpx = level.unpinx, rdunpy = level.unpiny;
-		if (Mrot) { var swp = Munpinx; Munpinx = Munpiny; Munpiny = swp; rdunpx = level.unpiny; rdunpy = level.unpinx; } // rotate swaps single unpins
 /// TEST - remove
+// run random map modifications
+  var maxpr = document.getElementById("maxpr").value,		// max percent
+		mids  = document.getElementById("midskil").value,
+		decp  = document.getElementById("decblw").value,
+		incp  = document.getElementById("incabv").value,
+		lvlp  = document.getElementById("inclvl").value;
+/*		lvlp  = document.getElementById().value,
+
+
+
+
+"stmir"
+"pmir"
+"stflp"
+"pflp"
+"strot"
+"prot"
+"stunp"
+"punp"
+"ststun"
+"psstun"
+"sthurt"
+"pshurt"
+*/
+		var rdunpx = level.unpinx, rdunpy = level.unpiny;	// unpin by map design - rotate has to swap unpin status in this case
+		if (Mrot) { var swp = Munpinx; Munpinx = Munpiny; Munpiny = swp; rdunpx = level.unpiny; rdunpy = level.unpinx; } // rotate swaps single unpins
+
 		 if (level.mw == null || level.mw == undefined) { level.mw = source.width; level.mh = source.height; }
 		 else { source.width = level.mw; source.height = level.mh; }
 // process level colors, hue overrides, special color instructions, tile overrides
