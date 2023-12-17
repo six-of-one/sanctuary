@@ -1949,46 +1949,46 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		document.getElementById("midskil").value = readCookie("_o_"+"mids");
 		document.getElementById("inclvl").value  = readCookie("_o_"+"lvlp");
 
-		document.getElementById("seltut").checked = false;
+		document.getElementById("seltut").checked   = false;
 		document.getElementById("selg2tut").checked = false;
-		document.getElementById("seltutx").checked = false;
-		document.getElementById("mazsolv").checked = false;
+		document.getElementById("seltutx").checked  = false;
+		document.getElementById("mazsolv").checked  = false;
 // dev options, prob. remove
-		document.getElementById("xunp").checked = false;
-		document.getElementById("yunp").checked = false;
-		document.getElementById("xmiror").checked = false;
-		document.getElementById("ymiror").checked = false;
-		document.getElementById("rotat").checked = false;
-		document.getElementById("invwal").checked = false;
-		document.getElementById("invhint").checked = false;
-		document.getElementById("spedis").checked = false;
+		document.getElementById("xunp").checked     = false;
+		document.getElementById("yunp").checked     = false;
+		document.getElementById("xmiror").checked   = false;
+		document.getElementById("ymiror").checked   = false;
+		document.getElementById("rotat").checked    = false;
+		document.getElementById("invwal").checked   = false;
+		document.getElementById("invhint").checked  = false;
+		document.getElementById("spedis").checked   = false;
 		document.getElementById("blrndlod").checked = false;
 		document.getElementById("forndlod").checked = false;
-		document.getElementById("nostal").checked = false;
-		document.getElementById("noah").checked = false;
-		document.getElementById("nommv").checked = false;
-		document.getElementById("nogen").checked = false;
-		document.getElementById("noblend").checked = false;
+		document.getElementById("nostal").checked   = false;
+		document.getElementById("noah").checked     = false;
+		document.getElementById("nommv").checked    = false;
+		document.getElementById("nogen").checked    = false;
+		document.getElementById("noblend").checked  = false;
 
-		if (readCookie("_o_"+"seltut") == "true") document.getElementById("seltut").checked = true;
+		if (readCookie("_o_"+"seltut") == "true")   document.getElementById("seltut").checked   = true;
 		if (readCookie("_o_"+"selg2tut") == "true") document.getElementById("selg2tut").checked = true;
-		if (readCookie("_o_"+"seltutx") == "true") document.getElementById("seltutx").checked = true;
-		if (readCookie("_d_"+"mazsolv") == "true") document.getElementById("mazsolv").checked = true;
-		if (readCookie("_d_"+"xunp") == "true") document.getElementById("xunp").checked = true;
-		if (readCookie("_d_"+"yunp") == "true") document.getElementById("yunp").checked = true;
-		if (readCookie("_d_"+"xmiror") == "true") document.getElementById("xmiror").checked = true;
-		if (readCookie("_d_"+"ymiror") == "true") document.getElementById("ymiror").checked = true;
-		if (readCookie("_d_"+"rotat") == "true") document.getElementById("rotat").checked = true;
-		if (readCookie("_d_"+"invwal") == "true") document.getElementById("invwal").checked = true;
-		if (readCookie("_d_"+"invhint") == "true") document.getElementById("invhint").checked = true;
-		if (readCookie("_d_"+"spedis") == "true") document.getElementById("spedis").checked = true;
+		if (readCookie("_o_"+"seltutx") == "true")  document.getElementById("seltutx").checked  = true;
+		if (readCookie("_d_"+"mazsolv") == "true")  document.getElementById("mazsolv").checked  = true;
+		if (readCookie("_d_"+"xunp") == "true")     document.getElementById("xunp").checked     = true;
+		if (readCookie("_d_"+"yunp") == "true")     document.getElementById("yunp").checked     = true;
+		if (readCookie("_d_"+"xmiror") == "true")   document.getElementById("xmiror").checked   = true;
+		if (readCookie("_d_"+"ymiror") == "true")   document.getElementById("ymiror").checked   = true;
+		if (readCookie("_d_"+"rotat") == "true")    document.getElementById("rotat").checked    = true;
+		if (readCookie("_d_"+"invwal") == "true")   document.getElementById("invwal").checked   = true;
+		if (readCookie("_d_"+"invhint") == "true")  document.getElementById("invhint").checked  = true;
+		if (readCookie("_d_"+"spedis") == "true")   document.getElementById("spedis").checked   = true;
 		if (readCookie("_d_"+"blrndlod") == "true") document.getElementById("blrndlod").checked = true;
 		if (readCookie("_d_"+"forndlod") == "true") document.getElementById("forndlod").checked = true;
-		if (readCookie("_d_"+"nostal") == "true") document.getElementById("nostal").checked = true;
-		if (readCookie("_d_"+"noah") == "true") document.getElementById("noah").checked = true;
-		if (readCookie("_d_"+"nommv") == "true") document.getElementById("nommv").checked = true;
-		if (readCookie("_d_"+"nogen") == "true") document.getElementById("nogen").checked = true;
-		if (readCookie("_d_"+"noblend") == "true") document.getElementById("noblend").checked = true;
+		if (readCookie("_d_"+"nostal") == "true")   document.getElementById("nostal").checked   = true;
+		if (readCookie("_d_"+"noah") == "true")     document.getElementById("noah").checked     = true;
+		if (readCookie("_d_"+"nommv") == "true")    document.getElementById("nommv").checked    = true;
+		if (readCookie("_d_"+"nogen") == "true")    document.getElementById("nogen").checked    = true;
+		if (readCookie("_d_"+"noblend") == "true")  document.getElementById("noblend").checked  = true;
 /// TEST - remove
 //for (i = 1; i <= 81; i++) { deleteCookie(i+"char"); deleteCookie(i+"score"); deleteCookie(i+"name"); }
 		loadscortabl();
@@ -2007,12 +2007,12 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		  Musicth.play(Musicth.sounds[type.helo]);
 
 // setup some things for this run - maybe
-			SPOTION[0] = TREASURE.XSPEED;
-			SPOTION[1] = TREASURE.XSHOTPWR;
-			SPOTION[2] = TREASURE.XSHOTSPD;
-			SPOTION[3] = TREASURE.XARMOR;
-			SPOTION[4] = TREASURE.XFIGHT;
-			SPOTION[5] = TREASURE.XMAGIC;
+			SPOTION[0]  = TREASURE.XSPEED;
+			SPOTION[1]  = TREASURE.XSHOTPWR;
+			SPOTION[2]  = TREASURE.XSHOTSPD;
+			SPOTION[3]  = TREASURE.XARMOR;
+			SPOTION[4]  = TREASURE.XFIGHT;
+			SPOTION[5]  = TREASURE.XMAGIC;
 			shuffle(SPOTION);
 // special treasure room deal
 			TROOMSUP[1] = TREASURE.GOLD;
@@ -2020,46 +2020,46 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 			TROOMSUP[3] = TREASURE.LOCKED;
 			TROOMSUP[4] = TREASURE.KEY;
 // autoload
-			RNGLOAD[1] = TREASURE.GOLD;
+			RNGLOAD[1]  = TREASURE.GOLD;
 //			stolen_load = 0;
 			FLVLRND = Game.Math.randomInt(FLOOR.MIN, FLOOR.MAX);
 
-			beets = to.number(this.storage[STORAGE.BEETS],0);		// master stats
-		allcoins = to.number(this.storage[STORAGE.COINS],0);
-			gpots = to.number(this.storage[STORAGE.GPOTS],0);
-			gfuds = to.number(this.storage[STORAGE.GFUDS],0);
-			gkeys = to.number(this.storage[STORAGE.GKEYS],0);
-			gspec = to.number(this.storage[STORAGE.GSPEC],0);
-			glims = to.number(this.storage[STORAGE.GLIMS],0);
-			fpots = to.number(this.storage[STORAGE.FPOTS],0);
-			fkeys = to.number(this.storage[STORAGE.FKEYS],0);
-			gtrs  = to.number(this.storage[STORAGE.GTRS],0);
-			gltrs = to.number(this.storage[STORAGE.GLTRS],0);
-			gexits = to.number(this.storage[STORAGE.GEXS],0);
-			deds  = to.number(this.storage[STORAGE.DEDS],0);
-			cwiz  = to.number(this.storage[STORAGE.CWIZ],0);
-			cwar  = to.number(this.storage[STORAGE.CWAR],0);
-			cval  = to.number(this.storage[STORAGE.CVAL],0);
-			celf  = to.number(this.storage[STORAGE.CELF],0);
-			scores = this;
-			curwiz = curwar = curval = curelf = " ";
-			igpots = gpots;	// track individual stats temp
-			igfuds = gfuds;
-			igkeys = gkeys;
-			igspec = gspec;
-			iglims = glims;
-			ifpots = fpots;
-			ifkeys = fkeys;
-			igtrs  = gtrs;
-			igltrs = gltrs;
+			beets   = to.number(this.storage[STORAGE.BEETS],0);		// master stats
+		allcoins   = to.number(this.storage[STORAGE.COINS],0);
+			gpots   = to.number(this.storage[STORAGE.GPOTS],0);
+			gfuds   = to.number(this.storage[STORAGE.GFUDS],0);
+			gkeys   = to.number(this.storage[STORAGE.GKEYS],0);
+			gspec   = to.number(this.storage[STORAGE.GSPEC],0);
+			glims   = to.number(this.storage[STORAGE.GLIMS],0);
+			fpots   = to.number(this.storage[STORAGE.FPOTS],0);
+			fkeys   = to.number(this.storage[STORAGE.FKEYS],0);
+			gtrs    = to.number(this.storage[STORAGE.GTRS] ,0);
+			gltrs   = to.number(this.storage[STORAGE.GLTRS],0);
+			gexits  = to.number(this.storage[STORAGE.GEXS] ,0);
+			deds    = to.number(this.storage[STORAGE.DEDS] ,0);
+			cwiz    = to.number(this.storage[STORAGE.CWIZ] ,0);
+			cwar    = to.number(this.storage[STORAGE.CWAR] ,0);
+			cval    = to.number(this.storage[STORAGE.CVAL] ,0);
+			celf    = to.number(this.storage[STORAGE.CELF] ,0);
+			scores  = this;
+			curwiz  = curwar  = curval  = curelf  = " ";
+			igpots  = gpots;	// track individual stats temp
+			igfuds  = gfuds;
+			igkeys  = gkeys;
+			igspec  = gspec;
+			iglims  = glims;
+			ifpots  = fpots;
+			ifkeys  = fkeys;
+			igtrs   = gtrs;
+			igltrs  = gltrs;
 			igexits = gexits;
-			ideds  = deds;
+			ideds   = deds;
 			allcoins++;
 			this.storage[STORAGE.COINS] = allcoins;
-			if (type.name == "wizard") { cwiz++; curwiz = "*"; }
-			if (type.name == "warrior") { cwar++; curwar = "*"; }
+			if (type.name == "wizard")   { cwiz++; curwiz = "*"; }
+			if (type.name == "warrior")  { cwar++; curwar = "*"; }
 			if (type.name == "valkyrie") { cval++; curval = "*"; }
-			if (type.name == "elf") {  celf++; curelf = "*"; }
+			if (type.name == "elf")      { celf++; curelf = "*"; }
 			this.storage[STORAGE.CWIZ] = cwiz;
 			this.storage[STORAGE.CWAR] = cwar;
 			this.storage[STORAGE.CVAL] = cval;
@@ -5192,54 +5192,54 @@ var txsv = ":";
 //				createCookie("_d_"+, document.getElementById().checked,7777);
 // the first 5 are (planned) normal ops and should be kept after TEST is removed...
 				if ((heartbeet & 15) == 7) {
-				createCookie("_o_"+"seldiff", document.getElementById("seldiff").value,7777);
-				createCookie("_o_"+"sellvl", document.getElementById("sellvl").value,7777);
-				createCookie("_o_"+"seltut", document.getElementById("seltut").checked,7777);
+				createCookie("_o_"+"seldiff",  document.getElementById("seldiff").value,7777);
+				createCookie("_o_"+"sellvl",   document.getElementById("sellvl").value,7777);
+				createCookie("_o_"+"seltut",   document.getElementById("seltut").checked,7777);
 				createCookie("_o_"+"selg2tut", document.getElementById("selg2tut").checked,7777);
-				createCookie("_o_"+"seltutx", document.getElementById("seltutx").checked,7777);
-				createCookie("_d_"+"mazsolv", document.getElementById("mazsolv").checked,7777);
+				createCookie("_o_"+"seltutx",  document.getElementById("seltutx").checked,7777);
+				createCookie("_d_"+"mazsolv",  document.getElementById("mazsolv").checked,7777);
 // user effect controls of vars game random events, for some spice
 // level to start testing for rnd event
-				createCookie("_o_"+"smir", document.getElementById("stmir").value,7777);		// mirror map in X dim
-				createCookie("_o_"+"sflp", document.getElementById("stflp").value,7777);		// flip map in Y dim
-				createCookie("_o_"+"srot", document.getElementById("strot").value,7777);		// rotate map 270deg
-				createCookie("_o_"+"sunp", document.getElementById("stunp").value,7777);		// unpin X/Y or both
-				createCookie("_o_"+"sstun", document.getElementById("ststun").value,7777);		// players shots stun players
-				createCookie("_o_"+"shurt", document.getElementById("sthurt").value,7777);		// players shots hurt players
+				createCookie("_o_"+"smir",     document.getElementById("stmir").value,7777);		// mirror map in X dim
+				createCookie("_o_"+"sflp",     document.getElementById("stflp").value,7777);		// flip map in Y dim
+				createCookie("_o_"+"srot",     document.getElementById("strot").value,7777);		// rotate map 270deg
+				createCookie("_o_"+"sunp",     document.getElementById("stunp").value,7777);		// unpin X/Y or both
+				createCookie("_o_"+"sstun",    document.getElementById("ststun").value,7777);		// players shots stun players
+				createCookie("_o_"+"shurt",    document.getElementById("sthurt").value,7777);		// players shots hurt players
 // base % of rnd event occurance
-				createCookie("_o_"+"pmir", document.getElementById("pmir").value,7777);			// percentages - 0.1 = 10%, 0.25 = 25%, 1 = 100%
-				createCookie("_o_"+"pflp", document.getElementById("pflp").value,7777);
-				createCookie("_o_"+"prot", document.getElementById("prot").value,7777);
-				createCookie("_o_"+"punp", document.getElementById("punp").value,7777);
-				createCookie("_o_"+"pstun", document.getElementById("psstun").value,7777);
-				createCookie("_o_"+"phurt", document.getElementById("pshurt").value,7777);
+				createCookie("_o_"+"pmir",     document.getElementById("pmir").value,7777);			// percentages - 0.1 = 10%, 0.25 = 25%, 1 = 100%
+				createCookie("_o_"+"pflp",     document.getElementById("pflp").value,7777);
+				createCookie("_o_"+"prot",     document.getElementById("prot").value,7777);
+				createCookie("_o_"+"punp",     document.getElementById("punp").value,7777);
+				createCookie("_o_"+"pstun",    document.getElementById("psstun").value,7777);
+				createCookie("_o_"+"phurt",    document.getElementById("pshurt").value,7777);
 // max % and adjustments per difficulty & level
-				createCookie("_o_"+"maxp", document.getElementById("maxpr").value,7777);		// max % of all random event tests
-				createCookie("_o_"+"decp", document.getElementById("decblw").value,7777);
-				createCookie("_o_"+"incp", document.getElementById("incabv").value,7777);
-				createCookie("_o_"+"mids", document.getElementById("midskil").value,7777);		// middle difficulty - dec% below and inc% above as indicated
-				createCookie("_o_"+"lvlp", document.getElementById("inclvl").value,7777);		// inc% by this much per level advanced
+				createCookie("_o_"+"maxp",     document.getElementById("maxpr").value,7777);		// max % of all random event tests
+				createCookie("_o_"+"decp",     document.getElementById("decblw").value,7777);
+				createCookie("_o_"+"incp",     document.getElementById("incabv").value,7777);
+				createCookie("_o_"+"mids",     document.getElementById("midskil").value,7777);		// middle difficulty - dec% below and inc% above as indicated
+				createCookie("_o_"+"lvlp",     document.getElementById("inclvl").value,7777);		// inc% by this much per level advanced
 // keep     -^
-				createCookie("_d_"+"xunp", document.getElementById("xunp").checked,7777);
-				createCookie("_d_"+"yunp", document.getElementById("yunp").checked,7777);
-				createCookie("_d_"+"xmiror", document.getElementById("xmiror").checked,7777);
-				createCookie("_d_"+"ymiror", document.getElementById("ymiror").checked,7777);
-				createCookie("_d_"+"rotat", document.getElementById("rotat").checked,7777);
-				createCookie("_d_"+"invwal", document.getElementById("invwal").checked,7777);
-				createCookie("_d_"+"invhint", document.getElementById("invhint").checked,7777);
-				createCookie("_d_"+"spedis", document.getElementById("spedis").checked,7777);
+				createCookie("_d_"+"xunp",     document.getElementById("xunp").checked,7777);
+				createCookie("_d_"+"yunp",     document.getElementById("yunp").checked,7777);
+				createCookie("_d_"+"xmiror",   document.getElementById("xmiror").checked,7777);
+				createCookie("_d_"+"ymiror",   document.getElementById("ymiror").checked,7777);
+				createCookie("_d_"+"rotat",    document.getElementById("rotat").checked,7777);
+				createCookie("_d_"+"invwal",   document.getElementById("invwal").checked,7777);
+				createCookie("_d_"+"invhint",  document.getElementById("invhint").checked,7777);
+				createCookie("_d_"+"spedis",   document.getElementById("spedis").checked,7777);
 				createCookie("_d_"+"blrndlod", document.getElementById("blrndlod").checked,7777);
 				createCookie("_d_"+"forndlod", document.getElementById("forndlod").checked,7777);
-				createCookie("_d_"+"nostal", document.getElementById("nostal").checked,7777);
-				createCookie("_d_"+"noah", document.getElementById("noah").checked,7777);
-				createCookie("_d_"+"nommv", document.getElementById("nommv").checked,7777);
-				createCookie("_d_"+"nogen", document.getElementById("nogen").checked,7777);
-				createCookie("_d_"+"noblend", document.getElementById("noblend").checked,7777);
-				createCookie("_o_"+"whue", document.getElementById("whue").value,7777);
-				createCookie("_o_"+"fhue", document.getElementById("fhue").value,7777);
-				createCookie("_o_"+"phue", document.getElementById("phue").value,7777);
-				createCookie("_o_"+"ashue", document.getElementById("ashue").value,7777);
-				createCookie("_o_"+"vports", document.getElementById("vports").value,7777);
+				createCookie("_d_"+"nostal",   document.getElementById("nostal").checked,7777);
+				createCookie("_d_"+"noah",     document.getElementById("noah").checked,7777);
+				createCookie("_d_"+"nommv",    document.getElementById("nommv").checked,7777);
+				createCookie("_d_"+"nogen",    document.getElementById("nogen").checked,7777);
+				createCookie("_d_"+"noblend",  document.getElementById("noblend").checked,7777);
+				createCookie("_o_"+"whue",     document.getElementById("whue").value,7777);
+				createCookie("_o_"+"fhue",     document.getElementById("fhue").value,7777);
+				createCookie("_o_"+"phue",     document.getElementById("phue").value,7777);
+				createCookie("_o_"+"ashue",    document.getElementById("ashue").value,7777);
+				createCookie("_o_"+"vports",   document.getElementById("vports").value,7777);
 				}
 /// TEST - remove
 		}
