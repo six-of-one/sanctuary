@@ -332,6 +332,7 @@ Game = {
   createImage: function(url, options) {
     options = options || {};
     var image = $({tag: 'img'});
+	 image.crossOrigin="anonymous";
     if (options.onload)
       image.on('load', options.onload);
     image.src = url;
