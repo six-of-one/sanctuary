@@ -3282,29 +3282,24 @@ if (document.getElementById("noclip").checked) return false;
 		if (cb == true || level.unpiny) Munpiny = true;
 /// TEST - remove
 // run random map modifications
-  var maxpr = document.getElementById("maxpr").value,		// max percent
-		mids  = document.getElementById("midskil").value,
-		decp  = document.getElementById("decblw").value,
-		incp  = document.getElementById("incabv").value,
-		lvlp  = document.getElementById("inclvl").value;
-/*		lvlp  = document.getElementById().value,
+  var maxpr  = document.getElementById("maxpr").value,		// max percent
+		mids   = document.getElementById("midskil").value,
+		decp   = document.getElementById("decblw").value,
+		incp   = document.getElementById("incabv").value,
+		lvlp   = document.getElementById("inclvl").value,
+		stmir  = document.getElementById("stmir").value,
+		stflp  = document.getElementById("stflp").value,
+		strot  = document.getElementById("strot").value,
+		stunp  = document.getElementById("stunp").value,
+		ststun = document.getElementById("ststun").value,
+		sthurt = document.getElementById("sthurt").value,
+		pmir   = document.getElementById("pmir").value,
+		pflp   = document.getElementById("pflp").value,
+		prot   = document.getElementById("prot").value,
+		punp   = document.getElementById("punp").value,
+		psstun = document.getElementById("psstun").value,
+		pshurt = document.getElementById("pshurt").value;
 
-
-
-
-"stmir"
-"pmir"
-"stflp"
-"pflp"
-"strot"
-"prot"
-"stunp"
-"punp"
-"ststun"
-"psstun"
-"sthurt"
-"pshurt"
-*/
 		var rdunpx = level.unpinx, rdunpy = level.unpiny;	// unpin by map design - rotate has to swap unpin status in this case
 		if (Mrot) { var swp = Munpinx; Munpinx = Munpiny; Munpiny = swp; rdunpx = level.unpiny; rdunpy = level.unpinx; } // rotate swaps single unpins
 
