@@ -3300,6 +3300,28 @@ if (document.getElementById("noclip").checked) return false;
 		psstun = document.getElementById("psstun").value,
 		pshurt = document.getElementById("pshurt").value;
 
+  var rndm, dfl = (diff_level > 9) ? 9 : diff_level;
+		if (nlevel >= stmir) {
+			rndm = pmir + (lvlp * nlevel);
+			if (dfl > mids) rndm += incp * dfl;
+			else if (dfl < mids) rndm -= decp * dfl;
+			if (Math.random() < rndm) Mirx = true;
+			}
+
+		if (nlevel >= stflp) {
+			rndm = pflp + (lvlp * nlevel);
+			if (dfl > mids) rndm += incp * dfl;
+			else if (dfl < mids) rndm -= decp * dfl;
+			if (Math.random() < rndm) Miry = true;
+			}
+
+		if (nlevel >= strot) {
+			rndm = prot + (lvlp * nlevel);
+			if (dfl > mids) rndm += incp * dfl;
+			else if (dfl < mids) rndm -= decp * dfl;
+			if (Math.random() < rndm) Mrot = true;
+			}
+
 		var rdunpx = level.unpinx, rdunpy = level.unpiny;	// unpin by map design - rotate has to swap unpin status in this case
 		if (Mrot) { var swp = Munpinx; Munpinx = Munpiny; Munpiny = swp; rdunpx = level.unpiny; rdunpy = level.unpinx; } // rotate swaps single unpins
 
