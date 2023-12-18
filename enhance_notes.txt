@@ -26,7 +26,7 @@ limited teleport does not: telefrag (it uses fight to kill monsters), blot out w
 
 note: the lobber shot ext in entities.png
 
-complete gwal shotwalls
+complete gwal shotwalls (refers to crafted shotwals in some gwals)
 ent level walls do not yet blend
 
 add provision for using orig sound fx on jsgv levels, if installed
@@ -53,9 +53,6 @@ save highscore table for reload
 
 
 imm issues:
-
-shop, ssop, unpins, mirrors code not finished yet
--- add: base% ea., max% all, %inc/%dec abv/blw mid skill, %inc per level
 
 may want to up max skill that stores highscores
 (this is janky tho and needs tested as higher skills add a lot of helper items)
@@ -531,6 +528,10 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 
 done:
+
+x-- shop, ssop, unpins, mirrors code not finished yet
+   \- add: base% ea., max% all, %inc/%dec abv/blw mid skill, %inc per level
+    \_ needs test out via multi level play
 
 x-- solid walls, lattice (lvl 63) -- off by 1 pixel left, lattice L corner malformed
 

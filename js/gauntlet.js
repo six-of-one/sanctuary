@@ -87,6 +87,8 @@ Gauntlet = function() {
 
 // stats package - all coin drops, heartbeet tot, deaths, got vars things, fired pots & keys, char count total, curr char in play
 	allcoins, beets, deds, gpots, gfuds, gkeys, gspec, glims, gtrs, gltrs, gexits, fpots, fkeys, celf, cwar, cwiz, cval, curwiz, curwar, curval, curelf,
+// map RNG stats
+	gmir, gflp, grot, gunp, gssop, gshop,
 // per play stats count (save start total, diff is that play)
 	ideds, igpots, igfuds, igkeys, igspec, iglims, igtrs, igltrs, igexits, ifpots, ifkeys,
 // dps/hps display (preamrd - damage accum pre armor lowering total)
@@ -592,6 +594,13 @@ Gauntlet = function() {
         CWAR:    "gauntlet.wars",
         CVAL:    "gauntlet.vals",
         CELF:    "gauntlet.elfs",
+// map RNG stats
+        GMIR:    "gauntlet.xmir",
+        GFLP:    "gauntlet.yflp",
+        GROT:    "gauntlet.rot",
+        GUNP:    "gauntlet.unp",
+        GSSOP:    "gauntlet.ssop",
+        GSHOP:    "gauntlet.shop",
 // top4 score table
         Z1:      "gauntlet.z1",
         Z2:      "gauntlet.z2",
@@ -2024,23 +2033,29 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 //			stolen_load = 0;
 			FLVLRND = Game.Math.randomInt(FLOOR.MIN, FLOOR.MAX);
 
-			beets   = to.number(this.storage[STORAGE.BEETS],0);		// master stats
-		allcoins   = to.number(this.storage[STORAGE.COINS],0);
-			gpots   = to.number(this.storage[STORAGE.GPOTS],0);
-			gfuds   = to.number(this.storage[STORAGE.GFUDS],0);
-			gkeys   = to.number(this.storage[STORAGE.GKEYS],0);
-			gspec   = to.number(this.storage[STORAGE.GSPEC],0);
-			glims   = to.number(this.storage[STORAGE.GLIMS],0);
-			fpots   = to.number(this.storage[STORAGE.FPOTS],0);
-			fkeys   = to.number(this.storage[STORAGE.FKEYS],0);
-			gtrs    = to.number(this.storage[STORAGE.GTRS] ,0);
-			gltrs   = to.number(this.storage[STORAGE.GLTRS],0);
-			gexits  = to.number(this.storage[STORAGE.GEXS] ,0);
-			deds    = to.number(this.storage[STORAGE.DEDS] ,0);
-			cwiz    = to.number(this.storage[STORAGE.CWIZ] ,0);
-			cwar    = to.number(this.storage[STORAGE.CWAR] ,0);
-			cval    = to.number(this.storage[STORAGE.CVAL] ,0);
-			celf    = to.number(this.storage[STORAGE.CELF] ,0);
+			beets   = to.number(this.storage[STORAGE.BEETS] ,0);		// master stats
+		allcoins   = to.number(this.storage[STORAGE.COINS] ,0);
+			gpots   = to.number(this.storage[STORAGE.GPOTS] ,0);
+			gfuds   = to.number(this.storage[STORAGE.GFUDS] ,0);
+			gkeys   = to.number(this.storage[STORAGE.GKEYS] ,0);
+			gspec   = to.number(this.storage[STORAGE.GSPEC] ,0);
+			glims   = to.number(this.storage[STORAGE.GLIMS] ,0);
+			fpots   = to.number(this.storage[STORAGE.FPOTS] ,0);
+			fkeys   = to.number(this.storage[STORAGE.FKEYS] ,0);
+			gtrs    = to.number(this.storage[STORAGE.GTRS]  ,0);
+			gltrs   = to.number(this.storage[STORAGE.GLTRS] ,0);
+			gexits  = to.number(this.storage[STORAGE.GEXS]  ,0);
+			deds    = to.number(this.storage[STORAGE.DEDS]  ,0);
+			cwiz    = to.number(this.storage[STORAGE.CWIZ]  ,0);
+			cwar    = to.number(this.storage[STORAGE.CWAR]  ,0);
+			cval    = to.number(this.storage[STORAGE.CVAL]  ,0);
+			celf    = to.number(this.storage[STORAGE.CELF]  ,0);
+			gmir    = to.number(this.storage[STORAGE.GMIR]  ,0);
+			gflp    = to.number(this.storage[STORAGE.GFLP]  ,0);
+			grot    = to.number(this.storage[STORAGE.GROT]  ,0);
+			gunp    = to.number(this.storage[STORAGE.GUNP]  ,0);
+			gssop   = to.number(this.storage[STORAGE.GSSOP] ,0);
+			gshop   = to.number(this.storage[STORAGE.GSHOP] ,0);
 			scores  = this;
 			curwiz  = curwar  = curval  = curelf  = " ";
 			igpots  = gpots;	// track individual stats temp
@@ -2807,19 +2822,25 @@ var lvu = document.getElementById("flvl").value;
 
     saveHighScore: function() {
 
-		this.storage[STORAGE.COINS] = allcoins;
-		this.storage[STORAGE.GPOTS] = gpots;
-		this.storage[STORAGE.GFUDS] = gfuds;
-		this.storage[STORAGE.GKEYS] = gkeys;
-		this.storage[STORAGE.GSPEC] = gspec;
-		this.storage[STORAGE.GLIMS] = glims;
-		this.storage[STORAGE.FPOTS] = fpots;
-		this.storage[STORAGE.FKEYS] = fkeys;
-		this.storage[STORAGE.GTRS]  = gtrs;
-		this.storage[STORAGE.GLTRS] = gltrs;
-		this.storage[STORAGE.GEXS] = gexits;
-		this.storage[STORAGE.DEDS]  = deds;
-		this.storage[STORAGE.BEETS] = beets + heartbeet;
+		this.storage[STORAGE.COINS]  = allcoins;
+		this.storage[STORAGE.GPOTS]  = gpots;
+		this.storage[STORAGE.GFUDS]  = gfuds;
+		this.storage[STORAGE.GKEYS]  = gkeys;
+		this.storage[STORAGE.GSPEC]  = gspec;
+		this.storage[STORAGE.GLIMS]  = glims;
+		this.storage[STORAGE.FPOTS]  = fpots;
+		this.storage[STORAGE.FKEYS]  = fkeys;
+		this.storage[STORAGE.GTRS]   = gtrs;
+		this.storage[STORAGE.GLTRS]  = gltrs;
+		this.storage[STORAGE.GEXS]   = gexits;
+		this.storage[STORAGE.GMIR]   = gmir;
+		this.storage[STORAGE.GFLP]   = gflp;
+		this.storage[STORAGE.GROT]   = grot;
+		this.storage[STORAGE.GUNP]   = gunp;
+		this.storage[STORAGE.GSSOP]  = gssop;
+		this.storage[STORAGE.GSHOP]  = gshop;
+		this.storage[STORAGE.DEDS]   = deds;
+		this.storage[STORAGE.BEETS]  = beets + heartbeet;
 
 		if (max_diff_level > 9) return;
       if ((this.player.score / this.player.droppedcoins) > this.loadHighScore()) {
@@ -3307,21 +3328,21 @@ if (document.getElementById("noclip").checked) return false;
 			rndm = pmir + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
-			if (Math.random() < rndm) Mirx = true;
+			if (Math.random() < rndm) { Mirx = true; gmir++; }
 			}
 
 		if (nlevel >= stflp) {
 			rndm = pflp + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
-			if (Math.random() < rndm) Miry = true;
+			if (Math.random() < rndm) { Miry = true; gflp++; }
 			}
 
 		if (nlevel >= strot) {
 			rndm = prot + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
-			if (Math.random() < rndm) Mrot = true;
+			if (Math.random() < rndm) { Mrot = true; grot++; }
 			}
 
 		if (nlevel >= stunp) {
@@ -3329,12 +3350,12 @@ if (document.getElementById("noclip").checked) return false;
 			if (dfl > mids) r2 += incp * dfl;
 			else if (dfl < mids) r2 -= decp * dfl;
 			rndm = r2 + punp;
-			if (Math.random() < rndm) { Munpinx = true; Munpiny = true; }
+			if (Math.random() < rndm) { Munpinx = true; Munpiny = true; gunp++; }
 // this is blocked by g1/g2 only mode
 			else {
 				rndm = r2 + punp / 2; // half chance of one mode on if prev test fails
-					if (Math.random() < rndm) Munpiny = true;
-					else if (Math.random() < rndm) Munpinx = true;
+					if (Math.random() < rndm) { Munpiny = true; gunp++; }
+					else if (Math.random() < rndm) { Munpinx = true; gunp++; }
 				}
 			}
 
@@ -3343,14 +3364,14 @@ if (document.getElementById("noclip").checked) return false;
 			rndm = psstun + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
-			if (Math.random() < rndm) Mssop = true;
+			if (Math.random() < rndm) { Mssop = true; gssop++; }
 			}
 
 		if (nlevel >= sthurt) {
 			rndm = pshurt + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
-			if (Math.random() < rndm) Mshop = true;
+			if (Math.random() < rndm) { Mshop = true; gshop++; }
 			}
 
 		var rdunpx = level.unpinx, rdunpy = level.unpiny;	// unpin by map design - rotate has to swap unpin status in this case
