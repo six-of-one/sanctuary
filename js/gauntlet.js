@@ -42,8 +42,8 @@ Gauntlet = function() {
 		reloaded, Mastercell, Masterthmp, Musicth, Mastermap, Mtw, Mth, gwal, GWDEF = 2, GSHW = 1, 
 		ENTLVLDOOR = -3, ENTLVLWAL = -6, ENTLVLSHWAL = -5, ENTGFI = -4, ENTGITM = -8, gitmrow = 10, gitmst = 16, gitmex = 23,
 		NX = 0, NY = 0,
-// levelwide master values for unpins, unpin high/low x, high/lowy, mirror and rotates
-		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false,
+// levelwide master values for unpins, unpin high/low x, high/lowy, mirror and rotates, "shots now"
+		Munpinx = false, Munpiny = false, Munhx, Munlx = 1, Munhy, Munly = 1, Mirx = false, Miry = false, Mrot = false, Mssop = false, Mshop = false,
 // data set for map pixels, hue override pixels, moving exits (3), pick one real exit - rest fake (2), phasewalls (4), tile render master, Vx, Vy to .vx, .vy: drew this ent across upin line
 		Mapdata, Huedata, Movexit, lastmex = 0, Movit = null, P1rexit, lastp1rex, Phasewal, lastphas = 0, pwalled, altphas = 0, tilerend, Vx, Vy,
 // debug code, remove
@@ -2151,9 +2151,11 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		var plannc = false;
 		var shotsnow = "<br><br><br><font color=orange>shots now stun other players";
 		var anncshots = Musicth.sounds.ancyssop;
-//		plannc = true;
-		if (Math.random() < 0.5) { shotsnow = "<br><br><br><font color=red>shots now hurt other players"; anncshots = Musicth.sounds.ancyshop; }
-//		Musicth.play(anncshots);
+		if (Mshop) { shotsnow = "<br><br><br><font color=red>shots now hurt other players"; anncshots = Musicth.sounds.ancyshop; }
+		if (Mssop || Mshop) {
+			plannc = true;
+			Musicth.play(anncshots);
+			}
 
 // check for hidden potions
 		if (nlevel > 5)
@@ -3320,6 +3322,35 @@ if (document.getElementById("noclip").checked) return false;
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (Math.random() < rndm) Mrot = true;
+			}
+
+		if (nlevel >= stunp) {
+			var r2 = (lvlp * nlevel);
+			if (dfl > mids) r2 += incp * dfl;
+			else if (dfl < mids) r2 -= decp * dfl;
+			rndm = r2 + punp;
+			if (Math.random() < rndm) { Munpinx = true; Munpiny = true; }
+// this is blocked by g1/g2 only mode
+			else {
+				rndm = r2 + punp / 2; // half chance of one mode on if prev test fails
+					if (Math.random() < rndm) Munpiny = true;
+					else if (Math.random() < rndm) Munpinx = true;
+				}
+			}
+
+// note: code for these will no be complete until multiplayer is added...
+		if (nlevel >= ststun) {
+			rndm = psstun + (lvlp * nlevel);
+			if (dfl > mids) rndm += incp * dfl;
+			else if (dfl < mids) rndm -= decp * dfl;
+			if (Math.random() < rndm) Mssop = true;
+			}
+
+		if (nlevel >= sthurt) {
+			rndm = pshurt + (lvlp * nlevel);
+			if (dfl > mids) rndm += incp * dfl;
+			else if (dfl < mids) rndm -= decp * dfl;
+			if (Math.random() < rndm) Mshop = true;
 			}
 
 		var rdunpx = level.unpinx, rdunpy = level.unpiny;	// unpin by map design - rotate has to swap unpin status in this case

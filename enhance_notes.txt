@@ -44,6 +44,9 @@ heu override code to place 2 digit item under: trap wall, shot wall, gudy wall, 
 
 adjust trap walls: remove trap now has to look for restore trap and v-v
 
+perhaps a music play queue for sequences of annouces that currently overlap ?
+- mostly when a treasure room has a potion, or ssop/shop and something else play at lvl start
+
 save rand load level for replay
 save highscore table for reload
 
