@@ -1564,7 +1564,7 @@ Gauntlet = function() {
 // xFA - color layer as gradient 0xFFFF gradient codes, & follow 2 triples color1 to color2
 // xF8 - phase wall code # byte 0, sequential - 1st phase set, {1,2,3,4}, break (no 5) 2nd phase set, {6,7,8,9,10,11}, and on -- byte 1 is time delay (default 2 sec)
 // xF4 - trap code - trap # match 80B#, this wall or item will be removed by indicated trap
-// xF -
+// xF2 - spec item (2 digit) to produce from: trap wall, shot wall, gudy wall, cycle wall(?), door, or other removable map feature
 /*
 	var mgrad = ctx.createLinearGradient(0, 0, 0, 170);
 	mgrad.addColorStop(0, "red");
@@ -1573,17 +1573,18 @@ Gauntlet = function() {
 // XF -
 // any other codes: color triple 0xFFFFFF that will load between gbas layer and gflr
 
-var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
+var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 
 	function parseHue(px, py, ns, ctx) {
-		Lhue_bkg = 0;
+		Lhue_bkg  = 0;
 		Lhue_item = 0;
 		Lcolor = 0;
-		Lxtr = 0;
-		Ltile = 0;
-		Ltrap = 0;
-		Lsecs = 0;
+		Lxtr   = 0;
+		Ltile  = 0;
+		Ltrap  = 0;
+		Lsecs  = 0;
 		Lphase = 0;
+		Litem  = 0;
 // no data loaded
 		if (Huedata == null) return -1;
 		var n = px + (py * Mtw), mask = 0xFF0000;
@@ -1608,6 +1609,11 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs;
 		if ((d & mask) == 0xF80000) {
 			Lsecs = (d & 0xFF00) / 0x100;
 			Lphase = (d & 0xFF);
+			return 0;
+		}
+// reveal place item code
+		if ((d & mask) == 0xF20000) {
+			Litem = (d & 0xFFFF);
 			return 0;
 		}
 		Lcolor = d;
