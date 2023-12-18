@@ -339,7 +339,7 @@ Gauntlet = function() {
         FOOD1:             { sx: 3,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:  10, health:  100,               canbeshot: 3,         sound: 'collectfood',   nohlp: 16 },
         FOOD2:             { sx: 4,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:  10, health:  100,               canbeshot: 3,         sound: 'collectfood',   nohlp: 16 },
         FOOD3:             { sx: 5,  sy: 11,   frames: 1,                 fpf: FPS/10,   score:  10, health:  100,               canbeshot: 3,         sound: 'collectfood',   nohlp: 16 },
-        POISON:            { sx: 21, sy: 11,   frames: 1,                 fpf: FPS/10,   score:   0, damage:  50,  poison: true, canbeshot: 2,         sound: 'collectpotion', nohlp: 80 },
+        POISON:            { sx: 22, sy: 10,   frames: 1,                 fpf: FPS/10,   score:   0, damage:  50,  poison: true, canbeshot: 2,         sound: 'collectpotion', nohlp: 80 },
         KEY:               { sx: 16, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 100,               key: true,                          sound: 'collectkey',    nohlp: 18 },
         KEYPILE:           { sx: 28, sy: 10,   frames: 1,                 fpf: FPS/10,   score: 100,               key: true,                          sound: 'collectkey',    nohlp: 18 },
         POTION:            { sx: 20, sy: 10,   frames: 1,                 fpf: FPS/10,   score:  50,               potion: true, canbeshot: 2,         sound: 'collectpotion', nohlp: 19 },
