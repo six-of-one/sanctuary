@@ -640,6 +640,7 @@ Gauntlet = function() {
 // rnd load profiles
 		rlloop = 33,
 		rlline = 9,
+		svrcnt = 1,
 	RLPROF = [
 [	0x008090,  1,  0,  0,  0,  0,  0,  0,  2,  1,  0,  1,  1	],
 [	0x008050,  1,  1,  1,  0,  3,  1,  0,  1,  2,  0,  1,  0	],
@@ -2340,7 +2341,10 @@ var lvu = document.getElementById("flvl").value;
 
 			if ((Mastermap.level.nornd == undefined || frnd == true) && blrnd != true)	// random load a level
 			{
-					var f, rprof, ldiff;
+		var	f, rprof, ldiff;
+		var 	vartxt = document.getElementById("varout");
+					vartxt.style.display = "block";
+					vartxt.value += "	SVRLOAD["+svrcnt+"] = [ ];\n	SVRLOAD["+svrcnt+"][1] = \""+Mastermap.level.url+"\";\n	SVRLOAD["+svrcnt+"][2] = \""+Mastermap.level.name+"\";\n	SVRLOAD["+svrcnt+"][3] = [ ];";
 
 					ldiff = diff_level / def_diff;
 // treasure will come thru here unless blocked
@@ -2364,6 +2368,7 @@ var lvu = document.getElementById("flvl").value;
 									if (fnd)
 									{
 											Mastermap.load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
+											vartxt.value += "	SVRLOAD["+svrcnt+"][3]["+(cell.tx + cell.ty * Mtw)+"] = \""+RLPROF[f][0]+"\"\n";
 											cell.loaded = true;
 											RLOAD[f]--;
 // randomize the last 2
@@ -2372,6 +2377,7 @@ var lvu = document.getElementById("flvl").value;
 									}
 							}
 					}
+					svrcnt++;
 			}
 // theif escaped with item -
 			if (stolen_load > 0 && stolen_load <= rlloop)
