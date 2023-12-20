@@ -49,7 +49,7 @@ Gauntlet = function() {
 // debug code, remove
 		mtm,
 // exit to 4,6,8, ref pixel val for ent, shot a potion flag, slowmonsters (2), paused game for announce display
-		levelplus, refpixel, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
+		levelplus, refpixel, repwalls = false, shotpot, slowmonster = 1, slowmonstertime = 0, announcepause = false,
 //	save last tile & last cell in the floor writing loop - current method to put custom floor under an ent (hue pixel override is now avail as an alt)
 		ftilestr, fcellstr,
 //	custom g1 tiler on 0x00000F code of floor tiles
@@ -1535,7 +1535,16 @@ Gauntlet = function() {
 
 		 for(ty = 0 ; ty < Mth ; ty++)
 			for(tx = 0 ; tx < Mtw ; tx++)
-			  callback(tx, ty, Mapdata[helpers.indexc(tx,ty)], helpers, sref);
+/// TEST - remove - this is a test of the random wall builder
+				{
+				if (!repwalls || !iswallrw(Mapdata[helpers.indexc(tx,ty)]) || (tx == 0 || ty == 0 || tx == (Mtw - 1) || ty == (Mth - 1) ))
+/// TEST - remove
+					callback(tx, ty, Mapdata[helpers.indexc(tx,ty)], helpers, sref);
+/// TEST - remove
+				else
+					callback(tx, ty, 0xA08060, helpers, sref);
+				}
+/// TEST - remove
 		};
 
 	function rewall(map) {
@@ -3403,6 +3412,9 @@ if (document.getElementById("noclip").checked) return false;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (Math.random() < rndm) { Mshop = true; gshop++; }
 			}
+
+// option to replace reg level walls - this may not stay in, this is testing random builder
+		repwalls = true;
 
 		var rdunpx = level.unpinx, rdunpy = level.unpiny;	// unpin by map design - rotate has to swap unpin status in this case
 		if (Mrot) { var swp = Munpinx; Munpinx = Munpiny; Munpiny = swp; rdunpx = level.unpiny; rdunpy = level.unpinx; } // rotate swaps single unpins
