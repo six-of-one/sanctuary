@@ -1537,14 +1537,11 @@ Gauntlet = function() {
 			for(tx = 0 ; tx < Mtw ; tx++)
 /// TEST - remove - this is a test of the random wall builder
 				{
-				if (!repwalls || !iswallrw(Mapdata[helpers.indexc(tx,ty)]) || (tx == 0 || ty == 0 || tx == (Mtw - 1) || ty == (Mth - 1) ))
+				if (repwalls && iswallrw(Mapdata[helpers.indexc(tx,ty)]) && !(tx == 0 || ty == 0 || tx == (Mtw - 1) || ty == (Mth - 1) ))
+					Mapdata[helpers.indexc(tx,ty)] = 0xA08060;
 /// TEST - remove
-					callback(tx, ty, Mapdata[helpers.indexc(tx,ty)], helpers, sref);
-/// TEST - remove
-				else
-					callback(tx, ty, 0xA08060, helpers, sref);
+				callback(tx, ty, Mapdata[helpers.indexc(tx,ty)], helpers, sref);
 				}
-/// TEST - remove
 		};
 
 	function rewall(map) {
