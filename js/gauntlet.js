@@ -2339,12 +2339,29 @@ var lvu = document.getElementById("flvl").value;
 			diff_level = document.getElementById("seldiff").value;
 			if (diff_level > max_diff_level || max_diff_level == undefined) max_diff_level = diff_level;
 
+// check level reload files
+// later add user option to turn off
+			var srvsek = 1, rerlod = 0;
+			while (SVRLOAD[srvsek] != undefined) {
+					if (SVRLOAD[srvsek] [1] == Mastermap.level.url) rerlod = srvsek;
+					srvsek++;
+				}
+
+			if (rerlod > 0)
+					for (srvsek = 1;srvsek < SVRLOAD[rerlod][4]; srvsek++) {
+						if (SVRLOAD[rerlod][3][srvsek] != undefined) {
+						var	cty = Math.floor(srvsek / Mtw);
+						var	ctx = srvsek - (cty * Mtw);
+							if (cty < Mth && ctx < Mtw) Mastermap.load_cell(ctx, cty, SVRLOAD[rerlod][3][srvsek], Mastermap);
+							}
+						}
+			else
 			if ((Mastermap.level.nornd == undefined || frnd == true) && blrnd != true)	// random load a level
 			{
 		var	f, rprof, ldiff;
 		var 	vartxt = document.getElementById("varout");
 					vartxt.style.display = "block";
-					vartxt.value += "	SVRLOAD["+svrcnt+"] = [ ];\n	SVRLOAD["+svrcnt+"][1] = \""+Mastermap.level.url+"\";\n	SVRLOAD["+svrcnt+"][2] = \""+Mastermap.level.name+"\";\n	SVRLOAD["+svrcnt+"][3] = [ ];\n";
+					vartxt.value += "	SVRLOAD["+svrcnt+"] = [ ];\n	SVRLOAD["+svrcnt+"][1] = \""+Mastermap.level.url+"\";\n	SVRLOAD["+svrcnt+"][2] = \""+Mastermap.level.name+"\";\n	SVRLOAD["+svrcnt+"][3] = [ ];\n	SVRLOAD["+svrcnt+"][4] =\""+nc+"\";\n";
 
 					ldiff = diff_level / def_diff;
 // treasure will come thru here unless blocked
@@ -2368,7 +2385,7 @@ var lvu = document.getElementById("flvl").value;
 									if (fnd)
 									{
 											Mastermap.load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
-											vartxt.value += "	SVRLOAD["+svrcnt+"][3]["+(cell.tx + cell.ty * Mtw)+"] = \""+RLPROF[f][0]+"\"\n";
+											vartxt.value += "	SVRLOAD["+svrcnt+"][3]["+(cell.tx + cell.ty * Mtw)+"] = \""+RLPROF[f][0]+"\";\n //  x: "+cell.tx +",y:  "+ cell.ty;
 											cell.loaded = true;
 											RLOAD[f]--;
 // randomize the last 2
