@@ -2342,6 +2342,7 @@ var lvu = document.getElementById("flvl").value;
 // check level reload files
 // later add user option to turn off
 			var srvsek = 1, rerlod = 0;
+			rerload();
 			while (SVRLOAD[srvsek] != undefined) {
 					if (SVRLOAD[srvsek] [1] == Mastermap.level.url) rerlod = srvsek;
 					srvsek++;
