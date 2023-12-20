@@ -236,9 +236,9 @@ x-- save last map to replay on re-entry as map 8
 x-- map layout
 level population
 
--- these are coded in to operate, but not fixed in level flow yet
-corner unpin above level 100
-levels flip / mirror above 100 -- code is done, needs logic control
+x- these are coded fully, left is setting to op g1/g2 only modes
+   - corner unpin above level 100
+   - levels flip / mirror above 100 -- code is done, needs logic control
 
 shots stun & hurt other player levels
 \_ audio / tut messages in, no level ops yet, no dmg/stun yet
@@ -528,6 +528,8 @@ all the non player count down items should prob. be on setTimeout() or locked ou
 >>>>>>>>>>>>>>>>>>>>>>
 
 done:
+
+------------------- 023.12.29
 
 x-- shop, ssop, unpins, mirrors code not finished yet
    \- add: base% ea., max% all, %inc/%dec abv/blw mid skill, %inc per level

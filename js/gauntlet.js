@@ -2344,7 +2344,7 @@ var lvu = document.getElementById("flvl").value;
 		var	f, rprof, ldiff;
 		var 	vartxt = document.getElementById("varout");
 					vartxt.style.display = "block";
-					vartxt.value += "	SVRLOAD["+svrcnt+"] = [ ];\n	SVRLOAD["+svrcnt+"][1] = \""+Mastermap.level.url+"\";\n	SVRLOAD["+svrcnt+"][2] = \""+Mastermap.level.name+"\";\n	SVRLOAD["+svrcnt+"][3] = [ ];";
+					vartxt.value += "	SVRLOAD["+svrcnt+"] = [ ];\n	SVRLOAD["+svrcnt+"][1] = \""+Mastermap.level.url+"\";\n	SVRLOAD["+svrcnt+"][2] = \""+Mastermap.level.name+"\";\n	SVRLOAD["+svrcnt+"][3] = [ ];\n";
 
 					ldiff = diff_level / def_diff;
 // treasure will come thru here unless blocked
