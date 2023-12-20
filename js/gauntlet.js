@@ -2386,7 +2386,7 @@ var lvu = document.getElementById("flvl").value;
 									if (fnd)
 									{
 											Mastermap.load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
-											vartxt.value += "	SVRLOAD["+svrcnt+"][3]["+(cell.tx + cell.ty * Mtw)+"] = \""+RLPROF[f][0]+"\";\n //  x: "+cell.tx +",y:  "+ cell.ty;
+											vartxt.value += "	SVRLOAD["+svrcnt+"][3]["+(cell.tx + cell.ty * Mtw)+"] = \""+RLPROF[f][0]+"\";   //  x: "+cell.tx +" y:  "+ cell.ty + ", w: "+Mtw+" h: "+Mth+ "\n";
 											cell.loaded = true;
 											RLOAD[f]--;
 // randomize the last 2
