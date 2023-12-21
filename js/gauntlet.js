@@ -1549,7 +1549,7 @@ Gauntlet = function() {
 						{
 								tx = Game.Math.randomInt(1,Mtw - 2);
 								ty = Game.Math.randomInt(1,Mth - 2);
-								fnd = isfloor(Mapdata[helpers.indexc(tx,ty));
+								fnd = isfloor(Mapdata[helpers.indexc(tx,ty)]);
 								sft--;
 						}
 						if (fnd) {
@@ -2376,7 +2376,8 @@ var lvu = document.getElementById("flvl").value;
 					srvsek++;
 				}
 
-			if (rerlod > 0)
+	var 	vartxt = document.getElementById("varout");
+			if (rerlod > 0) {
 					for (srvsek = 1;srvsek < SVRLOAD[rerlod][4]; srvsek++) {
 						if (SVRLOAD[rerlod][3][srvsek] != undefined) {
 						var	cty = Math.floor(srvsek / Mtw);
@@ -2384,11 +2385,18 @@ var lvu = document.getElementById("flvl").value;
 							if (cty < Mth && ctx < Mtw) Mastermap.load_cell(ctx, cty, SVRLOAD[rerlod][3][srvsek], Mastermap);
 							}
 						}
+/// TEST - remove
+// include the test random walls if genned
+					if (svrnwalls > "") {
+						vartxt.style.display = "block";
+						vartxt.value = svrnwalls;
+						}
+/// TEST - remove
+					}
 			else
 			if ((Mastermap.level.nornd == undefined || frnd == true) && blrnd != true)	// random load a level
 			{
 		var	f, rprof, ldiff;
-		var 	vartxt = document.getElementById("varout");
 					vartxt.style.display = "block";
 					vartxt.value += "	SVRLOAD["+svrcnt+"] = [ ];\n	SVRLOAD["+svrcnt+"][1] = \""+Mastermap.level.url+"\";\n	SVRLOAD["+svrcnt+"][2] = \""+Mastermap.level.name+"\";\n	SVRLOAD["+svrcnt+"][3] = [ ];\n	SVRLOAD["+svrcnt+"][4] =\""+nc+"\";\n";
 
@@ -2423,6 +2431,7 @@ var lvu = document.getElementById("flvl").value;
 									}
 							}
 					}
+					vartxt.value += svrnwalls;		// add in random walls
 					svrcnt++;
 			}
 // theif escaped with item -
