@@ -5026,10 +5026,10 @@ var txsv = ":";
 // maze edit system	( W key is bound to Warrior start
 	 cursorOn:     function() { cursor[0] = true; crblink = 60; },
 	 cursorOff:    function() { cursor[0] = null; },
-	 cursorUp:     function() { if (cursor[0] == null) { this.player.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } },
-	 cursorRight:  function() { if (cursor[0] == null) { this.player.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } },
-	 cursorLeft:   function() { if (cursor[0] == null) { this.player.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } },
-	 cursorDown:   function() { if (cursor[0] == null) { this.player.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } },
+	 cursorUp:     function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } cursor[cry]--; if (cursor[cry] < 0) cursor[cry] = Mth - 1; },
+	 cursorRight:  function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } cursor[crx]++; if (cursor[crx] > Mtw - 1) cursor[crx] = 0; },
+	 cursorLeft:   function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } cursor[crx]--; if (cursor[crx] < 0) cursor[crx] = Mtw - 1; },
+	 cursorDown:   function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } cursor[cry]++; if (cursor[cry] > Mth - 1) cursor[cry] = 0; },
 
     setDir: function() {
       if (this.moving.up && this.moving.left)
