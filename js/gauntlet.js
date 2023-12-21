@@ -11,7 +11,7 @@ Gauntlet = function() {
 											DEBUGON = 0,
 // debug - provide a one time start level
 											initlevel = 0,
-	vardbg = 0, dent, d1, d2, bb = 0, PARSE,
+	vardbg = 0, dent, d1, d2, bb = 0, PARSE, cursor = [ ], crx = 1, cry = 2, critm = 3, crblink,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -3368,6 +3368,8 @@ if (document.getElementById("noclip").checked) return false;
           hues = level.hued,
           parser = level.plvl;
 
+		 cursor[0] = null;
+
 		if (level.gshw == undefined) level.gshw = GSHW;	// default count of walls/ shotwalls in gwal
 
 /// TEST - remove
@@ -3375,13 +3377,13 @@ if (document.getElementById("noclip").checked) return false;
 		Mirx = document.getElementById("xmiror").checked;
 		Miry = document.getElementById("ymiror").checked;
 		Mrot = document.getElementById("rotat").checked;
+/// TEST - remove
 		Munpinx = false;
 		Munpiny = false;
 		var cb = document.getElementById("xunp").checked;
 		if (cb == true || level.unpinx) Munpinx = true;
 		cb = document.getElementById("yunp").checked;
 		if (cb == true || level.unpiny) Munpiny = true;
-/// TEST - remove
 // run random map modifications
   var maxpr  = document.getElementById("maxpr").value,		// max percent
 		mids   = document.getElementById("midskil").value,
