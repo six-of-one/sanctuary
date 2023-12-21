@@ -1541,8 +1541,10 @@ Gauntlet = function() {
 			for(tx = 0 ; tx < Mtw ; tx++)
 				if (iswallrw(Mapdata[helpers.indexc(tx,ty)]) && !(tx == 0 || ty == 0 || tx == (Mtw - 1) || ty == (Mth - 1) ))
 					Mapdata[helpers.indexc(tx,ty)] = 0xA08060;
-// rng in new walls
-		var	w = Game.Math.randomInt(10, 30), sft = 6000, fnd, c;
+// rng in new walls - total random based on % of map size
+		var	mn = 0.1 * (Mtw * Mth);
+		var	mx = 0.35 * (Mtw * Mth);
+		var	w = Game.Math.randomInt(mn, mx), sft = 6000 + 3 * w, fnd, c;
 			while (w > 0 && sft > 0) {
 						fnd = 0;
 						while (!fnd && (sft > 0))
