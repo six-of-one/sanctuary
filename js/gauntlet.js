@@ -11,7 +11,7 @@ Gauntlet = function() {
 											DEBUGON = 0,
 // debug - provide a one time start level
 											initlevel = 0,
-	vardbg = 0, dent, d1, d2, bb = 0, PARSE, cursor = [ ], crx = 1, cry = 2, critm = 3, crblink,
+	vardbg = 0, dent, d1, d2, bb = 0, PARSE, cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 24, cdsy = 11,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -1195,7 +1195,14 @@ Gauntlet = function() {
       { key: Game.Key.Z,      mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.WIZARD);       } },
       { key: Game.Key.E,      mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.ELF);          } },
       { key: Game.Key.F2,     mode: 'up',   state: 'menu',    action: function()    { screenshot();                    } },
+// test key - currently inserts exit at start - org: started a theif
       { key: Game.Key.X,      mode: 'up',   state: 'playing', action: function()    { spawn();                         } },
+// maze edit system	( W key is bound to Warrior start
+      { key: Game.Key.Q,      mode: 'up',   state: 'playing', action: function()    { this.player.cursorUp()           } },
+      { key: Game.Key.A,      mode: 'up',   state: 'playing', action: function()    { this.player.cursorLeft()         } },
+      { key: Game.Key.D,      mode: 'up',   state: 'playing', action: function()    { this.player.cursorRight()        } },
+      { key: Game.Key.S,      mode: 'up',   state: 'playing', action: function()    { this.player.cursorDown()         } },
+
       { key: Game.Key.F2,     mode: 'up',   state: 'playing', action: function()    { screenshot();                    } },
       { key: Game.Key.ONE,    mode: 'up',   state: 'playing', action: function()    { this.player.coindrop();          } },
       { key: Game.Key.ESC,    mode: 'up',   state: 'playing', action: function()    { this.quit();                     } },
@@ -3368,7 +3375,7 @@ if (document.getElementById("noclip").checked) return false;
           hues = level.hued,
           parser = level.plvl;
 
-		 cursor[0] = null;
+		 cursor[0] = null;	// deactivate edit corsor
 
 		if (level.gshw == undefined) level.gshw = GSHW;	// default count of walls/ shotwalls in gwal
 
@@ -5016,6 +5023,13 @@ var txsv = ":";
 			 }
 		 }
 	},
+// maze edit system	( W key is bound to Warrior start
+	 cursorOn:     function() { cursor[0] = true; crblink = 60; },
+	 cursorOff:    function() { cursor[0] = null; },
+	 cursorUp:     function() { if (cursor[0] == null) { this.player.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } },
+	 cursorRight:  function() { if (cursor[0] == null) { this.player.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } },
+	 cursorLeft:   function() { if (cursor[0] == null) { this.player.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } },
+	 cursorDown:   function() { if (cursor[0] == null) { this.player.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } },
 
     setDir: function() {
       if (this.moving.up && this.moving.left)
@@ -6539,6 +6553,13 @@ var txsv = ":";
 						entity.vx = Vx;
 						entity.vy = Vy;
 			}
+// maze edit system
+			if (cursor[0] == true) {
+				if (crblink > 0)
+					this.sprite(ctx, sprites, viewport, cdsx, cdsy, cursor[crx] * TILE, cursor[cry] * TILE, TILE, TILE, 0, 0);
+				crblink--;
+				if (crblink < -60) crblink = 60;
+				}
     }
 
   });
