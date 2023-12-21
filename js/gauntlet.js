@@ -1202,6 +1202,7 @@ Gauntlet = function() {
       { key: Game.Key.A,      mode: 'up',   state: 'playing', action: function()    { this.player.cursorLeft()         } },
       { key: Game.Key.D,      mode: 'up',   state: 'playing', action: function()    { this.player.cursorRight()        } },
       { key: Game.Key.S,      mode: 'up',   state: 'playing', action: function()    { this.player.cursorDown()         } },
+      { key: Game.Key.HOME,   mode: 'up',   state: 'playing', action: function()    { this.player.cursorHome()         } },
 
       { key: Game.Key.F2,     mode: 'up',   state: 'playing', action: function()    { screenshot();                    } },
       { key: Game.Key.ONE,    mode: 'up',   state: 'playing', action: function()    { this.player.coindrop();          } },
@@ -5026,10 +5027,11 @@ var txsv = ":";
 // maze edit system	( W key is bound to Warrior start
 	 cursorOn:     function() { cursor[0] = true; crblink = 60; },
 	 cursorOff:    function() { cursor[0] = null; },
-	 cursorUp:     function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } cursor[cry]--; if (cursor[cry] < 0) cursor[cry] = Mth - 1; },
-	 cursorRight:  function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } cursor[crx]++; if (cursor[crx] > Mtw - 1) cursor[crx] = 0; },
-	 cursorLeft:   function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } cursor[crx]--; if (cursor[crx] < 0) cursor[crx] = Mtw - 1; },
-	 cursorDown:   function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x); cursor[cry] = p2t(this.y); } cursor[cry]++; if (cursor[cry] > Mth - 1) cursor[cry] = 0; },
+	 cursorUp:     function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[cry]--; if (cursor[cry] < 0) cursor[cry] = Mth - 1; crblink = 30; },
+	 cursorRight:  function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[crx]++; if (cursor[crx] > Mtw - 1) cursor[crx] = 0; crblink = 30; },
+	 cursorLeft:   function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[crx]--; if (cursor[crx] < 0) cursor[crx] = Mtw - 1; crblink = 30; },
+	 cursorDown:   function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[cry]++; if (cursor[cry] > Mth - 1) cursor[cry] = 0; crblink = 30; },
+	 cursorHome:   function() { if (cursor[0] == null) this.cursorOn();   cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); crblink = 30; },
 
     setDir: function() {
       if (this.moving.up && this.moving.left)
