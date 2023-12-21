@@ -2436,6 +2436,15 @@ var lvu = document.getElementById("flvl").value;
 					vartxt.value += svrnwalls;		// add in random walls
 					svrcnt++;
 			}
+/// TEST - remove
+			else
+// include the test random walls if genned
+					if (svrnwalls > "") {
+						vartxt.style.display = "block";
+						vartxt.value = svrnwalls;
+						}
+/// TEST - remove
+
 // theif escaped with item -
 			if (stolen_load > 0 && stolen_load <= rlloop)
 			{
