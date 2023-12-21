@@ -640,7 +640,7 @@ Gauntlet = function() {
 // rnd load profiles
 		rlloop = 33,
 		rlline = 9,
-		svrcnt = 1,
+		svrcnt = 1, svrnwalls,
 	RLPROF = [
 [	0x008090,  1,  0,  0,  0,  0,  0,  0,  2,  1,  0,  1,  1	],
 [	0x008050,  1,  1,  1,  0,  3,  1,  0,  1,  2,  0,  1,  0	],
@@ -1534,10 +1534,31 @@ Gauntlet = function() {
 		}
 
 /// TEST - remove - this is a test of the random wall builder
+// wipe the walls out
+		if (repwalls) {
+		 svrnwalls = "";
 		 for(ty = 0 ; ty < Mth ; ty++)
 			for(tx = 0 ; tx < Mtw ; tx++)
-				if (repwalls && iswallrw(Mapdata[helpers.indexc(tx,ty)]) && !(tx == 0 || ty == 0 || tx == (Mtw - 1) || ty == (Mth - 1) ))
+				if (iswallrw(Mapdata[helpers.indexc(tx,ty)]) && !(tx == 0 || ty == 0 || tx == (Mtw - 1) || ty == (Mth - 1) ))
 					Mapdata[helpers.indexc(tx,ty)] = 0xA08060;
+// rng in new walls
+		var	w = Game.Math.randomInt(10, 30), sft = 6000, fnd, c;
+			while (w > 0 && sft > 0) {
+						fnd = 0;
+						while (!fnd && (sft > 0))
+						{
+								tx = Game.Math.randomInt(1,Mtw - 2);
+								ty = Game.Math.randomInt(1,Mth - 2);
+								fnd = isfloor(Mapdata[helpers.indexc(tx,ty));
+								sft--;
+						}
+						if (fnd) {
+							Mapdata[helpers.indexc(tx,ty)] = 0x404000;
+							w--;
+							svrnwalls += "	SVRLOAD["+svrcnt+"][3]["+(tx + ty * Mtw)+"] = \"0x404000\";   //  x: "+tx +" y:  "+ ty + ", w: "+Mtw+" h: "+Mth+ "\n";
+							}
+				}
+		}
 /// TEST - remove
 
 		 for(ty = 0 ; ty < Mth ; ty++)
@@ -2393,7 +2414,7 @@ var lvu = document.getElementById("flvl").value;
 									if (fnd)
 									{
 											Mastermap.load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
-											vartxt.value += "	SVRLOAD["+svrcnt+"][3]["+(cell.tx + cell.ty * Mtw)+"] = \""+RLPROF[f][0]+"\";   //  x: "+cell.tx +" y:  "+ cell.ty + ", w: "+Mtw+" h: "+Mth+ "\n";
+											vartxt.value += "	SVRLOAD["+svrcnt+"][3]["+(cell.tx + cell.ty * Mtw)+"] = \"0x"+RLPROF[f][0].toString(16);+"\";   //  x: "+cell.tx +" y:  "+ cell.ty + ", w: "+Mtw+" h: "+Mth+ "\n";
 											cell.loaded = true;
 											RLOAD[f]--;
 // randomize the last 2
