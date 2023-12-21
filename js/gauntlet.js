@@ -1533,15 +1533,16 @@ Gauntlet = function() {
 					}
 		}
 
+/// TEST - remove - this is a test of the random wall builder
 		 for(ty = 0 ; ty < Mth ; ty++)
 			for(tx = 0 ; tx < Mtw ; tx++)
-/// TEST - remove - this is a test of the random wall builder
-				{
 				if (repwalls && iswallrw(Mapdata[helpers.indexc(tx,ty)]) && !(tx == 0 || ty == 0 || tx == (Mtw - 1) || ty == (Mth - 1) ))
 					Mapdata[helpers.indexc(tx,ty)] = 0xA08060;
 /// TEST - remove
+
+		 for(ty = 0 ; ty < Mth ; ty++)
+			for(tx = 0 ; tx < Mtw ; tx++)
 				callback(tx, ty, Mapdata[helpers.indexc(tx,ty)], helpers, sref);
-				}
 		};
 
 	function rewall(map) {
