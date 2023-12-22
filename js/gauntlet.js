@@ -5183,7 +5183,6 @@ var txsv = ":";
 			document.getElementById("ofkeysa").innerHTML = fkeys - ifkeys;
 			document.getElementById("ogexsa").innerHTML  = gexits - igexits;
 			document.getElementById("ocoinsa").innerHTML = this.droppedcoins;
-			document.getElementById("osecsa").innerHTML  = heartbeet;
 			}
 
       if ((frame % (FPS/1)) === 0) {
@@ -5194,6 +5193,7 @@ var txsv = ":";
 
 // this is game 1 second interval pulse - prob should be on a timer
 			heartbeet++;
+			document.getElementById("osecsa").innerHTML  = heartbeet;
 
 // maze editor active
 			if (cursor[0] == true) gedits++;
