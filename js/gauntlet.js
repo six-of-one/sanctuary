@@ -2128,14 +2128,33 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			ideds   = deds;
 			allcoins++;
 			this.storage[STORAGE.COINS] = allcoins;
-			if (type.name == "wizard")   { cwiz++; curwiz = "*"; }
-			if (type.name == "warrior")  { cwar++; curwar = "*"; }
-			if (type.name == "valkyrie") { cval++; curval = "*"; }
-			if (type.name == "elf")      { celf++; curelf = "*"; }
+			if (type.name == "wizard")   { cwiz++; curwiz = "*"; document.getElementById("owiza").innerHTML = "*"; }
+			if (type.name == "warrior")  { cwar++; curwar = "*"; document.getElementById("owara").innerHTML = "*"; }
+			if (type.name == "valkyrie") { cval++; curval = "*"; document.getElementById("ovala").innerHTML = "*"; }
+			if (type.name == "elf")      { celf++; curelf = "*"; document.getElementById("oelfa").innerHTML = "*"; }
 			this.storage[STORAGE.CWIZ] = cwiz;
 			this.storage[STORAGE.CWAR] = cwar;
 			this.storage[STORAGE.CVAL] = cval;
 			this.storage[STORAGE.CELF] = celf;
+// stats panel
+			document.getElementById("odeds").innerHTML = deds;
+			document.getElementById("otrs").innerHTML = gtrs;
+			document.getElementById("oltrs").innerHTML = gltrs;
+			document.getElementById("opots").innerHTML = gpots;
+			document.getElementById("ofuds").innerHTML = gfuds;
+			document.getElementById("okeys").innerHTML = gkeys;
+			document.getElementById("ospecs").innerHTML = gspec;
+			document.getElementById("olims").innerHTML = glims;
+			document.getElementById("ofpots").innerHTML = fpots;
+			document.getElementById("ofkeys").innerHTML = fkeys;
+			document.getElementById("ogexs").innerHTML = gexits;
+			document.getElementById("ocoins").innerHTML = allcoins;
+			document.getElementById("osecs").innerHTML = beets;
+
+			document.getElementById("owiz").innerHTML = cwiz;
+			document.getElementById("owar").innerHTML = cwar;
+			document.getElementById("oval").innerHTML = cval;
+			document.getElementById("oelf").innerHTML = celf;
     },
 
     onload: function(event, previous, current, nlevel) {
@@ -5139,6 +5158,23 @@ var txsv = ":";
 						}
 					}
 		}
+      if ((frame % (FPS/0.25)) === 0) {
+// stats panel
+//			document.getElementById("odeds").innerHTML   = deds;
+			document.getElementById("otrsa").innerHTML   = igtrs - gtrs;
+			document.getElementById("oltrsa").innerHTML  = igltrs - gltrs;
+			document.getElementById("opotsa").innerHTML  = igpots - gpots;
+			document.getElementById("ofudsa").innerHTML  = igfuds - gfuds;
+			document.getElementById("okeysa").innerHTML  = igkeys - gkeys;
+			document.getElementById("ospecsa").innerHTML = igspec - gspec;
+			document.getElementById("olimsa").innerHTML  = iglims - glims;
+			document.getElementById("ofpotsa").innerHTML = ifpots - fpots;
+			document.getElementById("ofkeysa").innerHTML = ifkeys - fkeys;
+			document.getElementById("ogexsa").innerHTML  = igexits - gexits;
+			document.getElementById("ocoinsa").innerHTML = this.droppedcoins;
+			document.getElementById("osecsa").innerHTML  = heartbeets;
+			}
+
       if ((frame % (FPS/1)) === 0) {
 
 /// TEST - update

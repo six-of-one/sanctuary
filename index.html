@@ -116,7 +116,7 @@
     </div>
 
     <div id='instructions'>
-	<label for="fname">Difficulty: </label><input type="number" value="3" id="seldiff" name="seldiff" min="1" max="30" title="1 = easy, 3 = medium, 6 = hard, 9 = nightmare, > 10 wut?"> &nbsp;<b>ARROW</b> keys to move, <b>HOLD SPACE</b> to fire, <b>ENTER</b> to use potion
+	<label>Difficulty: </label><input type="number" value="3" id="seldiff" name="seldiff" min="1" max="30" title="1 = easy, 3 = medium, 6 = hard, 9 = nightmare, > 10 wut?"> &nbsp;<b>ARROW</b> keys to move, <b>HOLD SPACE</b> to fire, <b>ENTER</b> to use potion
  - start on: <select  id="sellvl" title="level to start - saved: last level played">
           <option value="0">research</option>
           <option value="1">level 1</option>
@@ -156,6 +156,30 @@ sound [<input type="text" value="" size="4" id="nsnd" name="nsnd" title="play so
  - noblend <input type="checkbox" id="noblend" name="noblend" value="1" title="do not blend wall tex" > -- plyr  hue [<input type="text" value="" size="4" id="phue" name="phue" title="hue shift player sprite by # deg">deg] - allspr  hue [<input type="text" value="" size="4" id="ashue" name="ashue" title="hue shift player sprite by # deg">deg]
  <button onClick="vout()" title="store things">cky</button><br><textarea title="vars output" id="varout"  rows="9" cols="90" style='display:none;'></textarea>
     </div>
+<div id='statspat' style="position:absolute;left:-210px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
+<TABLE>
+<tr><td style="text-align:right;padding:0px 3px">stat</td><td>&nbsp;adv&nbsp;</td><td>total</td></tr>
+<tr><td style="text-align:right;padding:0px 3px">death</td><td><label id="odedsa">...</label></td><td><label id="odeds">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">treasure</td><td><label id="otrsa">...</label></td><td><label id="otrs">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">locked</td><td><label id="oltrsa">...</label></td><td><label id="oltrs">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">potions</td><td><label id="opotsa">...</label></td><td><label id="opots">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">foods</td><td><label id="ofudsa">...</label></td><td><label id="ofuds">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">keys</td><td><label id="okeysa">...</label></td><td><label id="okeys">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">specials</td><td><label id="ospecsa">...</label></td><td><label id="ospecs">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">limiteds</td><td><label id="olimsa">...</label></td><td><label id="olims">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">fired pots</td><td><label id="ofpotsa">...</label></td><td><label id="ofpots">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">used keys</td><td><label id="ofkeysa">...</label></td><td><label id="ofkeys">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">used keys</td><td><label id="ogexsa">...</label></td><td><label id="ogexs">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px"><hr></td><td><hr></td><td><hr></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">wizards</td><td><label id="owiza"></label></td><td><label id="owiz">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">warriors</td><td><label id="owara"></label></td><td><label id="owar">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">valkyries</td><td><label id="ovala"></label></td><td><label id="oval">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">elves</td><td><label id="oelfa"></label></td><td><label id="oelf">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">coins</td><td><label id="ocoinsa">...</label></td><td><label id="ocoins">...</label></td></tr>
+<tr><td style="text-align:right;padding:0px 3px">seconds</td><td><label id="osecsa">...</label></td><td><label id="osecs">...</label></td></tr>
+
+</TABLE>
+  </div>
 <img id="gfloor" src="gfx/g1floor0.jpg">
 <img id="gfloorbas" src="gfx/g1floorb.jpg">
 <img id="gwall" src="gfx/g2wall0.jpg">
