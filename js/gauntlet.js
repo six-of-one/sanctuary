@@ -14,7 +14,10 @@ Gauntlet = function() {
 	vardbg = 0, dent, d1, d2, bb = 0, PARSE,
 // maze edit cursor
 	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 24, cdsy = 11,
-	crlist = [ 0x008070, 0x008090, 0x008050, 0x008060, 0x008060, 0x008060, 0x008060, 0x004000, 0x0080A0, 0x0080D0, 0x0080C0, 0xF00000, 0xF00010, 0xF00020, 0xF00030, 0xF00050, -1 ], crll,
+	crlist = [ 0x008070, 0x008090, 0x008050, 0x008060, 0x008061, 0x008000, 0x008020, 0x004000, 0x0080A0, 0x0080D0, 0x0080C0, 0xF00000, 0xF00010, 0xF00020, 0xF00030, 0xF00050, -1 ], crll = 15,
+// location in entities.png
+	crlsx =  [ 17, 27, 16, 20,  7, 21,  3, 23, 24,  0, 28, 32, 32, 32, 32,  3 ],
+	crlsy =  [ 10, 10, 10, 10, 11, 10, 11, 10, 22, 11, 11,  4,  5,  6,  6,  6 ],
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -1205,8 +1208,8 @@ Gauntlet = function() {
       { key: Game.Key.A,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorLeft()         } },
       { key: Game.Key.D,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorRight()        } },
       { key: Game.Key.S,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorDown()         } },
-      { key: Game.Key.PAGEUP,   mode: 'up',   state: 'playing', action: function()    { this.player.cursorHome()         } },
-      { key: Game.Key.PAGEDOWN, mode: 'up',   state: 'playing', action: function()    { this.player.cursorHome()         } },
+      { key: Game.Key.PAGEUP,   mode: 'up',   state: 'playing', action: function()    { this.player.cursorIup()          } },
+      { key: Game.Key.PAGEDOWN, mode: 'up',   state: 'playing', action: function()    { this.player.cursorIdn()          } },
 
       { key: Game.Key.F2,       mode: 'up',   state: 'playing', action: function()    { screenshot();                    } },
       { key: Game.Key.ONE,      mode: 'up',   state: 'playing', action: function()    { this.player.coindrop();          } },
@@ -5029,13 +5032,15 @@ var txsv = ":";
 		 }
 	},
 // maze edit system	( W key is bound to Warrior start
-	 cursorOn:     function() { cursor[0] = true; crblink = 60; },
+	 cursorOn:     function() { cursor[0] = true; crblink = 60; cursor[critm] = -1; },
 	 cursorOff:    function() { cursor[0] = null; },
 	 cursorUp:     function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[cry]--; if (cursor[cry] < 0) cursor[cry] = Mth - 1; crblink = 30; },
 	 cursorRight:  function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[crx]++; if (cursor[crx] > Mtw - 1) cursor[crx] = 0; crblink = 30; },
 	 cursorLeft:   function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[crx]--; if (cursor[crx] < 0) cursor[crx] = Mtw - 1; crblink = 30; },
 	 cursorDown:   function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[cry]++; if (cursor[cry] > Mth - 1) cursor[cry] = 0; crblink = 30; },
-	 cursorHome:   function() { if (cursor[0] == null) this.cursorOn();   cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); crblink = 30; },
+	 cursorHome:   function() { if (cursor[0] == null)   this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); crblink = 30; },
+	 cursorIup:    function() { if (cursor[0] == null)   this.cursorOn(); cursor[critm]++; if (crlist[cursor[critm]] == -1) cursor[critm] = 0;    },
+	 cursorIdn:    function() { if (cursor[0] == null)   this.cursorOn(); cursor[critm]--;           if (cursor[critm] < 0) cursor[critm] = crll; },
 
     setDir: function() {
       if (this.moving.up && this.moving.left)
@@ -6565,6 +6570,9 @@ var txsv = ":";
 					this.sprite(ctx, sprites, viewport, cdsx, cdsy, cursor[crx] * TILE, cursor[cry] * TILE, TILE, TILE, 0, 0);
 				crblink--;
 				if (crblink < -60) crblink = 60;
+				if (cursor[critm] >= 0)
+				if (crlist[cursor[critm]] >= 0)
+					this.sprite(ctx, sprites, viewport, crlsx[cursor[critm]], crlsy[cursor[critm]], cursor[crx] * TILE, cursor[cry] * TILE, TILE - 4, TILE - 4, 0, 0);
 				}
     }
 
