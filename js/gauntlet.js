@@ -11,7 +11,10 @@ Gauntlet = function() {
 											DEBUGON = 0,
 // debug - provide a one time start level
 											initlevel = 0,
-	vardbg = 0, dent, d1, d2, bb = 0, PARSE, cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 24, cdsy = 11,
+	vardbg = 0, dent, d1, d2, bb = 0, PARSE,
+// maze edit cursor
+	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 24, cdsy = 11,
+	crlist = [ 0x008070, 0x008090, 0x008050, 0x008060, 0x008060, 0x008060, 0x008060, 0x004000, 0x0080A0, 0x0080D0, 0x0080C0, 0xF00000, 0xF00010, 0xF00020, 0xF00030, 0xF00050, -1 ], crll,
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -1190,41 +1193,42 @@ Gauntlet = function() {
     ],
 
     keys: [
-      { key: Game.Key.W,      mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.WARRIOR);      } },
-      { key: Game.Key.V,      mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.VALKYRIE);     } },
-      { key: Game.Key.Z,      mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.WIZARD);       } },
-      { key: Game.Key.E,      mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.ELF);          } },
-      { key: Game.Key.F2,     mode: 'up',   state: 'menu',    action: function()    { screenshot();                    } },
+      { key: Game.Key.W,        mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.WARRIOR);      } },
+      { key: Game.Key.V,        mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.VALKYRIE);     } },
+      { key: Game.Key.Z,        mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.WIZARD);       } },
+      { key: Game.Key.E,        mode: 'up',   state: 'menu',    action: function()    { this.start(PLAYER.ELF);          } },
+      { key: Game.Key.F2,       mode: 'up',   state: 'menu',    action: function()    { screenshot();                    } },
 // test key - currently inserts exit at start - org: started a theif
-      { key: Game.Key.X,      mode: 'up',   state: 'playing', action: function()    { spawn();                         } },
+      { key: Game.Key.X,        mode: 'up',   state: 'playing', action: function()    { spawn();                         } },
 // maze edit system	( W key is bound to Warrior start
-      { key: Game.Key.Q,      mode: 'up',   state: 'playing', action: function()    { this.player.cursorUp()           } },
-      { key: Game.Key.A,      mode: 'up',   state: 'playing', action: function()    { this.player.cursorLeft()         } },
-      { key: Game.Key.D,      mode: 'up',   state: 'playing', action: function()    { this.player.cursorRight()        } },
-      { key: Game.Key.S,      mode: 'up',   state: 'playing', action: function()    { this.player.cursorDown()         } },
-      { key: Game.Key.HOME,   mode: 'up',   state: 'playing', action: function()    { this.player.cursorHome()         } },
+      { key: Game.Key.Q,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorUp()           } },
+      { key: Game.Key.A,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorLeft()         } },
+      { key: Game.Key.D,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorRight()        } },
+      { key: Game.Key.S,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorDown()         } },
+      { key: Game.Key.PAGEUP,   mode: 'up',   state: 'playing', action: function()    { this.player.cursorHome()         } },
+      { key: Game.Key.PAGEDOWN, mode: 'up',   state: 'playing', action: function()    { this.player.cursorHome()         } },
 
-      { key: Game.Key.F2,     mode: 'up',   state: 'playing', action: function()    { screenshot();                    } },
-      { key: Game.Key.ONE,    mode: 'up',   state: 'playing', action: function()    { this.player.coindrop();          } },
-      { key: Game.Key.ESC,    mode: 'up',   state: 'playing', action: function()    { this.quit();                     } },
-      { key: Game.Key.LEFT,   mode: 'down', state: 'playing', action: function()    { this.player.moveLeft(true);      } },
-      { key: Game.Key.RIGHT,  mode: 'down', state: 'playing', action: function()    { this.player.moveRight(true);     } },
-      { key: Game.Key.UP,     mode: 'down', state: 'playing', action: function()    { this.player.moveUp(true);        } },
-      { key: Game.Key.DOWN,   mode: 'down', state: 'playing', action: function()    { this.player.moveDown(true);      } },
-      { key: Game.Key.LEFT,   mode: 'up',   state: 'playing', action: function()    { this.player.moveLeft(false);     } },
-      { key: Game.Key.RIGHT,  mode: 'up',   state: 'playing', action: function()    { this.player.moveRight(false);    } },
-      { key: Game.Key.UP,     mode: 'up',   state: 'playing', action: function()    { this.player.moveUp(false);       } },
-      { key: Game.Key.DOWN,   mode: 'up',   state: 'playing', action: function()    { this.player.moveDown(false);     } },
-      { key: Game.Key.SPACE,  mode: 'down', state: 'playing', action: function()    { this.player.fire(true);          } },
-      { key: Game.Key.SPACE,  mode: 'up',   state: 'playing', action: function()    { this.player.fire(false);         } },
-      { key: Game.Key.RETURN, mode: 'up',   state: 'playing', action: function()    { this.player.nuke();              } },
-      { key: Game.Key.ESC,    mode: 'up',   state: 'help',    action: function()    { this.resume();                   } },
-      { key: Game.Key.RETURN, mode: 'up',   state: 'help',    action: function()    { this.resume();                   } },
-      { key: Game.Key.SPACE,  mode: 'up',   state: 'help',    action: function()    { this.resume();                   } },
-      { key: Game.Key.F2,     mode: 'up',   state: 'tween',   action: function()    { screenshot();                    } },
-      { key: Game.Key.ESC,    mode: 'up',   state: 'tween',   action: function()    { this.resume();                   } },
-      { key: Game.Key.RETURN, mode: 'up',   state: 'tween',   action: function()    { this.resume();                   } },
-      { key: Game.Key.SPACE,  mode: 'up',   state: 'tween',   action: function()    { this.resume();                   } }
+      { key: Game.Key.F2,       mode: 'up',   state: 'playing', action: function()    { screenshot();                    } },
+      { key: Game.Key.ONE,      mode: 'up',   state: 'playing', action: function()    { this.player.coindrop();          } },
+      { key: Game.Key.ESC,      mode: 'up',   state: 'playing', action: function()    { this.quit();                     } },
+      { key: Game.Key.LEFT,     mode: 'down', state: 'playing', action: function()    { this.player.moveLeft(true);      } },
+      { key: Game.Key.RIGHT,    mode: 'down', state: 'playing', action: function()    { this.player.moveRight(true);     } },
+      { key: Game.Key.UP,       mode: 'down', state: 'playing', action: function()    { this.player.moveUp(true);        } },
+      { key: Game.Key.DOWN,     mode: 'down', state: 'playing', action: function()    { this.player.moveDown(true);      } },
+      { key: Game.Key.LEFT,     mode: 'up',   state: 'playing', action: function()    { this.player.moveLeft(false);     } },
+      { key: Game.Key.RIGHT,    mode: 'up',   state: 'playing', action: function()    { this.player.moveRight(false);    } },
+      { key: Game.Key.UP,       mode: 'up',   state: 'playing', action: function()    { this.player.moveUp(false);       } },
+      { key: Game.Key.DOWN,     mode: 'up',   state: 'playing', action: function()    { this.player.moveDown(false);     } },
+      { key: Game.Key.SPACE,    mode: 'down', state: 'playing', action: function()    { this.player.fire(true);          } },
+      { key: Game.Key.SPACE,    mode: 'up',   state: 'playing', action: function()    { this.player.fire(false);         } },
+      { key: Game.Key.RETURN,   mode: 'up',   state: 'playing', action: function()    { this.player.nuke();              } },
+      { key: Game.Key.ESC,      mode: 'up',   state: 'help',    action: function()    { this.resume();                   } },
+      { key: Game.Key.RETURN,   mode: 'up',   state: 'help',    action: function()    { this.resume();                   } },
+      { key: Game.Key.SPACE,    mode: 'up',   state: 'help',    action: function()    { this.resume();                   } },
+      { key: Game.Key.F2,       mode: 'up',   state: 'tween',   action: function()    { screenshot();                    } },
+      { key: Game.Key.ESC,      mode: 'up',   state: 'tween',   action: function()    { this.resume();                   } },
+      { key: Game.Key.RETURN,   mode: 'up',   state: 'tween',   action: function()    { this.resume();                   } },
+      { key: Game.Key.SPACE,    mode: 'up',   state: 'tween',   action: function()    { this.resume();                   } }
     ]
 
   };
