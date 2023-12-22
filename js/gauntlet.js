@@ -2530,9 +2530,20 @@ var lvu = document.getElementById("flvl").value;
       this.saveHighScore();
 // a one time popup display of stats per play (on quit or dead)
 // goal: a properly css formatted sheet, as a popup and a side bar selectable display
-		alert("stats: total -- this adventure\n        secs: "+(beets+heartbeet)+": "+heartbeet+"\n     deaths: "+deds+": "+(deds-ideds)+"\n treasures: "+gtrs+": "+(gtrs-igtrs)+"\nlocked trs: "+gltrs+": "+(gltrs-igltrs)+"\n    potions: "+gpots+": "+(gpots-igpots)+"\n       foods: "+gfuds+": "+(gfuds-igfuds)+
-		 "\n        keys: "+gkeys+": "+(gkeys-igkeys)+"\n   specials: "+gspec+": "+(gspec-igspec)+"\n   limiteds: "+glims+": "+(glims-iglims)+"\n fired pots: "+fpots+": "+(fpots-ifpots)+"\n used keys: "+fkeys+": "+(fkeys-ifkeys)+"\n         exits: "+gexits+": "+(gexits-igexits)+
-		 "\n----------------\n     wizards: "+cwiz+curwiz+"\n    warriors: "+cwar+curwar+"\n  valkyries: "+cval+curval+"\n        elves: "+celf+curelf+"\nreplace this with\na proper css overlay");
+			document.getElementById("odeds").innerHTML  = deds;
+			document.getElementById("otrs").innerHTML   = gtrs;
+			document.getElementById("oltrs").innerHTML  = gltrs;
+			document.getElementById("opots").innerHTML  = gpots;
+			document.getElementById("ofuds").innerHTML  = gfuds;
+			document.getElementById("okeys").innerHTML  = gkeys;
+			document.getElementById("ospecs").innerHTML = gspec;
+			document.getElementById("olims").innerHTML  = glims;
+			document.getElementById("ofpots").innerHTML = fpots;
+			document.getElementById("ofkeys").innerHTML = fkeys;
+			document.getElementById("ogexs").innerHTML  = gexits;
+			document.getElementById("ocoins").innerHTML = allcoins;
+			document.getElementById("osecs").innerHTML  = beets+heartbeet;
+
       this.player.leave();
 
 // restart intros
@@ -5161,18 +5172,18 @@ var txsv = ":";
       if ((frame % (FPS/0.25)) === 0) {
 // stats panel
 //			document.getElementById("odeds").innerHTML   = deds;
-			document.getElementById("otrsa").innerHTML   = igtrs - gtrs;
-			document.getElementById("oltrsa").innerHTML  = igltrs - gltrs;
-			document.getElementById("opotsa").innerHTML  = igpots - gpots;
-			document.getElementById("ofudsa").innerHTML  = igfuds - gfuds;
-			document.getElementById("okeysa").innerHTML  = igkeys - gkeys;
-			document.getElementById("ospecsa").innerHTML = igspec - gspec;
-			document.getElementById("olimsa").innerHTML  = iglims - glims;
-			document.getElementById("ofpotsa").innerHTML = ifpots - fpots;
-			document.getElementById("ofkeysa").innerHTML = ifkeys - fkeys;
-			document.getElementById("ogexsa").innerHTML  = igexits - gexits;
+			document.getElementById("otrsa").innerHTML   = gtrs  - igtrs;
+			document.getElementById("oltrsa").innerHTML  = gltrs - igltrs;
+			document.getElementById("opotsa").innerHTML  = gpots - igpots;
+			document.getElementById("ofudsa").innerHTML  = gfuds - igfuds;
+			document.getElementById("okeysa").innerHTML  = gkeys - igkeys;
+			document.getElementById("ospecsa").innerHTML = gspec - igspec;
+			document.getElementById("olimsa").innerHTML  = glims - iglims;
+			document.getElementById("ofpotsa").innerHTML = fpots - ifpots;
+			document.getElementById("ofkeysa").innerHTML = fkeys - ifkeys;
+			document.getElementById("ogexsa").innerHTML  = gexits - igexits;
 			document.getElementById("ocoinsa").innerHTML = this.droppedcoins;
-			document.getElementById("osecsa").innerHTML  = heartbeets;
+			document.getElementById("osecsa").innerHTML  = heartbeet;
 			}
 
       if ((frame % (FPS/1)) === 0) {
