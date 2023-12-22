@@ -2137,19 +2137,19 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			this.storage[STORAGE.CVAL] = cval;
 			this.storage[STORAGE.CELF] = celf;
 // stats panel
-			document.getElementById("odeds").innerHTML = deds;
-			document.getElementById("otrs").innerHTML = gtrs;
-			document.getElementById("oltrs").innerHTML = gltrs;
-			document.getElementById("opots").innerHTML = gpots;
-			document.getElementById("ofuds").innerHTML = gfuds;
-			document.getElementById("okeys").innerHTML = gkeys;
+			document.getElementById("odeds").innerHTML  = deds;
+			document.getElementById("otrs").innerHTML   = gtrs;
+			document.getElementById("oltrs").innerHTML  = gltrs;
+			document.getElementById("opots").innerHTML  = gpots;
+			document.getElementById("ofuds").innerHTML  = gfuds;
+			document.getElementById("okeys").innerHTML  = gkeys;
 			document.getElementById("ospecs").innerHTML = gspec;
-			document.getElementById("olims").innerHTML = glims;
+			document.getElementById("olims").innerHTML  = glims;
 			document.getElementById("ofpots").innerHTML = fpots;
 			document.getElementById("ofkeys").innerHTML = fkeys;
-			document.getElementById("ogexs").innerHTML = gexits;
+			document.getElementById("ogexs").innerHTML  = gexits;
 			document.getElementById("ocoins").innerHTML = allcoins;
-			document.getElementById("osecs").innerHTML = beets;
+			document.getElementById("osecs").innerHTML  = beets;
 
 			document.getElementById("owiz").innerHTML = cwiz;
 			document.getElementById("owar").innerHTML = cwar;
