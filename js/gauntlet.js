@@ -3429,6 +3429,7 @@ if (document.getElementById("noclip").checked) return false;
 			rndm = pmir + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
+			if (rndm > maxpr) rndm = maxpr;
 			if (Math.random() < rndm) { Mirx = true; gmir++; }
 			}
 
@@ -3436,6 +3437,7 @@ if (document.getElementById("noclip").checked) return false;
 			rndm = pflp + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
+			if (rndm > maxpr) rndm = maxpr;
 			if (Math.random() < rndm) { Miry = true; gflp++; }
 			}
 
@@ -3443,6 +3445,7 @@ if (document.getElementById("noclip").checked) return false;
 			rndm = prot + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
+			if (rndm > maxpr) rndm = maxpr;
 			if (Math.random() < rndm) { Mrot = true; grot++; }
 			}
 
@@ -3451,10 +3454,12 @@ if (document.getElementById("noclip").checked) return false;
 			if (dfl > mids) r2 += incp * dfl;
 			else if (dfl < mids) r2 -= decp * dfl;
 			rndm = r2 + punp;
+			if (rndm > maxpr) rndm = maxpr;
 			if (Math.random() < rndm) { Munpinx = true; Munpiny = true; gunp++; }
 // this is blocked by g1/g2 only mode
 			else {
 				rndm = r2 + punp / 2; // half chance of one mode on if prev test fails
+					`if (rndm > maxpr) rndm = maxpr;
 					if (Math.random() < rndm) { Munpiny = true; gunp++; }
 					else if (Math.random() < rndm) { Munpinx = true; gunp++; }
 				}
@@ -3465,6 +3470,7 @@ if (document.getElementById("noclip").checked) return false;
 			rndm = psstun + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
+			if (rndm > maxpr) rndm = maxpr;
 			if (Math.random() < rndm) { Mssop = true; gssop++; }
 			}
 
@@ -3472,6 +3478,7 @@ if (document.getElementById("noclip").checked) return false;
 			rndm = pshurt + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
+			if (rndm > maxpr) rndm = maxpr;
 			if (Math.random() < rndm) { Mshop = true; gshop++; }
 			}
 
