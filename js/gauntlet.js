@@ -13,7 +13,7 @@ Gauntlet = function() {
 											initlevel = 0,
 	vardbg = 0, dent, d1, d2, bb = 0, PARSE,
 // maze edit cursor
-	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 24, cdsy = 11, medits,
+	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 24, cdsy = 11, gedits,
 // edit items - the pixel add code
 	crlist = [ 0x008070, 0x008090, 0x008050, 0x008060, 0x008061, 0x008000, 0x008020, 0x004000, 0x0080A0, 0x0080D0, 0x0080C0, 0xF00000, 0xF00010, 0xF00020, 0xF00030, 0xF00050, -1 ], crll = 15,
 // location in entities.png
@@ -97,7 +97,7 @@ Gauntlet = function() {
 // map RNG stats
 	gmir, gflp, grot, gunp, gssop, gshop,
 // per play stats count (save start total, diff is that play)
-	ideds, igpots, igfuds, igkeys, igspec, iglims, igtrs, igltrs, igexits, ifpots, ifkeys,
+	ideds, igpots, igfuds, igkeys, igspec, iglims, igtrs, igltrs, igexits, ifpots, ifkeys, igedits,
 // dps/hps display (preamrd - damage accum pre armor lowering total)
 	dpstim = 0, dpsacc = 0, prearmd = 0,
 // highscores, max table size, max view size, and arrays
@@ -586,7 +586,7 @@ Gauntlet = function() {
         WHO:     "gauntlet.who",
         COINS:   "gauntlet.coins",
         BEETS:   "gauntlet.beets",
-        MEDITS:  "gauntlet.medits",
+        GEDITS:  "gauntlet.gedits",
         GPOTS:   "gauntlet.gpots",
         GFUDS:   "gauntlet.gfuds",
         GKEYS:   "gauntlet.gkeys",
@@ -2089,6 +2089,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			FLVLRND = Game.Math.randomInt(FLOOR.MIN, FLOOR.MAX);
 
 			beets   = to.number(this.storage[STORAGE.BEETS] ,0);		// master stats
+			gedits  = to.number(this.storage[STORAGE.GEDITS],0);
 		allcoins   = to.number(this.storage[STORAGE.COINS] ,0);
 			gpots   = to.number(this.storage[STORAGE.GPOTS] ,0);
 			gfuds   = to.number(this.storage[STORAGE.GFUDS] ,0);
@@ -2123,6 +2124,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			igtrs   = gtrs;
 			igltrs  = gltrs;
 			igexits = gexits;
+			igedits = gedits;
 			ideds   = deds;
 			allcoins++;
 			this.storage[STORAGE.COINS] = allcoins;
@@ -2929,6 +2931,7 @@ var lvu = document.getElementById("flvl").value;
 		this.storage[STORAGE.GTRS]   = gtrs;
 		this.storage[STORAGE.GLTRS]  = gltrs;
 		this.storage[STORAGE.GEXS]   = gexits;
+		this.storage[STORAGE.GEDITS] = gedits;
 		this.storage[STORAGE.GMIR]   = gmir;
 		this.storage[STORAGE.GFLP]   = gflp;
 		this.storage[STORAGE.GROT]   = grot;
@@ -5136,7 +5139,10 @@ var txsv = ":";
 /// TEST - update
 
 // this is game 1 second interval pulse - prob should be on a timer
-			heartbeet += 1;
+			heartbeet++;
+
+// maze editor active
+			if (cursor[0] == true) gedits++;
 
 			this.gluesp = 1;	// glue slow is reset here, mr burton
 // poisoned -- woozy controls turn off here
