@@ -5155,10 +5155,10 @@ var txsv = ":";
 // poisoned -- woozy controls turn off here
 			if (this.poison > 0) {
 // poison confuses controls by activating them - because it wasnt a button press, we need to turn it back off a second later
-				if (this.moving.left == this.poison) this.moving.left = false;
+				if (this.moving.left == this.poison)  this.moving.left = false;
 				if (this.moving.right == this.poison) this.moving.right = false;
-				if (this.moving.up == this.poison) this.moving.up = false;
-				if (this.moving.down == this.poison) this.moving.down = false;
+				if (this.moving.up == this.poison)    this.moving.up = false;
+				if (this.moving.down == this.poison)  this.moving.down = false;
 				this.setDir();
 				this.poison--; // count down poison effect
 			}
