@@ -13,11 +13,11 @@ Gauntlet = function() {
 											initlevel = 0,
 	vardbg = 0, dent, d1, d2, bb = 0, PARSE,
 // maze edit cursor
-	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 24, cdsy = 11,
+	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 24, cdsy = 11, medits,
 // edit items - the pixel add code
 	crlist = [ 0x008070, 0x008090, 0x008050, 0x008060, 0x008061, 0x008000, 0x008020, 0x004000, 0x0080A0, 0x0080D0, 0x0080C0, 0xF00000, 0xF00010, 0xF00020, 0xF00030, 0xF00050, -1 ], crll = 15,
 // location in entities.png
-	crlsx =  [ 17, 27, 16, 20,  7, 21,  3, 23, 24,  0, 28, 32, 32, 32, 32,  3 ],
+	crlsx =  [ 17, 27, 16, 20,  7, 21,  3, 23, 24,  0, 28, 32, 32, 32, 32, 32 ],
 	crlsy =  [ 10, 10, 10, 10, 11, 10, 11, 10, 22, 11, 11,  4,  5,  6,  6,  6 ],
 /// end debug tier
 // music control - needs user interf
@@ -586,6 +586,7 @@ Gauntlet = function() {
         WHO:     "gauntlet.who",
         COINS:   "gauntlet.coins",
         BEETS:   "gauntlet.beets",
+        MEDITS:  "gauntlet.medits",
         GPOTS:   "gauntlet.gpots",
         GFUDS:   "gauntlet.gfuds",
         GKEYS:   "gauntlet.gkeys",
