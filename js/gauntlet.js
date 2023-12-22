@@ -3459,7 +3459,7 @@ if (document.getElementById("noclip").checked) return false;
 // this is blocked by g1/g2 only mode
 			else {
 				rndm = r2 + punp / 2; // half chance of one mode on if prev test fails
-					`if (rndm > maxpr) rndm = maxpr;
+					if (rndm > maxpr) rndm = maxpr;
 					if (Math.random() < rndm) { Munpiny = true; gunp++; }
 					else if (Math.random() < rndm) { Munpinx = true; gunp++; }
 				}
@@ -5052,9 +5052,9 @@ var txsv = ":";
 	 cursorLeft:   function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[crx]--; if (cursor[crx] < 0) cursor[crx] = Mtw - 1; crblink = 30; },
 	 cursorDown:   function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[cry]++; if (cursor[cry] > Mth - 1) cursor[cry] = 0; crblink = 30; },
 	 cursorHome:   function() { if (cursor[0] == null)   this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); crblink = 30; },
-	 cursorIup:    function() { if (cursor[0] != null) { cursor[critm]++; if (crlist[cursor[critm]] == -1) cursor[critm] = 0; } },
+	 cursorIup:    function() { if (cursor[0] != null) { cursor[critm]++; if (crlist[cursor[critm]] == -1) cursor[critm] = 0;    } },
 	 cursorIdn:    function() { if (cursor[0] != null) { cursor[critm]--;           if (cursor[critm] < 0) cursor[critm] = crll; } },
-	 cursorIadd:   function() { if (cursor[0] != null) { Mastermap.load_cell(cursor[crx], cursor[cry], crlist[cursor[critm]]); } },
+	 cursorIadd:   function() { if (cursor[0] != null) { Mastermap.load_cell(cursor[crx], cursor[cry], crlist[cursor[critm]]);   } },
 
     setDir: function() {
       if (this.moving.up && this.moving.left)
