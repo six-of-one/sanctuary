@@ -94,10 +94,14 @@ Gauntlet = function() {
 
 // stats package - all coin drops, heartbeet tot, deaths, got vars things, fired pots & keys, char count total, curr char in play
 	allcoins, beets, deds, gpots, gfuds, gkeys, gspec, glims, gtrs, gltrs, gexits, fpots, fkeys, celf, cwar, cwiz, cval, curwiz, curwar, curval, curelf,
+// stats on monsters / generators
+	gbns, ggen, ggst, ggrt, gdem, gsrc, glob, gdeth,
 // map RNG stats
 	gmir, gflp, grot, gunp, gssop, gshop,
 // per play stats count (save start total, diff is that play)
 	ideds, igpots, igfuds, igkeys, igspec, iglims, igtrs, igltrs, igexits, ifpots, ifkeys, igedits,
+// gens / monsters
+	igbns, iggen, iggst, iggrt, igdem, igsrc, iglob, igdeth,
 // dps/hps display (preamrd - damage accum pre armor lowering total)
 	dpstim = 0, dpsacc = 0, prearmd = 0,
 // highscores, max table size, max view size, and arrays
@@ -602,6 +606,15 @@ Gauntlet = function() {
         CWAR:    "gauntlet.wars",
         CVAL:    "gauntlet.vals",
         CELF:    "gauntlet.elfs",
+// generators / monsters destroyed
+        GBNS:    "gauntlet.gbns",
+        GGEN:    "gauntlet.ggen",
+        GGST:    "gauntlet.ggst",
+        GGRT:    "gauntlet.ggrt",
+        GDEM:    "gauntlet.gdem",
+        GSRC:    "gauntlet.gsrc",
+        GLOB:    "gauntlet.glob",
+        GDTH:    "gauntlet.gdeth",
 // map RNG stats
         GMIR:    "gauntlet.xmir",
         GFLP:    "gauntlet.yflp",
@@ -2106,6 +2119,16 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			cwar    = to.number(this.storage[STORAGE.CWAR]  ,0);
 			cval    = to.number(this.storage[STORAGE.CVAL]  ,0);
 			celf    = to.number(this.storage[STORAGE.CELF]  ,0);
+
+			gbns    = to.number(this.storage[STORAGE.CBNS]  ,0);
+			ggen    = to.number(this.storage[STORAGE.GGEN]  ,0);
+			ggst    = to.number(this.storage[STORAGE.GGST]  ,0);
+			ggrt    = to.number(this.storage[STORAGE.GGRT]  ,0);
+			gdem    = to.number(this.storage[STORAGE.GDEM]  ,0);
+			gsrc    = to.number(this.storage[STORAGE.GSRC]  ,0);
+			glob    = to.number(this.storage[STORAGE.GLOB]  ,0);
+			gdeth   = to.number(this.storage[STORAGE.GDTH]  ,0);
+
 			gmir    = to.number(this.storage[STORAGE.GMIR]  ,0);
 			gflp    = to.number(this.storage[STORAGE.GFLP]  ,0);
 			grot    = to.number(this.storage[STORAGE.GROT]  ,0);
@@ -2126,6 +2149,14 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			igexits = gexits;
 			igedits = gedits;
 			ideds   = deds;
+			igbns   = gbns;
+			iggen   = ggen;
+			iggst   = ggst;
+			iggrt   = ggrt;
+			igdem   = gdem;
+			igsrc   = gsrc;
+			iglob   = glob;
+			igdeth  = gdeth;
 			allcoins++;
 			this.storage[STORAGE.COINS] = allcoins;
 			if (type.name == "wizard")   { cwiz++; curwiz = "*"; document.getElementById("owiza").innerHTML = "*"; }
@@ -2152,10 +2183,19 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			document.getElementById("osecs").innerHTML  = (beets > 21600) ? Math.floor(beets/3600)+"h":(beets > 360) ? Math.floor(beets/60)+"m":beets+"s";
 			document.getElementById("osecs").title      = (beets > 21600) ? "hours":(beets > 360) ? "minutes":"seconds";
 
-			document.getElementById("owiz").innerHTML = cwiz;
-			document.getElementById("owar").innerHTML = cwar;
-			document.getElementById("oval").innerHTML = cval;
-			document.getElementById("oelf").innerHTML = celf;
+			document.getElementById("owiz").innerHTML  = cwiz;
+			document.getElementById("owar").innerHTML  = cwar;
+			document.getElementById("oval").innerHTML  = cval;
+			document.getElementById("oelf").innerHTML  = celf;
+
+			document.getElementById("obns").innerHTML  = gbns;
+			document.getElementById("ogens").innerHTML = ggen;
+			document.getElementById("ogst").innerHTML  = ggst;
+			document.getElementById("ogrt").innerHTML  = ggrt;
+			document.getElementById("odem").innerHTML  = gdem;
+			document.getElementById("osrc").innerHTML  = gsrc;
+			document.getElementById("olob").innerHTML  = glob;
+			document.getElementById("odeth").innerHTML = gdeth;
     },
 
     onload: function(event, previous, current, nlevel) {
@@ -2542,6 +2582,14 @@ var lvu = document.getElementById("flvl").value;
 			document.getElementById("ofpots").innerHTML = fpots;
 			document.getElementById("ofkeys").innerHTML = fkeys;
 			document.getElementById("ogexs").innerHTML  = gexits;
+			document.getElementById("obns").innerHTML   = gbns;
+			document.getElementById("ogens").innerHTML  = ggen;
+			document.getElementById("ogst").innerHTML   = ggst;
+			document.getElementById("ogrt").innerHTML   = ggrt;
+			document.getElementById("odem").innerHTML   = gdem;
+			document.getElementById("osrc").innerHTML   = gsrc;
+			document.getElementById("olob").innerHTML   = glob;
+			document.getElementById("odeth").innerHTML  = gdeth;
 			document.getElementById("ocoins").innerHTML = allcoins;
 	var	bph = beets+heartbeet;
 			document.getElementById("osecs").innerHTML  = (bph > 21600) ? Math.floor(bph/3600)+"h":(bph > 360) ? Math.floor(bph/60)+"m":beets+"s";
@@ -2973,6 +3021,14 @@ var lvu = document.getElementById("flvl").value;
 		this.storage[STORAGE.GSSOP]  = gssop;
 		this.storage[STORAGE.GSHOP]  = gshop;
 		this.storage[STORAGE.DEDS]   = deds;
+		this.storage[STORAGE.GBNS]   = gbns;
+		this.storage[STORAGE.GGEN]   = ggen;
+		this.storage[STORAGE.GGST]   = ggst;
+		this.storage[STORAGE.GGRT]   = ggrt;
+		this.storage[STORAGE.GDEM]   = gdem;
+		this.storage[STORAGE.GSRC]   = gsrc;
+		this.storage[STORAGE.GLOB]   = glob;
+		this.storage[STORAGE.GDTH]   = gdeth;
 		this.storage[STORAGE.BEETS]  = beets + heartbeet;
 
 		if (max_diff_level > 9) return;
@@ -5186,6 +5242,14 @@ var txsv = ":";
 			document.getElementById("ofpotsa").innerHTML = fpots - ifpots;
 			document.getElementById("ofkeysa").innerHTML = fkeys - ifkeys;
 			document.getElementById("ogexsa").innerHTML  = gexits - igexits;
+			document.getElementById("obnsa").innerHTML   = gbns - igbns;
+			document.getElementById("ogensa").innerHTML  = ggen - iggen;
+			document.getElementById("ogsta").innerHTML   = ggst - iggst;
+			document.getElementById("ogrta").innerHTML   = ggrt - iggrt;
+			document.getElementById("odema").innerHTML   = gdem - igdem;
+			document.getElementById("odema").innerHTML   = gsrc - igsrc;
+			document.getElementById("oloba").innerHTML   = glob - iglob;
+			document.getElementById("odetha").innerHTML  = gdeth - igdeth;
 			document.getElementById("ocoinsa").innerHTML = this.droppedcoins;
 			}
 
