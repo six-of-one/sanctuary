@@ -95,13 +95,13 @@ Gauntlet = function() {
 // stats package - all coin drops, heartbeet tot, deaths, got vars things, fired pots & keys, char count total, curr char in play
 	allcoins, beets, deds, gpots, gfuds, gkeys, gspec, glims, gtrs, gltrs, gexits, fpots, fkeys, celf, cwar, cwiz, cval, curwiz, curwar, curval, curelf,
 // stats on monsters / generators
-	gbns, ggen, ggst, ggrt, gdem, gsrc, glob, gdeth,
+	gbns, ggen, ggsup, ggst, ggrt, gdem, gsrc, glob, gdeth,
 // map RNG stats
 	gmir, gflp, grot, gunp, gssop, gshop,
 // per play stats count (save start total, diff is that play)
 	ideds, igpots, igfuds, igkeys, igspec, iglims, igtrs, igltrs, igexits, ifpots, ifkeys, igedits,
 // gens / monsters
-	igbns, iggen, iggst, iggrt, igdem, igsrc, iglob, igdeth,
+	igbns, iggen, iggsup, iggst, iggrt, igdem, igsrc, iglob, igdeth,
 // dps/hps display (preamrd - damage accum pre armor lowering total)
 	dpstim = 0, dpsacc = 0, prearmd = 0,
 // highscores, max table size, max view size, and arrays
@@ -167,7 +167,7 @@ Gauntlet = function() {
         DEMON:        { sx: 0,  sy: 5,    frames: 3,   fpf: FPS/10,   score:    20, health:  30,   speed: 120/FPS,  damage: 20/FPS,   selfharm: 0,      canbeshot: true,   canbehit: true,  invisibility: false,                      travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 12, 12, 7, 1 ],     generator: { glvl: [ 12, 12, 7, 1 ],     health: 30,   speed: 3.5*FPS,   max: 40,   score: 200,   sx: 32, sy: 5 },                        name: "demon",              hits: 'hithump',     weapon:  { speed: 240/FPS, reload: 2*FPS,    damage: 10, sx: 24,  sy: 5,   fpf: FPS/10, monster: true },                                    nohlp: 43 },
         GRUNT:        { sx: 0,  sy: 6,    frames: 3,   fpf: FPS/10,   score:    30, health:  30,   speed: 110/FPS,  damage: 20/FPS,   selfharm: 0,      canbeshot: true,   canbehit: true,  invisibility: false,                      travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 13, 13, 8, 2 ],     generator: { glvl: [ 13, 13, 8, 2 ],     health: 30,   speed: 3.5*FPS,   max: 40,   score: 300,   sx: 32, sy: 6 },                        name: "grunt",              hits: 'hithump',     weapon: null,                                                                                                                               nohlp: 42 },
         WIZARD:       { sx: 0,  sy: 7,    frames: 3,   fpf: FPS/10,   score:    30, health:  30,   speed: 120/FPS,  damage: 20/FPS,   selfharm: 0,      canbeshot: true,   canbehit: true,  invisibility:  { on: 3*FPS, off: 6*FPS }, travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 14, 14, 9, 3 ],     generator: { glvl: [ 14, 14, 9, 3 ],     health: 30,   speed: 4.0*FPS,   max: 20,   score: 400,   sx: 32, sy: 6 },                        name: "sorcerer",           hits: 'hithump',     weapon: null,                                                                                                                               nohlp: 44 },
-        DEATH:        { sx: 0,  sy: 8,    frames: 3,   fpf: FPS/10,   score:    1,  health:  20,   speed: 125/FPS,  damage: 20/FPS,   selfharm: 2/FPS,  canbeshot: false,  canbehit: 2,     invisibility: false, notfot: true,        travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 4, 4, 4, 4 ],       generator: { glvl: [ 4,  4,  4, 4 ],     health: 30,   speed: 5.0*FPS,   max: 14,   score: 1000,  sx: 32, sy: 8 },                        name: "death",                                   weapon: null,                                                                                                                               nohlp: 60 },
+        DEATH:        { sx: 0,  sy: 8,    frames: 3,   fpf: FPS/10,   score:    1,  health:  20,   speed: 125/FPS,  damage: 20/FPS,   selfharm: 2/FPS,  canbeshot: false,  canbehit: 2,     invisibility: false, notfot: true,        travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 4, 4, 4, 4 ],       generator: { glvl: [ 4,  4,  4, 4 ],     health: 30,   speed: 5.0*FPS,   max: 14,   score: 1000,  sx: 32, sy: 8, supr: 1 },               name: "death",                                   weapon: null,                                                                                                                               nohlp: 60 },
         LOBBER:       { sx: 0,  sy: 9,    frames: 3,   fpf: FPS/10,   score:    10, health:  30,   speed: 80/FPS,   damage:  0/FPS,   selfharm: 0,      canbeshot: true,   canbehit: true,  invisibility: false,                      travelling: 0.3*FPS, thinking: 0.5*FPS, mlvl: [ 15, 15, 10, 5 ],    generator: { glvl: [ 15, 15, 10, 5 ],    health: 30,   speed: 3.5*FPS,   max: 20,   score: 100,   sx: 32, sy: 6 },                        name: "lobber",                                  weapon:  { speed: 180/FPS, reload: 1.9*FPS,  damage: 3,  sx: 24,  sy: 9,   fpf: FPS/10, monster: true, lobsht: true, foir: 'firelob' },     nohlp: 45 },
 // added level 2, level 1 monsters - set above is level 3
         GHOST2:       { sx: 0,  sy: 13,   frames: 3,   fpf: FPS/10,   score:    10, health:  20,   speed: 120/FPS,  damage: 20,       selfharm: 300,    canbeshot: true,   canbehit: false, notfot: true, invisibility: false,        travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 11, 11, 6, 0 ],     generator: { glvl: [ 11, 11, 6, 0 ],     health: 20,   speed: 3.5*FPS,   max: 42,   score: 50,    sx: 32, sy: 4, bones: 1 },              name: "ghost",              hits: 'hitghost',    weapon: null,                                                                                                                               nohlp: 41 },
@@ -184,9 +184,9 @@ Gauntlet = function() {
         THIEF:        { sx: 0,  sy: 23,   frames: 3,   fpf: FPS/10,   score:    50, health:  10,   speed: 225/FPS,  damage: 20/FPS,   selfharm: 0,      canbeshot: true,   canbehit: true,  invisibility: false,                      travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 16, 16, 16, 16 ],   generator: { glvl: [ 16, 16, 16, 16 ],   health: 10,   speed: 5.5*FPS,   max: 14,   score: 100,   sx: 32, sy: 6, theif: 4 }, theif: true, name: "thief",              bsound: 'hitheif',   weapon: null,  steal: 500,                                                                                                                  nohlp: 39 },
         MUGGER:       { sx: 0,  sy: 24,   frames: 3,   fpf: FPS/10,   score:    50, health:  10,   speed: 233/FPS,  damage: 0,        selfharm: 0,      canbeshot: true,   canbehit: true,  invisibility: false,                      travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 17, 17, 17, 17 ],   generator: { glvl: [ 17, 17, 17, 17 ],   health: 10,   speed: 5.5*FPS,   max: 16,   score: 100,   sx: 32, sy: 6, theif: 4 }, theif: true, name: "mugger",             bsound: 'himug',     weapon: null,  steal: 100,                                                                                                                  nohlp: 62 },
 // g2 calls this the acid blob - it looks like an angry pickle...
-        PICKLE:       { sx: 0,  sy:  25,  frames: 3,   fpf: FPS/10,   score:  1000, health:  60,   speed: 40/FPS,   damage:  60,      selfharm: 300,    canbeshot: false,  canbehit: false, invisibility: false, notfot: true,        travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 18, 18, 18, 18 ],   generator: { glvl: [ 18, 18, 18, 18 ],   health: 10,   speed: 1.5*FPS,   max: 20,   score: 500,   sx: 32, sy: 8 }, scorefx: 0, twopot: 1, name: "Acid blob",          hits: 'hitpickle',   weapon: null,                                                                                                                               nohlp: 63 },
-      SUPERSOC:       { sx: 0,  sy: 7,    frames: 3,   fpf: FPS/10,   score:   100, health:  10,   speed: 0,        damage:  20/FPS,  selfharm: 0,      canbeshot: true,   canbehit: true,                                            travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 19, 19, 19, 19 ],   generator: { glvl: [ 19, 19, 19, 19 ],   health: 40,   speed: 1.0*FPS,   max: 6,    score: 1000,  sx: 32, sy: 8 }, scorefx: 5, twopot: 1, name: "Super sorcerer",     hits: 'hithump',     weapon:  { speed: 240/FPS, reload: 3*FPS,    damage: 50, sx: 24, sy: 7,   fpf: FPS/10, monster: true },                                     nohlp: 69 },
-            IT:       { sx: 24, sy: 23,   frames: 7,   fpf: FPS/10,   score:  6000, health: 600,   speed: 140/FPS,  damage:  0,       selfharm: 610,    canbeshot: true,   canbehit: false, invisibility: false, notfot: true,        travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 20, 20, 20, 20 ],   generator: { glvl: [ 20, 20, 20, 20 ],   health: 50,   speed: 1.5*FPS,   max: 2,    score: 500,   sx: 32, sy: 8 }, scorefx: 3, twopot: 2, name: "IT",                 hits: 'hithump',     weapon: null,                                                                                                                               nohlp: 70 }
+        PICKLE:       { sx: 0,  sy:  25,  frames: 3,   fpf: FPS/10,   score:  1000, health:  60,   speed: 40/FPS,   damage:  60,      selfharm: 300,    canbeshot: false,  canbehit: false, invisibility: false, notfot: true,        travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 18, 18, 18, 18 ],   generator: { glvl: [ 18, 18, 18, 18 ],   health: 10,   speed: 1.5*FPS,   max: 20,   score: 500,   sx: 32, sy: 8, supr: 1 }, scorefx: 0, twopot: 1, name: "Acid blob",          hits: 'hitpickle',   weapon: null,                                                                                                                               nohlp: 63 },
+      SUPERSOC:       { sx: 0,  sy: 7,    frames: 3,   fpf: FPS/10,   score:   100, health:  10,   speed: 0,        damage:  20/FPS,  selfharm: 0,      canbeshot: true,   canbehit: true,                                            travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 19, 19, 19, 19 ],   generator: { glvl: [ 19, 19, 19, 19 ],   health: 40,   speed: 1.0*FPS,   max: 6,    score: 1000,  sx: 32, sy: 8, supr: 1 }, scorefx: 5, twopot: 1, name: "Super sorcerer",     hits: 'hithump',     weapon:  { speed: 240/FPS, reload: 3*FPS,    damage: 50, sx: 24, sy: 7,   fpf: FPS/10, monster: true },                                     nohlp: 69 },
+            IT:       { sx: 24, sy: 23,   frames: 7,   fpf: FPS/10,   score:  6000, health: 600,   speed: 140/FPS,  damage:  0,       selfharm: 610,    canbeshot: true,   canbehit: false, invisibility: false, notfot: true,        travelling: 0.5*FPS, thinking: 0.5*FPS, mlvl: [ 20, 20, 20, 20 ],   generator: { glvl: [ 20, 20, 20, 20 ],   health: 50,   speed: 1.5*FPS,   max: 2,    score: 500,   sx: 32, sy: 8, supr: 1 }, scorefx: 3, twopot: 2, name: "IT",                 hits: 'hithump',     weapon: null,                                                                                                                               nohlp: 70 }
       },
 // track a potential "richest" player path - (really have to track them all...)
 		THIEFTRX = [ ], THIEFTRY = [ ], thieftrack = 0, one_theif = 0, theif_ad = 0x400100, mug_ad = 0x400110, thf_mug_bal = 0.2, stolen_load = 0, NOSPAWNTHF = 4, nohlpkth = 39, nohlpinl = 40, thieftim = 0, thiefrnd = 0.35, thieftotim = 25, thiefexit = false,
@@ -609,6 +609,7 @@ Gauntlet = function() {
 // generators / monsters destroyed
         GBNS:    "gauntlet.gbns",
         GGEN:    "gauntlet.ggen",
+        GGSUP:   "gauntlet.ggsup",
         GGST:    "gauntlet.ggst",
         GGRT:    "gauntlet.ggrt",
         GDEM:    "gauntlet.gdem",
@@ -2122,6 +2123,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 
 			gbns    = to.number(this.storage[STORAGE.CBNS]  ,0);
 			ggen    = to.number(this.storage[STORAGE.GGEN]  ,0);
+			ggsup   = to.number(this.storage[STORAGE.GGSUP] ,0);
 			ggst    = to.number(this.storage[STORAGE.GGST]  ,0);
 			ggrt    = to.number(this.storage[STORAGE.GGRT]  ,0);
 			gdem    = to.number(this.storage[STORAGE.GDEM]  ,0);
@@ -2151,6 +2153,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			ideds   = deds;
 			igbns   = gbns;
 			iggen   = ggen;
+			iggsup  = ggsup;
 			iggst   = ggst;
 			iggrt   = ggrt;
 			igdem   = gdem;
@@ -3023,6 +3026,7 @@ var lvu = document.getElementById("flvl").value;
 		this.storage[STORAGE.DEDS]   = deds;
 		this.storage[STORAGE.GBNS]   = gbns;
 		this.storage[STORAGE.GGEN]   = ggen;
+		this.storage[STORAGE.GGSUP]  = ggsup;
 		this.storage[STORAGE.GGST]   = ggst;
 		this.storage[STORAGE.GGRT]   = ggrt;
 		this.storage[STORAGE.GDEM]   = gdem;
@@ -4253,8 +4257,8 @@ vartxt.value += "	]\n"
     },
 
     die: function(by) {
-		 alert (this.type.bones);
 		 if (this.type.bones) gbns++
+		 if (this.type.supr) ggsup++
 		 else ggen++
       publish(EVENT.GENERATOR_DEATH, this, by);
     },
