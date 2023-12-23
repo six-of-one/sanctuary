@@ -2071,6 +2071,64 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 //for (i = 1; i <= 81; i++) { deleteCookie(i+"char"); deleteCookie(i+"score"); deleteCookie(i+"name"); }
 		loadscortabl();
 		$('scordiv').hide();
+// load total stats here
+			beets   = to.number(this.storage[STORAGE.BEETS] ,0);		// master stats
+			gedits  = to.number(this.storage[STORAGE.GEDITS],0);
+		allcoins   = to.number(this.storage[STORAGE.COINS] ,0);
+			gpots   = to.number(this.storage[STORAGE.GPOTS] ,0);
+			gfuds   = to.number(this.storage[STORAGE.GFUDS] ,0);
+			gkeys   = to.number(this.storage[STORAGE.GKEYS] ,0);
+			gspec   = to.number(this.storage[STORAGE.GSPEC] ,0);
+			glims   = to.number(this.storage[STORAGE.GLIMS] ,0);
+			fpots   = to.number(this.storage[STORAGE.FPOTS] ,0);
+			fkeys   = to.number(this.storage[STORAGE.FKEYS] ,0);
+			gtrs    = to.number(this.storage[STORAGE.GTRS]  ,0);
+			gltrs   = to.number(this.storage[STORAGE.GLTRS] ,0);
+			gexits  = to.number(this.storage[STORAGE.GEXS]  ,0);
+			deds    = to.number(this.storage[STORAGE.DEDS]  ,0);
+			cwiz    = to.number(this.storage[STORAGE.CWIZ]  ,0);
+			cwar    = to.number(this.storage[STORAGE.CWAR]  ,0);
+			cval    = to.number(this.storage[STORAGE.CVAL]  ,0);
+			celf    = to.number(this.storage[STORAGE.CELF]  ,0);
+
+			gbns    = to.number(this.storage[STORAGE.CBNS]  ,0);
+			ggen    = to.number(this.storage[STORAGE.GGEN]  ,0);
+			ggsup   = to.number(this.storage[STORAGE.GGSUP] ,0);
+			ggst    = to.number(this.storage[STORAGE.GGST]  ,0);
+			ggrt    = to.number(this.storage[STORAGE.GGRT]  ,0);
+			gdem    = to.number(this.storage[STORAGE.GDEM]  ,0);
+			gsrc    = to.number(this.storage[STORAGE.GSRC]  ,0);
+			glob    = to.number(this.storage[STORAGE.GLOB]  ,0);
+			gdeth   = to.number(this.storage[STORAGE.GDTH]  ,0);
+// stats panel
+			document.getElementById("odeds").innerHTML  = Game.Math.mku(deds);
+			document.getElementById("otrs").innerHTML   = Game.Math.mku(gtrs);
+			document.getElementById("oltrs").innerHTML  = Game.Math.mku(gltrs);
+			document.getElementById("opots").innerHTML  = Game.Math.mku(gpots);
+			document.getElementById("ofuds").innerHTML  = Game.Math.mku(gfuds);
+			document.getElementById("okeys").innerHTML  = Game.Math.mku(gkeys);
+			document.getElementById("ospecs").innerHTML = Game.Math.mku(gspec);
+			document.getElementById("olims").innerHTML  = Game.Math.mku(glims);
+			document.getElementById("ofpots").innerHTML = Game.Math.mku(fpots);
+			document.getElementById("ofkeys").innerHTML = Game.Math.mku(fkeys);
+			document.getElementById("ogexs").innerHTML  = Game.Math.mku(gexits);
+			document.getElementById("ocoins").innerHTML = Game.Math.mku(allcoins);
+			document.getElementById("osecs").innerHTML  = Game.Math.hms(beets);
+			document.getElementById("osecs").title      = Game.Math.hms_title(beets);
+
+			document.getElementById("owiz").innerHTML  = Game.Math.mku(cwiz);
+			document.getElementById("owar").innerHTML  = Game.Math.mku(cwar);
+			document.getElementById("oval").innerHTML  = Game.Math.mku(cval);
+			document.getElementById("oelf").innerHTML  = Game.Math.mku(celf);
+
+			document.getElementById("obns").innerHTML  = Game.Math.mku(gbns);
+			document.getElementById("ogens").innerHTML = Game.Math.mku(ggen);
+			document.getElementById("ogst").innerHTML  = Game.Math.mku(ggst);
+			document.getElementById("ogrt").innerHTML  = Game.Math.mku(ggrt);
+			document.getElementById("odem").innerHTML  = Game.Math.mku(gdem);
+			document.getElementById("osrc").innerHTML  = Game.Math.mku(gsrc);
+			document.getElementById("olob").innerHTML  = Game.Math.mku(glob);
+			document.getElementById("odeth").innerHTML = Game.Math.mku(gdeth);
     },
 
     onstart: function(event, previous, current, type, nlevel) {
@@ -2101,35 +2159,6 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			RNGLOAD[1]  = TREASURE.GOLD;
 //			stolen_load = 0;
 			FLVLRND = Game.Math.randomInt(FLOOR.MIN, FLOOR.MAX);
-
-			beets   = to.number(this.storage[STORAGE.BEETS] ,0);		// master stats
-			gedits  = to.number(this.storage[STORAGE.GEDITS],0);
-		allcoins   = to.number(this.storage[STORAGE.COINS] ,0);
-			gpots   = to.number(this.storage[STORAGE.GPOTS] ,0);
-			gfuds   = to.number(this.storage[STORAGE.GFUDS] ,0);
-			gkeys   = to.number(this.storage[STORAGE.GKEYS] ,0);
-			gspec   = to.number(this.storage[STORAGE.GSPEC] ,0);
-			glims   = to.number(this.storage[STORAGE.GLIMS] ,0);
-			fpots   = to.number(this.storage[STORAGE.FPOTS] ,0);
-			fkeys   = to.number(this.storage[STORAGE.FKEYS] ,0);
-			gtrs    = to.number(this.storage[STORAGE.GTRS]  ,0);
-			gltrs   = to.number(this.storage[STORAGE.GLTRS] ,0);
-			gexits  = to.number(this.storage[STORAGE.GEXS]  ,0);
-			deds    = to.number(this.storage[STORAGE.DEDS]  ,0);
-			cwiz    = to.number(this.storage[STORAGE.CWIZ]  ,0);
-			cwar    = to.number(this.storage[STORAGE.CWAR]  ,0);
-			cval    = to.number(this.storage[STORAGE.CVAL]  ,0);
-			celf    = to.number(this.storage[STORAGE.CELF]  ,0);
-
-			gbns    = to.number(this.storage[STORAGE.CBNS]  ,0);
-			ggen    = to.number(this.storage[STORAGE.GGEN]  ,0);
-			ggsup   = to.number(this.storage[STORAGE.GGSUP] ,0);
-			ggst    = to.number(this.storage[STORAGE.GGST]  ,0);
-			ggrt    = to.number(this.storage[STORAGE.GGRT]  ,0);
-			gdem    = to.number(this.storage[STORAGE.GDEM]  ,0);
-			gsrc    = to.number(this.storage[STORAGE.GSRC]  ,0);
-			glob    = to.number(this.storage[STORAGE.GLOB]  ,0);
-			gdeth   = to.number(this.storage[STORAGE.GDTH]  ,0);
 
 			gmir    = to.number(this.storage[STORAGE.GMIR]  ,0);
 			gflp    = to.number(this.storage[STORAGE.GFLP]  ,0);
@@ -2171,34 +2200,10 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			this.storage[STORAGE.CVAL] = cval;
 			this.storage[STORAGE.CELF] = celf;
 // stats panel
-			document.getElementById("odeds").innerHTML  = Game.Math.mku(deds);
-			document.getElementById("otrs").innerHTML   = Game.Math.mku(gtrs);
-			document.getElementById("oltrs").innerHTML  = Game.Math.mku(gltrs);
-			document.getElementById("opots").innerHTML  = Game.Math.mku(gpots);
-			document.getElementById("ofuds").innerHTML  = Game.Math.mku(gfuds);
-			document.getElementById("okeys").innerHTML  = Game.Math.mku(gkeys);
-			document.getElementById("ospecs").innerHTML = Game.Math.mku(gspec);
-			document.getElementById("olims").innerHTML  = Game.Math.mku(glims);
-			document.getElementById("ofpots").innerHTML = Game.Math.mku(fpots);
-			document.getElementById("ofkeys").innerHTML = Game.Math.mku(fkeys);
-			document.getElementById("ogexs").innerHTML  = Game.Math.mku(gexits);
-			document.getElementById("ocoins").innerHTML = Game.Math.mku(allcoins);
-			document.getElementById("osecs").innerHTML  = Game.Math.hms(beets);
-			document.getElementById("osecs").title      = Game.Math.hms_title(beets);
-
 			document.getElementById("owiz").innerHTML  = Game.Math.mku(cwiz);
 			document.getElementById("owar").innerHTML  = Game.Math.mku(cwar);
 			document.getElementById("oval").innerHTML  = Game.Math.mku(cval);
 			document.getElementById("oelf").innerHTML  = Game.Math.mku(celf);
-
-			document.getElementById("obns").innerHTML  = Game.Math.mku(gbns);
-			document.getElementById("ogens").innerHTML = Game.Math.mku(ggen);
-			document.getElementById("ogst").innerHTML  = Game.Math.mku(ggst);
-			document.getElementById("ogrt").innerHTML  = Game.Math.mku(ggrt);
-			document.getElementById("odem").innerHTML  = Game.Math.mku(gdem);
-			document.getElementById("osrc").innerHTML  = Game.Math.mku(gsrc);
-			document.getElementById("olob").innerHTML  = Game.Math.mku(glob);
-			document.getElementById("odeth").innerHTML = Game.Math.mku(gdeth);
     },
 
     onload: function(event, previous, current, nlevel) {
