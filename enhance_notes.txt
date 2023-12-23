@@ -41,6 +41,7 @@ could limit "slide" of monsters in strict g1/g2 mode
 replace/remove cfg - chk box & text value, if value is empty, remove
 
 heu override code to place 2 digit item under: trap wall, shot wall, gudy wall, cycle wall
+- this could also be done with SVRLOAD and some adapted code
 
 adjust trap walls: remove trap now has to look for restore trap and v-v
 
