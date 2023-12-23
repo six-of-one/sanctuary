@@ -143,7 +143,7 @@ rotate: <input type="text" value="30" size="1" id="strot" title="select level to
 unpin: <input type="text" value="50" size="1" id="stunp" title="select level to start rnd unpins">:<input type="text" value="0.25" size="1" id="punp" title="base % to unpin X or Y">&nbsp;
 shots stun: <input type="text" value="24" size="1" id="ststun" title="select level to start shots stun other players">:<input type="text" value="0.2" size="1" id="psstun" title="base % players shots stun players">&nbsp;
 shots hurt: <input type="text" value="33" size="1" id="sthurt" title="select level to start shots hurt other players">:<input type="text" value="0.16" size="1" id="pshurt" title="base % players shots hurt players">
-<br> stats: <input type="checkbox" id="shostat" name="shostats" value="1" title="check to show stats live" onClick="statswp()">
+<br> stats: <input type="checkbox" checked="true" id="shostat" name="shostats" value="1" title="check to show stats live" onClick="panlswap('statspat','shostat')">
 <hr> dev... unpin : x <input type="checkbox" id="xunp" name="xunp" value="1" title="testing" > y <input type="checkbox" id="yunp" name="yunp" value="1" title="testing" > -- mir: x <input type="checkbox" id="xmiror" name="xmiror" value="1" title="testing" > y <input type="checkbox" id="ymiror" name="ymiror" value="1" title="testing" >
 rot: <input type="checkbox" id="rotat" name="rotat" value="1" title="testing" > -- invis walls <input type="checkbox" id="invwal" name="invwal" value="1" title="testing" > -- special display <input type="checkbox" id="spedis" name="spedis" value="1" title="testing" > -- 
 block rnd load <input type="checkbox" id="blrndlod" name="blrndlod" value="1" title="testing" > force rnd load <input type="checkbox" id="forndlod" name="forndlod" value="1" title="testing" > 
@@ -158,7 +158,7 @@ sound [<input type="text" value="" size="4" id="nsnd" name="nsnd" title="play so
     </div>
 <div id='statspat' style="position:absolute;left:-220px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
 <TABLE>
-<tr><td><hr></td><td style="text-align:right;padding:0px 3px"><label title="detail on item listed">stat</label></td><td>&nbsp;<label title="stats for adventure in progress">adv</label>&nbsp;</td><td><label title="total stats accumulated">total</label></td></tr>
+<tr><td title="uncheck 'stats' on instruction panel at bottom to hide"><hr></td><td style="text-align:right;padding:0px 3px"><label title="detail on item listed">stat</label></td><td>&nbsp;<label title="stats for adventure in progress">adv</label>&nbsp;</td><td><label title="total stats accumulated">total</label></td></tr>
 <tr><td><img src="images/olded.png" style="width:16px"></td><td style="text-align:right;padding:0px 3px">death</td><td><label id="odedsa">...</label></td><td><label id="odeds">...</label></td></tr>
 <tr><td><img src="images/oltrs.png" style="width:16px"></td><td style="text-align:right;padding:0px 3px">treasure</td><td><label id="otrsa">...</label></td><td><label id="otrs">...</label></td></tr>
 <tr><td><img src="images/ollok.png" style="width:16px"></td><td style="text-align:right;padding:0px 3px">locked</td><td><label id="oltrsa">...</label></td><td><label id="oltrs">...</label></td></tr>
@@ -198,7 +198,7 @@ sound [<input type="text" value="" size="4" id="nsnd" name="nsnd" title="play so
   <script src="js/gauntlet.js"></script>
   <script>
   function vout() {var vartxt = document.getElementById("varout");vartxt.value = document.cookie.replace(/; /gi, ";\n"); vartxt.value += "\n"; vartxt.style.display = "block"}
-  function statswp() {var statp = document.getElementById("statspat"); var cb = document.getElementById("shostat"); cb.checked ? statp.style.display = "block":statp.style.display = "hidden"}
+  function panlswap(panlref, cbref) {var panl = document.getElementById(panlref); var cb = document.getElementById(cbref); cb.checked ? panl.style.display = "block":panl.style.display = "none"}
     Game.run(Gauntlet);
   </script>
 <noscript> Final warning buddy - this browser is not running JavaScript!</noscript>
