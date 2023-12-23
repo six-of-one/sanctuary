@@ -2149,7 +2149,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			document.getElementById("ofkeys").innerHTML = fkeys;
 			document.getElementById("ogexs").innerHTML  = gexits;
 			document.getElementById("ocoins").innerHTML = allcoins;
-			document.getElementById("osecs").innerHTML  = (beets > 21600) ? Math.floor(beets/3600):(beets > 360) ? Math.floor(beets/60):beets;
+			document.getElementById("osecs").innerHTML  = (beets > 21600) ? Math.floor(beets/3600)+"h":(beets > 360) ? Math.floor(beets/60)+"m":beets+"s";
 			document.getElementById("osecs").title      = (beets > 21600) ? "hours":(beets > 360) ? "minutes":"seconds";
 
 			document.getElementById("owiz").innerHTML = cwiz;
@@ -2544,7 +2544,7 @@ var lvu = document.getElementById("flvl").value;
 			document.getElementById("ogexs").innerHTML  = gexits;
 			document.getElementById("ocoins").innerHTML = allcoins;
 	var	bph = beets+heartbeet;
-			document.getElementById("osecs").innerHTML  = (bph > 21600) ? Math.floor(bph/3600):(bph > 360) ? Math.floor(bph/60):beets;
+			document.getElementById("osecs").innerHTML  = (bph > 21600) ? Math.floor(bph/3600)+"h":(bph > 360) ? Math.floor(bph/60)+"m":beets+"s";
 			document.getElementById("osecs").title      = (bph > 21600) ? "hours":(bph > 360) ? "minutes":"seconds";
 
 
@@ -5197,7 +5197,7 @@ var txsv = ":";
 
 // this is game 1 second interval pulse - prob should be on a timer
 			heartbeet++;
-			document.getElementById("osecsa").innerHTML  = (heartbeet > 21600) ? Math.floor(heartbeet/3600):(heartbeet > 360) ? Math.floor(heartbeet/60):heartbeet;
+			document.getElementById("osecsa").innerHTML  = (heartbeet > 21600) ? Math.floor(heartbeet/3600)+"h":(heartbeet > 360) ? Math.floor(heartbeet/60)+"m":heartbeet+"s";
 			document.getElementById("osecsa").title      = (heartbeet > 21600) ? "hours":(heartbeet > 360) ? "minutes":"seconds";
 
 // maze editor active
