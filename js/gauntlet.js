@@ -1573,8 +1573,8 @@ Gauntlet = function() {
 				if (iswallrw(Mapdata[helpers.indexc(tx,ty)]) && !(tx == 0 || ty == 0 || tx == (Mtw - 1) || ty == (Mth - 1) ))
 					Mapdata[helpers.indexc(tx,ty)] = 0xA08060;
 // rng in new walls - total random based on % of map size
-		var	mn = 0.1 * (Mtw * Mth);
-		var	mx = 0.35 * (Mtw * Mth);
+		var	mn = 0.08 * (Mtw * Mth);
+		var	mx = 0.24 * (Mtw * Mth);
 		var	w = Game.Math.randomInt(mn, mx), sft = 6000 + 3 * w, fnd, c;
 			while (w > 0 && sft > 0) {
 						fnd = 0;
@@ -4153,6 +4153,7 @@ vartxt.value += "	]\n"
     },
 
     die: function(by, nuke) {
+		 alert(this.type.name);
       if (this.generator)
         this.generator.remove(this);
       publish(EVENT.MONSTER_DEATH, this, by, nuke);
