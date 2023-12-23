@@ -723,6 +723,12 @@ Game.Math = {
              ((y2 + h2 - 1) < y1))
   }
 
+  hms: function(val) {
+			return ((val > 518400) ? Math.floor(val/86400)+"d":(val > 21600) ? Math.floor(val/3600)+"h":(val > 360) ? Math.floor(val/60)+"m":val+"s");
+  }
+  hms_title: function(val) {
+			return ((val > 518400) ? "days":(val > 21600) ? "hours":(val > 360) ? "minutes":"seconds");
+  }
 }
 
 

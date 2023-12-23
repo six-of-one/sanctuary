@@ -2183,8 +2183,8 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			document.getElementById("ofkeys").innerHTML = fkeys;
 			document.getElementById("ogexs").innerHTML  = gexits;
 			document.getElementById("ocoins").innerHTML = allcoins;
-			document.getElementById("osecs").innerHTML  = (beets > 21600) ? Math.floor(beets/3600)+"h":(beets > 360) ? Math.floor(beets/60)+"m":beets+"s";
-			document.getElementById("osecs").title      = (beets > 21600) ? "hours":(beets > 360) ? "minutes":"seconds";
+			document.getElementById("osecs").innerHTML  = Game.Math.hms(beets);
+			document.getElementById("osecs").title      = Game.Math.hms_title(beets);
 
 			document.getElementById("owiz").innerHTML  = cwiz;
 			document.getElementById("owar").innerHTML  = cwar;
@@ -2595,8 +2595,8 @@ var lvu = document.getElementById("flvl").value;
 			document.getElementById("odeth").innerHTML  = gdeth;
 			document.getElementById("ocoins").innerHTML = allcoins;
 	var	bph = beets+heartbeet;
-			document.getElementById("osecs").innerHTML  = (bph > 21600) ? Math.floor(bph/3600)+"h":(bph > 360) ? Math.floor(bph/60)+"m":beets+"s";
-			document.getElementById("osecs").title      = (bph > 21600) ? "hours":(bph > 360) ? "minutes":"seconds";
+			document.getElementById("osecs").innerHTML  = Game.Math.hms(bph);
+			document.getElementById("osecs").title      = Game.Math.hms_title(bph);
 
 
       this.player.leave();
@@ -5274,8 +5274,8 @@ var txsv = ":";
 
 // this is game 1 second interval pulse - prob should be on a timer
 			heartbeet++;
-			document.getElementById("osecsa").innerHTML  = (heartbeet > 21600) ? Math.floor(heartbeet/3600)+"h":(heartbeet > 360) ? Math.floor(heartbeet/60)+"m":heartbeet+"s";
-			document.getElementById("osecsa").title      = (heartbeet > 21600) ? "hours":(heartbeet > 360) ? "minutes":"seconds";
+			document.getElementById("osecsa").innerHTML  = Game.Math.hms(heartbeet);
+			document.getElementById("osecsa").title      = Game.Math.hms_title(heartbeet);
 
 // maze editor active
 			if (cursor[0] == true) gedits++;
