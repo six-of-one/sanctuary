@@ -1219,8 +1219,8 @@ Gauntlet = function() {
       { key: Game.Key.F2,       mode: 'up',   state: 'menu',    action: function()    { screenshot();                    } },
 // test key - currently inserts exit at start - org: started a theif
       { key: Game.Key.X,        mode: 'up',   state: 'playing', action: function()    { spawn();                         } },
-// maze edit system	( W key is bound to Warrior start
-      { key: Game.Key.Q,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorUp()           } },
+// maze edit system
+      { key: Game.Key.W,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorUp()           } },
       { key: Game.Key.A,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorLeft()         } },
       { key: Game.Key.D,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorRight()        } },
       { key: Game.Key.S,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorDown()         } },
@@ -5152,7 +5152,7 @@ var txsv = ":";
 			 }
 		 }
 	},
-// maze edit system	( W key is bound to Warrior start
+// maze edit system
 	 cursorOn:     function() { cursor[0] = true; crblink = 60; cursor[critm] = -1; },
 	 cursorOff:    function() { cursor[0] = null; },
 	 cursorUp:     function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[cry]--; if (cursor[cry] < 0) cursor[cry] = Mth - 1; crblink = 30; },
