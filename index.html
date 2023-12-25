@@ -122,6 +122,7 @@
 stats: <input type="checkbox" checked="true" id="shostat" name="shostats" value="1" title="check to show stats live - panel appears left of maze" onClick="panlswap('statspat','shostat')">
 options: <input type="checkbox" checked="true" id="shoopt" name="shoopts" value="1" title="check to show options - panel appears right of scoreboard" onClick="panlswap('optspat','shoopt')">
 dev: <input type="checkbox" id="shodev" name="shodevs" value="1" title="check to show developer mode - panel appears right of scoreboard" onClick="panlswap('devspat','shodev')">
+editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check to show maze editor - panel appears left amd right" onClick="panlswap('edspat','shoed')">
 
 <hr>
 
@@ -176,21 +177,21 @@ dev: <input type="checkbox" id="shodev" name="shodevs" value="1" title="check to
           <option value="6">level 6</option>
           <option value="7">level 7</option>
           <option value="8">saved</option></select></td></tr>
-<tr><td align="center"></td><td title="select in game tutorial help display">tutorials:</td></tr>
-<tr><td align="center"><input type="checkbox" id="seltut" name="seltut" value="1" title="check to display gauntlet 1 tutorial boxes once"></td><td>g1 items</td></tr>
-<tr><td align="center"><input type="checkbox" id="selg2tut" name="selg2tut" value="1" title="check to display gauntlet 2 tutorial boxes once"></td><td>g2 items</td></tr>
-<tr><td align="center"><input type="checkbox" id="seltutx" name="seltutx" value="1" title="check to display extended item tutorial boxes once"></td><td>sanctuary</td></tr>
+<tr><td align="center"></td><td title="select in game tutorial help display" bgcolor="#006600">tutorials:</td></tr>
+<tr><td align="center" bgcolor="#006600"><input type="checkbox" id="seltut" name="seltut" value="1" title="check to display gauntlet 1 tutorial boxes once"></td><td bgcolor="#006600">g1 items</td></tr>
+<tr><td align="center" bgcolor="#006600"><input type="checkbox" id="selg2tut" name="selg2tut" value="1" title="check to display gauntlet 2 tutorial boxes once"></td><td bgcolor="#006600">g2 items</td></tr>
+<tr><td align="center" bgcolor="#006600"><input type="checkbox" id="seltutx" name="seltutx" value="1" title="check to display extended item tutorial boxes once"></td><td bgcolor="#006600">sanctuary</td></tr>
 <tr><td align="center"><input type="checkbox" id="mazsolv" name="mazsolv" value="1" title="check to show maze solution if available - this is a cheet"></td><td>maze solver</td></tr>
 <tr><td align="center"><input type="checkbox" id="invhint" name="invhint" value="1" title="hint when invisible walls shot"></td><td title="flashes invisible wall structure when shot">invis hint</td></tr>
-<tr><td align="center"><input type="checkbox" id="sdps" name="sdps" value="1" title="show damage per second (or per 30 secs): shoot a push wall + show hurt per second: get hit"></td><td title="damage per second done by player | hurt per second damage done to player">dps | hps:</td></tr>
-<tr><td align="center"><input type="checkbox" id="sdphm" name="sdphm" value="1" title="show damage per 30 secs - shoot a push wall"></td><td title="damage per 30 secs done by player only, shows in dps field below">dp 30s:</td></tr>
-<tr><td colspan="2"><input type="text" style="height:11px" value="dps" size="3" id="dpsout" name="dpsout" title="dps: ">:<input type="text" style="height:11px" value="hps" size="3" id="hpsout" name="hurtpsout" title="hps: "></td></tr>
+<tr><td align="center" bgcolor="#AA0000"><input type="checkbox" id="sdps" name="sdps" value="1" title="show damage per second (or per 30 secs): shoot a push wall + show hurt per second: get hit"></td><td title="damage per second done by player | hurt per second damage done to player" bgcolor="#AA0000">dps | hps:</td></tr>
+<tr><td align="center" bgcolor="#AA0000"><input type="checkbox" id="sdphm" name="sdphm" value="1" title="show damage per 30 secs - shoot a push wall"></td><td title="damage per 30 secs done by player only, shows in dps field below" bgcolor="#AA0000">dp 30s:</td></tr>
+<tr><td colspan="2" bgcolor="#AA0000"><input type="text" style="height:11px" value="dps" size="3" id="dpsout" name="dpsout" title="dps: ">:<input type="text" style="height:11px" value="hps" size="3" id="hpsout" name="hurtpsout" title="hps: "></td></tr>
 <tr><td align="center"></td><td title="controls progression of maze/game enhancements">maze progress</td></tr>
 <tr><td align="center"></td><td>max <input type="text" style="height:11px" value="0.7" size="2" id="maxpr" title="select max % to cap all of these might happen tests -- 10% = 0.1">%</td></tr>
 <tr><td align="center"></td><td title="above (+%) or (-%) below MID skill adjust base % by indicated %">mid skill <input type="text" style="height:11px" value="5" size="1" id="midskil" title="middle diffculty for % increment / decrement of test value"></td></tr>
 <tr><td colspan="2">-<input type="text" style="height:11px" value="0.1" size="2" id="decblw" title="decr by % per skill under MID">%<input type="text" style="height:11px" value="0.05" size="2" id="incabv" title="incr by % per skill over MID - skill over 9 counts as 9">+</td></tr>
 <tr><td align="center"></td><td title="per level count * %mod added to base %">level* <input type="text" style="height:11px" value="0.02" size="2" id="inclvl" title="incr by % per level count">%</td></tr>
-<tr><td align="center"></td><td title="first level these maze progression will be tested and base percent to occur - 25% = 0.25">begins on level</td></tr>
+<tr><td align="center"></td><td title="first level these maze progression will be tested and base percent to occur - 25% = 0.25">begins @level</td></tr>
 <tr><td align="center"></td><td title="mazes will be mirrored in X coordinate, starting on level at base %">mirror:</td></tr>
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="10" size="1" id="stmir" title="select level to start rnd mirrors (Horiz)">:<input type="text" style="height:11px" value="0.3" size="2" id="pmir" title="base % to mirror (X axis)">%</td></tr>
 <tr><td align="center"></td><td title="mazes will be flipped in Y coordinate, starting on level at base %">flip:</td></tr>
@@ -263,10 +264,15 @@ dev: <input type="checkbox" id="shodev" name="shodevs" value="1" title="check to
   <script src="js/gauntlet.js"></script>
   <script>
   function vout() {var vartxt = document.getElementById("varout");vartxt.value = document.cookie.replace(/; /gi, ";\n"); vartxt.value += "\n"; vartxt.style.display = "block"}
-  function panlswap(panlref, cbref) {var panl = document.getElementById(panlref); var cb = document.getElementById(cbref); cb.checked ? panl.style.display = "block":panl.style.display = "none"}
+  function panlswap(panlref, cbref) {var panl = document.getElementById(panlref); var cb = document.getElementById(cbref); cb.checked ? panl.style.display = "block":panl.style.display = "none";
+												if (cbref == "edspat"  && panl.style.display == "block") { devgear(); optgear(); statgear(); }
+												if (cbref == "devspat" && panl.style.display == "block") { optgear(); edgear(); }
+												if (cbref == "optspat" && panl.style.display == "block") { devgear(); edgear(); }
+												}
   function statgear() {var cb = document.getElementById("shostat"); cb.checked = false; panlswap('statspat','shostat'); }
   function optgear() {var cb = document.getElementById("shoopt"); cb.checked = false; panlswap('optspat','shoopt'); }
   function devgear() {var cb = document.getElementById("shodev"); cb.checked = false; panlswap('devspat','shodev'); }
+  function edgear() {var cb = document.getElementById("shoed"); cb.checked = false; panlswap('edspat','shoed'); }
   devgear();
     Game.run(Gauntlet);
   </script>
