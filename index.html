@@ -116,23 +116,8 @@
     </div>
 
     <div id='instructions'>
-	<label>Instructions: </label>&nbsp;<b>ARROW</b> keys to move, <b>HOLD SPACE</b> to fire, <b>ENTER</b> to use potion
-- </select> tutorial: <input type="checkbox" id="seltut" name="seltut" value="1" title="check to display gauntlet 1 tutorial boxes once"> g2: <input type="checkbox" id="selg2tut" name="selg2tut" value="1" title="check to display gauntlet 2 tutorial boxes once"> x: <input type="checkbox" id="seltutx" name="seltutx" value="1" title="check to display extended item tutorial boxes once"> 
-maze solver <input type="checkbox" id="mazsolv" name="mazsolv" value="1" title="check to show maze solution if available"> 
-dps: <input type="checkbox" id="sdps" name="sdps" value="1" title="show damage per second - shoot a push wall" > 30: <input type="checkbox" id="sdphm" name="sdphm" value="1" title="show damage per 30 secs - shoot a push wall" >
-<input type="text" style="height:11px" value="" size="3" id="dpsout" name="dpsout" title="dps: "><input type="text" style="height:11px" value="" size="3" id="hpsout" name="hurtpsout" title="hps: ">
-<br>
-max <input type="text" style="height:11px" value="0.7" size="2" id="maxpr" title="select max % to cap all of these might happen tests -- 10% = 0.1">%&nbsp;<label title="above or below MID skill adjust base % by indicated %">skill</label>
--<input type="text" style="height:11px" value="0.1" size="2" id="decblw" title="decr by % per skill under MID">
-&lt;<input type="text" style="height:11px" value="5" size="1" id="midskil" title="middle diffculty for % increment / decrement of test value">&gt;
-+<input type="text" style="height:11px" value="0.05" size="2" id="incabv" title="incr by % per skill over MID - skill over 9 counts as 9">&nbsp;<label title="level count * %mod added to base %">level</label> +<input type="text" style="height:11px" value="0.02" size="2" id="inclvl" title="incr by % per level count">%
-&nbsp;&nbsp; <label title="first level any of these will be tested and base percent to occur - 25% = 0.25">begin on</label> --
-mirror: <input type="text" style="height:11px" value="10" size="1" id="stmir" title="select level to start rnd mirrors (Horiz)">:<input type="text" style="height:11px" value="0.3" size="1" id="pmir" title="base % to mirror (X axis)">&nbsp;
-flip: <input type="text" style="height:11px" value="20" size="1" id="stflp" title="select level to start rnd flips (Vert)">:<input type="text" style="height:11px" value="0.25" size="1" id="pflp" title="base % to flip (Y axis)">&nbsp;
-rotate: <input type="text" style="height:11px" value="30" size="1" id="strot" title="select level to start rnd rotates">:<input type="text" style="height:11px" value="0.15" size="1" id="prot" title="base % to rotate (270%)">&nbsp;
-unpin: <input type="text" style="height:11px" value="50" size="1" id="stunp" title="select level to start rnd unpins">:<input type="text" style="height:11px" value="0.25" size="1" id="punp" title="base % to unpin X or Y">&nbsp;
-shots stun: <input type="text" style="height:11px" value="24" size="1" id="ststun" title="select level to start shots stun other players">:<input type="text" style="height:11px" value="0.2" size="1" id="psstun" title="base % players shots stun players">&nbsp;
-shots hurt: <input type="text" style="height:11px" value="33" size="1" id="sthurt" title="select level to start shots hurt other players">:<input type="text" style="height:11px" value="0.16" size="1" id="pshurt" title="base % players shots hurt players">
+	<label title="hover over interactive panel items for hints">Instructions: </label>&nbsp;<b>ARROW</b> keys to move, <b>HOLD SPACE</b> to fire, <b>ENTER</b> to use potion
+
 <br>
 
 stats: <input type="checkbox" checked="true" id="shostat" name="shostats" value="1" title="check to show stats live - panel appears left of maze" onClick="panlswap('statspat','shostat')">
@@ -179,10 +164,10 @@ vp <input type="text" style="height:11px" value="" size="3" id="vports" name="vp
 <div id='optspat' style="position:absolute;right:-190px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
 <TABLE>
 <tr><td title="click gear or uncheck 'options' on instruction panel at bottom to hide"><img src="images/olgear.png" style="width:16px" onClick="optgear()"></td><td style="text-align:right;padding:0px 3px"><label title="game options config: difficulty, start level, tutorial cfg, maze advance">options</label></td></tr>
-<tr><td align="center"></td><td>Difficulty</td></tr>
+<tr><td align="center"></td><td title="extreme high difficulty > 10 will not save highscore">Difficulty:</td></tr>
 <tr><td align="center"></td><td><input type="number" style="height:11px;width:80px" size="3" value="3" id="seldiff" name="seldiff" min="1" max="30" title="1 = easy, 3 = medium, 6 = hard, 9 = nightmare, > 10 wut?"></td></tr>
 <tr><td align="center"></td><td>start on:</td></tr>
-<tr><td align="center"></td><td><select  id="sellvl" title="level to start - saved: last level played">
+<tr><td align="center"></td><td><select  id="sellvl" title="level to start - saved: last level played > 7">
           <option value="0">research</option>
           <option value="1">level 1</option>
           <option value="2">level 2</option>
@@ -191,9 +176,33 @@ vp <input type="text" style="height:11px" value="" size="3" id="vports" name="vp
           <option value="5">level 5</option>
           <option value="6">level 6</option>
           <option value="7">level 7</option>
-          <option value="8">saved</option></td></tr>
-<tr><td align="center"></td><td></td></tr>
-
+          <option value="8">saved</option></select></td></tr>
+<tr><td align="center"></td><td title="select in game tutorial help display">tutorials:</td></tr>
+<tr><td align="center"><input type="checkbox" id="seltut" name="seltut" value="1" title="check to display gauntlet 1 tutorial boxes once"></td><td>g1 items</td></tr>
+<tr><td align="center"><input type="checkbox" id="selg2tut" name="selg2tut" value="1" title="check to display gauntlet 2 tutorial boxes once"></td><td>g2 items</td></tr>
+<tr><td align="center"><input type="checkbox" id="seltutx" name="seltutx" value="1" title="check to display extended item tutorial boxes once"></td><td>sanctuary</td></tr>
+<tr><td align="center"><input type="checkbox" id="mazsolv" name="mazsolv" value="1" title="check to show maze solution if available - this is a cheet"></td><td>maze solver</td></tr>
+<tr><td align="center"><input type="checkbox" id="sdps" name="sdps" value="1" title="show damage per second (or per 30 secs): shoot a push wall + show hurt per second: get hit"></td><td title="damage per second done by player | hurt per second damage done to player">dps | hps:</td></tr>
+<tr><td align="center"><input type="checkbox" id="sdphm" name="sdphm" value="1" title="show damage per 30 secs - shoot a push wall"></td><td title="damage per 30 secs done by player only, shows in dps field below">dp 30s:</td></tr>
+<tr><td align="center"></td><td><input type="text" style="height:11px" value="dps" size="3" id="dpsout" name="dpsout" title="dps: ">:<input type="text" style="height:11px" value="hps" size="3" id="hpsout" name="hurtpsout" title="hps: "></td></tr>
+<tr><td align="center"></td><td title="controls progression of maze changes">maze progress</td></tr>
+<tr><td align="center"></td><td>max <input type="text" style="height:11px" value="0.7" size="2" id="maxpr" title="select max % to cap all of these might happen tests -- 10% = 0.1">%</td></tr>
+<tr><td align="center"></td><td title="above (+%) or (-%) below MID skill adjust base % by indicated %">skill</td></tr>
+<tr><td align="center"></td><td><input type="text" style="height:11px" value="0.1" size="2" id="decblw" title="decr by % per skill under MID">&lt;<input type="text" style="height:11px" value="5" size="1" id="midskil" title="middle diffculty for % increment / decrement of test value">&gt;+<input type="text" style="height:11px" value="0.05" size="2" id="incabv" title="incr by % per skill over MID - skill over 9 counts as 9"></td></tr>
+<tr><td align="center"></td><td title="level count * %mod added to base %">level +<input type="text" style="height:11px" value="0.02" size="2" id="inclvl" title="incr by % per level count">%</td></tr>
+<tr><td align="center"></td><td title="first level these maze progression will be tested and base percent to occur - 25% = 0.25">begins on...</td></tr>
+<tr><td align="center"></td><td title="mazes will be mirrored in X coordinate, starting on level at base %">mirror:</td></tr>
+<tr><td align="center"></td><td>lv <input type="text" style="height:11px" value="10" size="1" id="stmir" title="select level to start rnd mirrors (Horiz)">:<input type="text" style="height:11px" value="0.3" size="2" id="pmir" title="base % to mirror (X axis)">%</td></tr>
+<tr><td align="center"></td><td title="mazes will be flipped in Y coordinate, starting on level at base %">flip:</td></tr>
+<tr><td align="center"></td><td>lv <input type="text" style="height:11px" value="20" size="1" id="stflp" title="select level to start rnd flips (Vert)">:<input type="text" style="height:11px" value="0.25" size="1" id="pflp" title="base % to flip (Y axis)">%</td></tr>
+<tr><td align="center"></td><td title="mazes will be rotated 270 degrees, starting on level at base %">flip:</td></tr>
+<tr><td align="center"></td><td>lv <input type="text" style="height:11px" value="30" size="1" id="strot" title="select level to start rnd rotates">:<input type="text" style="height:11px" value="0.15" size="1" id="prot" title="base % to rotate (270%)">%</td></tr>
+<tr><td align="center"></td><td title="mazes will be unpinned from X and/or Y zero line, starting on level at base %">unpin:</td></tr>
+<tr><td align="center"></td><td>lv <input type="text" style="height:11px" value="50" size="1" id="stunp" title="select level to start rnd unpins">:<input type="text" style="height:11px" value="0.25" size="1" id="punp" title="base % to unpin X or Y">%</td></tr>
+<tr><td align="center"></td><td title="mazes will have shots stun other players, starting on level at base %">shots stun:</td></tr>
+<tr><td align="center"></td><td>lv <input type="text" style="height:11px" value="24" size="1" id="ststun" title="select level to start shots stun other players">:<input type="text" style="height:11px" value="0.2" size="1" id="psstun" title="base % players shots stun players">%</td></tr>
+<tr><td align="center"></td><td title="mazes will have shots hurt other players, starting on level at base %">shots hurt:</td></tr>
+<tr><td align="center"></td><td>lv <input type="text" style="height:11px" value="33" size="1" id="sthurt" title="select level to start shots hurt other players">:<input type="text" style="height:11px" value="0.16" size="1" id="pshurt" title="base % players shots hurt players">%</td></tr>
 </TABLE>
   </div>
 <div id='devspat' style="position:absolute;right:-190px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
@@ -215,24 +224,24 @@ vp <input type="text" style="height:11px" value="" size="3" id="vports" name="vp
 <tr style="display:none;"><td align="center"><input type="checkbox" id="spedis" name="spedis" value="1" title="test - show special display"></td><td>special display</td></tr>
 <tr><td align="center"><input type="checkbox" id="blrndlod" name="blrndlod" value="1" title="test prevent random item loading"></td><td>block rnd load</td></tr>
 <tr><td align="center"><input type="checkbox" id="forndlod" name="forndlod" value="1" title="test force random item loading"> </td><td>force rnd load</td></tr>
-<tr><td align="center"></td><td>parse level</td></tr>
+<tr><td align="center"></td><td>parse level:</td></tr>
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="7" id="plvl" name="plvl" title="level image file to parse"></td></tr>
-<tr><td align="center"></td><td>force level</td></tr>
+<tr><td align="center"></td><td>force level:</td></tr>
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="7" id="flvl" name="flvl" title="override level image file to load"></td></tr>
 <tr><td align="center">#</td><td><input type="text" style="height:11px" value="" size="3" id="nlvl" name="nlvl" title="override level number from existing maps"></td></tr>
 
-<tr><td align="center"><input type="checkbox" id="noblend" name="noblend" value="1" title="do not blend wall tex"></td><td>noblend</td></tr>
-<tr><td align="center"></td><td>wall hue</td></tr>
+<tr><td align="center"><input type="checkbox" id="noblend" name="noblend" value="1" title="do not blend different color wall tex"></td><td>noblend</td></tr>
+<tr><td align="center"></td><td>wall hue:</td></tr>
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="4" id="whue" name="whue" title="hue shift main walls by # deg">deg</td></tr>
-<tr><td align="center"></td><td>floor hue</td></tr>
+<tr><td align="center"></td><td>floor hue:</td></tr>
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="4" id="fhue" name="fhue" title="hue shift main floor tile by # deg">deg</td></tr>
-<tr><td align="center"></td><td>plyr  hue</td></tr>
+<tr><td align="center"></td><td>plyr hue:</td></tr>
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="4" id="phue" name="phue" title="hue shift player sprite by # deg">deg</td></tr>
-<tr><td align="center"></td><td>allspr hue</td></tr>
+<tr><td align="center"></td><td>allspr hue:</td></tr>
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="4" id="ashue" name="ashue" title="hue shift player sprite by # deg">deg</td></tr>
 
-<tr><td align="center"><input type="checkbox" id="playsnd" name="playsnd" value="1" title="play"></td><td>sound</td></tr>
-<tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="4" id="nsnd" name="nsnd" title="play sound spec '{id}'"></td></tr>
+<tr><td align="center"><input type="checkbox" id="playsnd" name="playsnd" value="1" title="check box to play sound once"></td><td>sound:</td></tr>
+<tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="4" id="nsnd" name="nsnd" title="play sound spec '{id}' from source code"></td></tr>
 
 </TABLE>
   </div>
