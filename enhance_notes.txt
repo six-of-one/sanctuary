@@ -28,7 +28,7 @@ note: the lobber shot ext in entities.png
 
 complete gwal shotwalls (refers to crafted shotwals in some gwals)
 ent level walls do not yet blend
-
+y/ l
 add provision for using orig sound fx on jsgv levels, if installed
 (this is trickier than it sounds, since sounds are all cfg { } preload)
 

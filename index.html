@@ -116,33 +116,23 @@
     </div>
 
     <div id='instructions'>
-	<label>Difficulty: </label><input type="number" value="3" id="seldiff" name="seldiff" min="1" max="30" title="1 = easy, 3 = medium, 6 = hard, 9 = nightmare, > 10 wut?"> &nbsp;<b>ARROW</b> keys to move, <b>HOLD SPACE</b> to fire, <b>ENTER</b> to use potion
- - start on: <select  id="sellvl" title="level to start - saved: last level played">
-          <option value="0">research</option>
-          <option value="1">level 1</option>
-          <option value="2">level 2</option>
-          <option value="3">level 3</option>
-          <option value="4">level 4</option>
-          <option value="5">level 5</option>
-          <option value="6">level 6</option>
-          <option value="7">level 7</option>
-          <option value="8">saved</option>
-</select> tutorial: <input type="checkbox" id="seltut" name="seltut" value="1" title="check to display gauntlet 1 tutorial boxes once"> g2: <input type="checkbox" id="selg2tut" name="selg2tut" value="1" title="check to display gauntlet 2 tutorial boxes once"> x: <input type="checkbox" id="seltutx" name="seltutx" value="1" title="check to display extended item tutorial boxes once"> 
+	<label>Instructions: </label>&nbsp;<b>ARROW</b> keys to move, <b>HOLD SPACE</b> to fire, <b>ENTER</b> to use potion
+- </select> tutorial: <input type="checkbox" id="seltut" name="seltut" value="1" title="check to display gauntlet 1 tutorial boxes once"> g2: <input type="checkbox" id="selg2tut" name="selg2tut" value="1" title="check to display gauntlet 2 tutorial boxes once"> x: <input type="checkbox" id="seltutx" name="seltutx" value="1" title="check to display extended item tutorial boxes once"> 
 maze solver <input type="checkbox" id="mazsolv" name="mazsolv" value="1" title="check to show maze solution if available"> 
 dps: <input type="checkbox" id="sdps" name="sdps" value="1" title="show damage per second - shoot a push wall" > 30: <input type="checkbox" id="sdphm" name="sdphm" value="1" title="show damage per 30 secs - shoot a push wall" >
-<input type="text" value="" size="3" id="dpsout" name="dpsout" title="dps: "><input type="text" value="" size="3" id="hpsout" name="hurtpsout" title="hps: ">
+<input type="text" style="height:11px" value="" size="3" id="dpsout" name="dpsout" title="dps: "><input type="text" style="height:11px" value="" size="3" id="hpsout" name="hurtpsout" title="hps: ">
 <br>
-max <input type="text" value="0.7" size="2" id="maxpr" title="select max % to cap all of these might happen tests -- 10% = 0.1">%&nbsp;<label title="above or below MID skill adjust base % by indicated %">skill</label>
--<input type="text" value="0.1" size="2" id="decblw" title="decr by % per skill under MID">
-&lt;<input type="text" value="5" size="1" id="midskil" title="middle diffculty for % increment / decrement of test value">&gt;
-+<input type="text" value="0.05" size="2" id="incabv" title="incr by % per skill over MID - skill over 9 counts as 9">&nbsp;<label title="level count * %mod added to base %">level</label> +<input type="text" value="0.02" size="2" id="inclvl" title="incr by % per level count">%
+max <input type="text" style="height:11px" value="0.7" size="2" id="maxpr" title="select max % to cap all of these might happen tests -- 10% = 0.1">%&nbsp;<label title="above or below MID skill adjust base % by indicated %">skill</label>
+-<input type="text" style="height:11px" value="0.1" size="2" id="decblw" title="decr by % per skill under MID">
+&lt;<input type="text" style="height:11px" value="5" size="1" id="midskil" title="middle diffculty for % increment / decrement of test value">&gt;
++<input type="text" style="height:11px" value="0.05" size="2" id="incabv" title="incr by % per skill over MID - skill over 9 counts as 9">&nbsp;<label title="level count * %mod added to base %">level</label> +<input type="text" style="height:11px" value="0.02" size="2" id="inclvl" title="incr by % per level count">%
 &nbsp;&nbsp; <label title="first level any of these will be tested and base percent to occur - 25% = 0.25">begin on</label> --
-mirror: <input type="text" value="10" size="1" id="stmir" title="select level to start rnd mirrors (Horiz)">:<input type="text" value="0.3" size="1" id="pmir" title="base % to mirror (X axis)">&nbsp;
-flip: <input type="text" value="20" size="1" id="stflp" title="select level to start rnd flips (Vert)">:<input type="text" value="0.25" size="1" id="pflp" title="base % to flip (Y axis)">&nbsp;
-rotate: <input type="text" value="30" size="1" id="strot" title="select level to start rnd rotates">:<input type="text" value="0.15" size="1" id="prot" title="base % to rotate (270%)">&nbsp;
-unpin: <input type="text" value="50" size="1" id="stunp" title="select level to start rnd unpins">:<input type="text" value="0.25" size="1" id="punp" title="base % to unpin X or Y">&nbsp;
-shots stun: <input type="text" value="24" size="1" id="ststun" title="select level to start shots stun other players">:<input type="text" value="0.2" size="1" id="psstun" title="base % players shots stun players">&nbsp;
-shots hurt: <input type="text" value="33" size="1" id="sthurt" title="select level to start shots hurt other players">:<input type="text" value="0.16" size="1" id="pshurt" title="base % players shots hurt players">
+mirror: <input type="text" style="height:11px" value="10" size="1" id="stmir" title="select level to start rnd mirrors (Horiz)">:<input type="text" style="height:11px" value="0.3" size="1" id="pmir" title="base % to mirror (X axis)">&nbsp;
+flip: <input type="text" style="height:11px" value="20" size="1" id="stflp" title="select level to start rnd flips (Vert)">:<input type="text" style="height:11px" value="0.25" size="1" id="pflp" title="base % to flip (Y axis)">&nbsp;
+rotate: <input type="text" style="height:11px" value="30" size="1" id="strot" title="select level to start rnd rotates">:<input type="text" style="height:11px" value="0.15" size="1" id="prot" title="base % to rotate (270%)">&nbsp;
+unpin: <input type="text" style="height:11px" value="50" size="1" id="stunp" title="select level to start rnd unpins">:<input type="text" style="height:11px" value="0.25" size="1" id="punp" title="base % to unpin X or Y">&nbsp;
+shots stun: <input type="text" style="height:11px" value="24" size="1" id="ststun" title="select level to start shots stun other players">:<input type="text" style="height:11px" value="0.2" size="1" id="psstun" title="base % players shots stun players">&nbsp;
+shots hurt: <input type="text" style="height:11px" value="33" size="1" id="sthurt" title="select level to start shots hurt other players">:<input type="text" style="height:11px" value="0.16" size="1" id="pshurt" title="base % players shots hurt players">
 <br>
 
 stats: <input type="checkbox" checked="true" id="shostat" name="shostats" value="1" title="check to show stats live - panel appears left of maze" onClick="panlswap('statspat','shostat')">
@@ -151,8 +141,8 @@ dev: <input type="checkbox" id="shodev" name="shodevs" value="1" title="check to
 
 <hr>
 h-invs <input type="checkbox" id="invhint" name="invhint" value="1" title="hint when invisible walls shot" >
-vp <input type="text" value="" size="3" id="vports" name="vports" title="viewport size">
- <button onClick="vout()" title="store things">cky</button><br><textarea title="vars output" id="varout"  rows="9" cols="90" style='display:none;'></textarea>
+vp <input type="text" style="height:11px" value="" size="3" id="vports" name="vports" title="viewport size">
+ <button onClick="vout()" style="height:22px" title="store things">cky</button><br><textarea title="vars output" id="varout"  rows="9" cols="90" style='display:none;'></textarea>
     </div>
 <div id='statspat' style="position:absolute;left:-220px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
 <TABLE>
@@ -188,7 +178,21 @@ vp <input type="text" value="" size="3" id="vports" name="vports" title="viewpor
   </div>
 <div id='optspat' style="position:absolute;right:-190px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
 <TABLE>
-<tr><td title="click gear or uncheck 'options' on instruction panel at bottom to hide"><img src="images/olgear.png" style="width:16px" onClick="optgear()"></td><td style="text-align:right;padding:0px 3px"><label title="game options config">options</label></td></tr>
+<tr><td title="click gear or uncheck 'options' on instruction panel at bottom to hide"><img src="images/olgear.png" style="width:16px" onClick="optgear()"></td><td style="text-align:right;padding:0px 3px"><label title="game options config: difficulty, start level, tutorial cfg, maze advance">options</label></td></tr>
+<tr><td align="center"></td><td>Difficulty</td></tr>
+<tr><td align="center"></td><td><input type="number" style="height:11px;width:80px" size="3" value="3" id="seldiff" name="seldiff" min="1" max="30" title="1 = easy, 3 = medium, 6 = hard, 9 = nightmare, > 10 wut?"></td></tr>
+<tr><td align="center"></td><td>start on:</td></tr>
+<tr><td align="center"></td><td><select  id="sellvl" title="level to start - saved: last level played">
+          <option value="0">research</option>
+          <option value="1">level 1</option>
+          <option value="2">level 2</option>
+          <option value="3">level 3</option>
+          <option value="4">level 4</option>
+          <option value="5">level 5</option>
+          <option value="6">level 6</option>
+          <option value="7">level 7</option>
+          <option value="8">saved</option></td></tr>
+<tr><td align="center"></td><td></td></tr>
 
 </TABLE>
   </div>
@@ -254,7 +258,7 @@ vp <input type="text" value="" size="3" id="vports" name="vports" title="viewpor
   function statgear() {var cb = document.getElementById("shostat"); cb.checked = false; panlswap('statspat','shostat'); }
   function optgear() {var cb = document.getElementById("shoopt"); cb.checked = false; panlswap('optspat','shoopt'); }
   function devgear() {var cb = document.getElementById("shodev"); cb.checked = false; panlswap('devspat','shodev'); }
-  optgear();
+  devgear();
     Game.run(Gauntlet);
   </script>
 <noscript> Final warning buddy - this browser is not running JavaScript!</noscript>
