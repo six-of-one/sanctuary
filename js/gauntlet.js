@@ -13,7 +13,7 @@ Gauntlet = function() {
 											initlevel = 0,
 	vardbg = 0, dent, d1, d2, bb = 0, PARSE,
 // maze edit cursor
-	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 24, cdsy = 11, gedits,
+	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 35, cdsy = 10, gedits,
 // edit items - the pixel add code
 	crlist = [ 0x008070, 0x008090, 0x008050, 0x008060, 0x008061, 0x008000, 0x008020, 0x004000, 0x0080A0, 0x0080D0, 0x0080C0, 0xF00000, 0xF00010, 0xF00020, 0xF00030, 0xF00050, -1 ], crll = 15,
 // location in entities.png
