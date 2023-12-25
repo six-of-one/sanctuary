@@ -144,20 +144,14 @@ unpin: <input type="text" value="50" size="1" id="stunp" title="select level to 
 shots stun: <input type="text" value="24" size="1" id="ststun" title="select level to start shots stun other players">:<input type="text" value="0.2" size="1" id="psstun" title="base % players shots stun players">&nbsp;
 shots hurt: <input type="text" value="33" size="1" id="sthurt" title="select level to start shots hurt other players">:<input type="text" value="0.16" size="1" id="pshurt" title="base % players shots hurt players">
 <br>
+
 stats: <input type="checkbox" checked="true" id="shostat" name="shostats" value="1" title="check to show stats live - panel appears left of maze" onClick="panlswap('statspat','shostat')">
 options: <input type="checkbox" checked="true" id="shoopt" name="shoopts" value="1" title="check to show options - panel appears right of scoreboard" onClick="panlswap('optspat','shoopt')">
 dev: <input type="checkbox" id="shodev" name="shodevs" value="1" title="check to show developer mode - panel appears right of scoreboard" onClick="panlswap('devspat','shodev')">
 
-<hr> dev... unpin : x <input type="checkbox" id="xunp" name="xunp" value="1" title="testing" > y <input type="checkbox" id="yunp" name="yunp" value="1" title="testing" > -- mir: x <input type="checkbox" id="xmiror" name="xmiror" value="1" title="testing" > y <input type="checkbox" id="ymiror" name="ymiror" value="1" title="testing" >
-rot: <input type="checkbox" id="rotat" name="rotat" value="1" title="testing" > -- invis walls <input type="checkbox" id="invwal" name="invwal" value="1" title="testing" > -- special display <input type="checkbox" id="spedis" name="spedis" value="1" title="testing" > -- 
-block rnd load <input type="checkbox" id="blrndlod" name="blrndlod" value="1" title="testing" > force rnd load <input type="checkbox" id="forndlod" name="forndlod" value="1" title="testing" > 
-parse this level <input type="text" value="" size="7" id="plvl" name="plvl" title="level image file to parse"> force level <input type="text" value="" size="7" id="flvl" name="flvl" title="override level image file to load"> # <input type="text" value="" size="3" id="nlvl" name="nlvl" title="override level number from existing maps"><br>
+<hr>
+h-invs <input type="checkbox" id="invhint" name="invhint" value="1" title="hint when invisible walls shot" >
 vp <input type="text" value="" size="3" id="vports" name="vports" title="viewport size">
-sound [<input type="text" value="" size="4" id="nsnd" name="nsnd" title="play sound spec '{id}'">] <input type="checkbox" id="playsnd" name="playsnd" value="1" title="play" > -- nostal <input type="checkbox" id="nostal" name="nostal" value="1" title="no door/wall stalling" > - noah <input type="checkbox" id="noah" name="noah" value="1" title="no health count down" >
- -- nommv <input type="checkbox" id="nommv" name="nommv" value="1" title="no monsters move" > - nogen <input type="checkbox" id="nogen" name="nogen" value="1" title="do not generate monsters" > - h-invs <input type="checkbox" id="invhint" name="invhint" value="1" title="hint when invisible walls shot" > <input type="checkbox" id="invcht" name="invcht" value="1" title="overlay cheet invisible walls" >
- -- noclip <input type="checkbox" id="noclip" name="noclip" value="1" title="player noclip" >
- <br>wall hue [<input type="text" value="" size="4" id="whue" name="whue" title="hue shift main walls by # deg">deg] -- floor hue [<input type="text" value="" size="4" id="fhue" name="fhue" title="hue shift main floor tile by # deg">deg]
- - noblend <input type="checkbox" id="noblend" name="noblend" value="1" title="do not blend wall tex" > -- plyr  hue [<input type="text" value="" size="4" id="phue" name="phue" title="hue shift player sprite by # deg">deg] - allspr  hue [<input type="text" value="" size="4" id="ashue" name="ashue" title="hue shift player sprite by # deg">deg]
  <button onClick="vout()" title="store things">cky</button><br><textarea title="vars output" id="varout"  rows="9" cols="90" style='display:none;'></textarea>
     </div>
 <div id='statspat' style="position:absolute;left:-220px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
@@ -202,6 +196,40 @@ sound [<input type="text" value="" size="4" id="nsnd" name="nsnd" title="play so
 <TABLE>
 <tr><td title="click gear or uncheck 'dev' on instruction panel at bottom to hide"><img src="images/olgear.png" style="width:16px" onClick="devgear()"></td><td style="text-align:right;padding:0px 3px"><label title="developer controls & testing">dev mode</label></td></tr>
 
+<tr><td align="center"><input type="checkbox" id="nostal" name="nostal" value="1" title="no door/wall stalling"></td><td>nostal</td></tr>
+<tr><td align="center"><input type="checkbox" id="noah" name="noah" value="1" title="no health count down"></td><td>noah</td></tr>
+<tr><td align="center"><input type="checkbox" id="nommv" name="nommv" value="1" title="no monsters move"></td><td>nommv</td></tr>
+<tr><td align="center"><input type="checkbox" id="nogen" name="nogen" value="1" title="do not generate monsters"></td><td>nogen</td></tr>
+<tr><td align="center"><input type="checkbox" id="invcht" name="invcht" value="1" title="overlay cheet invisible walls"></td><td>cheet inv</td></tr>
+<tr><td align="center"><input type="checkbox" id="noclip" name="noclip" value="1" title="player noclip"></td><td>noclip</td></tr>
+<tr><td align="center"></td><td>unpin :</td></tr>
+<tr><td align="center"></td><td>x <input type="checkbox" id="xunp" name="xunp" value="1" title="testing" > y <input type="checkbox" id="yunp" name="yunp" value="1" title="testing" ></td></tr>
+<tr><td align="center"></td><td>mirror :</td></tr>
+<tr><td align="center"></td><td>x <input type="checkbox" id="xmiror" name="xmiror" value="1" title="testing" > y <input type="checkbox" id="ymiror" name="ymiror" value="1" title="testing" ></td></tr>
+<tr><td align="center"><input type="checkbox" id="rotat" name="rotat" value="1" title="testing"></td><td>rotate</td></tr>
+<tr><td align="center"><input type="checkbox" id="invwal" name="invwal" value="1" title="testing"></td><td>invis walls 
+<tr><td align="center"><input type="checkbox" id="spedis" name="spedis" value="1" title="testing"></td><td>special display</td></tr>
+<tr><td align="center"><input type="checkbox" id="blrndlod" name="blrndlod" value="1" title="testing"></td><td>block rnd load</td></tr>
+<tr><td align="center"><input type="checkbox" id="forndlod" name="forndlod" value="1" title="testing"> </td><td>force rnd load</td></tr>
+<tr><td align="center"></td><td>parse level</td></tr>
+<tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="7" id="plvl" name="plvl" title="level image file to parse"></td></tr>
+<tr><td align="center"></td><td>force level</td></tr>
+<tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="7" id="flvl" name="flvl" title="override level image file to load"></td></tr>
+<tr><td align="center">#</td><td><input type="text" style="height:11px" value="" size="3" id="nlvl" name="nlvl" title="override level number from existing maps"></td></tr>
+
+<tr><td align="center"><input type="checkbox" id="noblend" name="noblend" value="1" title="do not blend wall tex"></td><td>noblend</td></tr>
+<tr><td align="center"></td><td>wall hue</td></tr>
+<tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="4" id="whue" name="whue" title="hue shift main walls by # deg">deg</td></tr>
+<tr><td align="center"></td><td>floor hue</td></tr>
+<tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="4" id="fhue" name="fhue" title="hue shift main floor tile by # deg">deg</td></tr>
+<tr><td align="center"></td><td>plyr  hue</td></tr>
+<tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="4" id="phue" name="phue" title="hue shift player sprite by # deg">deg</td></tr>
+<tr><td align="center"></td><td>allspr hue</td></tr>
+<tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="4" id="ashue" name="ashue" title="hue shift player sprite by # deg">deg</td></tr>
+
+<tr><td align="center"><input type="checkbox" id="playsnd" name="playsnd" value="1" title="play"></td><td>sound</td></tr>
+<tr><td align="center"></td><td><input type="text" style="height:11px" value="" size="4" id="nsnd" name="nsnd" title="play sound spec '{id}'"></td></tr>
+
 </TABLE>
   </div>
 <img id="gfloor" src="gfx/g1floor0.jpg">
@@ -226,7 +254,7 @@ sound [<input type="text" value="" size="4" id="nsnd" name="nsnd" title="play so
   function statgear() {var cb = document.getElementById("shostat"); cb.checked = false; panlswap('statspat','shostat'); }
   function optgear() {var cb = document.getElementById("shoopt"); cb.checked = false; panlswap('optspat','shoopt'); }
   function devgear() {var cb = document.getElementById("shodev"); cb.checked = false; panlswap('devspat','shodev'); }
-  devgear(); optgear();
+  optgear();
     Game.run(Gauntlet);
   </script>
 <noscript> Final warning buddy - this browser is not running JavaScript!</noscript>
