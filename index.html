@@ -246,6 +246,17 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 
 </TABLE>
   </div>
+<div id='edspatr' style="position:absolute;right:-190px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
+<TABLE>
+<tr><td title="click gear or uncheck 'editar' on instruction panel at bottom to hide"><img src="images/olgear.png" style="width:16px" onClick="edgear()"></td><td style="text-align:right;padding:0px 3px"><label title="editar controls & testing">maze editor</label></td></tr>
+</TABLE>
+  </div>
+<div id='edspat' style="position:absolute;left:-220px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
+<TABLE>
+<tr><td title="click gear or uncheck 'editar' on instruction panel at bottom to hide"><img src="images/olgear.png" style="width:16px" onClick="edgear()"></td><td style="text-align:right;padding:0px 3px"><label title="editar controls & testing">maze items</label></td></tr>
+</TABLE>
+  </div>
+
 <img id="gfloor" src="gfx/g1floor0.jpg">
 <img id="gfloorbas" src="gfx/g1floorb.jpg">
 <img id="gwall" src="gfx/g2wall0.jpg">
@@ -265,15 +276,17 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
   <script>
   function vout() {var vartxt = document.getElementById("varout");vartxt.value = document.cookie.replace(/; /gi, ";\n"); vartxt.value += "\n"; vartxt.style.display = "block"}
   function panlswap(panlref, cbref) {var panl = document.getElementById(panlref); var cb = document.getElementById(cbref); cb.checked ? panl.style.display = "block":panl.style.display = "none";
-												if (cbref == "edspat"  && panl.style.display == "block") { devgear(); optgear(); statgear(); }
-												if (cbref == "devspat" && panl.style.display == "block") { optgear(); edgear(); }
-												if (cbref == "optspat" && panl.style.display == "block") { devgear(); edgear(); }
+												if (panlref == "edspat"  && panl.style.display == "block") { devgear(); optgear(); statgear(); document.getElementById("edspatr").style.display = "block"; }
+												if (panlref == "edspat"  && panl.style.display == "none") { document.getElementById("edspatr").style.display = "none"; }
+												if (panlref == "devspat" && panl.style.display == "block") { optgear(); edgear(); }
+												if (panlref == "optspat" && panl.style.display == "block") { devgear(); edgear(); }
+												if (panlref == "statspat" && panl.style.display == "block") { edgear(); }
 												}
   function statgear() {var cb = document.getElementById("shostat"); cb.checked = false; panlswap('statspat','shostat'); }
   function optgear() {var cb = document.getElementById("shoopt"); cb.checked = false; panlswap('optspat','shoopt'); }
   function devgear() {var cb = document.getElementById("shodev"); cb.checked = false; panlswap('devspat','shodev'); }
-  function edgear() {var cb = document.getElementById("shoed"); cb.checked = false; panlswap('edspat','shoed'); }
-  devgear();
+  function edgear() {var cb = document.getElementById("shoed"); cb.checked = false; panlswap('edspat','shoed'); panlswap('edspatr','shoed'); }
+  devgear(); edgear();
     Game.run(Gauntlet);
   </script>
 <noscript> Final warning buddy - this browser is not running JavaScript!</noscript>
