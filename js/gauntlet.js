@@ -2041,6 +2041,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 		document.getElementById("invwal").checked   = false;
 		document.getElementById("invhint").checked  = false;
 		document.getElementById("spedis").checked   = false;
+		document.getElementById("rndwalls").checked = false;
 		document.getElementById("blrndlod").checked = false;
 		document.getElementById("forndlod").checked = false;
 		document.getElementById("nostal").checked   = false;
@@ -2061,6 +2062,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 		if (readCookie("_d_"+"invwal") == "true")   document.getElementById("invwal").checked   = true;
 		if (readCookie("_d_"+"invhint") == "true")  document.getElementById("invhint").checked  = true;
 		if (readCookie("_d_"+"spedis") == "true")   document.getElementById("spedis").checked   = true;
+		if (readCookie("_d_"+"rrndwl") == "true")   document.getElementById("rndwalls").checked = true;
 		if (readCookie("_d_"+"blrndlod") == "true") document.getElementById("blrndlod").checked = true;
 		if (readCookie("_d_"+"forndlod") == "true") document.getElementById("forndlod").checked = true;
 		if (readCookie("_d_"+"nostal") == "true")   document.getElementById("nostal").checked   = true;
@@ -3583,7 +3585,7 @@ if (document.getElementById("noclip").checked) return false;
 			}
 
 // option to replace reg level walls - this may not stay in, this is testing random builder
-		repwalls = true;
+		repwalls = !document.getElementById("rndwalls").checked;
 
 		var rdunpx = level.unpinx, rdunpy = level.unpiny;	// unpin by map design - rotate has to swap unpin status in this case
 		if (Mrot) { var swp = Munpinx; Munpinx = Munpiny; Munpiny = swp; rdunpx = level.unpiny; rdunpy = level.unpinx; } // rotate swaps single unpins
@@ -5583,6 +5585,7 @@ var txsv = ":";
 				createCookie("_d_"+"invwal",   document.getElementById("invwal").checked,7777);
 				createCookie("_d_"+"invhint",  document.getElementById("invhint").checked,7777);
 				createCookie("_d_"+"spedis",   document.getElementById("spedis").checked,7777);
+				createCookie("_d_"+"rrndwl",   document.getElementById("rndwalls").checked,7777);
 				createCookie("_d_"+"blrndlod", document.getElementById("blrndlod").checked,7777);
 				createCookie("_d_"+"forndlod", document.getElementById("forndlod").checked,7777);
 				createCookie("_d_"+"nostal",   document.getElementById("nostal").checked,7777);
