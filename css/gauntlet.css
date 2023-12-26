@@ -49,6 +49,15 @@ body {
 /*   transform: translate3d(0, 0, 0);*/
 }
 
+/* editor hidden extra items */
+.tdsho {
+  display: none;
+}
+
+.tdrev:hover .tdsho {
+  display: block;
+}
+
 @keyframes slideshow {
     0% {
         transform: translateY(0px);
