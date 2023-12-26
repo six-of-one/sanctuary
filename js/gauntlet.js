@@ -1224,6 +1224,7 @@ Gauntlet = function() {
       { key: Game.Key.A,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorLeft()         } },
       { key: Game.Key.D,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorRight()        } },
       { key: Game.Key.S,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorDown()         } },
+      { key: Game.Key.HOME,     mode: 'up',   state: 'playing', action: function()    { this.player.cursorHome()          } },
       { key: Game.Key.PERIOD,   mode: 'up',   state: 'playing', action: function()    { this.player.cursorIup()          } },
       { key: Game.Key.COMMA,    mode: 'up',   state: 'playing', action: function()    { this.player.cursorIdn()          } },
       { key: Game.Key.EQUAL,    mode: 'up',   state: 'playing', action: function()    { this.player.cursorIadd()         } },
