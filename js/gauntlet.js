@@ -1224,7 +1224,8 @@ Gauntlet = function() {
       { key: Game.Key.A,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorLeft()         } },
       { key: Game.Key.D,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorRight()        } },
       { key: Game.Key.S,        mode: 'up',   state: 'playing', action: function()    { this.player.cursorDown()         } },
-      { key: Game.Key.HOME,     mode: 'up',   state: 'playing', action: function()    { this.player.cursorHome()          } },
+      { key: Game.Key.HOME,     mode: 'up',   state: 'playing', action: function()    { this.player.cursorHome()         } },
+      { key: Game.Key.END,      mode: 'up',   state: 'playing', action: function()    { this.player.cursorOff()          } },
       { key: Game.Key.PERIOD,   mode: 'up',   state: 'playing', action: function()    { this.player.cursorIup()          } },
       { key: Game.Key.COMMA,    mode: 'up',   state: 'playing', action: function()    { this.player.cursorIdn()          } },
       { key: Game.Key.EQUAL,    mode: 'up',   state: 'playing', action: function()    { this.player.cursorIadd()         } },
@@ -5157,7 +5158,7 @@ var txsv = ":";
 	},
 // maze edit system
 	 cursorOn:     function() { cursor[0] = true; crblink = 60; cursor[critm] = -1; },
-	 cursorOff:    function() { cursor[0] = null; },
+	 cursorOff:    function() { cursor[0] = null; cursor[critm] = -1; },
 	 cursorUp:     function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[cry]--; if (cursor[cry] < 0) cursor[cry] = Mth - 1; crblink = 30; },
 	 cursorRight:  function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[crx]++; if (cursor[crx] > Mtw - 1) cursor[crx] = 0; crblink = 30; },
 	 cursorLeft:   function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[crx]--; if (cursor[crx] < 0) cursor[crx] = Mtw - 1; crblink = 30; },
@@ -6721,8 +6722,11 @@ var txsv = ":";
 			}
 // maze edit system
 			if (cursor[0] == true) {
-				if (crblink > 0)
+				if (crblink > 0) {
 					this.sprite(ctx, sprites, viewport, cdsx, cdsy, cursor[crx] * TILE, cursor[cry] * TILE, TILE, TILE, 0, 0);
+					document.getElementById("posx").value = cursor[crx];
+					document.getElementById("posy").value = cursor[cry];
+					}
 				crblink--;
 				if (crblink < -60) crblink = 60;
 				if (cursor[critm] >= 0)
