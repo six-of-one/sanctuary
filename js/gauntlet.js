@@ -406,6 +406,7 @@ Gauntlet = function() {
 // animated floor items
         WATER:             { sx: 0,  sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0, gluesp: 0.5,                                       sound: 'null',          nohlp: 82  },
 // series of water boundary blocks code: 0x8140, with a pool wall appearing top, center and right, selected by MEXLOW 1, 2, 3
+//                        method change: low nybble != 0 auto adjusts pool edge for mirror/flip/rotate
         WATERT:            { sx: 4,  sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5,                                      sound: 'null',          nohlp: 82  },
         WATERC:            { sx: 8,  sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5,                                      sound: 'null',          nohlp: 82  },
         WATERR:            { sx: 12, sy: 26,   frames:4,  speed: 1*FPS,   fpf: FPS/5,    damage: 0,  gluesp: 0.5,                                      sound: 'null',          nohlp: 82  },
