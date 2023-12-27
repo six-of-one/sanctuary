@@ -250,7 +250,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <div id='edspatr' style="position:absolute;right:-190px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
 <TABLE>
 <tr><td title="click gear or uncheck 'editar' on instruction panel at bottom to hide"><img src="images/olgear.png" style="width:16px" onClick="edgear()"></td><td style="text-align:right;padding:0px 3px"><label title="editar controls & testing">maze editor</label></td></tr>
-<tr><td align="center"><img id="edgfx" src="images/oltrs.gif" style="width:24px" title="selected item image"></td><td><input type="text" style="height:11px" value="0x8070" size="7" id="edhcc" title="current cursor item hex color code">
+<tr><td align="center" bgcolor="#A0A0A0"><img id="edgfx" src="images/oltrs.gif" style="width:24px" title="selected item image"></td><td bgcolor="#A0A0A0"><input type="text" style="height:11px" value="0x8070" size="7" id="edhcc" title="current cursor item hex color code">
 <input type="text" style="height:11px; display:none" value="17" size="1" id="edsx" title="current cursor item sx ref"><input type="text" style="height:11px; display:none" value="10" size="1" id="edsy" title="current cursor item sy ref">
 </td></tr>
 <tr><td align="center"></td><td>x<input type="text" style="height:11px;" value="0" size="1" id="posx" title="current cursor position x">y<input type="text" style="height:11px;" value="0" size="1" id="posy" title="current cursor position y"></td></tr>
@@ -278,16 +278,17 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center" title="generators for all monsters in sanctuary engine">G</td><td><div class="tdrev"><img src="images/edfx/pgi3d.png" style="width:24px" title="Death generator lvl 3: Se - use sparingly" onClick="lded('0xF00040',34,8,'images/edfx/pgi3d.png')"><img src="images/edfx/pgn3t.png" style="width:24px" title="thief generator lvl 3: Se" onClick="lded('0xF00100',34,6,'images/edfx/pgn3t.png')"><div class="tdsho"><img src="images/edfx/pgn3m.png" style="width:24px" title="mugger generator lvl 3: Se" onClick="lded('0xF00110',34,6,'images/edfx/pgn3m.png')"><img src="images/edfx/pgi3a.png" style="width:24px" title="acid puddle generator lvl 3: Se" onClick="lded('0xF00120',34,8,'images/edfx/pgi3a.png')"><img src="images/edfx/pgi3ss.png" style="width:24px" title="super sorceror generator lvl 3: Se" onClick="lded('0xF00130',34,8,'images/edfx/pgi3ss.png')"><img src="images/edfx/pgi3it.png" style="width:24px" title="IT generator lvl 3: Se" onClick="lded('0xF00140',34,8,'images/edfx/pgi3it.png')"></div></div></td></tr>
 <tr><td align="center"></td><td><div class="tdrev"><img src="images/edfx/bk-0.png" style="width:24px" title="blank/empty maze tile - black square" onClick="lded('0x000000',34,10,'images/edfx/bk-0.png')"><img src="images/edfx/pst.png" style="width:24px" title="player start position" onClick="lded('0xF000',4,3,'images/edfx/pst.png')"><img src="images/edfx/bk-15.png" style="width:24px" title="maze solution tile - only appears if maze solver is on" onClick="lded('0xA0807F',33,10,'images/edfx/bk-15.png')"><div class="tdsho"></div></div></td></tr>
 <tr><td align="center" title="custom tiles available from backgrounds">T</td><td><div class="tdrev">
+<img src="images/edfx/gflr.png" style="width:24px" title="gauntlet floor spec in level cfg" onClick="lded('0xA08060',1,0,'images/edfx/gflr.png')">
 <img src="images/edfx/bk-1.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA08071',1,0,'images/edfx/bk-1.png')">
 <img src="images/edfx/bk-2.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA08072',2,0,'images/edfx/bk-2.png')">
-<img src="images/edfx/bk-3.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA08073',3,0,'images/edfx/bk-3.png')">
 <div class="tdsho">
+<img src="images/edfx/bk-3.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA08073',3,0,'images/edfx/bk-3.png')">
 <img src="images/edfx/bk-4.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA08074',4,0,'images/edfx/bk-4.png')">
 <img src="images/edfx/bk-5.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA08075',5,0,'images/edfx/bk-5.png')">
 <img src="images/edfx/bk-6.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA08076',6,0,'images/edfx/bk-6.png')">
 <img src="images/edfx/bk-7.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA08077',7,0,'images/edfx/bk-7.png')">
-<img src="images/edfx/bk-8.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA08078',8,0,'images/edfx/bk-8.png')">
-<img src="images/edfx/bk-9.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA08079',9,0,'images/edfx/bk-9.png')"><br>
+<img src="images/edfx/bk-8.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA08078',8,0,'images/edfx/bk-8.png')"><br>
+<img src="images/edfx/bk-9.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA08079',9,0,'images/edfx/bk-9.png')">
 <img src="images/edfx/bk-10.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA0807A',10,0,'images/edfx/bk-10.png')">
 <img src="images/edfx/bk-11.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA0807B',11,0,'images/edfx/bk-11.png')">
 <img src="images/edfx/bk-12.png" style="width:24px" title="jsgv tileset" onClick="lded('0xA0807C',12,0,'images/edfx/bk-12.png')">
