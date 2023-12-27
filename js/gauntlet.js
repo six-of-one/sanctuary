@@ -15,10 +15,16 @@ Gauntlet = function() {
 // maze edit cursor
 	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 35, cdsy = 10, gedits,
 // edit items - the pixel add code
-	crlist = [ 0x008070, 0x008090, 0x008050, 0x008060, 0x008061, 0x008000, 0x008020, 0x004000, 0x0080A0, 0x0080D0, 0x0080C0, 0xF00000, 0xF00010, 0xF00020, 0xF00030, 0xF00050, -1 ], crll = 15,
+// basic edit set: treasure, food [bottle], potion, key, door, std wall, exit.
+	crlist = [ 0x008070, 0x008000, 0x008060, 0x008050, 0xc0c000, 0x404000, 0x004000, -1, -1 ],
 // location in entities.png
-	crlsx =  [ 17, 27, 16, 20,  7, 21,  3, 23, 24,  0, 28, 32, 32, 32, 32, 32 ],
-	crlsy =  [ 10, 10, 10, 10, 11, 10, 11, 10, 22, 11, 11,  4,  5,  6,  6,  6 ],
+	crlsx =  [ 17, 21, 20, 16,  0,  2, 23 ],
+	crlsy =  [ 10, 10, 10, 10, 10,  0, 10 ],
+// for basic edit reset
+	recrlist = [ 0x008070, 0x008000, 0x008060, 0x008050, 0xc0c000, 0x404000, 0x004000, -1, -1 ],
+	recrlsx =  [ 17, 21, 20, 16,  0,  2, 23 ],
+	recrlsy =  [ 10, 10, 10, 10, 10,  0, 10 ],
+
 /// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
@@ -5165,7 +5171,7 @@ var txsv = ":";
 	 cursorDown:   function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[cry]++; if (cursor[cry] > Mth - 1) cursor[cry] = 0; crblink = 30; },
 	 cursorHome:   function() { if (cursor[0] == null)   this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); crblink = 30; },
 	 cursorIup:    function() { if (cursor[0] != null) { cursor[critm]++; if (crlist[cursor[critm]] == -1) cursor[critm] = 0;    } },
-	 cursorIdn:    function() { if (cursor[0] != null) { cursor[critm]--;           if (cursor[critm] < 0) cursor[critm] = crll; } },
+	 cursorIdn:    function() { if (cursor[0] != null) { cursor[critm]--; if (cursor[critm] < 0) { while (crlist[cursor[critm]] != -1) cursor[critm]++; cursor[critm]--; } } },
 	 cursorIadd:   function() { if (cursor[0] != null) { Mastermap.load_cell(cursor[crx], cursor[cry], crlist[cursor[critm]]);   } },
 
     setDir: function() {
