@@ -32,7 +32,7 @@ ent level walls do not yet blend
 add provision for using orig sound fx on jsgv levels, if installed
 (this is trickier than it sounds, since sounds are all cfg { } preload)
 
-"all walls are invisible" lvl load msg
+"all walls are invisible" lvl load msg & condition test
 
 option to have monsters: take tile dmg, slow in glue, etc
 
