@@ -5164,7 +5164,7 @@ var txsv = ":";
 		 }
 	},
 // maze edit system
-	 cursorOn:     function() { cursor[0] = true; crblink = 60; cursor[critm] = -1; },
+	 cursorOn:     function() { cursor[0] = true; crblink = 60; cursor[critm] = -1; crlast = 0x8070; },
 	 cursorOff:    function() { cursor[0] = null; cursor[critm] = -1; },
 	 cursorUp:     function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[cry]--; if (cursor[cry] < 0) cursor[cry] = Mth - 1; crblink = 30; },
 	 cursorRight:  function() { if (cursor[0] == null) { this.cursorOn(); cursor[crx] = p2t(this.x+5); cursor[cry] = p2t(this.y+5); } cursor[crx]++; if (cursor[crx] > Mtw - 1) cursor[crx] = 0; crblink = 30; },
