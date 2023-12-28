@@ -186,8 +186,8 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center" bgcolor="#AA0000"><input type="checkbox" id="sdps" name="sdps" value="1" title="show damage per second (or per 30 secs): shoot a push wall + show hurt per second: get hit"></td><td title="damage per second done by player | hurt per second damage done to player" bgcolor="#AA0000">dps | hps:</td></tr>
 <tr><td align="center" bgcolor="#AA0000"><input type="checkbox" id="sdphm" name="sdphm" value="1" title="show damage per 30 secs - shoot a push wall"></td><td title="damage per 30 secs done by player only, shows in dps field below" bgcolor="#AA0000">dp 30s:</td></tr>
 <tr><td colspan="2" bgcolor="#AA0000"><input type="text" style="height:11px" value="dps" size="3" id="dpsout" name="dpsout" title="dps: ">:<input type="text" style="height:11px" value="hps" size="3" id="hpsout" name="hurtpsout" title="hps: "></td></tr>
-<tr><td align="center"></td><td title="controls progression of maze/game enhancements">maze progress</td></tr>
-<tr><td align="center"></td><td>max <input type="text" style="height:11px" value="0.7" size="2" id="maxpr" title="select max % to cap all of these might happen tests -- 10% = 0.1">%</td></tr>
+<tr><td align="center"></td><td title="controls progression of maze/game enhancements - default settings are sanctuary engine enhanced">maze progress</td></tr>
+<tr><td align="center"></td><td>max <input type="text" style="height:11px" value="0.7" size="2" id="maxpr" title="select max % to cap all of these might happen tests -- 10% = 0.1, set to zero 0 = turn ALL off">%</td></tr>
 <tr><td align="center"></td><td title="above (+%) or (-%) below MID skill adjust base % by indicated %">mid skill <input type="text" style="height:11px" value="5" size="1" id="midskil" title="middle diffculty for % increment / decrement of test value"></td></tr>
 <tr><td colspan="2">-<input type="text" style="height:11px" value="0.1" size="2" id="decblw" title="decr by % per skill under MID">%<input type="text" style="height:11px" value="0.05" size="2" id="incabv" title="incr by % per skill over MID - skill over 9 counts as 9">+</td></tr>
 <tr><td align="center"></td><td title="per level count * %mod added to base %">level* <input type="text" style="height:11px" value="0.02" size="2" id="inclvl" title="incr by % per level count">%</td></tr>
@@ -196,7 +196,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="10" size="1" id="stmir" title="select level to start rnd mirrors (Horiz)">:<input type="text" style="height:11px" value="0.3" size="2" id="pmir" title="base % to mirror (X axis)">%</td></tr>
 <tr><td align="center"></td><td title="mazes will be flipped in Y coordinate, starting on level at base %">flip:</td></tr>
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="20" size="1" id="stflp" title="select level to start rnd flips (Vert)">:<input type="text" style="height:11px" value="0.25" size="2" id="pflp" title="base % to flip (Y axis)">%</td></tr>
-<tr><td align="center"></td><td title="mazes will be rotated 270 degrees, starting on level at base %">rotate:</td></tr>
+<tr><td align="center"></td><td title="mazes will be rotated 270 degrees: Se, starting on level at base %">rotate:</td></tr>
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="30" size="1" id="strot" title="select level to start rnd rotates">:<input type="text" style="height:11px" value="0.15" size="2" id="prot" title="base % to rotate (270%)">%</td></tr>
 <tr><td align="center"></td><td title="mazes will be unpinned from X and/or Y zero line, starting on level at base %">unpin:</td></tr>
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="50" size="1" id="stunp" title="select level to start rnd unpins">:<input type="text" style="height:11px" value="0.25" size="2" id="punp" title="base % to unpin X or Y">%</td></tr>
@@ -204,6 +204,8 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="24" size="1" id="ststun" title="select level to start shots stun other players">:<input type="text" style="height:11px" value="0.2" size="2" id="psstun" title="base % players shots stun players">%</td></tr>
 <tr><td align="center"></td><td title="mazes will have shots hurt other players, starting on level at base %">shots hurt:</td></tr>
 <tr><td align="center"></td><td><input type="text" style="height:11px" value="33" size="1" id="sthurt" title="select level to start shots hurt other players">:<input type="text" style="height:11px" value="0.16" size="2" id="pshurt" title="base % players shots hurt players">%</td></tr>
+<tr><td align="center"></td><td title="all std maze walls will be set invisible - rnd chance: Se, starting on level at base %">invis walls:</td></tr>
+<tr><td align="center"></td><td><input type="text" style="height:11px" value="80" size="1" id="rinvwals" title="randomly turn some mazes (all std walls) invisible - this is a sanctuary enhance, G2 had perm set invis walls">:<input type="text" style="height:11px" value="0.1" size="2" id="pshurt" title="base % all std maze walls turn invisible">%</td></tr>
 </TABLE>
   </div>
 <div id='devspat' style="position:absolute;right:-190px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
@@ -255,6 +257,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 </td></tr>
 <tr><td align="center"><input type="checkbox" id="creset" title="reset cursor edit set" onClick="lded(-1,0,0,'images/1x1.png')"></td><td title="reset cursor edit set to basic: treasure, food [bottle], potion, key, door, std wall, exit">reset</td></tr>
 <tr><td align="center"></td><td>x<input type="text" style="height:11px;" value="0" size="1" id="posx" title="current cursor position x">y<input type="text" style="height:11px;" value="0" size="1" id="posy" title="current cursor position y"></td></tr>
+
 </TABLE>
   </div>
 <div id='edspat' style="position:absolute;left:-220px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
