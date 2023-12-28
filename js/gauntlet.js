@@ -6729,13 +6729,33 @@ var txsv = ":";
 			}
 // maze edit system
 			if (cursor[0] == true) {
-				if (crblink > 0) {
+				if (crblink > 0)
 					this.sprite(ctx, sprites, viewport, cdsx, cdsy, cursor[crx] * TILE, cursor[cry] * TILE, TILE, TILE, 0, 0);
+				if ((crblink & 15) == 10) {
+// update panel stats
 					document.getElementById("posx").value = cursor[crx];
 					document.getElementById("posy").value = cursor[cry];
+// get potential new item
+					var itm = document.getElementById("edhcc").value, x = 0;
+// reset crlist
+					if (itm == -1) { crlist[7] = -1; cursor[critm] = -1; }
+					else {
+					while (crlist[x] != -1 && x != -1) {
+						if (crlist[x] == itm) { cursor[critm] = x; x = -2; }
+						x++;
+						}
+// add item
+					if (x != -1) {
+						cursor[critm] = x;
+						crlist[x] = itm;
+						crlsx[x] = document.getElementById("edsx").value;
+						crlsy[x] = document.getElementById("edsy").value;
+						crlist[x + 1] = -1;
+						}
 					}
+				}
 				crblink--;
-				if (crblink < -60) crblink = 60;
+				if (crblink < -40) crblink = 60;
 				if (cursor[critm] >= 0)
 				if (crlist[cursor[critm]] >= 0)
 					this.sprite(ctx, sprites, viewport, crlsx[cursor[critm]], crlsy[cursor[critm]], cursor[crx] * TILE + 2, cursor[cry] * TILE + 2, TILE - 4, TILE - 4, 0, 0);
