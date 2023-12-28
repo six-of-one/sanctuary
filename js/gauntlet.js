@@ -13,7 +13,7 @@ Gauntlet = function() {
 											initlevel = 0,
 	vardbg = 0, dent, d1, d2, bb = 0, PARSE,
 // maze edit cursor
-	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 35, cdsy = 10, gedits,
+	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 35, cdsy = 10, crlast, gedits,
 // edit items - the pixel add code
 // basic edit set: treasure, food [bottle], potion, key, door, std wall, exit.
 	crlist = [ 0x008070, 0x008000, 0x008060, 0x008050, 0xc0c000, 0x404000, 0x004000, -1, -1 ],
@@ -22,8 +22,8 @@ Gauntlet = function() {
 	crlsy =  [ 10, 10, 10, 10, 10,  0, 10 ],
 // for basic edit reset
 	recrlist = [ 0x008070, 0x008000, 0x008060, 0x008050, 0xc0c000, 0x404000, 0x004000, -1, -1 ],
-	recrlsx =  [ 17, 21, 20, 16,  0,  2, 23 ],
-	recrlsy =  [ 10, 10, 10, 10, 10,  0, 10 ],
+	recrlsx =  [ 17, 21, 20, 16,  0,  31, 23 ],
+	recrlsy =  [ 10, 10, 10, 10, 10,  10, 10 ],
 
 /// end debug tier
 // music control - needs user interf
@@ -6738,8 +6738,9 @@ var txsv = ":";
 // get potential new item
 					var itm = document.getElementById("edhcc").value, x = 0;
 // reset crlist
-					if (itm == -1) { crlist[7] = -1; cursor[critm] = -1; }
-					else {
+					if (itm == -1) { crlist[7] = -1; cursor[critm] = -1; document.getElementById("edhcc").value = "0x008070"; }
+					else if (itm != crlast) {
+						crlast = itm;
 					while (crlist[x] != -1 && x != -1) {
 						if (crlist[x] == itm) { cursor[critm] = x; x = -2; }
 						x++;
