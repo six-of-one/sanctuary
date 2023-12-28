@@ -18,8 +18,8 @@ Gauntlet = function() {
 // basic edit set: treasure, food [bottle], potion, key, door, std wall, exit.
 	crlist = [ 0x008070, 0x008000, 0x008060, 0x008050, 0xc0c000, 0x404000, 0x004000, -1, -1 ],
 // location in entities.png
-	crlsx =  [ 17, 21, 20, 16,  0,  2, 23 ],
-	crlsy =  [ 10, 10, 10, 10, 10,  0, 10 ],
+	crlsx =  [ 17, 21, 20, 16,  0,  31, 23 ],
+	crlsy =  [ 10, 10, 10, 10, 10,  10, 10 ],
 // for basic edit reset
 	recrlist = [ 0x008070, 0x008000, 0x008060, 0x008050, 0xc0c000, 0x404000, 0x004000, -1, -1 ],
 	recrlsx =  [ 17, 21, 20, 16,  0,  31, 23 ],
@@ -6738,7 +6738,7 @@ var txsv = ":";
 // get potential new item
 					var itm = document.getElementById("edhcc").value, x = 0;
 // reset crlist
-					if (itm == -1) { crlist[7] = -1; cursor[critm] = -1; document.getElementById("edhcc").value = "0x008070"; }
+					if (itm == -1) { crlist[7] = -1; cursor[critm] = -1; document.getElementById("edhcc").value = "0x8070"; crlast = 0x8070; }
 					else if (itm != crlast) {
 						crlast = itm;
 					while (crlist[x] != -1 && x != -1) {
