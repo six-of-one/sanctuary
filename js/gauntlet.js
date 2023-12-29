@@ -1062,7 +1062,7 @@ Gauntlet = function() {
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
       { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: 0x18,             gflr: "gfx/d1floor6.jpg",   gwal: "gfx/g2wall22.jpg",    nornd: 1,   unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R"},// gshw: 3, gfi: 7, gdor: 1, gitm: 2 },
       { name: 'Z gon',        url: "levels/glevelZ.png",                                        wall: WALL.ORANG9,      gflr: "gfx/g1floor0z.jpg",  gwal: "gfx/g1wallZ.png",               unpinx: 1,    music: 'nullm',      score:  1000, help: null },
-/* 
+/*
       { name: 'Training',       url: "levels/trainer1.png", floor: FLOOR.LIGHT_STONE,           wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, tmdf: 1, nornd: 1, help: "Shoot ghosts and find the exit" },
       { name: 'Training Two',   url: "levels/trainer2.png", floor: FLOOR.LIGHT_STONE,           wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, tmdf: 1, nornd: 1, help: "Watch out for demon fire" },
       { name: 'Training Three', url: "levels/trainer3.png", floor: FLOOR.LIGHT_STONE,           wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, tmdf: 1, nornd: 1, help: "Find keys to open doors" },

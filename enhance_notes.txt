@@ -48,9 +48,13 @@ adjust trap walls: remove trap now has to look for restore trap and v-v
 perhaps a music play queue for sequences of annouces that currently overlap ?
 - mostly when a treasure room has a potion, or ssop/shop and something else play at lvl start
 
-save highscore table for reload
+save highscore table, cookys, & storage for reload
 
-
+unsave change flag to check on ed level reload
+select level to edit
+set lvnum, name, url, (maybe wall, floor), gwal, gflr, unpins, nornd, rtime, help, inv, ovrload
+OVRLOAD - load instead of mapdata from url
+SVRLOAD - load on top of mapdata from url
 
 imm issues:
 
