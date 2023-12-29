@@ -591,9 +591,9 @@ Gauntlet = function() {
         NLEVEL:  "gauntlet.nlevel",
         SCORE:   "gauntlet.score",
         WHO:     "gauntlet.who",
-        COINS:   "gauntlet.coins",
         BEETS:   "gauntlet.beets",
         GEDITS:  "gauntlet.gedits",
+// item stats
         GPOTS:   "gauntlet.gpots",
         GFUDS:   "gauntlet.gfuds",
         GKEYS:   "gauntlet.gkeys",
@@ -604,11 +604,17 @@ Gauntlet = function() {
         GTRS:    "gauntlet.gtrs",
         GLTRS:   "gauntlet.gloktrs",
         GEXS:    "gauntlet.gexits",
+// plyr | char stats
+        COINS:   "gauntlet.coins",
         DEDS:    "gauntlet.deds",
         CWIZ:    "gauntlet.wizs",
         CWAR:    "gauntlet.wars",
         CVAL:    "gauntlet.vals",
         CELF:    "gauntlet.elfs",
+
+        DDONE:   "gauntlet.ddone",
+        DTAKE:   "gauntlet.dtake",
+        DAUTO:   "gauntlet.dauto",
 // generators / monsters destroyed
         GBNS:    "gauntlet.gbns",
         GGEN:    "gauntlet.ggen",
