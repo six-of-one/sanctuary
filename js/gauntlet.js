@@ -4168,6 +4168,7 @@ vartxt.value += "	]\n"
       if (nuke && this.type.canbehit == 2) // death nuked
 		 {
 				this.health = Math.max(0, this.health - damage);
+				if (by.player) ddone += Math.floor(Math.min(this.health,damage));
 				if (this.health > 0) return;
 				var re = Mastermap.addFx(this.x, this.y, FX.NUMER);
 				if (re != null) {
@@ -4188,6 +4189,7 @@ vartxt.value += "	]\n"
 					re.sy = re.type.sy + this.type.scorefx;
 					re.numer = true; // special display class because of sprite render using entity.type.sy instead of entity.sy
 				}
+				if (by.player) ddone += Math.floor(Math.min(this.health,damage));
 				this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null, nuke);
 				by.addscore(Math.floor( this.type.score /  (by.scmult > 1 ? 1.33333 : 1) ) );
 				return;
@@ -4195,6 +4197,7 @@ vartxt.value += "	]\n"
 
       if ((by.weapon && this.type.canbeshot && !this.inv) || (by.player && this.type.canbehit && !this.inv) || (by == this) || nuke) {
         this.health = Math.max(0, this.health - damage);
+			if (by.player) ddone += Math.floor(Math.min(this.health,damage));
 
 			var lvl = Math.max(0, Math.ceil(this.health / 10));
 			var monlvl = this.type.mlvl[lvl];
@@ -4301,6 +4304,7 @@ vartxt.value += "	]\n"
 
     hurt: function(damage, by) {
       this.health = Math.max(0, this.health - damage);
+		if (by.player) ddone += Math.floor(Math.min(this.health,damage));
       if (this.health === 0)
         this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null);
     },
@@ -4431,6 +4435,8 @@ vartxt.value += "	]\n"
 							helpdis(this.type.nohlp, undefined, 2000, undefined, undefined);
 						 if (this.health == undefined) this.health = this.type.health;
 						 this.health = Math.max(0, this.health - damage);
+// rn damage done stat is monster / gen only
+//						if (by.player) ddone += Math.floor(Math.min(this.health,damage));
 						 if (this.health > 0) return;
 						Musicth.play(Musicth.sounds[this.type.sound]);
 						if (this.type.gud > 0) {regud = true; rx = this.x; ry = this.y; }
@@ -4443,6 +4449,8 @@ vartxt.value += "	]\n"
 						{
 							if (this.health == undefined) this.health = this.type.health;
 							this.health = this.health - damage;
+// rn damage done stat is monster / gen only
+//							if (by.player) ddone += Math.floor(Math.min(this.health,damage));
 							if (this.health <= 10) helpdis(PSWDHLP, undefined, 2000, undefined, undefined);
 							if (this.health > 0) return;
 						}
