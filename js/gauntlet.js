@@ -2636,8 +2636,8 @@ var lvu = document.getElementById("flvl").value;
     },
 
     onbeforequit: function(event, previous, current) {
-		 savstat();
 		 if (game.player.respawn) { game.player.respawn = 2; return; }		// ESC key aborts respawn, goes through player.die()
+		 savstat();
       if (!confirm('Quit Game?'))
         return false;
     },
@@ -5677,13 +5677,13 @@ var txsv = ":";
     },
 
     respawner: function() {
+		savstat();
 		 this.respawn = FPS * 10; // seconds after death player has to hit coindrop to respawn
 		 helpdis(RSPHLP, undefined, 2000, Math.round(this.respawn / FPS), undefined);
 		 deds++;
 	 },
 
     die: function() {
-		savstat(this);
       this.dead = true;
 		this.respawn = false;
       publish(EVENT.PLAYER_DEATH, this);
