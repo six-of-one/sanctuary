@@ -1326,6 +1326,44 @@ Gauntlet = function() {
 			}
 	}
 
+// save stats in storage
+	function savstat()
+	{
+		this.storage[STORAGE.COINS]  = allcoins;
+		this.storage[STORAGE.DDONE]  = ddone;
+		this.storage[STORAGE.DTAKE]  = dtake;
+		this.storage[STORAGE.DAUTO]  = dauto;
+		this.storage[STORAGE.PHEAL]  = pheal; alert(pheal+" : "+this.storage[STORAGE.PHEAL]);
+		this.storage[STORAGE.GPOTS]  = gpots;
+		this.storage[STORAGE.GFUDS]  = gfuds;
+		this.storage[STORAGE.GKEYS]  = gkeys;
+		this.storage[STORAGE.GSPEC]  = gspec;
+		this.storage[STORAGE.GLIMS]  = glims;
+		this.storage[STORAGE.FPOTS]  = fpots;
+		this.storage[STORAGE.FKEYS]  = fkeys;
+		this.storage[STORAGE.GTRS]   = gtrs;
+		this.storage[STORAGE.GLTRS]  = gltrs;
+		this.storage[STORAGE.GEXS]   = gexits;
+		this.storage[STORAGE.GEDITS] = gedits;
+		this.storage[STORAGE.GMIR]   = gmir;
+		this.storage[STORAGE.GFLP]   = gflp;
+		this.storage[STORAGE.GROT]   = grot;
+		this.storage[STORAGE.GUNP]   = gunp;
+		this.storage[STORAGE.GSSOP]  = gssop;
+		this.storage[STORAGE.GSHOP]  = gshop;
+		this.storage[STORAGE.DEDS]   = deds;
+		this.storage[STORAGE.GBNS]   = gbns;
+		this.storage[STORAGE.GGEN]   = ggen;
+		this.storage[STORAGE.GGSUP]  = ggsup;
+		this.storage[STORAGE.GGST]   = ggst;
+		this.storage[STORAGE.GGRT]   = ggrt;
+		this.storage[STORAGE.GDEM]   = gdem;
+		this.storage[STORAGE.GSRC]   = gsrc;
+		this.storage[STORAGE.GLOB]   = glob;
+		this.storage[STORAGE.GDTH]   = gdeth;
+		this.storage[STORAGE.BEETS]  = beets + heartbeet;
+	}
+
   //=========================================================================
   // MAPPING
   //=========================================================================
@@ -2121,7 +2159,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			ddone   = to.number(this.storage[STORAGE.DDONE]  ,0);
 			dtake   = to.number(this.storage[STORAGE.DTAKE]  ,0);
 			dauto   = to.number(this.storage[STORAGE.DAUTO]  ,0);
-			pheal   = to.number(this.storage[STORAGE.PHEAL]  ,0);
+			pheal   = to.number(this.storage[STORAGE.PHEAL]  ,0);  alert("ld:"+pheal+" : "+this.storage[STORAGE.PHEAL]);
 // stats panel
 			document.getElementById("odeds").innerHTML  = Game.Math.mku(deds);
 			document.getElementById("odeals").innerHTML  = Game.Math.mku(ddone);
@@ -2597,6 +2635,7 @@ var lvu = document.getElementById("flvl").value;
     },
 
     onbeforequit: function(event, previous, current) {
+		 savstat();
 		 if (game.player.respawn) { game.player.respawn = 2; return; }		// ESC key aborts respawn, goes through player.die()
       if (!confirm('Quit Game?'))
         return false;
@@ -2638,7 +2677,6 @@ var lvu = document.getElementById("flvl").value;
 	var	bph = beets+heartbeet;
 			document.getElementById("osecs").innerHTML  = Game.Math.hms(bph);
 			document.getElementById("osecs").title      = Game.Math.hms_title(bph);
-
 
       this.player.leave();
 
@@ -3045,40 +3083,6 @@ var lvu = document.getElementById("flvl").value;
     loadHighWho:   function() { return this.storage[STORAGE.WHO];                     },
 
     saveHighScore: function() {
-
-		this.storage[STORAGE.COINS]  = allcoins;
-		this.storage[STORAGE.DDONE]  = ddone;
-		this.storage[STORAGE.DTAKE]  = dtake;
-		this.storage[STORAGE.DAUTO]  = dauto;
-		this.storage[STORAGE.PHEAL]  = pheal;
-		this.storage[STORAGE.GPOTS]  = gpots;
-		this.storage[STORAGE.GFUDS]  = gfuds;
-		this.storage[STORAGE.GKEYS]  = gkeys;
-		this.storage[STORAGE.GSPEC]  = gspec;
-		this.storage[STORAGE.GLIMS]  = glims;
-		this.storage[STORAGE.FPOTS]  = fpots;
-		this.storage[STORAGE.FKEYS]  = fkeys;
-		this.storage[STORAGE.GTRS]   = gtrs;
-		this.storage[STORAGE.GLTRS]  = gltrs;
-		this.storage[STORAGE.GEXS]   = gexits;
-		this.storage[STORAGE.GEDITS] = gedits;
-		this.storage[STORAGE.GMIR]   = gmir;
-		this.storage[STORAGE.GFLP]   = gflp;
-		this.storage[STORAGE.GROT]   = grot;
-		this.storage[STORAGE.GUNP]   = gunp;
-		this.storage[STORAGE.GSSOP]  = gssop;
-		this.storage[STORAGE.GSHOP]  = gshop;
-		this.storage[STORAGE.DEDS]   = deds;
-		this.storage[STORAGE.GBNS]   = gbns;
-		this.storage[STORAGE.GGEN]   = ggen;
-		this.storage[STORAGE.GGSUP]  = ggsup;
-		this.storage[STORAGE.GGST]   = ggst;
-		this.storage[STORAGE.GGRT]   = ggrt;
-		this.storage[STORAGE.GDEM]   = gdem;
-		this.storage[STORAGE.GSRC]   = gsrc;
-		this.storage[STORAGE.GLOB]   = glob;
-		this.storage[STORAGE.GDTH]   = gdeth;
-		this.storage[STORAGE.BEETS]  = beets + heartbeet;
 
 		if (max_diff_level > 9) return;
       if ((this.player.score / this.player.droppedcoins) > this.loadHighScore()) {
@@ -5678,6 +5682,7 @@ var txsv = ":";
 	 },
 
     die: function() {
+		savstat();
       this.dead = true;
 		this.respawn = false;
       publish(EVENT.PLAYER_DEATH, this);
