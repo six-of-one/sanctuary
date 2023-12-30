@@ -56,6 +56,7 @@ set lvnum, name, url, (maybe wall, floor), gwal, gflr, unpins, nornd, rtime, hel
 OVRLOAD - load instead of mapdata from url
 SVRLOAD - load on top of mapdata from url
 
+
 imm issues:
 
 may want to up max skill that stores highscores

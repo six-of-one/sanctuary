@@ -97,14 +97,14 @@ Gauntlet = function() {
 // stats package - all coin drops, heartbeet tot, deaths, got vars things, fired pots & keys, char count total, curr char in play
 	allcoins, beets, deds, gpots, gfuds, gkeys, gspec, glims, gtrs, gltrs, gexits, fpots, fkeys, celf, cwar, cwiz, cval, curwiz, curwar, curval, curelf,
 // some more player stats - damage dealt, damage taken, autohurt
-	ddone, dtake, dauto,
+	ddone, dtake, dauto, pheal,
 // stats on monsters / generators
 	gbns, ggen, ggsup, ggst, ggrt, gdem, gsrc, glob, gdeth,
 // map RNG stats
 	gmir, gflp, grot, gunp, gssop, gshop,
 // per play stats count (save start total, diff is that play)
 	ideds, igpots, igfuds, igkeys, igspec, iglims, igtrs, igltrs, igexits, ifpots, ifkeys, igedits,
-	iddone, idtake, idauto,
+	iddone, idtake, idauto, ipheal,
 // gens / monsters
 	igbns, iggen, iggsup, iggst, iggrt, igdem, igsrc, iglob, igdeth,
 // dps/hps display (preamrd - damage accum pre armor lowering total)
@@ -618,6 +618,7 @@ Gauntlet = function() {
         DDONE:   "gauntlet.ddone",
         DTAKE:   "gauntlet.dtake",
         DAUTO:   "gauntlet.dauto",
+        PHEAL:   "gauntlet.pheal",
 // generators / monsters destroyed
         GBNS:    "gauntlet.gbns",
         GGEN:    "gauntlet.ggen",
@@ -2120,11 +2121,13 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			ddone   = to.number(this.storage[STORAGE.DDONE]  ,0);
 			dtake   = to.number(this.storage[STORAGE.DTAKE]  ,0);
 			dauto   = to.number(this.storage[STORAGE.DAUTO]  ,0);
+			pheal   = to.number(this.storage[STORAGE.PHEAL]  ,0);
 // stats panel
 			document.getElementById("odeds").innerHTML  = Game.Math.mku(deds);
 			document.getElementById("odeals").innerHTML  = Game.Math.mku(ddone);
 			document.getElementById("odtaks").innerHTML  = Game.Math.mku(dtake);
 			document.getElementById("odauts").innerHTML  = Game.Math.mku(dauto);
+			document.getElementById("oheals").innerHTML  = Game.Math.mku(pheal);
 
 			document.getElementById("otrs").innerHTML   = Game.Math.mku(gtrs);
 			document.getElementById("oltrs").innerHTML  = Game.Math.mku(gltrs);
@@ -2207,6 +2210,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			iddone  = ddone;
 			idtake  = dtake;
 			idauto  = dauto;
+			ipheal  = pheal;
 			igbns   = gbns;
 			iggen   = ggen;
 			iggsup  = ggsup;
@@ -2610,6 +2614,7 @@ var lvu = document.getElementById("flvl").value;
 			document.getElementById("odeals").innerHTML  = Game.Math.mku(ddone);
 			document.getElementById("odtaks").innerHTML  = Game.Math.mku(dtake);
 			document.getElementById("odauts").innerHTML  = Game.Math.mku(dauto);
+			document.getElementById("oheals").innerHTML  = Game.Math.mku(pheal);
 
 			document.getElementById("otrs").innerHTML   = Game.Math.mku(gtrs);
 			document.getElementById("oltrs").innerHTML  = Game.Math.mku(gltrs);
@@ -3045,6 +3050,7 @@ var lvu = document.getElementById("flvl").value;
 		this.storage[STORAGE.DDONE]  = ddone;
 		this.storage[STORAGE.DTAKE]  = dtake;
 		this.storage[STORAGE.DAUTO]  = dauto;
+		this.storage[STORAGE.PHEAL]  = pheal;
 		this.storage[STORAGE.GPOTS]  = gpots;
 		this.storage[STORAGE.GFUDS]  = gfuds;
 		this.storage[STORAGE.GKEYS]  = gkeys;
@@ -5291,6 +5297,7 @@ var txsv = ":";
 			document.getElementById("odeala").innerHTML  = Game.Math.mku(ddone - iddone);
 			document.getElementById("odtaka").innerHTML  = Game.Math.mku(dtake - idtake);
 			document.getElementById("odauta").innerHTML  = Game.Math.mku(dauto - idauto);
+			document.getElementById("oheala").innerHTML  = Game.Math.mku(pheal - ipheal);
 
 			document.getElementById("otrsa").innerHTML   = Game.Math.mku(gtrs  - igtrs);
 			document.getElementById("oltrsa").innerHTML  = Game.Math.mku(gltrs - igltrs);
@@ -5423,9 +5430,11 @@ var txsv = ":";
 			if (!DEBUG.NOAUTOHURT)
 /// TEST - remove
 // dev: no autohurt
-		if (!document.getElementById("noah").checked)
+		if (!document.getElementById("noah").checked) {
 /// TEST - remove
 				this.hurt(1 + hinv, this, true);
+				dauto += 1 + hinv;
+			}
 
 // count downs may want a setTimeout fn for these and stalling
 			if ((frame % (FPS)) === 0)
