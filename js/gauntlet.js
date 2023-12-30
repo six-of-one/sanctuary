@@ -3574,6 +3574,7 @@ if (document.getElementById("noclip").checked) return false;
 		pshurt = document.getElementById("pshurt").value;
 
   var rndm, dfl = (diff_level > 9) ? 9 : diff_level;
+		if (pmir > 0)
 		if (nlevel >= stmir) {
 			rndm = pmir + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
@@ -3582,6 +3583,7 @@ if (document.getElementById("noclip").checked) return false;
 			if (Math.random() < rndm) { Mirx = true; gmir++; }
 			}
 
+		if (pflp > 0)
 		if (nlevel >= stflp) {
 			rndm = pflp + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
@@ -3590,6 +3592,7 @@ if (document.getElementById("noclip").checked) return false;
 			if (Math.random() < rndm) { Miry = true; gflp++; }
 			}
 
+		if (prot > 0)
 		if (nlevel >= strot) {
 			rndm = prot + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
@@ -3598,6 +3601,7 @@ if (document.getElementById("noclip").checked) return false;
 			if (Math.random() < rndm) { Mrot = true; grot++; }
 			}
 
+		if (punp > 0)
 		if (nlevel >= stunp) {
 			var r2 = (lvlp * nlevel);
 			if (dfl > mids) r2 += incp * dfl;
@@ -3615,6 +3619,7 @@ if (document.getElementById("noclip").checked) return false;
 			}
 
 // note: code for these will no be complete until multiplayer is added...
+		if (psstun > 0)
 		if (nlevel >= ststun) {
 			rndm = psstun + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
@@ -3623,6 +3628,7 @@ if (document.getElementById("noclip").checked) return false;
 			if (Math.random() < rndm) { Mssop = true; gssop++; }
 			}
 
+		if (pshurt > 0)
 		if (nlevel >= sthurt) {
 			rndm = pshurt + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
@@ -3631,6 +3637,7 @@ if (document.getElementById("noclip").checked) return false;
 			if (Math.random() < rndm) { Mshop = true; gshop++; }
 			}
 
+		if (prinvw > 0)
 		if (nlevel >= rinvw) {
 			rndm = prinvw + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
