@@ -101,7 +101,7 @@ Gauntlet = function() {
 // stats on monsters / generators
 	gbns, ggen, ggsup, ggst, ggrt, gdem, gsrc, glob, gdeth,
 // map RNG stats
-	gmir, gflp, grot, gunp, gssop, gshop,
+	gmir, gflp, grot, gunp, gssop, gshop, ginvw,
 // per play stats count (save start total, diff is that play)
 	ideds, igpots, igfuds, igkeys, igspec, iglims, igtrs, igltrs, igexits, ifpots, ifkeys, igedits,
 	iddone, idtake, idauto, ipheal,
@@ -634,8 +634,9 @@ Gauntlet = function() {
         GFLP:    "gauntlet.yflp",
         GROT:    "gauntlet.rot",
         GUNP:    "gauntlet.unp",
-        GSSOP:    "gauntlet.ssop",
-        GSHOP:    "gauntlet.shop",
+        GSSOP:   "gauntlet.ssop",
+        GSHOP:   "gauntlet.shop",
+        GINVW:   "gauntlet.invw",
 // top4 score table
         Z1:      "gauntlet.z1",
         Z2:      "gauntlet.z2",
@@ -1351,6 +1352,7 @@ Gauntlet = function() {
 		sloc.storage[STORAGE.GUNP]   = gunp;
 		sloc.storage[STORAGE.GSSOP]  = gssop;
 		sloc.storage[STORAGE.GSHOP]  = gshop;
+		sloc.storage[STORAGE.GINVW]  = ginvw;
 		sloc.storage[STORAGE.DEDS]   = deds;
 		sloc.storage[STORAGE.GBNS]   = gbns;
 		sloc.storage[STORAGE.GGEN]   = ggen;
@@ -2232,6 +2234,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			gunp    = to.number(this.storage[STORAGE.GUNP]  ,0);
 			gssop   = to.number(this.storage[STORAGE.GSSOP] ,0);
 			gshop   = to.number(this.storage[STORAGE.GSHOP] ,0);
+			ginvw   = to.number(this.storage[STORAGE.GINVW] ,0);
 			scores  = this;
 			curwiz  = curwar  = curval  = curelf  = " ";
 			igpots  = gpots;	// track individual stats temp
@@ -3561,10 +3564,12 @@ if (document.getElementById("noclip").checked) return false;
 		stunp  = document.getElementById("stunp").value,
 		ststun = document.getElementById("ststun").value,
 		sthurt = document.getElementById("sthurt").value,
+		rinvw  = document.getElementById("rinvwals").value,
 		pmir   = document.getElementById("pmir").value,
 		pflp   = document.getElementById("pflp").value,
 		prot   = document.getElementById("prot").value,
 		punp   = document.getElementById("punp").value,
+		prinvw = document.getElementById("prinvw").value,
 		psstun = document.getElementById("psstun").value,
 		pshurt = document.getElementById("pshurt").value;
 
@@ -3624,6 +3629,14 @@ if (document.getElementById("noclip").checked) return false;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
 			if (Math.random() < rndm) { Mshop = true; gshop++; }
+			}
+
+		if (nlevel >= rinvw) {
+			rndm = prinvw + (lvlp * nlevel);
+			if (dfl > mids) rndm += incp * dfl;
+			else if (dfl < mids) rndm -= decp * dfl;
+			if (rndm > maxpr) rndm = maxpr;
+			if (Math.random() < rndm) { Minvisiblewall = true; ginvw++; }
 			}
 
 // option to replace reg level walls - this may not stay in, this is testing random builder
