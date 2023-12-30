@@ -96,12 +96,15 @@ Gauntlet = function() {
 
 // stats package - all coin drops, heartbeet tot, deaths, got vars things, fired pots & keys, char count total, curr char in play
 	allcoins, beets, deds, gpots, gfuds, gkeys, gspec, glims, gtrs, gltrs, gexits, fpots, fkeys, celf, cwar, cwiz, cval, curwiz, curwar, curval, curelf,
+// some more player stats - damage dealt, damage taken, autohurt
+	ddone, dtake, dauto,
 // stats on monsters / generators
 	gbns, ggen, ggsup, ggst, ggrt, gdem, gsrc, glob, gdeth,
 // map RNG stats
 	gmir, gflp, grot, gunp, gssop, gshop,
 // per play stats count (save start total, diff is that play)
 	ideds, igpots, igfuds, igkeys, igspec, iglims, igtrs, igltrs, igexits, ifpots, ifkeys, igedits,
+	iddone, idtake, idauto,
 // gens / monsters
 	igbns, iggen, iggsup, iggst, iggrt, igdem, igsrc, iglob, igdeth,
 // dps/hps display (preamrd - damage accum pre armor lowering total)
@@ -2113,8 +2116,16 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			gsrc    = to.number(this.storage[STORAGE.GSRC]  ,0);
 			glob    = to.number(this.storage[STORAGE.GLOB]  ,0);
 			gdeth   = to.number(this.storage[STORAGE.GDTH]  ,0);
+
+			ddone   = to.number(this.storage[STORAGE.DDONE]  ,0);
+			dtake   = to.number(this.storage[STORAGE.DTAKE]  ,0);
+			dauto   = to.number(this.storage[STORAGE.DAUTO]  ,0);
 // stats panel
 			document.getElementById("odeds").innerHTML  = Game.Math.mku(deds);
+			document.getElementById("odeals").innerHTML  = Game.Math.mku(ddone);
+			document.getElementById("odtaks").innerHTML  = Game.Math.mku(dtake);
+			document.getElementById("odauts").innerHTML  = Game.Math.mku(dauto);
+
 			document.getElementById("otrs").innerHTML   = Game.Math.mku(gtrs);
 			document.getElementById("oltrs").innerHTML  = Game.Math.mku(gltrs);
 			document.getElementById("opots").innerHTML  = Game.Math.mku(gpots);
@@ -2193,6 +2204,9 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 			igexits = gexits;
 			igedits = gedits;
 			ideds   = deds;
+			iddone  = ddone;
+			idtake  = dtake;
+			idauto  = dauto;
 			igbns   = gbns;
 			iggen   = ggen;
 			iggsup  = ggsup;
@@ -2593,6 +2607,10 @@ var lvu = document.getElementById("flvl").value;
 // a one time popup display of stats per play (on quit or dead)
 // goal: a properly css formatted sheet, as a popup and a side bar selectable display
 			document.getElementById("odeds").innerHTML  = Game.Math.mku(deds);
+			document.getElementById("odeals").innerHTML  = Game.Math.mku(ddone);
+			document.getElementById("odtaks").innerHTML  = Game.Math.mku(dtake);
+			document.getElementById("odauts").innerHTML  = Game.Math.mku(dauto);
+
 			document.getElementById("otrs").innerHTML   = Game.Math.mku(gtrs);
 			document.getElementById("oltrs").innerHTML  = Game.Math.mku(gltrs);
 			document.getElementById("opots").innerHTML  = Game.Math.mku(gpots);
@@ -3024,6 +3042,9 @@ var lvu = document.getElementById("flvl").value;
     saveHighScore: function() {
 
 		this.storage[STORAGE.COINS]  = allcoins;
+		this.storage[STORAGE.DDONE]  = ddone;
+		this.storage[STORAGE.DTAKE]  = dtake;
+		this.storage[STORAGE.DAUTO]  = dauto;
 		this.storage[STORAGE.GPOTS]  = gpots;
 		this.storage[STORAGE.GFUDS]  = gfuds;
 		this.storage[STORAGE.GKEYS]  = gkeys;
@@ -5267,6 +5288,10 @@ var txsv = ":";
       if ((frame % (FPS/0.25)) === 0) {
 // stats panel
 			document.getElementById("odedsa").innerHTML  = Game.Math.mku(deds  - ideds);
+			document.getElementById("odeala").innerHTML  = Game.Math.mku(ddone - iddone);
+			document.getElementById("odtaka").innerHTML  = Game.Math.mku(dtake - idtake);
+			document.getElementById("odauta").innerHTML  = Game.Math.mku(dauto - idauto);
+
 			document.getElementById("otrsa").innerHTML   = Game.Math.mku(gtrs  - igtrs);
 			document.getElementById("oltrsa").innerHTML  = Game.Math.mku(gltrs - igltrs);
 			document.getElementById("opotsa").innerHTML  = Game.Math.mku(gpots - igpots);
