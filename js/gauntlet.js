@@ -4167,8 +4167,8 @@ vartxt.value += "	]\n"
 		 }
       if (nuke && this.type.canbehit == 2) // death nuked
 		 {
-				this.health = Math.max(0, this.health - damage);
 				if (by.player) ddone += Math.floor(Math.min(this.health,damage));
+				this.health = Math.max(0, this.health - damage);
 				if (this.health > 0) return;
 				var re = Mastermap.addFx(this.x, this.y, FX.NUMER);
 				if (re != null) {
@@ -4196,8 +4196,8 @@ vartxt.value += "	]\n"
 		 }
 
       if ((by.weapon && this.type.canbeshot && !this.inv) || (by.player && this.type.canbehit && !this.inv) || (by == this) || nuke) {
-        this.health = Math.max(0, this.health - damage);
 			if (by.player) ddone += Math.floor(Math.min(this.health,damage));
+        this.health = Math.max(0, this.health - damage);
 
 			var lvl = Math.max(0, Math.ceil(this.health / 10));
 			var monlvl = this.type.mlvl[lvl];
@@ -4303,8 +4303,8 @@ vartxt.value += "	]\n"
     },
 
     hurt: function(damage, by) {
-      this.health = Math.max(0, this.health - damage);
 		if (by.player) ddone += Math.floor(Math.min(this.health,damage));
+      this.health = Math.max(0, this.health - damage);
       if (this.health === 0)
         this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null);
     },
@@ -5275,9 +5275,9 @@ var txsv = ":";
 					}
 				}
 /// TEST - remove
+		  if (!automatic) dtake += Math.floor(Math.min(this.health,damage));
         this.health = Math.max(0, this.health - damage);
         if (!automatic) {
-			 dtake += Math.floor(Math.min(0,damage));
           this.hurting = FX.PLAYER_GLOW.frames;
           publish(EVENT.PLAYER_HURT, this, damage);
         }
