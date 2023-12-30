@@ -5233,6 +5233,7 @@ var txsv = ":";
 
     heal: function(health) {
       this.health  = this.health + health;
+		pheal += Math.floor(health);
       this.healing = FX.PLAYER_GLOW.frames;
       publish(EVENT.PLAYER_HEAL, this, health);
     },
@@ -5268,6 +5269,7 @@ var txsv = ":";
 /// TEST - remove
         this.health = Math.max(0, this.health - damage);
         if (!automatic) {
+			 dtake += Math.floor(Math.min(0,damage));
           this.hurting = FX.PLAYER_GLOW.frames;
           publish(EVENT.PLAYER_HURT, this, damage);
         }
@@ -5433,7 +5435,7 @@ var txsv = ":";
 		if (!document.getElementById("noah").checked) {
 /// TEST - remove
 				this.hurt(1 + hinv, this, true);
-				dauto += 1 + hinv;
+				dauto += Math.floor(1 + hinv);
 			}
 
 // count downs may want a setTimeout fn for these and stalling

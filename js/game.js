@@ -725,11 +725,11 @@ Game.Math = {
 
 // mega "m", kilo "k" or base unit " "
   mku: function(val) {
-			return ((val > 7340032) ? Math.floor(val/1048576)+"M":(val > 7168) ? Math.floor(val/1024)+"k":val);
+			return ((val > 7340032) ? Math.floor(val/1048576)+"M":(val > 7168) ? Math.floor(val/1024)+"k":Math.floor(val));
   },
 // days "d", hours "h", minutes "m" or seconds "s"
   hms: function(val) {
-			return ((val > 518400) ? Math.floor(val/86400)+"d":(val > 21600) ? Math.floor(val/3600)+"h":(val > 360) ? Math.floor(val/60)+"m":val+"s");
+			return ((val > 518400) ? Math.floor(val/86400)+"d":(val > 21600) ? Math.floor(val/3600)+"h":(val > 360) ? Math.floor(val/60)+"m":Math.floor(val)+"s");
   },
   hms_title: function(val) {
 			return ((val > 518400) ? "days":(val > 21600) ? "hours":(val > 360) ? "minutes":"seconds");
