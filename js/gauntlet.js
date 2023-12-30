@@ -4201,7 +4201,7 @@ vartxt.value += "	]\n"
 		 }
 
       if ((by.weapon && this.type.canbeshot && !this.inv) || (by.player && this.type.canbehit && !this.inv) || (by == this) || nuke) {
-			if (by.player) ddone += Math.floor(Math.min(this.health,damage));
+			if (by.player || by.type.player) ddone += Math.floor(Math.min(this.health,damage));
         this.health = Math.max(0, this.health - damage);
 
 			var lvl = Math.max(0, Math.ceil(this.health / 10));
@@ -4308,7 +4308,7 @@ vartxt.value += "	]\n"
     },
 
     hurt: function(damage, by) {
-		if (by.player) ddone += Math.floor(Math.min(this.health,damage));
+		if (by.player || by.type.player) ddone += Math.floor(Math.min(this.health,damage));
       this.health = Math.max(0, this.health - damage);
       if (this.health === 0)
         this.die(by.player ? by : by.weapon && by.type.player ? by.owner : null);
