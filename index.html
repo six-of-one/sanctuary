@@ -264,15 +264,9 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center"></td><td>x <input type="text" style="height:11px;" value="0" size="1" id="posx" title="current cursor position x">y<input type="text" style="height:11px;" value="0" size="1" id="posy" title="current cursor position y"></td></tr>
 <tr><td align="center"></td><td>W<input type="text" style="height:11px;" value="33" size="1" id="lvlw" title="current level width">H<input type="text" style="height:11px;" value="33" size="1" id="lvlh" title="current level height"></td></tr>
 <tr><td align="center"></td><td><select id="edurl" title="url map to use">
-<optgroup label="research levels">
+<optgroup label="research">
 <option value="levels/glevel1r.png">glevel1r</option>
 <option value="levels/glevelZ.png">glevelZ</option>
-</optgroup>
-<optgroup label="g2 levels">
-<option value="levels/g2level1.png">g2level1</option>
-<option value="levels/g2level2.png">g2level2</option>
-<option value="levels/g2level3.png">g2level3</option>
-<option value="levels/g2levelT.png">g2levelT</option>
 </optgroup>
 <optgroup label="g1 levels">
 <option value="levels/glevel0.png">glevel0</option>
@@ -391,19 +385,25 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <option value="levels/glevel113.png">glevel113</option>
 <option value="levels/glevel114.png">glevel114</option>
 </optgroup>
-<optgroup label="g1 treasure rooms">
-<option value="levels/glevel115.png">glevel115 TR</option>
-<option value="levels/glevel116.png">glevel116 TR</option>
-<option value="levels/glevel117.png">glevel117 TR</option>
-<option value="levels/glevel118.png">glevel118 TR</option>
-<option value="levels/glevel119.png">glevel119 TR</option>
-<option value="levels/glevel120.png">glevel120 TR</option>
-<option value="levels/glevel121.png">glevel121 TR</option>
-<option value="levels/glevel122.png">glevel122 TR</option>
-<option value="levels/glevel123.png">glevel123 TR</option>
-<option value="levels/glevel124.png">glevel124 TR</option>
+<optgroup label="g1 treasure">
+<option value="levels/glevel115.png">glevel115</option>
+<option value="levels/glevel116.png">glevel116</option>
+<option value="levels/glevel117.png">glevel117</option>
+<option value="levels/glevel118.png">glevel118</option>
+<option value="levels/glevel119.png">glevel119</option>
+<option value="levels/glevel120.png">glevel120</option>
+<option value="levels/glevel121.png">glevel121</option>
+<option value="levels/glevel122.png">glevel122</option>
+<option value="levels/glevel123.png">glevel123</option>
+<option value="levels/glevel124.png">glevel124</option>
 <option value="levels/glevel124t.png">glevel124t</option>
-<option value="levels/glevel125.png">glevel125 TR</option>
+<option value="levels/glevel125.png">glevel125</option>
+</optgroup>
+<optgroup label="g2 levels">
+<option value="levels/g2level1.png">g2level1</option>
+<option value="levels/g2level2.png">g2level2</option>
+<option value="levels/g2level3.png">g2level3</option>
+<option value="levels/g2levelT.png">g2levelT</option>
 </optgroup>
 <optgroup label="jsgv level">
 <option value="levels/level1.png">level1</option>
@@ -430,6 +430,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <option value="levels/7level.png">7level</option>
 
 </select></td></tr>
+<tr><td align="center"></td><td>F<input type="text" style="height:11px;" value="1" size="1" id="edflr" title="level floor code">W<input type="text" style="height:11px;" value="1" size="1" id="edwal" title="level wall code"></td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lrelod" title="reload level"></td><td title="reload level from selected source(s)" bgcolor="#0000BB">reload level</td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfbuff" title="load level from edit buffer"></td><td title="load level from edit buffer (if stored)" bgcolor="#0000BB">from buffer</td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfmap" title="load level from mapdata (if existing)"></td><td title="load level from mapdata (if existing: levels/*.png)" bgcolor="#0000BB">from mapdata</td></tr>
