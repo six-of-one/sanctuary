@@ -260,8 +260,8 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center" bgcolor="#A0A0A0"><img id="edgfx" src="images/oltrs.gif" style="width:24px" title="selected item image"></td><td bgcolor="#A0A0A0"><input type="text" style="height:11px" value="0x8070" size="7" id="edhcc" title="current cursor item hex color code">
 <input type="text" style="height:11px; display:none" value="17" size="1" id="edsx" title="current cursor item sx ref"><input type="text" style="height:11px; display:none" value="10" size="1" id="edsy" title="current cursor item sy ref">
 </td></tr>
-<tr><td align="center"><input type="checkbox" id="creset" title="reset cursor edit set" onClick="lded(-1,0,0,'images/1x1.png')"></td><td title="reset cursor edit set to basic: treasure, food [bottle], potion, key, door, std wall, exit">reset</td></tr>
-<tr><td align="center"></td><td>x <input type="text" style="height:11px;" value="0" size="1" id="posx" title="current cursor position x">y<input type="text" style="height:11px;" value="0" size="1" id="posy" title="current cursor position y"></td></tr>
+<tr><td align="center" bgcolor="#A0A0A0"><input type="checkbox" id="creset" title="reset cursor edit set" onClick="lded(-1,0,0,'images/1x1.png')"></td><td title="reset cursor edit set to basic: treasure, food [bottle], potion, key, door, std wall, exit" bgcolor="#A0A0A0">reset</td></tr>
+<tr><td align="center" bgcolor="#A0A0A0"></td><td bgcolor="#A0A0A0">x <input type="text" style="height:11px;" value="0" size="1" id="posx" title="current cursor position x">y<input type="text" style="height:11px;" value="0" size="1" id="posy" title="current cursor position y"></td></tr>
 <tr><td align="center"></td><td>W<input type="text" style="height:11px;" value="33" size="1" id="lvlw" title="current level width">H<input type="text" style="height:11px;" value="33" size="1" id="lvlh" title="current level height"></td></tr>
 <tr><td align="center"></td><td><select id="edurl" title="url map to use">
 <optgroup label="research">
@@ -430,7 +430,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <option value="levels/7level.png">7level</option>
 
 </select></td></tr>
-<tr><td align="center"></td><td>F<input type="text" style="height:11px;" value="1" size="1" id="edflr" title="level floor code">W<input type="text" style="height:11px;" value="1" size="1" id="edwal" title="level wall code"></td></tr>
+<tr><td align="center"></td><td>F<input type="text" style="height:11px;" value="" size="1" id="edflr" title="level floor code">W<input type="text" style="height:11px;" value="" size="1" id="edwal" title="level wall code"></td></tr>
 
 <tr><td align="center"></td><td><select id="edgflr" title="gfx - g?floor* to use">
 <optgroup label="f:g1">
@@ -815,6 +815,10 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <option value="gfx/d1wall5.png">d1wall5</option>
 </optgroup>
 </select></td></tr>
+<tr><td align="center"><input type="checkbox" id="ednornd" title="no random load this level"></td><td title="no random load this level">no random</td></tr>
+<tr><td align="center"><input type="checkbox" id="edunpinx" title="unpin X zero line"></td><td title="unpin X zero line">unpin X</td></tr>
+<tr><td align="center"><input type="checkbox" id="edunpiny" title="unpin Y zero line"></td><td title="unpin Y zero line">unpin Y</td></tr>
+<tr><td align="center"></td><td title="help display for level intro screen">help:<input type="text" style="height:11px" value="" size="7" id="edhelp" title="help display for this level"></td></tr>
 
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lrelod" title="reload level"></td><td title="reload level from selected source(s)" bgcolor="#0000BB">reload level</td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfbuff" title="load level from edit buffer"></td><td title="load level from edit buffer (if stored)" bgcolor="#0000BB">from buffer</td></tr>
