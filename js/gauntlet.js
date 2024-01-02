@@ -5328,9 +5328,10 @@ var txsv = ":";
 		}
       if ((frame % (FPS/0.25)) === 0) {
 // stats panel
+			var dtk = dtake - idtake;
 			document.getElementById("odedsa").innerHTML  = Game.Math.mku(deds  - ideds);
 			document.getElementById("odeala").innerHTML  = Game.Math.mku(ddone - iddone);
-			document.getElementById("odtaka").innerHTML  = Game.Math.mku(dtake - idtake);
+			document.getElementById("odtaka").innerHTML  = Game.Math.mku(dtk);
 			document.getElementById("odauta").innerHTML  = Game.Math.mku(dauto - idauto);
 			document.getElementById("oheala").innerHTML  = Game.Math.mku(pheal - ipheal);
 
@@ -5353,7 +5354,7 @@ var txsv = ":";
 			document.getElementById("oloba").innerHTML   = Game.Math.mku(glob - iglob);
 			document.getElementById("odetha").innerHTML  = Game.Math.mku(gdeth - igdeth);
 			document.getElementById("ocoinsa").innerHTML = Game.Math.mku(this.droppedcoins);
-			document.getElementById("oscord").innerHTML = Game.Math.mku(this.score / (dtake - idtake) );
+			document.getElementById("oscord").innerHTML = Game.Math.mku(dtk > 0 ? this.score / dtk:this.score);
 			document.getElementById("oscort").innerHTML = Game.Math.mku(this.score / heartbeet);
 			}
 
