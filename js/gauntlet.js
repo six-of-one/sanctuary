@@ -118,6 +118,8 @@ Gauntlet = function() {
 	WSCORE = [ ],
 	VSCORE = [ ],
 	ESCORE = [ ],
+// curr player sig
+	ptag,
 // g1 custom walls diff from main wall mapped on EXLOB (special handle)
 // invisible wall & shotable invisible are in INVWALSY, item 0 = INVWALA (0 shadow)
 //			G1WALL = [	0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 26	],
@@ -1765,7 +1767,9 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 				document.getElementById("valscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">VALKYRIES</TD></TR>';
 				document.getElementById("elfscor").innerHTML = '<TR><TD id="stitlfn" colspan="3" style="text-align: center; width:75%;">ELVES</TD></TR>';
 
+		var sinit = false, md = 4;
 			if (ZSCORE[0] == undefined) {
+					sinit = true;
 					ZSCORE[0] = 1;
 					ZSCORE[1] = [ ]; ZSCORE[2] = [ ]; ZSCORE[3] = [ ]; ZSCORE[4] = [ ]; ZSCORE[5] = [ ]; ZSCORE[6] = [ ]; ZSCORE[7] = [ ]; ZSCORE[8] = [ ]; ZSCORE[9] = [ ]; ZSCORE[10] = [ ]; 
 					WSCORE[1] = [ ]; WSCORE[2] = [ ]; WSCORE[3] = [ ]; WSCORE[4] = [ ]; WSCORE[5] = [ ]; WSCORE[6] = [ ]; WSCORE[7] = [ ]; WSCORE[8] = [ ]; WSCORE[9] = [ ]; WSCORE[10] = [ ]; 
@@ -1781,7 +1785,21 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 					ESCORE[1][1] = "ED "; ESCORE[2][1] = "BF "; ESCORE[3][1] = "LVR"; ESCORE[4][1] = "ELF"; ESCORE[5][1] = "RJF"; ESCORE[6][1] = "GEL"; ESCORE[7][1] = "SGM"; ESCORE[8][1] = "SMO"; ESCORE[9][1] = "AJM"; ESCORE[10][1] = "CJ ";
 				}
 // if given ref, load top 4
+				if (sloc != undefined) ref = sloc;
 				if (ref != undefined) {
+					if (sinit) // a score init happned - move scores down for top 4
+						for (var i = scorviewmax; i > 0; i--)
+							if (i + md <= scorviewmax) {
+								ZSCORE[i + md][0] = ZSCORE[i][0];
+								ZSCORE[i + md][1] = ZSCORE[i][1];
+								WSCORE[i + md][0] = WSCORE[i][0];
+								WSCORE[i + md][1] = WSCORE[i][1];
+								VSCORE[i + md][0] = VSCORE[i][0];
+								VSCORE[i + md][1] = VSCORE[i][1];
+								ESCORE[i + md][0] = ESCORE[i][0];
+								ESCORE[i + md][1] = ESCORE[i][1];
+							}
+
 					ZSCORE[1][0] = to.number(ref.storage[STORAGE.Z1],19830);
 					ZSCORE[1][1] = ref.storage[STORAGE.NZ1];
 					WSCORE[1][0] = to.number(ref.storage[STORAGE.W1],10000);
@@ -1826,11 +1844,25 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 				for (var i = 1; i <= scorviewmax; i++)
 				{
 					document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+WSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+WSCORE[i][0]+'</TD></TR>';
+					document.getElementById("oscor"+i).innerHTML = ZSCORE[i][0];
+					document.getElementById("osig"+i).innerHTML = ZSCORE[i][1];
 					document.getElementById("wizscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ZSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+ZSCORE[i][0]+'</TD></TR>';
 					document.getElementById("valscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+VSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+VSCORE[i][0]+'</TD></TR>';
 					document.getElementById("elfscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ESCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+ESCORE[i][0]+'</TD></TR>';
 				}
 
+		};
+
+// inject player score into score table for char live if displ active
+	function z_injscortabl(curr) {
+				var ij = 11, inj = false;
+				ptag = document.getElementById("ptag").value;
+				while (ij > 1) {
+					if (curr < ZSCORE[ij - 1][0]) { document.getElementById("oscor"+i).innerHTML = curr; document.getElementById("osig"+i).innerHTML = ptag; inj = true; }
+					else {document.getElementById("oscor"+i).innerHTML = ZSCORE[ij - 1][0]; document.getElementById("osig"+i).innerHTML = ZSCORE[ij - 1][1]; }
+					ij--;
+				}
+				if (!inj) document.getElementById("oscor"+i).innerHTML = curr; document.getElementById("osig"+i).innerHTML = ptag;
 		};
 
 // loop in score for each score table, sliding scores down as it goes
@@ -5355,6 +5387,11 @@ var txsv = ":";
 			document.getElementById("ocoinsa").innerHTML = Game.Math.mku(this.droppedcoins);
 			document.getElementById("oscord").innerHTML = Game.Math.mku(dtk > 0 ? this.score / dtk:this.score);
 			document.getElementById("oscort").innerHTML = Game.Math.mku(this.score / heartbeet);
+
+// live score table injector
+			if (document.getElementById("shoscor").checked && this.score > 0) {
+					if (this.type.name == "wizard") z_injscortabl(this.score);
+					}
 			}
 
       if ((frame % (FPS/1)) === 0) {
