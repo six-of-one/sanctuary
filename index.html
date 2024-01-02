@@ -120,6 +120,7 @@
 
 &nbsp;&nbsp;&nbsp;
 stats: <input type="checkbox" checked="true" id="shostat" name="shostats" value="1" title="check to show stats live - panel appears left of maze" onClick="panlswap('statspat','shostat')">
+scores: <input type="checkbox" checked="true" id="shoscor" name="shoscors" value="1" title="check to show active char score table - panel appears right of scoreboard" onClick="panlswap('scorspat','shoscor')">
 options: <input type="checkbox" checked="true" id="shoopt" name="shoopts" value="1" title="check to show options - panel appears right of scoreboard" onClick="panlswap('optspat','shoopt')">
 dev: <input type="checkbox" id="shodev" name="shodevs" value="1" title="check to show developer mode - panel appears right of scoreboard" onClick="panlswap('devspat','shodev')">
 editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check to show maze editor - panel appears left amd right" onClick="panlswap('edspat','shoed')">
@@ -159,13 +160,32 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="damage taken">damage</td><td><label id="odtaka">...</label></td><td><label id="odtaks">...</label></td></tr>
 <tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="damage from health count down">health tick</td><td><label id="odauta">...</label></td><td><label id="odauts">...</label></td></tr>
 <tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="health added">health+</td><td><label id="oheala">...</label></td><td><label id="oheals">...</label></td></tr>
-<tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="score per damage, score per sec">score/ d - s</td><td><label id="oscord" title="score per unit of damage">...</label></td><td><label id="oscort" title="score per unit of time">...</label></td></tr>
+                                                                                                                <tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="score per damage, score per sec">score/ d - s</td><td><label id="oscord" title="score per unit of damage">...</label></td><td><label id="oscort" title="score per unit of time">...</label></td></tr>
 
 <tr><td><img src="images/olcoin.png" style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="game start is 1 coin, and each addt. +2000 health coin">coins</td><td><label id="ocoinsa">...</label></td><td><label id="ocoins">...</label></td></tr>
 <tr><td><img src="images/olhg.png"   style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="time for adventure, scales secs to mins to hours to days, hover stat for declaration">length</td><td><label id="osecsa" title="...">...</label></td><td><label id="osecs" title="...">...</label></td></tr>
 
 </TABLE>
   </div>
+<div id='scorspat' style="position:absolute;right:-190px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
+<TABLE>
+<tr><td title="click gear or uncheck 'options' on instruction panel at bottom to hide"><img src="images/olgear.png" style="width:16px" onClick="socrgear()"></td><td>live </td><td style="text-align:right;padding:0px 3px"><label title="live score table track for selected char">scores</label></td></tr>
+<tr><td><img src="images/olwiz.png" style="width:16px" id="ochar"></td><td>...</td><td><label id="ochar" style="font:bold">Wizards</label></td></tr>
+<tr><td>1</td><td><label id="osig1">.z.</label></td><td><label id="oscor1">2,000,000</label></td></tr>
+<tr><td>2</td><td><label id="osig2">HAL</label></td><td><label id="oscor2">80000</label></td></tr>
+<tr><td>3</td><td><label id="osig3">JHP</label></td><td><label id="oscor3">76000</label></td></tr>
+<tr><td>4</td><td><label id="osig4">D P</label></td><td><label id="oscor4">72000</label></td></tr>
+<tr><td>5</td><td><label id="osig5">DUM</label></td><td><label id="oscor5">68000</label></td></tr>
+<tr><td>6</td><td><label id="osig6">J P</label></td><td><label id="oscor6">64000</label></td></tr>
+<tr><td>7</td><td><label id="osig7">BF </label></td><td><label id="oscor7">60000</label></td></tr>
+<tr><td>8</td><td><label id="osig8">PMC</label></td><td><label id="oscor8">56000</label></td></tr>
+<tr><td>9</td><td><label id="osig9">D H</label></td><td><label id="oscor9">52000</label></td></tr>
+<tr><td>10</td><td><label id="osig10">DFT</label></td><td><label id="oscor10">48000</label></td></tr>
+<tr><td></td><td><label id="osig11"></label></td><td><label id="oscor11"></label></td></tr>
+
+</TABLE>
+  </div>
+
 <div id='optspat' style="position:absolute;right:-190px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
 <TABLE>
 <tr><td title="click gear or uncheck 'options' on instruction panel at bottom to hide"><img src="images/olgear.png" style="width:16px" onClick="optgear()"></td><td style="text-align:right;padding:0px 3px"><label title="game options config: difficulty, start level, tutorial cfg, maze advance, loader text box appears below instructions">options</label></td></tr>
@@ -1181,18 +1201,19 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
   <script>
   function vout() {var vartxt = document.getElementById("varout");vartxt.value = document.cookie.replace(/; /gi, ";\n"); vartxt.value += "\n"; vartxt.style.display = "block"}
   function panlswap(panlref, cbref) {var panl = document.getElementById(panlref); var cb = document.getElementById(cbref); cb.checked ? panl.style.display = "block":panl.style.display = "none";
-												if (panlref == "edspat"  && panl.style.display == "block") { devgear(); optgear(); statgear(); document.getElementById("edspatr").style.display = "block"; }
+												if (panlref == "edspat"  && panl.style.display == "block") { devgear(); optgear(); statgear(); socrgear(); document.getElementById("edspatr").style.display = "block"; }
 												if (panlref == "edspat"  && panl.style.display == "none") { document.getElementById("edspatr").style.display = "none"; }
-												if (panlref == "devspat" && panl.style.display == "block") { optgear(); edgear(); }
-												if (panlref == "optspat" && panl.style.display == "block") { devgear(); edgear(); }
+												if (panlref == "devspat" && panl.style.display == "block") { optgear(); edgear(); socrgear(); }
+												if (panlref == "optspat" && panl.style.display == "block") { devgear(); edgear(); socrgear(); }
 												if (panlref == "statspat" && panl.style.display == "block") { edgear(); }
 												}
   function statgear() {var cb = document.getElementById("shostat"); cb.checked = false; panlswap('statspat','shostat'); }
+  function socrgear() {var cb = document.getElementById("shoscor"); cb.checked = false; panlswap('scorspat','shoscor'); }
   function optgear() {var cb = document.getElementById("shoopt"); cb.checked = false; panlswap('optspat','shoopt'); }
   function devgear() {var cb = document.getElementById("shodev"); cb.checked = false; panlswap('devspat','shodev'); }
   function edgear() {var cb = document.getElementById("shoed"); cb.checked = false; panlswap('edspat','shoed'); panlswap('edspatr','shoed'); }
   function lded(hcc, sx, sy, gfx) { document.getElementById("edgfx").src = gfx; document.getElementById("edhcc").value = hcc; document.getElementById("edsx").value = sx; document.getElementById("edsy").value = sy; document.getElementById("edhcc").title = "current cursor item "+hcc+": sx = "+sx+", sy = "+sy; if (hcc == -1) document.getElementById("creset").checked = false;}
-  devgear(); optgear(); statgear();
+  devgear(); optgear(); edgear();
     Game.run(Gauntlet);
   </script>
 <noscript> Final warning buddy - this browser is not running JavaScript!</noscript>
