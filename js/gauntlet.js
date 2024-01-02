@@ -1783,6 +1783,9 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 					VSCORE[1][1] = "EDL"; VSCORE[2][1] = "EAR"; VSCORE[3][1] = "KEN"; VSCORE[4][1] = "MV "; VSCORE[5][1] = "CAL"; VSCORE[6][1] = "MDN"; VSCORE[7][1] = "AMA"; VSCORE[8][1] = "ZON"; VSCORE[9][1] = "PCT"; VSCORE[10][1] = "REZ";
 					ESCORE[1][0] = 8000;  ESCORE[2][0] = 7600;  ESCORE[3][0] = 7200;  ESCORE[4][0] = 6800;  ESCORE[5][0] = 6400;  ESCORE[6][0] = 6000;  ESCORE[7][0] = 5600;  ESCORE[8][0] = 5200;  ESCORE[9][0] = 4800;  ESCORE[10][0] = 4400;
 					ESCORE[1][1] = "ED "; ESCORE[2][1] = "BF "; ESCORE[3][1] = "LVR"; ESCORE[4][1] = "ELF"; ESCORE[5][1] = "RJF"; ESCORE[6][1] = "GEL"; ESCORE[7][1] = "SGM"; ESCORE[8][1] = "SMO"; ESCORE[9][1] = "AJM"; ESCORE[10][1] = "CJ ";
+// default before play is currenlty wizrad table
+					document.getElementById("oico").src = "images/olwiz.png";
+					document.getElementById("ochar").innerHTML = "Wizards";
 				}
 // if given ref, load top 4
 				if (sloc != undefined) ref = sloc;
@@ -1844,13 +1847,14 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 				for (var i = 1; i <= scorviewmax; i++)
 				{
 					document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+WSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+WSCORE[i][0]+'</TD></TR>';
-					document.getElementById("oscor"+i).innerHTML = ZSCORE[i][0];
-					document.getElementById("osig"+i).innerHTML = ZSCORE[i][1];
+					if (sinit) {
+						document.getElementById("oscor"+i).innerHTML = ZSCORE[i][0];
+						document.getElementById("osig"+i).innerHTML = ZSCORE[i][1];
+						}
 					document.getElementById("wizscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ZSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+ZSCORE[i][0]+'</TD></TR>';
 					document.getElementById("valscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+VSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+VSCORE[i][0]+'</TD></TR>';
 					document.getElementById("elfscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+ESCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+ESCORE[i][0]+'</TD></TR>';
 				}
-
 		};
 
 // inject player score into score table for char live if displ active
@@ -1870,7 +1874,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 	function w_injscortabl(curr) {
 				var ij = 11, inj = false;
 				ptag = document.getElementById("ptag").value;
-				document.getElementById("oico").src = "images/olwiz.png";
+				document.getElementById("oico").src = "images/olwar.png";
 				document.getElementById("ochar").innerHTML = "Warriors";
 				while (ij > 1) {
 					if (inj) {document.getElementById("oscor"+ij).innerHTML = WSCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = WSCORE[ij][1]; }
@@ -1883,7 +1887,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 	function v_injscortabl(curr) {
 				var ij = 11, inj = false;
 				ptag = document.getElementById("ptag").value;
-				document.getElementById("oico").src = "images/olwiz.png";
+				document.getElementById("oico").src = "images/olval.png";
 				document.getElementById("ochar").innerHTML = "Valkyries";
 				while (ij > 1) {
 					if (inj) {document.getElementById("oscor"+ij).innerHTML = VSCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = VSCORE[ij][1]; }
@@ -1896,7 +1900,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 	function e_injscortabl(curr) {
 				var ij = 11, inj = false;
 				ptag = document.getElementById("ptag").value;
-				document.getElementById("oico").src = "images/olwiz.png";
+				document.getElementById("oico").src = "images/olelf.png";
 				document.getElementById("ochar").innerHTML = "Elves";
 				while (ij > 1) {
 					if (inj) {document.getElementById("oscor"+ij).innerHTML = ESCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = ESCORE[ij][1]; }
