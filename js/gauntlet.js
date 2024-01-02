@@ -5274,13 +5274,12 @@ var txsv = ":";
     hurt: function(damage, by, automatic) {
 		if (automatic || (this.linvuln < 1))
       if (this.active() && !DEBUG.NODAMAGE) {
-/// TEST - update ?
-// pre armor reduction damage
+
+// pre armor reduction damage for HPS display
 				prearmd += damage;
-/// TEST - update ?
 
         damage = automatic ? damage : damage/(this.type.armor + this.xarmor);
-/// TEST - update ?
+// dps meter - hurt per sec, keep this
 				if (document.getElementById("sdps").checked)
 				{
 					var hpst = document.getElementById("hpsout").title;
@@ -5288,7 +5287,7 @@ var txsv = ":";
 					if (document.getElementById("sdphm").checked) dphm = 30;
 					if (dpstim < heartbeet) {
 						document.getElementById("hpsout").value = Math.ceil(dpsacc);
-						if (hpst.length > 360) hpst = "dps: ";
+						if (hpst.length > 360) hpst = "hps: ";
 						document.getElementById("hpsout").title = hpst + " : "+Math.ceil(dpsacc)+" pa:"+Math.ceil(prearmd);
 						dpsacc = 0;
 						prearmd = 0;
@@ -5299,7 +5298,7 @@ var txsv = ":";
 						dpsacc += damage;
 					}
 				}
-/// TEST - remove
+
 		  if (!automatic) dtake += Math.floor(Math.min(this.health,damage));
         this.health = Math.max(0, this.health - damage);
         if (!automatic) {
