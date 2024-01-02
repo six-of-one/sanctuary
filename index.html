@@ -1208,6 +1208,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 												if (panlref == "devspat" && panl.style.display == "block") { optgear(); edgear(); socrgear(); }
 												if (panlref == "optspat" && panl.style.display == "block") { devgear(); edgear(); socrgear(); }
 												if (panlref == "statspat" && panl.style.display == "block") { edgear(); }
+												if (panlref == "scorspat" && panl.style.display == "block") { edgear(); devgear(); optgear(); }
 												}
   function statgear() {var cb = document.getElementById("shostat"); cb.checked = false; panlswap('statspat','shostat'); }
   function socrgear() {var cb = document.getElementById("shoscor"); cb.checked = false; panlswap('scorspat','shoscor'); }
