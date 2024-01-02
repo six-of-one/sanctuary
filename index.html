@@ -170,7 +170,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <div id='scorspat' style="position:absolute;right:-200px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
 <TABLE>
 <tr><td title="click gear or uncheck 'options' on instruction panel at bottom to hide"><img src="images/olgear.png" style="width:16px" onClick="socrgear()"></td><td>live </td><td style="text-align:right;padding:0px 3px"><label title="live score table track for selected char">scores</label></td></tr>
-<tr><td><img src="images/olwiz.png" style="width:16px" id="ochar"></td><td>...</td><td><label id="ochar" style="font:bold">Wizards</label></td></tr>
+<tr><td><img src="images/olwiz.png" style="width:16px" id="oico"></td><td>...</td><td><label id="ochar" style="font-weight:bold">Wizards</label></td></tr>
 <tr><td>1</td><td><label id="osig1">.z.</label></td><td><label id="oscor1">2,000,000</label></td></tr>
 <tr><td>2</td><td><label id="osig2">HAL</label></td><td><label id="oscor2">80000</label></td></tr>
 <tr><td>3</td><td><label id="osig3">JHP</label></td><td><label id="oscor3">76000</label></td></tr>
@@ -183,7 +183,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td>10</td><td><label id="osig10">DFT</label></td><td><label id="oscor10">48000</label></td></tr>
 <tr><td></td><td><label id="osig11"></label></td><td><label id="oscor11"></label></td></tr>
 <tr><td colspan="3"><hr></td></tr>
-<tr><td></td><td title="player signature on high score - 6 character max">sig:</td><td><input type="text" style="height:11px" value="..." size="6" maxlength="6" id="ptag" title="player signature on high score - 6 character max"></td></tr>
+<tr><td></td><td title="player signature on high score - 6 character max">sig:</td><td><input type="text" style="height:11px" value="..." size="6" maxlength="6" pattern="[A-Z._ ]" id="ptag" title="player signature on high score - 6 character max"></td></tr>
 
 </TABLE>
   </div>

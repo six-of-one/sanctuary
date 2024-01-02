@@ -1857,12 +1857,54 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 	function z_injscortabl(curr) {
 				var ij = 11, inj = false;
 				ptag = document.getElementById("ptag").value;
+				document.getElementById("oico").src = "images/olwiz.png";
+				document.getElementById("ochar").innerHTML = "Wizards";
 				while (ij > 1) {
-					if (curr < ZSCORE[ij - 1][0]) { document.getElementById("oscor"+i).innerHTML = curr; document.getElementById("osig"+i).innerHTML = ptag; inj = true; }
-					else {document.getElementById("oscor"+i).innerHTML = ZSCORE[ij - 1][0]; document.getElementById("osig"+i).innerHTML = ZSCORE[ij - 1][1]; }
+					if (inj) {document.getElementById("oscor"+ij).innerHTML = ZSCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = ZSCORE[ij][1]; }
+					else if (curr < ZSCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = curr; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
+					else {document.getElementById("oscor"+ij).innerHTML = ZSCORE[ij - 1][0]; document.getElementById("osig"+ij).innerHTML = ZSCORE[ij - 1][1]; }
 					ij--;
 				}
-				if (!inj) document.getElementById("oscor"+i).innerHTML = curr; document.getElementById("osig"+i).innerHTML = ptag;
+				if (!inj) { document.getElementById("oscor"+ij).innerHTML = curr; document.getElementById("osig"+ij).innerHTML = ptag; }
+		};
+	function w_injscortabl(curr) {
+				var ij = 11, inj = false;
+				ptag = document.getElementById("ptag").value;
+				document.getElementById("oico").src = "images/olwiz.png";
+				document.getElementById("ochar").innerHTML = "Warriors";
+				while (ij > 1) {
+					if (inj) {document.getElementById("oscor"+ij).innerHTML = WSCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = WSCORE[ij][1]; }
+					else if (curr < WSCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = curr; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
+					else {document.getElementById("oscor"+ij).innerHTML = WSCORE[ij - 1][0]; document.getElementById("osig"+ij).innerHTML = WSCORE[ij - 1][1]; }
+					ij--;
+				}
+				if (!inj) { document.getElementById("oscor"+ij).innerHTML = curr; document.getElementById("osig"+ij).innerHTML = ptag; }
+		};
+	function v_injscortabl(curr) {
+				var ij = 11, inj = false;
+				ptag = document.getElementById("ptag").value;
+				document.getElementById("oico").src = "images/olwiz.png";
+				document.getElementById("ochar").innerHTML = "Valkyries";
+				while (ij > 1) {
+					if (inj) {document.getElementById("oscor"+ij).innerHTML = VSCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = VSCORE[ij][1]; }
+					else if (curr < VSCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = curr; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
+					else {document.getElementById("oscor"+ij).innerHTML = VSCORE[ij - 1][0]; document.getElementById("osig"+ij).innerHTML = VSCORE[ij - 1][1]; }
+					ij--;
+				}
+				if (!inj) { document.getElementById("oscor"+ij).innerHTML = curr; document.getElementById("osig"+ij).innerHTML = ptag; }
+		};
+	function e_injscortabl(curr) {
+				var ij = 11, inj = false;
+				ptag = document.getElementById("ptag").value;
+				document.getElementById("oico").src = "images/olwiz.png";
+				document.getElementById("ochar").innerHTML = "Elves";
+				while (ij > 1) {
+					if (inj) {document.getElementById("oscor"+ij).innerHTML = ESCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = ESCORE[ij][1]; }
+					else if (curr < ESCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = curr; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
+					else {document.getElementById("oscor"+ij).innerHTML = ESCORE[ij - 1][0]; document.getElementById("osig"+ij).innerHTML = ESCORE[ij - 1][1]; }
+					ij--;
+				}
+				if (!inj) { document.getElementById("oscor"+ij).innerHTML = curr; document.getElementById("osig"+ij).innerHTML = ptag; }
 		};
 
 // loop in score for each score table, sliding scores down as it goes
@@ -3130,12 +3172,16 @@ var lvu = document.getElementById("flvl").value;
 		if (heartbeet > chtime) createCookie("chartm_"+this.player.type.name,heartbeet,7777);
 
 		if (this.player.score > 8000) {
-/// TEST - remove
-			var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ_"; // 1234567890._ ";
-			var res = "";
-				 for(var i = 0; i < 3; i++) {
-			var rnd = Math.floor(Math.random() * ablist.length);
-				 res = res + ablist.charAt(rnd); }
+	var	res = document.getElementById("ptag").value;
+// player left default -- randomize it
+// bot players can also use
+			if (res == "...") {
+					res = "";
+			var 	ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ_"; // 1234567890._ ";
+					for(var i = 0; i < 3; i++) {
+			var	rnd = Math.floor(Math.random() * ablist.length);
+					res = res + ablist.charAt(rnd); }
+			 }
 
 				 if (this.player.type.name == "wizard") setscorez((this.player.score / this.player.droppedcoins), res);
 				 if (this.player.type.name == "warrior") setscorew((this.player.score / this.player.droppedcoins), res);
@@ -5391,6 +5437,9 @@ var txsv = ":";
 // live score table injector
 			if (document.getElementById("shoscor").checked && this.score > 0) {
 					if (this.type.name == "wizard") z_injscortabl(this.score);
+					if (this.type.name == "warrior") w_injscortabl(this.score);
+					if (this.type.name == "valkyrie") v_injscortabl(this.score);
+					if (this.type.name == "elf") e_injscortabl(this.score);
 					}
 			}
 
