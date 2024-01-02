@@ -159,6 +159,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="damage taken">damage</td><td><label id="odtaka">...</label></td><td><label id="odtaks">...</label></td></tr>
 <tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="damage from health count down">health tick</td><td><label id="odauta">...</label></td><td><label id="odauts">...</label></td></tr>
 <tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="health added">health+</td><td><label id="oheala">...</label></td><td><label id="oheals">...</label></td></tr>
+<tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="score per damage, score per sec">score/ d - s</td><td><label id="oscord">...</label></td><td><label id="oscort">...</label></td></tr>
 
 <tr><td><img src="images/olcoin.png" style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="game start is 1 coin, and each addt. +2000 health coin">coins</td><td><label id="ocoinsa">...</label></td><td><label id="ocoins">...</label></td></tr>
 <tr><td><img src="images/olhg.png"   style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="time for adventure, scales secs to mins to hours to days, hover stat for declaration">length</td><td><label id="osecsa" title="...">...</label></td><td><label id="osecs" title="...">...</label></td></tr>
@@ -254,7 +255,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 
 </TABLE>
   </div>
-<div id='edspatr' style="position:absolute;right:-215px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
+<div id='edspatr' style="position:absolute;right:-207px; top:10px;font-size:10pt;background-color:rgba(0,0,0,0.7);padding: 2px 5px;">
 <TABLE>
 <tr><td title="click gear or uncheck 'editar' on instruction panel at bottom to hide"><img src="images/olgear.png" style="width:16px" onClick="edgear()"></td><td style="text-align:right;padding:0px 3px"><label title="editar controls & testing">maze editor</label></td></tr>
 <tr><td align="center"><input type="checkbox" id="svtext" title="load all saveables into bottom page text box"></td><td title="load all saveables into bottom page text box">save all</td></tr>
@@ -265,7 +266,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center" bgcolor="#A0A0A0"><input type="checkbox" id="creset" title="reset cursor edit set" onClick="lded(-1,0,0,'images/1x1.png')"></td><td title="reset cursor edit set to basic: treasure, food [bottle], potion, key, door, std wall, exit" bgcolor="#A0A0A0" style="color:black">reset</td></tr>
 <tr><td align="center" bgcolor="#A0A0A0"></td><td bgcolor="#A0A0A0" style="color:black">x <input type="text" style="height:11px;" value="0" size="1" id="posx" title="current cursor position x">y<input type="text" style="height:11px;" value="0" size="1" id="posy" title="current cursor position y"></td></tr>
 <tr><td align="center"></td><td>W<input type="text" style="height:11px;" value="33" size="1" id="lvlw" title="current level width">H<input type="text" style="height:11px;" value="33" size="1" id="lvlh" title="current level height"></td></tr>
-<tr><td align="center"></td><td><select id="edurl" title="url map to use">
+<tr><td align="center"></td><td><select id="edurl" title="url map to use" style="max-width:107px">
 <optgroup label="research">
 <option value="levels/glevel1r.png">glevel1r</option>
 <option value="levels/glevelZ.png">glevelZ</option>
@@ -434,7 +435,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 </select></td></tr>
 <tr><td align="center"></td><td>F<input type="text" style="height:11px;" value="" size="1" id="edflr" title="level floor code">W<input type="text" style="height:11px;" value="" size="1" id="edwal" title="level wall code"></td></tr>
 
-<tr><td align="center"></td><td><select id="edgflr" title="gfx - g?floor* to use">
+<tr><td align="center"></td><td><select id="edgflr" title="gfx - g?floor* to use" style="max-width:107px">
 <optgroup label="f:g1">
 <option value="gfx/g1floor0.jpg">g1floor0</option>
 <option value="gfx/g1floor0z.jpg">g1floor0z</option>
@@ -669,7 +670,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 </optgroup>
 
 </select></td></tr>
-<tr><td align="center"></td><td><select id="edgwal" title="gfx - g?wall* to use">
+<tr><td align="center"></td><td><select id="edgwal" title="gfx - g?wall* to use" style="max-width:107px">
 <optgroup label="w:g1">
 <option value="gfx/g1wall0.jpg">g1wall0</option>
 <option value="gfx/g1wall1.jpg">g1wall1</option>
@@ -820,14 +821,14 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center"><input type="checkbox" id="ednornd" title="no random load this level"></td><td title="no random load this level - save in buffer, this is not dev override">no random</td></tr>
 <tr><td align="center"><input type="checkbox" id="edunpinx" title="unpin X zero line"></td><td title="unpin X zero line - save in buffer, this is not dev override">unpin X</td></tr>
 <tr><td align="center"><input type="checkbox" id="edunpiny" title="unpin Y zero line"></td><td title="unpin Y zero line - save in buffer, this is not dev override">unpin Y</td></tr>
-<tr><td align="center"></td><td title="help display for level intro screen">help:<input type="text" style="height:11px" value="" size="7" id="edhelp" title="help display for this level"></td></tr>
+<tr><td colspan="2" title="help display for level intro screen">help: <input type="text" style="height:11px" value="" size="9" id="edhelp" title="help display for this level"></td></tr>
 
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lrelod" title="reload level"></td><td title="reload level from selected source(s)" bgcolor="#0000BB">reload level</td></tr>
-<tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfthis" title="load level from valid # or levels/*png"></td><td title="load level from valid # or levels/*png" bgcolor="#0000BB">#<input type="text" style="height:11px" value="" size="2" id="idxlvl" title="level number 0 - [max]">:<input type="text" style="height:11px" value="" size="4" id="fillvl" title="levels/*png"></td></tr>
+<tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfthis" title="load level from valid # or levels/*png"></td><td title="load level from valid # or levels/*png" bgcolor="#0000BB">#<input type="text" style="height:11px" value="" size="1" id="idxlvl" title="level number 0 - [max]">:<input type="text" style="height:11px" value="" size="4" id="fillvl" title="levels/*png"></td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfbuff" title="load level from edit buffer EDBUF[]  "></td><td title="load level from edit buffer (EDBUF[] if stored)" bgcolor="#0000BB">from buffer</td></tr>
-<tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfovr" title="load level from override (if existing: OVRLOAD[level num])"></td><td title="load level from override (if existing: OVRLOAD[level num] )" bgcolor="#0000BB">from OVR:<input type="text" style="height:11px" value="" size="3" id="idxovr" title="optional: use this OVR level num index"></td></tr>
+<tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfovr" title="load level from override (if existing: OVRLOAD[level num])"></td><td title="load level from override (if existing: OVRLOAD[level num] )" bgcolor="#0000BB">frm OVR:<input type="text" style="height:11px" value="" size="2" id="idxovr" title="optional: use this OVR level num index"></td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfmap" title="load level from mapdata (current loaded: levels/*.png)"></td><td title="load level from mapdata (current loaded: levels/*.png)" bgcolor="#0000BB">from mapdata</td></tr>
-<tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfsvr" title="load level include save-reload data (if existing: SVRLOAD[] matching mapdata *png name)"></td><td title="load level include save-reload data (if existing: SVRLOAD[] matching mapdata *png name)" bgcolor="#0000BB">incl SVR:<input type="text" style="height:11px" value="" size="3" id="idxsvr" title="optional: use this SVR array index - you have to know this from the load file!"></td></tr>
+<tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfsvr" title="load level include save-reload data (if existing: SVRLOAD[] matching mapdata *png name)"></td><td title="load level include save-reload data (if existing: SVRLOAD[] matching mapdata *png name)" bgcolor="#0000BB">incl SVR:<input type="text" style="height:11px" value="" size="2" id="idxsvr" title="optional: use this SVR array index - you have to know this from the load file!"></td></tr>
 <tr><td align="center"><input type="checkbox" id="ledbuf" title="level into edit buffer"></td><td title="copy level to edit buffer">level > bufffer</td></tr>
 <tr><td align="center"><input type="checkbox" id="clrbuf" title="clear level in edit buffer"></td><td title="clear level in edit buffer (has surround walls unless unpinned)">clear bufffer</td></tr>
 <tr><td align="center"><input type="checkbox" id="ovrbuf" title="save edit buffer as override level"></td><td title="save edit buffer as override level"><input type="text" style="height:11px" value="" size="3" id="svovr" title="save edit buffer to override this level number">:ovrload</td></tr>

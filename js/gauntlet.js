@@ -5353,6 +5353,8 @@ var txsv = ":";
 			document.getElementById("oloba").innerHTML   = Game.Math.mku(glob - iglob);
 			document.getElementById("odetha").innerHTML  = Game.Math.mku(gdeth - igdeth);
 			document.getElementById("ocoinsa").innerHTML = Game.Math.mku(this.droppedcoins);
+			document.getElementById("oscord").innerHTML = Game.Math.mku(this.score / (dtake - idtake) );
+			document.getElementById("oscort").innerHTML = Game.Math.mku(this.score / heartbeet);
 			}
 
       if ((frame % (FPS/1)) === 0) {
