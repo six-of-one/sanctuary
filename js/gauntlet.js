@@ -5299,7 +5299,7 @@ var txsv = ":";
 					}
 				}
 
-		  if (!automatic) dtake += Math.floor(Math.min(this.health,damage));
+		  if (!automatic) dtake += Math.min(this.health,damage);
         this.health = Math.max(0, this.health - damage);
         if (!automatic) {
           this.hurting = FX.PLAYER_GLOW.frames;
