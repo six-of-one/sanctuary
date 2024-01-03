@@ -1866,7 +1866,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 				document.getElementById("oscor1").innerHTML = ZSCORE[1][0]; document.getElementById("osig1").innerHTML = ZSCORE[1][1];
 				while (ij > 1) {
 					if (inj) {document.getElementById("oscor"+ij).innerHTML = ZSCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = ZSCORE[ij][1]; }
-					else if (curr < ZSCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = '<font color="yellow">'+curr+"</font>"; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
+					else if (curr < ZSCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = '<font color="#F5FC00">'+curr+"</font>"; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
 					else {document.getElementById("oscor"+ij).innerHTML = ZSCORE[ij - 1][0]; document.getElementById("osig"+ij).innerHTML = ZSCORE[ij - 1][1]; }
 					ij--;
 				}
@@ -1880,7 +1880,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 				document.getElementById("oscor1").innerHTML = WSCORE[1][0]; document.getElementById("osig1").innerHTML = WSCORE[1][1];
 				while (ij > 1) {
 					if (inj) {document.getElementById("oscor"+ij).innerHTML = WSCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = WSCORE[ij][1]; }
-					else if (curr < WSCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = '<font color="red">'+curr+"</font>"; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
+					else if (curr < WSCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = '<font color="#F90503">'+curr+"</font>"; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
 					else {document.getElementById("oscor"+ij).innerHTML = WSCORE[ij - 1][0]; document.getElementById("osig"+ij).innerHTML = WSCORE[ij - 1][1]; }
 					ij--;
 				}
@@ -1894,7 +1894,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 				document.getElementById("oscor1").innerHTML = VSCORE[1][0]; document.getElementById("osig1").innerHTML = VSCORE[1][1];
 				while (ij > 1) {
 					if (inj) {document.getElementById("oscor"+ij).innerHTML = VSCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = VSCORE[ij][1]; }
-					else if (curr < VSCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = '<font color="5555FF">'+curr+"</font>"; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
+					else if (curr < VSCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = '<font color="#08B4F0">'+curr+"</font>"; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
 					else {document.getElementById("oscor"+ij).innerHTML = VSCORE[ij - 1][0]; document.getElementById("osig"+ij).innerHTML = VSCORE[ij - 1][1]; }
 					ij--;
 				}
@@ -1908,7 +1908,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 				document.getElementById("oscor1").innerHTML = ESCORE[1][0]; document.getElementById("osig1").innerHTML = ESCORE[1][1];
 				while (ij > 1) {
 					if (inj) {document.getElementById("oscor"+ij).innerHTML = ESCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = ESCORE[ij][1]; }
-					else if (curr < ESCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = '<font color="#33FF33">'+curr+"</font>"; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
+					else if (curr < ESCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = '<font color="#00FF03">'+curr+"</font>"; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
 					else {document.getElementById("oscor"+ij).innerHTML = ESCORE[ij - 1][0]; document.getElementById("osig"+ij).innerHTML = ESCORE[ij - 1][1]; }
 					ij--;
 				}
