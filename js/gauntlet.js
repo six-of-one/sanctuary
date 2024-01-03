@@ -1863,6 +1863,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 				ptag = document.getElementById("ptag").value;
 				document.getElementById("oico").src = "images/olwiz.png";
 				document.getElementById("ochar").innerHTML = "Wizards";
+				document.getElementById("oscor1").innerHTML = ZSCORE[1][0]; document.getElementById("osig1").innerHTML = ZSCORE[1][1];
 				while (ij > 1) {
 					if (inj) {document.getElementById("oscor"+ij).innerHTML = ZSCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = ZSCORE[ij][1]; }
 					else if (curr < ZSCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = curr; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
@@ -1876,6 +1877,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 				ptag = document.getElementById("ptag").value;
 				document.getElementById("oico").src = "images/olwar.png";
 				document.getElementById("ochar").innerHTML = "Warriors";
+				document.getElementById("oscor1").innerHTML = WSCORE[1][0]; document.getElementById("osig1").innerHTML = WSCORE[1][1];
 				while (ij > 1) {
 					if (inj) {document.getElementById("oscor"+ij).innerHTML = WSCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = WSCORE[ij][1]; }
 					else if (curr < WSCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = curr; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
@@ -1889,6 +1891,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 				ptag = document.getElementById("ptag").value;
 				document.getElementById("oico").src = "images/olval.png";
 				document.getElementById("ochar").innerHTML = "Valkyries";
+				document.getElementById("oscor1").innerHTML = VSCORE[1][0]; document.getElementById("osig1").innerHTML = VSCORE[1][1];
 				while (ij > 1) {
 					if (inj) {document.getElementById("oscor"+ij).innerHTML = VSCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = VSCORE[ij][1]; }
 					else if (curr < VSCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = curr; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
@@ -1902,6 +1905,7 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 				ptag = document.getElementById("ptag").value;
 				document.getElementById("oico").src = "images/olelf.png";
 				document.getElementById("ochar").innerHTML = "Elves";
+				document.getElementById("oscor1").innerHTML = ESCORE[1][0]; document.getElementById("osig1").innerHTML = ESCORE[1][1];
 				while (ij > 1) {
 					if (inj) {document.getElementById("oscor"+ij).innerHTML = ESCORE[ij][0]; document.getElementById("osig"+ij).innerHTML = ESCORE[ij][1]; }
 					else if (curr < ESCORE[ij - 1][0]) { document.getElementById("oscor"+ij).innerHTML = curr; document.getElementById("osig"+ij).innerHTML = ptag; inj = true;}
