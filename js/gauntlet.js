@@ -2807,6 +2807,12 @@ var lvu = document.getElementById("flvl").value;
 		var	f, rprof, ldiff;
 					vartxt.style.display = "block";
 					vartxt.value += "	SVRLOAD["+svrcnt+"] = [ ];\n	SVRLOAD["+svrcnt+"][1] = \""+Mastermap.level.url+"\";\n	SVRLOAD["+svrcnt+"][2] = \""+Mastermap.level.name+"\";\n	SVRLOAD["+svrcnt+"][3] = [ ];\n	SVRLOAD["+svrcnt+"][4] =\""+nc+"\";\n";
+// load arrays now because of editor
+					SVRLOAD[svrcnt] = [ ];
+					SVRLOAD[svrcnt][1] = Mastermap.level.url;
+					SVRLOAD[svrcnt][2] = Mastermap.level.name;
+					SVRLOAD[svrcnt][3] = [ ];
+					SVRLOAD[svrcnt][4] = nc;
 
 					ldiff = diff_level / def_diff;
 // treasure will come thru here unless blocked
@@ -2831,6 +2837,7 @@ var lvu = document.getElementById("flvl").value;
 									{
 											Mastermap.load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
 											vartxt.value += "	SVRLOAD["+svrcnt+"][3]["+(cell.tx + cell.ty * Mtw)+"] = \"0x"+RLPROF[f][0].toString(16);+"\";   //  x: "+cell.tx +" y:  "+ cell.ty + ", w: "+Mtw+" h: "+Mth+ "\n";
+											SVRLOAD[svrcnt][3][(cell.tx + cell.ty * Mtw)] = "0x"+RLPROF[f][0].toString(16);
 											cell.loaded = true;
 											RLOAD[f]--;
 // randomize the last 2
