@@ -1902,6 +1902,21 @@ var 	vartxt = document.getElementById("varout");
 		vartxt.value += "sloc.storage[STORAGE.NE4] = "+sloc.storage[STORAGE.NE4]+";\n";
 
 		vartxt.value += "\n}\n\n";
+
+		vartxt.value += "// lower 6 score array\n";
+		vartxt.value += "function scorarr() {\n\n";
+		for (f = 5;f <= scorviewmax;f++)
+			{
+				vartxt.value += "ZSCORE["+f+"][0] = "+to.number(ZSCORE[f][0],6000)+";\n";
+				vartxt.value += "ZSCORE["+f+"][1] = "+ZSCORE[f][1]+";\n";
+				vartxt.value += "WSCORE["+f+"][0] = "+to.number(WSCORE[f][0],6000)+";\n";
+				vartxt.value += "WSCORE["+f+"][1] = "+WSCORE[f][1]+";\n";
+				vartxt.value += "VSCORE["+f+"][0] = "+to.number(VSCORE[f][0],6000)+";\n";
+				vartxt.value += "VSCORE["+f+"][1] = "+VSCORE[f][1]+";\n";
+				vartxt.value += "ESCORE["+f+"][0] = "+to.number(ESCORE[f][0],6000)+";\n";
+				vartxt.value += "ESCORE["+f+"][1] = "+ESCORE[f][1]+";\n";
+			}
+		vartxt.value += "\n}\n\n";
 		}
 
   //=========================================================================
