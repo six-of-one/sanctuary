@@ -1757,6 +1757,72 @@ var Lhue_bkg, Lhue_item, Lcolor, Lrgb, Lxtr, Ltile, Ltrap, Lphase, Lsecs, Litem;
 		};
 
   //=========================================================================
+  // SAVING DATA
+  //=========================================================================
+
+// "my android even comes with unlimited data"
+// no... not that data!
+
+	function	datasavr() {
+
+var 	vartxt = document.getElementById("varout");
+		vartxt.style.display = "block";
+		vartxt.value = "// .js file to reload vars game data\n\n";
+		vartxt.value += "// cookie reload\n";
+		vartxt.value += "function ckyload() {\n\n";
+
+		vartxt.value += "createCookie('_o_'+'seldiff',"+document.getElementById("seldiff").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'sellvl',"+document.getElementById("sellvl").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'seltut',"+document.getElementById("seltut").checked+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'selg2tut',"+document.getElementById("selg2tut").checked+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'seltutx',"+document.getElementById("seltutx").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'mazsolv',"+document.getElementById("mazsolv").checked+",7777);\n";
+// level to start testing for rnd event
+		vartxt.value += "createCookie('_o_'+'smir',"+document.getElementById("stmir").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'sflp',"+document.getElementById("stflp").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'srot',"+document.getElementById("strot").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'sunp',"+document.getElementById("stunp").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'sstun',"+document.getElementById("ststun").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'shurt',"+document.getElementById("sthurt").value+",7777);\n";
+// base % of rnd event occurance
+		vartxt.value += "createCookie('_o_'+'pmir',"+document.getElementById("pmir").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'pflp',"+document.getElementById("pflp").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'prot',"+document.getElementById("prot").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'punp',"+document.getElementById("punp").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'pstun',"+document.getElementById("psstun").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'phurt',"+document.getElementById("pshurt").value+",7777);\n";
+// max % and adjustments per difficulty & level
+		vartxt.value += "createCookie('_o_'+'maxp',"+document.getElementById("maxpr").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'decp',"+document.getElementById("decblw").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'incp',"+document.getElementById("incabv").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'mids',"+document.getElementById("midskil").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'lvlp',"+document.getElementById("inclvl").value+",7777);\n";
+// keep     -^
+		vartxt.value += "createCookie('_d_'+'xunp',"+document.getElementById("xunp").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'yunp',"+document.getElementById("yunp").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'xmiror',"+document.getElementById("xmiror").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'ymiror',"+document.getElementById("ymiror").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'rotat',"+document.getElementById("rotat").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'invwal',"+document.getElementById("invwal").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'invhint',"+document.getElementById("invhint").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'spedis',"+document.getElementById("spedis").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'rrndwl',"+document.getElementById("rndwalls").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'blrndlod',"+document.getElementById("blrndlod").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'forndlod',"+document.getElementById("forndlod").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'nostal',"+document.getElementById("nostal").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'noah',"+document.getElementById("noah").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'nommv',"+document.getElementById("nommv").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'nogen',"+document.getElementById("nogen").checked+",7777);\n";
+		vartxt.value += "createCookie('_d_'+'noblend',"+document.getElementById("noblend").checked+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'whue',"+document.getElementById("whue").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'fhue',"+document.getElementById("fhue").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'phue',"+document.getElementById("phue").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'ashue',"+document.getElementById("ashue").value+",7777);\n";
+		vartxt.value += "createCookie('_o_'+'vports',"+document.getElementById("vports").value+",7777);\n";
+		vartxt.value += "\n}\n";
+		}
+
+  //=========================================================================
   // SCORES
   //=========================================================================
 
@@ -5449,6 +5515,12 @@ var txsv = ":";
 					if (this.type.name == "valkyrie") v_injscortabl(this.score);
 					if (this.type.name == "elf") e_injscortabl(this.score);
 					}
+
+// check for some checkbox controls - 1st data saver
+			if (document.getElementById("svtext").checked) {
+				datasavr();
+				document.getElementById("svtext").checked = false;
+				}
 			}
 
       if ((frame % (FPS/1)) === 0) {
