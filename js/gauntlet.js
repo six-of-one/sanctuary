@@ -1771,6 +1771,7 @@ var 	vartxt = document.getElementById("varout");
 		vartxt.value += "// cookie reload\n";
 		vartxt.value += "function ckyload() {\n\n";
 
+		vartxt.value += "createCookie('deathmul',"+Deathmult+",7777);\n";
 		vartxt.value += "createCookie('_o_'+'seldiff',"+document.getElementById("seldiff").value+",7777);\n";
 		vartxt.value += "createCookie('_o_'+'sellvl',"+document.getElementById("sellvl").value+",7777);\n";
 		vartxt.value += "createCookie('_o_'+'seltut',"+document.getElementById("seltut").checked+",7777);\n";
