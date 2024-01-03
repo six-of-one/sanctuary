@@ -1647,6 +1647,9 @@ Gauntlet = function() {
 							Mapdata[helpers.indexc(tx,ty)] = 0x404000;
 							w--;
 							svrnwalls += "	SVRLOAD["+svrcnt+"][3]["+(tx + ty * Mtw)+"] = \"0x404000\";   //  x: "+tx +" y:  "+ ty + ", w: "+Mtw+" h: "+Mth+ "\n";
+							if (SVRLOAD[svrcnt] == undefined) SVRLOAD[svrcnt] = [ ];
+							if (SVRLOAD[svrcnt][3] == undefined) SVRLOAD[svrcnt][3] = [ ];
+							SVRLOAD[svrcnt][3][(tx + ty * Mtw)] = "0x404000";
 							}
 				}
 		}
