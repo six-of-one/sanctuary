@@ -2793,6 +2793,13 @@ var lvu = document.getElementById("flvl").value;
 							if (cty < Mth && ctx < Mtw) Mastermap.load_cell(ctx, cty, SVRLOAD[rerlod][3][srvsek], Mastermap);
 							}
 						}
+/// TEST - remove
+// include the test random walls if genned
+					if (svrnwalls > "") {
+						vartxt.style.display = "block";
+						vartxt.value = svrnwalls;
+						}
+/// TEST - remove
 					}
 			else
 			if ((Mastermap.level.nornd == undefined || frnd == true) && blrnd != true)	// random load a level
