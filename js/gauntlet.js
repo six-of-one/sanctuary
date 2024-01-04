@@ -3797,6 +3797,21 @@ if (document.getElementById("noclip").checked) return false;
 
 		 cursor[0] = null;	// deactivate edit corsor
 
+// maze ed load up
+/// later we need to include override / svrload, so this will have to come from some master array MLOAD[] - and mapdata/ huedata will need to load from that in the event of overrides
+		document.getElementById("edunpinx").checked = false;
+		document.getElementById("edunpiny").checked = false;
+		document.getElementById("ednornd").checked = false;
+		if (level.unpinx) document.getElementById("edunpinx").checked = true;
+		if (level.unpiny) document.getElementById("edunpiny").checked = true;
+		if (level.nornd) document.getElementById("ednornd").checked = true;
+		document.getElementById("edurlp").value = level.url; //.substring(7,(level.url.length - 4));;
+		if (level.wall) document.getElementById("edwal").value = level.wall;
+		if (level.floor) document.getElementById("edflr").value = level.floor;
+		if (level.gwal) document.getElementById("edgwalp").value = level.gwal;
+		if (level.gflr) document.getElementById("edgflrp").value = level.gflr;
+		if (level.help) document.getElementById("edhelp").value = level.help;
+
 		if (level.gshw == undefined) level.gshw = GSHW;	// default count of walls/ shotwalls in gwal
 
 /// TEST - remove
@@ -3811,13 +3826,6 @@ if (document.getElementById("noclip").checked) return false;
 		if (cb == true || level.unpinx) Munpinx = true;
 		cb = document.getElementById("yunp").checked;
 		if (cb == true || level.unpiny) Munpiny = true;
-		document.getElementById("edunpinx").checked = false;
-		document.getElementById("edunpiny").checked = false;
-		document.getElementById("ednornd").checked = false;
-		if (level.unpinx) document.getElementById("edunpinx").checked = true;
-		if (level.unpiny) document.getElementById("edunpiny").checked = true;
-		if (level.nornd) document.getElementById("ednornd").checked = true;
-		document.getElementById("edurlp").value = level.url; //.substring(7,(level.url.length - 4));;
 
 // run random map modifications
   var maxpr  = document.getElementById("maxpr").value,		// max percent
