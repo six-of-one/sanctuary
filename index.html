@@ -288,8 +288,9 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center" bgcolor="#A0A0A0"><input type="checkbox" id="creset" title="reset cursor edit set" onClick="lded(-1,0,0,'images/1x1.png')"></td><td title="reset cursor edit set to basic: treasure, food [bottle], potion, key, door, std wall, exit" bgcolor="#A0A0A0" style="color:black">reset</td></tr>
 <tr><td align="center" bgcolor="#A0A0A0"></td><td bgcolor="#A0A0A0" style="color:black">x <input type="text" style="height:11px;" value="0" size="1" id="posx" title="current cursor position x">y<input type="text" style="height:11px;" value="0" size="1" id="posy" title="current cursor position y"></td></tr>
 <tr><td align="center"></td><td>W<input type="text" style="height:11px;" value="33" size="1" id="lvlw" title="current level width">H<input type="text" style="height:11px;" value="33" size="1" id="lvlh" title="current level height"></td></tr>
-<tr><td align="center"></td><td><select id="edurl" title="url map to use" style="max-width:107px">
+<tr><td align="center"></td><td><input type="text" style="height:14px;" value="..." size="4" id="edurlp" title="level url set"><select id="edurl" title="select url map to use" style="height:11px;max-width:20px">
 <optgroup label="research">
+<option value="0"></option>
 <option value="levels/glevel1r.png">glevel1r</option>
 <option value="levels/glevelZ.png">glevelZ</option>
 </optgroup>
@@ -1216,7 +1217,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
   function devgear() {var cb = document.getElementById("shodev"); cb.checked = false; panlswap('devspat','shodev'); }
   function edgear() {var cb = document.getElementById("shoed"); cb.checked = false; panlswap('edspat','shoed'); panlswap('edspatr','shoed'); }
   function lded(hcc, sx, sy, gfx) { document.getElementById("edgfx").src = gfx; document.getElementById("edhcc").value = hcc; document.getElementById("edsx").value = sx; document.getElementById("edsy").value = sy; document.getElementById("edhcc").title = "current cursor item "+hcc+": sx = "+sx+", sy = "+sy; if (hcc == -1) document.getElementById("creset").checked = false;}
-  devgear(); optgear(); edgear();
+  devgear(); optgear(); statgear(); socrgear();
     Game.run(Gauntlet);
   </script>
 <noscript> Final warning buddy - this browser is not running JavaScript!</noscript>

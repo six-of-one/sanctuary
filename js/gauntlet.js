@@ -3811,6 +3811,14 @@ if (document.getElementById("noclip").checked) return false;
 		if (cb == true || level.unpinx) Munpinx = true;
 		cb = document.getElementById("yunp").checked;
 		if (cb == true || level.unpiny) Munpiny = true;
+		document.getElementById("edunpinx").checked = false;
+		document.getElementById("edunpiny").checked = false;
+		document.getElementById("ednornd").checked = false;
+		if (level.unpinx) document.getElementById("edunpinx").checked = true;
+		if (level.unpiny) document.getElementById("edunpiny").checked = true;
+		if (level.nornd) document.getElementById("ednornd").checked = true;
+		document.getElementById("edurlp").value = level.url;
+
 // run random map modifications
   var maxpr  = document.getElementById("maxpr").value,		// max percent
 		mids   = document.getElementById("midskil").value,
