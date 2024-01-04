@@ -288,7 +288,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center" bgcolor="#A0A0A0"><input type="checkbox" id="creset" title="reset cursor edit set" onClick="lded(-1,0,0,'images/1x1.png')"></td><td title="reset cursor edit set to basic: treasure, food [bottle], potion, key, door, std wall, exit" bgcolor="#A0A0A0" style="color:black">reset</td></tr>
 <tr><td align="center" bgcolor="#A0A0A0"></td><td bgcolor="#A0A0A0" style="color:black">x <input type="text" style="height:11px;" value="0" size="1" id="posx" title="current cursor position x">y<input type="text" style="height:11px;" value="0" size="1" id="posy" title="current cursor position y"></td></tr>
 <tr><td align="center"></td><td>W<input type="text" style="height:11px;" value="33" size="1" id="lvlw" title="current level width">H<input type="text" style="height:11px;" value="33" size="1" id="lvlh" title="current level height"></td></tr>
-<tr><td align="center"></td><td><input type="text" style="height:14px;" value="..." size="4" id="edurlp" title="level url set"><select id="edurl" title="select url map to use" style="height:11px;max-width:20px" onchange="edsel('edurlp',value);">
+<tr><td align="center"></td><td><input type="text" style="height:14px;" value="..." size="4" id="edurlp" title="level url set" onmouseover="txbig('edurlp',16);" onmouseleave="txbig('edurlp',4);"><select id="edurl" title="select url map to use" style="height:11px;max-width:20px" onchange="edsel('edurlp',value);">
 <optgroup label="research">
 <option value="0"></option>
 <option value="levels/glevel1r.png">glevel1r</option>
@@ -1203,6 +1203,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
   <script src="js/gauntlet.js"></script>
   <script>
   function vout() {var vartxt = document.getElementById("varout");vartxt.value = document.cookie.replace(/; /gi, ";\n"); vartxt.value += "\n"; vartxt.style.display = "block"}
+  function txbig(pnt, sz) {document.getElementById(pnt).size = sz}
   function edsel(pnt, v) { document.getElementById(pnt).value = v; if (pnt == "edurlp" && document.getElementById("lfthis").checked) document.getElementById("fillvl").value = v; }
   function panlswap(panlref, cbref) {var panl = document.getElementById(panlref); var cb = document.getElementById(cbref); cb.checked ? panl.style.display = "block":panl.style.display = "none";
 												if (panlref == "edspat"  && panl.style.display == "block") { devgear(); optgear(); statgear(); socrgear(); document.getElementById("edspatr").style.display = "block"; }
