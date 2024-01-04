@@ -288,7 +288,9 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center" bgcolor="#A0A0A0"><input type="checkbox" id="creset" title="reset cursor edit set" onClick="lded(-1,0,0,'images/1x1.png')"></td><td title="reset cursor edit set to basic: treasure, food [bottle], potion, key, door, std wall, exit" bgcolor="#A0A0A0" style="color:black">reset</td></tr>
 <tr><td align="center" bgcolor="#A0A0A0"></td><td bgcolor="#A0A0A0" style="color:black">x <input type="text" style="height:11px;" value="0" size="1" id="posx" title="current cursor position x">y<input type="text" style="height:11px;" value="0" size="1" id="posy" title="current cursor position y"></td></tr>
 <tr><td align="center"></td><td>W<input type="text" style="height:11px;" value="33" size="1" id="lvlw" title="current level width">H<input type="text" style="height:11px;" value="33" size="1" id="lvlh" title="current level height"></td></tr>
-<tr><td align="center"></td><td><input type="text" style="height:14px;" value="..." size="4" id="edurlp" title="level url set" onmouseover="txbig('edurlp',16);" onmouseleave="txbig('edurlp',4);"><select id="edurl" title="select url map to use" style="height:11px;max-width:20px" onchange="edsel('edurlp',value);">
+<tr><td align="center"></td><td>
+<input type="text" style="height:14px;" value="..." size="4" id="edurlp" title="level url set" onmouseover="txbig('edurlp',16);" onmouseleave="txbig('edurlp',4);">
+<select id="edurl" title="select url map to use" style="height:11px;max-width:20px" onchange="edsel('edurlp',value);">
 <optgroup label="research">
 <option value="0"></option>
 <option value="levels/glevel1r.png">glevel1r</option>
@@ -458,7 +460,9 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 </select></td></tr>
 <tr><td align="center"></td><td>F<input type="text" style="height:11px;" value="" size="1" id="edflr" title="level floor code">W<input type="text" style="height:11px;" value="" size="1" id="edwal" title="level wall code"></td></tr>
 
-<tr><td align="center"></td><td><select id="edgflr" title="gfx - g?floor* to use" style="max-width:107px">
+<tr><td align="center"></td><td>
+<input type="text" style="height:14px;" value="..." size="4" id="edgflrp" title="level floors via g?floor*" onmouseover="txbig('edgflrp',16);" onmouseleave="txbig('edgflrp',4);">
+<select id="edgflr" title="gfx - g?floor* to use" style="height:11px;max-width:20px" onchange="edsel('edgflrp',value);">
 <optgroup label="f:g1">
 <option value="gfx/g1floor0.jpg">g1floor0</option>
 <option value="gfx/g1floor0z.jpg">g1floor0z</option>
@@ -693,7 +697,10 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 </optgroup>
 
 </select></td></tr>
-<tr><td align="center"></td><td><select id="edgwal" title="gfx - g?wall* to use" style="max-width:107px">
+
+
+<input type="text" style="height:14px;" value="..." size="4" id="edgwalp" title="level wall via g?wall*" onmouseover="txbig('edgwalp',16);" onmouseleave="txbig('edgwalp',4);">
+<tr><td align="center"></td><td><select id="edgwal" title="gfx - g?wall* to use" style="height:11px;max-width:20px" onchange="edsel('edgwalp',value);">
 <optgroup label="w:g1">
 <option value="gfx/g1wall0.jpg">g1wall0</option>
 <option value="gfx/g1wall1.jpg">g1wall1</option>
