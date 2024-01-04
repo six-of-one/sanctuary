@@ -847,7 +847,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td colspan="2" title="help display for level intro screen">help: <input type="text" style="height:11px" value="" size="9" id="edhelp" title="help display for this level"></td></tr>
 
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lrelod" title="reload level"></td><td title="reload level from selected source(s)" bgcolor="#0000BB">reload level</td></tr>
-<tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfthis" title="load level from valid # or levels/*png"></td><td title="load level from valid # or levels/*png" bgcolor="#0000BB">#<input type="text" style="height:11px" value="" size="1" id="idxlvl" title="level number 0 - [max]">:<input type="text" style="height:11px" value="" size="4" id="fillvl" title="levels/*png"></td></tr>
+<tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfthis" title="load level from valid # or levels/*png"></td><td title="load level from valid # or levels/*png" bgcolor="#0000BB">#<input type="text" style="height:11px" value="" size="1" id="idxlvl" title="level number 0 - [max]">:<input type="text" style="height:11px" value="" size="4" id="fillvl" title="levels/*png - will load from map url select above if checkbox is checked"></td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfbuff" title="load level from copy buffer CPBUF[]  "></td><td title="load level from copy buffer (CPBUF[] if stored)" bgcolor="#0000BB">from buffer</td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfovr" title="load level from override (if existing: OVRLOAD[level num])"></td><td title="load level from override (if existing: OVRLOAD[level num] )" bgcolor="#0000BB">frm OVR:<input type="text" style="height:11px" value="" size="2" id="idxovr" title="optional: use this OVR level num index"></td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfmap" title="load level from mapdata (current loaded: levels/*.png)"></td><td title="load level from mapdata (current loaded: levels/*.png)" bgcolor="#0000BB">from mapdata</td></tr>
@@ -1203,7 +1203,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
   <script src="js/gauntlet.js"></script>
   <script>
   function vout() {var vartxt = document.getElementById("varout");vartxt.value = document.cookie.replace(/; /gi, ";\n"); vartxt.value += "\n"; vartxt.style.display = "block"}
-  function edsel(pnt, v) { document.getElementById(pnt).value = v; }
+  function edsel(pnt, v) { document.getElementById(pnt).value = v; if (pnt == "edurlp" && document.getElementById("lfthis").checked) document.getElementById("fillvl").value = v; }
   function panlswap(panlref, cbref) {var panl = document.getElementById(panlref); var cb = document.getElementById(cbref); cb.checked ? panl.style.display = "block":panl.style.display = "none";
 												if (panlref == "edspat"  && panl.style.display == "block") { devgear(); optgear(); statgear(); socrgear(); document.getElementById("edspatr").style.display = "block"; }
 												if (panlref == "edspat"  && panl.style.display == "none") { document.getElementById("edspatr").style.display = "none"; }
