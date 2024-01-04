@@ -3817,7 +3817,7 @@ if (document.getElementById("noclip").checked) return false;
 		if (level.unpinx) document.getElementById("edunpinx").checked = true;
 		if (level.unpiny) document.getElementById("edunpiny").checked = true;
 		if (level.nornd) document.getElementById("ednornd").checked = true;
-		document.getElementById("edurlp").value = level.url;
+		document.getElementById("edurlp").value = level.url.substring(7,(level.url.length - 4));;
 
 // run random map modifications
   var maxpr  = document.getElementById("maxpr").value,		// max percent
