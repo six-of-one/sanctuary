@@ -847,13 +847,13 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lrelod" title="reload level"></td><td title="reload level from selected source(s)" bgcolor="#0000BB">reload level</td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfthis" title="load level from valid # or levels/*png"></td><td title="load level from valid # or levels/*png" bgcolor="#0000BB">#<input type="text" style="height:11px" value="" size="1" id="idxlvl" title="level number 0 - [max]">:<input type="text" style="height:11px" value="" size="4" id="fillvl" title="levels/*png"></td></tr>
-<tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfbuff" title="load level from edit buffer EDBUF[]  "></td><td title="load level from edit buffer (EDBUF[] if stored)" bgcolor="#0000BB">from buffer</td></tr>
+<tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfbuff" title="load level from copy buffer CPBUF[]  "></td><td title="load level from copy buffer (CPBUF[] if stored)" bgcolor="#0000BB">from buffer</td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfovr" title="load level from override (if existing: OVRLOAD[level num])"></td><td title="load level from override (if existing: OVRLOAD[level num] )" bgcolor="#0000BB">frm OVR:<input type="text" style="height:11px" value="" size="2" id="idxovr" title="optional: use this OVR level num index"></td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfmap" title="load level from mapdata (current loaded: levels/*.png)"></td><td title="load level from mapdata (current loaded: levels/*.png)" bgcolor="#0000BB">from mapdata</td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfsvr" title="load level include save-reload data (if existing: SVRLOAD[] matching mapdata *png name)"></td><td title="load level include save-reload data (if existing: SVRLOAD[] matching mapdata *png name)" bgcolor="#0000BB">incl SVR:<input type="text" style="height:11px" value="" size="2" id="idxsvr" title="optional: use this SVR array index - you have to know this from the load file!"></td></tr>
-<tr><td align="center"><input type="checkbox" id="ledbuf" title="level into edit buffer"></td><td title="copy level to edit buffer">level > bufffer</td></tr>
-<tr><td align="center"><input type="checkbox" id="clrbuf" title="clear level in edit buffer"></td><td title="clear level in edit buffer (has surround walls unless unpinned)">clear bufffer</td></tr>
-<tr><td align="center"><input type="checkbox" id="ovrbuf" title="save edit buffer as override level"></td><td title="save edit buffer as override level"><input type="text" style="height:11px" value="" size="3" id="svovr" title="save edit buffer to override this level number">:ovrload</td></tr>
+<tr><td align="center"><input type="checkbox" id="ledbuf" title="move live edit into copy buffer"></td><td title="move live edit to copy buffer">live ed > bufffer</td></tr>
+<tr><td align="center"><input type="checkbox" id="clrbuf" title="clear level in copy buffer"></td><td title="clear level in copy buffer (has surround walls unless unpinned)">clear bufffer</td></tr>
+<tr><td align="center"><input type="checkbox" id="ovrbuf" title="save copy buffer as override level"></td><td title="save copy buffer as override level"><input type="text" style="height:11px" value="" size="3" id="svovr" title="save edit buffer to override this level number">:ovrload</td></tr>
 
 </TABLE>
   </div>
