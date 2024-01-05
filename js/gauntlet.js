@@ -2648,11 +2648,12 @@ var 	vartxt = document.getElementById("varout");
 			  $('booting').show();
 
 					var lvs = level.url;
-/// TEST - remove
-// this works - but it refuses to refresh if flvl is changed
-var lvu = document.getElementById("flvl").value;
+/// TEST - update
 
-	 if (lvu != "") lvs = lvu;
+					if (document.getElementById("lfthis").checked) {
+						var idxlv = document.getElementById("idxlvl").value;
+						if (idxlv > 0 && idxlv < cfg.levels.length) lvs = cfg.levels[idxlv].url;
+						}
 /// TEST - remove
 					level.plvl = Game.createImage(document.getElementById("plvl").value +"?cachebuster=" + VERSION);		// parse test
 					level.hued = Game.createImage("h"+lvs +"?cachebuster=" + VERSION);		// special color and hues map for a level
@@ -3795,9 +3796,10 @@ if (document.getElementById("noclip").checked) return false;
 
 		if (document.getElementById("lfthis").checked) {
 			idxlv = document.getElementById("idxlvl").value;
-			if (idx > 0) level = cfg.levels[idxlv];
+			if (idxlv > 0 && idxlv < cfg.levels.length) level = cfg.levels[idxlv];
+			else idxlv = nlevel;
 			}
-
+alert(level.url);
       var source = level.source,
           hues = level.hued,
           parser = level.plvl;
@@ -5654,7 +5656,9 @@ var txsv = ":";
 // editor called for level reload
 			if (document.getElementById("lrelod").checked) {
 				document.getElementById("lrelod").checked = false;
-				this.player.leave();
+				  this.exiting = { max: 3*FPS, count: 3*FPS, fpf: FPS/30, dx: game.player.x, dy: game.player.y };
+					levelplus = 0;
+				  publish(EVENT.PLAYER_EXITING, this, game.player);
 				return;
 				}
 			}
