@@ -3790,8 +3790,15 @@ if (document.getElementById("noclip").checked) return false;
 
     setupLevel: function(nlevel) {
 
-      var level  = cfg.levels[nlevel],
-          source = level.source,
+      var level  = cfg.levels[nlevel];
+		var idxlv = nlevel;
+
+		if (document.getElementById("lfthis").checked) {
+			idxlv = document.getElementById("idxlvl").value;
+			if (idx > 0) level = cfg.levels[idxlv];
+			}
+
+      var source = level.source,
           hues = level.hued,
           parser = level.plvl;
 
@@ -3850,8 +3857,8 @@ if (document.getElementById("noclip").checked) return false;
 
   var rndm, dfl = (diff_level > 9) ? 9 : diff_level;
 		if (pmir > 0)
-		if (nlevel >= stmir) {
-			rndm = pmir + (lvlp * nlevel);
+		if (idxlv >= stmir) {
+			rndm = pmir + (lvlp * idxlv);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
@@ -3859,8 +3866,8 @@ if (document.getElementById("noclip").checked) return false;
 			}
 
 		if (pflp > 0)
-		if (nlevel >= stflp) {
-			rndm = pflp + (lvlp * nlevel);
+		if (idxlv >= stflp) {
+			rndm = pflp + (lvlp * idxlv);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
@@ -3868,8 +3875,8 @@ if (document.getElementById("noclip").checked) return false;
 			}
 
 		if (prot > 0)
-		if (nlevel >= strot) {
-			rndm = prot + (lvlp * nlevel);
+		if (idxlv >= strot) {
+			rndm = prot + (lvlp * idxlv);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
@@ -3877,8 +3884,8 @@ if (document.getElementById("noclip").checked) return false;
 			}
 
 		if (punp > 0)
-		if (nlevel >= stunp) {
-			var r2 = (lvlp * nlevel);
+		if (idxlv >= stunp) {
+			var r2 = (lvlp * idxlv);
 			if (dfl > mids) r2 += incp * dfl;
 			else if (dfl < mids) r2 -= decp * dfl;
 			rndm = r2 + punp;
@@ -3895,8 +3902,8 @@ if (document.getElementById("noclip").checked) return false;
 
 // note: code for these will no be complete until multiplayer is added...
 		if (psstun > 0)
-		if (nlevel >= ststun) {
-			rndm = psstun + (lvlp * nlevel);
+		if (idxlv >= ststun) {
+			rndm = psstun + (lvlp * idxlv);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
@@ -3904,8 +3911,8 @@ if (document.getElementById("noclip").checked) return false;
 			}
 
 		if (pshurt > 0)
-		if (nlevel >= sthurt) {
-			rndm = pshurt + (lvlp * nlevel);
+		if (idxlv >= sthurt) {
+			rndm = pshurt + (lvlp * idxlv);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
@@ -3913,8 +3920,8 @@ if (document.getElementById("noclip").checked) return false;
 			}
 
 		if (prinvw > 0)
-		if (nlevel >= rinvw) {
-			rndm = prinvw + (lvlp * nlevel);
+		if (idxlv >= rinvw) {
+			rndm = prinvw + (lvlp * idxlv);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
@@ -4012,7 +4019,7 @@ vartxt.value += "	]\n"
 //		pMapcell(tx, ty, Mapdata[tx + (ty*Mtw)], map, this);
 /// TEST - update
 
-      self.nlevel   = nlevel;
+      self.nlevel   = idxlv;
       self.level    = level;
       self.last     = nlevel === (cfg.levels.length-1);
       self.tw       = tw;
@@ -5643,6 +5650,12 @@ var txsv = ":";
 			if (document.getElementById("svtext").checked) {
 				datasavr();
 				document.getElementById("svtext").checked = false;
+				}
+// editor called for level reload
+			if (document.getElementById("lrelod").checked) {
+				document.getElementById("lrelod").checked = false;
+				this.player.leave();
+				return;
 				}
 			}
 
