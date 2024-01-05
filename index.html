@@ -160,7 +160,7 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="damage taken">damage</td><td><label id="odtaka">...</label></td><td><label id="odtaks">...</label></td></tr>
 <tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="damage from health count down">health tick</td><td><label id="odauta">...</label></td><td><label id="odauts">...</label></td></tr>
 <tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="health added">health+</td><td><label id="oheala">...</label></td><td><label id="oheals">...</label></td></tr>
-                                                                                                                <tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="score per damage, score per sec">score/ d - s</td><td><label id="oscord" title="score per unit of damage">...</label></td><td><label id="oscort" title="score per unit of time">...</label></td></tr>
+<tr><td><img src="images/1x1.png"    style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="score per damage, score per sec">score/ d - s</td><td><label id="oscord" title="score per unit of damage">...</label></td><td><label id="oscort" title="score per unit of time">...</label></td></tr>
 
 <tr><td><img src="images/olcoin.png" style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="game start is 1 coin, and each addt. +2000 health coin">coins</td><td><label id="ocoinsa">...</label></td><td><label id="ocoins">...</label></td></tr>
 <tr><td><img src="images/olhg.png"   style="width:16px"></td><td style="text-align:right;padding:0px 3px" title="time for adventure, scales secs to mins to hours to days, hover stat for declaration">length</td><td><label id="osecsa" title="...">...</label></td><td><label id="osecs" title="...">...</label></td></tr>
@@ -288,9 +288,9 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center" bgcolor="#A0A0A0"><input type="checkbox" id="creset" title="reset cursor edit set" onClick="lded(-1,0,0,'images/1x1.png')"></td><td title="reset cursor edit set to basic: treasure, food [bottle], potion, key, door, std wall, exit" bgcolor="#A0A0A0" style="color:black">reset</td></tr>
 <tr><td align="center" bgcolor="#A0A0A0"></td><td bgcolor="#A0A0A0" style="color:black">x <input type="text" style="height:11px;" value="0" size="1" id="posx" title="current cursor position x">y<input type="text" style="height:11px;" value="0" size="1" id="posy" title="current cursor position y"></td></tr>
 <tr><td align="center"></td><td>W<input type="text" style="height:11px;" value="33" size="1" id="lvlw" title="current level width">H<input type="text" style="height:11px;" value="33" size="1" id="lvlh" title="current level height"></td></tr>
-<tr><td align="center"></td><td>
-<input type="text" style="height:14px;" value="..." size="4" id="edurlp" title="level url set" onmouseover="txbig('edurlp',16);" onmouseleave="txbig('edurlp',4);">
-<select id="edurl" title="select url map to use" style="height:11px;max-width:20px" onchange="edsel('edurlp',value);">
+<tr><td colspan="2" title="levels url codes">url:
+<input type="text" style="height:15px;position:relative;z-index:3;" value="..." size="8" id="edurlp" title="level url set" onmouseover="txbig('edurlp',16);" onmouseleave="txbig('edurlp',8);">
+<select id="edurl" title="select url map to use" style="height:11px;max-width:20px;margin-left:-22px;position:absolute;top:5;z-index:0" onchange="edsel('edurlp',value);">
 <optgroup label="research">
 <option value="0"></option>
 <option value="levels/glevel1r.png">glevel1r</option>
@@ -460,9 +460,9 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 </select></td></tr>
 <tr><td align="center"></td><td>F<input type="text" style="height:11px;" value="" size="1" id="edflr" title="level floor code">W<input type="text" style="height:11px;" value="" size="1" id="edwal" title="level wall code"></td></tr>
 
-<tr><td align="center"></td><td>
-<input type="text" style="height:14px;" value="..." size="4" id="edgflrp" title="level floors via g?floor*" onmouseover="txbig('edgflrp',16);" onmouseleave="txbig('edgflrp',4);">
-<select id="edgflr" title="gfx - g?floor* to use" style="height:11px;max-width:20px" onchange="edsel('edgflrp',value);">
+<tr><td colspan="2" title="gfx g-floor codes">gf.:
+<input type="text" style="height:15px;position:relative;z-index:3;" value="..." size="8" id="edgflrp" title="level floors via g?floor*" onmouseover="txbig('edgflrp',16);" onmouseleave="txbig('edgflrp',8);">
+<select id="edgflr" title="gfx - g?floor* to use" style="height:11px;max-width:20px;margin-left:-22px;position:absolute;top:5;z-index:0" onchange="edsel('edgflrp',value);">
 <optgroup label="f:g1">
 <option value="gfx/g1floor0.jpg">g1floor0</option>
 <option value="gfx/g1floor0z.jpg">g1floor0z</option>
@@ -698,9 +698,9 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 
 </select></td></tr>
 
-<tr><td align="center"></td><td>
-<input type="text" style="height:14px;" value="..." size="4" id="edgwalp" title="level wall via g?wall*" onmouseover="txbig('edgwalp',16);" onmouseleave="txbig('edgwalp',4);">
-<select id="edgwal" title="gfx - g?wall* to use" style="height:11px;max-width:20px" onchange="edsel('edgwalp',value);">
+<tr><td colspan="2" title="gfx g-wall codes">gw:
+<input type="text" style="height:15px;position:relative;z-index:3;" value="..." size="8" id="edgwalp" title="level wall via g?wall*" onmouseover="txbig('edgwalp',16);" onmouseleave="txbig('edgwalp',8);">
+<select id="edgwal" title="gfx - g?wall* to use" style="height:11px;max-width:20px;margin-left:-22px;position:absolute;top:5;z-index:0" onchange="edsel('edgwalp',value);">
 <optgroup label="w:g1">
 <option value="gfx/g1wall0.jpg">g1wall0</option>
 <option value="gfx/g1wall1.jpg">g1wall1</option>
@@ -851,7 +851,66 @@ editar: <input type="checkbox" id="shoed" name="shoeds" value="1" title="check t
 <tr><td align="center"><input type="checkbox" id="ednornd" title="no random load this level"></td><td title="no random load this level - save in buffer, this is not dev override">no random</td></tr>
 <tr><td align="center"><input type="checkbox" id="edunpinx" title="unpin X zero line"></td><td title="unpin X zero line - save in buffer, this is not dev override">unpin X</td></tr>
 <tr><td align="center"><input type="checkbox" id="edunpiny" title="unpin Y zero line"></td><td title="unpin Y zero line - save in buffer, this is not dev override">unpin Y</td></tr>
-<tr><td colspan="2" title="help display for level intro screen">help: <input type="text" style="height:11px" value="" size="9" id="edhelp" title="help display for this level"></td></tr>
+<tr><td colspan="2" title="message display for level intro screen">hlp:<input type="text" style="height:15px;position:relative;z-index:3;" value="" size="8" id="edhelp" title="message intro display for this level" onmouseover="txbig('edhelp',24);" onmouseleave="txbig('edhelp',8);">
+<select id="edhlst" title="potential level intro messages" style="height:11px;max-width:20px;margin-left:-22px;position:absolute;top:5;z-index:0" onchange="edsel('edhelp',value);">
+<optgroup label="help:g1">
+<option value="Save keys to open doors">Save keys to open doors</option>
+<option value="Save potions for later use">Save potions for later use</option>
+<option value="Traps make walls disappear">Traps make walls disappear</option>
+<option value="Some food destroyed by shots">Some food destroyed by shots</option>
+<option value="Shooting a potion has a lesser effect">Shooting a potion has a lesser effect</option>
+<option value="Magic potions work differently for each player">Magic potions work differently for each player</option>
+<option value="Magic potions affect everything on screen">Magic potions affect everything on screen</option>
+<option value="Transporters move you to&lt;br&gt; the closest transporter visible">Transporters move you to&lt;br&gt; the closest transporter visible</option>
+<option value="Some walls may be destroyed">Some walls may be destroyed</option>
+<option value="Stalling will cause doors to open">Stalling will cause doors to open</option>
+<option value="Find exit to next level">Find exit to next level</option>
+<option value="Get bonus multiplier by collecting treasure">Get bonus multiplier by collecting treasure</option>
+<option value="More players allow higher bonus multiplier">More players allow higher bonus multiplier</option>
+<option value="Add more players for greater fire power">Add more players for greater fire power</option>
+<option value="Have friends join in">Have friends join in</option>
+<option value="Ghosts must be shot">Ghosts must be shot</option>
+<option value="Some food can be destroyed">Some food can be destroyed</option>
+<option value="Fight hand to hand by running into grunts">Fight hand to hand by running into grunts</option>
+<option value="Beware the demons which shoot you">Beware the demons which shoot you</option>
+<option value="Sorcerers may be invisible">Sorcerers may be invisible</option>
+<option value="Use magic to kill death">Use magic to kill death</option>
+<option value="Kill thief to recover stolen item">Kill thief to recover stolen item</option>
+<option value="Shots do not hurt other players yet">Shots do not hurt other players yet</option>
+</optgroup>
+<optgroup label="help:g2">
+<option value="Some tiles stun players">Some tiles stun players</option>
+<option value="Shooting poison slows monsters">Shooting poison slows monsters</option>
+<option value="Use key to open treasure chest">Use key to open treasure chest</option>
+<option value="Push movable walls">Push movable walls</option>
+<option value="Some items may be fake">Some items may be fake</option>
+<option value="Avoid force fields or lose health">Avoid force fields or lose health</option>
+<option value="Kill mugger to recover stolen health">Kill mugger to recover stolen health</option>
+<option value="Avoid acid puddles">Avoid acid puddles</option>
+<option value="Acid puddles move randomly">Acid puddles move randomly</option>
+<option value="Some walls can be shot and turn into good or bad">Some walls can be shot and turn into good or bad</option>
+<option value="Save keys to open doors or chests">Save keys to open doors or chests</option>
+<option value="There can be more than one trap">There can be more than one trap</option>
+<option value="Death disappears after&lt;br&gt;taking up to 200 health">Death disappears after&lt;br&gt;taking up to 200 health</option>
+<option value="Shoot super sorcerors">Shoot super sorcerors</option>
+</optgroup>
+<optgroup label="help:sanctuary extended">
+<option value="Monsters follow/attack player who is IT">Monsters follow/attack player who is IT</option>
+<option value="Some walls move randomly">Some walls move randomly</option>
+<option value="Some fake items can be shot">Some fake items can be shot</option>
+<option value="Walls may be invisible">Walls may be invisible</option>
+<option value="You have 10 seconds to respawn with coindrop key">You have 10 seconds to respawn with coindrop key</option>
+<option value="Some invisible walls can be shot">Some invisible walls can be shot</option>
+<option value="Pushwalls can be destroyed">Pushwalls can be destroyed</option>
+<option value="Poisoned: if poisoned you become dizzy">Poisoned: if poisoned you become dizzy</option>
+<option value="Cycle walls keep shifting">Cycle walls keep shifting</option>
+<option value="Random wall areas reshape at random">Random wall areas reshape at random</option>
+<option value="Water slows you down">Water slows you down</option>
+<option value="Lava is very dangerous&lt;br&gt;Avoid lava">Lava is very dangerous&lt;br&gt;Avoid lava</option>
+<option value="Toxic ooze is dangerous&lt;br&gt;Avoid slime">Toxic ooze is dangerous&lt;br&gt;Avoid slime</option>
+</optgroup>
+</select>
+</td></tr>
 
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lrelod" title="reload level"></td><td title="reload level from selected source(s)" bgcolor="#0000BB">reload level</td></tr>
 <tr><td align="center" bgcolor="#0000BB"><input type="checkbox" id="lfthis" title="load level from valid # or levels/*png"></td><td title="load level from valid # or levels/*png" bgcolor="#0000BB">#<input type="text" style="height:11px" value="" size="1" id="idxlvl" title="level number 0 - [max]">:<input type="text" style="height:11px" value="" size="4" id="fillvl" title="levels/*png - will load from map url select above if checkbox is checked"></td></tr>
