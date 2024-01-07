@@ -2543,6 +2543,10 @@ var 	vartxt = document.getElementById("varout");
 			if (document.getElementById("lfthis").checked) {
 				var idxlv = document.getElementById("idxlvl").value;
 				if (idxlv > 0 && idxlv < cfg.levels.length) idx_level = idxlv;
+// filesped override is above # override
+				if (document.getElementById("fillvl").value != "")
+					for (i = 0;i < cfg.levels.length;i++)
+						if (cfg.levels[i].url == document.getElementById("fillvl").value) idx_level = i;
 				}
 /// TEST - remove
 
@@ -2578,6 +2582,7 @@ var 	vartxt = document.getElementById("varout");
 		 if (tlevel > 7) 				// last level was treasure room
 		 {
 			 trdisp = true;			// display treasure room stats first
+			 nlevel = tlevel;
 			 idx_level = tlevel;		// saved level advance to inject treasure room - resume on nlevel
 			 tlevel  = 0;
 			 treasurerc = 0;		// reset chance after treasure room
@@ -3323,7 +3328,6 @@ var 	vartxt = document.getElementById("varout");
 		if (document.getElementById("lfthis").checked) {
 			var dlvl = document.getElementById("idxlvl").value;
 			if (dlvl > 0 && dlvl < cfg.levels.length) slvl = dlvl;
-//			idx_level = slvl;
 			}
 /// TEST - remove
 
