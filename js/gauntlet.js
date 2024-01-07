@@ -1627,6 +1627,7 @@ Gauntlet = function() {
 /// TEST - remove - this is a test of the random wall builder
 // wipe the walls out
 		if (repwalls) {
+			if (svrcnt == undefined) svrcnt = 1;
 		 svrnwalls = "";
 		 for(ty = 0 ; ty < Mth ; ty++)
 			for(tx = 0 ; tx < Mtw ; tx++)
@@ -2830,7 +2831,7 @@ var 	vartxt = document.getElementById("varout");
 
 // check level reload files
 // later add user option to turn off
-			var srvsek = 1, rerlod = 0;
+			var srvsek = 1, rerlod = 0; svrcnt = 1;
 			rerload();
 			while (SVRLOAD[srvsek] != undefined) {
 					if (SVRLOAD[srvsek] [1] == Mastermap.level.url) rerlod = srvsek;
@@ -3850,8 +3851,6 @@ if (document.getElementById("noclip").checked) return false;
           parser = level.plvl;
 
 		 cursor[0] = null;	// deactivate edit corsor
-
-		 if (svrcnt == undefined || svrcnt < 1) svrcnt = 1;
 
 // maze ed load up
 /// later we need to include override / svrload, so this will have to come from some master array MLOAD[] - and mapdata/ huedata will need to load from that in the event of overrides
