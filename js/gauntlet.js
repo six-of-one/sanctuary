@@ -2659,16 +2659,6 @@ var 	vartxt = document.getElementById("varout");
 			  $('booting').show();
 
 					var lvs = level.url;
-/// TEST - update
-/*					idx_level = nlevel;
-					if (document.getElementById("lfthis").checked) {
-						var idxlv = document.getElementById("idxlvl").value;
-						if (idxlv > 0 && idxlv < cfg.levels.length) {
-							lvs = cfg.levels[idxlv].url;
-							idx_level = idxlv;
-							}
-						}*/
-/// TEST - remove
 					level.plvl = Game.createImage(document.getElementById("plvl").value +"?cachebuster=" + VERSION);		// parse test
 					level.hued = Game.createImage("h"+lvs +"?cachebuster=" + VERSION);		// special color and hues map for a level
 					level.source = Game.createImage(lvs +"?cachebuster=" + VERSION, { onload: onloaded });
@@ -3333,7 +3323,7 @@ var 	vartxt = document.getElementById("varout");
 		if (document.getElementById("lfthis").checked) {
 			var dlvl = document.getElementById("idxlvl").value;
 			if (dlvl > 0 && dlvl < cfg.levels.length) slvl = dlvl;
-			idx_level = slvl;
+//			idx_level = slvl;
 			}
 /// TEST - remove
 
@@ -3809,14 +3799,7 @@ if (document.getElementById("noclip").checked) return false;
     setupLevel: function(nlevel) {
 
       var level  = cfg.levels[nlevel];
-		idxlv = nlevel;
-/*
-		if (document.getElementById("lfthis").checked) {
-			idx_level = document.getElementById("idxlvl").value;
-			if (idx_level > 0 && idx_level < cfg.levels.length) level = cfg.levels[idx_level];
-			else idx_level = nlevel;
-			}
-alert(level.url); */
+
       var source = level.source,
           hues = level.hued,
           parser = level.plvl;
@@ -3876,8 +3859,8 @@ alert(level.url); */
 
   var rndm, dfl = (diff_level > 9) ? 9 : diff_level;
 		if (pmir > 0)
-		if (idxlv >= stmir) {
-			rndm = pmir + (lvlp * idxlv);
+		if (nlevel >= stmir) {
+			rndm = pmir + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
@@ -3885,8 +3868,8 @@ alert(level.url); */
 			}
 
 		if (pflp > 0)
-		if (idxlv >= stflp) {
-			rndm = pflp + (lvlp * idxlv);
+		if (nlevel >= stflp) {
+			rndm = pflp + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
@@ -3894,8 +3877,8 @@ alert(level.url); */
 			}
 
 		if (prot > 0)
-		if (idxlv >= strot) {
-			rndm = prot + (lvlp * idxlv);
+		if (nlevel >= strot) {
+			rndm = prot + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
@@ -3903,8 +3886,8 @@ alert(level.url); */
 			}
 
 		if (punp > 0)
-		if (idxlv >= stunp) {
-			var r2 = (lvlp * idxlv);
+		if (nlevel >= stunp) {
+			var r2 = (lvlp * nlevel);
 			if (dfl > mids) r2 += incp * dfl;
 			else if (dfl < mids) r2 -= decp * dfl;
 			rndm = r2 + punp;
@@ -3921,8 +3904,8 @@ alert(level.url); */
 
 // note: code for these will no be complete until multiplayer is added...
 		if (psstun > 0)
-		if (idxlv >= ststun) {
-			rndm = psstun + (lvlp * idxlv);
+		if (nlevel >= ststun) {
+			rndm = psstun + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
@@ -3930,8 +3913,8 @@ alert(level.url); */
 			}
 
 		if (pshurt > 0)
-		if (idxlv >= sthurt) {
-			rndm = pshurt + (lvlp * idxlv);
+		if (nlevel >= sthurt) {
+			rndm = pshurt + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
@@ -3939,8 +3922,8 @@ alert(level.url); */
 			}
 
 		if (prinvw > 0)
-		if (idxlv >= rinvw) {
-			rndm = prinvw + (lvlp * idxlv);
+		if (nlevel >= rinvw) {
+			rndm = prinvw + (lvlp * nlevel);
 			if (dfl > mids) rndm += incp * dfl;
 			else if (dfl < mids) rndm -= decp * dfl;
 			if (rndm > maxpr) rndm = maxpr;
@@ -4038,7 +4021,7 @@ vartxt.value += "	]\n"
 //		pMapcell(tx, ty, Mapdata[tx + (ty*Mtw)], map, this);
 /// TEST - update
 
-      self.nlevel   = idxlv;
+      self.nlevel   = nlevel;
       self.level    = level;
       self.last     = nlevel === (cfg.levels.length-1);
       self.tw       = tw;
