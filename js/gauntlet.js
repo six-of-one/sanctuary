@@ -1936,7 +1936,7 @@ var 	vartxt = document.getElementById("varout");
 					if (ic < 169) ic = 50 * 50;	// if total cells not set properly just check 50x sq level size
 					for (i = 0;i <= ic;i++)
 						if (SVRLOAD[f][3][i] != undefined)
-							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \"0x"+SVRLOAD[f][3][i].toString(16);+"\";\n";
+							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \"0x"+SVRLOAD[f][3][i].toString(16)+"\";\n";
 				}
 
 				vartxt.value += "\n}\n\n";
@@ -1954,7 +1954,7 @@ var 	vartxt = document.getElementById("varout");
 					if (ic < 1089) ic = 300 * 300; // 1089 is std 33 x 33 level -- no practical way to estimate overload level sizes
 					for (i = 0;i <= ic;i++)
 						if (OVRLOAD[f][3][i] != undefined)
-							vartxt.value += "	OVRLOAD["+f+"][3]["+i+"] = \"0x"+OVRLOAD[f][3][i].toString(16);+"\";\n";
+							vartxt.value += "	OVRLOAD["+f+"][3]["+i+"] = \"0x"+OVRLOAD[f][3][i].toString(16)+"\";\n";
 				}
 				vartxt.value += "\n}\n\n";
 			}
@@ -2832,8 +2832,8 @@ var 	vartxt = document.getElementById("varout");
 // check level reload files
 // later add user option to turn off
 			var srvsek = 1, rerlod = 0; svrcnt = 1;
-			rerload();
-alert(svrcnt);
+			svrcnt = rerload();
+
 			while (SVRLOAD[srvsek] != undefined) {
 					if (SVRLOAD[srvsek][1] == Mastermap.level.url) rerlod = srvsek;
 					srvsek++;
@@ -2891,7 +2891,7 @@ alert(svrcnt);
 									if (fnd)
 									{
 											Mastermap.load_cell(cell.tx, cell.ty, RLPROF[f][0],Mastermap);
-											vartxt.value += "	SVRLOAD["+svrcnt+"][3]["+(cell.tx + cell.ty * Mtw)+"] = \"0x"+RLPROF[f][0].toString(16);+"\";   //  x: "+cell.tx +" y:  "+ cell.ty + ", w: "+Mtw+" h: "+Mth+ "\n";
+											vartxt.value += "	SVRLOAD["+svrcnt+"][3]["+(cell.tx + cell.ty * Mtw)+"] = \"0x"+RLPROF[f][0].toString(16)+"\";   //  x: "+cell.tx +" y:  "+ cell.ty + ", w: "+Mtw+" h: "+Mth+ "\n";
 											SVRLOAD[svrcnt][3][(cell.tx + cell.ty * Mtw)] = "0x"+RLPROF[f][0].toString(16);
 											cell.loaded = true;
 											RLOAD[f]--;
