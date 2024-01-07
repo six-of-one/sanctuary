@@ -2543,7 +2543,7 @@ var 	vartxt = document.getElementById("varout");
 			if (document.getElementById("lfthis").checked) {
 				var idxlv = document.getElementById("idxlvl").value;
 				if (idxlv > 0 && idxlv < cfg.levels.length) idx_level = idxlv;
-// filesped override is above # override
+// filespec override is above # override
 				if (document.getElementById("fillvl").value != "")
 					for (i = 0;i < cfg.levels.length;i++)
 						if (cfg.levels[i].url == document.getElementById("fillvl").value) idx_level = i;
@@ -2664,6 +2664,11 @@ var 	vartxt = document.getElementById("varout");
 			  $('booting').show();
 
 					var lvs = level.url;
+// attempting load of non cfg set level - likely to fail
+					if (document.getElementById("lfthis").checked) {
+// filespec override where url is not known
+						if (document.getElementById("fillvl").value != lvs) lvs = document.getElementById("fillvl").value;
+					}
 					level.plvl = Game.createImage(document.getElementById("plvl").value +"?cachebuster=" + VERSION);		// parse test
 					level.hued = Game.createImage("h"+lvs +"?cachebuster=" + VERSION);		// special color and hues map for a level
 					level.source = Game.createImage(lvs +"?cachebuster=" + VERSION, { onload: onloaded });
