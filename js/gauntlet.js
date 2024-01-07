@@ -1922,6 +1922,40 @@ var 	vartxt = document.getElementById("varout");
 				vartxt.value += "ESCORE["+f+"][1] = "+ESCORE[f][1]+";\n";
 			}
 		vartxt.value += "\n}\n\n";
+// svr save
+		if (document.getElementById("svsvr").checked) {
+				vartxt.value += "// SVRLOAD array\n";
+				vartxt.value += "function svrarr() {\n\n";
+				for (f = 5;f <= svrcnt;f++)
+				if (SVRLOAD[f] != undefined)
+				{
+					vartxt.value += "	SVRLOAD["+f+"] = [ ];\n	SVRLOAD["+f+"][1] = \""+SVRLOAD[f][1]+"\";\n	SVRLOAD["+f+"][2] = \""+SVRLOAD[f][2]+"\";\n	SVRLOAD["+f+"][3] = [ ];\n	SVRLOAD["+f+"][4] =\""+SVRLOAD[f][4]+"\";\n";
+			var	ic = SVRLOAD[f][4];
+					if (ic < 169) ic = 50 * 50;	// if total cells not set properly just check 50x sq level size
+					for (i = 0;i <= ic;i++)
+						if (SVRLOAD[f][3][i] != undefined)
+							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \""+SVRLOAD[f][3][i]+"\";";
+				}
+
+				vartxt.value += "\n}\n\n";
+			}
+// ovr save
+		if (document.getElementById("svovr").checked) {
+				vartxt.value += "// OVRLOAD array\n";
+				vartxt.value += "function ovrarr() {\n\n";
+		var	maxovr = 700000; // will there ever be 700K level overrides?
+				for (f = 5;f <= maxovr;f++)
+				if (OVRLOAD[f] != undefined)
+				{
+					vartxt.value += "	OVRLOAD["+f+"] = [ ];\n	OVRLOAD["+f+"][1] = \""+OVRLOAD[f][1]+"\";\n	OVRLOAD["+f+"][2] = \""+OVRLOAD[f][2]+"\";\n	OVRLOAD["+f+"][3] = [ ];\n	OVRLOAD["+f+"][4] =\""+OVRLOAD[f][4]+"\";\n";
+			var	ic = OVRLOAD[f][4];
+					if (ic < 1089) ic = 300 * 300; // 1089 is std 33 x 33 level -- no practical way to estimate overload level sizes
+					for (i = 0;i <= ic;i++)
+						if (OVRLOAD[f][3][i] != undefined)
+							vartxt.value += "	OVRLOAD["+f+"][3]["+i+"] = \""+OVRLOAD[f][3][i]+"\";";
+				}
+				vartxt.value += "\n}\n\n";
+			}
 		}
 
   //=========================================================================
