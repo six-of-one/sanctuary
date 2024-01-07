@@ -19,6 +19,7 @@ function rerload() {
 
 // test rnd 1b
 	svrcnt = 19;
+
 	SVRLOAD[1] = [ ];
 	SVRLOAD[1][1] = "levels/glevel7.png";
 	SVRLOAD[1][2] = "Level 7";
@@ -3620,6 +3621,7 @@ SVRLOAD[2] = [ ];
 	SVRLOAD[18][3][115] = "4194320";   //  x: 16 y:  3, w: 33 h: 33
 	SVRLOAD[18][3][1044] = "4194320";   //  x: 21 y:  31, w: 33 h: 33
 
+	return(svrcnt);
 }
 
 /*

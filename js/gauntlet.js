@@ -1927,7 +1927,7 @@ var 	vartxt = document.getElementById("varout");
 		if (document.getElementById("svsvr").checked) {
 				vartxt.value += "// SVRLOAD array\n";
 				vartxt.value += "function svrarr() {\n\n";
-			alert(srvcnt);
+			alert(svrcnt);
 				for (f = 0;f <= svrcnt;f++)
 				if (SVRLOAD[f] != undefined)
 				{
@@ -2833,8 +2833,9 @@ var 	vartxt = document.getElementById("varout");
 // later add user option to turn off
 			var srvsek = 1, rerlod = 0; svrcnt = 1;
 			rerload();
+alert(svrcnt);
 			while (SVRLOAD[srvsek] != undefined) {
-					if (SVRLOAD[srvsek] [1] == Mastermap.level.url) rerlod = srvsek;
+					if (SVRLOAD[srvsek][1] == Mastermap.level.url) rerlod = srvsek;
 					srvsek++;
 				}
 
