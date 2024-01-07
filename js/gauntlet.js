@@ -1926,7 +1926,7 @@ var 	vartxt = document.getElementById("varout");
 		if (document.getElementById("svsvr").checked) {
 				vartxt.value += "// SVRLOAD array\n";
 				vartxt.value += "function svrarr() {\n\n";
-				for (f = 5;f <= svrcnt;f++)
+				for (f = 0;f <= svrcnt;f++)
 				if (SVRLOAD[f] != undefined)
 				{
 					vartxt.value += "	SVRLOAD["+f+"] = [ ];\n	SVRLOAD["+f+"][1] = \""+SVRLOAD[f][1]+"\";\n	SVRLOAD["+f+"][2] = \""+SVRLOAD[f][2]+"\";\n	SVRLOAD["+f+"][3] = [ ];\n	SVRLOAD["+f+"][4] =\""+SVRLOAD[f][4]+"\";\n";
@@ -2900,6 +2900,7 @@ var 	vartxt = document.getElementById("varout");
 					}
 					vartxt.value += svrnwalls;		// add in random walls
 					svrcnt++;
+					vartxt.value += "	svrcnt = "+svrcnt+";\n"
 			}
 /// TEST - remove
 			else

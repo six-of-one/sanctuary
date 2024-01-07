@@ -18,6 +18,7 @@
 function rerload() {
 
 // test rnd 1b
+	svrcnt = 19;
 	SVRLOAD[1] = [ ];
 	SVRLOAD[1][1] = "levels/glevel7.png";
 	SVRLOAD[1][2] = "Level 7";
