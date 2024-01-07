@@ -680,7 +680,7 @@ Gauntlet = function() {
 // rnd load profiles
 		rlloop = 33,
 		rlline = 9,
-		svrcnt = 1, svrnwalls,
+		svrcnt, svrnwalls,
 	RLPROF = [
 [	0x008090,  1,  0,  0,  0,  0,  0,  0,  2,  1,  0,  1,  1	],
 [	0x008050,  1,  1,  1,  0,  3,  1,  0,  1,  2,  0,  1,  0	],
@@ -1926,6 +1926,7 @@ var 	vartxt = document.getElementById("varout");
 		if (document.getElementById("svsvr").checked) {
 				vartxt.value += "// SVRLOAD array\n";
 				vartxt.value += "function svrarr() {\n\n";
+			alert(srvcnt);
 				for (f = 0;f <= svrcnt;f++)
 				if (SVRLOAD[f] != undefined)
 				{
@@ -1934,7 +1935,7 @@ var 	vartxt = document.getElementById("varout");
 					if (ic < 169) ic = 50 * 50;	// if total cells not set properly just check 50x sq level size
 					for (i = 0;i <= ic;i++)
 						if (SVRLOAD[f][3][i] != undefined)
-							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \""+SVRLOAD[f][3][i]+"\";";
+							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \"0x"+SVRLOAD[f][3][i].toString(16);+"\";\n";
 				}
 
 				vartxt.value += "\n}\n\n";
@@ -1952,7 +1953,7 @@ var 	vartxt = document.getElementById("varout");
 					if (ic < 1089) ic = 300 * 300; // 1089 is std 33 x 33 level -- no practical way to estimate overload level sizes
 					for (i = 0;i <= ic;i++)
 						if (OVRLOAD[f][3][i] != undefined)
-							vartxt.value += "	OVRLOAD["+f+"][3]["+i+"] = \""+OVRLOAD[f][3][i]+"\";";
+							vartxt.value += "	OVRLOAD["+f+"][3]["+i+"] = \"0x"+OVRLOAD[f][3][i].toString(16);+"\";\n";
 				}
 				vartxt.value += "\n}\n\n";
 			}
@@ -3849,6 +3850,8 @@ if (document.getElementById("noclip").checked) return false;
           parser = level.plvl;
 
 		 cursor[0] = null;	// deactivate edit corsor
+
+		 if (svrcnt == undefined || svrcnt < 1) svrcnt = 1;
 
 // maze ed load up
 /// later we need to include override / svrload, so this will have to come from some master array MLOAD[] - and mapdata/ huedata will need to load from that in the event of overrides
