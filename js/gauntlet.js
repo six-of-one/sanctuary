@@ -32,6 +32,8 @@ Gauntlet = function() {
 // set rnd_level true to indicate running rnd levels from here on out
 		loop_level = 8,
 		rnd_level = 0,
+// the actual index to load from cfg levels
+		idx_level,
 // 30% chance to play g4sec short intro
 		g4rc = 0.3,
 // save to pointers. -> reload level parts, walls to exits, stall open doors, play sounds for those, and so on
@@ -2535,6 +2537,15 @@ var 	vartxt = document.getElementById("varout");
 			 		nlevel = initlevel;
 					initlevel = 0;
 		 }
+// overload nlevel
+/// TEST - update
+			idx_level = nlevel;
+			if (document.getElementById("lfthis").checked) {
+				var idxlv = document.getElementById("idxlvl").value;
+				if (idxlv > 0 && idxlv < cfg.levels.length) idx_level = idxlv;
+				}
+/// TEST - remove
+
 // reset theif trax
 					thieftrack = 0;
 					thiefexit = false;
@@ -2559,7 +2570,7 @@ var 	vartxt = document.getElementById("varout");
 // randomly play 4 sec intro title bit on these levels
 				}
 		 }
-		 leveldisp = "<br>LEVEL:&nbsp&nbsp "+nlevel;
+		 leveldisp = "<br>LEVEL:&nbsp&nbsp "+idx_level;
 		 levelhelp = undefined;
 		 potionhelp = "";
 		 trdisp = false;
@@ -2567,7 +2578,7 @@ var 	vartxt = document.getElementById("varout");
 		 if (tlevel > 7) 				// last level was treasure room
 		 {
 			 trdisp = true;			// display treasure room stats first
-			 nlevel = tlevel;		// saved level advance to inject treasure room - resume on nlevel
+			 idx_level = tlevel;		// saved level advance to inject treasure room - resume on nlevel
 			 tlevel  = 0;
 			 treasurerc = 0;		// reset chance after treasure room
 // still :
@@ -2577,9 +2588,9 @@ var 	vartxt = document.getElementById("varout");
 		 if (treasurerc >= Math.random())		// test for treasure room rnd chance
 		 {
 				troomfin = false;
-				tlevel = nlevel;
+				tlevel = idx_level;
 				sk = Math.floor(Math.random() * (c - 1));
-				nlevel = TREASUREROOM[sk].lvl;
+				idx_level = TREASUREROOM[sk].lvl;
 				troomtime = TREASUREROOM[sk].rtime;	// run time
 				leveldisp = "<br>TREASURE ROOM";
 				levelhelp = HELPDIS[nohlptr].replace("#",troomtime) + "<br><br>" + HELPDIS[nohlpmstex];
@@ -2599,7 +2610,7 @@ var 	vartxt = document.getElementById("varout");
 // 1 - 2nd level after
 // 2 - 3rd level after
 // start room check again
-				if (nlevel > 9)			// not needed before - logic changed...
+				if (idx_level > 9)			// not needed before - logic changed...
 				if (tlevel > 1)			// wait 3 levels then start rand checks
 					treasurerc = treasurerc + 0.37;
 				else
@@ -2619,7 +2630,7 @@ var 	vartxt = document.getElementById("varout");
 			}
 
 // check for hidden potions
-		if (nlevel > 5)
+		if (idx_level > 5)
 		{
 				spotionloop++;
 				if (spotionloop > 2) spotionlv = 1;
@@ -2635,9 +2646,9 @@ var 	vartxt = document.getElementById("varout");
 				}
 		}
 
-      var level    = cfg.levels[nlevel],
+      var level    = cfg.levels[idx_level],
 		self     = this,
-		onloaded = function() { $('booting').hide(); self.play(new Map(nlevel)); };
+		onloaded = function() { $('booting').hide(); self.play(new Map(idx_level)); };
 		document.getElementById("gfloor").src = level.gflr;		// set this here so its ready on map build
 		if (level.gwal != undefined) document.getElementById("gwall").src = level.gwal;		// set this here so its ready on map build
       if (level.source) {
@@ -2649,11 +2660,14 @@ var 	vartxt = document.getElementById("varout");
 
 					var lvs = level.url;
 /// TEST - update
-
+/*					idx_level = nlevel;
 					if (document.getElementById("lfthis").checked) {
 						var idxlv = document.getElementById("idxlvl").value;
-						if (idxlv > 0 && idxlv < cfg.levels.length) lvs = cfg.levels[idxlv].url;
-						}
+						if (idxlv > 0 && idxlv < cfg.levels.length) {
+							lvs = cfg.levels[idxlv].url;
+							idx_level = idxlv;
+							}
+						}*/
 /// TEST - remove
 					level.plvl = Game.createImage(document.getElementById("plvl").value +"?cachebuster=" + VERSION);		// parse test
 					level.hued = Game.createImage("h"+lvs +"?cachebuster=" + VERSION);		// special color and hues map for a level
@@ -3315,9 +3329,12 @@ var 	vartxt = document.getElementById("varout");
 			var slvl = to.number(document.getElementById("sellvl").value, 1);
 			if (slvl == 8) slvl = to.number(this.storage[STORAGE.NLEVEL], 1);
 /// TEST - remove
-// dev - override level load with an internal level number
-	var dlvl = to.number(document.getElementById("nlvl").value, 1);
-		 if (dlvl > 7) slvl = dlvl;
+// ed - override level load with an internal level number
+		if (document.getElementById("lfthis").checked) {
+			var dlvl = document.getElementById("idxlvl").value;
+			if (dlvl > 0 && dlvl < cfg.levels.length) slvl = dlvl;
+			idx_level = slvl;
+			}
 /// TEST - remove
 
 			return slvl;
@@ -3792,14 +3809,14 @@ if (document.getElementById("noclip").checked) return false;
     setupLevel: function(nlevel) {
 
       var level  = cfg.levels[nlevel];
-		var idxlv = nlevel;
-
+		idxlv = nlevel;
+/*
 		if (document.getElementById("lfthis").checked) {
-			idxlv = document.getElementById("idxlvl").value;
-			if (idxlv > 0 && idxlv < cfg.levels.length) level = cfg.levels[idxlv];
-			else idxlv = nlevel;
+			idx_level = document.getElementById("idxlvl").value;
+			if (idx_level > 0 && idx_level < cfg.levels.length) level = cfg.levels[idx_level];
+			else idx_level = nlevel;
 			}
-alert(level.url);
+alert(level.url); */
       var source = level.source,
           hues = level.hued,
           parser = level.plvl;
