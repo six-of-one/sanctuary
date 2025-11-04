@@ -129,7 +129,7 @@ Gauntlet = function() {
 // handle death potion bomb rotating score -
 //				note: NON g1, this is multiplied by moded score x {1 or 1.333} by current code!
 		Deathmult, Dmmax = 7,
-		Deathscore = [1000, 4000, 2000, 6000, 1000, 8000, 1000, 2000],
+		Deathscore = [1000, 4000, 2000, 6000, 2000, 8000, 1000, 2000],
 // give notice after potion burst of death pts
 		Deathnote = [0, 2, 1, 3, 0, 4, 0, 1 ],
 // 5 = 100, 6 = 500 for treasure pts & keys
@@ -1626,7 +1626,7 @@ Gauntlet = function() {
 
 /// TEST - remove - this is a test of the random wall builder
 // wipe the walls out
-		if (repwalls) {
+		if (repwalls & 0) {
 			if (svrcnt == undefined) svrcnt = 1;
 		 svrnwalls = "";
 		 for(ty = 0 ; ty < Mth ; ty++)
