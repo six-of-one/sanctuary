@@ -1927,7 +1927,6 @@ var 	vartxt = document.getElementById("varout");
 		if (document.getElementById("svsvr").checked) {
 				vartxt.value += "// SVRLOAD array\n";
 				vartxt.value += "function svrarr() {\n\n";
-			alert(svrcnt);
 				for (f = 0;f <= svrcnt;f++)
 				if (SVRLOAD[f] != undefined)
 				{

@@ -57,6 +57,9 @@ OVRLOAD - load instead of mapdata from url
 SVRLOAD - load on top of mapdata from url
 
 
+How random are the results?
+To generate a random spin result the website uses a JavaScript programming language method Crypto.getRandomValues() under the hood (where available; in some old browsers Math.random() is used).
+
 imm issues:
 
 may want to up max skill that stores highscores
@@ -155,6 +158,7 @@ companion potion: cat face on blue potion
 - will stay with you until you die, then they are released
 -
 - ghosts kill accd to level on touch - 1st level ghost kills 1 level of enemy
+ \_ disappear & reform multiple times
 - grunts beat on enemies and loot treasure, transfer to you on touch
 - demons shoot things and collect food
 - sorcerors pick up potions and they can detonate as elf (good for war, val)
@@ -437,6 +441,12 @@ more powerful enemies may drop items - food, treasure, weapons, etc
 randomly leave out wall -> exit if more than {X} wall segs
 yellow teleports that can (possibly player) select further away
 blue or purple teleports that are unit linked - not to nearest visible
+- blue teles go to other rnd blue teles (unless only 1 or 2)
+- purple teles go to any other rnd red tele (but not a purple one)
+- green teles go to a spe. potion or other high end item
+- black tele goes to rnd chosen death if any
+- a [X] color tele that goes to exit
+
 pushable or shootable walls to temp block a teleport
 respawning generators (none respawn > level 4)
 enhance invisible wall code so - shots, potions, or some limited item makes walls slightly visible
@@ -476,6 +486,11 @@ land of lost pylon or other seperate dim space rooms that open above maze while 
 some type of flying ent, poss player controlled
 pets / helpers (e.g. magic sword companions)
 
+special potion upgrade:
+collect multiple increase by a % up to limit
+-- busting 10 poptions in rapid succ. will perm boost magic power by 10% * # x-magic power collected
+-- at 100% boost, magic power green bottle turns red - can now be used vs. boss for 1% dmg per potion held, fires all potions at once
+
 inventory system past keys, potions & specials
 - base hold 6 items
 - swap special potions, temporary items (freeze at count & store that)
@@ -505,6 +520,24 @@ player stats:		(once we have name keeping)
 - damage taken, tot autohurt
 - each type of monster & gen destroyed
 - total play stats per life & poss per map stats
+- clearing a dungeon in world game
+
+world game idea:
+
+from act-raiser - an overworld, travel between villages
+- on ground: style or vict road, commando, interspersed with dungeon elements "ruins"
+- flying: act-raiser village land overview
+- villages small, medium
+- med. villages have dungeon (g levels & rogue gen [fargoal])
+-- quest for some aspect to make villager life better
+- buy / trade with villagers
+- villages grow when no monsters around [plyer led expand like actrsr ?]
+- rewards for dungeon finish (some boss fight occasionally)
+-- 1st - g1 (x levels), key to release barrier
+-- mounts, flyers
+-- armor, weps, tools [port hole, bags holding, etc], other bonuses, clues or maps
+- at night, monsters may appear dep on loc (closer to dung, farther from vilag)
+
 
 crossovers interested in:
 
@@ -792,7 +825,7 @@ x-- level 1 & 2 gens & monsters set in level
 x-- monster / generator levels ? - by score and monster health I am not sure this is implemented the same as gauntlet arcade
 	- done visually, health & kill must be tested vs. player shots
 
-x-- multi point death potion kill = 1000, 2000,1000, 4000, 2000, 6000, 2000, 8000
+x-- multi point death potion kill = 1000, 2000, 1000, 4000, 2000, 6000, 2000, 8000
 
 x-- score multiplier - _______- since multi-player isnt finished I'll gather this was left unfinished as well
 	- a single player "times out" multiplier is done
