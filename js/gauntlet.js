@@ -12,6 +12,12 @@ Gauntlet = function() {
 // debug - provide a one time start level
 											initlevel = 0,
 	vardbg = 0, dent, d1, d2, bb = 0, PARSE,
+
+// TEST AREA - controls all switchable test code
+	T_REPWAL = true,
+
+/// end debug tier
+
 // maze edit cursor
 	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 35, cdsy = 10, crlast, gedits,
 // edit items - the pixel add code
@@ -21,7 +27,6 @@ Gauntlet = function() {
 	crlsx =  [ 17, 21, 20, 16,  0,  31, 23 ],
 	crlsy =  [ 10, 10, 10, 10, 10,  10, 10 ],
 
-/// end debug tier
 // music control - needs user interf
 // this turns off the ver 1.0.0 background music when true
 /// before restoring music load must be cleaned up !
@@ -1626,7 +1631,7 @@ Gauntlet = function() {
 
 /// TEST - remove - this is a test of the random wall builder
 // wipe the walls out
-		if (repwalls & 0) {
+		if (repwalls & T_REPWAL) {
 			if (svrcnt == undefined) svrcnt = 1;
 		 svrnwalls = "";
 		 for(ty = 0 ; ty < Mth ; ty++)
@@ -2572,7 +2577,7 @@ var 	vartxt = document.getElementById("varout");
 			 		nlevel = initlevel;
 					initlevel = 0;
 		 }
-// overload nlevel
+// overload nlevel -- editar options, not test
 /// TEST - update
 			idx_level = nlevel;
 			if (document.getElementById("lfthis").checked) {
@@ -3724,6 +3729,7 @@ var 	vartxt = document.getElementById("varout");
         return game.player;
 /// TEST - remove
 //var celpr = " c:";
+/// TEST - remove
       // now loop again checking for walls and other entities
       for(c = 0 ; c < nc ; c++) {
         cell = cells[c];
