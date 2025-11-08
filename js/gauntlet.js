@@ -18,6 +18,7 @@ Gauntlet = function() {
 
 /// end debug tier
 
+
 // maze edit cursor
 	cursor = [ ], crx = 1, cry = 2, critm = 3, crblink, cdsx = 35, cdsy = 10, crlast, gedits,
 // edit items - the pixel add code
