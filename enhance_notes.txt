@@ -166,7 +166,8 @@ companion potion: cat face on blue potion
 - death - does buku touch damage to all enemies except other death
 - acid blob - does large damage as well and wobbles around
 - super sorceror also have shot, wizard lvl potion skill, teleport behind walls to attack
-
+- wont kill same type (grunt vs. grunt, ghost vs ghost etc) but will block
+ \_ except: acid blob
 
 limits on g1, g2, sanctuary (items, monsters, modes, extras ...)
 \_selectable list of options for std elements, extras, overrides, etc
