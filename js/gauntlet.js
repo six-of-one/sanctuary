@@ -2011,27 +2011,6 @@ var 	vartxt = document.getElementById("varout");
                 ESCORE[i + md][0] = ESCORE[i][0];
                 ESCORE[i + md][1] = ESCORE[i][1];
               }
-// fix 'undefined' names in table
-          var res = "";
-          var resb = "";
-          var resc = "";
-          var resd = "";
-          var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ_"; // 1234567890._ ";
-          for (var j = 0; j < 3; j++) {
-            var rnd = Math.floor(Math.random() * ablist.length);
-            res = res + ablist.charAt(rnd);
-			rnd = Math.floor(Math.random() * ablist.length);
-            resb = resb + ablist.charAt(rnd);
-			rnd = Math.floor(Math.random() * ablist.length);
-            resc = resc + ablist.charAt(rnd);
-			rnd = Math.floor(Math.random() * ablist.length);
-            resd = resd + ablist.charAt(rnd);
-          }
-ref.storage[STORAGE.NZ2] = res;
-ref.storage[STORAGE.NW1] = resb;
-ref.storage[STORAGE.NV1] = resc;
-ref.storage[STORAGE.NE1] = resd;
-// end fix invalid name
 
           ZSCORE[1][0] = to.number(ref.storage[STORAGE.Z1], 19830);
           ZSCORE[1][1] = ref.storage[STORAGE.NZ1];
