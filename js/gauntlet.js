@@ -1998,80 +1998,81 @@ var 	vartxt = document.getElementById("varout");
 // if given ref, load top 4
 				if (sloc != undefined) ref = sloc;
 				if (ref != undefined) {
-					if (sinit) // a score init happned - move scores down for top 4
-						for (var i = scorviewmax; i > 0; i--)
-							if (i + md <= scorviewmax) {
-								ZSCORE[i + md][0] = ZSCORE[i][0];
-								ZSCORE[i + md][1] = ZSCORE[i][1];
-								WSCORE[i + md][0] = WSCORE[i][0];
-								WSCORE[i + md][1] = WSCORE[i][1];
-								VSCORE[i + md][0] = VSCORE[i][0];
-								VSCORE[i + md][1] = VSCORE[i][1];
-								ESCORE[i + md][0] = ESCORE[i][0];
-								ESCORE[i + md][1] = ESCORE[i][1];
-							}
+          if (sinit)
+            // a score init happned - move scores down for top 4
+            for (var i = scorviewmax; i > 0; i--)
+              if (i + md <= scorviewmax) {
+                ZSCORE[i + md][0] = ZSCORE[i][0];
+                ZSCORE[i + md][1] = ZSCORE[i][1];
+                WSCORE[i + md][0] = WSCORE[i][0];
+                WSCORE[i + md][1] = WSCORE[i][1];
+                VSCORE[i + md][0] = VSCORE[i][0];
+                VSCORE[i + md][1] = VSCORE[i][1];
+                ESCORE[i + md][0] = ESCORE[i][0];
+                ESCORE[i + md][1] = ESCORE[i][1];
+              }
+// fix 'undefined' names in table
+          var res = "";
+          var resb = "";
+          var resc = "";
+          var resd = "";
+          var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ_"; // 1234567890._ ";
+          for (var j = 0; j < 3; j++) {
+            var rnd = Math.floor(Math.random() * ablist.length);
+            res = res + ablist.charAt(rnd);
+            resb = resb + ablist.charAt(Math.max(rnd + 2, ablist.length));
+            resc = resc + ablist.charAt(Math.max(rnd + 4, ablist.length));
+            resd = resd + ablist.charAt(Math.min(rnd - 3, 1));
+          }
+ref.storage[STORAGE.NZ1] = res;
+ref.storage[STORAGE.NW1] = resb;
+ref.storage[STORAGE.NV1] = resc;
+ref.storage[STORAGE.NE1] = resd;
+// end fix invalid name
 
-					ZSCORE[1][0] = to.number(ref.storage[STORAGE.Z1],19830);
-					ZSCORE[1][1] = ref.storage[STORAGE.NZ1];
-					WSCORE[1][0] = to.number(ref.storage[STORAGE.W1],10000);
-					WSCORE[1][1] = ref.storage[STORAGE.NW1];
-					VSCORE[1][0] = to.number(ref.storage[STORAGE.V1],10000);
-					VSCORE[1][1] = ref.storage[STORAGE.NV1];
-					ESCORE[1][0] = to.number(ref.storage[STORAGE.E1],10000);
-					ESCORE[1][1] = ref.storage[STORAGE.NE1];
+          ZSCORE[1][0] = to.number(ref.storage[STORAGE.Z1], 19830);
+          ZSCORE[1][1] = ref.storage[STORAGE.NZ1];
+          WSCORE[1][0] = to.number(ref.storage[STORAGE.W1], 10000);
+          WSCORE[1][1] = ref.storage[STORAGE.NW1];
+          VSCORE[1][0] = to.number(ref.storage[STORAGE.V1], 10000);
+          VSCORE[1][1] = ref.storage[STORAGE.NV1];
+          ESCORE[1][0] = to.number(ref.storage[STORAGE.E1], 10000);
+          ESCORE[1][1] = ref.storage[STORAGE.NE1];
 
-					ZSCORE[2][0] = to.number(ref.storage[STORAGE.Z2],9500);
-					ZSCORE[2][1] = ref.storage[STORAGE.NZ2];
-					if (ZSCORE[2][1] < " ") ZSCORE[2][1] = " Z ";
-					WSCORE[2][0] = to.number(ref.storage[STORAGE.W2],9500);
-					WSCORE[2][1] = ref.storage[STORAGE.NW2];
-					if (WSCORE[2][1] < " ") WSCORE[2][1] = "RS ";
-					VSCORE[2][0] = to.number(ref.storage[STORAGE.V2],9500);
-					VSCORE[2][1] = ref.storage[STORAGE.NV2];
-					if (VSCORE[2][1] < " ") VSCORE[2][1] = "BH ";
-					ESCORE[2][0] = to.number(ref.storage[STORAGE.E2],9500);
-					ESCORE[2][1] = ref.storage[STORAGE.NE2];
-					if (ESCORE[2][1] < " ") ESCORE[2][1] = " _ ";
+          ZSCORE[2][0] = to.number(ref.storage[STORAGE.Z2], 9500);
+          ZSCORE[2][1] = ref.storage[STORAGE.NZ2];
+          if (ZSCORE[2][1] < " ") ZSCORE[2][1] = " Z ";
+          WSCORE[2][0] = to.number(ref.storage[STORAGE.W2], 9500);
+          WSCORE[2][1] = ref.storage[STORAGE.NW2];
+          if (WSCORE[2][1] < " ") WSCORE[2][1] = "RS ";
+          VSCORE[2][0] = to.number(ref.storage[STORAGE.V2], 9500);
+          VSCORE[2][1] = ref.storage[STORAGE.NV2];
+          if (VSCORE[2][1] < " ") VSCORE[2][1] = "BH ";
+          ESCORE[2][0] = to.number(ref.storage[STORAGE.E2], 9500);
+          ESCORE[2][1] = ref.storage[STORAGE.NE2];
+          if (ESCORE[2][1] < " ") ESCORE[2][1] = " _ ";
 
-					ZSCORE[3][0] = to.number(ref.storage[STORAGE.Z3],9000);
-					ZSCORE[3][1] = ref.storage[STORAGE.NZ3];
-					WSCORE[3][0] = to.number(ref.storage[STORAGE.W3],9000);
-					WSCORE[3][1] = ref.storage[STORAGE.NW3];
-					VSCORE[3][0] = to.number(ref.storage[STORAGE.V3],9000);
-					VSCORE[3][1] = ref.storage[STORAGE.NV3];
-					ESCORE[3][0] = to.number(ref.storage[STORAGE.E3],9000);
-					ESCORE[3][1] = ref.storage[STORAGE.NE3];
+          ZSCORE[3][0] = to.number(ref.storage[STORAGE.Z3], 9000);
+          ZSCORE[3][1] = ref.storage[STORAGE.NZ3];
+          WSCORE[3][0] = to.number(ref.storage[STORAGE.W3], 9000);
+          WSCORE[3][1] = ref.storage[STORAGE.NW3];
+          VSCORE[3][0] = to.number(ref.storage[STORAGE.V3], 9000);
+          VSCORE[3][1] = ref.storage[STORAGE.NV3];
+          ESCORE[3][0] = to.number(ref.storage[STORAGE.E3], 9000);
+          ESCORE[3][1] = ref.storage[STORAGE.NE3];
 
-					ZSCORE[4][0] = to.number(ref.storage[STORAGE.Z4],8500);
-					ZSCORE[4][1] = ref.storage[STORAGE.NZ4];
-					WSCORE[4][0] = to.number(ref.storage[STORAGE.W4],8500);
-					WSCORE[4][1] = ref.storage[STORAGE.NW4];
-					VSCORE[4][0] = to.number(ref.storage[STORAGE.V4],8500);
-					VSCORE[4][1] = ref.storage[STORAGE.NV4];
-					ESCORE[4][0] = to.number(ref.storage[STORAGE.E4],8500);
-					ESCORE[4][1] = ref.storage[STORAGE.NE4];
-				}
+          ZSCORE[4][0] = to.number(ref.storage[STORAGE.Z4], 8500);
+          ZSCORE[4][1] = ref.storage[STORAGE.NZ4];
+          WSCORE[4][0] = to.number(ref.storage[STORAGE.W4], 8500);
+          WSCORE[4][1] = ref.storage[STORAGE.NW4];
+          VSCORE[4][0] = to.number(ref.storage[STORAGE.V4], 8500);
+          VSCORE[4][1] = ref.storage[STORAGE.NV4];
+          ESCORE[4][0] = to.number(ref.storage[STORAGE.E4], 8500);
+          ESCORE[4][1] = ref.storage[STORAGE.NE4];
+        }
 
 				for (var i = 1; i <= scorviewmax; i++)
 				{
-// fix 'undefined' names in table
-					var res = "";
-					var resb = "";
-					var resc = "";
-					var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ_"; // 1234567890._ ";
-					for (var j = 0; j < 3; j++) {
-						var rnd = Math.floor(Math.random() * ablist.length);
-						res = res + ablist.charAt(rnd);
-						resb = resb + ablist.charAt(Math.max(rnd + 2, ablist.length));
-						resc = resc + ablist.charAt(Math.max(rnd + 4, ablist.length));
-					}
-					if (i < 5) {
-						ZSCORE[i][1] = res;
-						WSCORE[i][1] = resb;
-						VSCORE[i][1] = resc;
-						ESCORE[i][1] = resb;
-					}
-// end fix invalid name
 					document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+WSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+WSCORE[i][0]+'</TD></TR>';
 					if (sinit) {
 						document.getElementById("oscor"+i).innerHTML = ZSCORE[i][0];
