@@ -2054,6 +2054,20 @@ var 	vartxt = document.getElementById("varout");
 
 				for (var i = 1; i <= scorviewmax; i++)
 				{
+// fix 'undefined' names in table
+					var res = "";
+					var resb = "";
+					var ablist = "ABCDEFGHIJKLMNPQRSTUVWXYZ_"; // 1234567890._ ";
+					for (var i = 0; i < 3; i++) {
+						var rnd = Math.floor(Math.random() * ablist.length);
+						res = res + ablist.charAt(rnd);
+						resb = resb + ablist.charAt(Math.max(rnd + 2, ablist.length));
+					}
+					if (ZSCORE[i][1] == "undefined") ZSCORE[i][1] = res;
+					if (WSCORE[i][1] == "undefined") WSCORE[i][1] = resb;
+					if (VSCORE[i][1] == "undefined") VSCORE[i][1] = res;
+					if (ESCORE[i][1] == "undefined") ESCORE[i][1] = resb;
+// end fix invalid name
 					document.getElementById("warscor").innerHTML += '<TR><TD style="width:10%;">'+(i)+'</TD><TD style="width:30%;">'+WSCORE[i][1]+'</TD><TD style="width:60%;text-align:right">'+WSCORE[i][0]+'</TD></TR>';
 					if (sinit) {
 						document.getElementById("oscor"+i).innerHTML = ZSCORE[i][0];
