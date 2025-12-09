@@ -1941,9 +1941,10 @@ f = 1;
 					var ic = reloaded.cells.length;
 //					vartxt.value += "	SVRLOAD["+f+"] = [ ];\n	SVRLOAD["+f+"][1] = \""+SVRLOAD[f][1]+"\";\n	SVRLOAD["+f+"][2] = \""+SVRLOAD[f][2]+"\";\n	SVRLOAD["+f+"][3] = [ ];\n	SVRLOAD["+f+"][4] =\""+SVRLOAD[f][4]+"\";\n";
 					vartxt.value += "	SVRLOAD["+f+"] = [ ];\n	SVRLOAD["+f+"][1] = \""+Mastermap.level.url+"\";\n	SVRLOAD["+f+"][2] = \""+Mastermap.level.name+"\";\n	SVRLOAD["+f+"][3] = [ ];\n	SVRLOAD["+f+"][4] =\""+ic+"\";\n";
-					if (ic < 169) ic = 50 * 50;	// if total cells not set properly just check 50x sq level size
+//					if (ic < 169) ic = 50 * 50;	// if total cells not set properly just check 50x sq level size
 					for (i = 0;i <= ic;i++)
-						if (SVRLOAD[f][3][i] != undefined)
+//						if (SVRLOAD[f][3][i] != undefined)
+						if (Mapdata[i] != undefined)
 //							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \"0x"+SVRLOAD[f][3][i].toString(16)+"\";\n";
 							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \"0x"+Mapdata[i].toString(16)+"\";\n";
 /*						else
