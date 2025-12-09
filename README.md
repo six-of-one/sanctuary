@@ -13,7 +13,8 @@ SUPPORTED BROWSERS
  - this is still a mixed bag - different browsers may have vars issues
  - the following command (python 3 required) will run a local server
  -            python3 -m http.server -b "::" 8080
- -  \_ connect by loading http://127.0.0.1:8080
+ - run in dir with index.html, load address http://127.0.0.1:8080 in browser
+ - tested with vivaldi ( a chromium fork - works ) and firefox (has bugs)
 
    the best result for true local (direct loaded files) is firefox vers 0.7 or earlier
 
