@@ -1941,6 +1941,8 @@ var 	vartxt = document.getElementById("varout");
 					for (i = 0;i <= ic;i++)
 						if (SVRLOAD[f][3][i] != undefined)
 							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \"0x"+SVRLOAD[f][3][i].toString(16)+"\";\n";
+						else
+							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \"0\"\n";
 				}
 
 				vartxt.value += "\n}\n\n";
