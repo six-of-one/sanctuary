@@ -16,7 +16,7 @@ SUPPORTED BROWSERS
  - run in dir with index.html, load address http://127.0.0.1:8080 in browser
  - tested with vivaldi ( a chromium fork - works ) and firefox (has bugs)
 
-   the best result for true local (direct loaded files) is firefox vers 0.7 or earlier
+   the best result for true local (direct loaded files) is firefox vers 0.7 or slightly earlier
 
 KNOWN ISSUES
 ============
