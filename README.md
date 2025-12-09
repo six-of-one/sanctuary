@@ -10,14 +10,17 @@ Javascript engine;
 SUPPORTED BROWSERS
 ==================
 
- - this is a real mixed bag - all new browsers either fail miserably or require significant
-   command line workarounds - honestly the best result for local play is firefox vers 0.57 or earlier
+ - this is still a mixed bag - different browsers may have vars issues
+ - the following command (python 3 required) will run a local server
+             python3 -m http.server -b "::" 8080
+   \_ connect by loading http://127.0.0.1:8080
+
+   the best result for true local (direct loaded files) is firefox vers 0.7 or earlier
 
 KNOWN ISSUES
 ============
 
- - new browser versions will likely not run this due to all kinds of "feature" additions
-   \ planned instructions will be added to the eventual release with an archive copy of firefox
+ - some browsers have display problems and media load issues
  - No support for touch/mobile devices
  - unknown possibilities for local multiplayer support
 
