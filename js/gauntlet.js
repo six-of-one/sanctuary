@@ -1932,17 +1932,22 @@ var 	vartxt = document.getElementById("varout");
 		if (document.getElementById("svsvr").checked) {
 				vartxt.value += "// SVRLOAD array\n";
 				vartxt.value += "function svrarr() {\n\n";
-				for (f = 0;f <= svrcnt;f++)
+// test - outload curr map
+f = 1;
+//				for (f = 0;f <= svrcnt;f++)
 				if (SVRLOAD[f] != undefined)
 				{
-					vartxt.value += "	SVRLOAD["+f+"] = [ ];\n	SVRLOAD["+f+"][1] = \""+SVRLOAD[f][1]+"\";\n	SVRLOAD["+f+"][2] = \""+SVRLOAD[f][2]+"\";\n	SVRLOAD["+f+"][3] = [ ];\n	SVRLOAD["+f+"][4] =\""+SVRLOAD[f][4]+"\";\n";
-			var	ic = SVRLOAD[f][4];
+//					var	ic = SVRLOAD[f][4];
+					var ic = reloaded.cells.length;
+//					vartxt.value += "	SVRLOAD["+f+"] = [ ];\n	SVRLOAD["+f+"][1] = \""+SVRLOAD[f][1]+"\";\n	SVRLOAD["+f+"][2] = \""+SVRLOAD[f][2]+"\";\n	SVRLOAD["+f+"][3] = [ ];\n	SVRLOAD["+f+"][4] =\""+SVRLOAD[f][4]+"\";\n";
+					vartxt.value += "	SVRLOAD["+f+"] = [ ];\n	SVRLOAD["+f+"][1] = \""+Mastermap.level.url+"\";\n	SVRLOAD["+f+"][2] = \""+Mastermap.level.name+"\";\n	SVRLOAD["+f+"][3] = [ ];\n	SVRLOAD["+f+"][4] =\""+ic+"\";\n";
 					if (ic < 169) ic = 50 * 50;	// if total cells not set properly just check 50x sq level size
 					for (i = 0;i <= ic;i++)
 						if (SVRLOAD[f][3][i] != undefined)
-							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \"0x"+SVRLOAD[f][3][i].toString(16)+"\";\n";
-						else
-							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \"0\"\n";
+//							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \"0x"+SVRLOAD[f][3][i].toString(16)+"\";\n";
+							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \"0x"+Mapdata[i].toString(16)+"\";\n";
+/*						else
+							vartxt.value += "	SVRLOAD["+f+"][3]["+i+"] = \"0\"\n"; */
 				}
 
 				vartxt.value += "\n}\n\n";
