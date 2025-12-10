@@ -11,11 +11,33 @@
 
 // customize other features here
 
+// fix score table
+
+// STORAGE reload
+function storload(sloc) {
+sloc.storage[STORAGE.NZ1] = "RRB";
+sloc.storage[STORAGE.NZ2] = "DEF";
+sloc.storage[STORAGE.NZ3] = "TUL";
+sloc.storage[STORAGE.NZ4] = "CAT";
+sloc.storage[STORAGE.NW1] = "JUI";
+sloc.storage[STORAGE.NW2] = "WER";
+sloc.storage[STORAGE.NW3] = "WOT";
+sloc.storage[STORAGE.NW4] = "JJJ";
+sloc.storage[STORAGE.NV1] = "RV_";
+sloc.storage[STORAGE.NV2] = "FFG";
+sloc.storage[STORAGE.NV3] = "3TB";
+sloc.storage[STORAGE.NV4] = "MMM";
+sloc.storage[STORAGE.NE1] = "KAK";
+sloc.storage[STORAGE.NE2] = "KEK";
+sloc.storage[STORAGE.NE3] = "KIK";
+sloc.storage[STORAGE.NE4] = "JIK";
+}
 
 // reload random load saves
 	var SVRLOAD = [ ];
 
 function rerload() {
+
 
   // test g1 level from rom read
 
