@@ -16,6 +16,8 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 dev:
 
+loder.js is not updating from python3 web server - gaunltet.js does - hur?
+
 push wall collision
  \ x-- elevate them above other treasure tiles
 
