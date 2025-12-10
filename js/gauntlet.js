@@ -2019,7 +2019,7 @@ f = 1;
                 ESCORE[i + md][0] = ESCORE[i][0];
                 ESCORE[i + md][1] = ESCORE[i][1];
               }
-storload(ref);
+storload(ref, STORAGE);
           ZSCORE[1][0] = to.number(ref.storage[STORAGE.Z1], 19830);
           ZSCORE[1][1] = ref.storage[STORAGE.NZ1];
           WSCORE[1][0] = to.number(ref.storage[STORAGE.W1], 10000);
@@ -2846,20 +2846,17 @@ storload(ref);
 // later add user option to turn off
 			var srvsek = 1, rerlod = 0; svrcnt = 1;
 			svrcnt = rerload();
-// TEST remove
-document.title = Mastermap.level.url;
-alert(svrcnt + " ; " + srvsek + " = " + SVRLOAD[srvsek][1]);
 			while (SVRLOAD[srvsek][1] != undefined) {
 					if (SVRLOAD[srvsek][1] == Mastermap.level.url) {rerlod = srvsek;
 // TEST remove
 document.title = Mastermap.level.url + " - " + rerlod;
-alert(Mastermap.level.url + " = " + SVRLOAD[srvsek][1]);
 }
 					srvsek++;
 				}
 
 	var 	vartxt = document.getElementById("varout");
 			if (rerlod > 0) {
+alert(Mastermap.level.url + " SVRLOAD[rerlod][4] = " + SVRLOAD[rerlod][4] + " SVRLOAD[rerlod][3][1] = " + SVRLOAD[rerlod][3][1]);
 					for (srvsek = 1;srvsek < SVRLOAD[rerlod][4]; srvsek++) {
 						if (SVRLOAD[rerlod][3][srvsek] != undefined) {
 						var	cty = Math.floor(srvsek / Mtw);
