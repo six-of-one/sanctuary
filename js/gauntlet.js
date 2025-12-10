@@ -14,7 +14,7 @@ Gauntlet = function() {
 	vardbg = 0, dent, d1, d2, bb = 0, PARSE,
 
 // TEST AREA - controls all switchable test code
-	T_REPWAL = true,
+	T_REPWAL = false,
 
 /// end debug tier
 
