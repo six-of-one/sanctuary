@@ -2019,7 +2019,8 @@ f = 1;
                 ESCORE[i + md][0] = ESCORE[i][0];
                 ESCORE[i + md][1] = ESCORE[i][1];
               }
-storload(ref, STORAGE);
+// for reload via loder.js when top 4 table gets bonked
+//storload(ref, STORAGE);
           ZSCORE[1][0] = to.number(ref.storage[STORAGE.Z1], 19830);
           ZSCORE[1][1] = ref.storage[STORAGE.NZ1];
           WSCORE[1][0] = to.number(ref.storage[STORAGE.W1], 10000);
