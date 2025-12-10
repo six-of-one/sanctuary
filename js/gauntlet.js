@@ -2846,17 +2846,19 @@ storload(ref, STORAGE);
 // later add user option to turn off
 			var srvsek = 1, rerlod = 0; svrcnt = 1;
 			svrcnt = rerload();
-			while (SVRLOAD[srvsek][1] != undefined) {
-					if (SVRLOAD[srvsek][1] == Mastermap.level.url) {rerlod = srvsek;
-// TEST remove
-document.title = Mastermap.level.url + " - " + rerlod;
-}
+			while (SVRLOAD[srvsek] != undefined) {
+					if (SVRLOAD[srvsek][1] != undefined)
+					if (SVRLOAD[srvsek][1] == Mastermap.level.url) {
+              rerlod = srvsek;
+              // TEST remove
+              document.title = Mastermap.level.url + " - " + rerlod;
+            }
 					srvsek++;
 				}
 
 	var 	vartxt = document.getElementById("varout");
 			if (rerlod > 0) {
-alert(Mastermap.level.url + " SVRLOAD[rerlod][4] = " + SVRLOAD[rerlod][4] + " SVRLOAD[rerlod][3][1] = " + SVRLOAD[rerlod][3][1]);
+//alert(Mastermap.level.url + " SVRLOAD[rerlod][4] = " + SVRLOAD[rerlod][4] + " SVRLOAD[rerlod][3][1] = " + SVRLOAD[rerlod][3][1]);
 					for (srvsek = 1;srvsek < SVRLOAD[rerlod][4]; srvsek++) {
 						if (SVRLOAD[rerlod][3][srvsek] != undefined) {
 						var	cty = Math.floor(srvsek / Mtw);
