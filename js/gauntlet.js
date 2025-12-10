@@ -2848,14 +2848,15 @@ f = 1;
 			svrcnt = rerload();
 // TEST remove
 document.title = Mastermap.level.url;
-
-			while (SVRLOAD[srvsek] != undefined) {
-					if (SVRLOAD[srvsek][1] == Mastermap.level.url) { rerlod = srvsek;
+alert(svrcnt + " ; " + srvsek + " = " + SVRLOAD[srvsek][1]);
+			while (SVRLOAD[srvsek][1] != undefined) {
+					if (SVRLOAD[srvsek][1] == Mastermap.level.url) {rerlod = srvsek;
+// TEST remove
+document.title = Mastermap.level.url + " - " + rerlod;
+alert(Mastermap.level.url + " = " + SVRLOAD[srvsek][1]);
 }
 					srvsek++;
 				}
-// TEST remove
-document.title = Mastermap.level.url + " - " + rerlod;
 
 	var 	vartxt = document.getElementById("varout");
 			if (rerlod > 0) {
