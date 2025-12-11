@@ -678,6 +678,7 @@ nightmare
 walking on spikes
 running in flaming oil
 valley of the shadow of death
+(valley of shadows)
 
 char stats:
 player stats:		(once we have name keeping)
