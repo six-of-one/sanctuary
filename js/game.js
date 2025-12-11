@@ -762,8 +762,8 @@ Game.Math = {
 
 	  if (spl_cyc < 1 || spl_cyc > 12) spl_cyc = 0;
 	  spl_cyc++;
-/// TEST - remove
-		spl_cyc = 11;
+/// TEST - remove - is off
+	//	spl_cyc = 11;
 /// TEST - remove
 		if (spl_cyc != 11) $('scordiv').hide();
 
