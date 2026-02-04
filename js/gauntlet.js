@@ -1510,14 +1510,14 @@ Gauntlet = function() {
 		  else if (isgenerator(pixel)) {
 			 var ent = spref.addGenerator(x, y, MONSTERS[(type(pixel) < MONSTERS.length) ? type(pixel) : 0]);
 			  if (pixel != 0xF00000 && pixel != 0xF00060 && pixel != 0xF000B0) {
-					ent.dx = -5;
+					ent.dx = -5;	// this is the 24x24 pix gen test oversplash of 16x16 maze tiles
 					ent.dy = -5;
 					ent.dw = 10;
 					ent.dh = 10;
 					}
 				else
 					{
-					ent.dx = -2;
+					ent.dx = -2;	// equiv for bone piles
 					ent.dy = -2;
 					ent.dw = 4;
 					ent.dh = 4;
