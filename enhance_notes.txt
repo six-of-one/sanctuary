@@ -41,10 +41,13 @@ main issues with sanctuary engine in js/css/html
    - now with gved, the sprite sheet could easily be made - but would require a decent rewrite, perhaps 30% of base, e.g. most of the tile render code
 
 5. a lot of 'minor quirk' aspects that feed into item 3.
-   - push wall weirdness
+   - push wall weirdness (granted sanctuary has expanded push wall ops)
    - cycle walls do strange things, and sometimes just stop (even tho sounds continue)
    - shoot diagonal between columns doesnt work in 1 dir unless player position is goldilocksed - i.e. 'just right'
    - doors dont always operate as g1/g2, leave odd bits, fail to open more than a few units, etc
+   - slowdown on large levels when: opening traps, shooting walls open, walls -> exits
+   - gfx tearing issues on large maps (and maybe std 32 x 32 maps too)
+   - acid blob (G2) dont have same ai (not even sure what it is, besides select rnd dir & move)
 
 at this point, items 1 - 3 weight heavy on any attempts to continue with sanctuary in js/css/html
 
