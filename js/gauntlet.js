@@ -1080,7 +1080,7 @@ Gauntlet = function() {
 
     levels: [
 //      { name: 'intro',        url: "levels/7level.png",     floor: FLOOR.MULTIC,                wall: WALL.GREEN3,      gflr: "gfx/floor016.jpg",                                          nornd: 1,    music: 'nullm',      score:  1000, help: "welcome to ERR0R" },
-      { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: 0x18,             gflr: "gfx/d1floor6.jpg",   gwal: "gfx/g2wall22.jpg",    nornd: 1,   unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R"},// gshw: 3, gfi: 7, gdor: 1, gitm: 2 },
+      { name: 'Research 6',   url: "levels/glevel1r.png",                                       wall: 0x18,             gflr: "gfx/floor026.jpg",   gwal: "gfx/g1wallZ.jpg",    nornd: 1,   unpinx: 1, unpiny: 1, music: 'nullm',  score:  1000, help: "welcome to ERR0R"},// gshw: 3, gfi: 7, gdor: 1, gitm: 2 },
 //      { name: 'Z gon',        url: "levels/glevelZ.png",                                        wall: WALL.ORANG9,      gflr: "gfx/g1floor0z.jpg",  gwal: "gfx/g1wallZ.png",               unpinx: 1,    music: 'nullm',      score:  1000, help: null },
 /*
       { name: 'Training',       url: "levels/trainer1.png", floor: FLOOR.LIGHT_STONE,           wall: WALL.BLUE_COBBLE,      music: 'bloodyhalo',      score:  1000, tmdf: 1, nornd: 1, help: "Shoot ghosts and find the exit" },
@@ -2288,7 +2288,7 @@ f = 1;
 				if (Math.random() < thf_mug_bal) addo = mug_ad;		// g1 only will block this -- bal, first time more chance of thf
 				else thf_mug_bal = 0.65;																		// g2 seems to send out a lot of muggers
 // testing exits
-								addo = 0x4000;
+								addo = 0x4000;			/// TEST - REMOVE REMOVE
 				Mastermap.load_cell(thcell.tx, thcell.ty, addo,Mastermap);
 				Mastercell.ptr.theif = 0;	// spawned -- NOT generated or placed
 // could start a new thief where the old one was killed - if local thieftrack is saved

@@ -13,6 +13,40 @@ gJ - gauntlet javascript		(gJ.0 - original)
 
 -- upload notes on days ending in 9
 
+'proceed to catacomb sanctuary' list
+
+main issues with sanctuary engine in js/css/html
+
+1. WEB BROWSERS - so many things, and this is really what stopped the project - the inconsistencies are a major flummox
+   a. getting any after 0.7 or so of firefox (circa 2019) to 'open-file -> index.html'
+      - even the ones prior have vars. issues, chromium may be better
+   b. consistent ops - loading/playing jpg, png, ogg, ogv, vars medias have issues on vars browsers
+      - issue on (newish) vivaldi where floor & wall dont load, yes the files are there
+   c. playing audio (the firefox 0.57 apulse issue on linux where it ends up playing only 1 sound fx), or not playing any at all
+   d. stupid CORS, cross site domain crap, when its all loaded from one domain
+      - granted i havent gone thru ALL the js from the game engine to see if they snuck in some http access or other
+   e. it is possible to pack in a browser for self-contained use, the issue is finding a good one that does all ops well (or even just decent) on most systems
+
+2. adding multi-player - complexity of code, and player class written originally for single player only 
+   - most of player code (estimate 65% - 80% of code base) would need re-written to accomodate 'local' (single system) multiplayer
+   - over the net / client-server is a complete unknown, yes there are options, but bolting them into this are prob. not worth it
+
+3. doesnt 'play like gauntlet' - while this is not a 'big issue' like the above 2, it has a lot of weight
+   - this is hard to pin down.  80s arcade gauntlet had a 'feel' a certain way it played.  this just doenst have that
+   - it is likely this will never be satisfied by anything but: original cabinet with correct revision, or a decent multi-cade
+
+4. mounmental task of getting arcade gfx ported (since at conclusion of last code spurt/2024 it was difficult)
+   - it was possible with painstaking screen caps and editing, and no one has done it yet
+   - same was true of mapping (even with the gen cycle freezer cheet 904007:DA), both these issues are solved by the next item, the gauntlet visual editor
+   - now with gved, the sprite sheet could easily be made - but would require a decent rewrite, perhaps 30% of base, e.g. most of the tile render code
+
+5. a lot of 'minor quirk' aspects that feed into item 3.
+   - push wall weirdness
+   - cycle walls do strange things, and sometimes just stop (even tho sounds continue)
+   - shoot diagonal between columns doesnt work in 1 dir unless player position is goldilocksed - i.e. 'just right'
+   - doors dont always operate as g1/g2, leave odd bits, fail to open more than a few units, etc
+
+at this point, items 1 - 3 weight heavy on any attempts to continue with sanctuary in js/css/html
 
 dev:
 
@@ -180,6 +214,13 @@ mappy idea: 5 items in troom, 2x 3x 4x 5x 6x multiplier for gather in seq
 
 
 >>>>>>>>>>>>>>>>>>>>>>
+splitting a sprite sheet:
+convert full.png -crop 32x32 tiles.png
+
+put back together:
+files=$(ls tiles*.png | sort -t '-' -n -k 2 | tr '\n' ' ')
+montage $files -tile x1 -geometry 32x32+0+0 sheet.png
+
 WIP: arcade sound & gfx
 
 
